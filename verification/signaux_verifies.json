@@ -4,7 +4,7 @@
   "objet": "Verdicts humains/LLM sur les signaux que le lexique ne peut que SIGNALER (révision, objection, auto-citation). Un marqueur lexical dit où regarder ; seule une lecture en contexte tranche.",
   "protocole": "Chaque candidat est lu avec son contexte immédiat. Verdict « confirme » seulement si l'énoncé est une prise de position de FREUD sur SON PROPRE travail antérieur — ni un personnage de fiction, ni un patient, ni un autre auteur, ni une correction d'imprimerie.",
   "verifie_par": "Claude (Opus 4.8), lecture en contexte, 2026-07-26",
-  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un. Extension du corpus (2026-07-26) : 9 nouveaux candidats sur les 8 œuvres ajoutées (Leonardo, Moses, Dichter und Phantasieren, Zeitgemäßes über Krieg und Tod absent de candidats, Traum und Telepathie, Kindheitserinnerung aus Dichtung und Wahrheit) — lus et jugés un par un, même protocole.",
+  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un. Extension du corpus (2026-07-26) : 9 nouveaux candidats sur les 8 œuvres ajoutées (Leonardo, Moses, Dichter und Phantasieren, Zeitgemäßes über Krieg und Tod absent de candidats, Traum und Telepathie, Kindheitserinnerung aus Dichtung und Wahrheit) — lus et jugés un par un, même protocole. Normalisation des blancs (2026-07-26) : 22 signaux supplémentaires devenus visibles (leurs marqueurs étaient coupés par des retours à la ligne) — lus et jugés un par un : 7 confirmés (dont DEUX révisions doctrinales majeures, Traumdeutung sur le « Nein » du rêve et Zeitgemäßes sur l'Urmensch), 15 rejetés.",
   "verdicts_possibles": {
    "confirme": "signal réel — l'atome dit ce que le marqueur laissait espérer",
    "rejete": "faux positif — le marqueur a été déclenché par autre chose",
@@ -1226,6 +1226,138 @@
    "verdict": "confirme",
    "motif": "« Ich habe es aber schon an anderer Stelle ausgesprochen » — formule d'auto-citation canonique, suivie de la thèse effectivement reprise (l'enfant préféré de sa mère garde un sentiment de conquérant).",
    "ancien_id": "kindheitserinnerung_dichtung_wahrheit:a19"
+  },
+  "b495f4163b4588b7": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« von den Ausnahmen wird an anderer Stelle die Rede sein » — renvoi PROSPECTIF, et portant sur les jugements des AUTEURS de la littérature du rêve, pas sur un travail antérieur de Freud.",
+   "ancien_id": "traumdeutung:a483"
+  },
+  "9b4bec09a24a7da1": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "C'est le PERSONNAGE ÉTRANGER du rêve qui « korrigiert » le savoir du rêveur (Spaltung der Persönlichkeit) — un phénomène décrit, pas une révision de thèse par Freud.",
+   "ancien_id": "traumdeutung:a745"
+  },
+  "272511335e8c1ce9": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Von einer Person habe ich einen »heuchlerischen Ödipustraum« mitgeteilt » — renvoi explicite à sa propre communication publiée (« Typisches Beispiel eines verkappten Ödipustraumes », 1910).",
+   "ancien_id": "traumdeutung:a1379"
+  },
+  "f73c23827719aeb3": {
+   "signal": "revision",
+   "verdict": "confirme",
+   "motif": "CAS MAJEUR : « wonach also die frühere Behauptung zu korrigieren ist, daß der Traum das Nein nicht auszudrücken vermag » — Freud corrige explicitement sa thèse antérieure (le rêve ne sait pas dire non) devant un contre-exemple : l'échec du rêve EST un « non ». Ce signal était invisible avant la normalisation des blancs (marqueur coupé par un retour à la ligne).",
+   "ancien_id": "traumdeutung:a3144"
+  },
+  "50f61ca2187c7ab7": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« werden wir bald an anderer Stelle finden » — renvoi prospectif.",
+   "ancien_id": "traumdeutung:a3363"
+  },
+  "0ddbb17a9d38c065": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Wir haben SELBST die unbewußten Wünsche als immer rege bezeichnet » — attribution explicite à soi d'une formulation antérieure (ch. VII). C'est l'exemple canonique du lexique lui-même.",
+   "ancien_id": "traumdeutung:a5599"
+  },
+  "ad6d8056fda392c5": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« werden wir noch an anderer Stelle begegnen » — prospectif.",
+   "ancien_id": "drei_abhandlungen:a188"
+  },
+  "c24f60440bc81852": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "Le langage de correction (« Was man bisher … bezeichnet hat ») appartient à un AUTEUR CITÉ — Lipschütz, sur la glande pubertaire — pas à Freud.",
+   "ancien_id": "drei_abhandlungen:a339"
+  },
+  "9b851fa9199a7d74": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« wir haben aus der Psychoanalyse erfahren » — appel au savoir accumulé de la discipline, sans renvoi à un texte antérieur précis de Freud.",
+   "ancien_id": "drei_abhandlungen:a482"
+  },
+  "c6d276ed4b10ecc9": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "Freud corrige une LECTURE ERRONÉE en train de se produire (« korrigiere jetzt: … an der Ostsee ») — c'est le phénomène étudié (Verlesen), pas une révision de thèse.",
+   "ancien_id": "psychopathologie:a337"
+  },
+  "c7737ff1e29cbe39": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« werden das Problem nun wohl an anderer Stelle angreifen müssen » — prospectif.",
+   "ancien_id": "witz:a692"
+  },
+  "d2447a020c82af29": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Vgl. die vierte Abhandlung dieses Bandes » — renvoi de NAVIGATION interne au volume, pas une prise de position sur un travail antérieur.",
+   "ancien_id": "totem:a24"
+  },
+  "5494b79d45814eaa": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« an anderer Stelle » y est LITTÉRAL : un renoncement remplacé par un renoncement AILLEURS dans l'économie psychique. Aucun renvoi bibliographique — le marqueur pris au sens propre.",
+   "ancien_id": "totem:a306"
+  },
+  "254c7f8e85507fa6": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Wir haben erfahren » — récapitulation d'un acquis du même chapitre, pas une citation d'un texte antérieur.",
+   "ancien_id": "totem:a565"
+  },
+  "fc11771bdffb6beb": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« haben wir an anderer Stelle die Annahme vertreten » — renvoi rétrospectif précis à la satisfaction hallucinatoire du nourrisson, thèse du ch. VII de la Traumdeutung.",
+   "ancien_id": "totem:a775"
+  },
+  "5a483e3986a3bef6": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« wie ich es an anderer Stelle ausgedrückt habe, nur die »neurotische Währung« gilt » — reprise datée et guillemetée de sa propre formule (la « monnaie névrotique »).",
+   "ancien_id": "totem:a804"
+  },
+  "402112633669d0bf": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« sie wird an anderer Stelle berichtet werden » — prospectif, et il s'agit de la théorie de FRAZER.",
+   "ancien_id": "totem:a1050"
+  },
+  "88c15460eed37d0b": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Sujet impersonnel — « die psychoanalytische Forschung hat sich … auseinandergesetzt » : renvoi à la littérature de l'école, pas une auto-citation explicite de Freud.",
+   "ancien_id": "unheimliche:a420"
+  },
+  "c8fd5f2737e6e110": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« habe ich an anderer Stelle ausgeführt, daß sie sehr wohl traumatische Neurosen sein könnten » — renvoi explicite à son introduction à « Zur Psychoanalyse der Kriegsneurosen » (1919), note à l'appui.",
+   "ancien_id": "jenseits:a242"
+  },
+  "15b2c394ada114c9": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« wir haben … erfahren » porte sur un FAIT BIOGRAPHIQUE de Léonard établi plus haut (le cadastre de 1457), pas sur un travail théorique de Freud.",
+   "ancien_id": "kindheitserinnerung_leonardo:a198"
+  },
+  "3236f6e2a221a6cc": {
+   "signal": "revision",
+   "verdict": "confirme",
+   "motif": "« Ich möchte darum die obige Behauptung einschränken und korrigieren » — Freud restreint explicitement sa propre affirmation (l'Urmensch ne méditait pas la mort devant le cadavre de l'ENNEMI, seulement devant ses proches). Signal invisible avant la normalisation des blancs.",
+   "ancien_id": "zeitgemaesses_krieg_tod:a205"
+  },
+  "e5451aa81b44ed77": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Parole du CORRESPONDANT (la lettre du cas de télépathie : « beim Begräbnis meines Vaters ») — matériel rapporté, pas Freud.",
+   "ancien_id": "traum_telepathie:a75"
   }
  }
 }

@@ -204,6 +204,29 @@ Le reste est du **récit et de la description** (la biographie de Léonard, l'ex
 détail de la statue) : le laisser non qualifié est exact, pas un échec — un lexique de concepts
 n'a pas vocation à taguer chaque phrase narrative.
 
+### 4.6 Deux défauts que seule la LECTURE pouvait trouver (validation qualitative, 2026-07)
+
+**Le Ça qui n'en était pas un.** Le concept `es` (l'instance de la seconde topique) était capté
+par « déterminant + es » (« das Es », « vom Es »). Mais ce motif attrape aussi les **relatives**
+allemandes : « *ein Spielzeug, über **das es** sich geärgert hatte* » — le jouet contre lequel
+IL (l'enfant) s'était fâché. Lus un par un, les **19 atomes antérieurs à 1923** étaient TOUS de
+ce type : le corpus inventait une préhistoire au Ça, concept que Freud ne nomme qu'en 1923. Le
+discriminant est mécanique — une relative est précédée d'une préposition ou d'une virgule, le
+Ça topique jamais — et un test fige désormais le zéro : aucun atome `es` avant 1923.
+
+**Les marqueurs coupés par les retours à la ligne.** Le repliement (`replier`) conservait les
+`\n` du texte d'origine ; un marqueur multi-mots (« an anderer Stelle », « , dem es ») coupé par
+un retour à la ligne devenait invisible. La normalisation des blancs a fait apparaître **22
+signaux jamais repérés** — dont **deux révisions doctrinales majeures** endormies depuis le
+début du projet : la correction de la thèse « le rêve ne sait pas dire non » (*Traumdeutung*),
+et la restriction sur l'Urmensch devant le cadavre de l'ennemi (*Zeitgemäßes über Krieg und
+Tod*). Tous lus et jugés (7 confirmés, 15 rejetés).
+
+Aucun de ces deux défauts n'était détectable par les tests existants : ils tenaient tous deux la
+comptabilité pour bonne. C'est la **lecture qualitative des résultats** — pas un test de plus —
+qui les a trouvés. La leçon vaut règle : chaque résultat chiffré doit être lu par échantillon
+avant d'être publié.
+
 ---
 
 ## 5. Signal de validation

@@ -88,20 +88,21 @@ des grappes.
 
 L'agent `courants` va plus loin que les paires : il PARTITIONNE tout le graphe de concepts par
 maximisation gloutonne de la modularité (Newman, 2004), un algorithme déterministe — aucune
-grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 96 concepts suffisamment
-reliés, la partition atteint une **modularité de 0,354** — au-dessus du seuil de 0,30 généralement
+grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 107 concepts suffisamment
+reliés, la partition atteint une **modularité de 0,361** — au-dessus du seuil de 0,30 généralement
 retenu comme signe d'une vraie structure plutôt que d'un artefact du graphe (Newman & Girvan,
-2004). Sept grappes en ressortent :
+2004). Huit grappes en ressortent :
 
 | Grappe | Concepts (extrait) | Atomes |
 |---|---|---:|
-| Travail du rêve | *Traum, Wunsch, Verdichtung, Verschiebung, Zensur, Entstellung* | 4 329 |
-| Appareil psychique + esprit | *Bewußtsein, Unbewußt, Besetzung, Lustprinzip, Witz, Komik* | 3 826 |
-| Clinique pulsionnelle | *Trieb, Sexualität, Libido, Narzißmus, Neurose, Angst, Symptom* | 3 474 |
-| Enfance et famille | *Vater, Mutter, Geschwister, Ödipus, Infantil, Erinnerung* | 2 841 |
-| Psychologie sociale | *Totem, Tabu, Masse, Urhorde, Führer, Identifizierung* | 1 551 |
-| Esthétique et création | *Dichter, Phantasie, Symbol, Wahn, Erzählung* | 834 |
-| Seconde topique | *Ich, Es, Über-Ich* | 260 |
+| Travail du rêve | *Traum, Wunsch, Verdichtung, Verschiebung, Zensur, Affekt* | 4 656 |
+| Père, religion, mort | *Vater, Mutter, Ödipus, Totem, Tabu, Gott, Tod, Trauer* | 4 076 |
+| Appareil psychique + esprit | *Bewußtsein, Unbewußt, Besetzung, Lustprinzip, Witz, Komik* | 4 016 |
+| Clinique pulsionnelle | *Trieb, Sexualität, Libido, Neurose, Angst, Kultur, Aggression* | 3 929 |
+| Souvenir et création | *Erinnerung, Vergessen, Dichter, Phantasie, Symbol, Wahn* | 1 884 |
+| Peinture | *Kunst, Malerei, Teufel* | 386 |
+| Masse et autorité | *Masse, Führer, Suggestion, Institution* | 330 |
+| Seconde topique | *Ich, Es, Über-Ich* | 265 |
 
 **Contrôle de sens intégré** (pas seulement mesuré une fois, mais rejoué à chaque test) : *Ich*,
 *Es* et *Über-Ich* — la seconde topique, trois concepts inséparables par construction théorique —
@@ -109,13 +110,34 @@ tombent TOUJOURS dans la même grappe, minuscule et parfaitement pure : rien d'a
 *Wunsch* et *Wunscherfüllung*, *Masochismus* et *Sadismus* aussi. Si l'algorithme les avait
 dispersés, la partition n'aurait mesuré aucune structure réelle.
 
+### Validation qualitative — les grappes lues, pas seulement comptées
+
+Chaque grappe a été validée en lisant des atomes-croisements (portant au moins deux concepts de
+la grappe À LA FOIS), répartis sur plusieurs œuvres. Ce que la lecture confirme, et ce qu'elle
+nuance :
+
+- **« Père, religion, mort » est la grappe la plus freudienne du lot.** Sa cohérence n'est pas un
+  artefact de comptage : c'est le geste théorique même de *Totem und Tabu* (la religion et la
+  société dérivées du meurtre du père) et de la *Teufelsneurose* (le Diable en substitut du père
+  mort). Lu en croisement : « *Eine der Reaktionen auf den **Vatermord** war doch die Einrichtung
+  der totemistischen **Exogamie*** » (*Massenpsychologie*).
+- **« Souvenir et création » est portée par les œuvres sur l'art** : le souvenir d'enfance comme
+  matière de l'œuvre est la thèse du *Léonard* et du *Dichter und das Phantasieren*. La grappe
+  réunit ce que Freud lie explicitement.
+- **Une grappe est en partie un artefact de composition du corpus, et il faut le dire** :
+  « peinture » accueille *Teufel* uniquement parce que l'unique œuvre du corpus sur le diable
+  (la *Teufelsneurose*) porte sur un **peintre**. La cooccurrence est réelle dans le texte, mais
+  elle reflète le hasard biographique d'un cas, pas un lien conceptuel — le genre de nuance
+  qu'aucune modularité ne peut voir et que seule la lecture apporte.
+- **La validation a débusqué un défaut de données** : les atomes du concept *Es* antérieurs à
+  1923, lus un par un, étaient TOUS le pronom allemand dans une relative (« *ein Spielzeug, über
+  das es sich geärgert hatte* » — le jouet contre lequel IL s'était fâché), pas le Ça. Motif
+  corrigé, chronologie assainie (voir §3), verrou de test posé.
+
 **Ce que ces grappes ne sont pas** : des courants postérieurs. Freud n'a jamais rangé sa propre
-œuvre ainsi ; c'est une lecture rétrospective de la cooccurrence de ses mots, pas une classification
-qu'il revendique. Mais deux grappes attirent l'œil pour la suite du projet : « enfance et famille »
-sépare déjà des concepts de la clinique pulsionnelle stricto sensu — la distinction est exactement
-celle qui recoupera, à lire les auteurs suivants, la théorie des relations d'objet — et
-« psychologie sociale » sépare le totem/la masse de la clinique individuelle, préfigurant la
-psychanalyse appliquée au collectif. Une lecture qualitative reste requise avant d'en tirer plus.
+œuvre ainsi ; c'est une lecture rétrospective de la cooccurrence de ses mots, pas une
+classification qu'il revendique. Une grappe computée est un candidat de lecture — validé ici,
+mais jamais opposable seul.
 
 ---
 
@@ -173,15 +195,19 @@ La méthode a détecté l'ajout ; la phrase détectée le confirme.
 
 ### La seconde topique apparaît à sa date
 
-| Instance | Avant 1920 | 1920-21 | 1933 |
-|---|---:|---:|---:|
-| *Ich* (le Moi) | 2-17 ‰ | 28-49 ‰ | 35 ‰ |
-| *Es* (le Ça) | < 1 ‰ | ~4 ‰ | **23 ‰** |
-| *Über-Ich* (le Surmoi) | **absent** | **absent** | **29 ‰** |
+| Instance | Avant 1923 | 1933 |
+|---|---:|---:|
+| *Ich* (le Moi) | 2-49 ‰ | 35 ‰ |
+| *Es* (le Ça) | **0 — zéro atome réel** | **21 ‰** |
+| *Über-Ich* (le Surmoi) | **absent** | **29 ‰** |
 
-Le Ça et le Surmoi n'existent pas dans le vocabulaire de Freud avant les années 1920 — le corpus
-le retrouve seul. Le pic du Moi en 1921 tombe sur un livre intitulé *Massenpsychologie und
-**Ich-Analyse***.
+Le Ça et le Surmoi n'existent **pas du tout** dans le vocabulaire de Freud avant les années
+1920 — le corpus le retrouve seul, et plus nettement encore depuis la validation qualitative :
+les 19 détections antérieures du *Es*, lues une à une, étaient toutes le **pronom** allemand
+dans une relative (« *ein Spielzeug, über das es sich geärgert hatte* »), jamais l'instance.
+Le motif a été corrigé et un test verrouille désormais ce zéro : si un motif futur réinvente
+une préhistoire au Ça, il casse. Le pic du Moi en 1921 tombe sur un livre intitulé
+*Massenpsychologie und **Ich-Analyse***.
 
 > **Réserve.** *Das Ich und das Es* (1923), où ces instances sont introduites, **ne figure pas au
 > corpus** : aucune source libre n'en propose une transcription de qualité citable — Wikisource ne
@@ -189,21 +215,71 @@ le retrouve seul. Le pic du Moi en 1921 tombe sur un livre intitulé *Massenpsyc
 > éditorial est protégé. Même constat pour *Hemmung, Symptom und Angst* (1926). La marche entre
 > 1921 et 1933 est donc plus abrupte ici qu'elle ne le fut dans l'œuvre.
 
+### Les grappes se recomposent au milieu de l'œuvre
+
+Si les grappes de concepts mesurent quelque chose de réel, elles doivent BOUGER avec la pensée.
+Test : partitionner séparément les œuvres de **1900-1913** (9 œuvres, 13 535 atomes) et de
+**1914-1933** (11 œuvres, 5 124 atomes). Contrôle de rigueur : la moitié précoce a aussi été
+recalculée en **excluant les 2 120 atomes que la collation date comme ajouts tardifs** — le
+résultat tient dans les deux cas (modularité 0,368 avec, 0,381 sans).
+
+Trois recompositions, chacune datable et lisible :
+
+1. **La mort change de camp.** En 1900-1913, *Tod*, *Trauer* et *Sterben* voyagent avec la
+   **famille** (*Vater, Mutter, Eltern*) et la religion — la mort est celle des proches, objet
+   de deuil et de rêves de mort. En 1914-1933, *Tod* et *Todestrieb* rejoignent la grappe
+   **pulsion-biologie** (*Trieb, Libido, Narzißmus, Aggression*). C'est exactement le geste de
+   *Jenseits des Lustprinzips* (1920) — la mort cesse d'être un événement familial pour devenir
+   un principe pulsionnel — rendu visible par la seule cooccurrence.
+
+2. **Le rêve dégonfle, la métapsychologie s'autonomise.** En 1900-1913, la grappe du rêve est
+   un monstre de 26-30 concepts qui absorbe l'appareil psychique entier (*Bewußtsein, Besetzung,
+   Energie, Ich*…) : le rêve est le laboratoire de toute la théorie. En 1914-1933, le rêve
+   redevient une grappe modeste et l'appareil psychique forme sa propre grappe : la
+   métapsychologie n'a plus besoin du rêve pour se dire.
+
+3. **La seconde topique naît comme grappe.** Inexistante avant (le *Ich* précoce vit DANS la
+   grappe du rêve), elle émerge en 1914-1933 comme grappe propre — accolée à *Eltern* et
+   *Geschwister* : le corpus retrouve seul que le Surmoi est « l'héritier du complexe parental ».
+
+La modularité monte de 0,37-0,38 à **0,51** entre les deux moitiés : la pensée tardive est plus
+compartimentée. **Réserve de composition** : la moitié tardive est faite d'essais courts et
+spécialisés (11 œuvres, 5 124 atomes) là où la précoce contient trois monuments généralistes —
+une part de la compartimentation vient du format des œuvres, pas seulement de la pensée. Les
+trois migrations ci-dessus, elles, ne dépendent pas de ce biais : chacune est un déplacement de
+concepts PRÉSENTS des deux côtés.
+
 ---
 
 ## 4. Ce que Freud dit de lui-même
 
 Un lexique déterministe peut **repérer** un passage où un auteur se corrige, s'objecte ou se cite ;
-il ne peut pas **établir** qu'il le fait. Les 192 candidats du corpus ont donc été lus en contexte
-et jugés un par un — y compris les 9 candidats apportés par les huit œuvres ajoutées ensuite.
+il ne peut pas **établir** qu'il le fait. Les 214 candidats du corpus ont donc été lus en contexte
+et jugés un par un — les 183 d'origine, puis les 9 apportés par les huit œuvres ajoutées, puis
+**22 devenus visibles quand la normalisation des blancs a réparé les marqueurs coupés par un
+retour à la ligne** (le registre compte 225 verdicts : il est cumulatif et garde ceux dont le
+marqueur a depuis été retiré du lexique).
 
 | Signal | Repérés | Confirmés | Précision |
 |---|---:|---:|---:|
 | Objection contre sa propre thèse | 111 | 64 | 0,58 |
-| Renvoi à son propre travail | 62 | 33 | 0,53 |
-| Révision de soi | 19 | 5 | 0,26 |
+| Renvoi à son propre travail | 79 | 38 | 0,48 |
+| Révision de soi | 24 | 7 | 0,29 |
 
-**102 passages opposables.** Quelques-uns méritent d'être lus :
+**109 passages opposables.** Les 22 candidats cachés par les retours à la ligne contenaient
+**deux révisions doctrinales majeures** qui dormaient là depuis le début du projet :
+
+> « *…wonach also die frühere Behauptung zu korrigieren ist, daß der Traum das Nein nicht
+> auszudrücken vermag.* »
+> — *Die Traumdeutung*. Devant un contre-exemple (un rêve qui ne parvient pas à se former),
+> Freud **corrige sa thèse** que le rêve ne sait pas dire non : l'échec du rêve EST un « non ».
+
+> « *Ich möchte darum die obige Behauptung einschränken und korrigieren: an der Leiche des
+> erschlagenen Feindes wird der Urmensch triumphiert haben…* »
+> — *Zeitgemäßes über Krieg und Tod*. Il **restreint explicitement** son affirmation : l'homme
+> primitif ne méditait pas la mort devant le cadavre de l'ennemi — seulement devant ses proches.
+
+Quelques autres méritent d'être lus :
 
 > « *Ich hatte damals die (später als unrichtig erkannte) Meinung, daß meine Aufgabe sich darin
 > erschöpfe, den Kranken den verborgenen Sinn ihrer Symptome mitzuteilen…* »
@@ -224,11 +300,13 @@ et jugés un par un — y compris les 9 candidats apportés par les huit œuvres
 > (« *Über Deckerinnerungen* », 1899) — une œuvre que le corpus ne contient pas encore, mais dont
 > la trace reste lisible dans celle-ci.
 
-**Ce que les rejets apprennent.** Les 90 candidats écartés disent ce qu'un lexique ne peut pas
+**Ce que les rejets apprennent.** Les 104 candidats écartés disent ce qu'un lexique ne peut pas
 voir : objections appartenant à un **personnage de roman** (Hanold chez Jensen) ou à une **histoire
 drôle** ; objections que Freud adresse **à d'autres** (Frazer, Trotter, Scherner) et non à lui-même ;
-renvois **prospectifs** (« cela sera traité ailleurs ») pris pour des auto-citations ; et de purs
-homonymes — *einwandfrei* (irréprochable) n'a rien d'une objection, *einwandern* veut dire immigrer.
+renvois **prospectifs** (« cela sera traité ailleurs ») pris pour des auto-citations ; de purs
+homonymes — *einwandfrei* (irréprochable) n'a rien d'une objection, *einwandern* veut dire
+immigrer ; et jusqu'au marqueur pris **au sens propre** : « *ein Verzicht an anderer Stelle* »
+désigne un renoncement ailleurs dans l'économie psychique, pas un renvoi bibliographique.
 
 ---
 

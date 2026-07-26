@@ -111,14 +111,20 @@ def recomposable(phrases, source):
 
 
 def replier(s):
-    """Forme repliée pour comparaison : minuscules, sans diacritiques, ß→ss (allemand).
+    """Forme repliée pour comparaison : minuscules, sans diacritiques, ß→ss, blancs normalisés.
 
     Le ß devient « ss » à dessein : l'orthographe de 1900 et l'actuelle divergent (« Unbewußte »
     / « Unbewusste »), et un lexique qui les distinguerait manquerait la moitié des occurrences.
+
+    Les BLANCS sont réduits à une espace simple : le texte d'origine est retourné à la ligne, et
+    un motif contextuel (« , dem es » pour écarter une relative) ne voit pas « ,\\ndem es » sans
+    cela — quatre relatives sur dix-neuf survivaient au correctif du concept « es » par ce seul
+    biais. Aucun motif du lexique ne s'appuie sur la structure en lignes (vérifié : zéro re.M).
     """
     s = (s or "").replace("ß", "ss")
     s = unicodedata.normalize("NFD", s)
-    return "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+    return " ".join(s.split())
 
 
 def replier_esszett(s):
@@ -129,4 +135,5 @@ def replier_esszett(s):
     des foules. L'allemand, lui, les sépare nettement : on lui laisse trancher.
     """
     s = unicodedata.normalize("NFD", s or "")
-    return "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+    return " ".join(s.split())

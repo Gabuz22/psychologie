@@ -139,18 +139,22 @@ repartirait de zéro.
 Trois états, jamais mélangés : **confirmé** (opposable), **rejeté** (écarté, motif à l'appui),
 **non lu** (ni promu ni écarté).
 
-**Instruction complète** : les 178 signaux du corpus ont été lus en contexte et jugés un par un.
+**Instruction complète** : les 214 signaux du corpus ont été lus en contexte et jugés un par un
+— dont 22 devenus visibles quand la normalisation des blancs a réparé les marqueurs coupés par
+un retour à la ligne (ils dormaient là depuis le début, deux révisions doctrinales parmi eux).
 
-| Signal | Repérés | Lus | Confirmés | Rejetés | Précision mesurée |
-|---|---:|---:|---:|---:|---:|
-| `revision` | 16 | 16 | 5 | 11 | **0,31** |
-| `objection` | 108 | 108 | 61 | 47 | **0,56** |
-| `auto_citation` | 59 | 59 | 31 | 28 | **0,53** |
+| Signal | Repérés | Lus | Confirmés | Précision mesurée |
+|---|---:|---:|---:|---:|
+| `revision` | 24 | 24 | 7 | **0,29** |
+| `objection` | 111 | 111 | 64 | **0,58** |
+| `auto_citation` | 79 | 79 | 38 | **0,48** |
 
-**97 signaux opposables** — dont les objections que Freud dresse contre ses propres thèses
-(« *Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht* »), et ses
+**109 signaux opposables** — dont les objections que Freud dresse contre ses propres thèses
+(« *Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht* »), ses
 renvois datés à ses propres travaux (« *Der Schatten des Objekts ist auf das Ich gefallen, sagte
-ich an anderer Stelle* » — sa formule de *Trauer und Melancholie*).
+ich an anderer Stelle* » — sa formule de *Trauer und Melancholie*), et la correction de sa thèse
+sur le « non » : « *…wonach also die frühere Behauptung zu korrigieren ist, daß der Traum das
+Nein nicht auszudrücken vermag* » (*Die Traumdeutung*).
 
 Les rejets valent autant : ils disent ce qu'un lexique ne peut pas voir. Objections appartenant à
 un **personnage de roman** (Hanold chez Jensen) ou à une **histoire drôle** ; objections que Freud
@@ -184,19 +188,25 @@ psychique.
 La chronologie retrouve l'histoire réelle des concepts. `trieb` : 5 ‰ dans la *Traumdeutung*
 (1900), 141 ‰ dans les *Trois essais* (1905), 231 ‰ dans *Jenseits* (1920). Et la **seconde
 topique apparaît à sa date** : `Über-Ich` est absent de tout le corpus jusqu'à 1933 (29 ‰) ;
-`Es` reste sous 1 ‰ avant 1920 puis saute à 23 ‰ ; `Ich` culmine en 1921 — dans un livre qui
-s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
+`Es` est à **zéro atome réel avant 1923** — les 19 détections antérieures, lues une à une lors
+de la validation qualitative, étaient toutes le pronom allemand dans une relative, et un test
+verrouille désormais ce zéro — puis saute à 21 ‰ en 1933 ; `Ich` culmine en 1921, dans un livre
+qui s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
 gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
-Sur 96 concepts reliés, la partition atteint **0,354 de modularité** (le seuil de structure réelle
-est généralement fixé à 0,30) et fait ressortir sept grappes : travail du rêve, appareil psychique,
-clinique pulsionnelle, enfance et famille, psychologie sociale, esthétique, seconde topique. La
-seconde topique (*Ich*/*Es*/*Über-Ich*) forme une grappe minuscule et parfaitement pure — aucun
-autre concept ne s'y mêle, exactement ce qu'impose sa construction théorique. **C'est cet agent
-qui porte l'objectif long terme** : si les courants postérieurs se recomposent à partir des mêmes
-atomes fondateurs, un premier signe est qu'ils s'y regroupent déjà, avant même qu'aucun courant
-rival n'existe. Détail dans [`documentation/SYNTHESE_FREUD.md`](documentation/SYNTHESE_FREUD.md#2-les-concepts-que-freud-pense-ensemble).
+Sur 107 concepts reliés, la partition atteint **0,361 de modularité** (le seuil de structure
+réelle est généralement fixé à 0,30) et fait ressortir huit grappes — dont « père, religion,
+mort », la plus freudienne du lot (le geste même de *Totem und Tabu*), et la seconde topique
+(*Ich*/*Es*/*Über-Ich*), minuscule et parfaitement pure. Chaque grappe a été **validée en
+lisant** des atomes-croisements ; les artefacts sont dits (le *Teufel* rejoint la peinture parce
+que l'unique cas sur le diable porte sur un peintre). Partitionné séparément, le corpus
+1900-1913 contre 1914-1933 montre **trois recompositions datables** — la mort quitte la famille
+pour la pulsion, le rêve cesse d'absorber la métapsychologie, la seconde topique naît comme
+grappe accolée aux figures parentales. **C'est cet agent qui porte l'objectif long terme** : si
+les courants postérieurs se recomposent à partir des mêmes atomes fondateurs, un premier signe
+est qu'ils s'y regroupent déjà. Détail dans
+[`documentation/SYNTHESE_FREUD.md`](documentation/SYNTHESE_FREUD.md#2-les-concepts-que-freud-pense-ensemble).
 
 ---
 
@@ -280,9 +290,9 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
   reste incertaine que *Jenseits des Lustprinzips* — aucun meilleur fac-similé de sa 1ʳᵉ édition
   n'existe sur archive.org (recherche faite, documentée dans `SYNTHESE_FREUD.md`) : la méthode
   refuse de conclure plutôt que dater faux.
-- **Vérification faite** pour les 192 signaux du corpus actuel (dont les 9 apportés par les huit
-  œuvres ajoutées) ; à reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se
-  rejoue).
+- **Vérification faite** pour les 214 signaux du corpus actuel (dont les 9 apportés par les huit
+  œuvres ajoutées et les 22 que cachaient des marqueurs coupés par des retours à la ligne) ; à
+  reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
   grappes, modularité 0,354. Prochaine étape naturelle : comparer avec un premier auteur non
   freudien pour voir si SES concepts recomposent ou déplacent ces grappes.

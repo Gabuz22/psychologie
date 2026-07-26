@@ -261,7 +261,25 @@ CONCEPTS = {
             # « es » est le pronom « il/cela » en allemand : impossible à capter nu sans tout
             # ramasser. On ne le prend donc qu'après un déterminant, là où il désigne l'instance
             # (« das Es », « vom Es »). Comme pour « Ich », mieux vaut manquer que sur-détecter.
-            "es": [r"(?:das|des|dem|vom|im|ins) es\b"],
+            #
+            # DÉCELÉ PAR LA VALIDATION QUALITATIVE DES GRAPPES (2026-07) : « déterminant + es »
+            # capte aussi les RELATIVES — « ein Spielzeug, über das es sich geärgert hatte »
+            # (das = le jouet, es = l'enfant). Lus un par un, les 19 atomes antérieurs à 1923
+            # étaient TOUS de ce type : le Ça n'existait pas encore, chaque détection était du
+            # bruit — et faussait la chronologie de la seconde topique. Le discriminant est
+            # mécanique : une relative est toujours PRÉCÉDÉE d'une préposition (« in dem es »,
+            # « bei dem es », « über das es ») ; le Ça topique jamais (« das Es kennt », « im
+            # Es » — les formes contractées, elles, ne peuvent pas ouvrir une relative).
+            # Trois formes pronominales à écarter, toutes lues dans le corpus : la relative à
+            # préposition (« über das es sich geärgert hatte »), la relative après virgule
+            # (« das System, das es bezeichnet ») et le participe où « es » est objet (« dem es
+            # modifizierenden Realitätsprinzip » — le principe de réalité qui LE modifie).
+            # Le Ça topique ne se présente jamais ainsi.
+            "es": [r"(?:vom|im|ins|zum) es\b",
+                   r"(?<!in )(?<!bei )(?<!mit )(?<!von )(?<!zu )(?<!an )(?<!auf )(?<!aus )"
+                   r"(?<!nach )(?<!uber )(?<!unter )(?<!vor )(?<!durch )(?<!fur )(?<!um )"
+                   r"(?<!gegen )(?<!hinter )(?<!neben )(?<!zwischen )(?<!wahrend )(?<!, )"
+                   r"(?:das|dem|des) es\b(?! \w+enden\b)"],
             # PIÈGE DE TRANSLITTÉRATION, resté invisible jusqu'à l'arrivée des « Neue Folge » :
             # ces termes étaient écrits « ueber-ich », comme si le ü devenait « ue ». Or le
             # repliement SUPPRIME les diacritiques : « Über-Ich » donne « uber-ich ». Résultat,

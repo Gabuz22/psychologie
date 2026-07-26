@@ -67,6 +67,21 @@ class TestCorpus(unittest.TestCase):
         pendant = self.c.rechercher(concept="symbol", oeuvre="traumdeutung", annee_max=1914)
         self.assertTrue(pendant)
 
+    def test_le_ca_n_existe_pas_avant_1923(self):
+        """VERROU DE CHRONOLOGIE : aucun atome « es » (le Ça) avant que Freud ne l'ait nommé.
+
+        Le Ça entre dans la théorie avec « Das Ich und das Es » (1923). La validation qualitative
+        des grappes a montré que les 19 détections antérieures étaient TOUTES le pronom allemand
+        dans une relative (« über das es sich geärgert hatte ») ou un participe (« dem es
+        modifizierenden Realitätsprinzip ») — du bruit qui inventait une préhistoire au concept.
+        Ce test fige le résultat de cette lecture : si un motif futur les réintroduit, il casse.
+        """
+        from core import sources
+        for a in self.c.par_concept("es"):
+            annee = sources.OEUVRES[a["oeuvre"]]["annee_oeuvre"]
+            self.assertGreaterEqual(annee, 1923,
+                                    "faux « Ça » en %d : %s" % (annee, a["texte"][:100]))
+
     def test_citation_est_verifiable(self):
         """Une citation doit permettre de retrouver le passage — sinon elle ne vaut rien."""
         a = self.c.par_concept("traum")[0]
