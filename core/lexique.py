@@ -32,7 +32,7 @@ dépendre des variantes ß/ss.
 """
 import re
 
-from .segmentation import replier
+from .segmentation import replier, replier_esszett
 
 LEXIQUE_VERSION = "1.0.0"
 
@@ -298,6 +298,7 @@ CONCEPTS = {
             "angst": ["angst", "angstlich"],
             "abwehr": ["abwehr"],
             "konflikt": ["konflikt"],
+            "wahn": ["wahn", "wahnsinn", "paranoi"],
             # Concept À PART ENTIÈRE, et non un parasite du rêve (voir la note sur « traum ») :
             # la névrose traumatique et la névrose de guerre sont le point d'appui empirique de
             # « Jenseits des Lustprinzips » pour poser la compulsion de répétition.
@@ -340,6 +341,75 @@ CONCEPTS = {
             "eltern": ["eltern"],
             "geschwister": ["geschwister", "bruder", "schwester"],
             "familie": ["familie", "familiar"],
+        },
+    },
+    # ----------------------------------------------------------------------------------------
+    # GROUPES OUVERTS PAR L'EXTENSION DU CORPUS (2e vague : 7 œuvres ajoutées, 1901-1921).
+    # Freud ne parle pas que de rêve et de sexualité : il écrit aussi sur la société primitive,
+    # le mot d'esprit, la foule, l'art. Sans ces groupes, « Das Unheimliche » n'était qualifié
+    # qu'à 39 %, « Totem und Tabu » à 50 % — non parce que ces textes seraient hors psychanalyse,
+    # mais parce que l'ontologie était taillée sur trois livres seulement.
+    # ----------------------------------------------------------------------------------------
+    "anthropologie": {
+        "label": "Anthropologie : totémisme, tabou, sacrifice",
+        "termes": {
+            "totem": ["totem"],
+            "tabu": ["tabu"],
+            "exogamie": ["exogamie", "inzest"],
+            "opfer": ["opfer"],
+            "verbot": ["verbot", "verboten"],
+            "animismus": ["animismus", "animistisch", "magie", "zauber"],
+            "urhorde": ["urhorde", "urvater", "urzeit"],
+            "primitiv": ["primitiv", "wilde", "wilden", "volker"],
+            "beruehrung": ["beruhrung", "beruhrungsangst"],
+        },
+    },
+    "comique": {
+        "label": "Mot d'esprit, comique, rire",
+        "termes": {
+            "witz": ["witz"],
+            "komik": ["komik", "komisch"],
+            "lachen": ["lachen", "lacherlich"],
+            "anspielung": ["anspielung", "wortspiel", "doppelsinn"],
+            "tendenz": ["tendenzios"],
+        },
+    },
+    "social": {
+        "label": "Masse, lien social, autorité",
+        "termes": {
+            # « § » = ce terme se juge sur le texte où le ß est CONSERVÉ. Sans cela, « in hohem
+            # Maße » (mesure) se repliait en « masse » et rejoignait la psychologie des foules.
+            "masse": ["§masse", "§massen"],
+            "fuehrer": ["fuhrer"],
+            "suggestion": ["suggestion", "suggestiv"],
+            "identifizierung": ["identifizierung", "identifiziert"],
+            "panik": ["panik"],
+            "institution": ["kirche", "heer", "armee"],
+        },
+    },
+    "esthetique": {
+        "label": "Art, fiction, inquiétante étrangeté",
+        "termes": {
+            "unheimlich": ["unheimlich"],
+            # « Dichter » (le poète, l'écrivain) — Freud dialogue constamment avec la littérature.
+            # Homographe du comparatif « dichter » (plus dense), très rare ici : écart assumé.
+            "dichter": ["dichter", "dichtung", "poet"],
+            "phantasie": ["phantasie", "phantasier"],
+            "kunst": ["kunstwerk", "asthetik", "asthetisch"],
+            "erzaehlung": ["erzahlung", "roman", "novelle"],
+        },
+    },
+    "acte_manque": {
+        "label": "Actes manqués et psychopathologie du quotidien",
+        "termes": {
+            "fehlleistung": ["fehlleistung", "fehlhandlung"],
+            # « Versprechen » est ambigu en allemand (promesse / lapsus) ; dans ce corpus, c'est
+            # le lapsus qui domine — le livre entier porte sur « Vergessen, Versprechen,
+            # Vergreifen ». Ambiguïté connue et acceptée, signalée ici plutôt que masquée.
+            "versprechen": ["versprechen", "verlesen", "verschreiben"],
+            "vergreifen": ["vergreifen", "vergriff"],
+            "namenvergessen": ["namenvergessen", "namensvergessen"],
+            "aberglaube": ["aberglaube", "abergläubisch", "aberglaubisch"],
         },
     },
     "cure": {
@@ -448,6 +518,7 @@ def statut_de(texte):
 def concepts_de(texte):
     """Concepts psychanalytiques touchés → [{groupe, concept}], multigroupe, déterministe."""
     t = replier(texte)
+    t_ss = replier_esszett(texte)      # variante où le ß subsiste (voir la convention « § »)
     trouves = []
     for groupe, meta in CONCEPTS.items():
         for concept, termes in meta["termes"].items():
@@ -458,7 +529,12 @@ def concepts_de(texte):
             # Les termes sont des MOTIFS (écrits ici, jamais saisis par un utilisateur) : on ne
             # les échappe pas, ce qui autorise les exclusions fines indispensables — « traum(?!a) »
             # pour ne pas confondre Traum et Trauma, « lust(?!ig) » pour écarter « lustig ».
-            if any(re.search(r"\b" + terme, t) for terme in termes):
+            # Un terme préfixé de « § » se juge sur le texte à ß CONSERVÉ : c'est le seul moyen de
+            # séparer « Masse » (la foule) de « Maße » (les mesures), que le repliement ordinaire
+            # rend identiques — une vingtaine de « in hohem Maße » rejoignaient la psychologie des
+            # foules. Le préfixe est retiré avant la recherche.
+            if any(re.search(r"\b" + (m[1:] if m.startswith("§") else m),
+                             t_ss if m.startswith("§") else t) for m in termes):
                 entree = {"groupe": groupe, "concept": concept}
                 sous = _sous_concepts_de(t, concept)
                 if sous:

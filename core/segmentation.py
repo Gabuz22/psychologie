@@ -111,7 +111,22 @@ def recomposable(phrases, source):
 
 
 def replier(s):
-    """Forme repliée pour comparaison : minuscules, sans diacritiques, ß→ss (allemand)."""
+    """Forme repliée pour comparaison : minuscules, sans diacritiques, ß→ss (allemand).
+
+    Le ß devient « ss » à dessein : l'orthographe de 1900 et l'actuelle divergent (« Unbewußte »
+    / « Unbewusste »), et un lexique qui les distinguerait manquerait la moitié des occurrences.
+    """
     s = (s or "").replace("ß", "ss")
     s = unicodedata.normalize("NFD", s)
+    return "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+
+
+def replier_esszett(s):
+    """Même repliement, mais le ß est CONSERVÉ — pour les mots que seul le ß distingue.
+
+    Cas réel : « Masse » (la foule) et « Maße » (les mesures) deviennent identiques après le
+    repliement ordinaire, ce qui rattachait une vingtaine de « in hohem Maße » à la psychologie
+    des foules. L'allemand, lui, les sépare nettement : on lui laisse trancher.
+    """
+    s = unicodedata.normalize("NFD", s or "")
     return "".join(c for c in s if unicodedata.category(c) != "Mn").lower()

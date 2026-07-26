@@ -25,13 +25,21 @@ Le travail d'analyse, lui, se fait en français. La traduction des concepts vien
 
 ## Corpus
 
-Trois œuvres, choisies pour couvrir 20 ans d'évolution théorique :
+**Dix œuvres, 1900-1921** — l'ensemble de ce que Project Gutenberg propose de Freud en allemand.
+Une **★** signale une datation certaine : édition d'origine, ou réimpression déclarée inchangée.
 
 | Œuvre | Original | Édition lue | Source |
 |---|---|---|---|
-| *Die Traumdeutung* | 1900 | 4ᵉ éd., 1914 | [Gutenberg #40739](https://www.gutenberg.org/ebooks/40739) |
-| *Drei Abhandlungen zur Sexualtheorie* | 1905 | 4ᵉ éd., 1920 | [Gutenberg #39938](https://www.gutenberg.org/ebooks/39938) |
-| *Jenseits des Lustprinzips* | 1920 | 2ᵉ éd., 1921 | [Gutenberg #28220](https://www.gutenberg.org/ebooks/28220) |
+| *Die Traumdeutung* | 1900 | 4ᵉ éd., 1914 | [#40739](https://www.gutenberg.org/ebooks/40739) |
+| *Zur Psychopathologie des Alltagslebens* | 1901 | Abdruck, 1904 | [#24429](https://www.gutenberg.org/ebooks/24429) |
+| *Drei Abhandlungen zur Sexualtheorie* | 1905 | 4ᵉ éd., 1920 | [#39938](https://www.gutenberg.org/ebooks/39938) |
+| *Der Witz und seine Beziehung zum Unbewußten* | 1905 | 2ᵉ éd., 1912 | [#76423](https://www.gutenberg.org/ebooks/76423) |
+| *Der Wahn und die Träume in Jensens »Gradiva«* ★ | 1907 | 1ʳᵉ éd., 1907 | [#35549](https://www.gutenberg.org/ebooks/35549) |
+| *Über Psychoanalyse: Fünf Vorlesungen* ★ | 1910 | 2ᵉ éd., 1910 | [#20613](https://www.gutenberg.org/ebooks/20613) |
+| *Totem und Tabu* ★ | 1913 | 3ᵉ éd. **inchangée**, 1922 | [#37065](https://www.gutenberg.org/ebooks/37065) |
+| *Das Unheimliche* ★ | 1919 | 1ʳᵉ publication, 1919 | [#34222](https://www.gutenberg.org/ebooks/34222) |
+| *Jenseits des Lustprinzips* | 1920 | 2ᵉ éd., 1921 | [#28220](https://www.gutenberg.org/ebooks/28220) |
+| *Massenpsychologie und Ich-Analyse* ★ | 1921 | 1ʳᵉ éd., 1921 | [#30843](https://www.gutenberg.org/ebooks/30843) |
 
 **Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
 éditions utilisées sont antérieures à 1931.
@@ -71,20 +79,15 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**8 652 atomes** sur trois œuvres, tous localisables dans la source, produits sans aucun modèle de
-langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
+**15 832 atomes** sur dix œuvres, **tous** localisables dans la source, produits sans aucun modèle
+de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
+72 % sont qualifiés ; **5 œuvres sur 10 ont une datation certaine**.
 
-| Œuvre | Atomes | Localisation | Qualifiés | À confirmer |
-|---|---:|---|---:|---:|
-| *Die Traumdeutung* | 7 242 | 100 % | 68 % | 100 |
-| *Drei Abhandlungen* | 843 | 100 % | 83 % | 9 |
-| *Jenseits des Lustprinzips* | 567 | 100 % | 75 % | 7 |
-
-**Finesse de la catégorisation** — 10 groupes conceptuels, 73 concepts, 19 sous-concepts,
+**Finesse de la catégorisation** — 15 groupes conceptuels, 104 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
-**2 482 combinaisons distinctes** : un profil différent toutes les 3,5 phrases en moyenne.
+**4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-55 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+58 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -108,11 +111,22 @@ Un **chef d'orchestre** choisit les agents selon la question : passe générale 
 suite ciblée (`concept` → `chronologie` → `tension`) quand un concept est donné. Un agent en
 échec est signalé et isolé — il ne fait jamais tomber le dossier.
 
-**Ce que ça donne déjà.** L'agent `cooccurrence` retrouve, sans aucune supervision, les couples
-que tout lecteur de Freud reconnaît : *Wunsch* + *Wunscherfüllung*, *Sadismus* + *Masochismus*,
-*infantil* + *Sexualität*, *Traumgedanke* + *Trauminhalt* (latent / manifeste), *Apparat* +
-*Erregung*. Et la chronologie de `trieb` montre la pulsion envahir la pensée de Freud —
-5 ‰ dans la *Traumdeutung*, 140 ‰ dans les *Trois essais*, 231 ‰ dans *Jenseits*.
+**Ce que ça donne déjà.**
+
+L'agent `profil` retrouve la marque propre des **dix** œuvres, sans qu'on lui ait rien dit de leur
+contenu : *Die Traumdeutung* → rêve ; *Der Witz* → comique ; *Totem und Tabu* → anthropologie ;
+*Massenpsychologie* → social ; *Das Unheimliche* → esthétique ; *Zur Psychopathologie* → mémoire
+et actes manqués ; *Über Psychoanalyse* → conflit et cure. Dix sur dix.
+
+L'agent `cooccurrence` retrouve les couples que tout lecteur de Freud reconnaît : *Wunsch* +
+*Wunscherfüllung*, *Sadismus* + *Masochismus*, *Traumgedanke* + *Trauminhalt* (latent / manifeste),
+*Tabu* + *Verbot*, *Vater* + *Mutter*, *Führer* + *Masse*. Et il fait apparaître des **ponts entre
+œuvres** : *Komik* + *Lustprinzip* relie *Der Witz* (1905) au vocabulaire économique de *Jenseits*
+(1920) — c'est la thèse même du livre sur le mot d'esprit, le plaisir né d'une épargne de dépense
+psychique.
+
+La chronologie de `trieb` montre la pulsion envahir la pensée de Freud : 5 ‰ dans la
+*Traumdeutung*, 140 ‰ dans les *Trois essais*, 231 ‰ dans *Jenseits*.
 
 C'est cet agent qui portera l'objectif long terme : si les courants postérieurs se recomposent à
 partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes de concepts.

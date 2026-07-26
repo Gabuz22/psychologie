@@ -20,10 +20,12 @@ class TestCorpus(unittest.TestCase):
     def setUpClass(cls):
         cls.c = Corpus()                 # corpus complet : les agents doivent tenir à l'échelle réelle
 
-    def test_charge_les_trois_oeuvres(self):
+    def test_charge_tout_le_corpus(self):
+        """Le corpus doit suivre l'extension : le compte vient du registre, jamais d'un nombre figé."""
+        from core import sources
         r = self.c.resume()
-        self.assertEqual(r["oeuvres"], 3)
-        self.assertGreater(r["atomes"], 8000)
+        self.assertEqual(r["oeuvres"], len(sources.OEUVRES))
+        self.assertGreater(r["atomes"], 15000)
 
     def test_selections(self):
         self.assertTrue(self.c.par_concept("traum"))
@@ -37,7 +39,21 @@ class TestCorpus(unittest.TestCase):
         cit = self.c.citer(a)
         for champ in ("id", "texte", "oeuvre", "position", "edition_lue", "datation"):
             self.assertIn(champ, cit)
-        self.assertIn("au plus tard", cit["datation"])   # la réserve de datation est TOUJOURS là
+        # Une citation dit TOUJOURS ce que vaut sa date — soit qu'elle est certaine (édition
+        # d'origine, ou réimpression inchangée), soit qu'elle n'est qu'une borne supérieure.
+        self.assertRegex(cit["datation"], r"date certaine|au plus tard")
+
+    def test_datation_certaine_pour_les_editions_d_origine(self):
+        """L'extension a apporté des œuvres lues dans leur édition d'origine : à ne pas brader.
+
+        Les traiter comme incertaines par prudence mécanique reviendrait à jeter l'information la
+        plus précieuse du corpus pour toute chronologie.
+        """
+        from core import sources
+        exactes = [k for k in sources.OEUVRES if sources.datation(sources.OEUVRES[k])["precise"]]
+        self.assertGreaterEqual(len(exactes), 4)
+        for k in ("gradiva", "unheimliche", "massenpsychologie"):
+            self.assertIn(k, exactes)
 
 
 class TestAgents(unittest.TestCase):

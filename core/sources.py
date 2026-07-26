@@ -45,7 +45,12 @@ _FIN = re.compile(r"\*\*\* ?END OF TH[EI][^\n]*\*\*\*")
 # Les laisser produisait des atomes administratifs (« Produced by Jana Srna… ») mêlés à l'œuvre.
 _NOTE_TETE = re.compile(r"\A.{0,400}?\[\s*Anmerkungen zur Transkription:.*?^\s*\]\s*$",
                         re.S | re.M)
-_NOTE_QUEUE = re.compile(r"^\s*\[\s*Im folgenden werden alle geänderten Textzeilen.*\Z", re.S | re.M)
+# Deux formes de note finale coexistent selon le transcripteur — les deux doivent partir, sinon
+# des errata (« Seite 57: Unbebewußten -> Unbewußten ») deviennent des atomes de Freud.
+_NOTE_QUEUE = re.compile(
+    r"^\s*\[\s*Im folgenden werden alle geänderten Textzeilen.*\Z"
+    r"|^[ \t]*(?:ANMERKUNGEN ZUR TRANSKRIPTION|TRANSCRIBER'?S NOTES?)\b.*\Z",
+    re.S | re.M)
 
 # LIMINAIRES DE L'ÉDITEUR — page de titre et table des matières. Ce ne sont pas des énoncés de
 # Freud : atomisés, ils produisaient des unités absurdes (« DR. », « SIGM. », « Die Realität 472 »)
@@ -91,6 +96,87 @@ OEUVRES = {
         "source": "Project Gutenberg #39938 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/39938",
         "fac_simile": "https://archive.org/details/Freud_1905_Drei_Abhandlungen (1re éd., scan)",
+    },
+    "psychopathologie": {
+        "fichier": "1901_psychopathologie_alltagsleben.pg.txt",
+        "titre": "Zur Psychopathologie des Alltagslebens",
+        "titre_fr": "Psychopathologie de la vie quotidienne",
+        "annee_oeuvre": 1901,
+        "annee_edition": 1904,
+        "edition": "Durchgesehener Abdruck",
+        "editeur": "S. Karger, Berlin",
+        "source": "Project Gutenberg #24429 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/24429",
+    },
+    "witz": {
+        "fichier": "1905_witz.pg.txt",
+        "titre": "Der Witz und seine Beziehung zum Unbewußten",
+        "titre_fr": "Le mot d'esprit et sa relation à l'inconscient",
+        "annee_oeuvre": 1905,
+        "annee_edition": 1912,
+        "edition": "2. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Project Gutenberg #76423 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/76423",
+    },
+    "gradiva": {
+        "fichier": "1907_gradiva.pg.txt",
+        "titre": "Der Wahn und die Träume in W. Jensens »Gradiva«",
+        "titre_fr": "Le délire et les rêves dans la « Gradiva » de W. Jensen",
+        "annee_oeuvre": 1907,
+        "annee_edition": 1907,     # PREMIÈRE édition — datation exacte
+        "edition": "1. Auflage (Schriften zur angewandten Seelenkunde, erstes Heft)",
+        "editeur": "Hugo Heller & Cie., Wien/Leipzig",
+        "source": "Project Gutenberg #35549 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/35549",
+    },
+    "ueber_psychoanalyse": {
+        "fichier": "1910_ueber_psychoanalyse.pg.txt",
+        "titre": "Über Psychoanalyse: Fünf Vorlesungen",
+        "titre_fr": "Cinq leçons sur la psychanalyse",
+        "annee_oeuvre": 1910,
+        "annee_edition": 1910,     # 2e tirage la même année — aucun écart
+        "edition": "2. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Project Gutenberg #20613 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/20613",
+    },
+    "totem": {
+        "fichier": "1913_totem_und_tabu.pg.txt",
+        "titre": "Totem und Tabu",
+        "titre_fr": "Totem et tabou",
+        "annee_oeuvre": 1913,
+        "annee_edition": 1922,
+        "edition": "3., unveränderte Auflage",
+        # La page de titre porte « UNVERÄNDERTE » : réimpression SANS modification. L'écart de
+        # neuf ans n'introduit donc AUCUNE couche d'écriture — cas différent des éditions
+        # « vermehrte » (augmentées) où les ajouts sont indiscernables. Voir `datation`.
+        "texte_inchange": True,
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Project Gutenberg #37065 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/37065",
+    },
+    "unheimliche": {
+        "fichier": "1919_das_unheimliche.pg.txt",
+        "titre": "Das Unheimliche",
+        "titre_fr": "L'inquiétante étrangeté",
+        "annee_oeuvre": 1919,
+        "annee_edition": 1919,     # parution originale dans Imago V — datation exacte
+        "edition": "1re publication (Imago, Bd. V)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #34222 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/34222",
+    },
+    "massenpsychologie": {
+        "fichier": "1921_massenpsychologie.pg.txt",
+        "titre": "Massenpsychologie und Ich-Analyse",
+        "titre_fr": "Psychologie des masses et analyse du moi",
+        "annee_oeuvre": 1921,
+        "annee_edition": 1921,     # PREMIÈRE édition — datation exacte
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Project Gutenberg #30843 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/30843",
     },
     "jenseits": {
         "fichier": "1920_jenseits_lustprinzips.pg.txt",
@@ -189,18 +275,34 @@ def _retirer_liminaires(corps):
 def datation(meta):
     """Statut de datation d'un atome issu de cette œuvre — honnête par construction.
 
-    `precise=False` signifie : on connaît une borne SUPÉRIEURE (l'édition lue), pas la date réelle
-    d'écriture du passage. Toute analyse chronologique doit lire ce champ avant de conclure.
+    Trois cas, et non deux :
+      • ÉDITION D'ORIGINE (écart nul) → date certaine.
+      • RÉIMPRESSION INCHANGÉE (« unveränderte Auflage ») → le texte est celui de l'origine
+        même si l'exemplaire est tardif : aucune couche ajoutée, donc date certaine elle aussi.
+        Ignorer cette distinction ferait rejeter comme incertaines des œuvres parfaitement datées.
+      • ÉDITION AUGMENTÉE OU REVUE → on ne connaît qu'une borne SUPÉRIEURE : Freud a cessé de
+        signaler ses ajouts, ils sont indiscernables dans le texte.
     """
     ecart = meta["annee_edition"] - meta["annee_oeuvre"]
+    inchange = bool(meta.get("texte_inchange"))
+    precise = ecart == 0 or inchange
+    if ecart == 0:
+        regle = "édition d'origine (%d) — date certaine" % meta["annee_oeuvre"]
+    elif inchange:
+        regle = ("réimpression INCHANGÉE de %d (exemplaire de %d) — texte d'origine, date certaine"
+                 % (meta["annee_oeuvre"], meta["annee_edition"]))
+    else:
+        regle = ("attesté au plus tard dans l'édition %d ; première apparition inconnue dans [%d, %d]"
+                 % (meta["annee_edition"], meta["annee_oeuvre"], meta["annee_edition"]))
     return {
         "annee_oeuvre": meta["annee_oeuvre"],
         "annee_edition_lue": meta["annee_edition"],
-        "fenetre_incertitude_annees": ecart,
-        "precise": ecart == 0,
-        "regle": "attesté au plus tard dans l'édition %d ; première apparition inconnue dans [%d, %d]"
-                 % (meta["annee_edition"], meta["annee_oeuvre"], meta["annee_edition"]),
-        "levee_possible_par": "collation avec la 1re édition (fac-similé) — chantier distinct, non fait",
+        "fenetre_incertitude_annees": 0 if precise else ecart,
+        "precise": precise,
+        "texte_inchange": inchange,
+        "regle": regle,
+        "levee_possible_par": (None if precise else
+                               "collation avec la 1re édition (fac-similé) — chantier distinct, non fait"),
     }
 
 

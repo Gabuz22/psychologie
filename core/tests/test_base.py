@@ -6,6 +6,7 @@ test doit tomber : c'est ce qui distingue une base fiable d'une base qui a l'air
 Stdlib seulement (unittest), aucune dépendance, exécutable partout.
 """
 import os
+import re
 import sys
 import unittest
 
@@ -156,6 +157,32 @@ class TestLexique(unittest.TestCase):
         c2 = {x["concept"] for x in lexique.concepts_de("Das Lustprinzip beherrscht den Vorgang.")}
         self.assertIn("lustprinzip", c2)
 
+    def test_masse_nest_pas_masze(self):
+        """« Masse » (la foule) et « Maße » (les mesures) : seul le ß les distingue.
+
+        Le repliement ordinaire (ß→ss, nécessaire pour l'orthographe de 1900) les confondait, et
+        rattachait « in hohem Maße » à la psychologie des foules. Les termes marqués « § » se
+        jugent donc sur le texte où le ß subsiste.
+        """
+        foule = {x["concept"] for x in lexique.concepts_de("Die Masse verhält sich wie eine Horde.")}
+        mesure = {x["concept"] for x in lexique.concepts_de("Das gilt in hohem Maße für den Traum.")}
+        self.assertIn("masse", foule)
+        self.assertNotIn("masse", mesure)
+
+    def test_domaines_ouverts_par_l_extension(self):
+        """Les 7 œuvres ajoutées apportent des domaines entiers : ils doivent être reconnus."""
+        cas = {
+            "Das Tabu der Berührung beim Totemismus.": {"tabu", "totem", "beruehrung"},
+            "Der tendenziöse Witz erzeugt Komik.": {"witz", "komik", "tendenz"},
+            "Die Identifizierung mit dem Führer.": {"identifizierung", "fuehrer"},
+            "Das Unheimliche in der Erzählung des Dichters.": {"unheimlich", "erzaehlung", "dichter"},
+            "Das Versprechen ist eine Fehlleistung.": {"versprechen", "fehlleistung"},
+        }
+        for phrase, attendus in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertTrue(attendus <= trouves,
+                            "« %s » : manquent %s" % (phrase, attendus - trouves))
+
     def test_ich_pronom_nest_pas_le_moi(self):
         """PIÈGE : « ich » = « je » chez Freud qui écrit à la 1re personne. Ne pas taguer « topique »."""
         c = lexique.concepts_de("Ich habe diesen Traum selbst geträumt.")
@@ -190,7 +217,7 @@ class TestSources(unittest.TestCase):
 
     def test_manifeste_complet(self):
         m = sources.manifeste()
-        self.assertEqual(len(m["oeuvres"]), 3)
+        self.assertEqual(len(m["oeuvres"]), len(sources.OEUVRES))
         for o in m["oeuvres"]:
             self.assertTrue(o["present"], "œuvre absente du dépôt : %s" % o["cle"])
             self.assertTrue(o["empreinte_fichier"])
@@ -215,9 +242,12 @@ class TestSources(unittest.TestCase):
         """
         for cle in sources.OEUVRES:
             t = sources.charger(cle)["texte"]
-            self.assertNotIn("Inhaltsverzeichnis", t, "table des matières restante : %s" % cle)
-            self.assertNotIn("Inhaltsangabe", t, "table des matières restante : %s" % cle)
+            # On teste la STRUCTURE (un titre de table en tête de ligne), pas le mot : Freud parle
+            # parfois de la table des matières d'un AUTRE livre en plein texte — c'est du contenu.
+            self.assertIsNone(re.search(r"^[ 	]*(Inhaltsverzeichnis|Inhaltsangabe)\.?[ 	]*$",
+                                        t, re.M), "table des matières restante : %s" % cle)
             self.assertNotIn("VERLAGS-NR", t.upper(), "page de titre restante : %s" % cle)
+            self.assertNotIn("TRANSCRIBER", t.upper(), "note de transcription restante : %s" % cle)
 
     def test_prefaces_datees_preservees(self):
         """À l'inverse, les préfaces sont le SEUL matériau daté avec certitude : jamais retirées."""
