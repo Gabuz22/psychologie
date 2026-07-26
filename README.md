@@ -71,17 +71,51 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**8 602 atomes** sur trois œuvres, tous localisables dans la source, produits sans aucun modèle de
+**8 652 atomes** sur trois œuvres, tous localisables dans la source, produits sans aucun modèle de
 langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
 
 | Œuvre | Atomes | Localisation | Qualifiés | À confirmer |
 |---|---:|---|---:|---:|
-| *Die Traumdeutung* | 7 198 | 100 % | 62 % | 100 |
-| *Drei Abhandlungen* | 837 | 100 % | 70 % | 9 |
-| *Jenseits des Lustprinzips* | 567 | 100 % | 65 % | 7 |
+| *Die Traumdeutung* | 7 242 | 100 % | 68 % | 100 |
+| *Drei Abhandlungen* | 843 | 100 % | 83 % | 9 |
+| *Jenseits des Lustprinzips* | 567 | 100 % | 75 % | 7 |
 
-38 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
-séparation acquis / à confirmer).
+**Finesse de la catégorisation** — 10 groupes conceptuels, 73 concepts, 19 sous-concepts,
+11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
+**2 482 combinaisons distinctes** : un profil différent toutes les 3,5 phrases en moyenne.
+
+55 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
+
+---
+
+## Les agents déterministes
+
+Six agents lisent le corpus et répondent chacun à une question. Aucun n'emploie de modèle de
+langage : leurs résultats sont **reproductibles** — donc discutables, puisqu'on peut refaire le
+calcul au lieu de faire confiance. Chaque sortie est **citable** jusqu'au texte allemand.
+
+| Agent | Question |
+|---|---|
+| `profil` | De quoi cette œuvre parle-t-elle, et qu'est-ce qui lui est **propre** ? |
+| `concept` | Que dit Freud d'un concept, sur quel ton, avec quelles citations ? |
+| `cooccurrence` | Quels concepts pense-t-il **ensemble** ? |
+| `chronologie` | La place d'un concept change-t-elle d'une œuvre à l'autre ? |
+| `tension` | Où trouve-t-on des énoncés de sens opposé sur un même concept ? |
+| `signaux` | Quels passages demandent une vérification ? |
+
+Un **chef d'orchestre** choisit les agents selon la question : passe générale sans argument,
+suite ciblée (`concept` → `chronologie` → `tension`) quand un concept est donné. Un agent en
+échec est signalé et isolé — il ne fait jamais tomber le dossier.
+
+**Ce que ça donne déjà.** L'agent `cooccurrence` retrouve, sans aucune supervision, les couples
+que tout lecteur de Freud reconnaît : *Wunsch* + *Wunscherfüllung*, *Sadismus* + *Masochismus*,
+*infantil* + *Sexualität*, *Traumgedanke* + *Trauminhalt* (latent / manifeste), *Apparat* +
+*Erregung*. Et la chronologie de `trieb` montre la pulsion envahir la pensée de Freud —
+5 ‰ dans la *Traumdeutung*, 140 ‰ dans les *Trois essais*, 231 ‰ dans *Jenseits*.
+
+C'est cet agent qui portera l'objectif long terme : si les courants postérieurs se recomposent à
+partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes de concepts.
 
 ---
 
@@ -106,6 +140,12 @@ Détail et mesures : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENT
 ```bash
 python bin/atomiser.py                    # atomise tout le corpus → derive/
 python bin/atomiser.py traumdeutung       # une seule œuvre
+
+python bin/analyser.py                    # état des lieux : profils, co-occurrences, signaux
+python bin/analyser.py trieb              # dossier d'un concept + chronologie + tensions
+python bin/analyser.py --agent cooccurrence
+python bin/analyser.py angst --json       # sortie brute, pour chaîner
+
 python -m unittest discover -s core/tests -t .
 ```
 
@@ -113,20 +153,30 @@ Aucune dépendance : bibliothèque standard Python uniquement.
 
 ```
 sources/freud/de/   textes originaux — jamais modifiés
-core/               pipeline déterministe (segmentation, lexique, atomisation)
+core/               segmentation · lexique · atomisation · corpus · agents
+bin/                atomiser.py (produire) · analyser.py (interroger)
 derive/             sorties régénérables
 documentation/      inventaire empirique et méthode
 ```
+
+**Ajouter une œuvre** : déposer le texte dans `sources/freud/de/`, l'inscrire dans
+`core/sources.py:OEUVRES` (avec son édition réelle et son année de parution), relancer les tests.
+Le lexique et les agents n'ont pas à changer — mais vérifiez les **formes réellement captées**
+par tout nouveau terme ajouté (voir le point 3 ci-dessus).
 
 ---
 
 ## Suite
 
-La méthode est prouvée sur trois textes. Restent à faire, dans l'ordre :
+La base est complète et outillée sur trois textes : elle est prête à recevoir la suite de l'œuvre.
+Restent à faire, dans l'ordre :
 
-1. **Étendre le corpus** au reste de l'œuvre (~24 volumes).
-2. **Dater les couches** par collation avec les premières éditions.
+1. **Étendre le corpus** au reste de l'œuvre (~24 volumes). Le pipeline est prévu pour : ajout
+   déclaratif d'une œuvre, atomisation mémorisée, agents inchangés.
+2. **Dater les couches** par collation avec les premières éditions — la seule façon de lever
+   l'incertitude qui pèse aujourd'hui sur toute chronologie.
 3. **Vérifier les signaux** repérés (révisions, objections) — c'est là qu'un modèle de langage
-   apporte ce qu'un lexique ne peut pas.
+   apporte ce qu'un lexique ne peut pas : juger un passage en contexte.
 4. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
-   voir comment les courants se recomposent à partir des mêmes atomes fondateurs.
+   voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
+   `cooccurrence` est l'instrument de cette question.

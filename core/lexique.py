@@ -211,10 +211,15 @@ CONCEPTS = {
             "entstellung": ["entstellung", "traumentstellung"],
             "symbol": ["symbol", "symbolik", "symbolisch"],
             "tagesrest": ["tagesrest", "tagesreste"],
+            # Le sommeil est la CONDITION du rêve, et le grand absent de la première version du
+            # lexique : 416 occurrences ignorées dans un livre sur les rêves. « (?!rock|zimmer) »
+            # écarte les emplois non psychiques (robe de chambre, chambre à coucher).
+            "schlaf": [r"schlaf(?!rock|zimmer)", "einschlaf", "schlummer"],
+            "wachen": ["wachzustand", "wachleben", "erwachen", "wachend"],
         },
     },
     "topique": {
-        "label": "Appareil psychique (topique)",
+        "label": "Appareil psychique (lieux et instances)",
         "termes": {
             "unbewusst": ["unbewusst", "unbewusste", "unbewussten", "unbewusstes"],
             "vorbewusst": ["vorbewusst", "vorbewusste", "vorbewussten"],
@@ -223,12 +228,48 @@ CONCEPTS = {
             "ich": ["ich-", "ichs"],          # « Ich » nu est trop ambigu (pronom) — voir note ci-dessous
             "es": ["das es"],
             "ueberich": ["ueber-ich", "ueberich"],
+            # L'« appareil psychique » est le modèle central du chapitre VII — il manquait.
+            "apparat": ["apparat", "instanz", "system"],
+            "psychisme": ["seelisch", "seele", "psychisch", "psyche"],
+        },
+    },
+    # NOUVEAU GROUPE — le point de vue ÉCONOMIQUE (quantités d'énergie), distinct de la topique
+    # (les lieux) et de la dynamique (les conflits). C'est la grille que Freud superpose aux deux
+    # autres, et elle porte l'argument de « Jenseits » : 193 « Erregung » et 53 « Besetzung »
+    # étaient jusqu'ici invisibles.
+    "economie": {
+        "label": "Économie psychique (énergie, quantités)",
+        "termes": {
+            "erregung": ["erregung", "erregt", "reizung"],
+            "besetzung": ["besetzung", "besetzt", "gegenbesetzung"],
+            "spannung": ["spannung"],
+            "abfuhr": ["abfuhr", "entladung"],
+            "energie": ["energie", "quantitat", "intensitat"],
+            "reiz": ["reizschutz", "reizmenge"],
+        },
+    },
+    # NOUVEAU GROUPE — mémoire et oubli : 266 « Erinnerung » ignorées, alors que le souvenir
+    # d'enfance et le refoulement du souvenir sont la matière première de la méthode.
+    "memoire": {
+        "label": "Mémoire, souvenir, oubli",
+        "termes": {
+            "erinnerung": ["erinnerung", "erinnert", "erinnern"],
+            "gedaechtnis": ["gedachtnis"],
+            "vergessen": ["vergessen", "vergesslichkeit"],
+            "deckerinnerung": ["deckerinnerung"],
+            "spur": ["erinnerungsspur", "gedachtnisspur"],
         },
     },
     "pulsion": {
         "label": "Pulsion, libido, sexualité",
         "termes": {
-            "trieb": ["trieb", "triebe", "triebes", "trieben"],
+            # « trieb » nu ne voit pas les composés : l'allemand soude (Sexual-trieb, Todes-trieb),
+            # et la frontière de mot est en tête. Sans les composés attestés, les sous-concepts de
+            # « trieb » ne se déclenchaient jamais. On les énumère plutôt que d'employer un joker
+            # (`\w*trieb` attraperait « Betrieb », « getrieben ») — même prudence que Traum/Trauma.
+            "trieb": ["trieb",
+                      r"(?:sexual|todes|ich|partial|lebens|schau|selbsterhaltungs|destruktions|"
+                      r"aggressions|eros)trieb"],
             "libido": ["libido"],
             "sexualitaet": ["sexualitat", "sexuell", "sexuelle", "sexualtrieb"],
             # (?!ig) écarte « lustig » (amusant), qui n'a rien à voir avec le plaisir freudien.
@@ -237,6 +278,14 @@ CONCEPTS = {
             "todestrieb": ["todestrieb"],
             "wiederholungszwang": ["wiederholungszwang"],
             "narzissmus": ["narzissmus", "narzisstisch"],
+            # Les « aberrations sexuelles » sont le premier des Trois essais : 219 occurrences
+            # d'inversion et de perversion étaient hors ontologie.
+            "inversion": ["inversion", "invertiert", "invertierte"],
+            "perversion": ["perversion", "pervers"],
+            "sadismus": ["sadismus", "sadist"],
+            "masochismus": ["masochis"],
+            "autoerotismus": ["autoerot"],
+            "erogene_zone": ["erogen"],
         },
     },
     "conflit": {
@@ -273,6 +322,24 @@ CONCEPTS = {
             "infantil": ["infantil", "infantile", "kindheit", "kindlich", "kind"],
             "oedipus": ["oedipus", "odipus"],
             "elternkomplex": ["elternkomplex", "komplex"],
+            "latenzzeit": ["latenzzeit", "latenzperiode"],
+            "pubertaet": ["pubertat"],
+            "entwicklung": ["entwicklung", "entwicklungsstufe"],
+        },
+    },
+    # NOUVEAU GROUPE — les FIGURES du roman familial. « oedipus » ne captait que le mot (3 atomes) ;
+    # la substance du complexe est ailleurs : 232 « Vater », 163 « Mutter », 147 frères et sœurs.
+    # Groupe distinct à dessein : c'est sur lui que se recomposeront les courants postérieurs
+    # (relations d'objet chez Klein, fonction paternelle chez Lacan) — l'objectif à terme du projet.
+    "famille": {
+        "label": "Figures familiales et roman familial",
+        "termes": {
+            # (?!land|stadt) écarte « Vaterland » / « Vaterstadt », qui ne sont pas le père.
+            "vater": [r"vater(?!land|stadt)", "vaterlich"],
+            "mutter": [r"mutter(?!mal)", "mutterlich"],
+            "eltern": ["eltern"],
+            "geschwister": ["geschwister", "bruder", "schwester"],
+            "familie": ["familie", "familiar"],
         },
     },
     "cure": {
@@ -283,6 +350,47 @@ CONCEPTS = {
             "patient": ["patient", "patientin", "kranke", "kranken"],
             "assoziation": ["assoziation", "einfall", "einfalle"],
         },
+    },
+}
+
+# --------------------------------------------------------------------------- 3bis. SOUS-CONCEPTS
+# TROISIÈME NIVEAU (groupe → concept → sous-concept), posé UNIQUEMENT là où le texte fait une
+# distinction réelle et mesurable. Sans lui, tous les atomes de « trieb » tombaient dans le même
+# tiroir, que Freud parle de pulsion sexuelle (98 occurrences) ou de pulsion de mort (20) — deux
+# thèses que 15 ans et un revirement théorique séparent. C'est exactement la finesse qui manquait.
+#
+# Le sous-concept est ADDITIF : l'atome garde son concept parent (on ne perd jamais la vue large),
+# et gagne une précision quand le texte la donne. Aucun sous-concept n'est deviné : chacun a été
+# compté dans le corpus avant d'être inscrit (effectif entre parenthèses).
+SOUS_CONCEPTS = {
+    "trieb": {
+        "sexualtrieb": (["sexualtrieb"], 98),
+        "todestrieb": (["todestrieb", "destruktionstrieb"], 20),
+        "partialtrieb": (["partialtrieb"], 19),
+        "ichtrieb": (["ichtrieb"], 13),
+        "lebenstrieb": (["lebenstrieb", "erostrieb"], 11),
+        "schautrieb": (["schautrieb"], 2),
+    },
+    "traum": {
+        "angsttraum": (["angsttraum"], 38),
+        "typischer_traum": ([r"typische[nr]? traum"], 22),
+        "kindertraum": (["kindertraum"], 6),
+    },
+    "sexualitaet": {
+        "inversion": (["inversion", "invertiert"], 104),
+        "perversion": (["perversion", "pervers"], 115),
+        "erogene_zone": (["erogen"], 78),
+        "sadismus": (["sadismus", "sadist"], 31),
+        "masochismus": (["masochis"], 24),
+        "autoerotismus": (["autoerot"], 12),
+    },
+    "angst": {
+        "angsttraum": (["angsttraum"], 38),
+        "angstneurose": (["angstneurose"], 2),
+    },
+    "erinnerung": {
+        "deckerinnerung": (["deckerinnerung"], 6),
+        "kindheitserinnerung": (["kindheitserinnerung"], None),
     },
 }
 
@@ -351,8 +459,21 @@ def concepts_de(texte):
             # les échappe pas, ce qui autorise les exclusions fines indispensables — « traum(?!a) »
             # pour ne pas confondre Traum et Trauma, « lust(?!ig) » pour écarter « lustig ».
             if any(re.search(r"\b" + terme, t) for terme in termes):
-                trouves.append({"groupe": groupe, "concept": concept})
+                entree = {"groupe": groupe, "concept": concept}
+                sous = _sous_concepts_de(t, concept)
+                if sous:
+                    entree["sous_concepts"] = sous
+                trouves.append(entree)
     return trouves
+
+
+def _sous_concepts_de(texte_replie, concept):
+    """Précisions du 3e niveau portées par la phrase (additives : le concept parent reste)."""
+    table = SOUS_CONCEPTS.get(concept)
+    if not table:
+        return []
+    return sorted(nom for nom, (motifs, _) in table.items()
+                  if any(re.search(r"\b" + m, texte_replie) for m in motifs))
 
 
 def valider():

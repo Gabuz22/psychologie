@@ -69,8 +69,27 @@ def _emphases(texte):
     return out
 
 
+# Mémoire de calcul : l'atomisation est PURE (même texte → mêmes atomes), donc rejouable sans
+# risque et coûteuse à refaire. Sans ce cache, chaque agent réatomisait tout le corpus — tenable
+# sur trois œuvres, impraticable sur les vingt-quatre volumes visés. Vidable par `oublier()`.
+_CACHE = {}
+
+
+def oublier():
+    """Vide la mémoire de calcul (utile après modification du lexique ou des sources)."""
+    _CACHE.clear()
+
+
 def atomiser(cle_oeuvre):
-    """Atomise une œuvre entière → {atomes, meta, controles}."""
+    """Atomise une œuvre entière → {atomes, meta, controles}. Résultat mémorisé (calcul pur)."""
+    if cle_oeuvre in _CACHE:
+        return _CACHE[cle_oeuvre]
+    resultat = _atomiser(cle_oeuvre)
+    _CACHE[cle_oeuvre] = resultat
+    return resultat
+
+
+def _atomiser(cle_oeuvre):
     charge = sources.charger(cle_oeuvre)
     texte, meta = charge["texte"], charge["meta"]
     phrases = segmenter(texte)
@@ -140,7 +159,7 @@ def controler(atomes, phrases, texte):
 def indexer(atomes):
     """Index inversés : par fonction, par concept, par groupe, par statut — pour l'analyse."""
     par_fonction, par_concept, par_groupe, par_statut = {}, {}, {}, {}
-    par_signal = {}
+    par_signal, par_sous_concept = {}, {}
     for a in atomes:
         for f in a["fonctions"]:
             par_fonction.setdefault(f, []).append(a["id"])
@@ -149,13 +168,16 @@ def indexer(atomes):
         for c in a["concepts"]:
             par_concept.setdefault(c["concept"], []).append(a["id"])
             par_groupe.setdefault(c["groupe"], []).append(a["id"])
+            for sc in c.get("sous_concepts", []):
+                par_sous_concept.setdefault(sc, []).append(a["id"])
         par_statut.setdefault(a["statut"], []).append(a["id"])
     return {
         "par_fonction": {k: len(v) for k, v in sorted(par_fonction.items())},
         "par_signal_a_confirmer": {k: len(v) for k, v in sorted(par_signal.items())},
         "par_concept": {k: len(v) for k, v in sorted(par_concept.items(), key=lambda x: -len(x[1]))},
+        "par_sous_concept": {k: len(v) for k, v in sorted(par_sous_concept.items(), key=lambda x: -len(x[1]))},
         "par_groupe": {k: len(v) for k, v in sorted(par_groupe.items(), key=lambda x: -len(x[1]))},
         "par_statut": {k: len(v) for k, v in sorted(par_statut.items(), key=lambda x: -len(x[1]))},
         "_ids": {"par_fonction": par_fonction, "par_concept": par_concept,
-                 "par_signal_a_confirmer": par_signal},
+                 "par_sous_concept": par_sous_concept, "par_signal_a_confirmer": par_signal},
     }

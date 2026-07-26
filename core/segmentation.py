@@ -47,6 +47,11 @@ def _masquer(texte):
     #    capitalisé en allemand — on accepte donc les deux casses. Limité à 1-2 chiffres : cela
     #    exclut volontairement les millésimes à 4 chiffres (« Er starb 1939. Seine Werke… »), où le
     #    point termine réellement la phrase. Compromis assumé et testé.
+    #
+    #    Le point d'un numéro EN DÉBUT DE LIGNE est masqué lui aussi, mais pour une autre raison :
+    #    c'est un item de liste (Freud énumère beaucoup de rêves ainsi), et la coupure doit se
+    #    faire AVANT le numéro, pas après — sinon « 1. » se retrouve collé à la fin de l'atome
+    #    précédent. La frontière correspondante est posée dans `segmenter`.
     t = re.sub(r"\b(\d{1,2})\.(?=\s+[A-ZÄÖÜa-zäöüß])", r"\1" + _S, t)
     return t
 
@@ -64,9 +69,15 @@ def segmenter(texte):
     if not texte or not texte.strip():
         return []
     masque = _masquer(texte)
-    # Fin de phrase = ponctuation forte + espace(s) + début de phrase plausible
-    # (majuscule, guillemet ouvrant, tiret de dialogue, souligné de mise en relief Gutenberg).
-    frontiere = re.compile(r"(?<=[.!?])[ \t]*(?:\n(?!\s*\n))?[ \t]*(?=[»\"„_~#(\[]?[A-ZÄÖÜ0-9])")
+    # Deux sortes de frontières :
+    #   (a) fin de phrase = ponctuation forte + espace(s) + début plausible (majuscule, guillemet,
+    #       souligné de mise en relief Gutenberg) ;
+    #   (b) ITEM DE LISTE = un numéro en tête de ligne (« 1. Ich mache einen Besuch… »). Sans elle,
+    #       toute une énumération de rêves se soudait en un seul atome de 250 mots ; avec une
+    #       coupure « après le point », le numéro se serait retrouvé collé à l'atome précédent.
+    frontiere = re.compile(
+        r"(?<=[.!?])[ \t]*(?:\n(?!\s*\n))?[ \t]*(?=[»\"„_~#(\[]?[A-ZÄÖÜ0-9])"
+        r"|(?<=\n)(?=[ \t]*\d{1,2}[.\x00][ \t]+[A-ZÄÖÜ])")
     phrases, debut, index = [], 0, 0
     for m in frontiere.finditer(masque):
         brut = texte[debut:m.start()]

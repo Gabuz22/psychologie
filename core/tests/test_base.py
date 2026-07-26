@@ -36,6 +36,18 @@ class TestSegmentation(unittest.TestCase):
     def test_ordinal_ne_coupe_pas(self):
         self.assertEqual(len(segmenter("In der 3. Auflage habe ich das geändert.")), 1)
 
+    def test_liste_numerotee_se_decoupe(self):
+        """Freud énumère ses rêves (« 1. Ich mache einen Besuch… ») : chaque item est un atome.
+
+        Sans frontière dédiée, toute l'énumération se soudait en un seul atome de 250 mots — et le
+        numéro doit ouvrir son item, pas rester collé à la fin du précédent.
+        """
+        p = segmenter("Ich teile die Träume mit.\n\n1. Ich mache einen Besuch.\n\n2. Sie wartet.\n")
+        self.assertEqual(len(p), 3)
+        self.assertTrue(p[1]["texte"].startswith("1."))
+        self.assertTrue(p[2]["texte"].startswith("2."))
+        self.assertFalse(p[0]["texte"].rstrip().endswith("1."))
+
     def test_question_coupe(self):
         p = segmenter("Wie komme ich dazu? Am selben Abend kam der Einfall.")
         self.assertEqual(len(p), 2)
