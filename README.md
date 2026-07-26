@@ -25,7 +25,7 @@ Le travail d'analyse, lui, se fait en français. La traduction des concepts vien
 
 ## Corpus
 
-**Onze œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
+**Douze œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
 réimpression déclarée inchangée.
 
 Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
@@ -46,6 +46,7 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 | *Das Unheimliche* ★ | 1919 | 1ʳᵉ publication, 1919 | [#34222](https://www.gutenberg.org/ebooks/34222) |
 | *Jenseits des Lustprinzips* | 1920 | 2ᵉ éd., 1921 | [#28220](https://www.gutenberg.org/ebooks/28220) |
 | *Massenpsychologie und Ich-Analyse* ★ | 1921 | 1ʳᵉ éd., 1921 | [#30843](https://www.gutenberg.org/ebooks/30843) |
+| *Eine Teufelsneurose im 17. Jahrhundert* ★ | 1923 | 1ʳᵉ éd., 1923 | [Wikisource DE](https://de.wikisource.org/wiki/Eine_Teufelsneurose_im_siebzehnten_Jahrhundert) |
 | *Neue Folge der Vorlesungen* ★ | 1933 | 1ʳᵉ éd., 1933 | [Wikisource DE](https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einf%C3%BChrung_in_die_Psychoanalyse) |
 
 **Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
@@ -86,15 +87,20 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**17 975 atomes** sur onze œuvres, **tous** localisables dans la source, produits sans aucun modèle
+**16 898 atomes** sur douze œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-71 % sont qualifiés ; **6 œuvres sur 11 ont une datation certaine**.
+74 % sont qualifiés ; **7 œuvres sur 12 ont une datation certaine**.
+
+Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
+retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 du seul
+*Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
+« *#Alix.# Les rêves. Rev. Scient.* ».
 
 **Finesse de la catégorisation** — 15 groupes conceptuels, 104 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-70 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+74 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -128,11 +134,11 @@ Trois états, jamais mélangés : **confirmé** (opposable), **rejeté** (écart
 
 | Signal | Repérés | Lus | Confirmés | Rejetés | Précision mesurée |
 |---|---:|---:|---:|---:|---:|
-| `revision` | 15 | 15 | 5 | 9 | **0,33** |
-| `objection` | 106 | 106 | 59 | 47 | **0,56** |
-| `auto_citation` | 57 | 57 | 30 | 27 | **0,53** |
+| `revision` | 16 | 16 | 5 | 11 | **0,31** |
+| `objection` | 108 | 108 | 61 | 47 | **0,56** |
+| `auto_citation` | 59 | 59 | 31 | 28 | **0,53** |
 
-**94 signaux opposables** — dont les objections que Freud dresse contre ses propres thèses
+**97 signaux opposables** — dont les objections que Freud dresse contre ses propres thèses
 (« *Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht* »), et ses
 renvois datés à ses propres travaux (« *Der Schatten des Objekts ist auf das Ich gefallen, sagte
 ich an anderer Stelle* » — sa formule de *Trauer und Melancholie*).
@@ -175,7 +181,7 @@ partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes
 
 ---
 
-## Quatre choses à savoir avant d'utiliser cette base
+## Cinq choses à savoir avant d'utiliser cette base
 
 1. **La datation est une fourchette, pas une date.** Aucune édition disponible n'est une première
    édition, et Freud a cessé de signaler ses ajouts à partir de la 3ᵉ édition. Un atome est
@@ -187,13 +193,19 @@ partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes
    *Traumarbeit* (le travail du rêve, 126 occurrences). L'intuition ne suffit pas — il faut
    regarder le texte. Procédure et mesures dans l'inventaire.
 
-4. **Un volume n'est pas d'un seul auteur.** La 4ᵉ édition de la *Traumdeutung* contient un
+4. **Les jugements sont ancrés sur le TEXTE, pas sur le rang.** Les identifiants d'atomes sont
+   positionnels : retirer du paratexte en amont les décale. Le registre de vérification est donc
+   clé par empreinte de contenu — sans quoi 194 jugements lus à la main pointeraient dans le vide
+   au premier nettoyage.
+5. **Un volume n'est pas d'un seul auteur.** La 4ᵉ édition de la *Traumdeutung* contient un
    appendice d'**Otto Rank** (« *Traum und Dichtung* », « *Traum und Mythus* ») — 334 atomes, 7 %
    du volume. Chaque atome porte donc son auteur réel ; ne pas le faire mesurerait deux plumes
    pour une. Le défaut a été décelé par des passages parlant de « *der Freudschen Auffassung* »
    à la troisième personne.
 
-Détail et mesures : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENTAIRE_ATOMES.md).
+**Résultats en clair : [`documentation/SYNTHESE_FREUD.md`](documentation/SYNTHESE_FREUD.md)** —
+ce que le corpus dit de Freud, sans jargon technique.
+Détail méthodologique : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENTAIRE_ATOMES.md).
 
 ---
 

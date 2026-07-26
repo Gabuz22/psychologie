@@ -31,9 +31,19 @@ def charger():
         return json.load(f)
 
 
-def verdict(atome_id, table=None):
+def cle(atome):
+    """Clé d'un atome dans le registre : son EMPREINTE, jamais son rang.
+
+    Les identifiants positionnels (« oeuvre:aN ») se décalent dès qu'on retire du paratexte en
+    amont — le nettoyage des blocs de notes Wikisource, intercalés dans les Neue Folge, a suffi à
+    faire pointer 30 jugements dans le vide. Un verdict porte sur une PHRASE : il doit la suivre.
+    """
+    return atome["empreinte"] if isinstance(atome, dict) else atome
+
+
+def verdict(atome, table=None):
     """Jugement porté sur cet atome, ou None s'il n'a pas encore été lu."""
-    return (table or charger())["verdicts"].get(atome_id)
+    return (table or charger())["verdicts"].get(cle(atome))
 
 
 def etat(atomes, table=None):
@@ -50,7 +60,7 @@ def etat(atomes, table=None):
             case = par_signal.setdefault(s, {"total": 0, "juges": 0, "confirmes": 0,
                                              "rejetes": 0, "reclasses": 0})
             case["total"] += 1
-            j = v.get(a["id"])
+            j = v.get(cle(a))
             if j and j.get("signal") == s:
                 case["juges"] += 1
                 case[{"confirme": "confirmes", "rejete": "rejetes",
@@ -72,7 +82,7 @@ def confirmes(atomes, signal=None, table=None):
     t = table or charger()
     out = []
     for a in atomes:
-        j = t["verdicts"].get(a["id"])
+        j = t["verdicts"].get(cle(a))
         if not j or j["verdict"] != "confirme":
             continue
         if signal and j.get("signal") != signal:

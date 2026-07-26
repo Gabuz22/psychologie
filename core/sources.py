@@ -70,6 +70,19 @@ _PREMIER_CHAPITRE = re.compile(r"^[ \t]*I\.[ \t]*$", re.M)
 _TOC_TITRE = re.compile(r"^[ \t]*(Inhaltsverzeichnis|Inhaltsangabe)\.?[ \t]*$", re.M)
 _TOC_LIGNE = re.compile(r"^.{3,75}?[ \t]{3,}\d{1,3}[ \t]*$")
 
+# PARATEXTE DE FIN DE VOLUME — bibliographies et réclames d'éditeur. Ce n'est pas Freud, et cela
+# produisait des atomes absurdes : « #Alix.# Les rêves. Rev. Scient. » ou « Preis M 10.-- ».
+# Chaque borne a été RELEVÉE DANS LE TEXTE, jamais devinée ; elle n'est retenue que si elle tombe
+# au-delà des deux tiers du volume — le même mot peut figurer sur la page de titre.
+# La bibliographie de la Traumdeutung pèse à elle seule ~56 000 signes, soit 4 % du livre.
+PARATEXTE_FINAL = {
+    "traumdeutung": "VIII. Literaturverzeichnis.",
+    "witz": "VERLAG VON FRANZ DEUTICKE",
+    "gradiva": "Anzeige.",
+    "totem": "INTERNATIONALER PSYCHOANALYTISCHER VERLAG",
+    "jenseits": "Werke von Prof. Sigm. Freud",
+}
+
 # Registre des œuvres. `annee_edition` = ce qu'on LIT ; `annee_oeuvre` = première parution.
 # L'écart entre les deux EST l'incertitude de datation, portée explicitement.
 OEUVRES = {
@@ -186,6 +199,19 @@ OEUVRES = {
         "source": "Project Gutenberg #30843 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/30843",
     },
+    "teufelsneurose": {
+        "fichier": "1923_teufelsneurose.ws.txt",
+        "titre": "Eine Teufelsneurose im siebzehnten Jahrhundert",
+        "titre_fr": "Une névrose diabolique au XVIIᵉ siècle",
+        "annee_oeuvre": 1923,
+        "annee_edition": 1923,     # 1re publication (Imago IX) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. IX)",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien",
+        "provenance": "wikisource",
+        "source": "Wikisource DE (Bearbeitungsstand « fertig »)",
+        "url": "https://de.wikisource.org/wiki/Eine_Teufelsneurose_im_siebzehnten_Jahrhundert",
+        "fac_simile": "Imago 9-1.djvu (Wikimedia Commons)",
+    },
     "neue_folge": {
         "fichier": "1933_neue_folge.ws.txt",
         "titre": "Neue Folge der Vorlesungen zur Einführung in die Psychoanalyse",
@@ -237,6 +263,8 @@ def charger(cle):
     with open(chemin, encoding="utf-8") as f:
         brut = f.read()
     texte, bornage = _extraire_corps(brut, meta.get("provenance", "gutenberg"))
+    texte, note_fin = _retirer_paratexte_final(texte, cle)
+    bornage += " ; " + note_fin
     meta.update({
         "cle": cle,
         "empreinte_fichier": hashlib.sha256(brut.encode("utf-8")).hexdigest()[:16],
@@ -256,9 +284,8 @@ def _extraire_corps(brut, provenance="gutenberg"):
     un corpus silencieusement pollué est pire qu'un corpus dont on connaît le défaut.
     """
     if provenance != "gutenberg":
-        # Texte assemblé depuis Wikisource : le paratexte (annotations [WS], numéros de page du
-        # fac-similé, navigation) a déjà été écarté à l'extraction. Rien à borner ici.
-        return brut.strip(), "source Wikisource — paratexte écarté à l'extraction"
+        corps, note = _nettoyer_wikisource(brut)
+        return corps, "source Wikisource — " + note
     d = _DEBUT.search(brut)
     f = _FIN.search(brut)
     if not d or not f or f.start() <= d.end():
@@ -272,6 +299,58 @@ def _extraire_corps(brut, provenance="gutenberg"):
     corps, note = _retirer_liminaires(corps)
     notes.append(note)
     return corps.strip(), "bornes Gutenberg retirées ; " + " ; ".join(notes)
+
+
+def _nettoyer_wikisource(brut):
+    """Retire les apports de Wikisource : blocs de notes et liens d'édition.
+
+    Wikisource clôt chaque page par « Anmerkungen (Wikisource) » suivi d'entrées « ↑ … » — des
+    notes rédigées par les contributeurs pour identifier personnes et ouvrages cités. Utiles au
+    lecteur du site, ce ne sont PAS des phrases de Freud : atomisées, elles produisaient des
+    énoncés du genre « ↑ Karl Marx (Wikipedia) ». Huit blocs, 92 entrées dans les Neue Folge.
+    """
+    # Le bloc de notes clôt toujours une section et court jusqu'au TITRE de la suivante (ligne
+    # entièrement capitale, posée à l'assemblage). Borner sur « la première ligne qui commence par
+    # une majuscule » ne suffisait pas : une note longue se poursuit sur plusieurs lignes, dont
+    # certaines commencent par une majuscule — onze notes survivaient ainsi.
+    est_titre = lambda s: bool(s) and s == s.upper() and any(c.isalpha() for c in s) and len(s) < 80
+    lignes, garde, dans_notes, retires = brut.split("\n"), [], False, 0
+    for ligne in lignes:
+        nu = ligne.strip()
+        if nu.startswith("Anmerkungen (Wikisource)"):
+            dans_notes, retires = True, retires + 1
+            continue
+        if dans_notes:
+            if est_titre(nu):
+                dans_notes = False          # la section suivante commence : le bloc est clos
+            else:
+                continue
+        if nu == "Bearbeiten":              # lien d'édition MediaWiki égaré
+            continue
+        garde.append(ligne)
+    texte = "\n".join(garde)
+    # Flèche de retour restante : elle ouvre les notes de bas de page DE FREUD, que Wikisource rend
+    # ainsi. Le texte est de lui — on ne retire que le signe de renvoi, jamais la note.
+    texte = re.sub(r"^[ \t]*↑[ \t]*", "", texte, flags=re.M)
+    texte = re.sub(r"\n{3,}", "\n\n", texte).strip()
+    return texte, ("%d bloc(s) de notes Wikisource retiré(s)" % retires if retires
+                   else "aucun bloc de notes")
+
+
+def _retirer_paratexte_final(corps, cle):
+    """Coupe la bibliographie ou la réclame d'éditeur qui clôt certains volumes."""
+    marqueur = PARATEXTE_FINAL.get(cle)
+    if not marqueur:
+        return corps, "pas de paratexte final déclaré"
+    i = corps.find(marqueur)
+    # Garde-fou : le même intitulé peut apparaître ailleurs (page de titre, note). On ne coupe que
+    # si la borne tombe dans le dernier tiers — sinon on le signale plutôt que d'amputer le texte.
+    if i < 0:
+        return corps, "paratexte final « %s » introuvable — À VÉRIFIER" % marqueur[:30]
+    if i < 0.66 * len(corps):
+        return corps, "borne « %s » trouvée trop tôt (%d %%) — non appliquée" % (
+            marqueur[:24], round(100 * i / len(corps)))
+    return corps[:i].strip(), "paratexte final retiré (%d signes)" % (len(corps) - i)
 
 
 def _retirer_liminaires(corps):

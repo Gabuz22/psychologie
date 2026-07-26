@@ -61,7 +61,7 @@ class TestEtat(unittest.TestCase):
         self.assertLess(len(ok), len(tous), "aucun candidat écarté : la lecture n'a rien filtré ?")
         table = verification.charger()
         for a, j in ok:
-            self.assertEqual(table["verdicts"][a["id"]]["verdict"], "confirme")
+            self.assertEqual(table["verdicts"][verification.cle(a)]["verdict"], "confirme")
 
     def test_signal_non_juge_reste_en_attente(self):
         """Ni promu, ni écarté : un candidat non lu doit compter comme « restant ».
@@ -71,7 +71,8 @@ class TestEtat(unittest.TestCase):
         tomberait précisément parce que le travail a été fait.
         """
         table = verification.charger()
-        inconnu = {"id": "oeuvre_fictive:a999999", "signaux_a_confirmer": ["revision"]}
+        inconnu = {"id": "oeuvre_fictive:a999999", "empreinte": "0" * 16,
+                   "signaux_a_confirmer": ["revision"]}
         self.assertIsNone(verification.verdict(inconnu["id"], table))
         e = verification.etat([inconnu], table)["par_signal"]["revision"]
         self.assertEqual(e["total"], 1)
@@ -80,10 +81,26 @@ class TestEtat(unittest.TestCase):
         self.assertIsNone(e["precision_mesuree"])
         self.assertEqual(verification.confirmes([inconnu], table=table), [])
 
+    def test_verdicts_ancres_sur_le_texte_pas_sur_le_rang(self):
+        """Un jugement suit la PHRASE, pas son numéro d'ordre.
+
+        Les identifiants « oeuvre:aN » sont positionnels : retirer du paratexte en amont les
+        décale. Le nettoyage des blocs de notes Wikisource, intercalés dans les Neue Folge, avait
+        ainsi fait pointer 30 verdicts dans le vide. Le registre est donc clé par EMPREINTE.
+        """
+        table = verification.charger()
+        for k in table["verdicts"]:
+            self.assertRegex(k, r"^[0-9a-f]{16}$", "clé non conforme à une empreinte : %s" % k)
+        # Un atome retrouve son verdict quel que soit son rang : on le déplace artificiellement.
+        juge = next(a for a in self.c.atomes if verification.verdict(a, table))
+        deplace = dict(juge, id="oeuvre:a999999", index=999999)
+        self.assertEqual(verification.verdict(deplace, table), verification.verdict(juge, table))
+
     def test_instruction_complete(self):
         """État atteint : tous les signaux repérés du corpus ont été lus et jugés."""
         table = verification.charger()
-        restants = [a["id"] for a in self.c.a_confirmer() if a["id"] not in table["verdicts"]]
+        restants = [a["id"] for a in self.c.a_confirmer()
+                    if verification.cle(a) not in table["verdicts"]]
         self.assertEqual(restants, [], "signaux encore non instruits : %s" % restants[:5])
 
 

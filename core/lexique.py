@@ -190,6 +190,27 @@ MARQUEURS_STATUT = {
 # --------------------------------------------------------------------------- 3. CONCEPTS
 # Ontologie psychanalytique par GROUPES. Extensible : ajouter Jung/Klein/Lacan = ajouter des
 # entrées, jamais toucher au moteur. Termes en forme repliée (ß→ss, sans diacritiques).
+#
+# ACCUEIL D'AUTRES AUTEURS (structure posée avant d'en avoir besoin, tant que l'ontologie freudienne
+# est encore malléable — la refaire après coup coûterait bien plus cher).
+#
+# Le pari du projet est qu'un courant postérieur ne s'invente pas de toutes pièces : il RECOMPOSE
+# des atomes déjà là, en déplaçant les accents. La comparaison n'a donc de sens que si les auteurs
+# partagent le MÊME jeu de concepts — sinon on ne mesurerait que la différence des grilles de
+# lecture. D'où la règle : un concept propre à un auteur est ajouté au groupe EXISTANT qui lui
+# correspond, avec le champ `auteurs` ; il n'ouvre un groupe neuf que si aucun ne peut l'accueillir.
+#
+#   « archetyp » (Jung)            → groupe `topique`      (une instance de plus, pas un ailleurs)
+#   « position_depressive » (Klein) → groupe `developpement`
+#   « objet_partiel » (Klein)      → groupe `famille` ou `pulsion` selon l'usage attesté
+#   « objet_petit_a » (Lacan)      → groupe `desir`
+#
+# `auteurs` absent = concept commun, cherché chez tout le monde (c'est le cas de tout le lexique
+# freudien actuel). `auteurs: ["jung"]` = cherché seulement dans les œuvres de cet auteur, ce qui
+# évite de compter chez Freud un mot qu'il n'employait pas.
+#
+# La langue reste l'ALLEMAND pour Jung et Klein (qui écrivent en allemand), et demandera un
+# lexique français pour Lacan — d'où le champ `langue` prévu dans le registre des œuvres.
 CONCEPTS = {
     "reve": {
         "label": "Rêve et travail du rêve",
@@ -535,13 +556,25 @@ def statut_de(texte):
     return "affirme"
 
 
-def concepts_de(texte):
-    """Concepts psychanalytiques touchés → [{groupe, concept}], multigroupe, déterministe."""
+def concepts_de(texte, auteur=None):
+    """Concepts psychanalytiques touchés → [{groupe, concept}], multigroupe, déterministe.
+
+    `auteur` restreint aux concepts pertinents pour lui : un concept marqué `auteurs: ["jung"]`
+    n'est pas cherché chez Freud, qui ne l'employait pas. Sans argument, tout est cherché — c'est
+    le comportement actuel, le lexique étant encore entièrement freudien.
+    """
     t = replier(texte)
     t_ss = replier_esszett(texte)      # variante où le ß subsiste (voir la convention « § »)
     trouves = []
     for groupe, meta in CONCEPTS.items():
+        reserve = meta.get("auteurs")
+        if auteur and reserve and auteur not in reserve:
+            continue
         for concept, termes in meta["termes"].items():
+            if isinstance(termes, dict):          # forme étendue : {motifs, auteurs}
+                if auteur and termes.get("auteurs") and auteur not in termes["auteurs"]:
+                    continue
+                termes = termes["motifs"]
             if concept == "ich" and groupe == "topique":
                 if _RE_ICH_MOI.search(t):
                     trouves.append({"groupe": groupe, "concept": "ich"})
@@ -594,7 +627,9 @@ def valider():
     for groupe, meta in CONCEPTS.items():
         if not meta.get("termes"):
             erreurs.append("groupe de concepts vide : %s" % groupe)
-        for concept in meta["termes"]:
+        for concept, termes in meta["termes"].items():
+            if isinstance(termes, dict) and not termes.get("motifs"):
+                erreurs.append("concept en forme étendue sans motifs : %s/%s" % (groupe, concept))
             cle = (groupe, concept)
             if cle in vus:
                 erreurs.append("concept dupliqué : %s/%s" % cle)

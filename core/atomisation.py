@@ -20,6 +20,7 @@ Invariants (tenus par les tests) :
   • JAMAIS DE FAUX ACQUIS : un atome sans fonction/concept reconnu le dit (« non_qualifie »),
     on ne lui invente pas de catégorie.
 """
+import hashlib
 import re
 
 from . import lexique, sources
@@ -69,6 +70,18 @@ def contributions(texte, meta, reperes):
                 break
         out.append({"auteur": c["auteur"], "debut": debut, "fin": fin})
     return out
+
+
+def empreinte(texte):
+    """Identifiant STABLE d'un atome : une empreinte de son texte, insensible à sa position.
+
+    L'identifiant `oeuvre:aN` est positionnel — il change dès qu'on retire du paratexte en amont.
+    C'est ce qui est arrivé : le retrait de la bibliographie de la Traumdeutung a décalé tous les
+    numéros, et les 189 verdicts vérifiés à la main pointaient soudain dans le vide. Un jugement
+    porté sur une PHRASE doit rester attaché à cette phrase, quoi qu'il advienne du volume autour.
+    Normalisation légère (espaces) pour survivre à un reformatage sans changer de sens.
+    """
+    return hashlib.sha1(" ".join(str(texte or "").split()).encode("utf-8")).hexdigest()[:16]
 
 
 def _auteur_de(position, regions, defaut):
@@ -132,6 +145,9 @@ def _atomiser(cle_oeuvre):
         concepts = lexique.concepts_de(p["texte"])
         atomes.append({
             "id": "%s:a%d" % (cle_oeuvre, p["index"]),
+            # Clé STABLE, insensible à la position : c'est elle qui porte les jugements de
+            # vérification, pour qu'un nettoyage du volume ne les fasse plus pointer dans le vide.
+            "empreinte": empreinte(p["texte"]),
             "oeuvre": cle_oeuvre,
             "index": p["index"],
             "texte": p["texte"],

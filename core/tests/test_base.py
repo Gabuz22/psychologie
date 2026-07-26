@@ -228,6 +228,27 @@ class TestLexique(unittest.TestCase):
         c = lexique.concepts_de("Ich habe diesen Traum selbst geträumt.")
         self.assertNotIn("ich", {x["concept"] for x in c})
 
+    def test_concept_reserve_a_un_auteur(self):
+        """Un concept propre à un auteur ne doit pas être cherché chez les autres.
+
+        Le projet vise à comparer les courants : cela n'a de sens que si l'on ne compte pas chez
+        Freud un mot qu'il n'employait pas. Éprouvé ici sur un concept ajouté puis retiré, pour ne
+        pas dépendre de l'état du lexique.
+        """
+        groupe = lexique.CONCEPTS["topique"]["termes"]
+        groupe["archetyp_test"] = {"motifs": ["archetyp"], "auteurs": ["jung"]}
+        try:
+            phrase = "Der Archetypus wirkt im Unbewußten."
+            chez_jung = {x["concept"] for x in lexique.concepts_de(phrase, "jung")}
+            chez_freud = {x["concept"] for x in lexique.concepts_de(phrase, "freud")}
+            self.assertIn("archetyp_test", chez_jung)
+            self.assertNotIn("archetyp_test", chez_freud)
+            # …et le concept commun reste vu chez les deux.
+            self.assertIn("unbewusst", chez_jung)
+            self.assertIn("unbewusst", chez_freud)
+        finally:
+            del groupe["archetyp_test"]
+
     def test_aucune_qualification_forcee(self):
         """Une phrase neutre ne doit RIEN déclencher — mieux vaut vide que faux."""
         self.assertEqual(lexique.fonctions_de("Das Haus stand am Ufer."), [])
@@ -288,6 +309,48 @@ class TestSources(unittest.TestCase):
                                         t, re.M), "table des matières restante : %s" % cle)
             self.assertNotIn("VERLAGS-NR", t.upper(), "page de titre restante : %s" % cle)
             self.assertNotIn("TRANSCRIBER", t.upper(), "note de transcription restante : %s" % cle)
+
+    def test_paratexte_final_retire(self):
+        """Bibliographies et réclames d'éditeur ne sont pas de Freud.
+
+        Atomisées, elles donnaient « #Alix.# Les rêves. Rev. Scient. » ou « Preis M 10.-- ».
+        Le seul Literaturverzeichnis de la Traumdeutung pèse 56 000 signes.
+        """
+        # On teste la BORNE exacte, pas le mot : Freud mentionne lui-même sa bibliographie dans
+        # la préface (« Ein zweites Literaturverzeichnis am Ende… ») — c'est son texte à lui.
+        interdits = {
+            "traumdeutung": "VIII. Literaturverzeichnis.",
+            "witz": "VERLAG VON FRANZ DEUTICKE",
+            "totem": "Zu beziehen durch",
+            "jenseits": "Werke von Prof. Sigm. Freud",
+            "gradiva": "Anzeige.",
+        }
+        for cle, mot in interdits.items():
+            t = sources.charger(cle)["texte"]
+            self.assertNotIn(mot, t, "paratexte final restant dans %s" % cle)
+        # Contre-épreuve : les entrées bibliographiques elles-mêmes ont bien disparu.
+        self.assertNotIn("#Achmetis F. Serim.#", sources.charger("traumdeutung")["texte"])
+        # …et le texte de Freud qui le précède est intact. On normalise les espaces : le texte
+        # d'origine est retourné à la ligne : un saut au milieu d'une phrase n'est pas une coupure.
+        aplati = lambda cle: " ".join(sources.charger(cle)["texte"].split())
+        self.assertIn("Ebenbilde jener Vergangenheit gestaltet", aplati("traumdeutung"))
+        self.assertIn("nur Geschöpfe des Dichters sind", aplati("gradiva"))
+
+    def test_notes_wikisource_retirees(self):
+        """Wikisource ajoute ses propres notes (« ↑ Karl Marx (Wikipedia) ») : ce n'est pas Freud.
+
+        Mais ses notes de bas de page À LUI, rendues avec la même flèche, doivent rester : on ne
+        retire que le signe de renvoi.
+        """
+        t = sources.charger("neue_folge")["texte"]
+        self.assertNotIn("Anmerkungen (Wikisource)", t)
+        self.assertNotIn("(Wikipedia)", t)
+        self.assertNotIn("Bearbeiten", t)
+        self.assertNotIn("↑", t)
+        # note authentique de Freud, conservée sans sa flèche
+        self.assertIn("So wurde es mir im ersten Kriegsjahr", t)
+        for conference in ("REVISION DER TRAUMLEHRE", "ANGST UND TRIEBLEBEN"):
+            self.assertIn(conference, t)
 
     def test_prefaces_datees_preservees(self):
         """À l'inverse, les préfaces sont le SEUL matériau daté avec certitude : jamais retirées."""
