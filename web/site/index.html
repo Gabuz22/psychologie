@@ -18,9 +18,11 @@
 </header>
 
 <nav>
-  <a href="#recherche">Recherche</a>
-  <a href="#courants">Courants internes</a>
-  <a href="#methode">Méthode</a>
+  <a href="#recherche" data-vue="recherche">Recherche</a>
+  <a href="#courants" data-vue="courants">Courants internes</a>
+  <a href="#chronologie" data-vue="chronologie">Chronologie</a>
+  <a href="#lecture" data-vue="lecture">Lire une œuvre</a>
+  <a href="#methode" data-vue="methode">Méthode</a>
 </nav>
 
 <main>
@@ -79,8 +81,63 @@
   <h2>Les courants internes du corpus</h2>
   <p class="note">Huit grappes de concepts que Freud pense ensemble, découpées par
     maximisation de modularité (déterministe) et <em>validées par lecture</em>. Une grappe est
-    un candidat de courant — cliquer pour en parcourir les atomes.</p>
+    un candidat de courant — cliquer pour ouvrir son dossier complet.</p>
   <div id="grappes" class="cartes"></div>
+</section>
+
+<section id="courant" hidden>
+  <a href="#courants" class="retour">← toutes les grappes</a>
+  <h2 id="courant-nom"></h2>
+  <p id="courant-poids" class="poids-grappe"></p>
+  <p id="courant-description" class="note"></p>
+  <div id="courant-concepts" class="etiquettes"></div>
+  <h3>Citation vedette</h3>
+  <p class="note">Choisie par l'agent lui-même (le passage qui croise le plus de concepts de
+    la grappe, longueur la plus proche d'une thèse théorique) — jamais éditée à la main.</p>
+  <div id="courant-citation"></div>
+  <h3>Densité par œuvre</h3>
+  <p class="note">Part des atomes de l'œuvre qui portent un concept de cette grappe (Sigmund
+    Freud seul — l'appendice d'Otto Rank fausserait la mesure). Le trait clair marque la
+    densité <strong>d'origine</strong> quand l'œuvre a été collationnée avec sa première
+    édition — la seule comparable sans réserve d'édition.</p>
+  <div id="courant-densite" class="graphique"></div>
+  <p id="courant-reserve" class="reserve"></p>
+</section>
+
+<section id="chronologie">
+  <h2>Chronologie d'un concept</h2>
+  <p class="note">La densité d'un concept, œuvre par œuvre. Jamais une évolution d'idée en
+    soi — la place d'un mot — mais c'est déjà ce que Freud dit rarement lui-même.</p>
+  <form id="form-chrono">
+    <div class="grille">
+      <label>Concept
+        <select id="chrono-concept"></select>
+      </label>
+    </div>
+    <div class="actions"><button type="submit">Afficher</button></div>
+  </form>
+  <div id="chrono-resultat"></div>
+</section>
+
+<section id="lecture">
+  <h2>Lire une œuvre dans l'ordre</h2>
+  <p class="note">Les atomes tels qu'ils s'enchaînent dans le texte — pour suivre un
+    raisonnement, pas chercher un mot.</p>
+  <form id="form-lecture">
+    <div class="grille">
+      <label>Œuvre
+        <select id="lecture-oeuvre"></select>
+      </label>
+    </div>
+    <div class="actions"><button type="submit">Lire</button></div>
+  </form>
+  <div id="lecture-titre"></div>
+  <div id="lecture-resultat"></div>
+  <div class="actions" id="lecture-pager" hidden>
+    <button type="button" id="lecture-prec" class="secondaire">← précédent</button>
+    <span id="lecture-position" class="compte"></span>
+    <button type="button" id="lecture-suiv" class="secondaire">suivant →</button>
+  </div>
 </section>
 
 <section id="methode">
@@ -112,5 +169,13 @@
 </footer>
 
 <script src="app.js"></script>
+
+<!-- Cloudflare Web Analytics — respectueux de la vie privée, sans cookie ni fingerprinting.
+     Étape manuelle requise (dashboard Cloudflare, ~2 min) : voir DEPLOIEMENT.md « Point 7 ».
+     Une fois le jeton obtenu, décommenter et le coller à la place de VOTRE_JETON_BEACON. -->
+<!--
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "VOTRE_JETON_BEACON"}'></script>
+-->
 </body>
 </html>

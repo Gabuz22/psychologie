@@ -92,6 +92,50 @@ button.secondaire { background: transparent; color: var(--accent);
 .carte .poids { color: var(--accent); font-size: .85rem; }
 .carte .membres { color: var(--gris); font-size: .85rem; margin-top: .35rem; }
 
+/* dossier de grappe */
+.retour { color: var(--accent); text-decoration: none; font-weight: 600; font-size: .9rem; }
+.retour:hover { text-decoration: underline; }
+.poids-grappe { color: var(--accent); font-weight: 600; margin: .2rem 0 .8rem; }
+.etiquettes { display: flex; flex-wrap: wrap; gap: .4rem; margin: .6rem 0 1.2rem; }
+.etiquette {
+  font-size: .8rem; padding: .15rem .6rem; border-radius: 99px;
+  background: var(--accent-doux); color: var(--accent); border: 1px solid transparent;
+}
+.reserve {
+  font-size: .88rem; color: var(--gris); border-left: 3px solid var(--filet);
+  padding: .3rem 0 .3rem .8rem; margin-top: 1rem; max-width: 46rem;
+}
+
+/* graphique de densité (barres horizontales, sans dépendance) */
+.graphique { margin-top: .6rem; }
+.ligne-barre { display: grid; grid-template-columns: 11rem 1fr 3.5rem; align-items: center;
+               gap: .6rem; padding: .18rem 0; font-size: .85rem; }
+.ligne-barre .label { color: var(--gris); white-space: nowrap; overflow: hidden;
+                       text-overflow: ellipsis; }
+.ligne-barre .piste { position: relative; height: .9rem; background: var(--accent-doux);
+                       border-radius: 4px; overflow: visible; }
+.ligne-barre .plein { position: absolute; inset: 0; width: 0%; background: var(--accent);
+                       border-radius: 4px; transition: width .3s; }
+.ligne-barre .origine-marque { position: absolute; top: -2px; bottom: -2px; width: 2px;
+                                background: var(--encre); left: 0%; }
+.ligne-barre .valeur { text-align: right; color: var(--encre); font-variant-numeric: tabular-nums; }
+.legende-graphique { font-size: .8rem; color: var(--gris); margin-top: .3rem; }
+
+/* lecture séquentielle */
+#lecture-titre { font-family: var(--serif); font-size: 1.2rem; margin-top: .8rem; }
+.chapitre-titre {
+  font-family: var(--serif); font-size: 1rem; color: var(--accent); margin: 1.2rem 0 .3rem;
+  border-bottom: 1px dashed var(--filet); padding-bottom: .2rem;
+}
+.citation .citer {
+  background: none; border: none; color: var(--gris); font-size: .78rem; cursor: pointer;
+  padding: 0; margin-left: .6rem; text-decoration: underline;
+}
+.citation .citer:hover { color: var(--accent); }
+
+/* navigation active */
+nav a.actif { color: var(--accent); }
+
 /* méthode */
 .engagements { max-width: 46rem; padding-left: 1.2rem; }
 .engagements li { margin: .55rem 0; }

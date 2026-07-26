@@ -262,10 +262,14 @@ python -m unittest discover -s core/tests -t .
 
 Aucune dépendance : bibliothèque standard Python uniquement.
 
-**Le site** (`web/`) expose le corpus en ligne — Cloudflare Worker + D1, frontend statique
-sans framework. Le Worker ne calcule rien : il sert en lecture seule ce que
-`bin/exporter_d1.py` a déversé du pipeline Python (atomes, concepts, grappes, verdicts,
-fenêtres de datation). Déploiement pas à pas : [`web/DEPLOIEMENT.md`](web/DEPLOIEMENT.md).
+**Le site — [psychologie.guzan99.workers.dev](https://psychologie.guzan99.workers.dev)**
+(`web/`) expose le corpus en ligne : recherche multicritère, dossier complet de chaque grappe
+(éditorial, citation vedette choisie par l'agent, densité par œuvre), chronologie d'un concept
+visualisée, lecture séquentielle d'une œuvre, export de citation académique. Cloudflare Worker
++ D1, frontend statique sans framework — le Worker ne calcule rien : il sert en lecture seule
+ce que `bin/exporter_d1.py` a déversé du pipeline Python (atomes, concepts, grappes, verdicts,
+fenêtres de datation). Mise à jour du site après un changement de corpus : `web/deployer.sh`
+(un seul script, rejouable). Déploiement pas à pas : [`web/DEPLOIEMENT.md`](web/DEPLOIEMENT.md).
 
 ```
 sources/freud/de/          textes de travail — jamais modifiés

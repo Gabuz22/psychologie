@@ -43,21 +43,71 @@ AUTEURS = {
     "Otto Rank": {"naissance": 1884, "mort": 1939, "courant": "psychanalyse"},
 }
 
-# Noms éditoriaux des grappes (documentation/COURANTS_FREUD.md). L'agent ne nomme pas ses
-# grappes — ces libellés sont une couche de PRÉSENTATION, raccrochée par concept signature.
-# Une grappe sans signature connue garde un nom neutre : mieux vaut fade que faux.
-NOMS_GRAPPES = [
-    ("traum", "Le travail du rêve"),
-    ("vater", "Le père, la religion, la mort"),
-    ("apparat", "L'appareil psychique et l'économie du plaisir"),
-    ("trieb", "La clinique pulsionnelle"),
-    ("erinnerung", "Le souvenir et la création"),
-    ("malerei", "La peinture"),
-    ("masse", "La masse et l'autorité"),
-    ("ueberich", "La seconde topique"),
+# Éditorial des grappes (résumé de documentation/COURANTS_FREUD.md). L'agent `courants` ne
+# nomme pas ses grappes ni ne les commente — ceci est une couche de PRÉSENTATION, raccrochée
+# par concept signature. Une grappe sans signature connue garde un nom neutre : mieux vaut fade
+# que faux. La citation vedette, elle, N'EST PAS choisie ici : elle vient de l'agent lui-même
+# (AgentCourants._decrire_grappe), pour que le site ne montre jamais un texte que le pipeline
+# déterministe n'a pas produit.
+EDITORIAL_GRAPPES = [
+    ("traum", "Le travail du rêve",
+     "Mécanisme complet de l'interprétation des rêves : condensation, déplacement, censure, "
+     "travail du rêve. Revient en force en 1922 (Traum und Telepathie) et 1933 (la Neue Folge "
+     "s'ouvre sur une « Revision der Traumlehre »).",
+     "21 % des atomes de la Traumdeutung lue (éd. 1914) sont des ajouts postérieurs à 1900 — "
+     "voir la densité « d'origine » pour la version corrigée."),
+    ("vater", "Le père, la religion, la mort",
+     "La grappe la plus freudienne du découpage : la religion, la société et l'angoisse "
+     "dérivées du complexe paternel et de la mort — le geste théorique central de Totem und "
+     "Tabu et de Massenpsychologie.",
+     "Fusionne ce qu'un lecteur séparerait (famille / anthropologie / religion / mort). Avant "
+     "1914, la mort voyageait avec la famille ; c'est Jenseits (1920) qui l'arrime à la "
+     "pulsion — voir la stabilité temporelle dans COURANTS_FREUD.md."),
+    ("apparat", "L'appareil psychique et l'économie du plaisir",
+     "Le vocabulaire économique (énergie, décharge, investissement) qui unit la métapsychologie "
+     "et le mot d'esprit — la thèse même du Witz est une épargne de dépense psychique.",
+     "Après 1914, l'appareil psychique forme une grappe autonome ; le comique n'y reste que "
+     "par le poids du Witz, seule œuvre du corpus sur le sujet."),
+    ("trieb", "La clinique pulsionnelle",
+     "L'axe professionnel de l'œuvre : théorie des pulsions et doctrine de la cure. La culture "
+     "y figure à bon droit — chez Freud, la culture est un renoncement pulsionnel.",
+     "26 concepts : agrège la théorie sexuelle de 1905 et la doctrine de la cure. La partition "
+     "temporelle sépare, après 1914, un noyau clinique d'un noyau pulsion-mort-culture."),
+    ("erinnerung", "Le souvenir et la création",
+     "Soude la mémoire à la fiction : le fantasme est du souvenir d'enfance remanié, l'œuvre "
+     "est du fantasme avoué — la thèse du Dichter und das Phantasieren et de Gradiva.",
+     "N'existait pas avant l'extension du corpus (2026-07) : ce sont les œuvres sur l'art et "
+     "le souvenir (1907-1917) qui l'ont fait émerger."),
+    ("malerei", "La peinture",
+     "Les trois analyses d'œuvres visuelles du corpus.",
+     "Contient l'artefact le plus instructif du découpage : « Teufel » n'a rien à faire avec "
+     "la peinture — il y est parce que l'unique œuvre sur le diable (Teufelsneurose) porte sur "
+     "un peintre. Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder "
+     "sous la main."),
+    ("masse", "La masse et l'autorité",
+     "Le vocabulaire de la foule et de l'autorité — Massenpsychologie und Ich-Analyse.",
+     "Grappe mono-œuvre : 254 de ses 330 atomes viennent d'un seul livre. Sa pureté est "
+     "réelle, sa portée est celle d'un livre, pas d'un courant transversal."),
+    ("ueberich", "La seconde topique",
+     "La grappe-témoin : minuscule, parfaitement pure, datée au zéro près. Ich/Es/Über-Ich "
+     "sont inséparables par construction théorique — et le restent dans la partition.",
+     "Das Ich und das Es (1923), acte de naissance de ces instances, manque au corpus (aucune "
+     "source citable) : la grappe sous-représente 1923-1926."),
 ]
 
 SCHEMA = """
+DROP TABLE IF EXISTS grappe_concepts;
+DROP TABLE IF EXISTS grappes;
+DROP TABLE IF EXISTS signaux;
+DROP TABLE IF EXISTS fonctions;
+DROP TABLE IF EXISTS atome_sous_concepts;
+DROP TABLE IF EXISTS atome_concepts;
+DROP TABLE IF EXISTS atomes;
+DROP TABLE IF EXISTS concepts;
+DROP TABLE IF EXISTS oeuvres;
+DROP TABLE IF EXISTS auteurs;
+DROP TABLE IF EXISTS meta;
+
 CREATE TABLE auteurs (
   id INTEGER PRIMARY KEY,
   nom TEXT NOT NULL UNIQUE,
@@ -131,8 +181,11 @@ CREATE TABLE grappes (
   id INTEGER PRIMARY KEY,
   rang INTEGER NOT NULL,
   nom TEXT NOT NULL,
+  description TEXT,
+  reserve TEXT,
   taille INTEGER NOT NULL,
-  atomes_concernes INTEGER NOT NULL
+  atomes_concernes INTEGER NOT NULL,
+  citation_atome_id TEXT
 );
 CREATE TABLE grappe_concepts (
   grappe_id INTEGER NOT NULL REFERENCES grappes(id),
@@ -229,9 +282,14 @@ def construire(chemin_sqlite):
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
     r = agents.AGENTS["courants"].executer(corpus)
     for rang, g in enumerate(r["grappes"], 1):
-        nom = next((n for sig, n in NOMS_GRAPPES if sig in g["concepts"]), "Grappe %d" % rang)
-        cur = db.execute("INSERT INTO grappes (rang, nom, taille, atomes_concernes)"
-                         " VALUES (?,?,?,?)", (rang, nom, g["taille"], g["atomes_concernes"]))
+        edito = next(((n, d, rz) for sig, n, d, rz in EDITORIAL_GRAPPES if sig in g["concepts"]),
+                     ("Grappe %d" % rang, None, None))
+        nom, description, reserve = edito
+        citation_id = g["citation"]["id"] if g.get("citation") else None
+        cur = db.execute(
+            "INSERT INTO grappes (rang, nom, description, reserve, taille, atomes_concernes,"
+            " citation_atome_id) VALUES (?,?,?,?,?,?,?)",
+            (rang, nom, description, reserve, g["taille"], g["atomes_concernes"], citation_id))
         for nom_c in g["concepts"]:
             db.execute("INSERT INTO grappe_concepts VALUES (?,?)",
                        (cur.lastrowid, ids_concept[nom_c]))
