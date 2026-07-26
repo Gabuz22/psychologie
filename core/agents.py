@@ -179,6 +179,141 @@ class AgentCooccurrence(Agent):
 
 
 # --------------------------------------------------------------------------------------------
+class AgentCourants(Agent):
+    """Les concepts que Freud pense ensemble forment-ils déjà des grappes distinctes ?
+
+    Prolonge AgentCooccurrence : au lieu de lister les paires les plus liées, PARTITIONNE tout le
+    graphe de concepts en communautés, par maximisation gloutonne de la modularité (Newman, 2004)
+    — un algorithme classique, entièrement déterministe : à chaque étape on fusionne la paire dont
+    la fusion améliore le plus la modularité, et les égalités sont tranchées par ordre alphabétique
+    des concepts, jamais par hasard. On s'arrête dès qu'aucune fusion n'améliore plus le score —
+    le nombre et la taille des grappes ne sont donc jamais choisis à l'avance, ils sont mesurés.
+
+    C'est la première brique de l'objectif final du projet : si des courants postérieurs se
+    recomposent à partir des atomes du fondateur, un signe attendu est que ces atomes se
+    regroupent DÉJÀ en grappes distinctes dans son propre corpus, avant même qu'aucun courant
+    rival n'existe. Une grappe computée n'est PAS un courant : c'est un CANDIDAT à faire lire,
+    exactement comme AgentTension produit des candidats de contradiction plutôt que des preuves.
+
+    Restreint aux atomes de Sigmund Freud lui-même — l'appendice d'Otto Rank dans la Traumdeutung
+    parle d'une autre plume et fausserait la mesure de CE qu'il pense ensemble (voir sources.py).
+    """
+
+    nom = "courants"
+    question = "Les concepts que Freud pense ensemble forment-ils des grappes distinctes ?"
+
+    def executer(self, corpus, minimum=8, **kw):
+        atomes = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == "Sigmund Freud"]
+        graphe, presence = self._graphe(atomes, minimum)
+        communautes, m = self._partitionner(graphe)
+        modularite = self._modularite(graphe, m, communautes)
+        grappes = [self._decrire_grappe(corpus, atomes, c, presence)
+                   for c in communautes if len(c) >= 2]
+        grappes.sort(key=lambda g: -g["atomes_concernes"])
+        return self._fiche({
+            "statut": "a_confirmer",
+            "seuil_minimum": minimum,
+            "concepts_relies": len(graphe),
+            "grappes": grappes,
+            "modularite": round(modularite, 3),
+            "note": ("Grappes CANDIDATES, pas des courants établis : un ensemble de concepts que "
+                     "Freud pense souvent ensemble, mesuré par cooccurrence — pas une filiation "
+                     "théorique ni un courant reconnu. Ça demande une lecture qualitative. Une "
+                     "modularité au-delà de 0,30 est généralement jugée porter une structure "
+                     "réelle plutôt qu'un artefact de graphe (Newman & Girvan, 2004)."),
+        })
+
+    @staticmethod
+    def _graphe(atomes, minimum):
+        """Graphe pondéré {concept: {autre: jaccard}}, restreint aux paires assez attestées."""
+        presence, paires = {}, {}
+        for a in atomes:
+            concepts = sorted({c["concept"] for c in a["concepts"]})
+            for c in concepts:
+                presence[c] = presence.get(c, 0) + 1
+            for x, y in itertools.combinations(concepts, 2):
+                paires[(x, y)] = paires.get((x, y), 0) + 1
+        graphe = {}
+        for (x, y), n in sorted(paires.items()):
+            if n < minimum:
+                continue
+            union = presence[x] + presence[y] - n
+            poids = n / union if union else 0.0
+            if poids <= 0:
+                continue
+            graphe.setdefault(x, {})[y] = poids
+            graphe.setdefault(y, {})[x] = poids
+        return graphe, presence
+
+    @staticmethod
+    def _partitionner(graphe):
+        """Maximisation gloutonne de la modularité — une fusion par tour, la meilleure d'abord,
+        égalités tranchées par ordre alphabétique. Rend (communautés, m = poids total du graphe).
+        """
+        noeuds = sorted(graphe)
+        if not noeuds:
+            return [], 0.0
+        membres = {n: {n} for n in noeuds}
+        deg = {n: sum(graphe[n].values()) for n in noeuds}     # K_i
+        adj = {n: dict(graphe[n]) for n in noeuds}             # arêtes ENTRE communautés
+        m = sum(deg.values()) / 2
+        if m == 0:
+            return [{n} for n in noeuds], 0.0
+        EPS = 1e-9
+        while True:
+            meilleur, meilleur_dq = None, EPS
+            for i in sorted(adj):
+                for j in sorted(adj[i]):
+                    if j <= i:
+                        continue
+                    dq = adj[i][j] / m - (deg[i] * deg[j]) / (2 * m * m)
+                    if dq > meilleur_dq:
+                        meilleur, meilleur_dq = (i, j), dq
+            if meilleur is None:
+                break
+            i, j = meilleur
+            membres[i] |= membres.pop(j)
+            deg[i] += deg.pop(j)
+            for k in list(adj[j]):
+                if k == i:
+                    continue
+                adj[i][k] = adj[i].get(k, 0.0) + adj[j][k]
+                adj[k][i] = adj[i][k]
+                del adj[k][j]
+            del adj[j]
+            adj[i].pop(j, None)
+        return list(membres.values()), m
+
+    @staticmethod
+    def _modularite(graphe, m, communautes):
+        if m == 0:
+            return 0.0
+        q = 0.0
+        for c in communautes:
+            interne = sum(graphe[a].get(b, 0.0) for a in c for b in c if a < b)
+            degre = sum(sum(graphe[a].values()) for a in c)
+            q += interne / m - (degre / (2 * m)) ** 2
+        return q
+
+    @staticmethod
+    def _decrire_grappe(corpus, atomes, membres, presence):
+        concepts = sorted(membres, key=lambda c: -presence.get(c, 0))
+        porteurs = [a for a in atomes if any(c["concept"] in membres for c in a["concepts"])]
+        # Citation : un atome qui porte au moins DEUX concepts de la grappe À LA FOIS — preuve
+        # directe que Freud les pense ensemble, pas seulement dans le même livre.
+        croises = [a for a in porteurs
+                   if len({c["concept"] for c in a["concepts"]} & membres) >= 2
+                   and a["statut"] == "affirme" and not _est_vers(a["texte"])]
+        citation = min(croises, key=_ecart_longueur_ideale) if croises else None
+        return {
+            "concepts": concepts,
+            "taille": len(membres),
+            "atomes_concernes": len(porteurs),
+            "citation": corpus.citer(citation) if citation else None,
+        }
+
+
+# --------------------------------------------------------------------------------------------
 class AgentChronologie(Agent):
     """Comment la place d'un concept évolue d'une œuvre à l'autre — avec la réserve de datation.
 
@@ -326,7 +461,7 @@ class AgentSignaux(Agent):
 
 
 # --------------------------------------------------------------------------------------------
-AGENTS = {a.nom: a for a in (AgentProfil(), AgentConcept(), AgentCooccurrence(),
+AGENTS = {a.nom: a for a in (AgentProfil(), AgentConcept(), AgentCooccurrence(), AgentCourants(),
                              AgentChronologie(), AgentTension(), AgentSignaux())}
 
 
@@ -341,7 +476,7 @@ def orchestrer(corpus, demande=None, **kw):
     if concept:
         plan = ["concept", "chronologie", "tension"]
     else:
-        plan = ["profil", "cooccurrence", "signaux"]
+        plan = ["profil", "cooccurrence", "courants", "signaux"]
     resultats, erreurs = {}, {}
     for nom in plan:
         try:

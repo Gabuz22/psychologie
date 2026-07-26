@@ -107,6 +107,35 @@ class TestAgents(unittest.TestCase):
         self.assertIn(("wunsch", "wunscherfuellung"), couples)
         self.assertIn(("masochismus", "sadismus"), couples)
 
+    def test_courants_retrouve_des_grappes_reconnaissables(self):
+        """Validation de fond : les couples déjà connus doivent tomber dans la MÊME grappe.
+
+        Ce ne sont pas des concepts choisis au hasard : « ich »/« es »/« ueberich » sont la
+        seconde topique — trois concepts inséparables par construction théorique. S'ils se
+        dispersaient, ce serait la preuve que la partition ne mesure rien de réel.
+        """
+        r = agents.AgentCourants().executer(self.c)
+        self.assertEqual(r["statut"], "a_confirmer")
+        self.assertGreater(r["modularite"], 0.25, "pas de structure réelle détectée")
+
+        def grappe_de(concept):
+            return next((frozenset(g["concepts"]) for g in r["grappes"]
+                        if concept in g["concepts"]), None)
+
+        seconde_topique = grappe_de("ich")
+        self.assertIsNotNone(seconde_topique)
+        self.assertEqual(seconde_topique, grappe_de("es"))
+        self.assertEqual(seconde_topique, grappe_de("ueberich"))
+        self.assertEqual(grappe_de("wunsch"), grappe_de("wunscherfuellung"))
+        self.assertEqual(grappe_de("masochismus"), grappe_de("sadismus"))
+
+    def test_courants_ne_grossit_pas_les_atomes_de_rank(self):
+        """L'appendice d'Otto Rank ne doit pas peser dans la mesure de ce que FREUD pense ensemble."""
+        r = agents.AgentCourants().executer(self.c)
+        for g in r["grappes"]:
+            if g["citation"]:
+                self.assertEqual(g["citation"]["auteur"], "Sigmund Freud")
+
     def test_chronologie_porte_toujours_sa_reserve(self):
         """Aucune chronologie ne doit être lisible sans l'incertitude d'édition qui la limite."""
         r = agents.AgentChronologie().executer(self.c, concept="trieb")
@@ -130,7 +159,7 @@ class TestAgents(unittest.TestCase):
 
     def test_tous_les_agents_sont_deterministes(self):
         """Même corpus, même sortie : sans cela, aucune analyse n'est reproductible."""
-        for nom in ("profil", "cooccurrence"):
+        for nom in ("profil", "cooccurrence", "courants"):
             a, b = agents.AGENTS[nom].executer(self.c), agents.AGENTS[nom].executer(self.c)
             self.assertEqual(a, b, "agent « %s » non déterministe" % nom)
 
@@ -143,7 +172,7 @@ class TestOrchestrateur(unittest.TestCase):
 
     def test_passe_generale_sans_demande(self):
         r = agents.orchestrer(self.c)
-        self.assertEqual(r["plan"], ["profil", "cooccurrence", "signaux"])
+        self.assertEqual(r["plan"], ["profil", "cooccurrence", "courants", "signaux"])
         self.assertEqual(r["erreurs"], {})
 
     def test_passe_ciblee_sur_un_concept(self):

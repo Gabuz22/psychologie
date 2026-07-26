@@ -107,7 +107,7 @@ séparation acquis / à confirmer, pièges du lexique allemand, déterminisme de
 
 ## Les agents déterministes
 
-Six agents lisent le corpus et répondent chacun à une question. Aucun n'emploie de modèle de
+Sept agents lisent le corpus et répondent chacun à une question. Aucun n'emploie de modèle de
 langage : leurs résultats sont **reproductibles** — donc discutables, puisqu'on peut refaire le
 calcul au lieu de faire confiance. Chaque sortie est **citable** jusqu'au texte allemand.
 
@@ -116,6 +116,7 @@ calcul au lieu de faire confiance. Chaque sortie est **citable** jusqu'au texte 
 | `profil` | De quoi cette œuvre parle-t-elle, et qu'est-ce qui lui est **propre** ? |
 | `concept` | Que dit Freud d'un concept, sur quel ton, avec quelles citations ? |
 | `cooccurrence` | Quels concepts pense-t-il **ensemble** ? |
+| `courants` | Ces concepts forment-ils des **grappes** distinctes — candidats de courants ? |
 | `chronologie` | La place d'un concept change-t-elle d'une œuvre à l'autre ? |
 | `tension` | Où trouve-t-on des énoncés de sens opposé sur un même concept ? |
 | `signaux` | Quels passages sont vérifiés, lesquels restent à lire ? |
@@ -183,8 +184,16 @@ topique apparaît à sa date** : `Über-Ich` est absent de tout le corpus jusqu'
 `Es` reste sous 1 ‰ avant 1920 puis saute à 23 ‰ ; `Ich` culmine en 1921 — dans un livre qui
 s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
-C'est cet agent qui portera l'objectif long terme : si les courants postérieurs se recomposent à
-partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes de concepts.
+L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
+gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
+Sur 96 concepts reliés, la partition atteint **0,354 de modularité** (le seuil de structure réelle
+est généralement fixé à 0,30) et fait ressortir sept grappes : travail du rêve, appareil psychique,
+clinique pulsionnelle, enfance et famille, psychologie sociale, esthétique, seconde topique. La
+seconde topique (*Ich*/*Es*/*Über-Ich*) forme une grappe minuscule et parfaitement pure — aucun
+autre concept ne s'y mêle, exactement ce qu'impose sa construction théorique. **C'est cet agent
+qui porte l'objectif long terme** : si les courants postérieurs se recomposent à partir des mêmes
+atomes fondateurs, un premier signe est qu'ils s'y regroupent déjà, avant même qu'aucun courant
+rival n'existe. Détail dans [`documentation/SYNTHESE_FREUD.md`](documentation/SYNTHESE_FREUD.md#2-les-concepts-que-freud-pense-ensemble).
 
 ---
 
@@ -252,15 +261,31 @@ par tout nouveau terme ajouté (voir le point 3 ci-dessus).
 
 ## Suite
 
-La base est complète et outillée sur trois textes : elle est prête à recevoir la suite de l'œuvre.
-Restent à faire, dans l'ordre :
+La base est complète et outillée sur **douze** œuvres majeures — environ la moitié du corpus des
+grands ouvrages de Freud (le reste : préfaces isolées, correspondance, et une douzaine de textes
+non encore intégrés). Fait :
 
-1. **Étendre le corpus** au reste de l'œuvre (~24 volumes). Le pipeline est prévu pour : ajout
-   déclaratif d'une œuvre, atomisation mémorisée, agents inchangés.
-2. **Dater les couches** par collation avec les premières éditions — la seule façon de lever
-   l'incertitude qui pèse aujourd'hui sur toute chronologie.
-3. **Vérification faite** pour les 178 signaux du corpus actuel ; à reconduire sur chaque œuvre
-   ajoutée (le registre est cumulatif, rien ne se rejoue).
-4. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
+- **Corpus étendu** à douze œuvres (1900-1933), pipeline déclaratif : ajout d'une œuvre, atomisation
+  mémorisée, agents inchangés.
+- **Datation par collation** pour quatre œuvres (chaque atome sait s'il est d'origine ou ajouté) ;
+  sept autres lues dans leur édition d'origine. Ne reste incertaine que *Jenseits des
+  Lustprinzips* — aucun meilleur fac-similé de sa 1ʳᵉ édition n'existe sur archive.org (recherche
+  faite, documentée dans `SYNTHESE_FREUD.md`) : la méthode refuse de conclure plutôt que dater faux.
+- **Vérification faite** pour les 178 signaux du corpus actuel ; à reconduire sur chaque œuvre
+  ajoutée (le registre est cumulatif, rien ne se rejoue).
+- **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
+  grappes, modularité 0,354. Prochaine étape naturelle : comparer avec un premier auteur non
+  freudien pour voir si SES concepts recomposent ou déplacent ces grappes.
+
+Restent à faire :
+
+1. **Achever le corpus freudien** : les œuvres tardives encore hors d'atteinte en qualité citable
+   (*Das Ich und das Es*, *Hemmung, Symptom und Angst*) et les grands textes non encore intégrés
+   (*Vorlesungen* 1917, *Zukunft einer Illusion*, *Unbehagen in der Kultur*, *Der Mann Moses*,
+   les grands cas cliniques...).
+2. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
    voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
-   `cooccurrence` est l'instrument de cette question.
+   `courants` est l'instrument de cette question — construit et validé sur Freud seul, prêt à
+   recevoir un second auteur.
+3. **Rendre le corpus consultable** sans relancer un script — recherche et export de citations par
+   concept, auteur, période.

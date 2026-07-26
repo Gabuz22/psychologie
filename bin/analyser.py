@@ -50,6 +50,16 @@ def _rendre(nom, r):
             print("    %-18s + %-18s  %.3f   (n=%d)"
                   % (l["concepts"][0], l["concepts"][1], l["jaccard"], l["ensemble"]))
         print("  %s" % r["note"])
+    elif nom == "courants":
+        print("  %d concepts reliés · modularité %.3f (Newman-Girvan)"
+              % (r["concepts_relies"], r["modularite"]))
+        for g in r["grappes"]:
+            print("\n  GRAPPE (%d concepts, %d atomes) : %s"
+                  % (g["taille"], g["atomes_concernes"], ", ".join(g["concepts"][:8])))
+            if g["citation"]:
+                print("    « %s »" % " ".join(g["citation"]["texte"].split())[:170])
+                print("      → %s" % g["citation"]["oeuvre"])
+        print("\n  %s" % r["note"])
     elif nom == "concept":
         if not r.get("atomes"):
             print("  %s" % r.get("note", "aucun atome"))

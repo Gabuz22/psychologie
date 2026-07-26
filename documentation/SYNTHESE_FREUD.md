@@ -74,6 +74,39 @@ C'est ce type de regroupement qui servira la question de fond du projet : si les
 postérieurs se recomposent à partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme
 des grappes.
 
+### Les paires deviennent sept grappes
+
+L'agent `courants` va plus loin que les paires : il PARTITIONNE tout le graphe de concepts par
+maximisation gloutonne de la modularité (Newman, 2004), un algorithme déterministe — aucune
+grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 96 concepts suffisamment
+reliés, la partition atteint une **modularité de 0,354** — au-dessus du seuil de 0,30 généralement
+retenu comme signe d'une vraie structure plutôt que d'un artefact du graphe (Newman & Girvan,
+2004). Sept grappes en ressortent :
+
+| Grappe | Concepts (extrait) | Atomes |
+|---|---|---:|
+| Travail du rêve | *Traum, Wunsch, Verdichtung, Verschiebung, Zensur, Entstellung* | 4 329 |
+| Appareil psychique + esprit | *Bewußtsein, Unbewußt, Besetzung, Lustprinzip, Witz, Komik* | 3 826 |
+| Clinique pulsionnelle | *Trieb, Sexualität, Libido, Narzißmus, Neurose, Angst, Symptom* | 3 474 |
+| Enfance et famille | *Vater, Mutter, Geschwister, Ödipus, Infantil, Erinnerung* | 2 841 |
+| Psychologie sociale | *Totem, Tabu, Masse, Urhorde, Führer, Identifizierung* | 1 551 |
+| Esthétique et création | *Dichter, Phantasie, Symbol, Wahn, Erzählung* | 834 |
+| Seconde topique | *Ich, Es, Über-Ich* | 260 |
+
+**Contrôle de sens intégré** (pas seulement mesuré une fois, mais rejoué à chaque test) : *Ich*,
+*Es* et *Über-Ich* — la seconde topique, trois concepts inséparables par construction théorique —
+tombent TOUJOURS dans la même grappe, minuscule et parfaitement pure : rien d'autre ne s'y mêle.
+*Wunsch* et *Wunscherfüllung*, *Masochismus* et *Sadismus* aussi. Si l'algorithme les avait
+dispersés, la partition n'aurait mesuré aucune structure réelle.
+
+**Ce que ces grappes ne sont pas** : des courants postérieurs. Freud n'a jamais rangé sa propre
+œuvre ainsi ; c'est une lecture rétrospective de la cooccurrence de ses mots, pas une classification
+qu'il revendique. Mais deux grappes attirent l'œil pour la suite du projet : « enfance et famille »
+sépare déjà des concepts de la clinique pulsionnelle stricto sensu — la distinction est exactement
+celle qui recoupera, à lire les auteurs suivants, la théorie des relations d'objet — et
+« psychologie sociale » sépare le totem/la masse de la clinique individuelle, préfigurant la
+psychanalyse appliquée au collectif. Une lecture qualitative reste requise avant d'en tirer plus.
+
 ---
 
 ## 3. La chronologie des concepts
