@@ -39,9 +39,10 @@ class TestCorpus(unittest.TestCase):
         cit = self.c.citer(a)
         for champ in ("id", "texte", "oeuvre", "position", "edition_lue", "datation"):
             self.assertIn(champ, cit)
-        # Une citation dit TOUJOURS ce que vaut sa date — soit qu'elle est certaine (édition
-        # d'origine, ou réimpression inchangée), soit qu'elle n'est qu'une borne supérieure.
-        self.assertRegex(cit["datation"], r"date certaine|au plus tard")
+        # Une citation dit TOUJOURS ce que vaut sa date. Trois formes possibles : certaine par
+        # l'édition (origine ou réimpression inchangée), certaine par COLLATION (le passage a été
+        # retrouvé dans la première édition), ou simple borne supérieure.
+        self.assertRegex(cit["datation"], r"date certaine|daté avec certitude|au plus tard|ajouté entre")
 
     def test_datation_certaine_pour_les_editions_d_origine(self):
         """L'extension a apporté des œuvres lues dans leur édition d'origine : à ne pas brader.

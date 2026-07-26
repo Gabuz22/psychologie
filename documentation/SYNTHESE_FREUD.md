@@ -78,9 +78,43 @@ des grappes.
 
 ## 3. La chronologie des concepts
 
-L'agent `chronologie` mesure la densité d'un concept par œuvre (en ‰ des atomes). Il **ne date
-jamais un énoncé** : il compare des volumes, en rappelant que cinq d'entre eux sont lus dans une
-édition postérieure dont les couches d'ajout sont indiscernables (voir §5).
+L'agent `chronologie` mesure la densité d'un concept par œuvre (en ‰ des atomes).
+
+**Quatre œuvres sont désormais COLLATIONNÉES** : chacune a été confrontée à sa première édition,
+phrase par phrase, ce qui dit pour chaque passage s'il était là dès l'origine ou s'il fut ajouté
+plus tard. Pour celles-là, la datation n'est plus une fourchette mais un fait.
+
+| Œuvre | Éd. lue | Retrouvé dans la 1ʳᵉ éd. | Ajouté après |
+|---|---|---:|---:|
+| *Die Traumdeutung* | 4ᵉ, 1914 | 4 484 | **1 268** |
+| *Der Witz* | 2ᵉ, 1912 | 1 987 | 17 |
+| *Drei Abhandlungen* | 4ᵉ, 1920 | 600 | **226** |
+| *Zur Psychopathologie* | 1904 | 398 | **609** |
+
+*Zur Psychopathologie* a plus que doublé entre l'article de revue de 1901 et le livre de 1904.
+*Der Witz* n'a pratiquement pas bougé entre 1905 et 1912.
+
+### Le symbolisme onirique n'était pas là en 1900
+
+C'est le résultat que la collation seule permet, et il change une lecture courante.
+
+| *Symbol* dans la *Traumdeutung* | |
+|---|---:|
+| Densité dans l'édition lue (1914) | 26 ‰ |
+| Densité **réellement de 1900** | **9 ‰** |
+| Passages ajoutés après | **81 sur 121** |
+
+Les deux tiers de ce que la *Traumdeutung* dit du symbolisme ont été **greffés après coup**. Sans
+collation, on prêterait à Freud une théorie du symbole qu'il n'avait pas encore en 1900.
+
+Le plus probant : **Freud le dit lui-même**, dans un passage que la collation classe justement
+en « ajout » —
+
+> « *Durch eigene Erfahrung wie durch die Arbeiten von W. Stekel und anderen habe ich **seither**
+> den Umfang und die Bedeutung der Symbolik im Traume…* »
+> (« …j'ai reconnu **depuis lors** l'étendue et l'importance du symbolisme onirique »)
+
+La méthode a détecté l'ajout ; la phrase détectée le confirme.
 
 ### La pulsion envahit la pensée de Freud
 
@@ -153,10 +187,11 @@ homonymes — *einwandfrei* (irréprochable) n'a rien d'une objection, *einwande
 
 Cinq limites, toutes mesurées, aucune supposée.
 
-**La datation est une fourchette pour cinq œuvres sur douze.** Freud a cessé de signaler ses ajouts
-dès la 3ᵉ édition : les couches d'écriture sont indiscernables. Un atome est « attesté au plus tard »
-dans l'édition lue. Sept œuvres échappent à cette réserve (éditions d'origine, ou réimpression
-déclarée inchangée pour *Totem und Tabu*).
+**La datation reste une fourchette pour une seule œuvre.** Sept œuvres sont lues dans leur édition
+d'origine (ou une réimpression déclarée inchangée) ; quatre ont été collationnées phrase par
+phrase. Ne demeure incertain que *Jenseits des Lustprinzips* — dont l'océrisation du fac-similé
+s'est révélée trop dégradée pour distinguer « absent » de « présent mais illisible ». **La méthode
+refuse alors de conclure** plutôt que de produire une date fausse ; l'écart n'y est que d'un an.
 
 **Un volume n'est pas d'un seul auteur.** La 4ᵉ édition de la *Traumdeutung* contient un appendice
 d'**Otto Rank** — 334 atomes. Chaque atome porte son auteur réel ; sans cela, une mesure d'auteur

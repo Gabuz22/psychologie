@@ -102,8 +102,8 @@ tard dans l'édition lue » — jamais daté de l'année de l'œuvre. Dater un p
 qu'il vient d'un ajout de 1914 fausserait toute analyse chronologique, c'est-à-dire l'objet même
 du projet.
 
-**Levée possible** : une collation avec la 1ʳᵉ édition (fac-similés disponibles sur archive.org)
-daterait chaque ajout. Chantier distinct, **non fait** — pas une supposition à combler.
+**Levée : FAITE pour quatre œuvres.** La collation avec les premières éditions date désormais
+chaque phrase (voir §4.4).
 
 ### 4.2 Un lexique déterministe ne peut pas *établir* une révision
 
@@ -124,6 +124,32 @@ corrige un défaut physique.
 une liste de travail (`signaux_a_confirmer`) qui demande une vérification — humaine ou par un
 modèle de langage travaillant sur le passage complet. Les faire passer pour établis produirait
 exactement le défaut que ce projet doit éviter : une affirmation fausse présentée comme un résultat.
+
+### 4.4 La collation lève l'incertitude — et l'OCR écarté redevient utile
+
+Les fac-similés d'archive.org avaient été rejetés parce que leur océrisation est **inutilisable
+pour citer**. Mais la collation ne cite pas : elle demande si un passage **existe** dans l'édition
+antérieure. Exigence bien plus faible, que du texte bruité satisfait.
+
+Deux écarts systématiques à neutraliser, sans quoi rien ne correspond :
+- **l'orthographe** — l'édition de 1900 précède la réforme de 1901 (*Werthe*, *Theil*,
+  *Litteratur*) ; celle de 1914 la suit ;
+- **l'océrisation** — ses fautes sont *aléatoires*, donc absorbées en comparant des suites de
+  quatre mots plutôt que des mots isolés : une faute casse un n-gramme, pas tous.
+
+**La méthode doit prouver qu'elle discrimine avant de dater.** Deux garde-fous :
+
+| Contrôle | Résultat |
+|---|---|
+| Passages d'une **autre œuvre** (forcément absents) | couverture ≤ 0,07 partout |
+| Préface de la **1ʳᵉ** édition (présente en 1900) | **100 %** retrouvée |
+| Préfaces des **2ᵉ et 3ᵉ** éditions (1908, 1911) | **0 %** retrouvée |
+| Appendice d'**Otto Rank** (ajouté en 1914) | **0 %** retrouvé |
+
+Résultat : 4 œuvres collationnées sur 5 tentées. Pour *Jenseits des Lustprinzips*, la distribution
+des couvertures reste **unimodale et étalée** — l'océrisation ne permet pas d'y distinguer
+« absent » de « présent mais illisible ». **La méthode refuse alors de conclure**, et l'œuvre garde
+sa réserve d'un an.
 
 ### 4.3 En allemand, un mot n'est pas un préfixe — leçon *Traum* / *Trauma*
 

@@ -72,6 +72,40 @@ def contributions(texte, meta, reperes):
     return out
 
 
+_CACHE_COUCHES = {}
+
+
+def _couches(cle_oeuvre, meta):
+    """Collationne l'œuvre avec sa première édition — {empreinte: attestation}, ou {} si impossible.
+
+    L'étalonnage est OBLIGATOIRE : sans deux populations séparables, on renvoie {} et la datation
+    bornée de l'œuvre reste en vigueur. Mieux vaut une incertitude connue qu'une date fausse.
+    """
+    if cle_oeuvre in _CACHE_COUCHES:
+        return _CACHE_COUCHES[cle_oeuvre]
+    from . import collation
+    resultat = {}
+    temoin = collation.temoin_de(cle_oeuvre)
+    if temoin is not None:
+        phrases = segmenter(sources.charger(cle_oeuvre)["texte"])
+        propres = [p["texte"] for p in phrases if p["nb_mots"] >= 15][:300]
+        # Témoin négatif universel : des passages d'une AUTRE œuvre, forcément absents d'ici.
+        etrangere = "totem" if cle_oeuvre != "totem" else "jenseits"
+        etrangers = [p["texte"] for p in segmenter(sources.charger(etrangere)["texte"])
+                     if p["nb_mots"] >= 15][:80]
+        etalon = collation.etalonner(temoin, propres, etrangers)
+        if etalon["concluant"]:
+            atomes_min = [{"empreinte": empreinte(p["texte"]), "texte": p["texte"],
+                           "nb_mots": p["nb_mots"]} for p in phrases]
+            resultat = collation.dater_atomes(
+                atomes_min, temoin, etalon["seuil"],
+                collation.FACSIMILES[cle_oeuvre]["annee"], meta["annee_edition"])
+            for v in resultat.values():
+                v["etalonnage"] = {"forme": etalon["forme"], "seuil": etalon["seuil"]}
+    _CACHE_COUCHES[cle_oeuvre] = resultat
+    return resultat
+
+
 def empreinte(texte):
     """Identifiant STABLE d'un atome : une empreinte de son texte, insensible à sa position.
 
@@ -120,6 +154,7 @@ _CACHE = {}
 def oublier():
     """Vide la mémoire de calcul (utile après modification du lexique ou des sources)."""
     _CACHE.clear()
+    _CACHE_COUCHES.clear()
 
 
 def atomiser(cle_oeuvre):
@@ -138,6 +173,10 @@ def _atomiser(cle_oeuvre):
     reperes = chapitres(texte)
     regions = contributions(texte, meta, reperes)
     attestation = meta["datation"]
+    # Collation : quand un fac-similé de première édition existe ET que l'étalonnage est concluant,
+    # chaque atome reçoit sa couche d'écriture — ce qui remplace la datation bornée de l'œuvre par
+    # une datation par phrase. Sinon la réserve d'origine subsiste, inchangée.
+    couches = _couches(cle_oeuvre, meta)
 
     atomes = []
     for p in phrases:
@@ -166,7 +205,8 @@ def _atomiser(cle_oeuvre):
             "emphase": _emphases(p["texte"]),
             # Aucune catégorie reconnue : on l'AFFICHE au lieu de combler (doctrine AXA).
             "non_qualifie": not fonctions and not a_confirmer and not concepts,
-            "attestation": attestation,
+            # Datation par phrase quand la collation a pu conclure ; sinon la réserve d'œuvre.
+            "attestation": couches.get(empreinte(p["texte"]), attestation),
         })
 
     return {
@@ -203,6 +243,8 @@ def controler(atomes, phrases, texte):
         "avec_chapitre": sum(1 for a in atomes if a["chapitre"]),
         "par_auteur": {a: sum(1 for x in atomes if x["auteur"] == a)
                        for a in sorted({x["auteur"] for x in atomes})},
+        "par_couche": {c: sum(1 for x in atomes if x["attestation"].get("couche") == c)
+                       for c in sorted({x["attestation"].get("couche") for x in atomes} - {None})},
     }
 
 

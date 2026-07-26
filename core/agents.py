@@ -193,26 +193,47 @@ class AgentChronologie(Agent):
     def executer(self, corpus, concept=None, **kw):
         if not concept:
             raise ValueError("agent « chronologie » : paramètre `concept` requis")
-        etapes = []
+        etapes, collationnees = [], 0
         for cle, meta in sorted(corpus.oeuvres.items(), key=lambda x: x[1]["annee_oeuvre"]):
             atomes = corpus.par_oeuvre(cle)
-            n = sum(1 for a in atomes if any(c["concept"] == concept for c in a["concepts"]))
-            etapes.append({
+            porteurs = [a for a in atomes
+                        if any(c["concept"] == concept for c in a["concepts"])]
+            # Quand la collation a pu conclure, on sait pour chaque atome s'il était là DÈS
+            # L'ORIGINE ou s'il fut ajouté ensuite. La densité d'origine est alors la seule
+            # comparable d'une œuvre à l'autre : elle exclut ce que Freud a greffé après coup.
+            couches = [a["attestation"].get("couche") for a in atomes]
+            collationnee = any(c in ("origine", "ajout") for c in couches)
+            etape = {
                 "oeuvre": meta["oeuvre"],
                 "annee_oeuvre": meta["annee_oeuvre"],
                 "edition_lue": meta["edition_lue"],
                 "annee_edition": meta["annee_edition"],
-                "atomes_du_concept": n,
-                "pour_mille": round(1000 * n / max(1, len(atomes))),
+                "atomes_du_concept": len(porteurs),
+                "pour_mille": round(1000 * len(porteurs) / max(1, len(atomes))),
                 "incertitude_annees": meta["annee_edition"] - meta["annee_oeuvre"],
-            })
+                "collationnee": collationnee,
+            }
+            if collationnee:
+                collationnees += 1
+                base = [a for a in atomes if a["attestation"].get("couche") == "origine"]
+                dorigine = [a for a in porteurs if a["attestation"].get("couche") == "origine"]
+                ajoutes = [a for a in porteurs if a["attestation"].get("couche") == "ajout"]
+                etape.update({
+                    "incertitude_annees": 0,
+                    "pour_mille_origine": round(1000 * len(dorigine) / max(1, len(base))),
+                    "du_concept_ajoutes_apres": len(ajoutes),
+                })
+            etapes.append(etape)
         return self._fiche({
             "concept": concept,
             "etapes": etapes,
-            "reserve": ("Les œuvres sont lues dans des éditions postérieures dont Freud n'a pas "
-                        "signalé les ajouts. Une variation peut donc refléter un ajout tardif "
-                        "plutôt qu'un mouvement de la pensée à la date de parution. "
-                        "Trancher exige une collation avec les premières éditions."),
+            "oeuvres_collationnees": collationnees,
+            "reserve": (
+                "Pour les œuvres COLLATIONNÉES, « pour_mille_origine » ne compte que les passages "
+                "retrouvés dans la première édition : cette densité-là est datée avec certitude. "
+                "Pour les autres, l'œuvre est lue dans une édition postérieure dont Freud n'a pas "
+                "signalé les ajouts — une variation peut y refléter un ajout tardif plutôt qu'un "
+                "mouvement de la pensée. La collation lève cette réserve là où elle a pu conclure."),
         })
 
 

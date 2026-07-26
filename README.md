@@ -100,7 +100,7 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-74 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+86 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -119,6 +119,13 @@ calcul au lieu de faire confiance. Chaque sortie est **citable** jusqu'au texte 
 | `chronologie` | La place d'un concept change-t-elle d'une œuvre à l'autre ? |
 | `tension` | Où trouve-t-on des énoncés de sens opposé sur un même concept ? |
 | `signaux` | Quels passages sont vérifiés, lesquels restent à lire ? |
+
+La **collation** (`core/collation.py`) confronte une œuvre à sa première édition pour dater chaque
+phrase. Elle s'appuie sur les fac-similés océrisés d'archive.org — écartés pour le corpus de
+travail parce qu'illisibles pour citer, mais parfaitement suffisants ici : établir qu'un passage
+*existe* est une exigence bien plus faible que le citer. Deux écarts sont neutralisés (la réforme
+orthographique de 1901, et les fautes d'océrisation) et la méthode doit **prouver qu'elle sait
+discriminer** — témoin négatif universel et distribution bimodale — avant de dater quoi que ce soit.
 
 ### La vérification, cumulative
 
@@ -183,9 +190,11 @@ partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes
 
 ## Cinq choses à savoir avant d'utiliser cette base
 
-1. **La datation est une fourchette, pas une date.** Aucune édition disponible n'est une première
-   édition, et Freud a cessé de signaler ses ajouts à partir de la 3ᵉ édition. Un atome est
-   « attesté *au plus tard* » dans l'édition lue.
+1. **La datation est faite phrase par phrase, là où elle a pu l'être.** Freud a cessé de signaler
+   ses ajouts dès la 3ᵉ édition : les couches d'écriture sont invisibles dans le texte. Quatre
+   œuvres ont donc été **collationnées** avec leur première édition — chaque atome sait s'il était
+   là dès l'origine ou s'il fut ajouté ensuite. Sept autres sont lues dans leur édition d'origine.
+   Ne reste incertaine que *Jenseits des Lustprinzips*, où la méthode **refuse de conclure**.
 2. **Un marqueur lexical ne prouve pas une révision.** Mesuré : ~3 vrais positifs sur 7. Ces
    signaux alimentent une **liste à vérifier**, jamais les faits établis.
 3. **Tout terme ajouté au lexique doit être vérifié sur les formes réellement captées.**
@@ -226,7 +235,8 @@ python -m unittest discover -s core/tests -t .
 Aucune dépendance : bibliothèque standard Python uniquement.
 
 ```
-sources/freud/de/   textes originaux — jamais modifiés
+sources/freud/de/          textes de travail — jamais modifiés
+sources/freud/facsimiles/  1res éditions océrisées — collation seulement, jamais citées
 core/               segmentation · lexique · atomisation · corpus · agents
 bin/                atomiser.py (produire) · analyser.py (interroger)
 derive/             sorties régénérables
