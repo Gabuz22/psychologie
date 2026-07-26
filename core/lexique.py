@@ -183,11 +183,29 @@ CONCEPTS = {
     "reve": {
         "label": "Rêve et travail du rêve",
         "termes": {
-            "traum": ["traum", "traume", "traumes", "traeume", "traumen"],
+            # PIÈGE MAJEUR (vérifié sur le texte, deux fois plutôt qu'une).
+            #
+            # 1) « traum » nu capte aussi « Trauma », « traumatisch » : deux notions distinctes,
+            #    et la confusion tombait au pire endroit — « Jenseits des Lustprinzips » argumente
+            #    à partir de la névrose TRAUMATIQUE pour poser la compulsion de répétition
+            #    (24 des 38 atomes « rêve » de ce livre parlaient en fait de trauma).
+            #
+            # 2) Mais exclure bêtement « traum » suivi d'un « a » est PIRE : l'allemand compose,
+            #    et « Traumarbeit » (le travail du rêve, 126 occurrences !), « Traumanalyse »,
+            #    « Traumangst », « Traumätiologie » sont des mots du RÊVE qui commencent par
+            #    « trauma… ». La première version de ce correctif les avait tous perdus.
+            #
+            # On discrimine donc sur la FAMILLE MORPHOLOGIQUE réelle de Trauma — c'est-à-dire
+            # « trauma » terminé (Trauma/Traumas) ou suivi de ses seuls dérivés attestés
+            # (traumatisch, traumatisier-, traumatolog-) — et jamais sur la lettre suivante.
+            "traum": [r"traum(?!a(?:s?\b|ti(?:sch|sier)|tolog))"],
             "traumdeutung": ["traumdeutung"],
             "traumarbeit": ["traumarbeit"],
             "traumgedanke": ["traumgedanke", "traumgedanken"],
-            "trauminhalt": ["trauminhalt", "manifeste", "latente"],
+            # « manifeste » / « latente » nus retirés : adjectifs courants, qui peuvent qualifier
+            # tout autre chose qu'un contenu de rêve. Les vrais emplois techniques (« manifester
+            # Trauminhalt », « latente Traumgedanken ») restent captés par les termes composés.
+            "trauminhalt": ["trauminhalt"],
             "verdichtung": ["verdichtung"],
             "verschiebung": ["verschiebung"],
             "entstellung": ["entstellung", "traumentstellung"],
@@ -213,7 +231,8 @@ CONCEPTS = {
             "trieb": ["trieb", "triebe", "triebes", "trieben"],
             "libido": ["libido"],
             "sexualitaet": ["sexualitat", "sexuell", "sexuelle", "sexualtrieb"],
-            "lustprinzip": ["lustprinzip", "lust"],
+            # (?!ig) écarte « lustig » (amusant), qui n'a rien à voir avec le plaisir freudien.
+            "lustprinzip": ["lustprinzip", r"lust(?!ig)"],
             "realitaetsprinzip": ["realitatsprinzip"],
             "todestrieb": ["todestrieb"],
             "wiederholungszwang": ["wiederholungszwang"],
@@ -230,6 +249,13 @@ CONCEPTS = {
             "angst": ["angst", "angstlich"],
             "abwehr": ["abwehr"],
             "konflikt": ["konflikt"],
+            # Concept À PART ENTIÈRE, et non un parasite du rêve (voir la note sur « traum ») :
+            # la névrose traumatique et la névrose de guerre sont le point d'appui empirique de
+            # « Jenseits des Lustprinzips » pour poser la compulsion de répétition.
+            # Motif STRICTEMENT symétrique de celui de « traum » : seuls Trauma/Traumas et les
+            # dérivés attestés comptent — surtout pas « Traumarbeit » ni « Traumanalyse », qui
+            # sont des composés du rêve (l'erreur inverse, mesurée à 163 faux positifs sur 165).
+            "trauma": [r"trauma(?:s?\b|ti(?:sch|sier)|tolog)"],
         },
     },
     "desir": {
@@ -321,7 +347,10 @@ def concepts_de(texte):
                 if _RE_ICH_MOI.search(t):
                     trouves.append({"groupe": groupe, "concept": "ich"})
                 continue
-            if any(re.search(r"\b" + re.escape(terme), t) for terme in termes):
+            # Les termes sont des MOTIFS (écrits ici, jamais saisis par un utilisateur) : on ne
+            # les échappe pas, ce qui autorise les exclusions fines indispensables — « traum(?!a) »
+            # pour ne pas confondre Traum et Trauma, « lust(?!ig) » pour écarter « lustig ».
+            if any(re.search(r"\b" + terme, t) for terme in termes):
                 trouves.append({"groupe": groupe, "concept": concept})
     return trouves
 

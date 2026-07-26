@@ -31,7 +31,7 @@ Trois œuvres, choisies pour couvrir 20 ans d'évolution théorique :
 |---|---|---|---|
 | *Die Traumdeutung* | 1900 | 4ᵉ éd., 1914 | [Gutenberg #40739](https://www.gutenberg.org/ebooks/40739) |
 | *Drei Abhandlungen zur Sexualtheorie* | 1905 | 4ᵉ éd., 1920 | [Gutenberg #39938](https://www.gutenberg.org/ebooks/39938) |
-| *Jenseits des Lustprinzips* | 1920 | 1920/1921 | [Gutenberg #28220](https://www.gutenberg.org/ebooks/28220) |
+| *Jenseits des Lustprinzips* | 1920 | 2ᵉ éd., 1921 | [Gutenberg #28220](https://www.gutenberg.org/ebooks/28220) |
 
 **Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
 éditions utilisées sont antérieures à 1931.
@@ -71,27 +71,31 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**8 633 atomes** sur trois œuvres, tous localisables dans la source, produits sans aucun modèle de
+**8 602 atomes** sur trois œuvres, tous localisables dans la source, produits sans aucun modèle de
 langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
 
 | Œuvre | Atomes | Localisation | Qualifiés | À confirmer |
 |---|---:|---|---:|---:|
-| *Die Traumdeutung* | 7 216 | 100 % | 62 % | 100 |
-| *Drei Abhandlungen* | 844 | 100 % | 70 % | 9 |
-| *Jenseits des Lustprinzips* | 573 | 100 % | 65 % | 7 |
+| *Die Traumdeutung* | 7 198 | 100 % | 62 % | 100 |
+| *Drei Abhandlungen* | 837 | 100 % | 70 % | 9 |
+| *Jenseits des Lustprinzips* | 567 | 100 % | 65 % | 7 |
 
-33 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+38 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer).
 
 ---
 
-## Deux limites, dites d'emblée
+## Trois choses à savoir avant d'utiliser cette base
 
 1. **La datation est une fourchette, pas une date.** Aucune édition disponible n'est une première
    édition, et Freud a cessé de signaler ses ajouts à partir de la 3ᵉ édition. Un atome est
    « attesté *au plus tard* » dans l'édition lue.
 2. **Un marqueur lexical ne prouve pas une révision.** Mesuré : ~3 vrais positifs sur 7. Ces
    signaux alimentent une **liste à vérifier**, jamais les faits établis.
+3. **Tout terme ajouté au lexique doit être vérifié sur les formes réellement captées.**
+   L'allemand compose : `traum` attrapait *Trauma*, et le correctif naïf a ensuite fait perdre
+   *Traumarbeit* (le travail du rêve, 126 occurrences). L'intuition ne suffit pas — il faut
+   regarder le texte. Procédure et mesures dans l'inventaire.
 
 Détail et mesures : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENTAIRE_ATOMES.md).
 

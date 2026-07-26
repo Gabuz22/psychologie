@@ -106,6 +106,44 @@ class TestLexique(unittest.TestCase):
         self.assertEqual(a, b)
         self.assertIn("unbewusst", a)
 
+    def test_trauma_nest_pas_traum(self):
+        """PIÈGE VÉRIFIÉ SUR LE TEXTE : « Trauma » ≠ « Traum ».
+
+        « traum » nu captait « traumatisch » : dans Jenseits des Lustprinzips, 24 des 38 atomes
+        « rêve » parlaient en réalité de névrose TRAUMATIQUE — c'est-à-dire l'appui empirique de
+        la compulsion de répétition, attribué au mauvais concept.
+        """
+        c = {x["concept"] for x in lexique.concepts_de(
+            "Die traumatische Neurose zeigt einen Wiederholungszwang.")}
+        self.assertIn("trauma", c)
+        self.assertNotIn("traum", c)
+        # et inversement, le rêve reste bien détecté
+        c2 = {x["concept"] for x in lexique.concepts_de("Der Traum ist eine Wunscherfüllung.")}
+        self.assertIn("traum", c2)
+        self.assertNotIn("trauma", c2)
+
+    def test_composes_du_reve_en_a_restent_des_reves(self):
+        """CONTRE-ÉPREUVE : l'allemand compose. « Traumarbeit » est un mot du RÊVE, pas du trauma.
+
+        Une première version du correctif excluait « traum » suivi d'un « a » : elle perdait
+        Traumarbeit (126 occurrences — le travail du rêve !), Traumanalyse, Traumangst,
+        Traumätiologie. Corriger un faux positif en créant un faux négatif ne vaut rien.
+        """
+        for mot in ("Die Traumarbeit leistet die Verdichtung.",
+                    "Die Traumanalyse führt zum Wunsch.",
+                    "Die Traumangst ist keine gewöhnliche Angst.",
+                    "Zur Traumätiologie gehören die Tagesreste."):
+            c = {x["concept"] for x in lexique.concepts_de(mot)}
+            self.assertIn("traum", c, "« %s » devrait relever du rêve" % mot)
+            self.assertNotIn("trauma", c, "« %s » n'est pas un trauma" % mot)
+
+    def test_lustig_nest_pas_lust(self):
+        """« lustig » (amusant) n'est pas le plaisir freudien."""
+        c = {x["concept"] for x in lexique.concepts_de("Es war eine lustige Geschichte.")}
+        self.assertNotIn("lustprinzip", c)
+        c2 = {x["concept"] for x in lexique.concepts_de("Das Lustprinzip beherrscht den Vorgang.")}
+        self.assertIn("lustprinzip", c2)
+
     def test_ich_pronom_nest_pas_le_moi(self):
         """PIÈGE : « ich » = « je » chez Freud qui écrit à la 1re personne. Ne pas taguer « topique »."""
         c = lexique.concepts_de("Ich habe diesen Traum selbst geträumt.")
@@ -156,6 +194,24 @@ class TestSources(unittest.TestCase):
         c = sources.charger("jenseits")
         self.assertNotIn("PROJECT GUTENBERG", c["texte"].upper()[:2000])
         self.assertLess(len(c["texte"]), c["meta"]["caracteres_fichier"])
+
+    def test_liminaires_editeur_retires(self):
+        """Page de titre et table des matières ne sont pas des énoncés de Freud.
+
+        Atomisées, elles produisaient « DR. », « SIGM. », « Die Realität 472 » — du bruit qui
+        gonflait le corpus et le taux de non-qualifiés.
+        """
+        for cle in sources.OEUVRES:
+            t = sources.charger(cle)["texte"]
+            self.assertNotIn("Inhaltsverzeichnis", t, "table des matières restante : %s" % cle)
+            self.assertNotIn("Inhaltsangabe", t, "table des matières restante : %s" % cle)
+            self.assertNotIn("VERLAGS-NR", t.upper(), "page de titre restante : %s" % cle)
+
+    def test_prefaces_datees_preservees(self):
+        """À l'inverse, les préfaces sont le SEUL matériau daté avec certitude : jamais retirées."""
+        t = sources.charger("traumdeutung")["texte"]
+        self.assertTrue(t.lstrip().startswith("Vorbemerkung"))
+        self.assertIn("Vorwort zur zweiten Auflage", t)
 
 
 class TestAtomisation(unittest.TestCase):

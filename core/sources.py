@@ -47,6 +47,24 @@ _NOTE_TETE = re.compile(r"\A.{0,400}?\[\s*Anmerkungen zur Transkription:.*?^\s*\
                         re.S | re.M)
 _NOTE_QUEUE = re.compile(r"^\s*\[\s*Im folgenden werden alle geänderten Textzeilen.*\Z", re.S | re.M)
 
+# LIMINAIRES DE L'ÉDITEUR — page de titre et table des matières. Ce ne sont pas des énoncés de
+# Freud : atomisés, ils produisaient des unités absurdes (« DR. », « SIGM. », « Die Realität 472 »)
+# qui gonflaient artificiellement le corpus et le taux de non-qualifiés.
+#   • Page de titre : du début jusqu'au premier vrai titre de section (Vorbemerkung/Vorwort/…).
+#     Elle est conservée AILLEURS — c'est elle qui atteste l'édition (« VIERTE, VERMEHRTE
+#     AUFLAGE … 1914 »), information déjà portée par le registre OEUVRES.
+#   • Table des matières : de son titre jusqu'à sa dernière entrée. Une entrée a une signature
+#     nette et vérifiable : un libellé, au moins trois espaces, un numéro de page, fin de ligne.
+# Les PRÉFACES, elles, sont conservées : Freud les date et les signe — c'est le seul matériau du
+# corpus dont la datation soit certaine (voir `datation`).
+# Repli pour les œuvres sans préface (« Jenseits des Lustprinzips » paraît comme supplément de
+# revue : sa page de titre est suivie d'un copyright et de l'imprimeur, puis du chapitre « I. »).
+_PREMIER_TITRE = re.compile(r"^\s*(Vorbemerkung|Vorwort|Einleitung|Inhaltsverzeichnis|Inhaltsangabe)\b",
+                            re.M)
+_PREMIER_CHAPITRE = re.compile(r"^[ \t]*I\.[ \t]*$", re.M)
+_TOC_TITRE = re.compile(r"^[ \t]*(Inhaltsverzeichnis|Inhaltsangabe)\.?[ \t]*$", re.M)
+_TOC_LIGNE = re.compile(r"^.{3,75}?[ \t]{3,}\d{1,3}[ \t]*$")
+
 # Registre des œuvres. `annee_edition` = ce qu'on LIT ; `annee_oeuvre` = première parution.
 # L'écart entre les deux EST l'incertitude de datation, portée explicitement.
 OEUVRES = {
@@ -80,7 +98,9 @@ OEUVRES = {
         "titre_fr": "Au-delà du principe de plaisir",
         "annee_oeuvre": 1920,
         "annee_edition": 1921,
-        "edition": "1re/2e Auflage (à confirmer par collation)",
+        # Établi par la page de titre elle-même : « 2. DURCHGESEHENE AUFLAGE (2.-4. TAUSEND) 1921 ».
+        # Plus une supposition à confirmer : le texte le dit.
+        "edition": "2. durchgesehene Auflage",
         "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
         "source": "Project Gutenberg #28220 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/28220",
@@ -133,7 +153,37 @@ def _extraire_corps(brut):
     notes.append("note de transcription en tête %s" % ("retirée" if n else "absente"))
     corps, n = _NOTE_QUEUE.subn("", corps)
     notes.append("liste d'errata en queue %s" % ("retirée" if n else "absente"))
+    corps, note = _retirer_liminaires(corps)
+    notes.append(note)
     return corps.strip(), "bornes Gutenberg retirées ; " + " ; ".join(notes)
+
+
+def _retirer_liminaires(corps):
+    """Retire la page de titre puis la table des matières. Déterministe et borné."""
+    faits = []
+    # 1. Page de titre : tout ce qui précède le premier vrai titre de section — une préface si
+    #    elle existe, sinon le premier chapitre (œuvre sans préface).
+    t = _PREMIER_TITRE.search(corps) or _PREMIER_CHAPITRE.search(corps)
+    if t and t.start() > 0:
+        corps = corps[t.start():]
+        faits.append("page de titre retirée")
+    # 2. Table des matières : de son titre à sa DERNIÈRE entrée « libellé … numéro ».
+    m = _TOC_TITRE.search(corps)
+    if m:
+        lignes = corps[m.end():].split("\n")
+        fin_relative, curseur, hors_toc = 0, 0, 0
+        for ligne in lignes:
+            curseur += len(ligne) + 1
+            if _TOC_LIGNE.match(ligne):
+                fin_relative, hors_toc = curseur, 0
+            elif ligne.strip():
+                hors_toc += 1
+                if hors_toc >= 3:      # trois lignes pleines non conformes → on a quitté la table
+                    break
+        if fin_relative:
+            corps = corps[:m.start()] + corps[m.end() + fin_relative:]
+            faits.append("table des matières retirée")
+    return corps, (" ; ".join(faits) if faits else "aucun liminaire détecté")
 
 
 def datation(meta):

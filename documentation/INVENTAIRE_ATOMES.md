@@ -30,7 +30,7 @@ pourquoi la classification porte sur la **fonction argumentative de la phrase**,
 ## 2. Les types d'atomes relevés
 
 Chaque type est donné avec un **exemple réel du texte** et son **effectif mesuré** sur les
-7 216 atomes de l'œuvre.
+7 198 atomes de l'œuvre.
 
 ### Fonctions établies (marqueur net, qualification tenue pour acquise)
 
@@ -88,7 +88,7 @@ Aucune des éditions disponibles n'est une première édition :
 |---|---|---|---|
 | *Die Traumdeutung* | 4ᵉ, 1914 | 1900 | **14 ans** |
 | *Drei Abhandlungen* | 4ᵉ, 1920 | 1905 | **15 ans** |
-| *Jenseits des Lustprinzips* | 1920/1921 | 1920 | ~1 an |
+| *Jenseits des Lustprinzips* | 2ᵉ, 1921 | 1920 | ~1 an |
 
 Et surtout, Freud a **cessé de signaler ses ajouts**. Préface à la 3ᵉ édition des *Drei
 Abhandlungen* :
@@ -125,6 +125,30 @@ une liste de travail (`signaux_a_confirmer`) qui demande une vérification — h
 modèle de langage travaillant sur le passage complet. Les faire passer pour établis produirait
 exactement le défaut que ce projet doit éviter : une affirmation fausse présentée comme un résultat.
 
+### 4.3 En allemand, un mot n'est pas un préfixe — leçon *Traum* / *Trauma*
+
+Défaut trouvé et corrigé lors d'un second audit, exemplaire de ce qui guette tout ce projet.
+
+Le motif `traum` captait aussi **`Trauma`**, `traumatisch`, `traumatischen`. Deux notions
+distinctes — et la confusion tombait au pire endroit : *Jenseits des Lustprinzips* argumente à
+partir de la **névrose traumatique** pour établir la compulsion de répétition. **24 des 38 atomes
+« rêve » de ce livre parlaient en réalité de trauma**, c'est-à-dire que l'appui empirique de sa
+thèse centrale était rangé sous le mauvais concept.
+
+Le premier correctif — exclure `traum` suivi d'un `a` — s'est révélé **pire que le mal**.
+L'allemand compose : `Traumarbeit` (le travail du rêve, **126 occurrences**), `Traumanalyse`,
+`Traumangst`, `Traumätiologie` sont des mots du *rêve* qui commencent par « trauma… ». Sur
+165 atomes alors étiquetés « trauma » dans la *Traumdeutung*, **163 étaient faux**.
+
+La règle correcte discrimine sur la **famille morphologique attestée**, jamais sur la lettre
+suivante : *Trauma* n'est reconnu que terminé (Trauma/Traumas) ou suivi de ses dérivés réels
+(*traumatisch-*, *traumatisier-*, *traumatolog-*). Résultat : *Traumdeutung* 2 traumas (réels),
+*Jenseits* 22 (tous authentiques), et les composés du rêve sont revenus au rêve.
+
+**À retenir pour l'extension du corpus** : chaque terme ajouté au lexique doit être vérifié sur
+les **formes réellement captées dans le texte**, pas sur l'intuition. Deux tests verrouillent
+désormais ce couple, dans les deux sens.
+
 ---
 
 ## 5. Signal de validation
@@ -135,15 +159,15 @@ mesure quelque chose de réel :
 
 | Œuvre | Groupe conceptuel dominant |
 |---|---|
-| *Die Traumdeutung* | **rêve** (4 398) |
+| *Die Traumdeutung* | **rêve** (4 363) |
 | *Drei Abhandlungen* | **pulsion** (383), développement (249) |
-| *Jenseits des Lustprinzips* | **pulsion** (267) |
+| *Jenseits des Lustprinzips* | **pulsion** (267), trauma désormais distinct |
 
 ---
 
 ## 6. Ce que cette base permet, et ce qu'elle ne permet pas encore
 
-**Permet dès maintenant** — 8 633 atomes, tous localisables dans la source :
+**Permet dès maintenant** — 8 602 atomes, tous localisables dans la source :
 - retrouver tout ce que Freud dit d'un concept, avec sa citation allemande exacte ;
 - distinguer ce qu'il affirme de ce qu'il suppose, questionne ou rapporte ;
 - comparer le profil conceptuel de deux œuvres ;
