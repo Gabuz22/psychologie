@@ -175,6 +175,35 @@ suivante : *Trauma* n'est reconnu que terminé (Trauma/Traumas) ou suivi de ses 
 les **formes réellement captées dans le texte**, pas sur l'intuition. Deux tests verrouillent
 désormais ce couple, dans les deux sens.
 
+### 4.5 Troisième audit (2026-07) — les œuvres à fort non-qualifié désignent les trous
+
+La méthode éprouvée deux fois — scanner les noms fréquents des atomes **non qualifiés** — a été
+rejouée sur les cinq œuvres où le taux dépassait 40 %. Cinq domaines entiers étaient hors
+ontologie : la **description d'œuvre d'art** (le *Moses* est une analyse visuelle : statue,
+peintre, tableau), le **deuil et la mort** (*Trauer*, *Tod*, *Vergänglichkeit* — alors que
+« Trauer und Melancholie » est un pivot de l'œuvre), la **religion** (*Gott*, *Teufel* — la
+*Teufelsneurose* lit le Diable en substitut paternel), la **guerre, la culture et l'État**
+(essais de 1915-1916), et **l'affect et l'agression** (*Zorn*, le sujet même du *Moses*).
+
+Un groupe (`mort`) et quinze concepts ajoutés — chacun vérifié sur ses formes réellement
+captées. Trois homonymes débusqués par cet inventaire, qu'aucune intuition n'aurait prévus :
+**Göttingen** (la ville universitaire, prise pour le divin), **Affektion** (l'affection au sens
+médical — *nervöse Affektion* — prise pour l'affect), **statuerunt** (du latin cité, pris pour
+une statue). Et un trou préexistant décelé par les nouveaux tests : `verbot` ignorait les formes
+conjuguées (*verbietet*).
+
+| Œuvre | Non-qualifiés avant | après |
+|---|---:|---:|
+| *Der Moses des Michelangelo* | 61 % | 44 % |
+| *Vergänglichkeit* | 48 % | 18 % |
+| *Eine Teufelsneurose…* | 46 % | 30 % |
+| *Kindheitserinnerung des Leonardo* | 44 % | 35 % |
+| *Zeitgemäßes über Krieg und Tod* | 44 % | 24 % |
+
+Le reste est du **récit et de la description** (la biographie de Léonard, l'examen détail par
+détail de la statue) : le laisser non qualifié est exact, pas un échec — un lexique de concepts
+n'a pas vocation à taguer chaque phrase narrative.
+
 ---
 
 ## 5. Signal de validation

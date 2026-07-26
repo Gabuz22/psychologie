@@ -89,7 +89,7 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 **18 659 atomes** sur vingt œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-73 % sont qualifiés ; **15 œuvres sur 20 ont une datation certaine** rien qu'à l'échelle de
+76 % sont qualifiés ; **15 œuvres sur 20 ont une datation certaine** rien qu'à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
@@ -97,7 +97,7 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 *Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
 « *#Alix.# Les rêves. Rev. Scient.* ».
 
-**Finesse de la catégorisation** — 15 groupes conceptuels, 104 concepts, 19 sous-concepts,
+**Finesse de la catégorisation** — 16 groupes conceptuels, 120 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 

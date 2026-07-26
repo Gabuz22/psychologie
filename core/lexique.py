@@ -287,6 +287,10 @@ CONCEPTS = {
             "abfuhr": ["abfuhr", "entladung"],
             "energie": ["energie", "quantitat", "intensitat"],
             "reiz": ["reizschutz", "reizmenge"],
+            # L'affect est une QUANTITÉ chez Freud (Affektbetrag) : sa place est ici.
+            # (?!ion) écarte « Affektion » — l'affection au sens MÉDICAL (nervöse Affektion,
+            # 14 occurrences), qui n'est pas l'affect.
+            "affekt": [r"affekt(?!ion)"],
         },
     },
     # NOUVEAU GROUPE — mémoire et oubli : 266 « Erinnerung » ignorées, alors que le souvenir
@@ -327,6 +331,10 @@ CONCEPTS = {
             "masochismus": ["masochis"],
             "autoerotismus": ["autoerot"],
             "erogene_zone": ["erogen"],
+            # L'agression — « Zorn » est LE sujet du « Moses des Michelangelo » (la colère que la
+            # statue retient), « Wut » sa variante ; « aggress » couvre Aggression, aggressiv et
+            # le composé Aggressionstrieb déjà énuméré sous « trieb ».
+            "aggression": ["aggress", "zorn", "wut"],
         },
     },
     "conflit": {
@@ -398,11 +406,21 @@ CONCEPTS = {
             "tabu": ["tabu"],
             "exogamie": ["exogamie", "inzest"],
             "opfer": ["opfer"],
-            "verbot": ["verbot", "verboten"],
+            # « verbiet » couvre les formes conjuguées (verbietet, verbieten) — trou décelé par
+            # les tests de l'audit 2026-07, pas par intuition.
+            "verbot": ["verbot", "verboten", "verbiet"],
             "animismus": ["animismus", "animistisch", "magie", "zauber"],
             "urhorde": ["urhorde", "urvater", "urzeit"],
-            "primitiv": ["primitiv", "wilde", "wilden", "volker"],
+            "primitiv": ["primitiv", "wilde", "wilden", "volker", "urmensch"],
             "beruehrung": ["beruhrung", "beruhrungsangst"],
+            # RELIGION — « Totem und Tabu » fonde la religion sur le père, la « Teufelsneurose »
+            # lit le Diable en substitut paternel, les essais de guerre parlent de l'au-delà.
+            # Ce vocabulaire restait entièrement hors ontologie.
+            "religion": ["religio"],
+            # (?!ing) écarte « Göttingen » — la ville universitaire, pas le divin.
+            "gott": [r"gott(?!ing)"],
+            # « teufl » attrape « teuflisch » — le e du radical tombe dans l'adjectif.
+            "teufel": ["teufel", "teufl"],
         },
     },
     "comique": {
@@ -426,6 +444,30 @@ CONCEPTS = {
             "identifizierung": ["identifizierung", "identifiziert"],
             "panik": ["panik"],
             "institution": ["kirche", "heer", "armee"],
+            # CULTURE, GUERRE, ÉTAT — le vocabulaire des essais de 1915-1916 (« Zeitgemäßes über
+            # Krieg und Tod », « Vergänglichkeit ») était invisible : 44 % de non-qualifiés.
+            "kultur": ["kultur"],
+            # « kriegen » = « recevoir » (familier, présent dans les Witze cités) : on ne prend
+            # que les formes nominales, les composés en kriegs- et « Krieger » — jamais le verbe.
+            "krieg": [r"krieg(?:e?s|e)?\b", r"kriegs[a-z]", "krieger"],
+            "staat": ["staat"],
+        },
+    },
+    # NOUVEAU GROUPE — mort, deuil, perte. Les essais de guerre (1915-1916) et la Teufelsneurose
+    # (la mélancolie du peintre après la mort de son père) parlaient dans le vide : « Trauer »,
+    # « Tod », « Vergänglichkeit » n'existaient nulle part dans l'ontologie — alors que « Trauer
+    # und Melancholie » est un pivot de l'œuvre, que Freud cite lui-même (voir la vérification
+    # des auto-citations : « Der Schatten des Objekts ist auf das Ich gefallen »).
+    "mort": {
+        "label": "Mort, deuil, perte",
+        "termes": {
+            # \btod couvre Tod/Todes- et recoupe « todestrieb » (groupe pulsion) : un énoncé sur
+            # la pulsion de mort parle AUSSI de la mort — recoupement voulu, pas un accident.
+            "tod": ["tod"],
+            "sterben": ["sterb", "stirb", "gestorben", "unsterblich"],
+            "trauer": ["trauer"],
+            "melancholie": ["melanchol"],
+            "verganglichkeit": ["verganglich"],
         },
     },
     "esthetique": {
@@ -436,7 +478,19 @@ CONCEPTS = {
             # Homographe du comparatif « dichter » (plus dense), très rare ici : écart assumé.
             "dichter": ["dichter", "dichtung", "poet"],
             "phantasie": ["phantasie", "phantasier"],
-            "kunst": ["kunstwerk", "asthetik", "asthetisch"],
+            # « kunstwerk » seul manquait 128 « Künstler » ; mais PAS de \bkunst nu, qui prendrait
+            # « künstlich » (artificiel, 24 occurrences — les « foules artificielles » de la
+            # Massenpsychologie n'ont rien d'esthétique).
+            "kunst": ["kunstwerk", "asthetik", "asthetisch", "kunstler", r"kunst\b", r"kunste\b"],
+            # PEINTURE ET SCULPTURE — le Léonard (44 % de non-qualifiés) et le Moses (61 %) sont
+            # des analyses d'œuvres VISUELLES ; le lexique ne connaissait que la littérature.
+            # « gemal » couvre gemalt/Gemälde — et ne peut pas attraper « Gemahl » (époux),
+            # qui s'écrit avec un h.
+            "malerei": ["maler", "gemal", "bildnis"],
+            # « statuen?\b » exact — « statue » nu attrapait « statuerunt » dans une citation latine.
+            "statue": [r"statuen?\b", "bildhauer", "plastik", "skulptur", "standbild"],
+            # « schonheit » est sans risque ; « schön » nu se replierait en « schon » (déjà).
+            "schoenheit": ["schonheit"],
             "erzaehlung": ["erzahlung", "roman", "novelle"],
         },
     },

@@ -249,6 +249,53 @@ class TestLexique(unittest.TestCase):
         finally:
             del groupe["archetyp_test"]
 
+    def test_domaines_de_l_audit_2026_07(self):
+        """Les 5 œuvres à fort non-qualifié ont révélé des domaines entiers hors ontologie.
+
+        Mesuré avant l'ajout : Moses des Michelangelo 61 % de non-qualifiés (description
+        d'œuvre d'art), Vergänglichkeit 48 % (beauté, deuil), Teufelsneurose 46 % (démonologie),
+        Leonardo 44 % (peinture), Zeitgemäßes über Krieg und Tod 44 % (guerre, mort, État).
+        """
+        cas = {
+            "Die Trauer über den Verlust läuft spontan ab.": {"trauer"},
+            "Der Tod des Vaters ist das bedeutsamste Ereignis.": {"tod", "vater"},
+            "Der Krieg hat die Kulturgüter zerstört.": {"krieg", "kultur"},
+            "Gott ist die erhöhte Vaterprojektion.": {"gott", "vater"},
+            "Der Teufel ist ein Vaterersatz.": {"teufel", "vater"},
+            "Der Maler schuf das Gemälde in Mailand.": {"malerei"},
+            "Die Statue stellt einen zornigen Moses dar.": {"statue", "aggression"},
+            "Die Schönheit der Natur ist vergänglich.": {"schoenheit", "verganglichkeit"},
+            "Der Staat verbietet dem Einzelnen das Unrecht.": {"staat", "verbot"},
+            "Der Künstler verfügt über die Kunst.": {"kunst"},
+            "Die Melancholie folgt dem Verlust des Objekts.": {"melancholie"},
+            "Der Affektbetrag wird verschoben.": {"affekt"},
+            "Die Religion des Urmenschen war animistisch.": {"religion", "primitiv", "animismus"},
+        }
+        for phrase, attendus in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertTrue(attendus <= trouves,
+                            "« %s » : manquent %s" % (phrase, attendus - trouves))
+
+    def test_homonymes_de_l_audit_ecartes(self):
+        """CONTRE-ÉPREUVES : les homonymes trouvés en inventoriant les formes réellement captées.
+
+        « Göttingen » est une ville, pas le divin ; « Affektion » est l'affection MÉDICALE
+        (nervöse Affektion), pas l'affect ; « künstlich » est l'artificiel (les « foules
+        artificielles » de la Massenpsychologie), pas l'art ; « kriegen » veut dire recevoir.
+        """
+        cas = {
+            "Er studierte in Göttingen bei den Professoren.": "gott",
+            "Eine nervöse Affektion der Patientin.": "affekt",
+            "Kirche und Heer sind künstliche Massen.": "kunst",
+            # NB : le corpus réel ne contient AUCUN « krieg » nu au sens de « recevoir » (les
+            # quatre occurrences nues sont le nom) — la forme familière exclue est « kriegen ».
+            "Man kann nicht alles kriegen, was man will.": "krieg",
+            "Das ist schon lange bekannt.": "schoenheit",
+        }
+        for phrase, interdit in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertNotIn(interdit, trouves, "« %s » a capté « %s »" % (phrase, interdit))
+
     def test_aucune_qualification_forcee(self):
         """Une phrase neutre ne doit RIEN déclencher — mieux vaut vide que faux."""
         self.assertEqual(lexique.fonctions_de("Das Haus stand am Ufer."), [])
