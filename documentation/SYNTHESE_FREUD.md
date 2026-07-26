@@ -193,6 +193,18 @@ phrase. Ne demeure incertain que *Jenseits des Lustprinzips* — dont l'océrisa
 s'est révélée trop dégradée pour distinguer « absent » de « présent mais illisible ». **La méthode
 refuse alors de conclure** plutôt que de produire une date fausse ; l'écart n'y est que d'un an.
 
+*Recherche d'un meilleur témoin, faite et documentée plutôt que supposée* : archive.org ne
+recense qu'un seul scan de la 1ʳᵉ édition (1920) — celui déjà utilisé. Un autre exemplaire
+(« jenseitsdeslust00freugoog », scan Google/Michigan) a d'abord semblé prometteur — sa
+couverture y grimpe à 0,82 contre 0,49 — mais son texte s'est révélé être la **2ᵉ édition
+(1921)**, la même que celle déjà lue dans le corpus : l'adopter aurait comparé le texte à
+lui-même et daté faussement « 1920 » ce qui n'est qu'un doublon de 1921. Tous les autres
+exemplaires trouvés sont soit des éditions encore plus tardives (3ᵉ éd. 1923, *Gesammelte
+Werke* 1925/1940), soit des traductions (hongrois, néerlandais, grec, japonais) — aucun n'est
+un second témoin recevable de 1920. Le fac-similé actuel ne dispose pas non plus d'une couche
+ABBYY à confiance par mot qui permettrait de filtrer les passages douteux. La réserve tient
+donc jusqu'à ce qu'un meilleur exemplaire physique soit numérisé.
+
 **Un volume n'est pas d'un seul auteur.** La 4ᵉ édition de la *Traumdeutung* contient un appendice
 d'**Otto Rank** — 334 atomes. Chaque atome porte son auteur réel ; sans cela, une mesure d'auteur
 mélangerait deux plumes.
