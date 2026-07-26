@@ -1,0 +1,8 @@
+# Sorties régénérables : elles se recalculent avec `python bin/atomiser.py`.
+# Rien d'irremplaçable ne vit ici — les sources, elles, sont versionnées.
+derive/
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,218 @@
+#!/usr/bin/env python3
+"""TESTS de la base d'atomisation — ils protègent les invariants, pas le confort.
+
+Chaque test correspond à une garantie annoncée dans la documentation. Si une garantie tombe, un
+test doit tomber : c'est ce qui distingue une base fiable d'une base qui a l'air de marcher.
+Stdlib seulement (unittest), aucune dépendance, exécutable partout.
+"""
+import os
+import sys
+import unittest
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+from core import atomisation, lexique, sources          # noqa: E402
+from core.segmentation import recomposable, segmenter   # noqa: E402
+
+
+class TestSegmentation(unittest.TestCase):
+    """Le découpage en phrases : la brique dont tout dépend."""
+
+    def test_phrase_simple(self):
+        p = segmenter("Der Traum ist eine Wunscherfüllung. Das ist die These.")
+        self.assertEqual(len(p), 2)
+        self.assertEqual(p[0]["texte"], "Der Traum ist eine Wunscherfüllung.")
+
+    def test_abreviation_ne_coupe_pas(self):
+        """« z. B. » et « d. h. » sont omniprésents chez Freud : les couper briserait les atomes."""
+        for abbr in ("z. B.", "d. h.", "u. dgl.", "vgl."):
+            t = "Man sieht dies %s im Traum vom Onkel." % abbr
+            self.assertEqual(len(segmenter(t)), 1, "coupé sur « %s »" % abbr)
+
+    def test_initiale_ne_coupe_pas(self):
+        """L'anonymisation des patients par initiale est constante (« Dr. M. »)."""
+        self.assertEqual(len(segmenter("Dr. M. ist mit meiner Lösung nicht einverstanden.")), 1)
+
+    def test_ordinal_ne_coupe_pas(self):
+        self.assertEqual(len(segmenter("In der 3. Auflage habe ich das geändert.")), 1)
+
+    def test_question_coupe(self):
+        p = segmenter("Wie komme ich dazu? Am selben Abend kam der Einfall.")
+        self.assertEqual(len(p), 2)
+
+    def test_offsets_exacts(self):
+        """Une citation doit être re-localisable dans la source, sinon elle n'est pas vérifiable."""
+        src = "Der Traum ist eine Wunscherfüllung. Wie komme ich dazu? Das ist merkwürdig."
+        p = segmenter(src)
+        self.assertTrue(recomposable(p, src))
+        for x in p:
+            self.assertEqual(src[x["debut"]:x["fin"]], x["texte"])
+
+    def test_texte_vide(self):
+        self.assertEqual(segmenter(""), [])
+        self.assertEqual(segmenter("   \n  "), [])
+
+
+class TestLexique(unittest.TestCase):
+    """La taxonomie : ce qui décide de la qualification de chaque atome."""
+
+    def test_integrite(self):
+        r = lexique.valider()
+        self.assertTrue(r["ok"], "lexique incohérent : %s" % r["erreurs"])
+
+    def test_inference(self):
+        self.assertIn("inference", lexique.fonctions_de(
+            "Ich habe also in diesem Traume bereits an zwei Personen Rache genommen."))
+
+    def test_hypothese_et_statut_modalise(self):
+        t = "Vielleicht ist der Traum eine Wunscherfüllung."
+        self.assertIn("hypothese", lexique.fonctions_de(t))
+        self.assertEqual(lexique.statut_de(t), "modalise")
+
+    def test_objection(self):
+        self.assertIn("objection", lexique.fonctions_de(
+            "Hier verlangt aber ein Einwand gehört zu werden."))
+
+    def test_revision(self):
+        """Le signal d'évolution théorique — la raison d'être du projet."""
+        self.assertIn("revision", lexique.fonctions_de(
+            "Mit welchem Rechte haben wir früher behauptet, daß der Traum den Schlaf schützt?"))
+
+    def test_auto_citation(self):
+        self.assertIn("auto_citation", lexique.fonctions_de(
+            "Wir haben selbst die unbewußten Wünsche als immer rege bezeichnet."))
+
+    def test_rapport_tiers(self):
+        self.assertIn("rapport_tiers", lexique.fonctions_de(
+            "So erging es Maury einmal mit einer Reihe von grotesken Gestalten."))
+
+    def test_statut_le_plus_prudent_gagne(self):
+        """On ne durcit JAMAIS un propos : une question reste une question."""
+        self.assertEqual(lexique.statut_de("Ist der Traum also eine Wunscherfüllung?"), "interrogatif")
+        self.assertEqual(lexique.statut_de("Der Traum ist eine Wunscherfüllung."), "affirme")
+
+    def test_concepts_multigroupe(self):
+        """Un atome peut relever de plusieurs groupes à la fois — c'est voulu."""
+        c = lexique.concepts_de("Die Verdrängung des unbewußten Wunsches erzeugt das Symptom.")
+        groupes = {x["groupe"] for x in c}
+        self.assertIn("conflit", groupes)
+        self.assertIn("topique", groupes)
+        self.assertIn("desir", groupes)
+
+    def test_orthographe_1900_ss_et_eszett(self):
+        """« unbewußt » (1900) et « unbewusst » (moderne) doivent être reconnus pareil."""
+        a = {x["concept"] for x in lexique.concepts_de("Das Unbewußte ist wirksam.")}
+        b = {x["concept"] for x in lexique.concepts_de("Das Unbewusste ist wirksam.")}
+        self.assertEqual(a, b)
+        self.assertIn("unbewusst", a)
+
+    def test_ich_pronom_nest_pas_le_moi(self):
+        """PIÈGE : « ich » = « je » chez Freud qui écrit à la 1re personne. Ne pas taguer « topique »."""
+        c = lexique.concepts_de("Ich habe diesen Traum selbst geträumt.")
+        self.assertNotIn("ich", {x["concept"] for x in c})
+
+    def test_aucune_qualification_forcee(self):
+        """Une phrase neutre ne doit RIEN déclencher — mieux vaut vide que faux."""
+        self.assertEqual(lexique.fonctions_de("Das Haus stand am Ufer."), [])
+
+    def test_signaux_rares_ne_sont_jamais_des_faits(self):
+        """GARDE-FOU CENTRAL : révision/objection/auto-citation restent des CANDIDATS.
+
+        Mesuré sur le texte réel : ~3 vrais positifs sur 7 pour « révision ». Les faire passer
+        pour établis fausserait l'analyse d'évolution théorique, qui est l'objet du projet.
+        """
+        for rare in ("revision", "objection", "auto_citation"):
+            self.assertEqual(lexique.FIABILITE[rare], "a_confirmer",
+                             "« %s » ne doit pas être présenté comme établi" % rare)
+        etablies, a_confirmer = lexique.fonctions_par_fiabilite(
+            "Ich hatte damals die als unrichtig erkannte Meinung vertreten.")
+        self.assertIn("revision", a_confirmer)
+        self.assertNotIn("revision", etablies)
+
+    def test_fonctions_frequentes_restent_etablies(self):
+        """À l'inverse, les fonctions à marqueur net ne doivent pas être dégradées en candidats."""
+        for sure in ("inference", "hypothese", "question", "methode"):
+            self.assertEqual(lexique.FIABILITE[sure], "etablie")
+
+
+class TestSources(unittest.TestCase):
+    """La provenance : ce qui rend le corpus opposable à un chercheur."""
+
+    def test_manifeste_complet(self):
+        m = sources.manifeste()
+        self.assertEqual(len(m["oeuvres"]), 3)
+        for o in m["oeuvres"]:
+            self.assertTrue(o["present"], "œuvre absente du dépôt : %s" % o["cle"])
+            self.assertTrue(o["empreinte_fichier"])
+
+    def test_datation_jamais_faussement_precise(self):
+        """Le cœur de l'honnêteté du projet : ne jamais dater un atome de l'année de l'œuvre."""
+        d = sources.datation(sources.OEUVRES["traumdeutung"])
+        self.assertFalse(d["precise"])
+        self.assertEqual(d["fenetre_incertitude_annees"], 14)
+        self.assertIn("au plus tard", d["regle"])
+
+    def test_entete_gutenberg_retiree(self):
+        c = sources.charger("jenseits")
+        self.assertNotIn("PROJECT GUTENBERG", c["texte"].upper()[:2000])
+        self.assertLess(len(c["texte"]), c["meta"]["caracteres_fichier"])
+
+
+class TestAtomisation(unittest.TestCase):
+    """Les invariants de la source de données principale."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.r = atomisation.atomiser("jenseits")     # la plus courte : test rapide et réel
+
+    def test_atomes_produits(self):
+        self.assertGreater(len(self.r["atomes"]), 500)
+
+    def test_recomposition_et_localisation(self):
+        c = self.r["controles"]
+        self.assertTrue(c["recomposition_ordre_ok"])
+        self.assertTrue(c["localisation_complete"],
+                        "%d/%d atomes localisés" % (c["localisation_exacte"], c["total_atomes"]))
+
+    def test_chaque_atome_porte_sa_datation(self):
+        for a in self.r["atomes"][:50]:
+            self.assertIn("attestation", a)
+            self.assertIn("regle", a["attestation"])
+
+    def test_non_qualifie_est_dit(self):
+        """Les atomes sans catégorie sont comptés et visibles, jamais comblés en silence."""
+        c = self.r["controles"]
+        self.assertEqual(c["qualifies"] + c["non_qualifies"], c["total_atomes"])
+
+    def test_signaux_a_confirmer_separes_des_fonctions(self):
+        """Aucun signal « à confirmer » ne doit fuiter dans les fonctions établies d'un atome."""
+        for a in self.r["atomes"]:
+            for s in a["signaux_a_confirmer"]:
+                self.assertNotIn(s, a["fonctions"])
+
+    def test_paratexte_transcripteur_absent(self):
+        """Le paratexte Gutenberg (producteur, errata) ne doit produire AUCUN atome."""
+        debut = " ".join(a["texte"] for a in self.r["atomes"][:20])
+        self.assertNotIn("Produced by", debut)
+        for a in self.r["atomes"]:
+            self.assertNotIn("geänderten Textzeilen", a["texte"])
+
+    def test_index_coherent(self):
+        idx = self.r["index"]
+        total_statuts = sum(idx["par_statut"].values())
+        self.assertEqual(total_statuts, len(self.r["atomes"]))
+
+    def test_ids_uniques(self):
+        ids = [a["id"] for a in self.r["atomes"]]
+        self.assertEqual(len(ids), len(set(ids)))
+
+    def test_deterministe(self):
+        """Même entrée → même sortie. Sans ça, aucune analyse n'est reproductible."""
+        encore = atomisation.atomiser("jenseits")
+        self.assertEqual([a["id"] for a in encore["atomes"]], [a["id"] for a in self.r["atomes"]])
+        self.assertEqual([a["fonctions"] for a in encore["atomes"]],
+                         [a["fonctions"] for a in self.r["atomes"]])
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

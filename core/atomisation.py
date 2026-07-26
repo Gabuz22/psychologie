@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+"""ATOMISATION — transforme une œuvre en ATOMES : les unités élémentaires du corpus.
+
+Un ATOME = une phrase, plus tout ce qui permet de la situer, de la qualifier et de la RETROUVER.
+C'est la source de données principale : catégorisation, détection de cycles, de progressions et de
+contradictions s'appuieront dessus. Aucun LLM, aucun réseau, aucun aléa — même texte, mêmes atomes.
+
+Structure d'un atome :
+  id, oeuvre, index, texte, debut, fin, nb_mots     — l'unité et sa position (re-vérifiable)
+  chapitre                                          — situation dans l'œuvre
+  fonctions[]                                       — ce que la phrase FAIT (multigroupe)
+  statut                                            — avec quelle force elle l'affirme
+  concepts[]                                        — de quoi elle parle (groupe + concept)
+  emphase                                           — mises en relief conservées par Gutenberg
+  attestation                                       — datation HONNÊTE (voir sources.datation)
+
+Invariants (tenus par les tests) :
+  • RECOMPOSITION : les atomes rendent le texte dans l'ordre, sans perte ni réécriture.
+  • LOCALISATION : texte[debut:fin] == texte de l'atome — toute citation est re-vérifiable.
+  • JAMAIS DE FAUX ACQUIS : un atome sans fonction/concept reconnu le dit (« non_qualifie »),
+    on ne lui invente pas de catégorie.
+"""
+import re
+
+from . import lexique, sources
+from .segmentation import segmenter
+
+ATOMISATION_VERSION = "1.0.0"
+
+# Titres de chapitre de Die Traumdeutung : chiffre romain seul sur sa ligne, puis le titre.
+_CHAPITRE = re.compile(r"^[ \t]*([IVX]{1,5})\.[ \t]*\n\s*\n[ \t]*(\S[^\n]{3,90})", re.M)
+
+# Mises en relief conservées par la transcription Gutenberg (elles portent du sens chez Freud :
+# c'est ainsi qu'il détache le texte du rêve, les termes techniques et les noms d'auteurs).
+_EMPHASES = {
+    "espace": re.compile(r"_[^_\n]{2,}_"),      # gesperrt — mise en valeur forte
+    "italique": re.compile(r"~[^~\n]{2,}~"),    # kursiv
+    "gras": re.compile(r"[#=][^#=\n]{2,}[#=]"),
+}
+
+
+def chapitres(texte):
+    """[(debut, numero, titre)] — repères de chapitre, pour situer chaque atome."""
+    out = []
+    for m in _CHAPITRE.finditer(texte):
+        titre = m.group(2).strip()
+        if len(titre) > 3:
+            out.append((m.start(), m.group(1), titre))
+    return out
+
+
+def _chapitre_de(position, reperes):
+    """Chapitre courant pour une position donnée (le dernier repère franchi)."""
+    courant = None
+    for debut, numero, titre in reperes:
+        if debut <= position:
+            courant = {"numero": numero, "titre": titre}
+        else:
+            break
+    return courant
+
+
+def _emphases(texte):
+    """Segments mis en relief dans la phrase (sens conservé, jamais inventé)."""
+    out = []
+    for genre, motif in _EMPHASES.items():
+        for m in motif.finditer(texte):
+            out.append({"genre": genre, "texte": m.group(0).strip("_~#=").strip()})
+    return out
+
+
+def atomiser(cle_oeuvre):
+    """Atomise une œuvre entière → {atomes, meta, controles}."""
+    charge = sources.charger(cle_oeuvre)
+    texte, meta = charge["texte"], charge["meta"]
+    phrases = segmenter(texte)
+    reperes = chapitres(texte)
+    attestation = meta["datation"]
+
+    atomes = []
+    for p in phrases:
+        fonctions, a_confirmer = lexique.fonctions_par_fiabilite(p["texte"])
+        concepts = lexique.concepts_de(p["texte"])
+        atomes.append({
+            "id": "%s:a%d" % (cle_oeuvre, p["index"]),
+            "oeuvre": cle_oeuvre,
+            "index": p["index"],
+            "texte": p["texte"],
+            "debut": p["debut"],
+            "fin": p["fin"],
+            "nb_mots": p["nb_mots"],
+            "chapitre": _chapitre_de(p["debut"], reperes),
+            "fonctions": fonctions,
+            # Signaux repérés mais NON ÉTABLIS (révision, objection, auto-citation) : ils forment
+            # la liste de travail à vérifier, jamais des faits acquis. Voir lexique.FIABILITE.
+            "signaux_a_confirmer": a_confirmer,
+            "statut": lexique.statut_de(p["texte"]),
+            "concepts": concepts,
+            "emphase": _emphases(p["texte"]),
+            # Aucune catégorie reconnue : on l'AFFICHE au lieu de combler (doctrine AXA).
+            "non_qualifie": not fonctions and not a_confirmer and not concepts,
+            "attestation": attestation,
+        })
+
+    return {
+        "meta": {
+            "oeuvre": meta["titre"],
+            "oeuvre_fr": meta["titre_fr"],
+            "cle": cle_oeuvre,
+            "edition_lue": meta["edition"],
+            "annee_edition": meta["annee_edition"],
+            "annee_oeuvre": meta["annee_oeuvre"],
+            "source": meta["source"],
+            "empreinte_fichier": meta["empreinte_fichier"],
+            "version_atomisation": ATOMISATION_VERSION,
+            "version_lexique": lexique.LEXIQUE_VERSION,
+        },
+        "atomes": atomes,
+        "controles": controler(atomes, phrases, texte),
+        "index": indexer(atomes),
+    }
+
+
+def controler(atomes, phrases, texte):
+    """Preuves d'intégrité — un chiffre qu'on peut vérifier, pas une promesse."""
+    localises = sum(1 for a in atomes if texte[a["debut"]:a["fin"]] == a["texte"])
+    a_confirmer = [a for a in atomes if a["signaux_a_confirmer"]]
+    return {
+        "total_atomes": len(atomes),
+        "a_confirmer": len(a_confirmer),
+        "recomposition_ordre_ok": [a["texte"] for a in atomes] == [p["texte"] for p in phrases],
+        "localisation_exacte": localises,
+        "localisation_complete": localises == len(atomes),
+        "qualifies": sum(1 for a in atomes if not a["non_qualifie"]),
+        "non_qualifies": sum(1 for a in atomes if a["non_qualifie"]),
+        "avec_chapitre": sum(1 for a in atomes if a["chapitre"]),
+    }
+
+
+def indexer(atomes):
+    """Index inversés : par fonction, par concept, par groupe, par statut — pour l'analyse."""
+    par_fonction, par_concept, par_groupe, par_statut = {}, {}, {}, {}
+    par_signal = {}
+    for a in atomes:
+        for f in a["fonctions"]:
+            par_fonction.setdefault(f, []).append(a["id"])
+        for s in a["signaux_a_confirmer"]:
+            par_signal.setdefault(s, []).append(a["id"])
+        for c in a["concepts"]:
+            par_concept.setdefault(c["concept"], []).append(a["id"])
+            par_groupe.setdefault(c["groupe"], []).append(a["id"])
+        par_statut.setdefault(a["statut"], []).append(a["id"])
+    return {
+        "par_fonction": {k: len(v) for k, v in sorted(par_fonction.items())},
+        "par_signal_a_confirmer": {k: len(v) for k, v in sorted(par_signal.items())},
+        "par_concept": {k: len(v) for k, v in sorted(par_concept.items(), key=lambda x: -len(x[1]))},
+        "par_groupe": {k: len(v) for k, v in sorted(par_groupe.items(), key=lambda x: -len(x[1]))},
+        "par_statut": {k: len(v) for k, v in sorted(par_statut.items(), key=lambda x: -len(x[1]))},
+        "_ids": {"par_fonction": par_fonction, "par_concept": par_concept,
+                 "par_signal_a_confirmer": par_signal},
+    }
