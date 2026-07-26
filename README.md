@@ -87,9 +87,10 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**16 898 atomes** sur douze œuvres, **tous** localisables dans la source, produits sans aucun modèle
+**18 659 atomes** sur vingt œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-74 % sont qualifiés ; **7 œuvres sur 12 ont une datation certaine**.
+73 % sont qualifiés ; **15 œuvres sur 20 ont une datation certaine** rien qu'à l'échelle de
+l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
 retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 du seul
@@ -166,10 +167,12 @@ suite ciblée (`concept` → `chronologie` → `tension`) quand un concept est d
 
 **Ce que ça donne déjà.**
 
-L'agent `profil` retrouve la marque propre des **dix** œuvres, sans qu'on lui ait rien dit de leur
+L'agent `profil` retrouve la marque propre des **vingt** œuvres, sans qu'on lui ait rien dit de leur
 contenu : *Die Traumdeutung* → rêve ; *Der Witz* → comique ; *Totem und Tabu* → anthropologie ;
 *Massenpsychologie* → social ; *Das Unheimliche* → esthétique ; *Zur Psychopathologie* → mémoire
-et actes manqués ; *Über Psychoanalyse* → conflit et cure. Dix sur dix.
+et actes manqués ; *Über Psychoanalyse* → conflit et cure ; *Der Dichter und das Phantasieren* →
+esthétique et désir. Vingt sur vingt — y compris les œuvres les plus courtes du corpus (44 et 21
+atomes), où le signal a pourtant beaucoup moins de matière pour se dégager.
 
 L'agent `cooccurrence` retrouve les couples que tout lecteur de Freud reconnaît : *Wunsch* +
 *Wunscherfüllung*, *Sadismus* + *Masochismus*, *Traumgedanke* + *Trauminhalt* (latent / manifeste),
@@ -265,32 +268,38 @@ par tout nouveau terme ajouté (voir le point 3 ci-dessus).
 
 ## Suite
 
-La base est complète et outillée sur **douze** œuvres majeures — environ la moitié du corpus des
-grands ouvrages de Freud (le reste : préfaces isolées, correspondance, et une douzaine de textes
-non encore intégrés). Fait :
+La base est complète et outillée sur **vingt** œuvres majeures — un peu plus de la moitié du
+corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait :
 
-- **Corpus étendu** à douze œuvres (1900-1933), pipeline déclaratif : ajout d'une œuvre, atomisation
-  mémorisée, agents inchangés.
+- **Corpus étendu** à vingt œuvres (1908-1933) : huit ajoutées en une passe (dont *Eine
+  Kindheitserinnerung des Leonardo da Vinci*), toutes du vrai `gutenberg.org`, même exigence de
+  qualité (relecture Distributed Proofreaders) que le reste. Pipeline inchangé : ajout déclaratif,
+  atomisation mémorisée, agents inchangés.
 - **Datation par collation** pour quatre œuvres (chaque atome sait s'il est d'origine ou ajouté) ;
-  sept autres lues dans leur édition d'origine. Ne reste incertaine que *Jenseits des
-  Lustprinzips* — aucun meilleur fac-similé de sa 1ʳᵉ édition n'existe sur archive.org (recherche
-  faite, documentée dans `SYNTHESE_FREUD.md`) : la méthode refuse de conclure plutôt que dater faux.
-- **Vérification faite** pour les 178 signaux du corpus actuel ; à reconduire sur chaque œuvre
-  ajoutée (le registre est cumulatif, rien ne se rejoue).
+  quinze autres lues dans leur édition d'origine (datation certaine à l'échelle de l'œuvre). Ne
+  reste incertaine que *Jenseits des Lustprinzips* — aucun meilleur fac-similé de sa 1ʳᵉ édition
+  n'existe sur archive.org (recherche faite, documentée dans `SYNTHESE_FREUD.md`) : la méthode
+  refuse de conclure plutôt que dater faux.
+- **Vérification faite** pour les 192 signaux du corpus actuel (dont les 9 apportés par les huit
+  œuvres ajoutées) ; à reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se
+  rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
   grappes, modularité 0,354. Prochaine étape naturelle : comparer avec un premier auteur non
   freudien pour voir si SES concepts recomposent ou déplacent ces grappes.
+- **Corpus consultable** sans relancer un script : `bin/rechercher.py` — filtres combinables
+  (concept, groupe, sous-concept, auteur, œuvre, statut, fonction, mot-clé, fenêtre d'années),
+  export `--json`/`--csv`.
+- **Recherche exhaustive et documentée** des œuvres restantes (`SYNTHESE_FREUD.md`, §5) : treize
+  œuvres majeures — dont *Das Ich und das Es*, *Hemmung, Symptom und Angst*, les *Vorlesungen*
+  de 1917, et les cinq grands cas cliniques — confirmées absentes en qualité citable de
+  `gutenberg.org` comme de Wikisource DE (catalogue et API de recherche vérifiés, pas supposés).
 
 Restent à faire :
 
-1. **Achever le corpus freudien** : les œuvres tardives encore hors d'atteinte en qualité citable
-   (*Das Ich und das Es*, *Hemmung, Symptom und Angst*) et les grands textes non encore intégrés
-   (*Vorlesungen* 1917, *Zukunft einer Illusion*, *Unbehagen in der Kultur*, *Der Mann Moses*,
-   les grands cas cliniques...).
+1. **Achever le corpus freudien**, si un meilleur fac-similé ou une transcription Wikisource
+   apparaît un jour pour l'un des treize textes documentés en §5 de `SYNTHESE_FREUD.md` — sinon,
+   la limite est structurelle et documentée, pas une tâche en attente.
 2. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
    voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
    `courants` est l'instrument de cette question — construit et validé sur Freud seul, prêt à
-   recevoir un second auteur.
-3. ~~**Rendre le corpus consultable** sans relancer un script — recherche et export de citations~~
-   **Fait** : `bin/rechercher.py` — filtres combinables (concept, groupe, sous-concept, auteur,
-   œuvre, statut, fonction, mot-clé, fenêtre d'années), export `--json`/`--csv`.
+   recevoir un second auteur. C'est la prochaine étape la plus porteuse.

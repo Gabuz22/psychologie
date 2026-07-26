@@ -5,7 +5,7 @@
 > calcul (`python bin/analyser.py`) et remonter de n'importe quel chiffre jusqu'à la phrase
 > allemande qui le fonde. Là où une lecture humaine a été nécessaire, elle est signalée comme telle.
 >
-> Corpus : **12 œuvres, 1900-1933, 16 898 atomes** (une phrase = un atome).
+> Corpus : **20 œuvres, 1900-1933, 18 659 atomes** (une phrase = un atome).
 
 ---
 
@@ -17,21 +17,31 @@ que des atomes catégorisés.
 
 | Œuvre | Atomes | Ce qui la distingue |
 |---|---:|---|
-| *Die Traumdeutung* (1900) | 5 996 | **rêve**, désir |
-| *Neue Folge der Vorlesungen* (1933) | 2 119 | **topique**, famille, cure |
-| *Der Witz…* (1905) | 2 076 | **comique**, économie |
-| *Totem und Tabu* (1913) | 1 588 | **anthropologie**, famille |
-| *Zur Psychopathologie…* (1901) | 1 051 | **mémoire**, actes manqués |
-| *Drei Abhandlungen…* (1905) | 843 | **pulsion**, développement |
-| *Gradiva* (1907) | 756 | rêve, **esthétique**, conflit |
-| *Massenpsychologie…* (1921) | 699 | **social**, famille |
-| *Jenseits des Lustprinzips* (1920) | 545 | **pulsion**, topique, économie |
-| *Über Psychoanalyse* (1910) | 467 | **conflit**, cure |
-| *Das Unheimliche* (1919) | 421 | **esthétique** |
-| *Eine Teufelsneurose…* (1923) | 337 | **famille**, conflit |
+| *Die Traumdeutung* (1900) | 5 996 | **rêve**, désir, topique, mémoire |
+| *Neue Folge der Vorlesungen* (1933) | 2 119 | **topique**, conflit, rêve, cure |
+| *Der Witz…* (1905) | 2 076 | **comique**, rêve, économie |
+| *Totem und Tabu* (1913) | 1 588 | **anthropologie**, famille, actes manqués |
+| *Zur Psychopathologie…* (1901) | 1 051 | **mémoire**, actes manqués, cure, conflit |
+| *Drei Abhandlungen…* (1905) | 843 | **pulsion**, développement, économie, conflit |
+| *Gradiva* (1907) | 756 | rêve, conflit, **esthétique**, mémoire |
+| *Massenpsychologie…* (1921) | 699 | **social**, anthropologie, pulsion, topique |
+| *Kindheitserinnerung des Leonardo* (1910) | 670 | famille, développement, mémoire, désir |
+| *Jenseits des Lustprinzips* (1920) | 545 | **pulsion**, topique, économie, conflit |
+| *Über Psychoanalyse* (1910) | 467 | **conflit**, cure, topique, développement |
+| *Das Unheimliche* (1919) | 421 | **esthétique**, anthropologie, désir |
+| *Eine Teufelsneurose…* (1923) | 337 | **famille**, conflit, cure |
+| *Traum und Telepathie* (1922) | 287 | rêve, famille, développement, désir |
+| *Der Moses des Michelangelo* (1914) | 283 | économie |
+| *Zeitgemäßes über Krieg und Tod* (1915) | 278 | anthropologie |
+| *Eine Schwierigkeit der Psychoanalyse* (1917) | 90 | pulsion, topique, cure, conflit |
+| *Der Dichter und das Phantasieren* (1908) | 88 | **esthétique**, désir, développement |
+| *Vergänglichkeit* (1916) | 44 | esthétique, économie |
+| *Kindheitserinnerung aus »Dichtung und Wahrheit«* (1917) | 21 | famille, développement, rêve |
 
-**Douze sur douze.** Ce n'est pas un résultat sur Freud — c'est un contrôle de validité : une
-ontologie qui se tromperait de catégories ne retrouverait pas ces identités.
+**Vingt sur vingt.** Ce n'est pas un résultat sur Freud — c'est un contrôle de validité : une
+ontologie qui se tromperait de catégories ne retrouverait pas ces identités, y compris sur des
+textes de quelques dizaines d'atomes (*Vergänglichkeit*, *Kindheitserinnerung aus »Dichtung und
+Wahrheit«*) où le signal a beaucoup moins de matière pour se dégager.
 
 Deux observations méritent d'être notées, parce qu'elles ne se lisent pas dans les titres :
 
@@ -184,16 +194,16 @@ le retrouve seul. Le pic du Moi en 1921 tombe sur un livre intitulé *Massenpsyc
 ## 4. Ce que Freud dit de lui-même
 
 Un lexique déterministe peut **repérer** un passage où un auteur se corrige, s'objecte ou se cite ;
-il ne peut pas **établir** qu'il le fait. Les 183 candidats du corpus ont donc été lus en contexte
-et jugés un par un.
+il ne peut pas **établir** qu'il le fait. Les 192 candidats du corpus ont donc été lus en contexte
+et jugés un par un — y compris les 9 candidats apportés par les huit œuvres ajoutées ensuite.
 
 | Signal | Repérés | Confirmés | Précision |
 |---|---:|---:|---:|
-| Objection contre sa propre thèse | 108 | 61 | 0,56 |
-| Renvoi à son propre travail | 59 | 31 | 0,53 |
-| Révision de soi | 16 | 5 | 0,31 |
+| Objection contre sa propre thèse | 111 | 64 | 0,58 |
+| Renvoi à son propre travail | 62 | 33 | 0,53 |
+| Révision de soi | 19 | 5 | 0,26 |
 
-**97 passages opposables.** Quelques-uns méritent d'être lus :
+**102 passages opposables.** Quelques-uns méritent d'être lus :
 
 > « *Ich hatte damals die (später als unrichtig erkannte) Meinung, daß meine Aufgabe sich darin
 > erschöpfe, den Kranken den verborgenen Sinn ihrer Symptome mitzuteilen…* »
@@ -208,7 +218,13 @@ et jugés un par un.
 > « *Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht.* »
 > — Il annonce une objection qui menace ses propres conclusions, avant de l'exposer et d'y répondre.
 
-**Ce que les rejets apprennent.** Les 86 candidats écartés disent ce qu'un lexique ne peut pas
+> « *Ich habe einmal behauptet, daß solche Kindheitsszenen »Denkerinnerungen« sind, die zu einer
+> späteren Zeit herausgesucht, zusammengestellt, und dabei nicht selten verfälscht werden.* »
+> — *Traum und Telepathie* (1922). Renvoi explicite à sa propre théorie des **souvenirs-écrans**
+> (« *Über Deckerinnerungen* », 1899) — une œuvre que le corpus ne contient pas encore, mais dont
+> la trace reste lisible dans celle-ci.
+
+**Ce que les rejets apprennent.** Les 90 candidats écartés disent ce qu'un lexique ne peut pas
 voir : objections appartenant à un **personnage de roman** (Hanold chez Jensen) ou à une **histoire
 drôle** ; objections que Freud adresse **à d'autres** (Frazer, Trotter, Scherner) et non à lui-même ;
 renvois **prospectifs** (« cela sera traité ailleurs ») pris pour des auto-citations ; et de purs
@@ -248,9 +264,23 @@ pas ce que Freud en dit. La lecture reste nécessaire.
 **Une chronologie de densité n'est pas une histoire des idées.** Elle mesure la place d'un mot,
 pas l'évolution d'une pensée. Un concept peut être présent sans être nommé.
 
-**Deux œuvres majeures manquent.** *Das Ich und das Es* (1923) et *Hemmung, Symptom und Angst*
-(1926) ne sont disponibles dans aucune source libre de qualité citable. Leur absence pèse
-directement sur la chronologie de la seconde topique (§3).
+**Treize œuvres majeures manquent — recherche faite, pas supposée.** Huit œuvres ont rejoint le
+corpus (1908-1922, dont *Eine Kindheitserinnerung des Leonardo da Vinci*), toutes issues du vrai
+`gutenberg.org` (allemand, relu par Distributed Proofreaders — même exigence que le reste).
+Treize autres restent hors d'atteinte en qualité citable, vérifié par recherche systématique
+plutôt que supposé : ni `gutenberg.org` (dont le catalogue complet a été passé en revue — seules
+des traductions anglaises y figurent pour ces titres), ni Wikisource DE (dont l'API de recherche
+ne renvoie aucune page hébergée pour aucun des treize, seulement des entrées bibliographiques
+pointant vers des scans bruts d'archive.org) ne les proposent transcrits. Sept œuvres
+théoriques majeures — *Vorlesungen zur Einführung* (1917), *Das Ich und das Es* (1923),
+*Hemmung, Symptom und Angst* (1926), *Zur Geschichte der psychoanalytischen Bewegung* (1914),
+*Die Zukunft einer Illusion* (1927), *Das Unbehagen in der Kultur* (1930), *Der Mann Moses*
+(1939), *Abriss der Psychoanalyse* (1940) — et cinq grands cas cliniques (Dora, le petit Hans,
+l'Homme aux rats, Schreber, l'Homme aux loups). L'absence des deux premières pèse directement
+sur la chronologie de la seconde topique (§3). *Der Mann Moses* et *Abriss* ont une raison
+supplémentaire : publiés en 1939/1940, ils ne sont pas encore libres de droits aux États-Unis
+(règle de 95 ans après publication), où `gutenberg.org` est hébergé — seul Wikisource DE
+pourrait les proposer légalement, s'il les transcrivait un jour.
 
 ---
 

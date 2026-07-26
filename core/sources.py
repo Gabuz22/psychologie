@@ -244,6 +244,103 @@ OEUVRES = {
         "url": "https://www.gutenberg.org/ebooks/28220",
         "fac_simile": "https://archive.org/details/II_Freud_1920_Jenseits_k (1re éd., scan)",
     },
+    "kindheitserinnerung_leonardo": {
+        "fichier": "1910_kindheitserinnerung_leonardo.pg.txt",
+        "titre": "Eine Kindheitserinnerung des Leonardo da Vinci",
+        "titre_fr": "Un souvenir d'enfance de Léonard de Vinci",
+        "annee_oeuvre": 1910,
+        "annee_edition": 1910,     # PREMIÈRE édition — datation exacte
+        "edition": "1. Auflage (Schriften zur angewandten Seelenkunde, VII. Heft)",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Project Gutenberg #75455 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/75455",
+    },
+    "schwierigkeit_psychoanalyse": {
+        "fichier": "1917_schwierigkeit_psychoanalyse.pg.txt",
+        "titre": "Eine Schwierigkeit der Psychoanalyse",
+        "titre_fr": "Une difficulté de la psychanalyse",
+        "annee_oeuvre": 1917,
+        "annee_edition": 1917,     # 1re publication (Imago V, p. 1-7) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. V)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #29097 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/29097",
+    },
+    "moses_michelangelo": {
+        "fichier": "1914_moses_michelangelo.pg.txt",
+        "titre": "Der Moses des Michelangelo",
+        "titre_fr": "Le Moïse de Michel-Ange",
+        "annee_oeuvre": 1914,
+        "annee_edition": 1914,     # 1re publication (Imago III, p. 15-36) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. III)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #30762 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/30762",
+        # PUBLIÉ ANONYME EN 1914 : la page de titre porte « Von *** », et une note de la
+        # rédaction d'Imago précise seulement que « der ihr bekannte Verfasser analytischen
+        # Kreisen nahe steht » (l'auteur, connu de la rédaction, est proche des cercles
+        # analytiques) — sans le nommer. Freud n'a reconnu la paternité du texte qu'en 1924,
+        # dans ses Gesammelte Schriften. L'attribution à Freud est établie de longue date par
+        # la recherche freudienne (confirmée par sa propre correspondance et son inclusion dans
+        # ses œuvres complètes) : elle n'est donc pas déclarée par CE texte lui-même, à la
+        # différence de tout le reste du corpus, qui se signe. Fait à savoir, pas à cacher.
+        "attribution_non_signee": True,
+    },
+    "dichter_phantasieren": {
+        "fichier": "1908_dichter_phantasieren.pg.txt",
+        "titre": "Der Dichter und das Phantasieren",
+        "titre_fr": "Le créateur littéraire et la fantaisie",
+        "annee_oeuvre": 1908,
+        "annee_edition": 1908,     # 1re publication (Neue Revue I, p. 716-724) — datation exacte
+        "edition": "1. Auflage (Neue Revue, Bd. I, 1907/08)",
+        "editeur": "Neue Revue, Wien",
+        "source": "Project Gutenberg #28863 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/28863",
+    },
+    "zeitgemaesses_krieg_tod": {
+        "fichier": "1915_zeitgemaesses_krieg_tod.pg.txt",
+        "titre": "Zeitgemäßes über Krieg und Tod",
+        "titre_fr": "Considérations actuelles sur la guerre et sur la mort",
+        "annee_oeuvre": 1915,
+        "annee_edition": 1915,     # 1re publication (Imago IV, p. 1-21) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. IV)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #29941 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/29941",
+    },
+    "traum_telepathie": {
+        "fichier": "1922_traum_telepathie.pg.txt",
+        "titre": "Traum und Telepathie",
+        "titre_fr": "Rêve et télépathie",
+        "annee_oeuvre": 1922,
+        "annee_edition": 1922,     # 1re publication (Imago VIII, p. 1-22) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. VIII)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #31560 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/31560",
+    },
+    "vergaenglichkeit": {
+        "fichier": "1916_vergaenglichkeit.pg.txt",
+        "titre": "Vergänglichkeit",
+        "titre_fr": "Éphémère destinée",
+        "annee_oeuvre": 1916,
+        "annee_edition": 1916,     # 1re publication — datation exacte
+        "edition": "1. Auflage (« Das Land Goethes 1914-1916 », recueil du Berliner Goethebund)",
+        "editeur": "Deutsche Verlags-Anstalt, Stuttgart/Berlin",
+        "source": "Project Gutenberg #29514 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/29514",
+    },
+    "kindheitserinnerung_dichtung_wahrheit": {
+        "fichier": "1917_kindheitserinnerung_dichtung_wahrheit.pg.txt",
+        "titre": "Eine Kindheitserinnerung aus »Dichtung und Wahrheit«",
+        "titre_fr": "Un souvenir d'enfance tiré de « Poésie et vérité »",
+        "annee_oeuvre": 1917,
+        "annee_edition": 1917,     # 1re publication (Imago V, p. 49-57) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. V)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #29946 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/29946",
+    },
 }
 
 # Domaine public : Freud est mort en 1939 → libre de droits (vie + 70 ans) depuis 2010, et les

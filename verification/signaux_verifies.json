@@ -4,7 +4,7 @@
   "objet": "Verdicts humains/LLM sur les signaux que le lexique ne peut que SIGNALER (révision, objection, auto-citation). Un marqueur lexical dit où regarder ; seule une lecture en contexte tranche.",
   "protocole": "Chaque candidat est lu avec son contexte immédiat. Verdict « confirme » seulement si l'énoncé est une prise de position de FREUD sur SON PROPRE travail antérieur — ni un personnage de fiction, ni un patient, ni un autre auteur, ni une correction d'imprimerie.",
   "verifie_par": "Claude (Opus 4.8), lecture en contexte, 2026-07-26",
-  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un.",
+  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un. Extension du corpus (2026-07-26) : 9 nouveaux candidats sur les 8 œuvres ajoutées (Leonardo, Moses, Dichter und Phantasieren, Zeitgemäßes über Krieg und Tod absent de candidats, Traum und Telepathie, Kindheitserinnerung aus Dichtung und Wahrheit) — lus et jugés un par un, même protocole.",
   "verdicts_possibles": {
    "confirme": "signal réel — l'atome dit ce que le marqueur laissait espérer",
    "rejete": "faux positif — le marqueur a été déclenché par autre chose",
@@ -1172,6 +1172,60 @@
    "signal": "revision",
    "verdict": "rejete",
    "motif": "« er sich in der Datierung der Verschreibungen irrte » : c'est le rédacteur du manuscrit ancien qui s'est trompé de date, indice de sa double rédaction. Une erreur d'un tiers, non une révision de Freud."
+  },
+  "686693eccadb62d3": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Pas de renvoi à un travail antérieur de Freud : décrit un constat général (la méfiance de l'enfant envers la fable de la cigogne) sans « ich habe... gesagt/behauptet ». Le marqueur d'auto-citation a été déclenché par la forme « wir haben erfahren », pas par un renvoi réel.",
+   "ancien_id": "kindheitserinnerung_leonardo:a112"
+  },
+  "8e53ce1123a1481f": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Wir wissen, daß wir der Einwendung zu begegnen haben » — Freud nomme et anticipe explicitement une objection à SA propre thèse (l'homosexualité de Leonardo lue dans son rapport à ses élèves), qu'il s'apprête à réfuter dans les phrases suivantes.",
+   "ancien_id": "kindheitserinnerung_leonardo:a288"
+  },
+  "1991a7b86871b8f5": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "« Sie mußten sich von Thode berichtigen lassen » — ce sont D'AUTRES interprètes de la statue qui sont corrigés par l'historien d'art Thode, pas Freud qui révise sa propre position. Même défaut qu'ailleurs : un tiers qui se corrige n'est pas une révision.",
+   "ancien_id": "moses_michelangelo:a193"
+  },
+  "8e9ee445a5b63253": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "Aucune position antérieure de Freud n'est révisée ici : la phrase décrit un effet du plaisir esthétique (« Vorwurf »/« Schämen » = reproche/honte du lecteur, pas de Freud). Faux positif du marqueur de révision.",
+   "ancien_id": "dichter_phantasieren:a86"
+  },
+  "70082d109f674277": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Unterbrechen Sie mich jetzt nicht mit dem Einwand… » — Freud formule et retarde explicitement une objection anticipée à son propre argument (l'absence de preuve négative), adressée à son auditoire de conférence.",
+   "ancien_id": "traum_telepathie:a18"
+  },
+  "a24f81ce7c6de9af": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Ich hoffe, Sie werden das zugeben, mir aber bald einwenden… » — Freud anticipe explicitement l'objection de son auditoire à sa propre distinction entre télépathie et rêve, et l'énonce lui-même avant d'y répondre.",
+   "ancien_id": "traum_telepathie:a127"
+  },
+  "dfc4ecb61e10f94f": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "Citation d'un patient rapportant sa propre expérience biographique (« Ich bin zweimal verlobt gewesen… ») dans un cas clinique que Freud rapporte : c'est le PATIENT qui se corrige sur un détail de son récit, pas Freud sur une thèse théorique.",
+   "ancien_id": "traum_telepathie:a184"
+  },
+  "20c470c49dffe98d": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Ich habe einmal behauptet, daß solche Kindheitsszenen »Denkerinnerungen« sind… » — renvoi explicite et nommé à une thèse antérieure de Freud lui-même (les souvenirs-écrans, sujet de son article de 1899 « Über Deckerinnerungen »).",
+   "ancien_id": "traum_telepathie:a229"
+  },
+  "e4698c3aa5b4aef7": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Ich habe es aber schon an anderer Stelle ausgesprochen » — formule d'auto-citation canonique, suivie de la thèse effectivement reprise (l'enfant préféré de sa mère garde un sentiment de conquérant).",
+   "ancien_id": "kindheitserinnerung_dichtung_wahrheit:a19"
   }
  }
 }
