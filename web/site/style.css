@@ -92,6 +92,20 @@ button.secondaire { background: transparent; color: var(--accent);
 .carte .poids { color: var(--accent); font-size: .85rem; }
 .carte .membres { color: var(--gris); font-size: .85rem; margin-top: .35rem; }
 
+/* assistant */
+#chat-messages { display: flex; flex-direction: column; gap: .7rem; margin: 1rem 0;
+                 max-height: 32rem; overflow-y: auto; }
+.msg { max-width: 42rem; padding: .6rem .9rem; border-radius: 10px; line-height: 1.5; }
+.msg-utilisateur { align-self: flex-end; background: var(--accent); color: #fff; }
+.msg-assistant { align-self: flex-start; background: var(--carte); border: 1px solid var(--filet); }
+.msg-systeme { align-self: center; color: var(--gris); font-size: .85rem; font-style: italic; }
+.msg-outils { font-size: .78rem; color: var(--gris); margin-top: .4rem;
+              border-top: 1px dashed var(--filet); padding-top: .3rem; }
+#form-chat .actions { gap: .6rem; }
+#chat-saisie { flex: 1; min-width: 0; }
+.point-suspension::after { content: "…"; animation: clignote 1.2s infinite; }
+@keyframes clignote { 50% { opacity: .3; } }
+
 /* dossier de grappe */
 .retour { color: var(--accent); text-decoration: none; font-weight: 600; font-size: .9rem; }
 .retour:hover { text-decoration: underline; }

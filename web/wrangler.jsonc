@@ -11,6 +11,10 @@
 	// que createMcpHandler, côté serveur) — substituée par un stub pour que l'empaquetage
 	// résolve l'import sans installer un paquet inutile. Voir worker/_stub_ai.js.
 	"alias": { "ai": "./worker/_stub_ai.js" },
+	// GROQ_API_KEY (secret, non versionné — voir DEPLOIEMENT.md) manque volontairement ici :
+	// posé via `wrangler secret put`. GROQ_MODEL n'est PAS sensible, donc une simple var —
+	// changer de modèle ne demande qu'une édition de ce fichier, pas un nouveau secret.
+	"vars": { "GROQ_MODEL": "llama-3.3-70b-versatile" },
 	"assets": {
 		"directory": "site",
 		// Les routes /api/* n'ont pas de fichier statique : elles tombent sur le Worker.

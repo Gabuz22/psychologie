@@ -261,6 +261,72 @@ async function afficherLecture() {
   }
 }
 
+/* -------------------------------------------------------------------------------- assistant */
+
+const conversation = [];   // {role: "user"|"assistant", content}
+
+function ajouterMessage(role, texteMsg, outilsAppeles) {
+  const zone = $("#chat-messages");
+  const div = document.createElement("div");
+  div.className = "msg " + (role === "user" ? "msg-utilisateur"
+    : role === "systeme" ? "msg-systeme" : "msg-assistant");
+  const p = document.createElement("p");
+  p.style.margin = "0";
+  p.style.whiteSpace = "pre-wrap";
+  p.textContent = texteMsg;                    // jamais innerHTML sur un texte de réponse LLM
+  div.appendChild(p);
+  if (outilsAppeles?.length) {
+    const outils = document.createElement("div");
+    outils.className = "msg-outils";
+    outils.textContent = "Outils appelés : " + outilsAppeles
+      .map((o) => `${o.nom}(${Object.entries(o.arguments || {}).map(([k, v]) => `${k}=${v}`).join(", ")})`)
+      .join(" · ");
+    div.appendChild(outils);
+  }
+  zone.appendChild(div);
+  zone.scrollTop = zone.scrollHeight;
+  return div;
+}
+
+async function envoyerChat(question) {
+  if (!question.trim()) return;
+  ajouterMessage("user", question);
+  conversation.push({ role: "user", content: question });
+
+  const attente = ajouterMessage("systeme", "réflexion en cours");
+  attente.querySelector("p").classList.add("point-suspension");
+  $("#chat-saisie").disabled = true;
+
+  try {
+    const r = await fetch("/api/chat", {
+      method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ messages: conversation }),
+    });
+    const data = await r.json();
+    attente.remove();
+    if (!r.ok) {
+      ajouterMessage("systeme", "erreur : " + (data.erreur || r.statusText));
+      return;
+    }
+    conversation.push({ role: "assistant", content: data.reponse });
+    ajouterMessage("assistant", data.reponse || "(réponse vide)", data.outils_appeles);
+  } catch (e) {
+    attente.remove();
+    ajouterMessage("systeme", "erreur réseau : " + e.message);
+  } finally {
+    $("#chat-saisie").disabled = false;
+    $("#chat-saisie").focus();
+  }
+}
+
+$("#form-chat").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const champ = $("#chat-saisie");
+  const question = champ.value;
+  champ.value = "";
+  envoyerChat(question);
+});
+
 /* --------------------------------------------------------------------------- démarrage */
 
 function gererHash() {

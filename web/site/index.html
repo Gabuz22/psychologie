@@ -18,6 +18,7 @@
 </header>
 
 <nav>
+  <a href="#assistant" data-vue="assistant">Assistant</a>
   <a href="#recherche" data-vue="recherche">Recherche</a>
   <a href="#courants" data-vue="courants">Courants internes</a>
   <a href="#chronologie" data-vue="chronologie">Chronologie</a>
@@ -26,6 +27,24 @@
 </nav>
 
 <main>
+
+<section id="assistant">
+  <h2>Poser une question au corpus</h2>
+  <p class="note">Un assistant qui ne répond JAMAIS « de mémoire » : chaque question déclenche
+    un appel réel aux mêmes outils que la recherche ci-dessous — le modèle met en prose ce que
+    le corpus a retourné, jamais autre chose. Les outils appelés sont affichés sous chaque
+    réponse, pour vérifier. Pour brancher son propre assistant IA (Claude, etc.) directement sur
+    le corpus : <a href="https://github.com/Gabuz22/psychologie/blob/main/web/DEPLOIEMENT.md"
+    rel="noopener">serveur MCP</a>.</p>
+  <div id="chat-messages"></div>
+  <form id="form-chat">
+    <div class="actions">
+      <input id="chat-saisie" type="text" placeholder="ex. Que dit Freud du symbolisme du rêve ?"
+             maxlength="600" autocomplete="off">
+      <button type="submit">Envoyer</button>
+    </div>
+  </form>
+</section>
 
 <section id="recherche">
   <h2>Rechercher dans le corpus</h2>

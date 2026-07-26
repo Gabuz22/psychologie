@@ -10,6 +10,7 @@
  */
 import * as donnees from "./donnees.js";
 import { repondreMcp } from "./mcp.js";
+import { repondreChat } from "./chat.js";
 
 const JSON_HEADERS = {
   "content-type": "application/json; charset=utf-8",
@@ -58,6 +59,10 @@ export default {
       case "/api/grappe":      return route(() => donnees.grappeDetail(env, p));
       case "/api/chronologie": return route(() => donnees.chronologieConcept(env, p));
       case "/api/lire":        return route(() => donnees.lireOeuvre(env, p));
+      case "/api/chat":
+        if (requete.method !== "POST")
+          return json({ erreur: "POST requis" }, 405, false);
+        return route(() => repondreChat(requete, env));
       default:
         if (url.pathname.startsWith("/api/"))
           return json({ erreur: "route inconnue : " + url.pathname }, 404, false);

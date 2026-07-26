@@ -92,6 +92,31 @@ porte sa règle de datation, le filtre par année s'appuie sur la fenêtre de ch
 densité des grappes se restreint à Sigmund Freud (comme `AgentCourants`), la chronologie compte
 tous les atomes de l'œuvre y compris ceux d'Otto Rank (comme `AgentChronologie`).
 
+## L'assistant du site — action manuelle requise (clé Groq)
+
+`/api/chat` (section « Assistant » du site) répond en langage naturel, mais n'utilise le LLM
+QUE pour choisir quels outils appeler et mettre leur résultat en prose — jamais pour affirmer
+un fait sur Freud de son propre chef (voir `worker/chat.js` et `worker/outils.js`, la même
+liste de six outils que le serveur MCP). Sans clé, la route répond une erreur claire (503),
+le reste du site continue de fonctionner normalement.
+
+1. Créer un compte sur [console.groq.com](https://console.groq.com) et générer une clé API
+   (gratuit).
+2. Depuis `web/`, poser le secret (la clé ne transite jamais par une conversation ni par
+   `wrangler.jsonc`, elle est demandée de façon sécurisée) :
+
+```bash
+wrangler secret put GROQ_API_KEY
+```
+
+3. Redéployer : `wrangler deploy` (les secrets survivent aux redéploiements suivants, cette
+   étape n'est à refaire qu'une fois).
+
+**Changer de modèle** si Groq retire celui utilisé (`llama-3.3-70b-versatile` par défaut —
+leçon retenue de Gemini dans Gabriel Virtuel, les modèles gratuits ne durent pas toujours) :
+éditer `GROQ_MODEL` dans `wrangler.jsonc:vars` (pas un secret, une simple variable — le nom du
+modèle n'a rien de confidentiel) puis `wrangler deploy`.
+
 ## Le serveur MCP — le corpus comme outil pour un assistant IA
 
 `/mcp` expose les MÊMES données que l'API REST (`worker/donnees.js`, une seule logique de
