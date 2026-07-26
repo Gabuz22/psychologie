@@ -101,6 +101,20 @@ button.secondaire { background: transparent; color: var(--accent);
 .msg-systeme { align-self: center; color: var(--gris); font-size: .85rem; font-style: italic; }
 .msg-outils { font-size: .78rem; color: var(--gris); margin-top: .4rem;
               border-top: 1px dashed var(--filet); padding-top: .3rem; }
+.verif { font-size: .78rem; margin-top: .5rem; padding: .15rem .5rem; border-radius: 99px;
+         display: inline-block; cursor: help; }
+.verif-verifie, .verif-corrige { background: var(--accent-doux); color: var(--accent); }
+.verif-reserves { background: #fdf1d6; color: #8a5a00; border: 1px solid #e5c88a; }
+@media (prefers-color-scheme: dark) {
+  .verif-reserves { background: #3d2f14; color: #e8bd6a; border-color: #6b5528; }
+}
+.verif-probleme { font-size: .78rem; color: #8a5a00; margin-top: .3rem;
+                  border-left: 3px solid #e5c88a; padding-left: .6rem; }
+@media (prefers-color-scheme: dark) { .verif-probleme { color: #e8bd6a; } }
+.sources { margin-top: .6rem; font-size: .85rem; }
+.sources summary { cursor: pointer; color: var(--gris); }
+.sources summary:hover { color: var(--accent); }
+.sources .citation { margin: .5rem 0; }
 #form-chat .actions { gap: .6rem; }
 #chat-saisie { flex: 1; min-width: 0; }
 .point-suspension::after { content: "…"; animation: clignote 1.2s infinite; }

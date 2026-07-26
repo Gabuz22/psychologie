@@ -100,6 +100,29 @@ un fait sur Freud de son propre chef (voir `worker/chat.js` et `worker/outils.js
 liste de six outils que le serveur MCP). Sans clé, la route répond une erreur claire (503),
 le reste du site continue de fonctionner normalement.
 
+**Ce qui distingue cet assistant d'un chatbot ordinaire : la vérification déterministe**
+(`worker/verification.js`, 14 tests — `npm test` depuis `web/`). Le function-calling garantit
+que le modèle *appelle* les bons outils ; il ne garantit pas qu'il reste *fidèle* à leurs
+résultats en rédigeant. Chaque réponse est donc confrontée aux données réellement retournées,
+**sans aucun modèle de langage dans ce contrôle** (le faire juger par un second LLM ne ferait
+que déplacer le problème) :
+
+| Vérifié mécaniquement | Comment |
+|---|---|
+| citations allemandes | présentes ou non dans un atome retourné — comparaison réduite aux lettres, comme `core/collation.py`, pour ignorer ponctuation, diacritiques, ß, retours à la ligne et marqueurs d'emphase Gutenberg (`_Stekel_`) |
+| densités en ‰ | présentes ou non parmi les valeurs rendues par `chronologie`/`grappe` |
+| identifiants d'atomes | existants ou non parmi ceux retournés |
+| réponse longue sans aucun appel d'outil | signalée comme « répondue de mémoire » |
+
+En cas d'écart, le modèle est **renvoyé à ses propres sources** avec la liste exacte des
+problèmes, puis re-vérifié. Ce qui résiste est **affiché en clair à l'utilisateur** (statut
+« ⚠ réserves ») plutôt que tu — même doctrine que les signaux « à confirmer » du corpus. Les
+citations brutes rendues par les outils sont dépliables sous chaque réponse, pour recouper.
+
+Ce que le contrôle NE couvre PAS, et le site le dit : la prose d'analyse elle-même n'est pas
+mécaniquement vérifiable. « ✓ vérifié » signifie « tout ce qui était vérifiable l'a été »,
+jamais « l'analyse est juste ».
+
 1. Créer un compte sur [console.groq.com](https://console.groq.com) et générer une clé API
    (gratuit).
 2. Depuis `web/`, poser le secret (la clé ne transite jamais par une conversation ni par

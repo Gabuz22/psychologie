@@ -265,7 +265,23 @@ async function afficherLecture() {
 
 const conversation = [];   // {role: "user"|"assistant", content}
 
-function ajouterMessage(role, texteMsg, outilsAppeles) {
+/* Statut de la vérification déterministe. « Vérifié » ne dit PAS que l'analyse est juste —
+ * seulement que les citations, densités et identifiants produits se retrouvent réellement dans
+ * les données. La prose d'interprétation n'est pas mécaniquement vérifiable, et l'infobulle
+ * le dit plutôt que de laisser croire à une garantie plus large. */
+const STATUTS_VERIF = {
+  verifie: { texte: "✓ vérifié",
+             titre: "Citations, densités et identifiants confrontés aux données retournées par "
+                  + "les outils : tous attestés. Ne garantit pas la justesse de l'analyse." },
+  corrige: { texte: "✓ vérifié après correction",
+             titre: "Un premier jet contenait des éléments non attestés ; le modèle a été "
+                  + "renvoyé à ses sources et sa réponse corrigée passe les contrôles." },
+  reserves: { texte: "⚠ réserves",
+              titre: "Des éléments n'ont pas pu être confirmés dans les données retournées, "
+                   + "même après correction. Ils sont listés ci-dessous." },
+};
+
+function ajouterMessage(role, texteMsg, extras = {}) {
   const zone = $("#chat-messages");
   const div = document.createElement("div");
   div.className = "msg " + (role === "user" ? "msg-utilisateur"
@@ -275,6 +291,30 @@ function ajouterMessage(role, texteMsg, outilsAppeles) {
   p.style.whiteSpace = "pre-wrap";
   p.textContent = texteMsg;                    // jamais innerHTML sur un texte de réponse LLM
   div.appendChild(p);
+
+  const { outilsAppeles, verification, sources } = extras;
+
+  if (verification) {
+    const s = STATUTS_VERIF[verification.statut] || STATUTS_VERIF.reserves;
+    const badge = document.createElement("div");
+    badge.className = "verif verif-" + verification.statut;
+    badge.title = s.titre;
+    const c = verification.controles || {};
+    const compte = [];
+    if (c.citations_verifiees) compte.push(`${c.citations_verifiees} citation(s)`);
+    if (c.pour_mille_verifies) compte.push(`${c.pour_mille_verifies} densité(s)`);
+    if (c.identifiants_verifies) compte.push(`${c.identifiants_verifies} identifiant(s)`);
+    badge.textContent = s.texte + (compte.length ? ` — ${compte.join(", ")} contrôlée(s)` : "");
+    div.appendChild(badge);
+
+    for (const pb of verification.problemes || []) {
+      const alerte = document.createElement("div");
+      alerte.className = "verif-probleme";
+      alerte.textContent = (pb.extrait ? `« ${pb.extrait} » — ` : "") + pb.motif;
+      div.appendChild(alerte);
+    }
+  }
+
   if (outilsAppeles?.length) {
     const outils = document.createElement("div");
     outils.className = "msg-outils";
@@ -283,6 +323,19 @@ function ajouterMessage(role, texteMsg, outilsAppeles) {
       .join(" · ");
     div.appendChild(outils);
   }
+
+  // Les citations brutes rendues par les outils — la réponse en prose n'est jamais la seule
+  // chose montrée : le lecteur peut recouper sans quitter la page.
+  if (sources?.length) {
+    const details = document.createElement("details");
+    details.className = "sources";
+    const resume = document.createElement("summary");
+    resume.textContent = `Sources retournées par les outils (${sources.length})`;
+    details.appendChild(resume);
+    for (const c of sources) details.appendChild(rendreCitation(c));
+    div.appendChild(details);
+  }
+
   zone.appendChild(div);
   zone.scrollTop = zone.scrollHeight;
   return div;
@@ -309,7 +362,11 @@ async function envoyerChat(question) {
       return;
     }
     conversation.push({ role: "assistant", content: data.reponse });
-    ajouterMessage("assistant", data.reponse || "(réponse vide)", data.outils_appeles);
+    ajouterMessage("assistant", data.reponse || "(réponse vide)", {
+      outilsAppeles: data.outils_appeles,
+      verification: data.verification,
+      sources: data.sources,
+    });
   } catch (e) {
     attente.remove();
     ajouterMessage("systeme", "erreur réseau : " + e.message);

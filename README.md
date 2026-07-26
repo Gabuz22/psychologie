@@ -274,10 +274,13 @@ fenêtres de datation). Mise à jour du site après un changement de corpus : `w
 **Le corpus comme outil pour une IA** — deux façades, une seule logique de requête
 (`worker/donnees.js`) et une seule liste d'outils (`worker/outils.js`) :
 - **Assistant du site** (section « Assistant ») — répond en langage naturel, mais le LLM ne
-  sert QU'À choisir quels outils appeler et mettre leurs résultats en prose : chaque
-  affirmation s'appuie sur un atome réellement retourné, cité avec sa règle de datation. Jamais
-  une réponse « de mémoire » sur Freud. Nécessite une clé Groq (gratuite) posée en secret
-  Cloudflare — voir `web/DEPLOIEMENT.md`.
+  sert QU'À choisir quels outils appeler et mettre leurs résultats en prose. Surtout, chaque
+  réponse subit une **vérification déterministe** (`web/worker/verification.js`, 14 tests) :
+  citations allemandes, densités en ‰ et identifiants d'atomes sont confrontés aux données
+  réellement retournées — **sans aucun modèle de langage dans ce contrôle**. Un écart renvoie
+  le modèle à ses sources pour correction ; ce qui résiste est affiché en clair plutôt que tu,
+  comme les signaux « à confirmer » du corpus. Nécessite une clé Groq (gratuite) posée en
+  secret Cloudflare — voir `web/DEPLOIEMENT.md`.
 - **Serveur MCP** (`/mcp`) — un chercheur branche son propre assistant (Claude Desktop, Claude
   Code…) directement sur le corpus, sans passer par le site : `claude mcp add --transport http
   corpus-freud https://psychologie.guzan99.workers.dev/mcp`.
