@@ -58,6 +58,9 @@ class Corpus:
         return {
             "id": atome["id"],
             "texte": atome["texte"][:longueur],
+            # Un volume peut contenir des contributions d'autres auteurs (l'appendice d'Otto Rank
+            # dans la Traumdeutung) : la citation dit QUI écrit, sinon elle attribue à tort.
+            "auteur": atome.get("auteur", "Sigmund Freud"),
             "oeuvre": meta["oeuvre"],
             "chapitre": ("%s. %s" % (ch["numero"], ch["titre"])) if ch else None,
             "position": [atome["debut"], atome["fin"]],

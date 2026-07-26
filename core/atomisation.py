@@ -49,6 +49,35 @@ def chapitres(texte):
     return out
 
 
+def contributions(texte, meta, reperes):
+    """Régions du texte écrites par QUELQU'UN D'AUTRE que l'auteur du volume.
+
+    Déclarées dans le registre des œuvres (voir `sources.OEUVRES[...]["contributions"]`) et
+    localisées ici par leur marqueur de début, jusqu'au chapitre indiqué. Sans cela, l'appendice
+    d'Otto Rank dans la 4e édition de la Traumdeutung — 7 % du volume — passerait pour du Freud,
+    et toute mesure d'auteur mélangerait deux plumes.
+    """
+    out = []
+    for c in meta.get("contributions", []):
+        debut = texte.find(c["debut"])
+        if debut < 0:
+            continue
+        fin = len(texte)
+        for pos, numero, _titre in reperes:
+            if numero == c.get("jusqu_au_chapitre") and pos > debut:
+                fin = pos
+                break
+        out.append({"auteur": c["auteur"], "debut": debut, "fin": fin})
+    return out
+
+
+def _auteur_de(position, regions, defaut):
+    for r in regions:
+        if r["debut"] <= position < r["fin"]:
+            return r["auteur"]
+    return defaut
+
+
 def _chapitre_de(position, reperes):
     """Chapitre courant pour une position donnée (le dernier repère franchi)."""
     courant = None
@@ -94,6 +123,7 @@ def _atomiser(cle_oeuvre):
     texte, meta = charge["texte"], charge["meta"]
     phrases = segmenter(texte)
     reperes = chapitres(texte)
+    regions = contributions(texte, meta, reperes)
     attestation = meta["datation"]
 
     atomes = []
@@ -109,6 +139,8 @@ def _atomiser(cle_oeuvre):
             "fin": p["fin"],
             "nb_mots": p["nb_mots"],
             "chapitre": _chapitre_de(p["debut"], reperes),
+            # Qui écrit RÉELLEMENT cette phrase — un volume peut contenir des contributions.
+            "auteur": _auteur_de(p["debut"], regions, "Sigmund Freud"),
             "fonctions": fonctions,
             # Signaux repérés mais NON ÉTABLIS (révision, objection, auto-citation) : ils forment
             # la liste de travail à vérifier, jamais des faits acquis. Voir lexique.FIABILITE.
@@ -153,6 +185,8 @@ def controler(atomes, phrases, texte):
         "qualifies": sum(1 for a in atomes if not a["non_qualifie"]),
         "non_qualifies": sum(1 for a in atomes if a["non_qualifie"]),
         "avec_chapitre": sum(1 for a in atomes if a["chapitre"]),
+        "par_auteur": {a: sum(1 for x in atomes if x["auteur"] == a)
+                       for a in sorted({x["auteur"] for x in atomes})},
     }
 
 

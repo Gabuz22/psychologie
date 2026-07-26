@@ -100,8 +100,19 @@ FONCTIONS = [
         "aide": "Freud met en scène une contre-objection AVANT d'y répondre. Rare, très informatif.",
         "fiabilite": "a_confirmer",
         "mesure_traumdeutung": 27,
-        "marqueurs": [r"\beinwand", r"\beinwendung", r"\beinwenden\b", r"\bman koennte sagen\b",
-                      r"\bdagegen spricht\b", r"\bfreilich\b"],
+        # « freilich » a été RETIRÉ après lecture : c'est un adverbe concessif (« certes », « il est
+        # vrai que »), pas une objection mise en scène. Il produisait 60 candidats sur 177, dont
+        # aucun des dix lus n'était une contre-objection — et dans « Gradiva » il apparaissait
+        # jusque dans les dialogues cités du roman. Même défaut que « nicht mehr » pour la
+        # révision : un mot fréquent et vague noie le signal rare et précis.
+        # Deux homonymies écartées, découvertes en lisant les candidats un par un :
+        #   • « einwandfrei » = irréprochable, sans défaut — un tout autre mot (11 occurrences,
+        #     dont « eine einwandfreie Deutung », qui est un ÉLOGE, pas une objection) ;
+        #   • « einwandern » = immigrer — dans Totem und Tabu, les âmes qui « migrent » dans
+        #     d'autres personnes se retrouvaient comptées comme objections.
+        "marqueurs": [r"\beinwand(?!frei|ern)", r"\beinwendung", r"\beinwenden\b",
+                      r"\bman koennte sagen\b", r"\bman kann einwenden\b",
+                      r"\bdagegen spricht\b", r"\bdagegen laesst sich\b"],
     },
     {
         "id": "revision",

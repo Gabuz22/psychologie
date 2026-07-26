@@ -84,6 +84,14 @@ OEUVRES = {
         "source": "Project Gutenberg #40739 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/40739",
         "fac_simile": "https://archive.org/details/Freud_1900_Die_Traumdeutung_k (1re éd., scan)",
+        # TOUT CE LIVRE N'EST PAS DE FREUD. Sa page de titre l'annonce — « MIT BEITRÄGEN VON
+        # Dr. OTTO RANK » — et le texte le confirme par une note : « (183) Von Dr. Otto Rank ».
+        # Il s'agit d'un APPENDICE entier (« Traum und Dichtung », « Traum und Mythus »), inséré
+        # entre les chapitres VI et VII : environ 100 000 signes, soit 7 % du volume.
+        # Sans cette déclaration, ces pages étaient attribuées à Freud — et des lecteurs l'ont
+        # décelé en trouvant des passages qui parlent de « der Freudschen Auffassung » à la
+        # TROISIÈME personne. Une analyse d'auteur qui ignore cela mesure deux plumes pour une.
+        "contributions": [{"auteur": "Otto Rank", "debut": "Anhang(183)", "jusqu_au_chapitre": "VII"}],
     },
     "drei_abhandlungen": {
         "fichier": "1905_drei_abhandlungen.pg.txt",

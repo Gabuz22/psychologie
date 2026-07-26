@@ -86,6 +86,31 @@ class TestLexique(unittest.TestCase):
         self.assertIn("objection", lexique.fonctions_de(
             "Hier verlangt aber ein Einwand gehört zu werden."))
 
+    def test_homonymes_de_einwand_ecartes(self):
+        """« einwandfrei » (irréprochable) et « einwandern » (immigrer) ne sont pas des objections.
+
+        Trouvés en lisant les candidats un par un : « eine einwandfreie Deutung » est un ÉLOGE, et
+        dans Totem und Tabu les âmes qui « migrent » dans d'autres personnes étaient comptées
+        comme objections.
+        """
+        for phrase in ("Das ist eine durchaus einwandfreie Deutung des Kollegen.",
+                       "Die Seelen können in andere Menschen einwandern."):
+            self.assertNotIn("objection", lexique.fonctions_de(phrase), phrase)
+        self.assertIn("objection", lexique.fonctions_de(
+            "Der naheliegende Einwand trifft unsere Auffassung."))
+
+    def test_freilich_nest_pas_une_objection(self):
+        """« freilich » = « certes », un concessif — pas une objection mise en scène.
+
+        Mesuré : il produisait 60 candidats sur 177, dont aucun des dix lus n'était une
+        contre-objection ; dans « Gradiva » il apparaissait jusque dans les dialogues du roman.
+        Même défaut que « nicht mehr » pour la révision : un mot fréquent noie le signal rare.
+        """
+        self.assertNotIn("objection", lexique.fonctions_de(
+            "Ein Zuviel von elterlicher Zärtlichkeit wird freilich schädlich werden."))
+        self.assertIn("objection", lexique.fonctions_de(
+            "Man wird gegen diese Auffassung einwenden, daß sie zu weit geht."))
+
     def test_revision(self):
         """Le signal d'évolution théorique — la raison d'être du projet."""
         self.assertIn("revision", lexique.fonctions_de(
@@ -314,6 +339,26 @@ class TestAtomisation(unittest.TestCase):
         idx = self.r["index"]
         total_statuts = sum(idx["par_statut"].values())
         self.assertEqual(total_statuts, len(self.r["atomes"]))
+
+    def test_appendice_de_rank_nest_pas_attribue_a_freud(self):
+        """La 4e éd. de la Traumdeutung contient un appendice d'OTTO RANK — 7 % du volume.
+
+        Sa page de titre l'annonce (« MIT BEITRÄGEN VON Dr. OTTO RANK ») et le texte le confirme
+        (« (183) Von Dr. Otto Rank »). Sans déclaration, ces pages passaient pour du Freud — le
+        défaut a été décelé par des passages parlant de « der Freudschen Auffassung » à la
+        TROISIÈME personne. Une analyse d'auteur qui l'ignore mesure deux plumes pour une.
+        """
+        r = atomisation.atomiser("traumdeutung")
+        par_auteur = r["controles"]["par_auteur"]
+        self.assertIn("Otto Rank", par_auteur)
+        self.assertGreater(par_auteur["Otto Rank"], 200)
+        self.assertGreater(par_auteur["Sigmund Freud"], par_auteur["Otto Rank"] * 10)
+        rank = [a for a in r["atomes"] if a["auteur"] == "Otto Rank"]
+        self.assertIn("Traum und Dichtung", rank[0]["texte"])
+        # Les œuvres sans contribution déclarée restent intégralement de Freud.
+        for cle in ("jenseits", "massenpsychologie"):
+            self.assertEqual(list(atomisation.atomiser(cle)["controles"]["par_auteur"]),
+                             ["Sigmund Freud"])
 
     def test_ids_uniques(self):
         ids = [a["id"] for a in self.r["atomes"]]

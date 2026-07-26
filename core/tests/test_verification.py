@@ -64,12 +64,27 @@ class TestEtat(unittest.TestCase):
             self.assertEqual(table["verdicts"][a["id"]]["verdict"], "confirme")
 
     def test_signal_non_juge_reste_en_attente(self):
-        """Ni promu, ni écarté : un candidat non lu doit rester dans les restants."""
+        """Ni promu, ni écarté : un candidat non lu doit compter comme « restant ».
+
+        Le mécanisme est éprouvé sur un atome FICTIF plutôt que sur l'état courant du corpus :
+        l'instruction étant aujourd'hui complète, un test adossé à des candidats en attente
+        tomberait précisément parce que le travail a été fait.
+        """
         table = verification.charger()
-        attente = [a for a in self.c.a_confirmer() if a["id"] not in table["verdicts"]]
-        self.assertGreater(len(attente), 0)
-        for a in attente[:20]:
-            self.assertIsNone(verification.verdict(a["id"], table))
+        inconnu = {"id": "oeuvre_fictive:a999999", "signaux_a_confirmer": ["revision"]}
+        self.assertIsNone(verification.verdict(inconnu["id"], table))
+        e = verification.etat([inconnu], table)["par_signal"]["revision"]
+        self.assertEqual(e["total"], 1)
+        self.assertEqual(e["juges"], 0)
+        self.assertEqual(e["restants"], 1)
+        self.assertIsNone(e["precision_mesuree"])
+        self.assertEqual(verification.confirmes([inconnu], table=table), [])
+
+    def test_instruction_complete(self):
+        """État atteint : tous les signaux repérés du corpus ont été lus et jugés."""
+        table = verification.charger()
+        restants = [a["id"] for a in self.c.a_confirmer() if a["id"] not in table["verdicts"]]
+        self.assertEqual(restants, [], "signaux encore non instruits : %s" % restants[:5])
 
 
 if __name__ == "__main__":

@@ -94,7 +94,7 @@ de langage : le pipeline est **entièrement déterministe** (même texte → mê
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-66 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+70 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -124,17 +124,27 @@ repartirait de zéro.
 Trois états, jamais mélangés : **confirmé** (opposable), **rejeté** (écarté, motif à l'appui),
 **non lu** (ni promu ni écarté).
 
-| Signal | Repérés | Lus | Confirmés | Précision mesurée |
-|---|---:|---:|---:|---:|
-| `revision` | 15 | **15** | 5 | **0,33** |
-| `objection` | 177 | 0 | — | non mesurée |
-| `auto_citation` | 57 | 0 | — | non mesurée |
+**Instruction complète** : les 178 signaux du corpus ont été lus en contexte et jugés un par un.
 
-Les 15 candidats « révision » ont été lus intégralement. Les 10 écartés sont instructifs : un
-personnage de roman qui corrige son erreur, un correcteur d'imprimerie, Westermarck déclarant que
-*d'autres* auteurs se trompent. Parmi les 5 confirmés, le cas d'école : « *Ich hatte damals die
-(später als unrichtig erkannte) Meinung…* » — Freud déclarant qu'une position sienne fut ensuite
-reconnue fausse.
+| Signal | Repérés | Lus | Confirmés | Rejetés | Précision mesurée |
+|---|---:|---:|---:|---:|---:|
+| `revision` | 15 | 15 | 5 | 9 | **0,33** |
+| `objection` | 106 | 106 | 59 | 47 | **0,56** |
+| `auto_citation` | 57 | 57 | 30 | 27 | **0,53** |
+
+**94 signaux opposables** — dont les objections que Freud dresse contre ses propres thèses
+(« *Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht* »), et ses
+renvois datés à ses propres travaux (« *Der Schatten des Objekts ist auf das Ich gefallen, sagte
+ich an anderer Stelle* » — sa formule de *Trauer und Melancholie*).
+
+Les rejets valent autant : ils disent ce qu'un lexique ne peut pas voir. Objections appartenant à
+un **personnage de roman** (Hanold chez Jensen) ou à une **histoire drôle** ; objections que Freud
+adresse **à d'autres** (Frazer, Trotter, Scherner) et non à lui-même ; renvois **prospectifs**
+(« *cela sera traité ailleurs* ») pris pour des auto-citations ; et de purs homonymes —
+« *einwandfrei* » (irréprochable) n'a rien d'une objection, « *einwandern* » veut dire immigrer.
+
+Trois marqueurs ont été corrigés à la source plutôt que d'annoter leur bruit : `freilich`
+(concessif, 60 faux candidats), `einwandfrei`, `einwandern`.
 
 Un **chef d'orchestre** choisit les agents selon la question : passe générale sans argument,
 suite ciblée (`concept` → `chronologie` → `tension`) quand un concept est donné. Un agent en
@@ -165,7 +175,7 @@ partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes
 
 ---
 
-## Trois choses à savoir avant d'utiliser cette base
+## Quatre choses à savoir avant d'utiliser cette base
 
 1. **La datation est une fourchette, pas une date.** Aucune édition disponible n'est une première
    édition, et Freud a cessé de signaler ses ajouts à partir de la 3ᵉ édition. Un atome est
@@ -176,6 +186,12 @@ partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes
    L'allemand compose : `traum` attrapait *Trauma*, et le correctif naïf a ensuite fait perdre
    *Traumarbeit* (le travail du rêve, 126 occurrences). L'intuition ne suffit pas — il faut
    regarder le texte. Procédure et mesures dans l'inventaire.
+
+4. **Un volume n'est pas d'un seul auteur.** La 4ᵉ édition de la *Traumdeutung* contient un
+   appendice d'**Otto Rank** (« *Traum und Dichtung* », « *Traum und Mythus* ») — 334 atomes, 7 %
+   du volume. Chaque atome porte donc son auteur réel ; ne pas le faire mesurerait deux plumes
+   pour une. Le défaut a été décelé par des passages parlant de « *der Freudschen Auffassung* »
+   à la troisième personne.
 
 Détail et mesures : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENTAIRE_ATOMES.md).
 
@@ -221,8 +237,8 @@ Restent à faire, dans l'ordre :
    déclaratif d'une œuvre, atomisation mémorisée, agents inchangés.
 2. **Dater les couches** par collation avec les premières éditions — la seule façon de lever
    l'incertitude qui pèse aujourd'hui sur toute chronologie.
-3. **Poursuivre la vérification** : les 15 « révisions » sont instruites ; restent 177 objections
-   et 57 auto-citations. Le mécanisme est en place, il ne demande que de la lecture.
+3. **Vérification faite** pour les 178 signaux du corpus actuel ; à reconduire sur chaque œuvre
+   ajoutée (le registre est cumulatif, rien ne se rejoue).
 4. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
    voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
    `cooccurrence` est l'instrument de cette question.

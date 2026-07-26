@@ -4,7 +4,7 @@
   "objet": "Verdicts humains/LLM sur les signaux que le lexique ne peut que SIGNALER (révision, objection, auto-citation). Un marqueur lexical dit où regarder ; seule une lecture en contexte tranche.",
   "protocole": "Chaque candidat est lu avec son contexte immédiat. Verdict « confirme » seulement si l'énoncé est une prise de position de FREUD sur SON PROPRE travail antérieur — ni un personnage de fiction, ni un patient, ni un autre auteur, ni une correction d'imprimerie.",
   "verifie_par": "Claude (Opus 4.8), lecture en contexte, 2026-07-26",
-  "portee": "signal « revision » : les 15 candidats du corpus (11 œuvres) sont tous jugés ci-dessous. Les signaux « objection » (177) et « auto_citation » (57) restent à instruire.",
+  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un.",
   "verdicts_possibles": {
    "confirme": "signal réel — l'atome dit ce que le marqueur laissait espérer",
    "rejete": "faux positif — le marqueur a été déclenché par autre chose",
@@ -13,64 +13,950 @@
  },
  "verdicts": {
   "traumdeutung:a915": {
-   "signal": "revision", "verdict": "confirme",
+   "signal": "revision",
+   "verdict": "confirme",
    "motif": "Cas d'école : « Ich hatte damals die (später als unrichtig erkannte) Meinung… » — Freud déclare explicitement qu'une position sienne a été RECONNUE FAUSSE ensuite. Porte sur la technique analytique (croire qu'il suffit de communiquer au malade le sens caché de ses symptômes)."
   },
   "traumdeutung:a28": {
-   "signal": "revision", "verdict": "confirme",
+   "signal": "revision",
+   "verdict": "confirme",
    "motif": "Préface : il dit avoir tenté de « hisser le texte antérieur au niveau de nos vues actuelles » et s'excuser d'y avoir parfois échoué. Révision assumée au niveau de l'œuvre — et aveu direct que les couches d'écriture coexistent dans le texte."
   },
   "traumdeutung:a21": {
-   "signal": "revision", "verdict": "confirme",
+   "signal": "revision",
+   "verdict": "confirme",
    "motif": "Préface à la 3e édition : « Der Fortschritt wissenschaftlicher Erkenntnis hat auch die Traumdeutung nicht unberührt gelassen. » Reconnaissance que le progrès scientifique a atteint le livre. Révision au niveau de l'œuvre, non d'une thèse précise."
   },
   "jenseits:a441": {
-   "signal": "revision", "verdict": "confirme",
+   "signal": "revision",
+   "verdict": "confirme",
    "motif": "« Klinische Beobachtungen haben uns SEINERZEIT zur Auffassung genötigt… » : rappel daté de sa position antérieure sur le masochisme comme retournement du sadisme — précisément au moment où il va la remanier en posant un masochisme primaire. Le contexte immédiat le dit (« daß wir sie bereits früher einmal gemacht haben »)."
   },
   "ueber_psychoanalyse:a203": {
-   "signal": "revision", "verdict": "confirme",
+   "signal": "revision",
+   "verdict": "confirme",
    "motif": "Récit du remaniement de sa technique : « In Wirklichkeit traf es nur die ersten Male zu… » — l'insistance simple ne suffisait plus, les idées venues étaient tenues pour fausses par les malades eux-mêmes. Freud raconte pourquoi il a dû changer de méthode."
   },
   "traumdeutung:a1564": {
-   "signal": "revision", "verdict": "reclasse", "vers": "auto_citation",
+   "signal": "revision",
+   "verdict": "reclasse",
+   "vers": "auto_citation",
    "motif": "« (Neurolog. Zentralblatt, 1895) habe ich seinerzeit behauptet… » : renvoi daté et référencé à un travail antérieur sur l'angoisse névrotique. C'est une auto-citation nette, mais il la REPREND à son compte ici, il ne la corrige pas."
   },
   "gradiva:a600": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "C'est HANOLD, le personnage du roman de Jensen, qui « berichtigt » son erreur de la veille. Une correction de fiction, pas une révision de Freud."
   },
   "psychopathologie:a4": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Les « noms de substitution » sont reconnus faux par le SUJET qui cherche un nom oublié. Description d'un mécanisme, pas une correction d'auteur."
   },
   "psychopathologie:a8": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Cas Signorelli : c'est le jugement de Freud qui écarte Botticelli et Boltraffio comme faux — auto-observation clinique, non révision théorique."
   },
   "psychopathologie:a389": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Correction d'épreuves d'imprimerie (noms d'auteurs étrangers mal composés par le typographe). Aucun rapport avec une position théorique."
   },
   "psychopathologie:a874": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Énoncé général des critères de l'acte manqué (« si nous sommes corrigés par autrui… »). C'est la théorie qui parle de correction, ce n'est pas Freud qui se corrige."
   },
   "totem:a548": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Citation de Westermarck affirmant que Jevons et Grant Allen « sont dans l'erreur ». Un tiers corrigeant d'autres tiers, rapporté par Freud."
   },
   "traumdeutung:a265": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "« wie nunmehr der Erwachende erkennt » appartient au RÉCIT DE RÊVE cité (le dormeur reconnaît le réveille-matin). « nunmehr » y est purement narratif."
   },
   "traumdeutung:a4733": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Citation de la XIIe Élégie romaine de Goethe. Le marqueur s'est déclenché sur le vocabulaire du poème."
   },
   "traumdeutung:a5754": {
-   "signal": "revision", "verdict": "rejete",
+   "signal": "revision",
+   "verdict": "rejete",
    "motif": "Contenu théorique sur le jugement qui rejette une pensée « comme fausse ou inutilisable ». C'est l'objet décrit qui corrige, pas l'auteur."
+  },
+  "drei_abhandlungen:a47": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Die Degeneration unterliegt den Einwänden, die sich gegen die wahllose Verwendung des Wortes überhaupt erheben » : c'est Freud qui objecte au concept psychiatrique de dégénérescence, thèse tierce ; sa propre position n'est pas visée."
+  },
+  "drei_abhandlungen:a63": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objection attribuée à un tiers — « Man kann einwenden (Havelock Ellis), daß… » — et visant la doctrine, elle aussi tierce, de l'inversion congénitale."
+  },
+  "drei_abhandlungen:a252": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Die Symptome sind, wie ich es an anderer Stelle ausgedrückt habe, die Sexualbetätigung der Kranken » : première personne, renvoi rétrospectif à une formulation antérieure de Freud, redoublé dans la phrase suivante."
+  },
+  "drei_abhandlungen:a444": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« ich habe schon erwähnt, daß ich auch die normale infantile Amnesie mit dieser infantilen Sexualbetätigung in Zusammenhang bringen möchte » : rappel explicite et rétrospectif d'un développement antérieur du même livre."
+  },
+  "gradiva:a6": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les objections sont seulement annoncées et ajournées (« zur Seite drängen ») : Freud demande au lecteur d'écarter provisoirement « die ihm sicherlich aufsteigenden Einwendungen », sans les formuler ni les discuter."
+  },
+  "gradiva:a16": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Eine schärfere Kritik könnte ja einwenden, der Dichter nehme weder für noch gegen die psychische Bedeutung des einzelnen Traumes Partei » : Freud oppose à sa propre affirmation une critique plus sévère, puis y répond."
+  },
+  "gradiva:a182": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "L'objection appartient à la fiction de Jensen : elle décrit le conflit intérieur de Hanold — objection d'un personnage romanesque, pas de Freud contre lui-même."
+  },
+  "jenseits:a188": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Wir haben erfahren, daß die unbewußten Seelenvorgänge an sich »zeitlos« sind » : invocation générale d'un acquis analytique, sans première personne ni indication de lieu — trop vague pour être opposable."
+  },
+  "jenseits:a214": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Man wird gegen diese Auffassung nicht mit Recht einwenden, daß die Erhöhung der Besetzungen um die Einbruchsstelle sich weit einfacher … erkläre » : objection anticipée contre sa conception du pare-excitations, réfutée aussitôt."
+  },
+  "jenseits:a275": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Der naheliegende Einwand, es verhalte sich wohl so, daß es außer den konservativen Trieben … auch andere gibt, die zur Neugestaltung und zum Fortschritt drängen » vise sa thèse du caractère conservateur de toute pulsion ; il l'admet et en renvoie le traitement."
+  },
+  "jenseits:a465": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Le « sie » visé est la conception darwinienne de l'origine de la reproduction sexuée : Freud objecte à une théorie biologique tierce, non à sa propre thèse."
+  },
+  "jenseits:a528": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Wir haben alle erfahren, daß die größte uns erreichbare Lust, die des Sexualaktes… » : le « wir alle » désigne l'expérience humaine commune, non un travail antérieur de Freud."
+  },
+  "massenpsychologie:a7": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objection portée par Freud contre une thèse tierce — la pulsion sociale irréductible des auteurs anglo-saxons (« herd instinct, group mind ») ; c'est lui qui attaque."
+  },
+  "massenpsychologie:a232": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Gegen diese Auffassung der libidinösen Struktur einer Armee wird man mit Recht einwenden, daß die Ideen des Vaterlandes … hier keine Stelle gefunden haben » : objection reconnue fondée contre sa construction, suivie de « Die Antwort darauf lautet… »."
+  },
+  "massenpsychologie:a246": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection anticipée contre son explication de la panique (dissolution des liens d'abord, angoisse ensuite) ; Freud l'attribue à McDougall et la réfute : « Allein diese rationelle Erklärungsweise geht hier doch ganz fehl »."
+  },
+  "massenpsychologie:a298": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Réponse à l'objection formulée juste avant contre sa thèse (l'intérêt commun suffirait, sans apport libidinal) : « Man wird diesem Einwand mit dem Bescheid begegnen, daß auf solche Weise eine bleibende Einschränkung des Narzißmus doch nicht zustande kommt »."
+  },
+  "massenpsychologie:a365": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Der Schatten des Objekts ist auf das Ich gefallen, sagte ich an anderer Stelle » : citation littérale, à la première personne, de sa propre formule de Trauer und Melancholie."
+  },
+  "massenpsychologie:a441": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud objecte à sa propre formule de la masse qu'elle n'explique qu'une partie des faits : « Und nun zeigt uns ein anderer Einwand den weiteren Weg… », puis « Aber die Masse zeigt … mehr »."
+  },
+  "massenpsychologie:a460": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Aber gegen Trotters Darstellung läßt sich … einwenden, daß sie auf die Rolle des Führers in der Masse zu wenig Rücksicht nimmt » : Freud objecte à un auteur tiers."
+  },
+  "massenpsychologie:a566": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« die Erörterung eines Problems fortsetzen, das ich an anderer Stelle ungelöst verlassen mußte », avec note renvoyant au Jahrbuch der Psychoanalyse VI, 1914 (Zur Einführung des Narzißmus) : renvoi daté et localisé."
+  },
+  "massenpsychologie:a673": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "L'objection porte sur sa propre construction (l'amour non refoulé des frères semblerait incompatible avec « unserem Mythus von der Urfamilie ») ; Freud la retourne : « Allein bei weiterer Überlegung löst sich dieser Einwand in eine Bestätigung auf »."
+  },
+  "neue_folge:a140": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : l'adjectif « einwandfreien » dans « der Verknüpfung mit den anderen einwandfreien Traumgedanken » (irréprochables) ; le passage expose la formation du rêve."
+  },
+  "neue_folge:a183": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection réelle contre la psychanalyse (des médecins américains lui refusent le statut de science faute d'expérimentation), réfutée : « Sie hätten denselben Einwand auch gegen die Astronomie erheben können »."
+  },
+  "neue_folge:a246": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Den unvermeidlichen, immer wiederkehrenden Einwand der Laien, daß es doch soviele Angstträume gibt, haben wir bereits in den früheren Vorlesungen … voll erledigt » : objection contre sa thèse la plus contestée."
+  },
+  "neue_folge:a257": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Seconde des deux difficultés annoncées contre la théorie du rêve comme accomplissement de désir : « sie bedeutet auch keinen so gewichtigen Einwand wie die andere » — l'objection (scènes sexuelles infantiles pénibles) est développée et discutée."
+  },
+  "neue_folge:a269": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud amende sa propre thèse pour tenir compte des objections : « wenn Sie den letzten Einwänden Rechnung tragen wollen, so sagen Sie immerhin, der Traum ist der Versuch einer Wunscherfüllung »."
+  },
+  "neue_folge:a306": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les « intellektuelle Einwendungen » visent une thèse absurde forgée pour l'exemple (le noyau de la Terre en confiture), afin d'illustrer comment on traite une affirmation insoutenable."
+  },
+  "neue_folge:a336": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection anticipée contre sa position (les miracles ne se produisent pas), formulée puis écartée : « so fürchten wir den Einwand nicht, sie könnten sich doch in alten Zeiten ereignet haben »."
+  },
+  "neue_folge:a403": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : « besonders einwandfreie Beobachtungen über Gedankenübertragung » (observations irréprochables) ; aucune objection."
+  },
+  "neue_folge:a637": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection contre la psychanalyse citée dans sa teneur : « die geistvollen Einwendungen … der Mensch sei nicht bloß ein Sexualwesen », à laquelle Freud réplique ironiquement."
+  },
+  "neue_folge:a907": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Récapitulation annoncée de sa propre 25e conférence (« Der Angst habe ich bereits eine Vorlesung der früheren Reihe, die fünfundzwanzigste, gewidmet ») : renvoi à un texte de Freud parfaitement identifié."
+  },
+  "neue_folge:a914": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Même chaîne récapitulative de la 25e conférence : « Wir haben uns dann zur neurotischen Angst gewendet und gesagt, daß wir sie unter dreierlei Verhältnissen beobachten »."
+  },
+  "neue_folge:a964": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Renvoi prospectif et négatif : « Wir haben aber noch gar nicht gesagt, was die reale Gefahr ist… » annonce ce qui reste à dire."
+  },
+  "neue_folge:a995": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Récapitulation ancrée dans l'enquête menée juste avant, avec correction expresse de sa doctrine antérieure : « daß die Angst die Verdrängung macht, nicht, wie wir meinten, umgekehrt »."
+  },
+  "neue_folge:a1007": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud pèse l'objection qu'il s'est adressée à lui-même (avoir traduit en langage de la pensée normale un processus énergétique inconscient), après l'interpellation mise en scène de l'auditoire (« Halt! werden Sie mir zurufen ») : « Aber das ist kein starker Einwand »."
+  },
+  "neue_folge:a1047": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Freud rappelle une thèse qu'il a lui-même énoncée dans une leçon antérieure du même livre — « Wir haben gesagt, das Ich sei schwach gegen das Es, sei sein getreuer Diener » — et l'enchaînement « Wir denken nicht daran, diesen Satz zurückzunehmen » confirme qu'il s'agit bien de sa propre proposition antérieure, qu'il maintient avant de l'amender."
+  },
+  "neue_folge:a1070": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Aucune objection n'est formulée : Freud dit au contraire n'en voir aucune contre la double origine de l'angoisse — « sehe ich keinen Einwand » —, le mot n'apparaît que dans une dénégation qui clôt la discussion."
+  },
+  "neue_folge:a1121": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Wir haben gerade über diese auffällige Entwicklungsstufe viel interessante Einzelheiten erfahren » désigne un acquis général du savoir analytique sur la phase sadique-anale, sans marqueur rétrospectif ni passage identifiable ; le renvoi est trop vague pour être opposable."
+  },
+  "neue_folge:a1261": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Wir haben erfahren, in wie ingeniöser Weise diese Bändigung des Widerspenstigen vollzogen wird » énonce un savoir acquis que la phrase suivante réexpose au lieu de le localiser ; aucun marqueur du type « ich habe gezeigt » ni renvoi à un lieu textuel précis."
+  },
+  "neue_folge:a1326": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Le renvoi vise explicitement les travaux d'AUTRES analystes, non ceux de Freud : « dank dem Umstande, daß mehrere unserer trefflichen Kolleginnen in der Analyse begonnen haben, diese Frage zu bearbeiten » — crédit donné à ses collègues femmes sur la sexualité féminine."
+  },
+  "neue_folge:a1383": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud met en scène l'objection de l'auditoire contre la thèse analytique sur la sexualité des petites filles (« man merkt ihnen nichts dergleichen an ») puis la réfute : « Aber der Einwand trifft nicht zu; man kann genug an den Kindern sehen, wenn man zu beobachten versteht »."
+  },
+  "neue_folge:a1426": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud interrompt son propre développement sur le détachement de la fille envers la mère : « da stellt sich plötzlich ein Einwand ein, der unser Interesse in eine andere Richtung drängt » — objection dirigée contre sa propre ligne explicative (ces facteurs agissent aussi chez le garçon)."
+  },
+  "neue_folge:a1612": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Simple mention en bloc des griefs adverses — « eine Musterung aller der Vorwürfe und Einwendungen ... die die Gegner der Psychoanalyse gegen sie erhoben haben » — que Freud renonce ensuite à passer en revue : aucune objection n'est réellement formulée ni traitée."
+  },
+  "neue_folge:a1722": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Das Stichwort ... fällt heute an anderer Stelle » emploie « an anderer Stelle » au sens d'un autre lieu où le travail pédagogique se fait aujourd'hui, et non comme renvoi à un écrit antérieur de Freud."
+  },
+  "neue_folge:a1864": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "L'objection porte contre la conception scientifique du monde que Freud défend comme sienne — « den überheblichen Einwand ..., eine solche Weltanschauung sei ebenso armselig wie trostlos » — et il la repousse aussitôt : « Man kann diesen Einwand nicht energisch genug zurückweisen »."
+  },
+  "neue_folge:a1982": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud formule l'objection des défenseurs de la religion contre sa propre entreprise : « Die erste Einwendung, die man hört, lautet, es sei eine Vermessenheit der Wissenschaft, die Religion zum Gegenstand ihrer Untersuchungen zu nehmen » — pour la reformuler puis la réfuter."
+  },
+  "psychopathologie:a108": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud anticipe une objection contre sa propre démonstration et règle sa méthode dessus : « weil ich den Einwand fürchten muss, die betreffenden Phänomene seien eben Erfolge und Äusserungen der Neurose » — contre-argument visant la valeur probante de son matériel, désamorcé par le recours à l'auto-observation."
+  },
+  "psychopathologie:a509": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection anticipée contre son hypothèse de la tendance de défense : « Man möge gegen die Annahme einer solchen Abwehrtendenz nicht einwenden, dass wir es im Gegenteil häufig genug unmöglich finden, peinliche Erinnerungen ... los zu werden », réfutée dans la phrase suivante."
+  },
+  "psychopathologie:a1030": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Einwendungen » désigne ici un contenu psychique du sujet, non une objection adressée à Freud : « Andere Male scheinen es höchst harmlose Einwendungen und Rücksichten zu sein, aus denen die störenden Gedanken entspringen »."
+  },
+  "totem:a128": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objection d'un tiers contre un autre tiers, dans l'appareil ethnographique : « Diese Einwendung wurde auch gegen die Auffassung von _Fison_ erhoben » — la thèse de Freud n'est pas en cause."
+  },
+  "totem:a132": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "C'est Freud qui objecte à l'explication ethnographique d'autrui (Crawley) — « unterliegt diese Erklärung dem Einwand, daß sie ... den geschlechtlichen Faktor übersieht » —, non une objection contre sa propre thèse."
+  },
+  "totem:a341": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud annonce qu'il doit affronter une objection dirigée contre sa propre explication par l'ambivalence : « müssen wir gegen eine naheliegende Einwendung Stellung nehmen », dont le contenu suit — « wird man uns mit _Frazer_ und anderen entgegenhalten »."
+  },
+  "totem:a346": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Poursuite de la même objection contre sa propre tentative d'explication : « Diese Einwendung ist in der Tat naheliegend, und wenn sie ebenso ausreichend wäre, könnten wir uns die Mühe unseres Erklärungsversuches gern ersparen »."
+  },
+  "totem:a450": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi rétrospectif explicite à un développement antérieur du même livre : « dies scheint ein zweiter besonders greller Widerspruch zu sein; allein wir haben bereits erfahren, daß er nur scheinbar ist » — « bereits » et « zweiter » localisent le passage déjà traité."
+  },
+  "totem:a706": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Unsere psychoanalytische Arbeit wird an anderer Stelle einsetzen » est prospectif et signifie « attaquer en un autre point », non un renvoi à un travail antérieur de Freud."
+  },
+  "totem:a769": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Freud donne raison à une objection de tiers contre la théorie associationniste de la magie de Frazer — « muß man aber dem Einwand Recht geben » — : la cible est un auteur tiers, pas la psychanalyse."
+  },
+  "totem:a850": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi de Freud à son propre développement antérieur sur la projection : « Die Geister und Dämonen sind, wie an anderer Stelle angedeutet wurde, nichts als die Projektionen seiner Gefühlsregungen », adossé en note à sa propre étude sur Schreber."
+  },
+  "totem:a1021": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objection d'un ethnologue contre une théorie d'autres ethnologues : « Einen ... unwiderleglichen Einwand gegen solche Zurückführung der Totemnamen ... hat _Fison_ vorgebracht » — Freud rapporte le débat."
+  },
+  "totem:a1048": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objections adressées à une théorie tierce du totémisme (l'explication nutritionnelle) : « Die Einwendungen gegen diese rationalste aller Totemtheorien besagen ... » — pure recension doxographique."
+  },
+  "totem:a1073": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objections d'auteurs tiers contre un autre tiers : « die von _Durkheim_ und _Lang_ vorgebrachten Einwendungen » visent la théorie de Frazer, non une thèse de Freud."
+  },
+  "totem:a1137": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Note bibliographique sur la polémique d'un tiers : « Dort auch die Verteidigung des Autors gegen ihm bekannt gewordene Einwendungen » concerne Westermarck se défendant de ses critiques."
+  },
+  "totem:a1151": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les objections s'accumulent contre une théorie étrangère (l'inceste interdit pour éviter la dégénérescence) : « Die Einwendungen gegen diesen Erklärungsversuch drängen einander » — Freud est du côté des objectants."
+  },
+  "totem:a1158": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Auto-citation explicite et localisée : « Wie ich an anderer Stelle dargetan habe(174) ... (174) Vgl. die erste Abhandlung » — renvoi nommé au premier essai de Totem und Tabu."
+  },
+  "totem:a1317": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objections d'auteurs tiers contre la théorie du sacrifice de Robertson Smith, mentionnées sans être formulées : « Die von verschiedenen Autoren (_Marillier_, _Hubert_ und _Mauss_ u. a.) ... vorgebrachten Einwendungen sind mir nicht unbekannt geblieben »."
+  },
+  "totem:a1525": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection canonique contre sa propre thèse (la réalité psychique suffirait, sans acte réel) : « Man wird dagegen einwenden, daß ja eine Veränderung der Gesellschaft ... wirklich vorgefallen ist », qu'il pèse aussitôt (« Dies ist ein starkes Argument, aber doch nicht entscheidend »)."
+  },
+  "totem:a1529": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Deuxième objection contre sa propre construction, numérotée et réfutée : « Ebensowenig ist der zweite Einwand stichhaltig, daß alles, was sich aus der ambivalenten Relation zum Vater ableitet ... » — réponse par l'analogie avec la névrose obsessionnelle."
+  },
+  "traumdeutung:a279": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Mention générique dans le chapitre de revue de littérature : « Allen Einwendungen zum Trotz wird man zugeben müssen ... » — aucune objection n'est énoncée, et le débat porte sur les théories des auteurs."
+  },
+  "traumdeutung:a415": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objection empruntée à la littérature sur la fidélité du souvenir du rêve, attribuée ensuite à un tiers : « Solche Zweifel ... spricht auch _Strümpell_ » ; ce n'est pas une objection contre la thèse de Freud."
+  },
+  "traumdeutung:a472": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les « Einwendungen » renvoient à une longue citation de Burdach opposée à une thèse de la littérature sur le sommeil — objections d'auteur à auteur dans le chapitre doxographique."
+  },
+  "traumdeutung:a505": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Freud résume la théorie de tiers (Strümpell, Wundt) ; « aus den verschiedenen an anderer Stelle angeführten Quellen » n'est qu'un pointeur incident vers une énumération de sources, sans renvoi identifiable à une publication de Freud."
+  },
+  "traumdeutung:a597": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« An anderer Stelle findet er das treffende Wort (p. 462) » : le sujet « er » est Maury ; le renvoi désigne un autre endroit de l'œuvre de Maury, pas du travail de Freud."
+  },
+  "traumdeutung:a634": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Es hat der Theorie des partiellen Wachens schon frühzeitig nicht an Einwänden gefehlt », suivi de « Burdach meint 1830 » : objections d'un auteur tiers contre une théorie tierce."
+  },
+  "traumdeutung:a766": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« ich werde an anderer Stelle einige Beobachtungen zu der Aufstellung Swobodas mitteilen » est un renvoi prospectif (futur), exclu par la rubrique."
+  },
+  "traumdeutung:a858": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud anticipe l'objection dirigée contre son propre matériel : « daß ich mich dem Einwand aussetzen würde, es seien ja die Träume von Neuropathen, die einen Rückschluß auf die Träume gesunder Menschen nicht gestatten »."
+  },
+  "traumdeutung:a984": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Es ist ein ähnliches Vergleichen wie oben zwischen der unfolgsamen Patientin Irma und ihrer für klüger gehaltenen Freundin » : renvoi rétrospectif identifiable à sa propre analyse du rêve de l'injection faite à Irma."
+  },
+  "traumdeutung:a1109": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Wir haben erfahren, daß der Traum einen Wunsch als erfüllt darstellt » renvoie au résultat acquis au chapitre précédent, identifié par la suite (« jenes Traumes (»von Irmas Injektion«), mit dem unsere Analyse begonnen »)."
+  },
+  "traumdeutung:a1135": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud formule un contre-cas à son expérience de la soif et y répond : « so bedeutet dies keinen Einwand gegen mein Experiment, sondern charakterisiert diese anderen als schlechtere Schläfer »."
+  },
+  "traumdeutung:a1258": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud dresse contre sa propre thèse l'obstacle des rêves d'angoisse : « Wirklich scheinen gerade die Angstträume eine Verallgemeinerung des Satzes ... unmöglich zu machen, ja diesen Satz als Absurdität zu brandmarken », suivi de « Dennoch ist es nicht sehr schwer... »."
+  },
+  "traumdeutung:a1263": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« dann treffen uns die beiden Einwände nicht mehr » : Freud désigne les deux objections (rêves pénibles, rêves d'angoisse) opposées à sa doctrine et les lève par la distinction contenu manifeste / latent."
+  },
+  "traumdeutung:a1436": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Forme canonique de l'objection anticipée : « Man wird mir einwenden, das sei die bekannte hysterische Imitation », suivie de la réfutation."
+  },
+  "traumdeutung:a1492": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Sie hatte nicht übel Lust, aus dieser Traumerscheinung einen Einwand gegen die Wunscherfüllungstheorie zu machen » : objection réelle visant la théorie de Freud, dissoute par l'analyse du détail de la « Schachtel »."
+  },
+  "traumdeutung:a1726": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Man kann noch weiterhin gegen die Lehre von Robert einwenden » : c'est Freud qui objecte à la doctrine d'un auteur tiers."
+  },
+  "traumdeutung:a1752": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht » : Freud annonce une objection menaçant ses propres conclusions, avant de l'exposer et d'y répondre."
+  },
+  "traumdeutung:a1753": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "L'objection contre sa conclusion est développée puis résolue : « Dieser Einwand ist voll zu erledigen, wenn man sich auf die Ergebnisse der Psychoanalyse bei Neurotikern stützt »."
+  },
+  "traumdeutung:a2009": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Übrigens derselbe Mißbrauch mit Namen wie oben mit Pélagie, Knödl, Brücke, Fleischl » : renvoi rétrospectif à ses propres analyses de rêves du même livre, identifiable par la liste nominative."
+  },
+  "traumdeutung:a2038": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« nachdem er einen Einwand gemacht hat » décrit une scène du rêve rapporté (le cocher proteste) ; aucune objection théorique."
+  },
+  "traumdeutung:a2108": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Einem weiteren Einwand begegne ich durch die Bemerkung, daß ich auf anderen Reisen ... fast niemals den Harndrang nach frühzeitigem Erwachen verspürt habe » : réponse à une objection visant sa propre interprétation."
+  },
+  "traumdeutung:a2126": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les deux « Einwände » sont dirigés par Freud contre la doctrine des sources somatiques des auteurs tiers (Spitta, Strümpell)."
+  },
+  "traumdeutung:a2136": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Andere Einwendungen richten sich gegen die Grundvoraussetzung der ganzen Illusionslehre » : objections visant Strümpell et Wundt — débat entre auteurs tiers."
+  },
+  "traumdeutung:a2161": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Von einem Einwand aber wird die Schernersche Lehre ... schwer getroffen » : l'objection frappe la doctrine de Scherner, auteur tiers."
+  },
+  "traumdeutung:a2164": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Will man sich diesem Einwand durch die Bedingung entziehen » poursuit la réfutation de la théorie des excitations corporelles (Scherner, Strümpell)."
+  },
+  "traumdeutung:a2224": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« werden wir diese Auffassung an anderer Stelle rechtfertigen » : promesse de justification future, renvoi prospectif exclu."
+  },
+  "traumdeutung:a2338": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : le déclencheur est l'adjectif « einwandfreien » dans « den bewußtseinsfähigen und einwandfreien Wünschen des Heimatlosen » (souhaits irréprochables) ; aucune objection."
+  },
+  "traumdeutung:a2568": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection contre la thèse psychanalytique de l'égoïsme des rêves : « erhob eine gelehrte Dame gegen diese unwissenschaftliche Verallgemeinerung den Einwand, der Autor könne doch nur über die Träume von Österreichern urteilen », citée pour être disqualifiée."
+  },
+  "traumdeutung:a2611": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Man könnte gegen die Behauptung, daß ... eine ausgiebige Verdichtung ... statt[finde], einen Einwand geltend machen, der für den ersten Eindruck recht bestechend scheint » : objection anticipée contre sa thèse de la condensation."
+  },
+  "traumdeutung:a2783": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Der erste Leser und Kritiker dieses Buches hat mir den Einwand gemacht ... »daß der Träumer oft zu witzig erscheine« » : objection adressée à Freud sur son propre livre, concédée puis retournée."
+  },
+  "traumdeutung:a2861": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Ich könnte diesen Einwand nicht gelten lassen » : Freud rejette l'objection méthodologique visant sa technique, tout en annonçant une difficulté voisine qu'il assume."
+  },
+  "traumdeutung:a2883": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« ihre Zuverlässigkeit gegen Einwendungen zu sichern » : mention générique, aucune objection déterminée n'est formulée."
+  },
+  "traumdeutung:a2888": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "La note attachée est une auto-citation explicite et datée : « Ich habe die vollständige Analyse und Synthese zweier Träume seither in dem »Bruchstück einer Hysterieanalyse«, 1905, gegeben »."
+  },
+  "traumdeutung:a2904": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Vielleicht wird sich hier ein Einwand erheben, der für den Traum den Verzicht auf die Darstellung logischer Relationen bestreitet » : objection anticipée contre sa propre affirmation."
+  },
+  "traumdeutung:a3033": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Ich habe vorhin behauptet, daß der Traum kein Mittel hat, die Relation des Widerspruches ... auszudrücken » : renvoi rétrospectif identifiable à sa propre affirmation, qu'il annonce vouloir contredire."
+  },
+  "traumdeutung:a3154": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« werde ich an anderer Stelle (s. u. p. 350) erörtern » : annonce de traitement futur, cas exclu par la rubrique malgré la pagination."
+  },
+  "traumdeutung:a3211": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« auf welche ich ... noch an anderer Stelle zurückkommen werde ... Siehe unten p. 361 ff. » : renvoi vers l'avenir."
+  },
+  "traumdeutung:a3224": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« deren richtigen Kern ich an anderer Stelle verteidigt habe » : parfait à la première personne, renvoi rétrospectif à sa propre défense du noyau valable des interprétations de Scherner."
+  },
+  "traumdeutung:a3289": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Freud reprend son propre article, titre et référence complets : « Ich wiederhole hierüber, was ich an anderer Stelle (Die zukünftigen Chancen der psychoanalytischen Therapie, Zentralbl. f. Psychoanalyse I, 1910) geäußert habe », suivi de la citation littérale."
+  },
+  "traumdeutung:a3291": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection dirigée contre la thèse de Freud (« wir überschätzten doch gewiß die geheime sexuelle Bedeutung der Träume »), à laquelle il répond : « Durch diesen Einwand aufmerksam gemacht, haben wir dem Vorkommen von Stiegen … Aufmerksamkeit geschenkt »."
+  },
+  "traumdeutung:a3397": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Fin d'un récit de rêve suivi du début de sa « _Deutung_ » par les restes diurnes ; aucun renvoi à un travail antérieur de Freud."
+  },
+  "traumdeutung:a3414": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Le reproche est intérieur au rêve d'un patient — « Sein Klavierlehrer mache ihm Vorwürfe » — adressé par un personnage onirique au rêveur."
+  },
+  "traumdeutung:a3498": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : le radical n'apparaît que dans « an anderen einwandfreien Körperteilen » (parties du corps irréprochables) ; aucune objection."
+  },
+  "traumdeutung:a3530": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Même faux positif (« an anderen einwandfreien Körperstellen »), de surcroît dans une citation enchâssée dans la contribution d'un tiers."
+  },
+  "traumdeutung:a3536": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« einwandfrei » qualifie une interprétation jugée irréprochable — « die … wie ich glaube auch einwandfreie Deutung des Kollegen » — c'est un éloge, pas une objection."
+  },
+  "traumdeutung:a3539": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "L'objection est réelle mais n'est pas énoncée par Freud : le locuteur parle de lui à la troisième personne (« die _Freud_sche Auffassung ») — contribution d'un collègue sur les rêves d'excitation dentaire, reproduite dans l'ouvrage."
+  },
+  "traumdeutung:a3579": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Freud ne renvoie qu'à des travaux de tiers qu'il conteste (Stekel 1911, Adler) ; sa position est affirmée au présent sans renvoi à un écrit antérieur de lui-même."
+  },
+  "traumdeutung:a3868": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "L'« Einwand » appartient au contenu manifeste du rêve : le cocher du fiacre proteste (« nachdem er einen Einwand gemacht, als ob ich ihn übermüdet hätte »)."
+  },
+  "traumdeutung:a4012": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud met en scène les objections tirées des rêves où l'on juge — « muß ich die Einwendungen, die aus solchen Vorkommnissen sich ableiten, an ausgewählten Beispielen erledigen » — et y répond : « Meine Erwiderung lautet: … »."
+  },
+  "traumdeutung:a4169": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Double renvoi de Freud à lui-même : renvoi interne paginé (« vgl. p. 149 ») et renvoi à son propre ouvrage nommé — « deren Aufklärung ich in der »Psychopathologie des Alltagslebens« versucht habe »."
+  },
+  "traumdeutung:a4171": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Ich erzählte bereits an anderer Stelle von einem hochgebildeten … Manne » : sujet à la première personne, renvoi rétrospectif à un cas déjà exposé — auto-citation caractérisée."
+  },
+  "traumdeutung:a4495": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : « einen einwandfreien Beweis dafür » signifie une preuve irréfutable ; le passage établit une thèse, il n'objecte rien."
+  },
+  "traumdeutung:a4620": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« wie an anderer Stelle erwähnt(181) » est une incise passive attachée à la découverte d'un tiers (Silberer) ; impossible d'établir qu'il s'agit d'un passage de Freud plutôt que de la publication de Silberer."
+  },
+  "traumdeutung:a4641": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Formule prospective : « … geziemt es sich, an anderer Stelle zu handeln » annonce un traitement à venir (note : Zur Einführung des Narzissmus, 1914) ; cas exclu par la rubrique."
+  },
+  "traumdeutung:a4710": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« an anderer Stelle » désigne un autre passage d'un autre auteur : « die der Dichter an anderer Stelle im Sinne der Wunschtheorie ergänzt » renvoie à d'autres vers de Grillparzer."
+  },
+  "traumdeutung:a4822": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "L'objection est construite mais la voix n'est pas celle de Freud : elle parle de la psychanalyse à la troisième personne (« bietet der Psychoanalyse willkommenen Anlaß ») — contribution rapportée insérée dans l'ouvrage."
+  },
+  "traumdeutung:a4830": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Revue de travaux tiers sur rêve, conte et mythe (Riklin, Jones, Abraham) ; ni thèse contestée ni réplique."
+  },
+  "traumdeutung:a4952": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : « erklärt sich einwandfrei als Ausdruck der … Libido » — « einwandfrei » est l'adverbe « sans conteste », qui affirme au lieu d'objecter."
+  },
+  "traumdeutung:a4965": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Le « ich … gesagt » appartient au récit de rêve de la rêveuse (« das ist mein eigener Vogel ») : parole intérieure au rêve."
+  },
+  "traumdeutung:a5017": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud annonce une objection contre sa propre entreprise : « ein bisher unbeachteter Einwand … der doch geeignet scheinen könnte, unseren Bemühungen um die Traumdeutung den Boden zu entziehen », qu'il précise puis réfute."
+  },
+  "traumdeutung:a5145": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« Einwände gegen die Technik der Traumdeutung » n'est qu'un titre courant intercalé ; le corps du passage expose positivement l'abaissement de la censure."
+  },
+  "traumdeutung:a5150": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud ouvre une nouvelle séquence d'objections contre sa propre méthode : « Es gibt eine andere Reihe von Einwendungen gegen unser Verfahren bei der Traumdeutung, um die wir uns jetzt bekümmern müssen »."
+  },
+  "traumdeutung:a5160": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection prêtée à un contradicteur en style direct (« Es ist aber alles Willkür … ») puis réfutée : « Wenn uns solche Einwände wirklich vorgerückt werden, so können wir uns zur Abwehr auf den Eindruck unserer Traumdeutungen berufen »."
+  },
+  "traumdeutung:a5198": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud concède explicitement une part des objections : « Eines nur ist richtig und bleibt von den Einwendungen bestehen, nämlich daß wir nicht alle Einfälle der Deutungsarbeit auch in die nächtliche Traumarbeit zu versetzen brauchen »."
+  },
+  "traumdeutung:a5203": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Phrase transitionnelle qui clôt rétrospectivement la séquence défensive ; aucune objection n'y est formulée, seulement mentionnée."
+  },
+  "traumdeutung:a5278": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi récapitulatif à ses propres développements : « Wir haben gesehen, daß es uns unmöglich wurde, die Traumbildung zu erklären, wenn wir nicht die Annahmen zweier psychischen Instanzen wagen wollten »."
+  },
+  "traumdeutung:a5287": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Renvoi tourné vers l'avenir : « Wir werden aber auch an anderer Stelle, wenn wir vom Traumwunsche handeln, erfahren … » — annonce d'un développement ultérieur."
+  },
+  "traumdeutung:a5343": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi interne paginé à un rêve déjà rapporté : « Ich habe auf p. 332 einen Traum erwähnt, in dem die tiefblaue Farbe des Wassers … mir einen tiefen Eindruck hinterließen »."
+  },
+  "traumdeutung:a5448": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "« Wir fügen hinzu, was wir bereits an anderer Stelle gelernt haben, daß diese rezenten und indifferenten Elemente … » : renvoi rétrospectif à un acquis démontré plus haut."
+  },
+  "traumdeutung:a5472": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« an anderer Stelle » a un sens topique : un autre lieu de l'appareil psychique (« … hat an anderer Stelle nicht die Folge… »), non un texte de Freud."
+  },
+  "traumdeutung:a5481": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Note renvoyant à sa propre publication : « Ich habe diesen Gedankengang an anderer Stelle (Formulierungen über die zwei Prinzipien des psychischen Geschehens…) »."
+  },
+  "traumdeutung:a5516": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« Wir können aber die hier vermißte Zutat aus dem Vorbewußten an anderer Stelle auffinden » désigne un autre endroit du matériel psychique, non un écrit de Freud."
+  },
+  "traumdeutung:a5532": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud formule l'objection opposable à sa conclusion et la récuse : « Es ist durchaus notwendig, den Einwand dagegen gering zu schätzen, daß unser Bewußtsein auf das eine Wissen nie gelenkt wird … »."
+  },
+  "traumdeutung:a5598": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud introduit lui-même une contestation de son explication : « Hier verlangt aber ein Einwand gehört zu werden, der auf einer besseren Kenntnis der unbewußten Vorgänge fußt », dont le contenu s'énonce aussitôt — objection contre sa propre théorie, posée pour être traitée."
+  },
+  "traumdeutung:a5743": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi explicite à un acquis antérieur du même livre : « Wir haben erfahren, daß der Traum eine Anzahl von Gedanken ersetzt, die aus unserem Tagesleben stammen und vollkommen logisch gefügt sind »."
+  },
+  "traumdeutung:a5801": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Rappel littéral d'une thèse posée plus haut : « wir haben gesagt, nichts anderes als ein Wunsch sei im stande, den Apparat in Bewegung zu bringen »."
+  },
+  "traumdeutung:a5867": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection méthodologique contre son propre matériel — « Der Einwand, daß meine Träume und die meiner neurotischen Patienten nicht auf die Träume gesunder Menschen schließen lassen » — traitée aussitôt."
+  },
+  "traumdeutung:a5882": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« An anderer Stelle könnte noch gezeigt werden, wie … » est un renvoi prospectif et conditionnel, exclu par la rubrique."
+  },
+  "ueber_psychoanalyse:a91": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud met en scène l'objection de son auditoire contre sa thèse de la fixation aux traumatismes : « Ich gebe Ihnen gern den Einwand zu, den Sie jetzt wahrscheinlich bilden, indem Sie an die Krankengeschichte der Breuerschen Patientin denken »."
+  },
+  "ueber_psychoanalyse:a196": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Le déclencheur est l'adjectif « einwandfrei » dans « auf ein höheres und darum einwandfreies Ziel geleitet (was man seine Sublimierung heißt) » ; aucune objection."
+  },
+  "ueber_psychoanalyse:a244": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Freud constate seulement que ses adversaires ont cherché à se débarrasser de la Traumdeutung « mit den seichtesten Einwendungen » : mention polémique sans contenu énoncé ni réfuté."
+  },
+  "ueber_psychoanalyse:a258": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection canonique contre sa thèse du rêve comme accomplissement de souhait : « Da ist vor allem die erste und gewichtigste Einwendung, daß die Träume Erwachsener gewöhnlich einen unverständlichen Inhalt haben », suivie de « Die Antwort lautet hier: … »."
+  },
+  "ueber_psychoanalyse:a275": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud anticipe l'objection tirée des rêves d'angoisse : « daß Sie sich nicht durch den Einwand irre machen lassen, das Vorkommen von Angstträumen widerspreche unserer Auffassung des Traumes als Wunscherfüllung », puis y répond."
+  },
+  "ueber_psychoanalyse:a369": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Objection prêtée à l'auditoire en style direct : « Sie werden jetzt vielleicht den Einwand machen: Aber das ist ja alles nicht Sexualität », traitée par la réponse sur l'extension du terme."
+  },
+  "ueber_psychoanalyse:a394": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Faux positif lexical : « einwandfreier » qualifie la manière dont l'éducation s'acquitte de sa tâche, et ne formule aucune objection."
+  },
+  "witz:a15": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« An anderer Stelle (S. 20) wird das ästhetische Verhalten … charakterisiert » renvoie à une autre page de l'ouvrage de Lipps que Freud résume et cite : texte d'un tiers."
+  },
+  "witz:a294": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud rappelle qu'il s'est lui-même opposé une objection : « damals machten wir uns den berechtigten Einwand, ein Lakonismus sei noch kein Witz » — relançant la recherche du trait spécifique."
+  },
+  "witz:a394": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud anticipe la critique de sa distinction double sens / déplacement : « An dieser Stelle dürfen wir uns auf den Einwand gefaßt machen, daß uns vorgehalten werde, diese heikeln Unterscheidungen suchen auseinander zu reißen, was doch zusammengehöre »."
+  },
+  "witz:a401": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Temps de réponse à l'objection qu'il s'est faite : « Einen Wert wollen wir aber jenem Einwand nicht bestreiten », d'où la conséquence méthodologique (ne pas confondre travail du mot d'esprit et travail de compréhension)."
+  },
+  "witz:a425": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi à sa propre analyse antérieure d'un exemple du même livre : « wir haben durch die Analyse erfahren, daß diese Logik einen Denkfehler, nämlich eine Verschiebung des Gedankenganges zu verdecken hatte » (exemple « Lachs mit Mayonnaise »)."
+  },
+  "witz:a474": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Bilan explicite des acquis du même ouvrage : « Wir haben nun bereits an zwei Gruppen von Beispielen erfahren, daß die Witzarbeit sich der Abweichungen vom normalen Denken … bedient »."
+  },
+  "witz:a573": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Objection d'un tiers contre un tiers dans un exemple littéraire : Lichtenberg juge la condamnation de Hamlet insuffisante « indem sie nicht alles verwertet, was man gegen die Schulweisheit einwenden kann »."
+  },
+  "witz:a700": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "Formules prospectives : « wird eine unserer späteren Aufgaben werden » et « Derselbe Witz wird uns noch an anderer Stelle beschäftigen » — annonce de ce qui sera traité plus loin."
+  },
+  "witz:a771": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Scrupule sur le choix d'un exemple (« Da mir aber Bedenken aufsteigen … »), le mot ne désigne qu'anaphoriquement ce scrupule d'exemplification."
+  },
+  "witz:a901": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les objections appartiennent aux personnages de l'histoire drôle (le prétendant et le Schadchen) : matériau anecdotique analysé."
+  },
+  "witz:a1138": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi interne à un développement antérieur : « Läßt sich in solcher Art, wie oben angedeutet wurde, die Überwindung äußerer Hindernisse auf die innerer Hemmungen und Verdrängungen zurückführen »."
+  },
+  "witz:a1352": {
+   "signal": "auto_citation",
+   "verdict": "rejete",
+   "motif": "« an anderer Stelle » n'a aucune valeur bibliographique : « solange das hier Ersparte an anderer Stelle zur Verwendung kommen kann » désigne un autre point de dépense psychique."
+  },
+  "witz:a1385": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« die kritischen Einwendungen … standhaft zurückweisen » énonce une règle technique de l'association libre (écarter les objections critiques du sujet), non des objections adressées à Freud."
+  },
+  "witz:a1434": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Mise en scène explicite d'une objection menaçant son hypothèse : « wollen wir eines Einwandes gedenken, welcher unserer Voraussetzung bedrohlich werden kann »."
+  },
+  "witz:a1439": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Freud évalue l'objection qu'il vient de construire contre lui-même (soupçon de projection depuis la Traumdeutung) : « Das wäre ein möglicher Einwand, aber darum noch kein berechtigter », puis la réfute."
+  },
+  "witz:a1443": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "Deuxième objection auto-adressée : « Ein anderer Einwand träfe unsere Sache nicht so schwer, wäre aber auch nicht so gründlich zu widerlegen », suivie de son contenu."
+  },
+  "witz:a1447": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "« einen Einwand macht » sert d'exemple générique d'acte mental délibéré dans une comparaison : « … als wenn man ein Urteil fällt, einen Einwand macht »."
+  },
+  "witz:a1458": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Allusion rétrospective sans contenu : « entwerteten aber diese Auffassung selbst durch nahe liegende Einwendungen » — aucune objection n'est énoncée."
+  },
+  "witz:a1516": {
+   "signal": "auto_citation",
+   "verdict": "confirme",
+   "motif": "Renvoi paginé à son propre développement : « Wir haben nun erfahren (bei der Auflösung gewisser tendenziöser Witze, S. 44), daß der Unsinn im Witze den gleichen Zwecken der Darstellung dienstbar gemacht wird »."
+  },
+  "witz:a1525": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "L'objection contre sa généralisation est énoncée juste avant et Freud s'engage à l'examiner : « Wir dürfen uns der Prüfung dieses Einwandes nicht entziehen »."
+  },
+  "witz:a1773": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "L'objection est interne à l'histoire drôle : c'est le Heiratsvermittler qui, « um einen Einwand zu widerlegen », lâche « wer wird denn solchen Leuten etwas leihen! »."
+  },
+  "witz:a1882": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "L'« Einwand » est une réplique dans la devinette rapportée : « Aber um Gotteswillen, heißt dann der entsetzte Einwand, ein Hering hängt doch nicht an der Wand »."
+  },
+  "witz:a1899": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Freud annonce seulement que « Die Abweisung der Einwendungen … » deviendra facile ; les objections visent les définitions du comique de la littérature, aucune n'est formulée."
   }
  }
 }
