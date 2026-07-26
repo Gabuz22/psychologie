@@ -1,0 +1,22 @@
+{
+  "name": "psychologie-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "agents": "^0.2.13",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.114.0"
+  },
+  "allowScripts": {
+    "core-js-pure@3.49.0": true,
+    "esbuild@0.28.1": true,
+    "workerd@1.20260722.1": true
+  }
+}

@@ -91,3 +91,40 @@ Principes tenus par l'API : lecture seule, paramètres liés (jamais concaténé
 porte sa règle de datation, le filtre par année s'appuie sur la fenêtre de chaque atome, la
 densité des grappes se restreint à Sigmund Freud (comme `AgentCourants`), la chronologie compte
 tous les atomes de l'œuvre y compris ceux d'Otto Rank (comme `AgentChronologie`).
+
+## Le serveur MCP — le corpus comme outil pour un assistant IA
+
+`/mcp` expose les MÊMES données que l'API REST (`worker/donnees.js`, une seule logique de
+requête pour les deux façades) via le Model Context Protocol — n'importe quel client compatible
+(Claude Desktop, Claude Code, tout autre) peut s'y connecter et interroger le corpus
+directement, sans passer par le site.
+
+**Se connecter depuis Claude Code** :
+
+```bash
+claude mcp add --transport http corpus-freud https://psychologie.guzan99.workers.dev/mcp
+```
+
+**Se connecter depuis Claude Desktop** — Réglages → Connecteurs → Ajouter un connecteur
+personnalisé → coller l'URL `https://psychologie.guzan99.workers.dev/mcp`.
+
+**Six outils**, décrits dans `worker/mcp.js` avec des descriptions écrites pour le modèle qui
+les lira (pas seulement pour un humain) : `referentiel`, `rechercher`, `atome`, `grappe`,
+`chronologie`, `lire`. Le serveur porte des **instructions systémiques** rappelées à la
+connexion : ne jamais répondre sur Freud à partir des connaissances générales du modèle sans
+avoir appelé un outil — toute affirmation doit s'appuyer sur un atome retourné par le serveur,
+cité avec sa règle de datation.
+
+**Détail technique retenu** : une instance de serveur MCP est créée À CHAQUE REQUÊTE (jamais
+partagée entre requêtes/clients) — consigne de sécurité du SDK MCP ≥1.26 contre la réutilisation
+de connexion entre clients différents. Le paquet `agents/mcp` importe dynamiquement le SDK
+Vercel AI (`"ai"`) pour une fonctionnalité CLIENT inutilisée ici ; `wrangler.jsonc:alias` le
+redirige vers un stub (`worker/_stub_ai.js`) plutôt que d'installer une dépendance inutile.
+
+Test local rapide (sans client MCP complet) :
+
+```bash
+curl -X POST http://localhost:8787/mcp \
+  -H "Content-Type: application/json" -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```

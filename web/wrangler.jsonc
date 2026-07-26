@@ -5,6 +5,12 @@
 	"name": "psychologie",
 	"main": "worker/index.js",
 	"compatibility_date": "2026-07-01",
+	// requis par le SDK MCP (agents/mcp, @modelcontextprotocol/sdk) — voir worker/mcp.js
+	"compatibility_flags": ["nodejs_compat"],
+	// "ai" (Vercel AI SDK) : dépendance CLIENT de agents/mcp, jamais utilisée ici (on ne sert
+	// que createMcpHandler, côté serveur) — substituée par un stub pour que l'empaquetage
+	// résolve l'import sans installer un paquet inutile. Voir worker/_stub_ai.js.
+	"alias": { "ai": "./worker/_stub_ai.js" },
 	"assets": {
 		"directory": "site",
 		// Les routes /api/* n'ont pas de fichier statique : elles tombent sur le Worker.
