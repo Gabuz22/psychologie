@@ -1,0 +1,22 @@
+// Configuration Cloudflare — Worker (API) + assets statiques (site) + base D1 (corpus).
+// Déploiement : voir DEPLOIEMENT.md dans ce dossier.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "psychologie",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "site",
+    // Les routes /api/* n'ont pas de fichier statique : elles tombent sur le Worker.
+    "not_found_handling": "single-page-application"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "psychologie-corpus",
+      // À REMPLACER par l'identifiant rendu par : wrangler d1 create psychologie-corpus
+      "database_id": "REMPLACER-PAR-L-ID-DE-LA-BASE"
+    }
+  ],
+  "observability": { "enabled": true }
+}

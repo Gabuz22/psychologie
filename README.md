@@ -262,12 +262,18 @@ python -m unittest discover -s core/tests -t .
 
 Aucune dépendance : bibliothèque standard Python uniquement.
 
+**Le site** (`web/`) expose le corpus en ligne — Cloudflare Worker + D1, frontend statique
+sans framework. Le Worker ne calcule rien : il sert en lecture seule ce que
+`bin/exporter_d1.py` a déversé du pipeline Python (atomes, concepts, grappes, verdicts,
+fenêtres de datation). Déploiement pas à pas : [`web/DEPLOIEMENT.md`](web/DEPLOIEMENT.md).
+
 ```
 sources/freud/de/          textes de travail — jamais modifiés
 sources/freud/facsimiles/  1res éditions océrisées — collation seulement, jamais citées
 core/               segmentation · lexique · atomisation · corpus · agents
-bin/                atomiser.py (produire) · analyser.py (interroger)
-derive/             sorties régénérables
+bin/                atomiser.py · analyser.py · rechercher.py · exporter_d1.py
+web/                site Cloudflare : worker (API D1) + site (statique) + DEPLOIEMENT.md
+derive/             sorties régénérables (dont derive/d1/, les dumps pour D1)
 documentation/      inventaire empirique et méthode
 ```
 

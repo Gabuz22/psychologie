@@ -1,0 +1,103 @@
+/* Atomes — style sobre : le texte de Freud est la vedette, l'interface s'efface. */
+:root {
+  --encre: #262220;
+  --papier: #faf7f2;
+  --carte: #ffffff;
+  --filet: #ddd5c8;
+  --accent: #7a2e2b;        /* rouge brique discret */
+  --accent-doux: #f3e7e6;
+  --gris: #6d665e;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: system-ui, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --encre: #e8e2d8; --papier: #1d1a17; --carte: #262220; --filet: #443d35;
+    --accent: #d08a86; --accent-doux: #3a2c2b; --gris: #a39a8e;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--papier); color: var(--encre);
+  font-family: var(--sans); line-height: 1.55;
+}
+main, header, nav, footer { max-width: 60rem; margin: 0 auto; padding: 0 1.2rem; }
+
+header { padding-top: 2.5rem; }
+h1 { font-family: var(--serif); font-size: 2.6rem; margin: 0; letter-spacing: .02em; }
+.sous-titre { margin: .3rem 0 0; color: var(--gris); max-width: 44rem; }
+.stats { color: var(--accent); font-size: .95rem; min-height: 1.2em; }
+
+nav { display: flex; gap: 1.4rem; padding-top: .8rem; padding-bottom: .4rem;
+      border-bottom: 1px solid var(--filet); position: sticky; top: 0;
+      background: var(--papier); z-index: 5; }
+nav a { color: var(--encre); text-decoration: none; font-weight: 600; font-size: .95rem; }
+nav a:hover { color: var(--accent); }
+
+section { padding: 2.2rem 0 1rem; }
+h2 { font-family: var(--serif); font-size: 1.6rem; margin: 0 0 .4rem;
+     border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: .15rem; }
+.note { color: var(--gris); font-size: .95rem; max-width: 46rem; }
+
+/* formulaire */
+.grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+          gap: .8rem 1rem; margin: 1rem 0; }
+label { display: flex; flex-direction: column; font-size: .85rem; font-weight: 600;
+        gap: .25rem; color: var(--gris); }
+select, input {
+  font: inherit; padding: .45rem .55rem; border: 1px solid var(--filet);
+  border-radius: 6px; background: var(--carte); color: var(--encre);
+}
+select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.actions { display: flex; align-items: center; gap: .8rem; margin: .6rem 0 1rem; }
+button {
+  font: inherit; font-weight: 600; padding: .5rem 1.2rem; border-radius: 6px;
+  border: none; background: var(--accent); color: #fff; cursor: pointer;
+}
+button:hover { filter: brightness(1.12); }
+button.secondaire { background: transparent; color: var(--accent);
+                    border: 1px solid var(--accent); }
+.compte { color: var(--gris); font-size: .95rem; }
+
+/* résultats */
+.citation {
+  background: var(--carte); border: 1px solid var(--filet); border-left: 4px solid var(--accent);
+  border-radius: 8px; padding: .9rem 1.1rem; margin: .7rem 0;
+}
+.citation blockquote {
+  margin: 0; font-family: var(--serif); font-size: 1.06rem; line-height: 1.5;
+  quotes: "« " " »";
+}
+.citation blockquote::before { content: open-quote; color: var(--accent); }
+.citation blockquote::after { content: close-quote; color: var(--accent); }
+.citation .refs { margin-top: .5rem; font-size: .85rem; color: var(--gris); }
+.citation .refs b { color: var(--encre); }
+.citation .datation {
+  display: inline-block; margin-top: .35rem; font-size: .8rem; padding: .1rem .5rem;
+  border-radius: 99px; background: var(--accent-doux); color: var(--accent);
+}
+.badge { display: inline-block; font-size: .75rem; padding: .05rem .5rem; margin-left: .4rem;
+         border-radius: 99px; border: 1px solid var(--filet); color: var(--gris); }
+
+/* grappes */
+.cartes { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+          gap: .9rem; margin-top: 1rem; }
+.carte {
+  background: var(--carte); border: 1px solid var(--filet); border-radius: 8px;
+  padding: .9rem 1rem; cursor: pointer; transition: border-color .15s;
+}
+.carte:hover { border-color: var(--accent); }
+.carte h3 { margin: 0 0 .2rem; font-size: 1.05rem; font-family: var(--serif); }
+.carte .poids { color: var(--accent); font-size: .85rem; }
+.carte .membres { color: var(--gris); font-size: .85rem; margin-top: .35rem; }
+
+/* méthode */
+.engagements { max-width: 46rem; padding-left: 1.2rem; }
+.engagements li { margin: .55rem 0; }
+
+footer { border-top: 1px solid var(--filet); margin-top: 2.5rem; padding: 1.2rem;
+         color: var(--gris); font-size: .85rem; text-align: center; }
+
+.erreur { color: var(--accent); font-weight: 600; }
+@media (max-width: 40rem) { h1 { font-size: 2rem; } .grille { grid-template-columns: 1fr 1fr; } }
