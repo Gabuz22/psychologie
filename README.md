@@ -236,6 +236,8 @@ est qu'ils s'y regroupent déjà. Détail dans
 
 **Résultats en clair : [`documentation/SYNTHESE_FREUD.md`](documentation/SYNTHESE_FREUD.md)** —
 ce que le corpus dit de Freud, sans jargon technique.
+**Dossiers de référence par grappe : [`documentation/COURANTS_FREUD.md`](documentation/COURANTS_FREUD.md)**
+— chronologie, citations validées et réserves pour chacun des huit courants internes.
 Détail méthodologique : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENTAIRE_ATOMES.md).
 
 ---

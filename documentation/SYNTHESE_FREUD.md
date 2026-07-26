@@ -139,6 +139,9 @@ nuance :
 classification qu'il revendique. Une grappe computée est un candidat de lecture — validé ici,
 mais jamais opposable seul.
 
+**Le dossier complet de chaque grappe** — chronologie par œuvre, part datée d'origine,
+citations validées, réserves — est dans [`COURANTS_FREUD.md`](COURANTS_FREUD.md).
+
 ---
 
 ## 3. La chronologie des concepts
