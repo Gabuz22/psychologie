@@ -33,6 +33,40 @@ class TestCorpus(unittest.TestCase):
         self.assertTrue(self.c.par_sous_concept("todestrieb"))
         self.assertEqual(self.c.par_concept("concept_inexistant_xyz"), [])
 
+    def test_recherche_combine_les_filtres_en_et(self):
+        """Chaque filtre RESTREINT — ajouter un critère ne peut jamais faire grandir le résultat."""
+        large = self.c.rechercher(concept="trieb")
+        etroit = self.c.rechercher(concept="trieb", oeuvre="jenseits")
+        self.assertLessEqual(len(etroit), len(large))
+        self.assertTrue(etroit)
+        for a in etroit:
+            self.assertEqual(a["oeuvre"], "jenseits")
+            self.assertTrue(any(c["concept"] == "trieb" for c in a["concepts"]))
+
+    def test_recherche_par_auteur_isole_rank(self):
+        rank = self.c.rechercher(auteur="Otto Rank")
+        self.assertTrue(rank)
+        for a in rank:
+            self.assertEqual(a["auteur"], "Otto Rank")
+
+    def test_recherche_par_mot_cle_est_insensible_a_la_casse(self):
+        a = self.c.rechercher(mot_cle="wunscherfüllung")
+        b = self.c.rechercher(mot_cle="WUNSCHERFÜLLUNG")
+        self.assertEqual({x["id"] for x in a}, {x["id"] for x in b})
+        self.assertTrue(a)
+
+    def test_recherche_par_annee_respecte_la_fenetre_de_datation(self):
+        """Une fenêtre entièrement HORS de la vie de l'œuvre doit exclure tous ses atomes.
+
+        La Traumdeutung n'existe qu'à partir de 1900 (origine) et jusqu'à 1914 (édition lue) —
+        origine comme ajouts compris, aucun atome ne peut prétendre à une fenêtre antérieure à
+        1900. Une recherche bornée à 1899 doit donc rendre le corpus vide, pas un faux résultat.
+        """
+        avant = self.c.rechercher(concept="symbol", oeuvre="traumdeutung", annee_max=1899)
+        self.assertEqual(avant, [])
+        pendant = self.c.rechercher(concept="symbol", oeuvre="traumdeutung", annee_max=1914)
+        self.assertTrue(pendant)
+
     def test_citation_est_verifiable(self):
         """Une citation doit permettre de retrouver le passage — sinon elle ne vaut rien."""
         a = self.c.par_concept("traum")[0]

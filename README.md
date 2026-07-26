@@ -238,6 +238,10 @@ python bin/analyser.py trieb              # dossier d'un concept + chronologie +
 python bin/analyser.py --agent cooccurrence
 python bin/analyser.py angst --json       # sortie brute, pour chaîner
 
+python bin/rechercher.py --concept trieb --annee-max 1905      # recherche multicritère
+python bin/rechercher.py --auteur "Otto Rank"                  # filtre par auteur réel
+python bin/rechercher.py --groupe pulsion --csv > citations.csv  # export pour un tableur
+
 python -m unittest discover -s core/tests -t .
 ```
 
@@ -287,5 +291,6 @@ Restent à faire :
    voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
    `courants` est l'instrument de cette question — construit et validé sur Freud seul, prêt à
    recevoir un second auteur.
-3. **Rendre le corpus consultable** sans relancer un script — recherche et export de citations par
-   concept, auteur, période.
+3. ~~**Rendre le corpus consultable** sans relancer un script — recherche et export de citations~~
+   **Fait** : `bin/rechercher.py` — filtres combinables (concept, groupe, sous-concept, auteur,
+   œuvre, statut, fonction, mot-clé, fenêtre d'années), export `--json`/`--csv`.
