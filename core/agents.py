@@ -19,6 +19,7 @@ question posée, et chacun ignore l'existence des autres.
 import itertools
 import re
 
+from . import verification
 from .segmentation import replier
 
 AGENTS_VERSION = "1.0.0"
@@ -267,25 +268,39 @@ class AgentTension(Agent):
 
 # --------------------------------------------------------------------------------------------
 class AgentSignaux(Agent):
-    """La liste de travail : révisions, objections et auto-citations REPÉRÉES, à faire vérifier."""
+    """La liste de travail : ce qui est REPÉRÉ, ce qui est JUGÉ, ce qui reste à lire.
+
+    L'agent distingue trois états et ne les mélange jamais : un signal confirmé en contexte est
+    opposable ; un signal rejeté est écarté avec son motif ; un signal non lu reste une piste.
+    C'est ce qui rend la vérification cumulative — sans quoi chaque relecture repartirait de zéro.
+    """
 
     nom = "signaux"
-    question = "Quels passages demandent une vérification humaine ou par modèle de langage ?"
+    question = "Quels passages sont vérifiés, et lesquels demandent encore une lecture ?"
 
     def executer(self, corpus, signal=None, maximum=40, **kw):
         atomes = corpus.a_confirmer(signal)
+        table = verification.charger()
         par_signal = {}
         for a in atomes:
             for s in a["signaux_a_confirmer"]:
                 par_signal[s] = par_signal.get(s, 0) + 1
+
+        juges = verification.confirmes(atomes, signal, table)
+        restants = [a for a in atomes if not table["verdicts"].get(a["id"])]
         return self._fiche({
             "statut": "a_confirmer",
             "total": len(atomes),
             "par_signal": dict(sorted(par_signal.items(), key=lambda x: -x[1])),
-            "passages": [dict(corpus.citer(a), signaux=a["signaux_a_confirmer"])
-                         for a in atomes[:maximum]],
-            "note": ("Un marqueur lexical ne prouve pas qu'un auteur se corrige : mesuré à environ "
-                     "3 vrais positifs sur 7 pour « révision ». Ces passages sont des pistes."),
+            "avancement": verification.etat(corpus.atomes, table),
+            "confirmes": [dict(corpus.citer(a), signal=j["signal"], motif=j["motif"])
+                          for a, j in juges[:maximum]],
+            "restants": [dict(corpus.citer(a), signaux=a["signaux_a_confirmer"])
+                         for a in restants[:maximum]],
+            "note": ("Un marqueur lexical ne prouve pas qu'un auteur se corrige. Sur les 15 "
+                     "candidats « révision » lus en contexte, 5 se sont confirmés : les autres "
+                     "étaient un personnage de roman qui se corrige, un correcteur d'imprimerie, "
+                     "ou un auteur tiers en corrigeant d'autres."),
         })
 
 

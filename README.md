@@ -94,7 +94,7 @@ de langage : le pipeline est **entièrement déterministe** (même texte → mê
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-59 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+66 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -112,7 +112,29 @@ calcul au lieu de faire confiance. Chaque sortie est **citable** jusqu'au texte 
 | `cooccurrence` | Quels concepts pense-t-il **ensemble** ? |
 | `chronologie` | La place d'un concept change-t-elle d'une œuvre à l'autre ? |
 | `tension` | Où trouve-t-on des énoncés de sens opposé sur un même concept ? |
-| `signaux` | Quels passages demandent une vérification ? |
+| `signaux` | Quels passages sont vérifiés, lesquels restent à lire ? |
+
+### La vérification, cumulative
+
+Un lexique dit **où regarder** ; il ne peut pas trancher qu'un auteur se corrige. Les jugements
+portés en contexte — par un humain ou un modèle de langage — sont donc consignés dans
+`verification/signaux_verifies.json`, versionné et argumenté : sans cela, chaque relecture
+repartirait de zéro.
+
+Trois états, jamais mélangés : **confirmé** (opposable), **rejeté** (écarté, motif à l'appui),
+**non lu** (ni promu ni écarté).
+
+| Signal | Repérés | Lus | Confirmés | Précision mesurée |
+|---|---:|---:|---:|---:|
+| `revision` | 15 | **15** | 5 | **0,33** |
+| `objection` | 177 | 0 | — | non mesurée |
+| `auto_citation` | 57 | 0 | — | non mesurée |
+
+Les 15 candidats « révision » ont été lus intégralement. Les 10 écartés sont instructifs : un
+personnage de roman qui corrige son erreur, un correcteur d'imprimerie, Westermarck déclarant que
+*d'autres* auteurs se trompent. Parmi les 5 confirmés, le cas d'école : « *Ich hatte damals die
+(später als unrichtig erkannte) Meinung…* » — Freud déclarant qu'une position sienne fut ensuite
+reconnue fausse.
 
 Un **chef d'orchestre** choisit les agents selon la question : passe générale sans argument,
 suite ciblée (`concept` → `chronologie` → `tension`) quand un concept est donné. Un agent en
@@ -199,8 +221,8 @@ Restent à faire, dans l'ordre :
    déclaratif d'une œuvre, atomisation mémorisée, agents inchangés.
 2. **Dater les couches** par collation avec les premières éditions — la seule façon de lever
    l'incertitude qui pèse aujourd'hui sur toute chronologie.
-3. **Vérifier les signaux** repérés (révisions, objections) — c'est là qu'un modèle de langage
-   apporte ce qu'un lexique ne peut pas : juger un passage en contexte.
+3. **Poursuivre la vérification** : les 15 « révisions » sont instruites ; restent 177 objections
+   et 57 auto-citations. Le mécanisme est en place, il ne demande que de la lecture.
 4. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
    voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
    `cooccurrence` est l'instrument de cette question.

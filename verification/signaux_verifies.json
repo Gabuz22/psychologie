@@ -1,0 +1,76 @@
+{
+ "meta": {
+  "version": "1.0.0",
+  "objet": "Verdicts humains/LLM sur les signaux que le lexique ne peut que SIGNALER (révision, objection, auto-citation). Un marqueur lexical dit où regarder ; seule une lecture en contexte tranche.",
+  "protocole": "Chaque candidat est lu avec son contexte immédiat. Verdict « confirme » seulement si l'énoncé est une prise de position de FREUD sur SON PROPRE travail antérieur — ni un personnage de fiction, ni un patient, ni un autre auteur, ni une correction d'imprimerie.",
+  "verifie_par": "Claude (Opus 4.8), lecture en contexte, 2026-07-26",
+  "portee": "signal « revision » : les 15 candidats du corpus (11 œuvres) sont tous jugés ci-dessous. Les signaux « objection » (177) et « auto_citation » (57) restent à instruire.",
+  "verdicts_possibles": {
+   "confirme": "signal réel — l'atome dit ce que le marqueur laissait espérer",
+   "rejete": "faux positif — le marqueur a été déclenché par autre chose",
+   "reclasse": "signal réel mais d'une autre nature que celle détectée"
+  }
+ },
+ "verdicts": {
+  "traumdeutung:a915": {
+   "signal": "revision", "verdict": "confirme",
+   "motif": "Cas d'école : « Ich hatte damals die (später als unrichtig erkannte) Meinung… » — Freud déclare explicitement qu'une position sienne a été RECONNUE FAUSSE ensuite. Porte sur la technique analytique (croire qu'il suffit de communiquer au malade le sens caché de ses symptômes)."
+  },
+  "traumdeutung:a28": {
+   "signal": "revision", "verdict": "confirme",
+   "motif": "Préface : il dit avoir tenté de « hisser le texte antérieur au niveau de nos vues actuelles » et s'excuser d'y avoir parfois échoué. Révision assumée au niveau de l'œuvre — et aveu direct que les couches d'écriture coexistent dans le texte."
+  },
+  "traumdeutung:a21": {
+   "signal": "revision", "verdict": "confirme",
+   "motif": "Préface à la 3e édition : « Der Fortschritt wissenschaftlicher Erkenntnis hat auch die Traumdeutung nicht unberührt gelassen. » Reconnaissance que le progrès scientifique a atteint le livre. Révision au niveau de l'œuvre, non d'une thèse précise."
+  },
+  "jenseits:a441": {
+   "signal": "revision", "verdict": "confirme",
+   "motif": "« Klinische Beobachtungen haben uns SEINERZEIT zur Auffassung genötigt… » : rappel daté de sa position antérieure sur le masochisme comme retournement du sadisme — précisément au moment où il va la remanier en posant un masochisme primaire. Le contexte immédiat le dit (« daß wir sie bereits früher einmal gemacht haben »)."
+  },
+  "ueber_psychoanalyse:a203": {
+   "signal": "revision", "verdict": "confirme",
+   "motif": "Récit du remaniement de sa technique : « In Wirklichkeit traf es nur die ersten Male zu… » — l'insistance simple ne suffisait plus, les idées venues étaient tenues pour fausses par les malades eux-mêmes. Freud raconte pourquoi il a dû changer de méthode."
+  },
+  "traumdeutung:a1564": {
+   "signal": "revision", "verdict": "reclasse", "vers": "auto_citation",
+   "motif": "« (Neurolog. Zentralblatt, 1895) habe ich seinerzeit behauptet… » : renvoi daté et référencé à un travail antérieur sur l'angoisse névrotique. C'est une auto-citation nette, mais il la REPREND à son compte ici, il ne la corrige pas."
+  },
+  "gradiva:a600": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "C'est HANOLD, le personnage du roman de Jensen, qui « berichtigt » son erreur de la veille. Une correction de fiction, pas une révision de Freud."
+  },
+  "psychopathologie:a4": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Les « noms de substitution » sont reconnus faux par le SUJET qui cherche un nom oublié. Description d'un mécanisme, pas une correction d'auteur."
+  },
+  "psychopathologie:a8": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Cas Signorelli : c'est le jugement de Freud qui écarte Botticelli et Boltraffio comme faux — auto-observation clinique, non révision théorique."
+  },
+  "psychopathologie:a389": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Correction d'épreuves d'imprimerie (noms d'auteurs étrangers mal composés par le typographe). Aucun rapport avec une position théorique."
+  },
+  "psychopathologie:a874": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Énoncé général des critères de l'acte manqué (« si nous sommes corrigés par autrui… »). C'est la théorie qui parle de correction, ce n'est pas Freud qui se corrige."
+  },
+  "totem:a548": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Citation de Westermarck affirmant que Jevons et Grant Allen « sont dans l'erreur ». Un tiers corrigeant d'autres tiers, rapporté par Freud."
+  },
+  "traumdeutung:a265": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "« wie nunmehr der Erwachende erkennt » appartient au RÉCIT DE RÊVE cité (le dormeur reconnaît le réveille-matin). « nunmehr » y est purement narratif."
+  },
+  "traumdeutung:a4733": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Citation de la XIIe Élégie romaine de Goethe. Le marqueur s'est déclenché sur le vocabulaire du poème."
+  },
+  "traumdeutung:a5754": {
+   "signal": "revision", "verdict": "rejete",
+   "motif": "Contenu théorique sur le jugement qui rejette une pensée « comme fausse ou inutilisable ». C'est l'objet décrit qui corrige, pas l'auteur."
+  }
+ }
+}

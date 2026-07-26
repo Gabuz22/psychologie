@@ -76,9 +76,22 @@ def _rendre(nom, r):
                 print("      · %s" % " ".join(cit["texte"].split())[:150])
         print("\n  %s" % r["note"])
     elif nom == "signaux":
-        print("  %d passages à vérifier · %s" % (r["total"], r["par_signal"]))
-        for p in r["passages"][:6]:
-            print("    [%s] %s" % (",".join(p["signaux"]), " ".join(p["texte"].split())[:140]))
+        print("  %d passages repérés · %s" % (r["total"], r["par_signal"]))
+        print("\n  AVANCEMENT DE LA VÉRIFICATION (lecture en contexte) :")
+        for s, v in r["avancement"]["par_signal"].items():
+            p = v["precision_mesuree"]
+            print("    %-14s %4d repérés · %3d lus · %2d confirmés · %2d rejetés · %4d restants%s"
+                  % (s, v["total"], v["juges"], v["confirmes"], v["rejetes"], v["restants"],
+                     ("  (précision %.2f)" % p) if p is not None else ""))
+        if r["confirmes"]:
+            print("\n  CONFIRMÉS EN CONTEXTE — opposables :")
+            for c in r["confirmes"][:5]:
+                print("    · %s" % " ".join(c["texte"].split())[:135])
+                print("        %s — %s" % (c["oeuvre"][:38], c["motif"][:110]))
+        if r["restants"]:
+            print("\n  RESTE À LIRE (échantillon) :")
+            for p in r["restants"][:4]:
+                print("    [%s] %s" % (",".join(p["signaux"]), " ".join(p["texte"].split())[:120]))
         print("\n  %s" % r["note"])
 
 
