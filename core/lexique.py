@@ -226,8 +226,17 @@ CONCEPTS = {
             "bewusstsein": ["bewusstsein", "bewusst"],
             "zensur": ["zensur"],
             "ich": ["ich-", "ichs"],          # « Ich » nu est trop ambigu (pronom) — voir note ci-dessous
-            "es": ["das es"],
-            "ueberich": ["ueber-ich", "ueberich"],
+            # « es » est le pronom « il/cela » en allemand : impossible à capter nu sans tout
+            # ramasser. On ne le prend donc qu'après un déterminant, là où il désigne l'instance
+            # (« das Es », « vom Es »). Comme pour « Ich », mieux vaut manquer que sur-détecter.
+            "es": [r"(?:das|des|dem|vom|im|ins) es\b"],
+            # PIÈGE DE TRANSLITTÉRATION, resté invisible jusqu'à l'arrivée des « Neue Folge » :
+            # ces termes étaient écrits « ueber-ich », comme si le ü devenait « ue ». Or le
+            # repliement SUPPRIME les diacritiques : « Über-Ich » donne « uber-ich ». Résultat,
+            # le SURMOI — l'une des trois instances de la seconde topique — n'était détecté nulle
+            # part dans le corpus (48 mentions manquées dans les seules Neue Folge).
+            # Les deux graphies sont gardées : le corpus mélange « Über-Ich » et « Überich ».
+            "ueberich": ["uber-ich", "uberich"],
             # L'« appareil psychique » est le modèle central du chapitre VII — il manquait.
             "apparat": ["apparat", "instanz", "system"],
             "psychisme": ["seelisch", "seele", "psychisch", "psyche"],

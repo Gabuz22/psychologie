@@ -178,6 +178,24 @@ OEUVRES = {
         "source": "Project Gutenberg #30843 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/30843",
     },
+    "neue_folge": {
+        "fichier": "1933_neue_folge.ws.txt",
+        "titre": "Neue Folge der Vorlesungen zur Einführung in die Psychoanalyse",
+        "titre_fr": "Nouvelles conférences d'introduction à la psychanalyse",
+        "annee_oeuvre": 1933,
+        "annee_edition": 1933,     # 1. Auflage — datation exacte
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Wien",
+        # PROVENANCE DIFFÉRENTE : Wikisource (allemand), et non Project Gutenberg. Le site
+        # américain gutenberg.org ne distribue pas les œuvres tardives de Freud — non parce
+        # qu'elles seraient protégées (mort en 1939 → libres depuis 2010 en Europe) mais parce
+        # que le droit AMÉRICAIN se règle sur la date de publication. Wikisource, hébergé
+        # ailleurs et sous licence libre, les propose légalement.
+        "provenance": "wikisource",
+        "source": "Wikisource DE (Bearbeitungsstand « fertig » : relu deux fois sur le fac-similé)",
+        "url": "https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einführung_in_die_Psychoanalyse",
+        "fac_simile": "https://archive.org/details/Freud_1933_Neue_Folge_k",
+    },
     "jenseits": {
         "fichier": "1920_jenseits_lustprinzips.pg.txt",
         "titre": "Jenseits des Lustprinzips",
@@ -210,7 +228,7 @@ def charger(cle):
     chemin = os.path.join(DOSSIER_DE, meta["fichier"])
     with open(chemin, encoding="utf-8") as f:
         brut = f.read()
-    texte, bornage = _extraire_corps(brut)
+    texte, bornage = _extraire_corps(brut, meta.get("provenance", "gutenberg"))
     meta.update({
         "cle": cle,
         "empreinte_fichier": hashlib.sha256(brut.encode("utf-8")).hexdigest()[:16],
@@ -223,12 +241,16 @@ def charger(cle):
     return {"texte": texte, "meta": meta}
 
 
-def _extraire_corps(brut):
+def _extraire_corps(brut, provenance="gutenberg"):
     """Retire l'en-tête/licence Gutenberg PUIS le paratexte du transcripteur.
 
     Si une borne manque, on le DIT dans le rapport plutôt que de laisser croire à un texte propre :
     un corpus silencieusement pollué est pire qu'un corpus dont on connaît le défaut.
     """
+    if provenance != "gutenberg":
+        # Texte assemblé depuis Wikisource : le paratexte (annotations [WS], numéros de page du
+        # fac-similé, navigation) a déjà été écarté à l'extraction. Rien à borner ici.
+        return brut.strip(), "source Wikisource — paratexte écarté à l'extraction"
     d = _DEBUT.search(brut)
     f = _FIN.search(brut)
     if not d or not f or f.start() <= d.end():

@@ -183,6 +183,21 @@ class TestLexique(unittest.TestCase):
             self.assertTrue(attendus <= trouves,
                             "« %s » : manquent %s" % (phrase, attendus - trouves))
 
+    def test_seconde_topique_detectee(self):
+        """Ich / Es / Über-Ich — les trois instances doivent être reconnues.
+
+        PIÈGE DE TRANSLITTÉRATION resté longtemps invisible : le terme était écrit « ueber-ich »,
+        comme si le ü devenait « ue ». Or le repliement SUPPRIME les diacritiques (« Über » →
+        « uber ») : le SURMOI n'était détecté nulle part dans tout le corpus.
+        """
+        moi = {x["concept"] for x in lexique.concepts_de("Das Ich ist vom Es abhängig.")}
+        surmoi = {x["concept"] for x in lexique.concepts_de(
+            "Das Über-Ich ist der Erbe des Ödipuskomplexes.")}
+        ca = {x["concept"] for x in lexique.concepts_de("Das Es kennt keine Verneinung.")}
+        self.assertIn("ich", moi)
+        self.assertIn("ueberich", surmoi)
+        self.assertIn("es", ca)
+
     def test_ich_pronom_nest_pas_le_moi(self):
         """PIÈGE : « ich » = « je » chez Freud qui écrit à la 1re personne. Ne pas taguer « topique »."""
         c = lexique.concepts_de("Ich habe diesen Traum selbst geträumt.")

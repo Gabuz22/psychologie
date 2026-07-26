@@ -25,8 +25,14 @@ Le travail d'analyse, lui, se fait en français. La traduction des concepts vien
 
 ## Corpus
 
-**Dix œuvres, 1900-1921** — l'ensemble de ce que Project Gutenberg propose de Freud en allemand.
-Une **★** signale une datation certaine : édition d'origine, ou réimpression déclarée inchangée.
+**Onze œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
+réimpression déclarée inchangée.
+
+Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
+libre **partout** depuis 2010 (mort en 1939 + 70 ans), mais `gutenberg.org` est une organisation
+**américaine**, soumise à une règle fondée sur la date de *publication* — elle ne distribue donc
+pas les œuvres tardives. Les *Neue Folge* (1933) viennent de **Wikisource allemand**, hébergé
+ailleurs et sous licence libre, où elles sont légalement disponibles et relues deux fois.
 
 | Œuvre | Original | Édition lue | Source |
 |---|---|---|---|
@@ -40,6 +46,7 @@ Une **★** signale une datation certaine : édition d'origine, ou réimpression
 | *Das Unheimliche* ★ | 1919 | 1ʳᵉ publication, 1919 | [#34222](https://www.gutenberg.org/ebooks/34222) |
 | *Jenseits des Lustprinzips* | 1920 | 2ᵉ éd., 1921 | [#28220](https://www.gutenberg.org/ebooks/28220) |
 | *Massenpsychologie und Ich-Analyse* ★ | 1921 | 1ʳᵉ éd., 1921 | [#30843](https://www.gutenberg.org/ebooks/30843) |
+| *Neue Folge der Vorlesungen* ★ | 1933 | 1ʳᵉ éd., 1933 | [Wikisource DE](https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einf%C3%BChrung_in_die_Psychoanalyse) |
 
 **Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
 éditions utilisées sont antérieures à 1931.
@@ -79,15 +86,15 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**15 832 atomes** sur dix œuvres, **tous** localisables dans la source, produits sans aucun modèle
+**17 975 atomes** sur onze œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-72 % sont qualifiés ; **5 œuvres sur 10 ont une datation certaine**.
+71 % sont qualifiés ; **6 œuvres sur 11 ont une datation certaine**.
 
 **Finesse de la catégorisation** — 15 groupes conceptuels, 104 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-58 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+59 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -125,8 +132,11 @@ L'agent `cooccurrence` retrouve les couples que tout lecteur de Freud reconnaît
 (1920) — c'est la thèse même du livre sur le mot d'esprit, le plaisir né d'une épargne de dépense
 psychique.
 
-La chronologie de `trieb` montre la pulsion envahir la pensée de Freud : 5 ‰ dans la
-*Traumdeutung*, 140 ‰ dans les *Trois essais*, 231 ‰ dans *Jenseits*.
+La chronologie retrouve l'histoire réelle des concepts. `trieb` : 5 ‰ dans la *Traumdeutung*
+(1900), 141 ‰ dans les *Trois essais* (1905), 231 ‰ dans *Jenseits* (1920). Et la **seconde
+topique apparaît à sa date** : `Über-Ich` est absent de tout le corpus jusqu'à 1933 (29 ‰) ;
+`Es` reste sous 1 ‰ avant 1920 puis saute à 23 ‰ ; `Ich` culmine en 1921 — dans un livre qui
+s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 C'est cet agent qui portera l'objectif long terme : si les courants postérieurs se recomposent à
 partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme des grappes de concepts.
