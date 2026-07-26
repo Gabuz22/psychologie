@@ -84,31 +84,39 @@ C'est ce type de regroupement qui servira la question de fond du projet : si les
 postérieurs se recomposent à partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme
 des grappes.
 
-### Les paires deviennent sept grappes
+### Les paires deviennent huit grappes
 
 L'agent `courants` va plus loin que les paires : il PARTITIONNE tout le graphe de concepts par
 maximisation gloutonne de la modularité (Newman, 2004), un algorithme déterministe — aucune
-grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 107 concepts suffisamment
-reliés, la partition atteint une **modularité de 0,361** — au-dessus du seuil de 0,30 généralement
+grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 126 concepts suffisamment
+reliés, la partition atteint une **modularité de 0,372** — au-dessus du seuil de 0,30 généralement
 retenu comme signe d'une vraie structure plutôt que d'un artefact du graphe (Newman & Girvan,
 2004). Huit grappes en ressortent :
 
 | Grappe | Concepts (extrait) | Atomes |
 |---|---|---:|
-| Travail du rêve | *Traum, Wunsch, Verdichtung, Verschiebung, Zensur, Affekt* | 4 656 |
-| Père, religion, mort | *Vater, Mutter, Ödipus, Totem, Tabu, Gott, Tod, Trauer* | 4 076 |
-| Appareil psychique + esprit | *Bewußtsein, Unbewußt, Besetzung, Lustprinzip, Witz, Komik* | 4 016 |
-| Clinique pulsionnelle | *Trieb, Sexualität, Libido, Neurose, Angst, Kultur, Aggression* | 3 929 |
-| Souvenir et création | *Erinnerung, Vergessen, Dichter, Phantasie, Symbol, Wahn* | 1 884 |
-| Peinture | *Kunst, Malerei, Teufel* | 386 |
-| Masse et autorité | *Masse, Führer, Suggestion, Institution* | 330 |
-| Seconde topique | *Ich, Es, Über-Ich* | 265 |
+| Le rêve, la mémoire et l'interprétation | *Traum, Verdichtung, Zensur, Erinnerung, Deutung* | 5 527 |
+| L'appareil psychique et l'économie du plaisir | *Bewußtsein, Besetzung, Lustprinzip, Körper, Witz* | 4 345 |
+| La clinique : névroses, cure, délire en fiction | *Hysterie, Zwangsneurose, Arzt, Behandlung, Wahn* | 3 436 |
+| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Weiblichkeit, Tod* | 3 374 |
+| Religion, anthropologie, discours de la science | *Totem, Tabu, Gott, Wissenschaft, Theorie* | 2 045 |
+| La pulsion, le développement sexuel, les instances | *Trieb, Libido, Sublimierung, Ich, Es, Über-Ich* | 2 027 |
+| La masse, l'autorité et la suggestion | *Masse, Führer, Suggestion, Hypnose* | 387 |
+| La peinture | *Kunst, Malerei, Teufel* | 386 |
 
 **Contrôle de sens intégré** (pas seulement mesuré une fois, mais rejoué à chaque test) : *Ich*,
 *Es* et *Über-Ich* — la seconde topique, trois concepts inséparables par construction théorique —
-tombent TOUJOURS dans la même grappe, minuscule et parfaitement pure : rien d'autre ne s'y mêle.
-*Wunsch* et *Wunscherfüllung*, *Masochismus* et *Sadismus* aussi. Si l'algorithme les avait
-dispersés, la partition n'aurait mesuré aucune structure réelle.
+tombent TOUJOURS dans la même grappe. *Wunsch* et *Wunscherfüllung*, *Masochismus* et *Sadismus*
+aussi. Si l'algorithme les avait dispersés, la partition n'aurait mesuré aucune structure réelle.
+
+**Ces grappes BOUGENT quand l'ontologie s'affine — et c'est un résultat, pas un défaut.**
+L'audit 4 du lexique (2026-07) a ajouté 22 concepts, dont la différence des sexes et le
+vocabulaire de la cure : la partition s'est recomposée en profondeur (modularité 0,361 → 0,372,
+donc une structure un peu plus nette). La clinique s'est détachée en grappe propre au lieu
+d'être diluée dans la pulsion ; la différence des sexes a rejoint le roman familial ; la seconde
+topique, jusque-là isolée, s'est rattachée au développement sexuel. Une grappe est un état de la
+mesure, jamais une vérité sur Freud — le dossier complet de chacune, régénéré à chaque
+changement, est dans [`COURANTS_FREUD.md`](COURANTS_FREUD.md).
 
 ### Validation qualitative — les grappes lues, pas seulement comptées
 

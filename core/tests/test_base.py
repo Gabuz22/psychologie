@@ -296,6 +296,73 @@ class TestLexique(unittest.TestCase):
             trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
             self.assertNotIn(interdit, trouves, "« %s » a capté « %s »" % (phrase, interdit))
 
+    def test_domaines_de_l_audit_4(self):
+        """Quatrième audit (2026-07), mené sur les VINGT œuvres et non plus cinq.
+
+        Le scan global des atomes non qualifiés a montré que la majorité des mots fréquents
+        restants sont du vocabulaire ORDINAIRE (Person, Leben, Jahre, Stelle, Frage) qu'il ne
+        faut surtout pas taguer — mais il a aussi révélé des pans entiers de doctrine absents :
+        la différence des sexes (526 occ., 17 œuvres, alors qu'une conférence entière des Neue
+        Folge s'intitule « Die Weiblichkeit »), les défenses autres que le refoulement, le
+        complexe de castration, le vocabulaire ordinaire de la cure, et le méta-discours
+        scientifique de Freud sur son propre travail.
+        """
+        cas = {
+            "Die Hysterie zeigt ein Symptom.": {"hysterie", "symptom", "neurose"},
+            "Zwangsvorstellungen und Zwangshandlungen quälen ihn.": {"zwangsneurose"},
+            "Die Sublimierung des Triebes schafft Kultur.": {"sublimierung", "trieb", "kultur"},
+            "Die Projektion erklärt den Animismus.": {"projektion", "animismus"},
+            "Er verleugnet die Wahrnehmung.": {"verleugnung"},
+            "Der Kastrationskomplex und der Penisneid.": {"kastration"},
+            "Die Weiblichkeit ist ein Rätsel.": {"weiblichkeit"},
+            "Die männliche Einstellung.": {"maennlichkeit"},
+            "Der somatische Vorgang im Körper.": {"koerper"},
+            "Die ärztliche Behandlung führt zur Heilung.": {"arzt", "behandlung"},
+            "Die Deutung des Einfalls.": {"deutung", "assoziation"},
+            "Die Hypnose und die kathartische Methode.": {"hypnose"},
+            "Die Aufmerksamkeit schwankt.": {"aufmerksamkeit"},
+            "Die Wissenschaft verlangt Beobachtung und Theorie.":
+                {"wissenschaft", "beobachtung", "theorie"},
+            "Die menschliche Gesellschaft beruht auf Verzicht.": {"gesellschaft"},
+        }
+        for phrase, attendus in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertTrue(attendus <= trouves,
+                            "« %s » : manquent %s" % (phrase, attendus - trouves))
+
+    def test_homonymes_de_l_audit_4_ecartes(self):
+        """CONTRE-ÉPREUVES de l'audit 4 — les pièges relevés en inventoriant les formes captées.
+
+        « Bedeutung » (signification, 375 occurrences) est un tout autre mot que « Deutung »
+        (l'interprétation) ; « Wiederholungszwang » est un concept distinct de la névrose
+        obsessionnelle ; « der Mann » (l'homme, la personne) n'est pas la masculinité comme
+        qualité ; « Sexualtheorie » désigne une théorie particulière, pas le fait d'en avoir une.
+        """
+        cas = {
+            "Die Bedeutung dieses Traumes ist klar.": "deutung",
+            "Die Traumdeutung ist sein Hauptwerk.": "deutung",
+            "Der Wiederholungszwang beherrscht ihn.": "zwangsneurose",
+            "Der Mann trat in das Zimmer.": "maennlichkeit",
+            "Die Sexualtheorie von 1905.": "theorie",
+        }
+        for phrase, interdit in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertNotIn(interdit, trouves, "« %s » a capté « %s »" % (phrase, interdit))
+
+    def test_composes_de_besetzung_captes(self):
+        """La frontière de mot exclut tout composé : les composés attestés sont donc ÉNUMÉRÉS.
+
+        Défaut décelé par un test de l'audit 4 : « Aufmerksamkeitsbesetzung » (l'investissement
+        d'attention) n'était pas reconnu comme un investissement. Même correctif que pour
+        « trieb » — énumérer les formes relevées dans le texte, jamais un joker qui ramasserait
+        n'importe quel mot finissant par « besetzung ».
+        """
+        for phrase in ("Die Aufmerksamkeitsbesetzung schwankt.",
+                       "Die Objektbesetzung wird aufgegeben.",
+                       "Eine Überbesetzung des Systems.",
+                       "Die Besetzung der Vorstellung."):
+            self.assertIn("besetzung", {x["concept"] for x in lexique.concepts_de(phrase)}, phrase)
+
     def test_aucune_qualification_forcee(self):
         """Une phrase neutre ne doit RIEN déclencher — mieux vaut vide que faux."""
         self.assertEqual(lexique.fonctions_de("Das Haus stand am Ufer."), [])

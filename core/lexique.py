@@ -300,7 +300,13 @@ CONCEPTS = {
         "label": "Économie psychique (énergie, quantités)",
         "termes": {
             "erregung": ["erregung", "erregt", "reizung"],
-            "besetzung": ["besetzung", "besetzt", "gegenbesetzung"],
+            # Les composés sont ÉNUMÉRÉS, jamais captés par un joker : même prudence que pour
+            # « trieb ». Décelé par un test de l'audit 4 — « Aufmerksamkeitsbesetzung » n'était
+            # pas vu, la frontière de mot excluant tout composé où « besetzung » est en second.
+            # Liste relevée sur le texte, pas devinée (les 10 formes attestées ≥ 2 occurrences).
+            "besetzung": ["besetzung", "besetzt",
+                          r"(?:gegen|objekt|uber|hemmungs|energie|aufmerksamkeits|libido|probe|"
+                          r"ziel|erinnerungs|bewusstseins|mehr)besetzung"],
             "spannung": ["spannung"],
             "abfuhr": ["abfuhr", "entladung"],
             "energie": ["energie", "quantitat", "intensitat"],
@@ -309,6 +315,10 @@ CONCEPTS = {
             # (?!ion) écarte « Affektion » — l'affection au sens MÉDICAL (nervöse Affektion,
             # 14 occurrences), qui n'est pas l'affect.
             "affekt": [r"affekt(?!ion)"],
+            # L'ATTENTION — audit 4 (2026-07). Grandeur ÉCONOMIQUE chez Freud, pas
+            # psychologie de sens commun : « Aufmerksamkeitsbesetzung » (investissement
+            # d'attention) est le terme technique, d'où sa place dans ce groupe.
+            "aufmerksamkeit": ["aufmerksamkeit"],
         },
     },
     # NOUVEAU GROUPE — mémoire et oubli : 266 « Erinnerung » ignorées, alors que le souvenir
@@ -353,6 +363,19 @@ CONCEPTS = {
             # statue retient), « Wut » sa variante ; « aggress » couvre Aggression, aggressiv et
             # le composé Aggressionstrieb déjà énuméré sous « trieb ».
             "aggression": ["aggress", "zorn", "wut"],
+            # LA DIFFÉRENCE DES SEXES — audit 4 (2026-07). Le plus gros manque du corpus :
+            # 526 occurrences dans 17 œuvres, et une conférence entière des « Neue Folge »
+            # s'intitule « Die Weiblichkeit ». Rien n'en était capté.
+            # « weib » couvre Weib/Weibes/Weibe (la femme, forme d'époque) ET weiblich/
+            # Weiblichkeit — aucun mot allemand ne commence par « weib » sans parler de la femme.
+            "weiblichkeit": ["weib"],
+            # « mannlich » et NON « mann » nu : ce dernier ramasserait « der Mann » (l'homme, la
+            # personne) partout, alors que le concept est la masculinité COMME QUALITÉ, celle que
+            # Freud oppose à la féminité. Même prudence que « ich » réservé au moi.
+            "maennlichkeit": ["mannlich"],
+            # LE CORPS — la pulsion est définie par Freud comme « Grenzbegriff zwischen
+            # Seelischem und Somatischem » : le somatique appartient donc bien à ce groupe.
+            "koerper": ["korper", "somatisch", "organisch", "leiblich"],
         },
     },
     "conflit": {
@@ -365,6 +388,28 @@ CONCEPTS = {
             "angst": ["angst", "angstlich"],
             "abwehr": ["abwehr"],
             "konflikt": ["konflikt"],
+            # LES DEUX GRANDES NÉVROSES, distinguées — audit 4 (2026-07). « neurose » les captait
+            # déjà toutes deux (voir son motif) mais les confondait : impossible de demander ce que
+            # Freud dit de l'hystérie SANS l'obsession, alors que leur distinction est fondatrice.
+            # Elles restent AUSSI sous « neurose » — l'hystérie EST une névrose, le multigroupe
+            # est fait pour ça.
+            "hysterie": ["hysteri"],
+            # « zwangs- » et non « zwang » nu : le second ramasserait la contrainte au sens
+            # ordinaire (66 occ.), et surtout il chevaucherait « wiederholungszwang », concept
+            # distinct du groupe pulsion. Les composés cliniques suffisent et sont sans ambiguïté :
+            # Zwangsneurose, Zwangsvorstellung, Zwangshandlung, Zwangskranke, Zwangsverbot.
+            "zwangsneurose": ["zwangs"],
+            # LES DÉFENSES AUTRES QUE LE REFOULEMENT — audit 4. Le groupe ne connaissait que
+            # « abwehr » (générique) et « verdrangung » : sublimation, projection et déni étaient
+            # hors ontologie, alors que la sublimation est ce par quoi Freud explique la culture
+            # et l'œuvre d'art (Leonardo), et la projection ce par quoi il explique la paranoïa
+            # et l'animisme (Totem und Tabu).
+            "sublimierung": ["sublimier"],
+            "projektion": ["projektion", "projizier"],
+            "verleugnung": ["verleugn"],
+            "reaktionsbildung": ["reaktionsbildung"],
+            "introjektion": ["introjekt"],
+            "isolierung": ["isolierung"],
             "wahn": ["wahn", "wahnsinn", "paranoi"],
             # Concept À PART ENTIÈRE, et non un parasite du rêve (voir la note sur « traum ») :
             # la névrose traumatique et la névrose de guerre sont le point d'appui empirique de
@@ -393,6 +438,11 @@ CONCEPTS = {
             "latenzzeit": ["latenzzeit", "latenzperiode"],
             "pubertaet": ["pubertat"],
             "entwicklung": ["entwicklung", "entwicklungsstufe"],
+            # LE COMPLEXE DE CASTRATION — audit 4 (2026-07). Pièce centrale de la théorie du
+            # développement, articulée à l'Œdipe, et totalement absente de l'ontologie : 116
+            # occurrences dans 7 œuvres. « phallisch » y est joint parce que c'est le nom du
+            # stade que ce complexe conclut.
+            "kastration": ["kastration", "penisneid", "phallisch", "phallus"],
         },
     },
     # NOUVEAU GROUPE — les FIGURES du roman familial. « oedipus » ne captait que le mot (3 atomes) ;
@@ -469,6 +519,8 @@ CONCEPTS = {
             # que les formes nominales, les composés en kriegs- et « Krieger » — jamais le verbe.
             "krieg": [r"krieg(?:e?s|e)?\b", r"kriegs[a-z]", "krieger"],
             "staat": ["staat"],
+            # « gesellschaft » couvre aussi vergesellschaftet/Gesellschaftsordnung.
+            "gesellschaft": ["gesellschaft", "vergesellschaft"],
         },
     },
     # NOUVEAU GROUPE — mort, deuil, perte. Les essais de guerre (1915-1916) et la Teufelsneurose
@@ -532,6 +584,39 @@ CONCEPTS = {
             "psychoanalyse": ["psychoanalyse", "psychoanalytisch"],
             "patient": ["patient", "patientin", "kranke", "kranken"],
             "assoziation": ["assoziation", "einfall", "einfalle"],
+            # LE VOCABULAIRE ORDINAIRE DE LA CURE — audit 4 (2026-07). Le groupe connaissait le
+            # transfert et l'association libre, mais pas le traitement lui-même ni le médecin :
+            # 417 occurrences dans 18 œuvres passaient à travers.
+            "behandlung": ["behandlung", "therapie", "therapeut", "heilung"],
+            "arzt": ["arzt"],
+            # « deutung » NU, et c'est un piège majeur : sans la frontière de mot (posée
+            # automatiquement devant chaque motif), il ramasserait « BEdeutung » (signification,
+            # 375 occ.) — un tout autre mot. La frontière écarte aussi « TRAUMdeutung », qui a
+            # son propre concept dans le groupe « reve ». Restent 323 occurrences de
+            # l'interprétation COMME ACTE, cœur de la méthode.
+            "deutung": ["deutung"],
+            # L'HYPNOSE ET LA CATHARSIS — la technique que Freud a pratiquée puis abandonnée.
+            # Absente de l'ontologie alors qu'elle est le repoussoir constant de la méthode
+            # analytique, et l'objet d'un chapitre entier de « Massenpsychologie ».
+            "hypnose": ["hypnos", "hypnot", "kathar"],
+        },
+    },
+    # NOUVEAU GROUPE — LE DISCOURS DE LA SCIENCE. Ce n'est pas de la théorie psychanalytique
+    # mais le MÉTA-DISCOURS de Freud sur son propre travail : est-ce une science, qu'est-ce qui
+    # y fait preuve, qu'est-ce qui s'y observe. 847 occurrences dans la quasi-totalité des
+    # œuvres, entièrement hors ontologie jusqu'ici — et c'est précisément la matière qui
+    # intéresse un projet dont l'objet est la rigueur épistémique.
+    # Le groupe est nommé et étiqueté pour qu'on ne le confonde jamais avec un concept freudien :
+    # taguer « Beobachtung » dit que l'atome PARLE d'observation, pas que Freud observe.
+    "episteme": {
+        "label": "Discours de la science : statut, méthode, preuve",
+        "termes": {
+            "wissenschaft": ["wissenschaft"],
+            "forschung": ["forschung", "erforsch"],
+            "beobachtung": ["beobachtung", "beobachtet"],
+            # La frontière de mot écarte « SexualTHEORIE », « LibidoTHEORIE », « TraumTHEORIE » :
+            # ces composés parlent d'une théorie PARTICULIÈRE, pas du fait d'en avoir une.
+            "theorie": ["theorie"],
         },
     },
 }

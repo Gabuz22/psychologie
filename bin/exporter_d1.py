@@ -45,55 +45,96 @@ AUTEURS = {
 
 # Éditorial des grappes (résumé de documentation/COURANTS_FREUD.md). L'agent `courants` ne
 # nomme pas ses grappes ni ne les commente — ceci est une couche de PRÉSENTATION, raccrochée
-# par concept signature. Une grappe sans signature connue garde un nom neutre : mieux vaut fade
-# que faux. La citation vedette, elle, N'EST PAS choisie ici : elle vient de l'agent lui-même
-# (AgentCourants._decrire_grappe), pour que le site ne montre jamais un texte que le pipeline
-# déterministe n'a pas produit.
+# par concept SIGNATURE, et l'appariement est vérifié en bijection stricte par nommer_grappes()
+# ci-dessous : un glissement de partition fait ÉCHOUER l'export, il ne produit jamais un
+# libellé emprunté. La citation vedette, elle, n'est pas choisie ici : elle vient de l'agent
+# lui-même (AgentCourants._decrire_grappe), pour que le site ne montre jamais un texte que le
+# pipeline déterministe n'a pas produit.
 EDITORIAL_GRAPPES = [
-    ("traum", "Le travail du rêve",
-     "Mécanisme complet de l'interprétation des rêves : condensation, déplacement, censure, "
-     "travail du rêve. Revient en force en 1922 (Traum und Telepathie) et 1933 (la Neue Folge "
-     "s'ouvre sur une « Revision der Traumlehre »).",
+    ("traumarbeit", "Le rêve, la mémoire et l'interprétation",
+     "Le mécanisme du rêve (condensation, déplacement, censure) soudé à la mémoire et à l'acte "
+     "d'interpréter : chez Freud, déchiffrer un rêve et retrouver un souvenir sont le même "
+     "geste, et le texte les dit ensemble.",
      "21 % des atomes de la Traumdeutung lue (éd. 1914) sont des ajouts postérieurs à 1900 — "
      "voir la densité « d'origine » pour la version corrigée."),
-    ("vater", "Le père, la religion, la mort",
-     "La grappe la plus freudienne du découpage : la religion, la société et l'angoisse "
-     "dérivées du complexe paternel et de la mort — le geste théorique central de Totem und "
-     "Tabu et de Massenpsychologie.",
-     "Fusionne ce qu'un lecteur séparerait (famille / anthropologie / religion / mort). Avant "
-     "1914, la mort voyageait avec la famille ; c'est Jenseits (1920) qui l'arrime à la "
-     "pulsion — voir la stabilité temporelle dans COURANTS_FREUD.md."),
     ("apparat", "L'appareil psychique et l'économie du plaisir",
-     "Le vocabulaire économique (énergie, décharge, investissement) qui unit la métapsychologie "
-     "et le mot d'esprit — la thèse même du Witz est une épargne de dépense psychique.",
-     "Après 1914, l'appareil psychique forme une grappe autonome ; le comique n'y reste que "
-     "par le poids du Witz, seule œuvre du corpus sur le sujet."),
-    ("trieb", "La clinique pulsionnelle",
-     "L'axe professionnel de l'œuvre : théorie des pulsions et doctrine de la cure. La culture "
-     "y figure à bon droit — chez Freud, la culture est un renoncement pulsionnel.",
-     "26 concepts : agrège la théorie sexuelle de 1905 et la doctrine de la cure. La partition "
-     "temporelle sépare, après 1914, un noyau clinique d'un noyau pulsion-mort-culture."),
-    ("erinnerung", "Le souvenir et la création",
-     "Soude la mémoire à la fiction : le fantasme est du souvenir d'enfance remanié, l'œuvre "
-     "est du fantasme avoué — la thèse du Dichter und das Phantasieren et de Gradiva.",
-     "N'existait pas avant l'extension du corpus (2026-07) : ce sont les œuvres sur l'art et "
-     "le souvenir (1907-1917) qui l'ont fait émerger."),
-    ("malerei", "La peinture",
-     "Les trois analyses d'œuvres visuelles du corpus.",
-     "Contient l'artefact le plus instructif du découpage : « Teufel » n'a rien à faire avec "
-     "la peinture — il y est parce que l'unique œuvre sur le diable (Teufelsneurose) porte sur "
-     "un peintre. Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder "
-     "sous la main."),
-    ("masse", "La masse et l'autorité",
-     "Le vocabulaire de la foule et de l'autorité — Massenpsychologie und Ich-Analyse.",
-     "Grappe mono-œuvre : 254 de ses 330 atomes viennent d'un seul livre. Sa pureté est "
+     "Le vocabulaire économique (énergie, décharge, investissement) qui unit la métapsychologie, "
+     "le corps et le mot d'esprit — la thèse même du Witz est une épargne de dépense psychique.",
+     "Réunit la métapsychologie et le comique par leur vocabulaire commun ; le comique n'y tient "
+     "que par le poids du Witz, seule œuvre du corpus sur le sujet."),
+    ("behandlung", "La clinique : névroses, cure — et le délire en fiction",
+     "L'axe professionnel de l'œuvre : hystérie et névrose obsessionnelle, symptôme, angoisse, "
+     "transfert, traitement. Le délire romanesque (Gradiva, l'inquiétante étrangeté) s'y "
+     "rattache — Freud lit la fiction avec les mêmes outils que la clinique.",
+     "Que la fiction rejoigne la clinique tient beaucoup à Gradiva, analyse d'un délire "
+     "littéraire : c'est autant un fait de composition du corpus qu'un fait de doctrine."),
+    ("kastration", "La famille, la différence des sexes et la mort",
+     "Le roman familial (père, mère, fratrie, Œdipe) noué au complexe de castration, à "
+     "l'opposition masculin/féminin et à la mort — la constellation que Freud tient pour "
+     "l'origine commune du symptôme, du mythe et du lien social.",
+     "La différence des sexes n'a rejoint cette grappe qu'à l'audit 4 du lexique (2026-07), qui "
+     "l'a ajoutée à l'ontologie : avant cela, 526 occurrences dans 17 œuvres étaient invisibles."),
+    ("totem", "Religion, anthropologie — et le discours de la science",
+     "Le totémisme, le tabou, le sacrifice, le dieu — et, dans la même grappe, le vocabulaire "
+     "par lequel Freud revendique un statut scientifique. Le voisinage n'est pas fortuit : c'est "
+     "en comparant sa méthode à celle des religions et des mythes qu'il argumente le plus sur "
+     "ce qui fait preuve.",
+     "Le rapprochement science/religion est un fait de COOCCURRENCE : Freud oppose souvent les "
+     "deux, et deux termes opposés dans un même énoncé y voisinent autant que deux termes alliés."),
+    ("libido", "La pulsion, le développement sexuel et les instances",
+     "Libido, sexualité, perversion, développement — et la seconde topique (Moi, Ça, Sur-Moi) "
+     "qui les régit. La sublimation et la formation réactionnelle y figurent : ce sont les "
+     "destins que Freud assigne à la pulsion.",
+     "La seconde topique formait, avant l'audit 4, une grappe minuscule et isolée ; l'ajout du "
+     "vocabulaire du développement sexuel l'a rattachée à la pulsion. Elle reste sous-représentée "
+     "faute de « Das Ich und das Es » (1923), absent du corpus."),
+    ("masse", "La masse, l'autorité et la suggestion",
+     "Le vocabulaire de la foule, du meneur et de l'hypnose — Freud explique le lien de masse "
+     "par le même mécanisme que la suggestion hypnotique.",
+     "Grappe portée par une seule œuvre (Massenpsychologie und Ich-Analyse) : sa pureté est "
      "réelle, sa portée est celle d'un livre, pas d'un courant transversal."),
-    ("ueberich", "La seconde topique",
-     "La grappe-témoin : minuscule, parfaitement pure, datée au zéro près. Ich/Es/Über-Ich "
-     "sont inséparables par construction théorique — et le restent dans la partition.",
-     "Das Ich und das Es (1923), acte de naissance de ces instances, manque au corpus (aucune "
-     "source citable) : la grappe sous-représente 1923-1926."),
+    ("malerei", "La peinture",
+     "Les trois analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le "
+     "peintre possédé de la Teufelsneurose).",
+     "Contient l'artefact le plus instructif du découpage : « Teufel » n'a rien à faire avec la "
+     "peinture — il y est parce que l'unique œuvre sur le diable porte sur un peintre. "
+     "Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder sous la main."),
 ]
+
+
+def nommer_grappes(grappes):
+    """Apparie chaque grappe à son éditorial — et ÉCHOUE BRUYAMMENT si l'appariement est douteux.
+
+    L'éditorial est raccroché par un concept SIGNATURE, ce qui est fragile : quand le lexique
+    change, la partition bouge et une signature peut se retrouver dans une autre grappe, dans
+    deux grappes, ou dans aucune. C'est arrivé à l'audit 4 (2026-07) — deux grappes s'étaient
+    retrouvées sans nom et deux avec un nom emprunté, SANS que rien ne le signale : le site
+    aurait affiché « La seconde topique » sur une grappe de dix-neuf concepts.
+    Un défaut doit être visible, jamais silencieux : on exige donc une bijection stricte.
+    """
+    par_rang, erreurs = {}, []
+    for sig, nom, description, reserve in EDITORIAL_GRAPPES:
+        rangs = [i for i, g in enumerate(grappes, 1) if sig in g["concepts"]]
+        if len(rangs) != 1:
+            erreurs.append("signature « %s » (%s) trouvée dans %d grappe(s) : %s"
+                           % (sig, nom, len(rangs), rangs or "aucune"))
+            continue
+        if rangs[0] in par_rang:
+            erreurs.append("grappe %d revendiquée deux fois (%s / %s)"
+                           % (rangs[0], par_rang[rangs[0]][0], nom))
+            continue
+        par_rang[rangs[0]] = (nom, description, reserve)
+    for i in range(1, len(grappes) + 1):
+        if i not in par_rang:
+            erreurs.append("grappe %d sans éditorial — concepts : %s"
+                           % (i, ", ".join(sorted(grappes[i - 1]["concepts"]))))
+    if erreurs:
+        raise SystemExit(
+            "ÉDITORIAL DES GRAPPES DÉSYNCHRONISÉ — la partition a changé (probablement après une "
+            "modification du lexique). Reprendre EDITORIAL_GRAPPES dans bin/exporter_d1.py, et "
+            "régénérer documentation/COURANTS_FREUD.md, qui décrit ces mêmes grappes."
+            + "".join(chr(10) + "  - " + e for e in erreurs))
+    return par_rang
 
 SCHEMA = """
 DROP TABLE IF EXISTS grappe_concepts;
@@ -281,10 +322,9 @@ def construire(chemin_sqlite):
 
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
     r = agents.AGENTS["courants"].executer(corpus)
+    editorial = nommer_grappes(r["grappes"])      # échoue bruyamment si l'appariement a glissé
     for rang, g in enumerate(r["grappes"], 1):
-        edito = next(((n, d, rz) for sig, n, d, rz in EDITORIAL_GRAPPES if sig in g["concepts"]),
-                     ("Grappe %d" % rang, None, None))
-        nom, description, reserve = edito
+        nom, description, reserve = editorial[rang]
         citation_id = g["citation"]["id"] if g.get("citation") else None
         cur = db.execute(
             "INSERT INTO grappes (rang, nom, description, reserve, taille, atomes_concernes,"

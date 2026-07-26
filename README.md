@@ -25,7 +25,7 @@ Le travail d'analyse, lui, se fait en français. La traduction des concepts vien
 
 ## Corpus
 
-**Douze œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
+**Vingt œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
 réimpression déclarée inchangée.
 
 Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
@@ -36,18 +36,26 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 
 | Œuvre | Original | Édition lue | Source |
 |---|---|---|---|
-| *Die Traumdeutung* | 1900 | 4ᵉ éd., 1914 | [#40739](https://www.gutenberg.org/ebooks/40739) |
-| *Zur Psychopathologie des Alltagslebens* | 1901 | Abdruck, 1904 | [#24429](https://www.gutenberg.org/ebooks/24429) |
-| *Drei Abhandlungen zur Sexualtheorie* | 1905 | 4ᵉ éd., 1920 | [#39938](https://www.gutenberg.org/ebooks/39938) |
-| *Der Witz und seine Beziehung zum Unbewußten* | 1905 | 2ᵉ éd., 1912 | [#76423](https://www.gutenberg.org/ebooks/76423) |
-| *Der Wahn und die Träume in Jensens »Gradiva«* ★ | 1907 | 1ʳᵉ éd., 1907 | [#35549](https://www.gutenberg.org/ebooks/35549) |
-| *Über Psychoanalyse: Fünf Vorlesungen* ★ | 1910 | 2ᵉ éd., 1910 | [#20613](https://www.gutenberg.org/ebooks/20613) |
-| *Totem und Tabu* ★ | 1913 | 3ᵉ éd. **inchangée**, 1922 | [#37065](https://www.gutenberg.org/ebooks/37065) |
-| *Das Unheimliche* ★ | 1919 | 1ʳᵉ publication, 1919 | [#34222](https://www.gutenberg.org/ebooks/34222) |
-| *Jenseits des Lustprinzips* | 1920 | 2ᵉ éd., 1921 | [#28220](https://www.gutenberg.org/ebooks/28220) |
-| *Massenpsychologie und Ich-Analyse* ★ | 1921 | 1ʳᵉ éd., 1921 | [#30843](https://www.gutenberg.org/ebooks/30843) |
-| *Eine Teufelsneurose im 17. Jahrhundert* ★ | 1923 | 1ʳᵉ éd., 1923 | [Wikisource DE](https://de.wikisource.org/wiki/Eine_Teufelsneurose_im_siebzehnten_Jahrhundert) |
-| *Neue Folge der Vorlesungen* ★ | 1933 | 1ʳᵉ éd., 1933 | [Wikisource DE](https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einf%C3%BChrung_in_die_Psychoanalyse) |
+| *Die Traumdeutung* | 1900 | 4. Auflage, 1914 | [#40739](https://www.gutenberg.org/ebooks/40739) |
+| *Zur Psychopathologie des Alltagslebens* | 1901 | Durchgesehener Abdruck, 1904 | [#24429](https://www.gutenberg.org/ebooks/24429) |
+| *Drei Abhandlungen zur Sexualtheorie* | 1905 | 4. Auflage, 1920 | [#39938](https://www.gutenberg.org/ebooks/39938) |
+| *Der Witz und seine Beziehung zum Unbewußten* | 1905 | 2. Auflage, 1912 | [#76423](https://www.gutenberg.org/ebooks/76423) |
+| *Der Wahn und die Träume in W. Jensens »Gradiva«* ★ | 1907 | 1. Auflage (Schriften zur angewandten Seelenkunde, erstes Heft), 1907 | [#35549](https://www.gutenberg.org/ebooks/35549) |
+| *Der Dichter und das Phantasieren* ★ | 1908 | 1. Auflage (Neue Revue, Bd. I, 1907/08), 1908 | [#28863](https://www.gutenberg.org/ebooks/28863) |
+| *Über Psychoanalyse: Fünf Vorlesungen* ★ | 1910 | 2. Auflage, 1910 | [#20613](https://www.gutenberg.org/ebooks/20613) |
+| *Eine Kindheitserinnerung des Leonardo da Vinci* ★ | 1910 | 1. Auflage (Schriften zur angewandten Seelenkunde, VII. Heft), 1910 | [#75455](https://www.gutenberg.org/ebooks/75455) |
+| *Totem und Tabu* ★ | 1913 | 3., unveränderte Auflage, 1922 | [#37065](https://www.gutenberg.org/ebooks/37065) |
+| *Der Moses des Michelangelo* ★ | 1914 | 1. Auflage (Imago, Bd. III), 1914 | [#30762](https://www.gutenberg.org/ebooks/30762) |
+| *Zeitgemäßes über Krieg und Tod* ★ | 1915 | 1. Auflage (Imago, Bd. IV), 1915 | [#29941](https://www.gutenberg.org/ebooks/29941) |
+| *Vergänglichkeit* ★ | 1916 | 1. Auflage (« Das Land Goethes 1914-1916 », recueil du Berliner Goethebund), 1916 | [#29514](https://www.gutenberg.org/ebooks/29514) |
+| *Eine Schwierigkeit der Psychoanalyse* ★ | 1917 | 1. Auflage (Imago, Bd. V), 1917 | [#29097](https://www.gutenberg.org/ebooks/29097) |
+| *Eine Kindheitserinnerung aus »Dichtung und Wahrheit«* ★ | 1917 | 1. Auflage (Imago, Bd. V), 1917 | [#29946](https://www.gutenberg.org/ebooks/29946) |
+| *Das Unheimliche* ★ | 1919 | 1re publication (Imago, Bd. V), 1919 | [#34222](https://www.gutenberg.org/ebooks/34222) |
+| *Jenseits des Lustprinzips* | 1920 | 2. durchgesehene Auflage, 1921 | [#28220](https://www.gutenberg.org/ebooks/28220) |
+| *Massenpsychologie und Ich-Analyse* ★ | 1921 | 1. Auflage, 1921 | [#30843](https://www.gutenberg.org/ebooks/30843) |
+| *Traum und Telepathie* ★ | 1922 | 1. Auflage (Imago, Bd. VIII), 1922 | [#31560](https://www.gutenberg.org/ebooks/31560) |
+| *Eine Teufelsneurose im siebzehnten Jahrhundert* ★ | 1923 | 1. Auflage (Imago, Bd. IX), 1923 | [Wikisource DE](https://de.wikisource.org/wiki/Eine_Teufelsneurose_im_siebzehnten_Jahrhundert) |
+| *Neue Folge der Vorlesungen zur Einführung in die Psychoanalyse* ★ | 1933 | 1. Auflage, 1933 | [Wikisource DE](https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einführung_in_die_Psychoanalyse) |
 
 **Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
 éditions utilisées sont antérieures à 1931.
@@ -89,7 +97,7 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 **18 659 atomes** sur vingt œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-76 % sont qualifiés ; **15 œuvres sur 20 ont une datation certaine** rien qu'à l'échelle de
+78 % sont qualifiés ; **15 œuvres sur 20 ont une datation certaine** rien qu'à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
@@ -97,11 +105,11 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 *Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
 « *#Alix.# Les rêves. Rev. Scient.* ».
 
-**Finesse de la catégorisation** — 16 groupes conceptuels, 120 concepts, 19 sous-concepts,
+**Finesse de la catégorisation** — 17 groupes conceptuels, 142 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-86 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+99 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -195,12 +203,15 @@ qui s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
 gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
-Sur 107 concepts reliés, la partition atteint **0,361 de modularité** (le seuil de structure
-réelle est généralement fixé à 0,30) et fait ressortir huit grappes — dont « père, religion,
-mort », la plus freudienne du lot (le geste même de *Totem und Tabu*), et la seconde topique
-(*Ich*/*Es*/*Über-Ich*), minuscule et parfaitement pure. Chaque grappe a été **validée en
-lisant** des atomes-croisements ; les artefacts sont dits (le *Teufel* rejoint la peinture parce
-que l'unique cas sur le diable porte sur un peintre). Partitionné séparément, le corpus
+Sur 126 concepts reliés, la partition atteint **0,372 de modularité** (le seuil de structure
+réelle est généralement fixé à 0,30) et fait ressortir huit grappes — dont « la famille, la
+différence des sexes et la mort », la plus freudienne du lot, et « la clinique », qui s'est
+détachée en grappe propre à l'audit 4 du lexique. Chaque grappe a été **validée en lisant**
+des atomes-croisements ; les artefacts sont dits (le *Teufel* rejoint la peinture parce que
+l'unique cas sur le diable porte sur un peintre). Le dossier complet de chacune est
+[`documentation/COURANTS_FREUD.md`](documentation/COURANTS_FREUD.md), **régénéré** par
+`bin/generer_courants.py` — un document qui décrit des données calculées ne peut pas rester
+juste s'il est tenu à la main. Partitionné séparément, le corpus
 1900-1913 contre 1914-1933 montre **trois recompositions datables** — la mort quitte la famille
 pour la pulsion, le rêve cesse d'absorber la métapsychologie, la seconde topique naît comme
 grappe accolée aux figures parentales. **C'est cet agent qui porte l'objectif long terme** : si
@@ -320,7 +331,7 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
   œuvres ajoutées et les 22 que cachaient des marqueurs coupés par des retours à la ligne) ; à
   reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
-  grappes, modularité 0,354. Prochaine étape naturelle : comparer avec un premier auteur non
+  grappes, modularité 0,372. Prochaine étape naturelle : comparer avec un premier auteur non
   freudien pour voir si SES concepts recomposent ou déplacent ces grappes.
 - **Corpus consultable** sans relancer un script : `bin/rechercher.py` — filtres combinables
   (concept, groupe, sous-concept, auteur, œuvre, statut, fonction, mot-clé, fenêtre d'années),

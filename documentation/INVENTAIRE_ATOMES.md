@@ -227,6 +227,58 @@ comptabilité pour bonne. C'est la **lecture qualitative des résultats** — pa
 qui les a trouvés. La leçon vaut règle : chaque résultat chiffré doit être lu par échantillon
 avant d'être publié.
 
+### 4.7 Quatrième audit (2026-07) — le scan étendu aux VINGT œuvres
+
+Les audits précédents n'avaient scanné que les œuvres au plus fort taux de non-qualifiés. Le
+quatrième a porté sur le corpus entier, et il a d'abord confirmé une chose rassurante : **la
+majorité des mots fréquents restants sont du vocabulaire ordinaire** — *Person*, *Leben*,
+*Jahre*, *Stelle*, *Frage*, *Beispiel*. Les taguer gonflerait le taux de qualifiés sans ajouter
+un gramme de sens ; ils ont donc été laissés de côté, délibérément.
+
+Deux vérifications ont aussi évité des ajouts inutiles : **`Kind`** (950 occurrences) et
+**`Hysterie`** semblaient absents, mais `infantil` couvrait déjà `kind`/`kindheit`, et `neurose`
+couvrait déjà `hysterie`. Chercher avant d'ajouter, toujours.
+
+Restaient de vrais pans de doctrine hors ontologie — 22 concepts et un groupe ajoutés :
+
+| Domaine ajouté | Occ. | Pourquoi c'était un manque |
+|---|---:|---|
+| **Différence des sexes** (*weiblich*, *männlich*) | 526 | Une conférence entière des *Neue Folge* s'intitule « Die Weiblichkeit » |
+| **Discours de la science** (nouveau groupe) | 847 | Le méta-discours de Freud sur ce qui fait preuve — la matière même qui intéresse ce projet |
+| **Vocabulaire de la cure** (*Behandlung*, *Arzt*, *Deutung*, *Hypnose*) | 740 | Le groupe connaissait le transfert mais pas le traitement ni le médecin |
+| **Corps** (*Körper*, *somatisch*, *organisch*) | 419 | La pulsion est définie comme frontière entre le somatique et le psychique |
+| **Défenses hors refoulement** (sublimation, projection, déni…) | 155 | La sublimation explique l'œuvre d'art, la projection explique la paranoïa |
+| **Complexe de castration** | 116 | Pièce centrale du développement, articulée à l'Œdipe |
+| **Névrose obsessionnelle distinguée de l'hystérie** | 81 | Leur distinction est fondatrice ; elles étaient confondues sous *neurose* |
+
+Résultat mesuré : **24,4 % → 22,1 % de non-qualifiés**, le plus fort gain sur les *Neue Folge*
+(-5,1 points), cohérent avec la conférence sur la féminité. Corpus qualifié à **78 %**.
+
+**Trois pièges neutralisés**, tous relevés sur les formes réellement captées :
+*Bedeutung* (signification, 375 occ.) n'est pas *Deutung* (l'interprétation) ; *der Mann*
+(la personne) n'est pas la masculinité comme qualité ; *Wiederholungszwang* n'est pas la névrose
+obsessionnelle. La frontière de mot, posée devant chaque motif, écarte les trois — mais il fallait
+les avoir vus pour choisir les bons motifs.
+
+**Un défaut préexistant décelé par un test** de cet audit : `besetzung` ne reconnaissait aucun
+composé (*Aufmerksamkeitsbesetzung*, *Objektbesetzung*…), la frontière de mot les excluant tous.
+Corrigé en énumérant les formes attestées, comme pour `trieb`.
+
+### 4.8 Une partition qui bouge invalide ce qui la décrit
+
+Conséquence non anticipée de l'audit 4 : les grappes de l'agent `courants` se sont **recomposées**
+(modularité 0,361 → 0,372). Or leurs noms éditoriaux étaient raccrochés par un concept signature,
+et leur dossier de référence était tenu à la main. Résultat : deux grappes se sont retrouvées
+sans nom et deux avec un nom emprunté — **sans que rien ne le signale**. Le site aurait affiché
+« La seconde topique » sur une grappe de dix-neuf concepts.
+
+Deux correctifs, tous deux structurels plutôt que ponctuels :
+- `bin/exporter_d1.py:nommer_grappes()` exige désormais une **bijection stricte** entre grappes
+  et éditoriaux, et fait ÉCHOUER l'export sinon. Un défaut doit être visible, jamais silencieux.
+- `documentation/COURANTS_FREUD.md` est devenu un **document généré** (`bin/generer_courants.py`) :
+  ses chiffres et ses citations viennent du corpus à chaque exécution. Un document qui décrit des
+  données calculées ne peut pas rester juste s'il est écrit à la main.
+
 ---
 
 ## 5. Signal de validation
