@@ -78,24 +78,30 @@ EDITORIAL_GRAPPES = [
      "La différence des sexes n'a rejoint cette grappe qu'à l'audit 4 du lexique (2026-07), qui "
      "l'a ajoutée à l'ontologie : avant cela, 526 occurrences dans 17 œuvres étaient invisibles."),
     ("totem", "Religion, anthropologie — et le discours de la science",
-     "Le totémisme, le tabou, le sacrifice, le dieu — et, dans la même grappe, le vocabulaire "
-     "par lequel Freud revendique un statut scientifique. Le voisinage n'est pas fortuit : c'est "
-     "en comparant sa méthode à celle des religions et des mythes qu'il argumente le plus sur "
-     "ce qui fait preuve.",
+     "Le totémisme, le tabou, le sacrifice, le dieu — avec, depuis l'audit 6, l'INTERDIT MORAL "
+     "et la PUNITION qui les accompagnent : chez Freud la morale naît du tabou, pas l'inverse. "
+     "S'y ajoute le vocabulaire par lequel il revendique un statut scientifique. Le voisinage "
+     "n'est pas fortuit : c'est en comparant sa méthode à celle des religions et des mythes "
+     "qu'il argumente le plus sur ce qui fait preuve.",
      "Le rapprochement science/religion est un fait de COOCCURRENCE : Freud oppose souvent les "
      "deux, et deux termes opposés dans un même énoncé y voisinent autant que deux termes alliés."),
-    ("libido", "La pulsion, le développement sexuel et les instances",
-     "Libido, sexualité, perversion, développement — et la seconde topique (Moi, Ça, Sur-Moi) "
-     "qui les régit. La sublimation et la formation réactionnelle y figurent : ce sont les "
-     "destins que Freud assigne à la pulsion.",
-     "La seconde topique formait, avant l'audit 4, une grappe minuscule et isolée ; l'ajout du "
-     "vocabulaire du développement sexuel l'a rattachée à la pulsion. Elle reste sous-représentée "
-     "faute de « Das Ich und das Es » (1923), absent du corpus."),
-    ("masse", "La masse, l'autorité et la suggestion",
-     "Le vocabulaire de la foule, du meneur et de l'hypnose — Freud explique le lien de masse "
-     "par le même mécanisme que la suggestion hypnotique.",
-     "Grappe portée par une seule œuvre (Massenpsychologie und Ich-Analyse) : sa pureté est "
-     "réelle, sa portée est celle d'un livre, pas d'un courant transversal."),
+    ("libido", "La pulsion et le développement sexuel",
+     "Libido, sexualité, perversion, stades du développement — et les destins que Freud assigne "
+     "à la pulsion : sublimation, formation réactionnelle, retournement en son contraire.",
+     "Cette grappe a PERDU la seconde topique à l'audit 6 (2026-07) : le Moi, le Ça et le "
+     "Sur-Moi ont migré vers la grappe du lien social quand la conscience morale est entrée dans "
+     "l'ontologie. Une grappe est un état de la mesure, pas une vérité — celle-ci a changé trois "
+     "fois de composition en trois audits."),
+    ("masse", "Les instances, la masse et la conscience morale",
+     "Le Moi, le Ça et le Sur-Moi réunis au meneur, à la masse, à l'identification et à la "
+     "conscience morale. Ce voisinage n'est pas un accident de comptage : c'est la thèse même "
+     "de « Massenpsychologie und Ich-Analyse » — l'idéal du moi se forme par identification au "
+     "meneur, et c'est de lui que procède la conscience. La grappe s'est constituée à l'audit 6 "
+     "(2026-07), quand « Gewissen » est entré dans l'ontologie : la seconde topique, jusque-là "
+     "rattachée au développement sexuel, a migré vers le lien social.",
+     "L'hypnose y figure parce que Freud explique le lien de masse par le mécanisme de la "
+     "suggestion hypnotique — cooccurrence doctrinale, mais portée surtout par une seule œuvre. "
+     "Le Sur-Moi reste sous-représenté faute de « Das Ich und das Es » (1923), absent du corpus."),
     ("hand", "Le corps décrit : main, œil, visage",
      "Les parties du corps que Freud DÉCRIT au lieu de les théoriser : la main et la barbe du "
      "Moïse de Michel-Ange, les yeux arrachés de l'homme au sable, le sourire de Monna Lisa. "

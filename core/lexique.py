@@ -412,14 +412,53 @@ CONCEPTS = {
             "lacheln": ["lachel"],
         },
     },
+    # NOUVEAU GROUPE (audit 6) — LA CONSCIENCE MORALE. Registre entier absent de l'ontologie,
+    # découvert en atomisant « Einige Charaktertypen aus der psychoanalytischen Arbeit » (1916),
+    # dont la troisième partie s'intitule « Verbrecher aus Schuldbewußtsein ». L'omission était
+    # de taille : Freud définit le Sur-Moi comme l'héritier de la conscience morale, et fait de
+    # la culpabilité le ressort du totémisme comme de la névrose obsessionnelle.
+    "morale": {
+        "label": "Conscience morale, culpabilité, punition",
+        "termes": {
+            "schuld": ["schuld"],
+            # PIÈGE MAJEUR : « gewissen » est aussi l'adjectif « gewiß » (certain) décliné —
+            # « einer gewissen Regel » compte à lui seul 108 occurrences, contre ~65 pour le
+            # substantif. Le repliement supprimant la majuscule qui les sépare en allemand, on
+            # ne retient que les formes SÛRES : le génitif et les composés (Gewissensangst,
+            # Gewissensvorwürfe), l'adjectif dérivé, et le substantif précédé d'un déterminant
+            # neutre — jamais « einer/einen/einem gewissen », qui ne peut pas être le nom.
+            # Mieux vaut manquer que sur-détecter, comme pour « ich » et « es ».
+            "gewissen": [r"gewissens\w*", r"gewissenhaft",
+                         r"(?<=das )gewissen\b", r"(?<=dem )gewissen\b",
+                         r"(?<=sein )gewissen\b", r"(?<=ihr )gewissen\b",
+                         r"(?<=mein )gewissen\b", r"(?<=kein )gewissen\b"],
+            "strafe": ["straf"],
+            "moral": ["moral"],
+            "verbrechen": ["verbrech"],
+            "reue": ["reue"],
+        },
+    },
     "conflit": {
         "label": "Conflit, défense, symptôme",
         "termes": {
             "verdraengung": ["verdrangung", "verdrangt", "verdrangen"],
             "widerstand": ["widerstand", "widerstande"],
             "symptom": ["symptom", "symptome"],
-            "neurose": ["neurose", "neurotisch", "hysterie", "hysterisch", "zwangsneurose"],
-            "angst": ["angst", "angstlich"],
+            # « neurotiker » (le névrosé, 95 occ.) et « nervös » (40) manquaient depuis
+            # l'origine — la maladie était captée, jamais le malade. Défaut révélé par un test
+            # de l'audit 6, pas par une relecture du lexique : une phrase d'exemple attendait
+            # « neurose » sur « quält den Neurotiker » et ne l'a pas trouvé.
+            "neurose": ["neurose", "neurotisch", "neurotik", "nervos",
+                        "hysterie", "hysterisch", "zwangsneurose"],
+            # Les COMPOSÉS en -angst sont ÉNUMÉRÉS, jamais pris par un joker : « längst »
+            # (depuis longtemps, 79 occ.) et « unlängst » (récemment, 16) finissent eux aussi
+            # par « angst » et n'ont rien d'anxieux. Défaut décelé par un test de l'audit 6 —
+            # « Gewissensangst » n'était pas reconnu comme de l'angoisse. Même correctif que
+            # pour « trieb » et « besetzung » : la frontière de mot exclut tout composé, donc
+            # on relève ceux qui existent réellement dans le texte.
+            "angst": ["angst", "angstlich",
+                      r"(?:real|kastrations|kinder|gewissens|augen|traum|beruhrungs|todes|"
+                      r"versuchungs|platz|massen|neurosen)angst"],
             "abwehr": ["abwehr"],
             "konflikt": ["konflikt"],
             # LES DEUX GRANDES NÉVROSES, distinguées — audit 4 (2026-07). « neurose » les captait
@@ -476,6 +515,14 @@ CONCEPTS = {
             "latenzzeit": ["latenzzeit", "latenzperiode"],
             "pubertaet": ["pubertat"],
             "entwicklung": ["entwicklung", "entwicklungsstufe"],
+            # LE CARACTÈRE, restreint à ses composés UNIVOQUES. « Charakter » nu est ambigu en
+            # allemand — le caractère d'une personne, mais aussi la nature d'une chose : « die
+            # Charaktere des Traumlebens » (les propriétés de la vie onirique) n'a rien de
+            # caractérologique. Sur 513 occurrences du radical, la part psychanalytique n'est
+            # pas séparable mécaniquement ; on ne prend donc que les 35 composés qui ne peuvent
+            # rien désigner d'autre. Concept volontairement étroit et exact plutôt que large et
+            # faux — même arbitrage que pour « gewissen ».
+            "charakter": [r"charakter(?:zug|bildung|typ|analyse|eigenschaft|entwicklung|anlage)"],
             # LE COMPLEXE DE CASTRATION — audit 4 (2026-07). Pièce centrale de la théorie du
             # développement, articulée à l'Œdipe, et totalement absente de l'ontologie : 116
             # occurrences dans 7 œuvres. « phallisch » y est joint parce que c'est le nom du

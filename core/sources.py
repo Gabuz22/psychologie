@@ -341,6 +341,44 @@ OEUVRES = {
         "source": "Project Gutenberg #29946 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/29946",
     },
+    "kaestchenwahl": {
+        "fichier": "1913_kaestchenwahl.pg.txt",
+        "titre": "Das Motiv der Kästchenwahl",
+        "titre_fr": "Le motif du choix des coffrets",
+        "annee_oeuvre": 1913,
+        "annee_edition": 1913,     # 1re publication (Imago II.3) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. II, Heft 3)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #24017 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/24017",
+    },
+    "charaktertypen": {
+        "fichier": "1916_charaktertypen.pg.txt",
+        "titre": "Einige Charaktertypen aus der psychoanalytischen Arbeit",
+        "titre_fr": "Quelques types de caractères dégagés par la psychanalyse",
+        "annee_oeuvre": 1916,
+        "annee_edition": 1916,     # 1re publication (Imago IV, p. 317-336) — datation exacte
+        "edition": "1. Auflage (Imago, Bd. IV)",
+        "editeur": "Internationaler Psychoanalytischer Verlag",
+        "source": "Project Gutenberg #29101 (relu par Distributed Proofreaders)",
+        "url": "https://www.gutenberg.org/ebooks/29101",
+    },
+}
+
+# ŒUVRES ÉCARTÉES APRÈS VÉRIFICATION — à ne pas réintroduire par inadvertance.
+#
+# Project Gutenberg publie AUSSI les quatre essais de « Totem und Tabu » séparément, tels
+# qu'ils parurent dans la revue Imago (1912-1913), AVANT leur réunion en volume :
+#   #37066 Die Inzestscheu · #37069 Das Tabu und die Ambivalenz der Gefühlsregungen
+#   #37070 Animismus, Magie und Allmacht der Gedanken · #37071 Die infantile Wiederkehr des Totemismus
+# Ce sont des DOUBLONS du volume déjà présent (#37065) : vérifié par comparaison de fragments —
+# 8 fragments longs sur 8, pris au tiers du texte, se retrouvent mot pour mot dans « totem ».
+# Les ajouter compterait deux fois les mêmes phrases et fausserait toute densité.
+DOUBLONS_ECARTES = {
+    "37066": "Die Inzestscheu — chapitre I de Totem und Tabu (#37065)",
+    "37069": "Das Tabu und die Ambivalenz — chapitre II de Totem und Tabu",
+    "37070": "Animismus, Magie und Allmacht der Gedanken — chapitre III de Totem und Tabu",
+    "37071": "Die infantile Wiederkehr des Totemismus — chapitre IV de Totem und Tabu",
 }
 
 # Domaine public : Freud est mort en 1939 → libre de droits (vie + 70 ans) depuis 2010, et les

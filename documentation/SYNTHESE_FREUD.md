@@ -5,7 +5,7 @@
 > calcul (`python bin/analyser.py`) et remonter de n'importe quel chiffre jusqu'à la phrase
 > allemande qui le fonde. Là où une lecture humaine a été nécessaire, elle est signalée comme telle.
 >
-> Corpus : **20 œuvres, 1900-1933, 18 659 atomes** (une phrase = un atome).
+> Corpus : **22 œuvres, 1900-1933, 19 019 atomes** (une phrase = un atome).
 
 ---
 
@@ -17,31 +17,37 @@ que des atomes catégorisés.
 
 | Œuvre | Atomes | Ce qui la distingue |
 |---|---:|---|
-| *Die Traumdeutung* (1900) | 5 996 | **rêve**, désir, topique, mémoire |
-| *Neue Folge der Vorlesungen* (1933) | 2 119 | **topique**, rêve, épistémè, conflit |
-| *Der Witz…* (1905) | 2 076 | **comique**, rêve, économie |
-| *Totem und Tabu* (1913) | 1 588 | **anthropologie**, famille, mort, actes manqués |
-| *Zur Psychopathologie…* (1901) | 1 051 | **mémoire**, actes manqués, cure, conflit |
+| *Die Traumdeutung* (1900) | 5 996 | **rêve**, topique, désir, mémoire |
+| *Neue Folge der Vorlesungen* (1933) | 2 119 | **topique**, rêve, conflit, épistémè |
+| *Der Witz…* (1905) | 2 076 | **comique**, rêve, économie, topique |
+| *Totem und Tabu* (1913) | 1 588 | **anthropologie**, morale, famille, conflit |
+| *Zur Psychopathologie…* (1901) | 1 051 | **mémoire**, actes manqués, cure, topique |
 | *Drei Abhandlungen…* (1905) | 843 | **pulsion**, développement, conflit, économie |
 | *Gradiva* (1907) | 756 | rêve, conflit, **esthétique**, mémoire |
-| *Massenpsychologie…* (1921) | 699 | **social**, cure, topique, anthropologie |
-| *Kindheitserinnerung des Leonardo* (1910) | 670 | famille, développement, **corps**, esthétique |
+| *Massenpsychologie…* (1921) | 699 | **social**, cure, topique, pulsion |
+| *Kindheitserinnerung des Leonardo* (1910) | 670 | développement, famille, **corps**, esthétique |
 | *Jenseits des Lustprinzips* (1920) | 545 | **pulsion**, topique, économie, mort |
-| *Über Psychoanalyse* (1910) | 467 | **conflit**, cure, topique, mémoire |
-| *Das Unheimliche* (1919) | 421 | **esthétique**, corps, développement, désir |
-| *Eine Teufelsneurose…* (1923) | 337 | **anthropologie**, esthétique, famille, conflit |
+| *Über Psychoanalyse* (1910) | 467 | **conflit**, cure, topique, développement |
+| *Das Unheimliche* (1919) | 421 | **esthétique**, corps, développement |
+| *Eine Teufelsneurose…* (1923) | 337 | **anthropologie**, esthétique, famille |
 | *Traum und Telepathie* (1922) | 287 | rêve, famille, développement, désir |
 | *Der Moses des Michelangelo* (1914) | 283 | **corps**, esthétique, économie |
-| *Zeitgemäßes über Krieg und Tod* (1915) | 278 | **mort**, social, anthropologie |
+| *Zeitgemäßes über Krieg und Tod* (1915) | 278 | **social**, mort, anthropologie, morale |
+| *Einige Charaktertypen…* (1916) | 233 | **morale**, développement, désir, famille |
+| *Das Motiv der Kästchenwahl* (1913) | 127 | **mort**, famille, désir, esthétique |
 | *Eine Schwierigkeit der Psychoanalyse* (1917) | 90 | topique, pulsion, cure, conflit |
 | *Der Dichter und das Phantasieren* (1908) | 88 | **esthétique**, désir, développement |
 | *Vergänglichkeit* (1916) | 44 | **mort**, esthétique, social, économie |
 | *Kindheitserinnerung aus »Dichtung und Wahrheit«* (1917) | 21 | famille, développement, épistémè |
 
-**Vingt sur vingt.** Ce n'est pas un résultat sur Freud — c'est un contrôle de validité : une
-ontologie qui se tromperait de catégories ne retrouverait pas ces identités, y compris sur des
-textes de quelques dizaines d'atomes (*Vergänglichkeit*, *Kindheitserinnerung aus »Dichtung und
-Wahrheit«*) où le signal a beaucoup moins de matière pour se dégager.
+**Vingt-deux sur vingt-deux.** Ce n'est pas un résultat sur Freud — c'est un contrôle de
+validité : une ontologie qui se tromperait de catégories ne retrouverait pas ces identités, y
+compris sur des textes de quelques dizaines d'atomes (*Vergänglichkeit*, *Kindheitserinnerung aus
+»Dichtung und Wahrheit«*) où le signal a beaucoup moins de matière pour se dégager. Les deux
+œuvres entrées au corpus le dernier jour le confirment à l'aveugle : *Einige Charaktertypen*
+reçoit « **morale** » — son sujet est le criminel par sentiment de culpabilité — et *Das Motiv
+der Kästchenwahl* reçoit « **mort** », qui est exactement sa thèse : le troisième coffret est la
+déesse de la mort.
 
 Deux observations méritent d'être notées, parce qu'elles ne se lisent pas dans les titres :
 
@@ -88,22 +94,22 @@ des grappes.
 
 L'agent `courants` va plus loin que les paires : il PARTITIONNE tout le graphe de concepts par
 maximisation gloutonne de la modularité (Newman, 2004), un algorithme déterministe — aucune
-grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 136 concepts suffisamment
-reliés, la partition atteint une **modularité de 0,382** — au-dessus du seuil de 0,30 généralement
+grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 142 concepts suffisamment
+reliés, la partition atteint une **modularité de 0,379** — au-dessus du seuil de 0,30 généralement
 retenu comme signe d'une vraie structure plutôt que d'un artefact du graphe (Newman & Girvan,
 2004). Neuf grappes en ressortent :
 
 | Grappe | Concepts (extrait) | Atomes |
 |---|---|---:|
-| Le rêve, la mémoire et l'interprétation | *Traum, Verdichtung, Zensur, Erinnerung, Name, Halluzination* | 5 700 |
-| L'appareil psychique et l'économie du plaisir | *Bewußtsein, Besetzung, Lustprinzip, Körper, Witz* | 4 501 |
-| La clinique : névroses, cure, délire en fiction | *Hysterie, Zwangsneurose, Arzt, Behandlung, Wahn* | 3 436 |
-| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Weiblichkeit, Tod* | 3 423 |
-| La pulsion, le développement sexuel, les instances | *Trieb, Libido, Sublimierung, Ich, Es, Über-Ich* | 2 217 |
-| Religion, anthropologie, discours de la science | *Totem, Tabu, Gott, Wissenschaft, Theorie* | 2 045 |
-| **Le corps décrit** | *Hand, Auge, Gesicht, Bart, Kopf* | 554 |
-| La masse, l'autorité et la suggestion | *Masse, Führer, Suggestion, Hypnose* | 387 |
-| La peinture et le pacte | *Malerei, Teufel, Pakt* | 198 |
+| Le rêve, la mémoire et l'interprétation | *Traum, Verdichtung, Zensur, Erinnerung, Name* | 5 746 |
+| L'appareil psychique et l'économie du plaisir | *Bewußtsein, Besetzung, Lustprinzip, Körper, Witz* | 4 533 |
+| La clinique : névroses, cure, délire en fiction | *Hysterie, Zwangsneurose, Arzt, Behandlung, Wahn* | 3 593 |
+| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Weiblichkeit* | 3 568 |
+| Religion, anthropologie, morale, science | *Totem, Tabu, Gott, Moral, Strafe, Wissenschaft* | 2 202 |
+| La pulsion et le développement sexuel | *Trieb, Libido, Sublimierung, Perversion* | 2 043 |
+| **Les instances, la masse et la conscience morale** | *Ich, Es, Über-Ich, Masse, Führer, Gewissen* | 789 |
+| Le corps décrit | *Hand, Auge, Gesicht, Bart, Kopf* | 564 |
+| La peinture et le pacte | *Malerei, Teufel, Pakt* | 199 |
 
 **Contrôle de sens intégré** (pas seulement mesuré une fois, mais rejoué à chaque test) : *Ich*,
 *Es* et *Über-Ich* — la seconde topique, trois concepts inséparables par construction théorique —
@@ -118,6 +124,14 @@ d'être diluée dans la pulsion ; la différence des sexes a rejoint le roman fa
 topique, jusque-là isolée, s'est rattachée au développement sexuel. Une grappe est un état de la
 mesure, jamais une vérité sur Freud — le dossier complet de chacune, régénéré à chaque
 changement, est dans [`COURANTS_FREUD.md`](COURANTS_FREUD.md).
+
+**L'audit 6 (2026-07) a produit le déplacement le plus parlant.** En faisant entrer la
+CONSCIENCE MORALE dans l'ontologie (*Gewissen*, *Schuld*, *Strafe*, absents jusque-là), la
+seconde topique a quitté la pulsion pour rejoindre **la masse et le meneur**. Ce n'est pas un
+hasard de calcul : c'est la thèse de *Massenpsychologie und Ich-Analyse* (1921) — l'idéal du moi
+se forme par identification au meneur, et c'est de là que procède la conscience. Le Moi, le Ça,
+le Sur-Moi, la masse, le chef et la conscience morale forment désormais une seule grappe de dix
+concepts. La partition a retrouvé seule un lien que Freud met vingt ans à établir.
 
 **L'audit 5 (2026-07) a fait apparaître une grappe que personne n'avait cherchée : le corps
 DÉCRIT.** En ajoutant à l'ontologie les parties du corps concrètes — la main, l'œil, le visage,
@@ -282,7 +296,7 @@ concepts PRÉSENTS des deux côtés.
 ## 4. Ce que Freud dit de lui-même
 
 Un lexique déterministe peut **repérer** un passage où un auteur se corrige, s'objecte ou se cite ;
-il ne peut pas **établir** qu'il le fait. Les 214 candidats du corpus ont donc été lus en contexte
+il ne peut pas **établir** qu'il le fait. Les 219 candidats du corpus ont donc été lus en contexte
 et jugés un par un — les 183 d'origine, puis les 9 apportés par les huit œuvres ajoutées, puis
 **22 devenus visibles quand la normalisation des blancs a réparé les marqueurs coupés par un
 retour à la ligne** (le registre compte 225 verdicts : il est cumulatif et garde ceux dont le
@@ -290,11 +304,11 @@ marqueur a depuis été retiré du lexique).
 
 | Signal | Repérés | Confirmés | Précision |
 |---|---:|---:|---:|
-| Objection contre sa propre thèse | 111 | 64 | 0,58 |
-| Renvoi à son propre travail | 79 | 38 | 0,48 |
+| Objection contre sa propre thèse | 115 | 67 | 0,58 |
+| Renvoi à son propre travail | 80 | 38 | 0,48 |
 | Révision de soi | 24 | 7 | 0,29 |
 
-**109 passages opposables.** Les 22 candidats cachés par les retours à la ligne contenaient
+**112 passages opposables.** Les 22 candidats cachés par les retours à la ligne contenaient
 **deux révisions doctrinales majeures** qui dormaient là depuis le début du projet :
 
 > « *…wonach also die frühere Behauptung zu korrigieren ist, daß der Traum das Nein nicht
@@ -328,7 +342,7 @@ Quelques autres méritent d'être lus :
 > (« *Über Deckerinnerungen* », 1899) — une œuvre que le corpus ne contient pas encore, mais dont
 > la trace reste lisible dans celle-ci.
 
-**Ce que les rejets apprennent.** Les 104 candidats écartés disent ce qu'un lexique ne peut pas
+**Ce que les rejets apprennent.** Les 107 candidats écartés disent ce qu'un lexique ne peut pas
 voir : objections appartenant à un **personnage de roman** (Hanold chez Jensen) ou à une **histoire
 drôle** ; objections que Freud adresse **à d'autres** (Frazer, Trotter, Scherner) et non à lui-même ;
 renvois **prospectifs** (« cela sera traité ailleurs ») pris pour des auto-citations ; de purs

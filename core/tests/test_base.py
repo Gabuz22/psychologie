@@ -414,6 +414,82 @@ class TestLexique(unittest.TestCase):
         self.assertIn("pakt", pacte)
         self.assertNotIn("versprechen", pacte)
 
+    def test_domaines_de_l_audit_6(self):
+        """Sixième audit (2026-07) — LA CONSCIENCE MORALE, registre entier absent.
+
+        Découvert en atomisant « Einige Charaktertypen aus der psychoanalytischen Arbeit »
+        (1916), entrée au corpus le même jour : sa troisième partie s'intitule « Verbrecher aus
+        Schuldbewußtsein » et 42 % de ses atomes restaient non qualifiés. L'omission était de
+        taille — Freud définit le Sur-Moi comme l'héritier de la conscience morale, et fait de
+        la culpabilité le ressort du totémisme comme de la névrose obsessionnelle.
+        """
+        cas = {
+            "Das Schuldbewußtsein des Verbrechers.": {"schuld", "verbrechen"},
+            "Ein Schuldgefühl quält den Neurotiker.": {"schuld", "neurose"},
+            "Das Gewissen schweigt in den Träumen.": {"gewissen", "traum"},
+            "Die Gewissensangst des Melancholikers.": {"gewissen", "angst", "melancholie"},
+            "Sein Gewissen wollte ihn strafen.": {"gewissen", "strafe"},
+            "Die moralischen Vorschriften der Kultur.": {"moral", "kultur"},
+            "Reue und Selbstvorwürfe folgen der Tat.": {"reue"},
+            "Die Charakterbildung des Kindes.": {"charakter"},
+            "Ein bemerkenswerter Charakterzug.": {"charakter"},
+        }
+        for phrase, attendus in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertTrue(attendus <= trouves,
+                            "« %s » : manquent %s" % (phrase, attendus - trouves))
+
+    def test_gewissen_adjectif_ecarte(self):
+        """PIÈGE MAJEUR de l'audit 6 : « gewissen » est aussi « gewiß » (certain) décliné.
+
+        « einer gewissen Regel » pèse 108 occurrences dans le corpus, contre ~65 pour le
+        substantif « das Gewissen ». Le repliement supprimant la majuscule qui les distingue en
+        allemand, seules les formes SÛRES sont retenues. Mieux vaut manquer que sur-détecter —
+        même arbitrage que pour « ich » et « es ».
+        """
+        for phrase in ("In einer gewissen Anzahl von Fällen.",
+                       "Bis zu einem gewissen Grade ist das richtig.",
+                       "Unter gewissen Bedingungen tritt es auf.",
+                       "Ein gewisser Herr aus Wien."):
+            self.assertNotIn("gewissen", {x["concept"] for x in lexique.concepts_de(phrase)},
+                             "« %s » a capté la conscience morale" % phrase)
+        # …et le substantif reste bien capté, dans les deux formes attestées.
+        for phrase in ("Das Gewissen ist der Erbe des Ödipuskomplexes.",
+                       "Die Entstehung des Gewissens bleibt dunkel.",
+                       "Er machte sich Gewissensvorwürfe."):
+            self.assertIn("gewissen", {x["concept"] for x in lexique.concepts_de(phrase)}, phrase)
+
+    def test_charakter_ordinaire_ecarte(self):
+        """« Charakter » nu désigne aussi la NATURE d'une chose, pas seulement le caractère.
+
+        « die Charaktere des Traumlebens » = les propriétés de la vie onirique. Sur 513
+        occurrences du radical, la part psychanalytique n'est pas séparable mécaniquement : le
+        concept est donc volontairement restreint à ses composés univoques.
+        """
+        for phrase in ("Die Charaktere des Traumlebens sind bekannt.",
+                       "Eine charakteristische Eigentümlichkeit.",
+                       "Das läßt sich so charakterisieren."):
+            self.assertNotIn("charakter", {x["concept"] for x in lexique.concepts_de(phrase)},
+                             phrase)
+
+    def test_composes_de_angst_captes_et_langst_ecarte(self):
+        """Les composés en -angst sont énumérés ; « längst » n'est pas de l'angoisse.
+
+        Défaut décelé par un test de l'audit 6 : « Gewissensangst » n'était pas reconnu. Mais
+        le joker qui l'aurait réparé aurait ramassé « längst » (depuis longtemps, 79 occ.) et
+        « unlängst » (récemment, 16) — 95 faux positifs. Les deux sens sont donc verrouillés.
+        """
+        for phrase in ("Die Kastrationsangst des Knaben.",
+                       "Die Realangst vor der Gefahr.",
+                       "Die Gewissensangst des Melancholikers.",
+                       "Die Todesangst überfiel ihn.",
+                       "Die Angst ist ein Affektzustand."):
+            self.assertIn("angst", {x["concept"] for x in lexique.concepts_de(phrase)}, phrase)
+        for phrase in ("Das ist längst bekannt.",
+                       "Er hat unlängst davon berichtet."):
+            self.assertNotIn("angst", {x["concept"] for x in lexique.concepts_de(phrase)},
+                             "« %s » a capté de l'angoisse" % phrase)
+
     def test_composes_de_besetzung_captes(self):
         """La frontière de mot exclut tout composé : les composés attestés sont donc ÉNUMÉRÉS.
 

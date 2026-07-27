@@ -25,7 +25,7 @@ Le travail d'analyse, lui, se fait en français. La traduction des concepts vien
 
 ## Corpus
 
-**Vingt œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
+**Vingt-deux œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
 réimpression déclarée inchangée.
 
 Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
@@ -45,9 +45,11 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 | *Über Psychoanalyse: Fünf Vorlesungen* ★ | 1910 | 2. Auflage, 1910 | [#20613](https://www.gutenberg.org/ebooks/20613) |
 | *Eine Kindheitserinnerung des Leonardo da Vinci* ★ | 1910 | 1. Auflage (Schriften zur angewandten Seelenkunde, VII. Heft), 1910 | [#75455](https://www.gutenberg.org/ebooks/75455) |
 | *Totem und Tabu* ★ | 1913 | 3., unveränderte Auflage, 1922 | [#37065](https://www.gutenberg.org/ebooks/37065) |
+| *Das Motiv der Kästchenwahl* ★ | 1913 | 1. Auflage (Imago, Bd. II, Heft 3), 1913 | [#24017](https://www.gutenberg.org/ebooks/24017) |
 | *Der Moses des Michelangelo* ★ | 1914 | 1. Auflage (Imago, Bd. III), 1914 | [#30762](https://www.gutenberg.org/ebooks/30762) |
 | *Zeitgemäßes über Krieg und Tod* ★ | 1915 | 1. Auflage (Imago, Bd. IV), 1915 | [#29941](https://www.gutenberg.org/ebooks/29941) |
 | *Vergänglichkeit* ★ | 1916 | 1. Auflage (« Das Land Goethes 1914-1916 », recueil du Berliner Goethebund), 1916 | [#29514](https://www.gutenberg.org/ebooks/29514) |
+| *Einige Charaktertypen aus der psychoanalytischen Arbeit* ★ | 1916 | 1. Auflage (Imago, Bd. IV), 1916 | [#29101](https://www.gutenberg.org/ebooks/29101) |
 | *Eine Schwierigkeit der Psychoanalyse* ★ | 1917 | 1. Auflage (Imago, Bd. V), 1917 | [#29097](https://www.gutenberg.org/ebooks/29097) |
 | *Eine Kindheitserinnerung aus »Dichtung und Wahrheit«* ★ | 1917 | 1. Auflage (Imago, Bd. V), 1917 | [#29946](https://www.gutenberg.org/ebooks/29946) |
 | *Das Unheimliche* ★ | 1919 | 1re publication (Imago, Bd. V), 1919 | [#34222](https://www.gutenberg.org/ebooks/34222) |
@@ -59,6 +61,14 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 
 **Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
 éditions utilisées sont antérieures à 1931.
+
+**Quatre textes de Gutenberg sont volontairement ÉCARTÉS** : les essais de *Totem und Tabu*
+publiés séparément dans *Imago* ([#37066](https://www.gutenberg.org/ebooks/37066),
+[#37069](https://www.gutenberg.org/ebooks/37069), [#37070](https://www.gutenberg.org/ebooks/37070),
+[#37071](https://www.gutenberg.org/ebooks/37071)) sont les chapitres du volume déjà présent —
+vérifié par comparaison de fragments, huit sur huit retrouvés mot pour mot. Les ajouter compterait
+deux fois les mêmes phrases. La liste est tenue dans `core/sources.py:DOUBLONS_ECARTES` : une
+décision négative doit être traçable, sinon elle sera refaite.
 
 **Pourquoi Gutenberg plutôt qu'un scan.** Les fac-similés d'archive.org ont été testés : l'OCR
 comporte 2 716 caractères parasites et plus de 2 000 jetons corrompus (`Patielitin` pour
@@ -95,9 +105,9 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**18 659 atomes** sur vingt œuvres, **tous** localisables dans la source, produits sans aucun modèle
+**19 019 atomes** sur vingt-deux œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-79 % sont qualifiés ; **15 œuvres sur 20 ont une datation certaine** rien qu'à l'échelle de
+80 % sont qualifiés ; **17 œuvres sur 22 ont une datation certaine** rien qu'à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
@@ -105,11 +115,11 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 *Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
 « *#Alix.# Les rêves. Rev. Scient.* ».
 
-**Finesse de la catégorisation** — 18 groupes conceptuels, 152 concepts, 19 sous-concepts,
+**Finesse de la catégorisation** — 19 groupes conceptuels, 159 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-99 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+106 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -203,7 +213,7 @@ qui s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
 gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
-Sur 136 concepts reliés, la partition atteint **0,382 de modularité** (le seuil de structure
+Sur 142 concepts reliés, la partition atteint **0,379 de modularité** (le seuil de structure
 réelle est généralement fixé à 0,30) et fait ressortir neuf grappes — dont « la famille, la
 différence des sexes et la mort », la plus freudienne du lot, et « la clinique », qui s'est
 détachée en grappe propre à l'audit 4 du lexique. Chaque grappe a été **validée en lisant**
@@ -333,7 +343,7 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
   œuvres ajoutées et les 22 que cachaient des marqueurs coupés par des retours à la ligne) ; à
   reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
-  grappes, modularité 0,382. Prochaine étape naturelle : comparer avec un premier auteur non
+  grappes, modularité 0,379. Prochaine étape naturelle : comparer avec un premier auteur non
   freudien pour voir si SES concepts recomposent ou déplacent ces grappes.
 - **Corpus consultable** sans relancer un script : `bin/rechercher.py` — filtres combinables
   (concept, groupe, sous-concept, auteur, œuvre, statut, fonction, mot-clé, fenêtre d'années),

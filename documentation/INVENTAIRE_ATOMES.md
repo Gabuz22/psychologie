@@ -330,6 +330,58 @@ personne n'avait cherchée — *le corps décrit*. Elle sépare le corps **regar
 sexualité ; seuls les organes que Freud décrit en regardant une œuvre se sont rassemblés. Une
 grappe peut donc mesurer un **geste** de l'auteur, pas seulement une doctrine.
 
+### 4.10 Sixième audit (2026-07) — deux œuvres inédites, et le registre moral qui manquait
+
+**Deux œuvres entrées au corpus.** Un passage en revue du catalogue allemand de Project
+Gutenberg a montré que deux textes de Freud y figuraient sans être au corpus : *Das Motiv der
+Kästchenwahl* (1913) et *Einige Charaktertypen aus der psychoanalytischen Arbeit* (1916), tous
+deux en première publication dans la revue *Imago* — donc datés avec certitude. Corpus porté à
+**22 œuvres, 19 019 atomes**.
+
+**Quatre autres ont été ÉCARTÉES, et c'est le point méthodologique.** Gutenberg publie aussi les
+quatre essais de *Totem und Tabu* séparément, tels qu'ils parurent dans *Imago* avant leur
+réunion en volume. Les ajouter aurait compté deux fois les mêmes phrases et faussé toute densité.
+La vérification n'a pas été faite à vue mais **par comparaison de fragments** : huit fragments
+longs pris au tiers du texte, huit retrouvés mot pour mot dans le volume déjà présent. Les
+identifiants écartés sont consignés dans `core/sources.py:DOUBLONS_ECARTES` — une décision
+négative doit être traçable, sinon elle sera refaite.
+
+**Le registre moral manquait entièrement.** L'atomisation des *Charaktertypen* (42 % de
+non-qualifiés) a révélé l'absence : *Gewissen* (conscience, 239 occ.), *Schuld* (culpabilité,
+153), *Strafe* (punition, 100), *Moral* (76), *Verbrechen* (67), *Reue* (24). L'omission était
+lourde — Freud définit le Sur-Moi comme l'héritier de la conscience morale, et fait de la
+culpabilité le ressort du totémisme comme de la névrose obsessionnelle.
+
+**Deux arbitrages « étroit et exact plutôt que large et faux ».**
+
+- *Gewissen* est aussi l'adjectif *gewiß* (certain) décliné : « einer gewissen Regel » pèse
+  **108 occurrences**, contre ~65 pour le substantif. Le repliement supprimant la majuscule qui
+  les sépare en allemand, seules les formes sûres sont retenues (génitif, composés, substantif
+  précédé d'un déterminant neutre). Même arbitrage que pour « ich » et « es ».
+- *Charakter* désigne aussi la NATURE d'une chose : « die Charaktere des Traumlebens » = les
+  propriétés de la vie onirique. Sur 513 occurrences du radical, la part psychanalytique n'est
+  pas séparable mécaniquement ; le concept est donc restreint à ses 35 composés univoques
+  (*Charakterzug*, *Charakterbildung*…).
+
+**Deux défauts PRÉEXISTANTS trouvés par les nouveaux tests, pas par relecture :**
+
+| Défaut | Portée |
+|---|---|
+| `neurose` ne captait pas *Neurotiker* (le névrosé) ni *nervös* | 135 occurrences — la maladie était captée, jamais le malade |
+| `angst` ne captait aucun composé en *-angst* | *Kastrationsangst*, *Realangst*, *Gewissensangst*… ~58 occurrences |
+
+Le second cachait un piège : le joker qui l'aurait réparé aurait ramassé **`längst`** (depuis
+longtemps, 79 occ.) et **`unlängst`** (16) — 95 faux positifs. Les composés sont donc énumérés,
+comme pour `trieb` et `besetzung`.
+
+**Effet sur la partition — le déplacement le plus parlant de tous les audits.** En faisant
+entrer la conscience morale, la seconde topique a quitté la pulsion pour rejoindre **la masse et
+le meneur**. Ce n'est pas un hasard de calcul : c'est la thèse de *Massenpsychologie und
+Ich-Analyse* (1921) — l'idéal du moi se forme par identification au meneur, et c'est de là que
+procède la conscience. Le Moi, le Ça, le Sur-Moi, la masse, le chef, l'identification, la
+suggestion, l'hypnose et la conscience morale forment désormais une grappe de dix concepts. La
+mesure a retrouvé seule un lien que Freud met vingt ans à établir.
+
 ---
 
 ## 5. Signal de validation
