@@ -108,7 +108,7 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 **21 928 atomes** sur vingt-trois œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-79 % sont qualifiés ; **18 œuvres sur 23 ont une datation certaine** rien qu'à l'échelle de
+80 % sont qualifiés ; **18 œuvres sur 23 ont une datation certaine** rien qu'à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
@@ -116,11 +116,11 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 *Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
 « *#Alix.# Les rêves. Rev. Scient.* ».
 
-**Finesse de la catégorisation** — 19 groupes conceptuels, 159 concepts, 19 sous-concepts,
+**Finesse de la catégorisation** — 19 groupes conceptuels, 168 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-108 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+110 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -214,8 +214,8 @@ qui s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
 gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
-Sur 142 concepts reliés, la partition atteint **0,371 de modularité** (le seuil de structure
-réelle est généralement fixé à 0,30) et fait ressortir neuf grappes — dont « la famille, la
+Sur 151 concepts reliés, la partition atteint **0,373 de modularité** (le seuil de structure
+réelle est généralement fixé à 0,30) et fait ressortir sept grappes — dont « la famille, la
 différence des sexes et la mort », la plus freudienne du lot, et « la clinique », qui s'est
 détachée en grappe propre à l'audit 4 du lexique. Chaque grappe a été **validée en lisant**
 des atomes-croisements ; les artefacts sont dits (le *Teufel* rejoint la peinture parce que
@@ -344,7 +344,7 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
   œuvres ajoutées et les 22 que cachaient des marqueurs coupés par des retours à la ligne) ; à
   reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
-  grappes, modularité 0,371. Prochaine étape naturelle : comparer avec un premier auteur non
+  grappes, modularité 0,373. Prochaine étape naturelle : comparer avec un premier auteur non
   freudien pour voir si SES concepts recomposent ou déplacent ces grappes.
 - **Corpus consultable** sans relancer un script : `bin/rechercher.py` — filtres combinables
   (concept, groupe, sous-concept, auteur, œuvre, statut, fonction, mot-clé, fenêtre d'années),

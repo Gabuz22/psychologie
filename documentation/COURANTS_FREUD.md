@@ -6,7 +6,7 @@
 > modification du lexique.
 >
 > **Ce que ce document est.** Le dossier de chacune des grappes que l'agent `courants` découpe
-> dans le graphe de cooccurrence des concepts (modularité 0,371 sur 142 concepts
+> dans le graphe de cooccurrence des concepts (modularité 0,373 sur 151 concepts
 > reliés — le seuil de structure réelle est généralement fixé à 0,30). Chaque dossier donne :
 > les concepts membres, le profil chronologique par œuvre, la part **datée avec certitude**
 > quand la collation le permet, une citation choisie par l'agent lui-même, et la réserve qui
@@ -22,91 +22,67 @@
 
 ---
 
-## 1. Le rêve et son travail — 21 concepts, 5 226 atomes
+## 1. Le rêve, l'appareil psychique et la représentation — 44 concepts, 8 969 atomes
 
-*affekt, anspielung, assoziation, deutung, entstellung, halluzination, schlaf, symbol, tagesrest, theorie, traum, traumarbeit, traumdeutung, traumgedanke, trauminhalt, verdichtung, verschiebung, wachen, wunsch, wunscherfuellung, zensur.*
+*abfuhr, affekt, anspielung, apparat, assoziation, aufmerksamkeit, besetzung, bewusstsein, deutung, energie, entstellung, erregung, fehlleistung, gedaechtnis, halluzination, hemmung, komik, lachen, lustprinzip, name, projektion, psychisme, regression, schlaf, spannung, tagesrest, tendenz, traum, traumarbeit, traumdeutung, traumgedanke, trauminhalt, unbewusst, verdichtung, vergessen, verschiebung, vorbewusst, vorstellung, wachen, widerstand, witz, wunsch, wunscherfuellung, zensur.*
 
-Condensation, déplacement, censure, restes diurnes : le mécanisme par lequel une pensée devient un rêve, et l'appareil de son déchiffrement.
+Le mécanisme du rêve (condensation, déplacement, censure) réuni à la métapsychologie qui l'explique — conscient, préconscient, inconscient, investissement, décharge — et à la REPRÉSENTATION, qui les relie. C'est la plus grosse grappe du corpus, et sa taille est elle-même un résultat : chez Freud, le rêve n'est pas un objet parmi d'autres, c'est le modèle sur lequel l'appareil psychique est pensé.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Die Traumdeutung* (1900) | 587 ‰ | 604 ‰ |
-| *Traum und Telepathie* (1922) | 422 ‰ | — |
-| *Der Dichter und das Phantasieren* (1908) | 284 ‰ | — |
-| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 272 ‰ | — |
-| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 231 ‰ | — |
-| *Das Motiv der Kästchenwahl* (1913) | 213 ‰ | — |
+| *Der Witz und seine Beziehung zum Unbewußten* (1905) | 693 ‰ | 716 ‰ |
+| *Die Traumdeutung* (1900) | 658 ‰ | 686 ‰ |
+| *Der Dichter und das Phantasieren* (1908) | 477 ‰ | — |
+| *Traum und Telepathie* (1922) | 470 ‰ | — |
+| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 458 ‰ | — |
+| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 448 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
 > « Mitteilungen wie die von _Pilcz_ würden hiezu stimmen, denen zufolge feste Beziehungen zwischen der Zeit des Träumens und dem Inhalt der Träume nachweisbar sind in der Weise, daß im tiefen Schlafe Eindrücke aus den ältes »
 > — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
 
-**Réserve.** L'entrée des « Studien über Hysterie » (1895) a fait MIGRER la mémoire hors de cette grappe, vers la clinique : le souvenir, chez Freud, appartient d'abord à la cure. 21 % des atomes de la Traumdeutung lue (éd. 1914) sont par ailleurs des ajouts postérieurs à 1900 — voir la densité « d'origine ».
+**Réserve.** 44 concepts : cette grappe a FUSIONNÉ avec celle de l'appareil psychique à l'audit 7, quand « Vorstellung » (763 occurrences) est entré dans l'ontologie et a ponté les deux. Une grappe aussi large discrimine moins qu'une petite : elle dit un voisinage massif, pas une articulation fine.
 
 ---
 
-## 2. La clinique, la cure et la réminiscence — 23 concepts, 4 936 atomes
+## 2. La clinique, le corps et la cure — 27 concepts, 4 783 atomes
 
-*abwehr, angst, arzt, behandlung, beobachtung, charakter, erinnerung, forschung, gedaechtnis, hypnose, hysterie, koerper, lacheln, neurose, patient, psychoanalyse, spur, suggestion, symptom, trauma, uebertragung, vergessen, widerstand.*
+*abwehr, anfall, angst, arzt, auge, bart, behandlung, charakter, conversion, erinnerung, erlebnis, gesicht, hand, hypnoid, hypnose, hysterie, koerper, kopf, lacheln, laehmung, neurose, patient, schmerz, spur, suggestion, symptom, trauma.*
 
-Hystérie, névrose obsessionnelle, symptôme, angoisse, transfert, résistance — et la MÉMOIRE, qui les a rejoints avec l'entrée du texte fondateur. Ce déplacement est le résultat le plus net de cet ajout : « Hysterische leiden größtentheils an Reminiscenzen », écrivent Breuer et Freud en 1895. Se souvenir n'est pas ici une faculté, c'est le traitement lui-même.
+Hystérie, symptôme, angoisse, transfert, résistance ; la conversion, la paralysie, la douleur, l'état hypnoïde — et le corps que Freud DÉCRIT en même temps qu'il le traite. La mémoire y figure : « Hysterische leiden größtentheils an Reminiscenzen », écrivent Breuer et Freud en 1895. Se souvenir n'est pas ici une faculté, c'est le traitement même.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 540 ‰ | — |
-| *Studien über Hysterie* (1895) | 523 ‰ | — |
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 331 ‰ | 330 ‰ |
-| *Eine Schwierigkeit der Psychoanalyse* (1917) | 322 ‰ | — |
-| *Zur Psychopathologie des Alltagslebens* (1901) | 307 ‰ | 271 ‰ |
-| *Jenseits des Lustprinzips* (1920) | 266 ‰ | — |
+| *Studien über Hysterie* (1895) | 593 ‰ | — |
+| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 493 ‰ | — |
+| *Der Moses des Michelangelo* (1914) | 350 ‰ | — |
+| *Drei Abhandlungen zur Sexualtheorie* (1905) | 282 ‰ | 317 ‰ |
+| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 234 ‰ | — |
+| *Zur Psychopathologie des Alltagslebens* (1901) | 226 ‰ | 161 ‰ |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
 > « Es lag nun nahe, den Traum selbst wie ein Symptom zu behandeln und die für letztere ausgearbeitete Methode der Deutung auf ihn anzuwenden. (32) _Breuer_ und _Freud_, Studien über Hysterie, Wien 1895, 2. Aufl., 1909. »
 > — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
 
-**Réserve.** La grappe doit beaucoup à une seule œuvre (« Studien über Hysterie », 2 909 atomes) : sa cohérence est réelle, son poids reflète aussi la composition du corpus.
+**Réserve.** Le corps décrit (main, œil, visage, barbe) y a été absorbé à l'audit 7, après avoir formé sa propre grappe : le vocabulaire clinique ajouté l'a rapproché du corps soigné. La grappe doit par ailleurs beaucoup à une seule œuvre — « Studien über Hysterie », 2 909 atomes.
 
 ---
 
-## 3. L'appareil psychique et l'économie du plaisir — 20 concepts, 4 514 atomes
+## 3. La famille, la différence des sexes et la mort — 18 concepts, 3 774 atomes
 
-*abfuhr, apparat, aufmerksamkeit, besetzung, bewusstsein, energie, erogene_zone, erregung, fehlleistung, komik, lachen, lustprinzip, projektion, psychisme, regression, spannung, tendenz, unbewusst, vorbewusst, witz.*
-
-Le vocabulaire économique (énergie, décharge, investissement) qui unit la métapsychologie et le mot d'esprit — la thèse même du Witz est une épargne de dépense psychique.
-
-| Œuvre | Densité | Dont d'origine |
-|---|---:|---:|
-| *Der Witz und seine Beziehung zum Unbewußten* (1905) | 614 ‰ | 634 ‰ |
-| *Jenseits des Lustprinzips* (1920) | 306 ‰ | — |
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 305 ‰ | 357 ‰ |
-| *Eine Schwierigkeit der Psychoanalyse* (1917) | 300 ‰ | — |
-| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 268 ‰ | — |
-| *Der Dichter und das Phantasieren* (1908) | 205 ‰ | — |
-
-Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
-
-> « Von zwei psychischen Bildungen, einer Affektneigung und einem Vorstellungsinhalt, die innig zusammengehören, hebt die eine, die aktuell gegeben ist, auch im Traume die andere; bald die somatisch gegebene Angst den unterd »
-> — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
-
-**Réserve.** Réunit la métapsychologie et le comique par leur vocabulaire commun ; le comique n'y tient que par le poids du Witz, seule œuvre du corpus sur le sujet.
-
----
-
-## 4. La famille, la différence des sexes et la mort — 18 concepts, 3 727 atomes
-
-*eltern, familie, geschwister, gesellschaft, infantil, inversion, kastration, maennlichkeit, mund, mutter, oedipus, schuld, sterben, tod, todestrieb, vater, verbrechen, weiblichkeit.*
+*eltern, familie, geschwister, infantil, inversion, kastration, maennlichkeit, mund, mutter, oedipus, schuld, sterben, symbol, tod, todestrieb, vater, verbrechen, weiblichkeit.*
 
 Le roman familial (père, mère, fratrie, Œdipe) noué au complexe de castration, à l'opposition masculin/féminin, à la mort et à la culpabilité — la constellation que Freud tient pour l'origine commune du symptôme, du mythe et du lien social.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
 | *Eine Kindheitserinnerung aus »Dichtung und W…* (1917) | 714 ‰ | — |
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 428 ‰ | 445 ‰ |
-| *Das Motiv der Kästchenwahl* (1913) | 394 ‰ | — |
+| *Drei Abhandlungen zur Sexualtheorie* (1905) | 429 ‰ | 445 ‰ |
+| *Das Motiv der Kästchenwahl* (1913) | 409 ‰ | — |
 | *Eine Kindheitserinnerung des Leonardo da Vin…* (1910) | 313 ‰ | — |
-| *Traum und Telepathie* (1922) | 303 ‰ | — |
+| *Traum und Telepathie* (1922) | 310 ‰ | — |
 | *Einige Charaktertypen aus der psychoanalytis…* (1916) | 300 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
@@ -118,42 +94,42 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 5. Religion, anthropologie, morale — et le lien de masse — 23 concepts, 2 634 atomes
+## 4. Religion, anthropologie, morale et lien social — 29 concepts, 3 338 atomes
 
-*aberglaube, animismus, beruehrung, exogamie, fuehrer, gott, identifizierung, institution, krieg, masse, moral, name, opfer, primitiv, religion, strafe, tabu, totem, trauer, unheimlich, urhorde, verbot, zwangsneurose.*
+*aberglaube, animismus, beobachtung, beruehrung, exogamie, forschung, fuehrer, gesellschaft, gott, identifizierung, institution, krieg, masse, moral, opfer, primitiv, psychoanalyse, religion, strafe, tabu, theorie, totem, trauer, uebertragung, unheimlich, urhorde, verbot, zwang, zwangsneurose.*
 
-Le totémisme, le tabou, le sacrifice, le dieu ; l'interdit moral et la punition qui les accompagnent — chez Freud la morale naît du tabou, pas l'inverse ; et, depuis l'entrée du texte fondateur, la MASSE et son meneur, que la partition a rattachés au religieux plutôt qu'aux instances. L'identification est le pivot commun : au père mort comme au chef.
+Le totémisme, le tabou, le sacrifice, le dieu ; l'interdit moral et la punition ; la masse et son meneur. La NÉVROSE OBSESSIONNELLE y a rejoint le religieux à l'audit 7 — voisinage que Freud pose lui-même dès 1907 dans « Zwangshandlungen und Religionsübungen » : le cérémonial du névrosé et le rite du croyant ont la même structure.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Totem und Tabu* (1913) | 572 ‰ | — |
-| *Massenpsychologie und Ich-Analyse* (1921) | 462 ‰ | — |
-| *Das Unheimliche* (1919) | 371 ‰ | — |
-| *Zeitgemäßes über Krieg und Tod* (1915) | 266 ‰ | — |
-| *Vergänglichkeit* (1916) | 250 ‰ | — |
-| *Eine Teufelsneurose im siebzehnten Jahrhunde…* (1923) | 169 ‰ | — |
+| *Totem und Tabu* (1913) | 586 ‰ | — |
+| *Massenpsychologie und Ich-Analyse* (1921) | 518 ‰ | — |
+| *Das Unheimliche* (1919) | 385 ‰ | — |
+| *Zeitgemäßes über Krieg und Tod* (1915) | 324 ‰ | — |
+| *Vergänglichkeit* (1916) | 273 ‰ | — |
+| *Eine Teufelsneurose im siebzehnten Jahrhunde…* (1923) | 211 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
 > « So findet man den Totemismus heute bei den Völkern, die ihn noch zeigen, in den mannigfaltigsten Stadien des Verfalles, der Abbröckelung, des Überganges zu anderen sozialen und religiösen Institutionen, oder aber i »
 > — *Totem und Tabu*, réimpression INCHANGÉE de 1913 (exemplaire de 1922) — texte d'origine, date certaine
 
-**Réserve.** Le rapprochement science/religion — quand il apparaît — est un fait de COOCCURRENCE : Freud oppose souvent les deux, et deux termes opposés dans un même énoncé voisinent autant que deux termes alliés.
+**Réserve.** Le rapprochement science/religion, quand il apparaît, est un fait de COOCCURRENCE : Freud oppose souvent les deux, et deux termes opposés dans un même énoncé voisinent autant que deux termes alliés.
 
 ---
 
-## 6. La pulsion, le développement sexuel et les instances — 23 concepts, 2 533 atomes
+## 5. La pulsion, le développement sexuel et les instances — 24 concepts, 2 570 atomes
 
-*aggression, elternkomplex, entwicklung, es, fixierung, gewissen, ich, konflikt, kultur, latenzzeit, libido, masochismus, narzissmus, perversion, pubertaet, reaktionsbildung, sadismus, sexualitaet, sublimierung, trieb, ueberich, verdraengung, wiederholungszwang.*
+*aggression, elternkomplex, entwicklung, erogene_zone, es, fixierung, gewissen, ich, konflikt, kultur, latenzzeit, libido, masochismus, narzissmus, perversion, pubertaet, reaktionsbildung, sadismus, sexualitaet, sublimierung, trieb, ueberich, verdraengung, wiederholungszwang.*
 
-Libido, sexualité, perversion, stades du développement, destins de la pulsion (sublimation, formation réactionnelle) — et la seconde topique (Moi, Ça, Sur-Moi) avec la conscience morale, revenues ici après avoir voisiné la masse à l'audit 6.
+Libido, sexualité, perversion, stades du développement, destins de la pulsion (sublimation, formation réactionnelle) — et la seconde topique (Moi, Ça, Sur-Moi) avec la conscience morale.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 522 ‰ | 560 ‰ |
+| *Drei Abhandlungen zur Sexualtheorie* (1905) | 561 ‰ | 610 ‰ |
 | *Eine Schwierigkeit der Psychoanalyse* (1917) | 489 ‰ | — |
 | *Jenseits des Lustprinzips* (1920) | 352 ‰ | — |
-| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 283 ‰ | — |
+| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 285 ‰ | — |
 | *Zeitgemäßes über Krieg und Tod* (1915) | 281 ‰ | — |
 | *Massenpsychologie und Ich-Analyse* (1921) | 249 ‰ | — |
 
@@ -162,15 +138,15 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 > « Von zwei psychischen Bildungen, einer Affektneigung und einem Vorstellungsinhalt, die innig zusammengehören, hebt die eine, die aktuell gegeben ist, auch im Traume die andere; bald die somatisch gegebene Angst den unterd »
 > — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
 
-**Réserve.** Cette grappe a changé de composition à chacun des trois derniers audits : la seconde topique l'a rejointe, quittée, puis reprise. Une grappe est un état de la mesure, pas une vérité sur Freud. Le Sur-Moi reste sous-représenté faute de « Das Ich und das Es » (1923), absent du corpus.
+**Réserve.** Cette grappe a changé de composition à chacun des quatre derniers audits : la seconde topique l'a rejointe, quittée, puis reprise. Une grappe est un état de la mesure, pas une vérité sur Freud. Le Sur-Moi reste sous-représenté faute de « Das Ich und das Es » (1923), absent du corpus.
 
 ---
 
-## 7. La fiction, le délire et la création — 6 concepts, 1 298 atomes
+## 6. La fiction, le délire et la création — 6 concepts, 1 298 atomes
 
 *dichter, erzaehlung, kunst, phantasie, wahn, wissenschaft.*
 
-Le poète, le récit, l'art, le fantasme et le délire — Freud lit la fiction avec les outils de la clinique, et le délire comme une œuvre. La grappe s'est détachée de la clinique quand le corpus a gagné assez de matière clinique réelle pour que les deux se distinguent.
+Le poète, le récit, l'art, le fantasme et le délire — Freud lit la fiction avec les outils de la clinique, et le délire comme une œuvre. La grappe s'est détachée quand le corpus a gagné assez de matière clinique réelle pour que les deux se distinguent.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
@@ -190,31 +166,7 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 8. Le corps décrit : main, œil, visage — 5 concepts, 711 atomes
-
-*auge, bart, gesicht, hand, kopf.*
-
-Les parties du corps que Freud DÉCRIT au lieu de les théoriser : la main et la barbe du Moïse de Michel-Ange, les yeux arrachés de l'homme au sable, le sourire de Monna Lisa. Que ce vocabulaire forme une grappe à part est un résultat, pas un artefact : le corps regardé ne voisine pas avec le corps pensé — « Körper », le somatique abstrait, est resté avec la clinique, et la zone orale avec la sexualité.
-
-| Œuvre | Densité | Dont d'origine |
-|---|---:|---:|
-| *Der Moses des Michelangelo* (1914) | 300 ‰ | — |
-| *Das Unheimliche* (1919) | 86 ‰ | — |
-| *Studien über Hysterie* (1895) | 73 ‰ | — |
-| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 53 ‰ | — |
-| *Traum und Telepathie* (1922) | 52 ‰ | — |
-| *Eine Kindheitserinnerung aus »Dichtung und W…* (1917) | 48 ‰ | — |
-
-Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
-
-> « London, Williams and Norgate, 1863. _Lloyd_ hat zuerst bemerkt, daß die gewöhnlichen Beschreibungen der Figur unrichtig sind, daß Moses nicht im Begriffe ist, aufzustehen[12], daß die rechte Hand nicht in den Bart gre »
-> — *Der Moses des Michelangelo*, édition d'origine (1914) — date certaine
-
-**Réserve.** Grappe née de l'audit 5 du lexique (2026-07) : avant lui, ce vocabulaire était invisible et le « Moses des Michelangelo » culminait à 43 % d'atomes non qualifiés, le pire du corpus. Elle décrit un GESTE de Freud (regarder une œuvre), pas une doctrine.
-
----
-
-## 9. La peinture et le pacte — 3 concepts, 201 atomes
+## 7. La peinture et le pacte — 3 concepts, 201 atomes
 
 *malerei, pakt, teufel.*
 

@@ -427,6 +427,42 @@ célèbre du livre — « *Hysterische leiden größtentheils an Reminiscenzen* 
 mouvement, la fiction et le délire se détachent en grappe propre : il y a désormais assez de
 clinique réelle pour que l'analyse d'un roman ne se confonde plus avec celle d'un malade.
 
+### 4.12 Septième audit (2026-07) — un livre de cas appelle un autre vocabulaire
+
+L'entrée des « Studien über Hysterie » a rendu visible ce que douze ans de textes théoriques
+n'avaient pas fait remonter : le vocabulaire de la CLINIQUE et de la REPRÉSENTATION. Neuf
+concepts ajoutés, tous mesurés avant de l'être.
+
+| Concept | Occurrences | Pourquoi il manquait au corpus |
+|---|---:|---|
+| `vorstellung` | 763 | **le terme même du refoulement** — ce qui est refoulé n'est ni un affect ni un souvenir en général, mais « eine unverträgliche Vorstellung » |
+| `schmerz` | 409 | le symptôme hystérique par excellence (les douleurs de jambe d'Elisabeth v. R.) |
+| `erlebnis` | 240 | l'événement vécu qui, faute d'être abréagi, revient comme symptôme |
+| `zwang` | 235 | la contrainte au-delà de la seule névrose obsessionnelle |
+| `anfall` | 162 | l'accès hystérique, qui répète la scène |
+| `hemmung` | 144 | assez central pour titrer « Hemmung, Symptom und Angst » (1926) |
+| `conversion` | 78 | le mécanisme même de l'hystérie, en graphie latine dans tout le corpus |
+| `hypnoid` | 64 | **la thèse de Breuer**, que Freud abandonnera |
+| `laehmung` | 64 | paralysies et « Contractur » — graphie médicale de 1895 |
+
+Aucun piège d'homonymie cette fois : les formes relevées sont toutes univoques (« vorstellung »
+ne prend que le substantif, jamais le verbe « sich vorstellen »). Le gain est modeste à l'échelle
+du corpus (79,0 % → 79,8 % de qualifiés) mais concentré là où il devait l'être : **24,1 % →
+21,3 %** de non-qualifiés sur les « Studien über Hysterie ».
+
+**Un concept ajouté pour rendre un désaccord mesurable.** `hypnoid` n'a pas été retenu pour son
+volume mais pour ce qu'il permet : sans lui, la théorie que Freud rejette resterait invisible
+dans un corpus qui contient précisément le texte où elle est défendue. Le résultat figure au §2
+de [`SYNTHESE_FREUD.md`](SYNTHESE_FREUD.md) — et il illustre pourquoi le comptage brut ne suffit
+jamais : Freud et Breuer emploient le terme un nombre de fois presque égal, mais Breuer deux fois
+plus densément, et pour le poser quand Freud le déplace.
+
+**Ce qui reste non qualifié est désormais du vocabulaire ORDINAIRE.** Le scan des six plus
+grosses œuvres ne remonte plus que *Zeit*, *Frau*, *Mensch*, *Mann*, *Mädchen*, *Tag*, *Fall*,
+*Leben*, *Zimmer* — et des noms propres (*Leonardo*, *Wien*, *Coppelius*, *Rebekka*). Les taguer
+gonflerait le taux de qualifiés sans rien ajouter à l'analyse. Le rendement des audits par scan
+est atteint ; les gains suivants viendront de nouvelles œuvres, pas de nouveaux mots.
+
 ---
 
 ## 5. Signal de validation

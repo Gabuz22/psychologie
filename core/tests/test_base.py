@@ -472,6 +472,49 @@ class TestLexique(unittest.TestCase):
             self.assertNotIn("charakter", {x["concept"] for x in lexique.concepts_de(phrase)},
                              phrase)
 
+    def test_domaines_de_l_audit_7(self):
+        """Septième audit (2026-07) — le vocabulaire CLINIQUE et la REPRÉSENTATION.
+
+        Rendus visibles par l'entrée des « Studien über Hysterie » : un livre de cas appelle un
+        vocabulaire que douze ans de textes théoriques n'avaient pas fait remonter. Le manque le
+        plus lourd n'était pourtant pas clinique mais central — « Vorstellung », 763 occurrences,
+        le terme même du refoulement : ce qui est refoulé n'est ni un affect ni un souvenir en
+        général, mais « eine unverträgliche Vorstellung ».
+        """
+        cas = {
+            "Die unverträgliche Vorstellung wird verdrängt.": {"vorstellung", "verdraengung"},
+            "Der Vorstellungskreis war abgetrennt.": {"vorstellung"},
+            "Die Schmerzen der Beine kehrten wieder.": {"schmerz"},
+            "Die Contractur des rechten Beines.": {"laehmung"},
+            "Eine hysterische Lähmung des Armes.": {"laehmung", "hysterie"},
+            "Die Conversion der Erregungssumme ins Körperliche.": {"conversion", "koerper"},
+            "Eine Hemmung der willkürlichen Bewegung.": {"hemmung"},
+            "Der hysterische Anfall wiederholt die Scene.": {"anfall", "hysterie"},
+            "Zwangsvorstellungen und Zwangshandlungen.": {"zwang"},
+            "Der hypnoide Zustand begünstigt die Spaltung.": {"hypnoid"},
+            "Das Erlebnis wurde nicht abreagiert.": {"erlebnis"},
+        }
+        for phrase, attendus in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertTrue(attendus <= trouves,
+                            "« %s » : manquent %s" % (phrase, attendus - trouves))
+
+    def test_hypnoid_est_de_breuer_pas_de_freud(self):
+        """L'état hypnoïde EXISTE dans l'ontologie pour rendre un DÉSACCORD mesurable.
+
+        C'est la thèse de Breuer, que Freud abandonnera. Le concept n'a pas été ajouté pour
+        gonfler le lexique mais pour que la théorie rejetée cesse d'être invisible dans un corpus
+        qui contient précisément le texte où elle est défendue. On vérifie donc qu'elle est bien
+        détectée ET qu'elle se concentre là où Breuer écrit.
+        """
+        r = atomisation.atomiser("studien_ueber_hysterie")
+        porteurs = [a for a in r["atomes"]
+                    if any(c["concept"] == "hypnoid" for c in a["concepts"])]
+        self.assertGreater(len(porteurs), 20, "l'état hypnoïde devrait être bien présent")
+        par_breuer = sum(1 for a in porteurs if a["auteur"] == "Josef Breuer")
+        self.assertGreater(par_breuer, len(porteurs) * 0.4,
+                           "l'état hypnoïde devrait se concentrer chez Breuer, son auteur")
+
     def test_composes_de_angst_captes_et_langst_ecarte(self):
         """Les composés en -angst sont énumérés ; « längst » n'est pas de l'angoisse.
 

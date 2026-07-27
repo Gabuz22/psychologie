@@ -93,25 +93,23 @@ C'est ce type de regroupement qui servira la question de fond du projet : si les
 postérieurs se recomposent à partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme
 des grappes.
 
-### Les paires deviennent neuf grappes
+### Les paires deviennent sept grappes
 
 L'agent `courants` va plus loin que les paires : il PARTITIONNE tout le graphe de concepts par
 maximisation gloutonne de la modularité (Newman, 2004), un algorithme déterministe — aucune
-grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 142 concepts suffisamment
-reliés, la partition atteint une **modularité de 0,371** — au-dessus du seuil de 0,30 généralement
+grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 151 concepts suffisamment
+reliés, la partition atteint une **modularité de 0,373** — au-dessus du seuil de 0,30 généralement
 retenu comme signe d'une vraie structure plutôt que d'un artefact du graphe (Newman & Girvan,
-2004). Neuf grappes en ressortent :
+2004). Sept grappes en ressortent :
 
 | Grappe | Concepts (extrait) | Atomes |
 |---|---|---:|
-| Le rêve et son travail | *Traum, Verdichtung, Verschiebung, Zensur, Tagesrest* | 5 226 |
-| **La clinique, la cure et la réminiscence** | *Hysterie, Behandlung, Arzt, Erinnerung, Vergessen* | 4 936 |
-| L'appareil psychique et l'économie du plaisir | *Bewußtsein, Besetzung, Lustprinzip, Witz* | 4 514 |
-| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Schuld, Tod* | 3 727 |
-| Religion, anthropologie, morale — et le lien de masse | *Totem, Tabu, Gott, Moral, Masse, Führer* | 2 634 |
-| La pulsion, le développement sexuel et les instances | *Trieb, Libido, Ich, Es, Über-Ich, Gewissen* | 2 533 |
+| Le rêve, l'appareil psychique et la représentation | *Traum, Verdichtung, Bewußtsein, Besetzung, Vorstellung* | 8 969 |
+| La clinique, le corps et la cure | *Hysterie, Conversion, Schmerz, Erinnerung, Hand, Auge* | 4 783 |
+| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Schuld, Tod* | 3 774 |
+| Religion, anthropologie, morale et lien social | *Totem, Tabu, Gott, Moral, Masse, Zwangsneurose* | 3 338 |
+| La pulsion, le développement sexuel et les instances | *Trieb, Libido, Ich, Es, Über-Ich, Gewissen* | 2 570 |
 | La fiction, le délire et la création | *Dichter, Erzählung, Phantasie, Wahn, Kunst* | 1 298 |
-| Le corps décrit | *Hand, Auge, Gesicht, Bart, Kopf* | 711 |
 | La peinture et le pacte | *Malerei, Teufel, Pakt* | 201 |
 
 **Contrôle de sens intégré** (pas seulement mesuré une fois, mais rejoué à chaque test) : *Ich*,
@@ -128,6 +126,14 @@ topique, jusque-là isolée, s'est rattachée au développement sexuel. Une grap
 mesure, jamais une vérité sur Freud — le dossier complet de chacune, régénéré à chaque
 changement, est dans [`COURANTS_FREUD.md`](COURANTS_FREUD.md).
 
+**Et elles peuvent aussi se CONSOLIDER — ce qui est une limite, pas un progrès.** L'audit 7 a
+fait passer la partition de neuf grappes à sept : le rêve a fusionné avec l'appareil psychique,
+la clinique a absorbé le corps décrit. En cause, « Vorstellung » (763 occurrences), concept si
+transversal qu'il ponte des ensembles jusque-là distincts. La modularité reste bonne (0,373)
+mais la grappe de tête compte désormais **44 concepts sur 168** : elle dit un voisinage massif,
+non une articulation fine. Plus l'ontologie s'enrichit de termes très connectés, moins la
+partition discrimine — à surveiller, et à dire.
+
 **L'entrée du texte FONDATEUR a déplacé la mémoire.** « Studien über Hysterie » (1895) rejoint
 le corpus comme son œuvre la plus ancienne — et 2 909 atomes de matière clinique réelle
 suffisent à faire migrer *Erinnerung*, *Gedächtnis*, *Vergessen* et *Spur* hors de la grappe du
@@ -137,6 +143,37 @@ hystériques souffrent surtout de réminiscences. Se souvenir n'y est pas une fa
 l'esprit : c'est le traitement lui-même. Dans le même mouvement, la fiction et le délire se
 détachent en grappe propre — le corpus a désormais assez de clinique réelle pour que l'analyse
 d'un roman ne se confonde plus avec celle d'un malade.
+
+### Le germe de la rupture est dans le livre fondateur — et il se mesure
+
+L'audit 7 a fait entrer dans l'ontologie l'**état hypnoïde** (*hypnoider Zustand*), non pour
+enrichir le lexique mais pour rendre un DÉSACCORD mesurable : c'est la thèse de Breuer, que
+Freud abandonnera. Sans le concept, une théorie que le corpus contient pourtant resterait
+invisible.
+
+Le résultat demande une nuance que le comptage brut aurait manquée. En valeur absolue, Freud
+emploie le terme presque autant que Breuer (26 contre 27 dans le volume) — mais Breuer n'a écrit
+que 886 atomes contre 2 023 :
+
+| Auteur | Atomes portant « hypnoïde » | Densité dans SA part |
+|---|---:|---:|
+| Josef Breuer | 27 | **30,5 ‰** |
+| Sigmund Freud | 26 | 12,9 ‰ |
+
+La lecture des passages confirme que l'écart n'est pas seulement de fréquence, mais de position.
+Breuer POSE la thèse :
+
+> « *Grundlage und Bedingung der Hysterie ist die Existenz von hypnoiden Zuständen.* »
+
+Freud, dans le même volume, la DÉPLACE déjà :
+
+> « *Ich kann den Verdacht nicht unterdrücken, dass Hypnoid- und Abwehrhysterie irgendwo an
+> ihrer Wurzel zusammentreffen, und dass dabei **die Abwehr das Primäre ist**.* »
+
+Le livre qui les réunit contient donc, mesurablement, ce qui les séparera : là où Breuer fonde
+l'hystérie sur un état de conscience, Freud fait de la **défense** le fait premier. C'est le seul
+endroit du corpus où deux auteurs sont en désaccord — et c'est l'attribution par auteur, posée
+pour éviter un contresens, qui permet de le voir.
 
 **L'audit 6 (2026-07) a produit le déplacement le plus parlant.** En faisant entrer la
 CONSCIENCE MORALE dans l'ontologie (*Gewissen*, *Schuld*, *Strafe*, absents jusque-là), la

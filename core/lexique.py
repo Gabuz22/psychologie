@@ -257,6 +257,12 @@ CONCEPTS = {
             "vorbewusst": ["vorbewusst", "vorbewusste", "vorbewussten"],
             "bewusstsein": ["bewusstsein", "bewusst"],
             "zensur": ["zensur"],
+            # LA REPRÉSENTATION — 763 occurrences, et pourtant absente de l'ontologie jusqu'à
+            # l'audit 7. C'est le terme central du refoulement : ce qui est refoulé n'est pas un
+            # affect ni un souvenir en général, mais « eine unverträgliche Vorstellung ». Le
+            # motif ne prend que le SUBSTANTIF et ses composés (Vorstellungsinhalt,
+            # Vorstellungskreis) — jamais le verbe « sich etwas vorstellen » (s'imaginer).
+            "vorstellung": ["vorstellung"],
             "ich": ["ich-", "ichs"],          # « Ich » nu est trop ambigu (pronom) — voir note ci-dessous
             # « es » est le pronom « il/cela » en allemand : impossible à capter nu sans tout
             # ramasser. On ne le prend donc qu'après un déterminant, là où il désigne l'instance
@@ -327,6 +333,9 @@ CONCEPTS = {
         "label": "Mémoire, souvenir, oubli",
         "termes": {
             "erinnerung": ["erinnerung", "erinnert", "erinnern"],
+            # L'ÉVÉNEMENT VÉCU (240 occ.) — chez Freud ce n'est pas un mot ordinaire : c'est ce
+            # qui, n'ayant pas été « abréagi », revient comme symptôme.
+            "erlebnis": ["erlebnis", "erlebniss"],
             "gedaechtnis": ["gedachtnis"],
             "vergessen": ["vergessen", "vergesslichkeit"],
             "deckerinnerung": ["deckerinnerung"],
@@ -392,6 +401,12 @@ CONCEPTS = {
         "label": "Corps, organes, expression",
         "termes": {
             "koerper": ["korper", "somatisch", "organisch", "leiblich"],
+            # LA DOULEUR (409 occ.) — le symptôme hystérique par excellence : les douleurs de
+            # jambe d'Elisabeth v. R. occupent tout un cas des « Studien über Hysterie ».
+            "schmerz": ["schmerz"],
+            # Les symptômes de conversion, dans la graphie médicale de 1895 (« Contractur »,
+            # avec c). Le corps qui parle à la place du souvenir.
+            "laehmung": ["lahmung", r"[ck]ontra[ck]tur", "anasthesie", "anaesthesie"],
             # Exclut « Augenblick » (l'instant, 41 occ.) et « augenfällig » (manifeste, 20) ;
             # garde les composés bien oculaires, dont « Augenangst » — l'angoisse pour ses yeux,
             # que Freud lit dans « Das Unheimliche » comme équivalent de l'angoisse de castration.
@@ -443,6 +458,23 @@ CONCEPTS = {
         "termes": {
             "verdraengung": ["verdrangung", "verdrangt", "verdrangen"],
             "widerstand": ["widerstand", "widerstande"],
+            # LA CONVERSION (78 occ.) — le mécanisme même de l'hystérie selon Freud : la somme
+            # d'excitation inconciliable est transposée dans le corporel. Graphie latine
+            # « Conversion » dans tout le corpus.
+            "conversion": ["conversion", "konversion"],
+            # L'INHIBITION (144 occ.) — assez centrale pour donner son titre à « Hemmung,
+            # Symptom und Angst » (1926), œuvre que le corpus ne peut pas encore atteindre.
+            "hemmung": ["hemmung"],
+            "anfall": ["anfall"],
+            # LA CONTRAINTE, au-delà de la seule névrose obsessionnelle : Zwangsvorstellung,
+            # Zwangshandlung, Wiederholungszwang. Recoupe « zwangsneurose », plus spécifique —
+            # recoupement voulu, comme « trieb » et « todestrieb ».
+            "zwang": ["zwang"],
+            # L'ÉTAT HYPNOÏDE (64 occ.) — thèse de BREUER, que Freud abandonnera. Le concept
+            # existe pour rendre ce désaccord MESURABLE : sans lui, la théorie que Freud rejette
+            # resterait invisible dans un corpus qui contient pourtant le texte où elle est
+            # défendue (« Studien über Hysterie », chapitre III, signé Breuer).
+            "hypnoid": ["hypnoid"],
             "symptom": ["symptom", "symptome"],
             # « neurotiker » (le névrosé, 95 occ.) et « nervös » (40) manquaient depuis
             # l'origine — la maladie était captée, jamais le malade. Défaut révélé par un test

@@ -56,63 +56,52 @@ AUTEURS = {
 # lui-même (AgentCourants._decrire_grappe), pour que le site ne montre jamais un texte que le
 # pipeline déterministe n'a pas produit.
 EDITORIAL_GRAPPES = [
-    ("traumarbeit", "Le rêve et son travail",
-     "Condensation, déplacement, censure, restes diurnes : le mécanisme par lequel une pensée "
-     "devient un rêve, et l'appareil de son déchiffrement.",
-     "L'entrée des « Studien über Hysterie » (1895) a fait MIGRER la mémoire hors de cette "
-     "grappe, vers la clinique : le souvenir, chez Freud, appartient d'abord à la cure. "
-     "21 % des atomes de la Traumdeutung lue (éd. 1914) sont par ailleurs des ajouts "
-     "postérieurs à 1900 — voir la densité « d'origine »."),
-    ("behandlung", "La clinique, la cure et la réminiscence",
-     "Hystérie, névrose obsessionnelle, symptôme, angoisse, transfert, résistance — et la "
-     "MÉMOIRE, qui les a rejoints avec l'entrée du texte fondateur. Ce déplacement est le "
-     "résultat le plus net de cet ajout : « Hysterische leiden größtentheils an Reminiscenzen », "
-     "écrivent Breuer et Freud en 1895. Se souvenir n'est pas ici une faculté, c'est le "
-     "traitement lui-même.",
-     "La grappe doit beaucoup à une seule œuvre (« Studien über Hysterie », 2 909 atomes) : "
-     "sa cohérence est réelle, son poids reflète aussi la composition du corpus."),
-    ("apparat", "L'appareil psychique et l'économie du plaisir",
-     "Le vocabulaire économique (énergie, décharge, investissement) qui unit la métapsychologie "
-     "et le mot d'esprit — la thèse même du Witz est une épargne de dépense psychique.",
-     "Réunit la métapsychologie et le comique par leur vocabulaire commun ; le comique n'y tient "
-     "que par le poids du Witz, seule œuvre du corpus sur le sujet."),
+    ("traumarbeit", "Le rêve, l'appareil psychique et la représentation",
+     "Le mécanisme du rêve (condensation, déplacement, censure) réuni à la métapsychologie qui "
+     "l'explique — conscient, préconscient, inconscient, investissement, décharge — et à la "
+     "REPRÉSENTATION, qui les relie. C'est la plus grosse grappe du corpus, et sa taille est "
+     "elle-même un résultat : chez Freud, le rêve n'est pas un objet parmi d'autres, c'est le "
+     "modèle sur lequel l'appareil psychique est pensé.",
+     "44 concepts : cette grappe a FUSIONNÉ avec celle de l'appareil psychique à l'audit 7, "
+     "quand « Vorstellung » (763 occurrences) est entré dans l'ontologie et a ponté les deux. "
+     "Une grappe aussi large discrimine moins qu'une petite : elle dit un voisinage massif, pas "
+     "une articulation fine."),
+    ("behandlung", "La clinique, le corps et la cure",
+     "Hystérie, symptôme, angoisse, transfert, résistance ; la conversion, la paralysie, la "
+     "douleur, l'état hypnoïde — et le corps que Freud DÉCRIT en même temps qu'il le traite. "
+     "La mémoire y figure : « Hysterische leiden größtentheils an Reminiscenzen », écrivent "
+     "Breuer et Freud en 1895. Se souvenir n'est pas ici une faculté, c'est le traitement même.",
+     "Le corps décrit (main, œil, visage, barbe) y a été absorbé à l'audit 7, après avoir formé "
+     "sa propre grappe : le vocabulaire clinique ajouté l'a rapproché du corps soigné. La grappe "
+     "doit par ailleurs beaucoup à une seule œuvre — « Studien über Hysterie », 2 909 atomes."),
     ("kastration", "La famille, la différence des sexes et la mort",
      "Le roman familial (père, mère, fratrie, Œdipe) noué au complexe de castration, à "
      "l'opposition masculin/féminin, à la mort et à la culpabilité — la constellation que Freud "
      "tient pour l'origine commune du symptôme, du mythe et du lien social.",
      "La différence des sexes n'a rejoint cette grappe qu'à l'audit 4 du lexique (2026-07) : "
      "avant cela, 526 occurrences dans 17 œuvres étaient invisibles."),
-    ("totem", "Religion, anthropologie, morale — et le lien de masse",
-     "Le totémisme, le tabou, le sacrifice, le dieu ; l'interdit moral et la punition qui les "
-     "accompagnent — chez Freud la morale naît du tabou, pas l'inverse ; et, depuis l'entrée du "
-     "texte fondateur, la MASSE et son meneur, que la partition a rattachés au religieux plutôt "
-     "qu'aux instances. L'identification est le pivot commun : au père mort comme au chef.",
-     "Le rapprochement science/religion — quand il apparaît — est un fait de COOCCURRENCE : "
-     "Freud oppose souvent les deux, et deux termes opposés dans un même énoncé voisinent autant "
-     "que deux termes alliés."),
+    ("totem", "Religion, anthropologie, morale et lien social",
+     "Le totémisme, le tabou, le sacrifice, le dieu ; l'interdit moral et la punition ; la masse "
+     "et son meneur. La NÉVROSE OBSESSIONNELLE y a rejoint le religieux à l'audit 7 — voisinage "
+     "que Freud pose lui-même dès 1907 dans « Zwangshandlungen und Religionsübungen » : le "
+     "cérémonial du névrosé et le rite du croyant ont la même structure.",
+     "Le rapprochement science/religion, quand il apparaît, est un fait de COOCCURRENCE : Freud "
+     "oppose souvent les deux, et deux termes opposés dans un même énoncé voisinent autant que "
+     "deux termes alliés."),
     ("libido", "La pulsion, le développement sexuel et les instances",
      "Libido, sexualité, perversion, stades du développement, destins de la pulsion "
      "(sublimation, formation réactionnelle) — et la seconde topique (Moi, Ça, Sur-Moi) avec la "
-     "conscience morale, revenues ici après avoir voisiné la masse à l'audit 6.",
-     "Cette grappe a changé de composition à chacun des trois derniers audits : la seconde "
+     "conscience morale.",
+     "Cette grappe a changé de composition à chacun des quatre derniers audits : la seconde "
      "topique l'a rejointe, quittée, puis reprise. Une grappe est un état de la mesure, pas une "
      "vérité sur Freud. Le Sur-Moi reste sous-représenté faute de « Das Ich und das Es » (1923), "
      "absent du corpus."),
     ("dichter", "La fiction, le délire et la création",
      "Le poète, le récit, l'art, le fantasme et le délire — Freud lit la fiction avec les outils "
-     "de la clinique, et le délire comme une œuvre. La grappe s'est détachée de la clinique "
-     "quand le corpus a gagné assez de matière clinique réelle pour que les deux se distinguent.",
+     "de la clinique, et le délire comme une œuvre. La grappe s'est détachée quand le corpus a "
+     "gagné assez de matière clinique réelle pour que les deux se distinguent.",
      "Grappe portée par les œuvres d'analyse littéraire (Gradiva, le Dichter, le Kästchenwahl) : "
      "elle décrit autant un GENRE d'écrit de Freud qu'un domaine de sa doctrine."),
-    ("hand", "Le corps décrit : main, œil, visage",
-     "Les parties du corps que Freud DÉCRIT au lieu de les théoriser : la main et la barbe du "
-     "Moïse de Michel-Ange, les yeux arrachés de l'homme au sable, le sourire de Monna Lisa. "
-     "Que ce vocabulaire forme une grappe à part est un résultat, pas un artefact : le corps "
-     "regardé ne voisine pas avec le corps pensé — « Körper », le somatique abstrait, est resté "
-     "avec la clinique, et la zone orale avec la sexualité.",
-     "Grappe née de l'audit 5 du lexique (2026-07) : avant lui, ce vocabulaire était invisible "
-     "et le « Moses des Michelangelo » culminait à 43 % d'atomes non qualifiés, le pire du "
-     "corpus. Elle décrit un GESTE de Freud (regarder une œuvre), pas une doctrine."),
     ("malerei", "La peinture et le pacte",
      "Les analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le peintre "
      "possédé de la Teufelsneurose) — et le pacte signé du sang, sujet de cette dernière.",
