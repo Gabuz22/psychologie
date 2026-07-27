@@ -678,6 +678,48 @@ class TestAtomisation(unittest.TestCase):
             self.assertEqual(list(atomisation.atomiser(cle)["controles"]["par_auteur"]),
                              ["Sigmund Freud"])
 
+    def test_breuer_nest_pas_attribue_a_freud(self):
+        """« Studien über Hysterie » (1895) est CO-ÉCRIT : Breuer en signe 30 %.
+
+        Le volume fondateur de la psychanalyse porte deux noms. Josef Breuer y écrit le cas
+        d'Anna O. et l'INTÉGRALITÉ du chapitre théorique III — dans lequel il défend l'état
+        hypnoïde, thèse que Freud abandonnera. Sans les bornes déclarées, cette théorie serait
+        mesurée comme du Freud : le contresens exact que l'appendice d'Otto Rank avait déjà
+        révélé dans la Traumdeutung, mais quatre fois plus lourd.
+        """
+        r = atomisation.atomiser("studien_ueber_hysterie")
+        par_auteur = r["controles"]["par_auteur"]
+        self.assertIn("Josef Breuer", par_auteur)
+        self.assertGreater(par_auteur["Josef Breuer"], 700)
+        self.assertGreater(par_auteur["Sigmund Freud"], par_auteur["Josef Breuer"])
+
+        # Le texte DÉCLARE lui-même ses auteurs en tête de chaque section. On vérifie donc que
+        # les bornes tombent au bon endroit — pas seulement qu'il existe deux auteurs — en
+        # confrontant l'attribution calculée à celle que la phrase énonce.
+        # Blancs normalisés : le texte source est retourné à la ligne, et « Theoretisches.\n\n
+        # (J. Breuer.) » ne se compare pas à la même chaîne écrite d'un trait.
+        def premier(fragment):
+            trouve = [a for a in r["atomes"] if fragment in " ".join(a["texte"].split())]
+            self.assertTrue(trouve, "fragment introuvable : %s" % fragment)
+            return trouve[0]
+
+        self.assertEqual(premier("Anna O … (Breuer)")["auteur"], "Josef Breuer")
+        self.assertEqual(premier("Theoretisches. (J. Breuer.)")["auteur"], "Josef Breuer")
+        self.assertEqual(premier("Zur Psychotherapie der Hysterie.")["auteur"], "Sigmund Freud")
+        self.assertEqual(premier("Frau Emmy v.")["auteur"], "Sigmund Freud")
+
+    def test_contribution_introuvable_leve_une_erreur(self):
+        """Une région d'auteur déclarée mais absente du texte est une ERREUR, pas un silence.
+
+        Le mécanisme localise les contributions par marqueur de texte. Si un marqueur ne se
+        retrouve pas — faute de frappe, texte re-téléchargé autrement —, la région disparaît
+        SANS BRUIT et son auteur réel est réattribué à l'auteur du volume. C'est précisément le
+        défaut que ce mécanisme existe pour empêcher : il doit donc échouer bruyamment.
+        """
+        with self.assertRaises(ValueError):
+            atomisation.contributions("un texte quelconque",
+                                      {"contributions": [{"auteur": "X", "debut": "ABSENT"}]}, [])
+
     def test_ids_uniques(self):
         ids = [a["id"] for a in self.r["atomes"]]
         self.assertEqual(len(ids), len(set(ids)))

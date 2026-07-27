@@ -68,6 +68,13 @@ _PREMIER_TITRE = re.compile(r"^\s*(Vorbemerkung|Vorwort|Einleitung|Inhaltsverzei
                             re.M)
 _PREMIER_CHAPITRE = re.compile(r"^[ \t]*I\.[ \t]*$", re.M)
 _TOC_TITRE = re.compile(r"^[ \t]*(Inhaltsverzeichnis|Inhaltsangabe)\.?[ \t]*$", re.M)
+# Variante pour les transcriptions WIKISOURCE page par page, qui conservent la CAPITALE de la
+# page imprimée (« VORWORT. », « INHALTS-VERZEICHNISS. ») là où Gutenberg normalise la casse.
+# Elle est séparée à dessein : rendre le motif principal insensible à la casse faisait matcher
+# « INHALTSVERZEICHNIS » en tête d'« Über Psychoanalyse » et CONSERVAIT sa table des matières —
+# 51 faux atomes. Un correctif ne doit pas déplacer le défaut vers une autre œuvre.
+_PREMIER_TITRE_WS = re.compile(r"^\s*(VORBEMERKUNG|VORWORT|EINLEITUNG)\b", re.M)
+_TOC_TITRE_WS = re.compile(r"^[ \t]*INHALTS-?VERZEICHNIS{1,2}\.?[ \t]*$", re.M)
 _TOC_LIGNE = re.compile(r"^.{3,75}?[ \t]{3,}\d{1,3}[ \t]*$")
 
 # PARATEXTE DE FIN DE VOLUME — bibliographies et réclames d'éditeur. Ce n'est pas Freud, et cela
@@ -341,6 +348,34 @@ OEUVRES = {
         "source": "Project Gutenberg #29946 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/29946",
     },
+    "studien_ueber_hysterie": {
+        "fichier": "1895_studien_ueber_hysterie.ws.txt",
+        "titre": "Studien über Hysterie",
+        "titre_fr": "Études sur l'hystérie",
+        "annee_oeuvre": 1895,
+        "annee_edition": 1895,     # PREMIÈRE édition — datation exacte
+        "edition": "1. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "provenance": "wikisource",
+        "source": ("Wikisource DE — 275 pages, toutes en Bearbeitungsstand « fertig » "
+                   "(relues deux fois sur le fac-similé)"),
+        "url": "https://de.wikisource.org/wiki/Studien_über_Hysterie",
+        # ŒUVRE CO-ÉCRITE, et pas à la marge : le volume fondateur de la psychanalyse est signé
+        # « Dr. Jos. Breuer und Dr. Sigm. Freud ». Josef Breuer y écrit DEUX blocs — le cas
+        # d'Anna O. (la patiente qui a nommé la « talking cure ») et l'INTÉGRALITÉ du chapitre
+        # théorique III —, soit environ 30 % du volume. Le texte le déclare lui-même à chaque
+        # section : « Beobachtung I. Frl. Anna O … (Breuer) », « III. Theoretisches. (J. Breuer.) ».
+        # Sans ces bornes, un tiers de la théorie de BREUER — l'état hypnoïde, qu'il défend et
+        # que Freud abandonnera — serait mesuré comme du Freud.
+        "contributions": [
+            {"auteur": "Josef Breuer",
+             "debut": "Beobachtung I. Frl. Anna O",
+             "fin": "II. Frau Emmy v. N"},
+            {"auteur": "Josef Breuer",
+             "debut": "III. Theoretisches.",
+             "fin": "IV. Zur Psychotherapie der Hysterie."},
+        ],
+    },
     "kaestchenwahl": {
         "fichier": "1913_kaestchenwahl.pg.txt",
         "titre": "Das Motiv der Kästchenwahl",
@@ -420,7 +455,8 @@ def _extraire_corps(brut, provenance="gutenberg"):
     """
     if provenance != "gutenberg":
         corps, note = _nettoyer_wikisource(brut)
-        return corps, "source Wikisource — " + note
+        corps, note_lim = _retirer_liminaires_wikisource(corps)
+        return corps, "source Wikisource — " + note + " ; " + note_lim
     d = _DEBUT.search(brut)
     f = _FIN.search(brut)
     if not d or not f or f.start() <= d.end():
@@ -486,6 +522,31 @@ def _retirer_paratexte_final(corps, cle):
         return corps, "borne « %s » trouvée trop tôt (%d %%) — non appliquée" % (
             marqueur[:24], round(100 * i / len(corps)))
     return corps[:i].strip(), "paratexte final retiré (%d signes)" % (len(corps) - i)
+
+
+def _retirer_liminaires_wikisource(corps):
+    """Page de titre et table des matières d'une transcription Wikisource page par page.
+
+    Ces transcriptions incluent le livre TEL QU'IMPRIMÉ, page de titre comprise — à la
+    différence des pages d'espace principal déjà assemblées (« Neue Folge », « Teufelsneurose »),
+    qui n'en ont pas. Sans ce retrait, « STUDIEN ÜBER HYSTERIE VON Dr. JOS. » devenait le premier
+    atome de l'œuvre.
+
+    La PRÉFACE est conservée — elle est datée et signée (« April 1895. J. Breuer, S. Freud »),
+    donc le seul matériau dont la datation soit certaine. On coupe jusqu'à son titre, pas au-delà.
+    """
+    faits = []
+    t = _PREMIER_TITRE_WS.search(corps)
+    if t and t.start() > 0:
+        corps = corps[t.start():]
+        faits.append("page de titre retirée")
+    # Table des matières : son intitulé et la ligne de titre du premier chapitre qu'elle annonce.
+    # Le tableau lui-même a déjà disparu à la récupération (bin/recuperer_wikisource.py).
+    m = _TOC_TITRE_WS.search(corps)
+    if m:
+        corps = corps[:m.start()] + corps[m.end():]
+        faits.append("intitulé de table des matières retiré")
+    return corps.strip(), (" ; ".join(faits) if faits else "aucun liminaire détecté")
 
 
 def _retirer_liminaires(corps):

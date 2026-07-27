@@ -25,7 +25,7 @@ Le travail d'analyse, lui, se fait en français. La traduction des concepts vien
 
 ## Corpus
 
-**Vingt-deux œuvres, 1900-1933.** Une **★** signale une datation certaine : édition d'origine, ou
+**Vingt-trois œuvres, 1895-1933.** Une **★** signale une datation certaine : édition d'origine, ou
 réimpression déclarée inchangée.
 
 Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
@@ -36,6 +36,7 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 
 | Œuvre | Original | Édition lue | Source |
 |---|---|---|---|
+| *Studien über Hysterie* (avec Josef Breuer) ★ | 1895 | 1. Auflage, 1895 | [Wikisource DE](https://de.wikisource.org/wiki/Studien_über_Hysterie) |
 | *Die Traumdeutung* | 1900 | 4. Auflage, 1914 | [#40739](https://www.gutenberg.org/ebooks/40739) |
 | *Zur Psychopathologie des Alltagslebens* | 1901 | Durchgesehener Abdruck, 1904 | [#24429](https://www.gutenberg.org/ebooks/24429) |
 | *Drei Abhandlungen zur Sexualtheorie* | 1905 | 4. Auflage, 1920 | [#39938](https://www.gutenberg.org/ebooks/39938) |
@@ -105,9 +106,9 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**19 019 atomes** sur vingt-deux œuvres, **tous** localisables dans la source, produits sans aucun modèle
+**21 928 atomes** sur vingt-trois œuvres, **tous** localisables dans la source, produits sans aucun modèle
 de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-80 % sont qualifiés ; **17 œuvres sur 22 ont une datation certaine** rien qu'à l'échelle de
+79 % sont qualifiés ; **18 œuvres sur 23 ont une datation certaine** rien qu'à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
@@ -119,7 +120,7 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 
-106 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
+108 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
 séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
 
 ---
@@ -213,7 +214,7 @@ qui s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
 gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
-Sur 142 concepts reliés, la partition atteint **0,379 de modularité** (le seuil de structure
+Sur 142 concepts reliés, la partition atteint **0,371 de modularité** (le seuil de structure
 réelle est généralement fixé à 0,30) et fait ressortir neuf grappes — dont « la famille, la
 différence des sexes et la mort », la plus freudienne du lot, et « la clinique », qui s'est
 détachée en grappe propre à l'audit 4 du lexique. Chaque grappe a été **validée en lisant**
@@ -343,7 +344,7 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
   œuvres ajoutées et les 22 que cachaient des marqueurs coupés par des retours à la ligne) ; à
   reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
-  grappes, modularité 0,379. Prochaine étape naturelle : comparer avec un premier auteur non
+  grappes, modularité 0,371. Prochaine étape naturelle : comparer avec un premier auteur non
   freudien pour voir si SES concepts recomposent ou déplacent ces grappes.
 - **Corpus consultable** sans relancer un script : `bin/rechercher.py` — filtres combinables
   (concept, groupe, sous-concept, auteur, œuvre, statut, fonction, mot-clé, fenêtre d'années),

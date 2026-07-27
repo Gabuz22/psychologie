@@ -54,20 +54,37 @@ def contributions(texte, meta, reperes):
     """Régions du texte écrites par QUELQU'UN D'AUTRE que l'auteur du volume.
 
     Déclarées dans le registre des œuvres (voir `sources.OEUVRES[...]["contributions"]`) et
-    localisées ici par leur marqueur de début, jusqu'au chapitre indiqué. Sans cela, l'appendice
-    d'Otto Rank dans la 4e édition de la Traumdeutung — 7 % du volume — passerait pour du Freud,
-    et toute mesure d'auteur mélangerait deux plumes.
+    localisées ici par leur marqueur de début. Sans cela, l'appendice d'Otto Rank dans la 4e
+    édition de la Traumdeutung — 7 % du volume — passerait pour du Freud, et toute mesure
+    d'auteur mélangerait deux plumes.
+
+    La fin d'une région se déclare de deux façons, au choix :
+      • `jusqu_au_chapitre` — le prochain chapitre portant ce numéro ;
+      • `fin` — un marqueur de texte explicite. Indispensable pour les œuvres CO-ÉCRITES, où
+        un même contributeur signe plusieurs régions disjointes : dans « Studien über Hysterie »
+        (1895), Breuer écrit à la fois le cas d'Anna O. et tout le chapitre théorique, soit 30 %
+        du volume, et les deux régions sont séparées par trois cas rédigés par Freud.
+    Une région déclarée qu'on ne retrouve PAS dans le texte est une erreur de déclaration, pas
+    un cas à ignorer en silence : elle lève une exception.
     """
     out = []
     for c in meta.get("contributions", []):
         debut = texte.find(c["debut"])
         if debut < 0:
-            continue
-        fin = len(texte)
-        for pos, numero, _titre in reperes:
-            if numero == c.get("jusqu_au_chapitre") and pos > debut:
-                fin = pos
-                break
+            raise ValueError("contribution de %s : marqueur de début introuvable — %r"
+                             % (c["auteur"], c["debut"][:60]))
+        if c.get("fin"):
+            pos = texte.find(c["fin"], debut)
+            if pos < 0:
+                raise ValueError("contribution de %s : marqueur de fin introuvable — %r"
+                                 % (c["auteur"], c["fin"][:60]))
+            fin = pos
+        else:
+            fin = len(texte)
+            for pos, numero, _titre in reperes:
+                if numero == c.get("jusqu_au_chapitre") and pos > debut:
+                    fin = pos
+                    break
         out.append({"auteur": c["auteur"], "debut": debut, "fin": fin})
     return out
 

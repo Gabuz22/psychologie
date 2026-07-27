@@ -382,6 +382,51 @@ procède la conscience. Le Moi, le Ça, le Sur-Moi, la masse, le chef, l'identif
 suggestion, l'hypnose et la conscience morale forment désormais une grappe de dix concepts. La
 mesure a retrouvé seule un lien que Freud met vingt ans à établir.
 
+### 4.11 Le texte fondateur, et ce qu'une œuvre co-écrite exige (2026-07)
+
+**« Studien über Hysterie » (1895) entre au corpus** — l'acte de naissance de la psychanalyse,
+antérieur de cinq ans à tout le reste. Il n'était pas sur Project Gutenberg : Wikisource
+allemand le transcrit **page par page**, 275 pages, **toutes en état « Fertig »** (relues deux
+fois sur le fac-similé). Un récupérateur dédié (`bin/recuperer_wikisource.py`) les assemble et
+**refuse d'écrire** si une seule page est en dessous de cet état : un corpus silencieusement
+dégradé est pire qu'un corpus absent.
+
+**Ce que la récupération a appris**, chaque point corrigé après constat :
+
+| Défaut | Effet s'il n'avait pas été vu |
+|---|---|
+| Tri alphabétique des pages | le liminaire (« A01 »…« A06 ») passait APRÈS la page 275 : la préface se retrouvait à la fin du livre |
+| Gabarits de mise en page supprimés en bloc | les titres de chapitre disparaissaient — **et avec eux l'attribution d'auteur qu'ils portent** |
+| Notes de bas de page insérées à leur appel | une note posée au milieu d'une phrase la coupait en deux, et le découpage en atomes héritait de la coupure. Elles sont désormais rejetées en fin de page, texte intégralement conservé |
+| Notes de contributeurs | Wikisource les marque `group="WS"` — discriminant sûr, préféré à toute devinette sur le contenu : un premier essai cherchait le mot « Vorlage » et échouait sur « ''Vorlage:'' », en italiques |
+| Casse des liminaires | « VORWORT. » en capitales n'était pas reconnu, et la coupe emportait la PRÉFACE — le seul matériau daté avec certitude |
+
+Ce dernier correctif a d'abord été appliqué au motif commun, en le rendant insensible à la
+casse. Résultat : « INHALTSVERZEICHNIS » se mettait à matcher en tête d'*Über Psychoanalyse* et
+sa table des matières était CONSERVÉE — 51 faux atomes. **Un correctif ne doit pas déplacer le
+défaut vers une autre œuvre** : la variante Wikisource est donc séparée du motif Gutenberg.
+
+**LA CO-ÉCRITURE, enjeu principal.** Le volume est signé « Dr. Jos. Breuer und Dr. Sigm.
+Freud ». Josef Breuer y écrit **deux blocs disjoints** — le cas d'Anna O., la patiente qui a
+nommé la *talking cure*, et l'INTÉGRALITÉ du chapitre théorique III — soit **886 atomes, 30 %
+du volume**. Dans ce chapitre il défend l'**état hypnoïde**, thèse que Freud abandonnera. Sans
+bornes d'auteur, cette théorie serait comptée comme freudienne : le contresens que l'appendice
+d'Otto Rank avait déjà révélé dans la *Traumdeutung*, mais quatre fois plus lourd.
+
+Le texte **déclare lui-même ses auteurs** à chaque section (« Beobachtung I. Frl. Anna O …
+(Breuer) », « III. Theoretisches. (J. Breuer.) ») : les bornes sont donc relevées dans le texte,
+jamais devinées. Le mécanisme de contributions a été étendu pour accepter un marqueur de FIN
+explicite — un même contributeur peut signer plusieurs régions séparées — et il **lève
+désormais une exception** quand un marqueur déclaré ne se retrouve pas : une région qui
+disparaît en silence réattribue son auteur, c'est-à-dire exactement ce que ce mécanisme existe
+pour empêcher.
+
+**Effet sur la partition.** La mémoire (*Erinnerung*, *Gedächtnis*, *Vergessen*, *Spur*) a
+QUITTÉ la grappe du rêve pour celle de la cure. Le corpus retrouve ainsi la phrase la plus
+célèbre du livre — « *Hysterische leiden größtentheils an Reminiscenzen* ». Dans le même
+mouvement, la fiction et le délire se détachent en grappe propre : il y a désormais assez de
+clinique réelle pour que l'analyse d'un roman ne se confonde plus avec celle d'un malade.
+
 ---
 
 ## 5. Signal de validation
