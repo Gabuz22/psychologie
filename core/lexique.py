@@ -331,6 +331,12 @@ CONCEPTS = {
             "vergessen": ["vergessen", "vergesslichkeit"],
             "deckerinnerung": ["deckerinnerung"],
             "spur": ["erinnerungsspur", "gedachtnisspur"],
+            # LE NOM PROPRE — matière privilégiée de l'oubli chez Freud : « Zur Psychopathologie
+            # des Alltagslebens » s'ouvre sur « Das Vergessen von Eigennamen ». Le concept
+            # « namenvergessen » ne captait que le mot composé (19 occurrences) ; le nom
+            # lui-même, 459 fois dans le corpus, n'existait pas dans l'ontologie.
+            # Borné : « namentlich » (à savoir) n'est pas un nom propre.
+            "name": [r"namen?s?\b", r"eigennamen?\b", r"vornamen?\b"],
         },
     },
     "pulsion": {
@@ -373,9 +379,37 @@ CONCEPTS = {
             # personne) partout, alors que le concept est la masculinité COMME QUALITÉ, celle que
             # Freud oppose à la féminité. Même prudence que « ich » réservé au moi.
             "maennlichkeit": ["mannlich"],
-            # LE CORPS — la pulsion est définie par Freud comme « Grenzbegriff zwischen
-            # Seelischem und Somatischem » : le somatique appartient donc bien à ce groupe.
+        },
+    },
+    # NOUVEAU GROUPE (audit 5) — LE CORPS ET SES EXPRESSIONS. « koerper » ne connaissait que
+    # l'abstrait (somatisch, leiblich) et vivait dans « pulsion ». Or trois œuvres du corpus
+    # sont des analyses de corps CONCRETS, et leur vocabulaire restait invisible : la main, la
+    # barbe et les Tables du *Moses des Michelangelo* (43 % de non-qualifiés, le pire du
+    # corpus), les yeux de *Das Unheimliche* — l'homme au sable arrache les yeux, que Freud
+    # lit comme équivalent de la castration —, le sourire de *Monna Lisa* dans le *Leonardo*.
+    # Le corps n'est pas une pulsion : il méritait son groupe.
+    "corps": {
+        "label": "Corps, organes, expression",
+        "termes": {
             "koerper": ["korper", "somatisch", "organisch", "leiblich"],
+            # Exclut « Augenblick » (l'instant, 41 occ.) et « augenfällig » (manifeste, 20) ;
+            # garde les composés bien oculaires, dont « Augenangst » — l'angoisse pour ses yeux,
+            # que Freud lit dans « Das Unheimliche » comme équivalent de l'angoisse de castration.
+            "auge": [r"auge(?!nblick|nfallig|nschein)"],
+            # Borné : « handeln », « Handlung », « behandeln » pèsent 300+ occurrences et ne
+            # parlent pas de la main. Le motif nu aurait triplé le concept avec du bruit.
+            "hand": [r"hand(?:e|en|es)?\b"],
+            "kopf": ["kopf"],
+            "bart": ["bart"],
+            # (?!lich) écarte « mündlich » (verbal, oral au sens de « parlé ») ; les composés
+            # gardés sont bien corporels, dont « Mundzone » — la zone érogène orale des
+            # « Drei Abhandlungen ».
+            "mund": [r"mund(?!lich)"],
+            # (?!spunkt) écarte « Gesichtspunkt » (le point de vue, 71 occ. sur 166).
+            "gesicht": [r"gesicht(?!spunkt)"],
+            # Le sourire, distinct du rire (« lachen », groupe comique) : Freud l'analyse comme
+            # mimique — celle de Monna Lisa (37 occ. sur 49) comme celle du mot d'esprit.
+            "lacheln": ["lachel"],
         },
     },
     "conflit": {
@@ -411,6 +445,10 @@ CONCEPTS = {
             "introjektion": ["introjekt"],
             "isolierung": ["isolierung"],
             "wahn": ["wahn", "wahnsinn", "paranoi"],
+            # L'HALLUCINATION manquait entièrement à l'ontologie (67 occurrences) — alors que la
+            # « halluzinatorische Wunscherfüllung » du nourrisson est le modèle même du rêve au
+            # chapitre VII de la Traumdeutung.
+            "halluzination": ["halluzin"],
             # Concept À PART ENTIÈRE, et non un parasite du rêve (voir la note sur « traum ») :
             # la névrose traumatique et la névrose de guerre sont le point d'appui empirique de
             # « Jenseits des Lustprinzips » pour poser la compulsion de répétition.
@@ -489,6 +527,13 @@ CONCEPTS = {
             "gott": [r"gott(?!ing)"],
             # « teufl » attrape « teuflisch » — le e du radical tombe dans l'adjectif.
             "teufel": ["teufel", "teufl"],
+            # LE PACTE avec le diable — l'engagement ÉCRIT et signé du sang, sujet même de la
+            # « Teufelsneurose » (52 occurrences de « Verschreibung », toutes dans cette œuvre).
+            # À NE PAS CONFONDRE avec « verschreiben » (le lapsus calami, groupe acte_manque) :
+            # le motif « verschreiben » ne capte pas « Verschreibung », les deux cohabitent sans
+            # se recouvrir. Concept mono-œuvre à ce jour — le signaler plutôt que le taire ; il
+            # se peuplera si d'autres textes de démonologie rejoignent le corpus.
+            "pakt": ["verschreibung", "pakt", "teufelspakt", "teufelsverschreibung"],
         },
     },
     "comique": {

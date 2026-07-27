@@ -349,6 +349,71 @@ class TestLexique(unittest.TestCase):
             trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
             self.assertNotIn(interdit, trouves, "« %s » a capté « %s »" % (phrase, interdit))
 
+    def test_domaines_de_l_audit_5(self):
+        """Cinquième audit (2026-07) — le CORPS CONCRET, le nom propre, l'hallucination.
+
+        Mené sur les six œuvres au non-qualifié le plus haut. Trois œuvres du corpus sont des
+        analyses de corps concrets dont le vocabulaire était invisible : la main, la barbe et
+        les Tables du *Moses* (43 % de non-qualifiés, le pire du corpus), les yeux arrachés de
+        *Das Unheimliche*, le sourire de *Monna Lisa*. S'y ajoutent deux absences criantes : le
+        NOM PROPRE (459 occ. — alors que « Zur Psychopathologie » s'ouvre sur « Das Vergessen
+        von Eigennamen », et que le concept ne captait que le mot composé) et l'HALLUCINATION
+        (67 occ. — alors que la « halluzinatorische Wunscherfüllung » est le modèle du rêve).
+        """
+        cas = {
+            "Die rechte Hand hält die Tafeln.": {"hand"},
+            "Der Sandmann reißt den Kindern die Augen aus.": {"auge"},
+            "Der Bart des Moses fällt über die Brust.": {"bart"},
+            "Er wandte den Kopf zur Seite.": {"kopf"},
+            "Das Lächeln der Monna Lisa ist rätselhaft.": {"lacheln"},
+            "Ein Ausdruck des Gesichtes verrät den Affekt.": {"gesicht"},
+            "Die Mundwinkel verziehen sich.": {"mund"},
+            "Das Vergessen von Eigennamen ist häufig.": {"name", "vergessen"},
+            "Der Name der Dame fiel mir nicht ein.": {"name"},
+            "Die halluzinatorische Wunscherfüllung des Säuglings.":
+                {"halluzination", "wunscherfuellung"},
+            "Der Maler unterschrieb die Verschreibung mit Blut.": {"pakt", "malerei"},
+        }
+        for phrase, attendus in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertTrue(attendus <= trouves,
+                            "« %s » : manquent %s" % (phrase, attendus - trouves))
+
+    def test_homonymes_de_l_audit_5_ecartes(self):
+        """CONTRE-ÉPREUVES de l'audit 5 — les pièges mesurés sur les formes réellement captées.
+
+        « handeln »/« Handlung » (300+ occ.) auraient triplé le concept « hand » avec du bruit ;
+        « Augenblick » (l'instant, 41 occ.) n'a rien d'oculaire ; « Gesichtspunkt » (le point de
+        vue, 71 occ. sur 166) n'est pas un visage ; « namentlich » veut dire « à savoir » ; et
+        « Erscheinung » — écarté à la source — signifie « phénomène » dans tout le corpus, pas
+        « apparition » : l'ajouter aurait produit un faux positif de masse.
+        """
+        cas = {
+            "Es handelt sich um eine Handlung.": "hand",
+            "Die Behandlung des Kranken.": "hand",
+            "Im Augenblick der Erkenntnis.": "auge",
+            "Unter diesem Gesichtspunkte betrachtet.": "gesicht",
+            "Namentlich die Neurotiker zeigen dies.": "name",
+            "Die pathologischen Erscheinungen des Seelenlebens.": "pakt",
+        }
+        for phrase, interdit in cas.items():
+            trouves = {x["concept"] for x in lexique.concepts_de(phrase)}
+            self.assertNotIn(interdit, trouves, "« %s » a capté « %s »" % (phrase, interdit))
+
+    def test_le_lapsus_calami_et_le_pacte_ne_se_confondent_pas(self):
+        """« verschreiben » (lapsus d'écriture) et « Verschreibung » (le pacte signé) sont deux
+        mots distincts que la frontière de mot sépare d'elle-même — vérifié dans les deux sens,
+        car les confondre rangerait le pacte avec le diable parmi les actes manqués."""
+        lapsus = {x["concept"] for x in lexique.concepts_de(
+            "Er hat sich beim Schreiben verschreiben können.")}
+        self.assertIn("versprechen", lapsus)
+        self.assertNotIn("pakt", lapsus)
+
+        pacte = {x["concept"] for x in lexique.concepts_de(
+            "Die Verschreibung an den Teufel galt neun Jahre.")}
+        self.assertIn("pakt", pacte)
+        self.assertNotIn("versprechen", pacte)
+
     def test_composes_de_besetzung_captes(self):
         """La frontière de mot exclut tout composé : les composés attestés sont donc ÉNUMÉRÉS.
 

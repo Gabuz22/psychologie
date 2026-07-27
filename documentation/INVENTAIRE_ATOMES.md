@@ -279,6 +279,57 @@ Deux correctifs, tous deux structurels plutôt que ponctuels :
   ses chiffres et ses citations viennent du corpus à chaque exécution. Un document qui décrit des
   données calculées ne peut pas rester juste s'il est écrit à la main.
 
+### 4.9 Cinquième audit (2026-07) — une ontologie trouée ne manque pas des choses, elle en dit de fausses
+
+Scan des six œuvres au non-qualifié le plus haut. Le vocabulaire manquant était celui du **corps
+concret** : la main, la barbe et les Tables du *Moses des Michelangelo*, les yeux arrachés de
+*Das Unheimliche*, le sourire de *Monna Lisa*. S'y ajoutaient deux absences criantes : le **nom
+propre** (459 occ. — alors que « Zur Psychopathologie » s'ouvre sur *Das Vergessen von
+Eigennamen*, et que le concept ne captait que le mot composé, 19 occ.) et l'**hallucination**
+(67 occ. — alors que la *halluzinatorische Wunscherfüllung* est le modèle du rêve au ch. VII).
+
+Un groupe (`corps`) et dix concepts ajoutés ; `koerper`, qui ne connaissait que l'abstrait
+(*somatisch*, *leiblich*), a quitté le groupe `pulsion` : le corps n'est pas une pulsion.
+
+| Œuvre | Non-qualifiés avant | après |
+|---|---:|---:|
+| *Der Moses des Michelangelo* | 43 % | **28 %** |
+| *Zur Psychopathologie* | 30 % | 27 % |
+| *Eine Teufelsneurose* | 29 % | 25 % |
+| *Das Unheimliche* | 36 % | 35 % |
+| *Kindheitserinnerung des Leonardo* | 32 % | 31 % |
+
+**Le résultat qui compte n'est pas ce gain, mais ceci** : avant l'audit, l'agent `profil`
+attribuait au *Moses des Michelangelo* la marque « **économie** ». C'est un contresens manifeste
+sur une analyse de sculpture — produit non par un bug, mais par un trou : faute de vocabulaire
+pour décrire un corps, la mesure s'était rabattue sur le mot le mieux couvert. Sa marque est
+désormais « **corps** ». Une ontologie trouée ne se contente pas de manquer des choses ; elle en
+dit de fausses, avec le même aplomb. C'est l'argument le plus fort en faveur de ces audits
+répétés.
+
+**Pièges mesurés et écartés à la source** (méthode inchangée : inventorier les formes réellement
+captées avant d'ajouter) :
+
+| Écarté | Pourquoi |
+|---|---|
+| `\bhand` nu | *handeln*, *Handlung*, *behandeln* — 300+ occ. qui ne parlent pas de la main |
+| `Augenblick` (41), `augenfällig` (20) | l'instant et l'évidence n'ont rien d'oculaire |
+| `Gesichtspunkt` (71 sur 166) | le point de vue n'est pas un visage |
+| `namentlich` | veut dire « à savoir » |
+| `mündlich` | « oral » au sens de *parlé*, pas de la bouche |
+| **`Erscheinung` (106), rejeté en entier** | signifie « phénomène » dans tout le corpus (*pathologische Erscheinungen des Seelenlebens*), jamais « apparition » : l'ajouter aurait produit un faux positif de masse |
+
+Et un défaut trouvé par un test, pas par l'intuition : le motif borné `mund(?:e|es)?\b` rejetait
+*Mundwinkel*, *Mundzone*, *Mundhöhle* — tous bien corporels, dont la **zone érogène orale** des
+*Drei Abhandlungen*. Corrigé en `mund(?!lich)`, qui garde les composés et n'écarte que le sens
+« parlé ».
+
+**Effet sur la partition** : modularité 0,372 → **0,382**, et une neuvième grappe apparaît, que
+personne n'avait cherchée — *le corps décrit*. Elle sépare le corps **regardé** du corps
+**pensé** : `koerper` (le somatique) est resté avec l'appareil psychique, `mund` avec la
+sexualité ; seuls les organes que Freud décrit en regardant une œuvre se sont rassemblés. Une
+grappe peut donc mesurer un **geste** de l'auteur, pas seulement une doctrine.
+
 ---
 
 ## 5. Signal de validation

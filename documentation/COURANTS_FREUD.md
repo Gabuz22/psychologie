@@ -6,7 +6,7 @@
 > modification du lexique.
 >
 > **Ce que ce document est.** Le dossier de chacune des grappes que l'agent `courants` découpe
-> dans le graphe de cooccurrence des concepts (modularité 0,372 sur 126 concepts
+> dans le graphe de cooccurrence des concepts (modularité 0,382 sur 136 concepts
 > reliés — le seuil de structure réelle est généralement fixé à 0,30). Chaque dossier donne :
 > les concepts membres, le profil chronologique par œuvre, la part **datée avec certitude**
 > quand la collation le permet, une citation choisie par l'agent lui-même, et la réserve qui
@@ -22,20 +22,20 @@
 
 ---
 
-## 1. Le rêve, la mémoire et l'interprétation — 23 concepts, 5 527 atomes
+## 1. Le rêve, la mémoire et l'interprétation — 25 concepts, 5 700 atomes
 
-*abwehr, affekt, anspielung, assoziation, deutung, entstellung, erinnerung, gedaechtnis, schlaf, spur, tagesrest, traum, traumarbeit, traumdeutung, traumgedanke, trauminhalt, verdichtung, vergessen, verschiebung, wachen, wunsch, wunscherfuellung, zensur.*
+*abwehr, anspielung, assoziation, deutung, entstellung, erinnerung, gedaechtnis, halluzination, lacheln, name, schlaf, spur, tagesrest, traum, traumarbeit, traumdeutung, traumgedanke, trauminhalt, verdichtung, vergessen, verschiebung, wachen, wunsch, wunscherfuellung, zensur.*
 
-Le mécanisme du rêve (condensation, déplacement, censure) soudé à la mémoire et à l'acte d'interpréter : chez Freud, déchiffrer un rêve et retrouver un souvenir sont le même geste, et le texte les dit ensemble.
+Le mécanisme du rêve (condensation, déplacement, censure) soudé à la mémoire et à l'acte d'interpréter : chez Freud, déchiffrer un rêve et retrouver un souvenir sont le même geste, et le texte les dit ensemble. L'audit 5 y a fait entrer le NOM PROPRE — matière privilégiée de l'oubli, sujet d'ouverture de « Zur Psychopathologie » — et l'HALLUCINATION, dont la satisfaction hallucinatoire du nourrisson est le modèle même du rêve au chapitre VII.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Die Traumdeutung* (1900) | 606 ‰ | 629 ‰ |
-| *Traum und Telepathie* (1922) | 449 ‰ | — |
-| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 333 ‰ | — |
-| *Der Dichter und das Phantasieren* (1908) | 307 ‰ | — |
-| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 291 ‰ | — |
-| *Zur Psychopathologie des Alltagslebens* (1901) | 289 ‰ | 329 ‰ |
+| *Die Traumdeutung* (1900) | 610 ‰ | 633 ‰ |
+| *Traum und Telepathie* (1922) | 456 ‰ | — |
+| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 354 ‰ | — |
+| *Zur Psychopathologie des Alltagslebens* (1901) | 339 ‰ | 417 ‰ |
+| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 281 ‰ | — |
+| *Der Dichter und das Phantasieren* (1908) | 261 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
@@ -46,20 +46,20 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 2. L'appareil psychique et l'économie du plaisir — 21 concepts, 4 345 atomes
+## 2. L'appareil psychique et l'économie du plaisir — 22 concepts, 4 501 atomes
 
-*abfuhr, apparat, aufmerksamkeit, besetzung, bewusstsein, energie, erogene_zone, erregung, fehlleistung, koerper, komik, lachen, lustprinzip, projektion, psychisme, regression, spannung, tendenz, unbewusst, vorbewusst, witz.*
+*abfuhr, affekt, apparat, aufmerksamkeit, besetzung, bewusstsein, energie, erogene_zone, erregung, fehlleistung, koerper, komik, lachen, lustprinzip, projektion, psychisme, regression, spannung, tendenz, unbewusst, vorbewusst, witz.*
 
 Le vocabulaire économique (énergie, décharge, investissement) qui unit la métapsychologie, le corps et le mot d'esprit — la thèse même du Witz est une épargne de dépense psychique.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Der Witz und seine Beziehung zum Unbewußten* (1905) | 618 ‰ | 639 ‰ |
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 349 ‰ | 400 ‰ |
-| *Jenseits des Lustprinzips* (1920) | 332 ‰ | — |
-| *Eine Schwierigkeit der Psychoanalyse* (1917) | 300 ‰ | — |
-| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 278 ‰ | — |
-| *Der Dichter und das Phantasieren* (1908) | 205 ‰ | — |
+| *Der Witz und seine Beziehung zum Unbewußten* (1905) | 621 ‰ | 642 ‰ |
+| *Drei Abhandlungen zur Sexualtheorie* (1905) | 351 ‰ | 400 ‰ |
+| *Jenseits des Lustprinzips* (1920) | 338 ‰ | — |
+| *Eine Schwierigkeit der Psychoanalyse* (1917) | 311 ‰ | — |
+| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 298 ‰ | — |
+| *Der Dichter und das Phantasieren* (1908) | 250 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
@@ -94,20 +94,20 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 4. La famille, la différence des sexes et la mort — 17 concepts, 3 374 atomes
+## 4. La famille, la différence des sexes et la mort — 18 concepts, 3 423 atomes
 
-*eltern, familie, geschwister, gesellschaft, identifizierung, infantil, inversion, kastration, maennlichkeit, mutter, oedipus, sterben, symbol, tod, todestrieb, vater, weiblichkeit.*
+*eltern, familie, geschwister, gesellschaft, identifizierung, infantil, inversion, kastration, maennlichkeit, mund, mutter, oedipus, sterben, symbol, tod, todestrieb, vater, weiblichkeit.*
 
 Le roman familial (père, mère, fratrie, Œdipe) noué au complexe de castration, à l'opposition masculin/féminin et à la mort — la constellation que Freud tient pour l'origine commune du symptôme, du mythe et du lien social.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
 | *Eine Kindheitserinnerung aus »Dichtung und W…* (1917) | 714 ‰ | — |
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 426 ‰ | 438 ‰ |
+| *Drei Abhandlungen zur Sexualtheorie* (1905) | 431 ‰ | 445 ‰ |
+| *Eine Kindheitserinnerung des Leonardo da Vin…* (1910) | 312 ‰ | — |
 | *Traum und Telepathie* (1922) | 310 ‰ | — |
-| *Eine Kindheitserinnerung des Leonardo da Vin…* (1910) | 309 ‰ | — |
 | *Zeitgemäßes über Krieg und Tod* (1915) | 281 ‰ | — |
-| *Jenseits des Lustprinzips* (1920) | 226 ‰ | — |
+| *Totem und Tabu* (1913) | 227 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
@@ -118,7 +118,31 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 5. Religion, anthropologie — et le discours de la science — 17 concepts, 2 045 atomes
+## 5. La pulsion, le développement sexuel et les instances — 20 concepts, 2 217 atomes
+
+*aggression, entwicklung, es, fixierung, ich, kultur, kunst, latenzzeit, libido, masochismus, narzissmus, perversion, pubertaet, reaktionsbildung, sadismus, sexualitaet, sublimierung, trieb, ueberich, wiederholungszwang.*
+
+Libido, sexualité, perversion, développement — et la seconde topique (Moi, Ça, Sur-Moi) qui les régit. La sublimation et la formation réactionnelle y figurent : ce sont les destins que Freud assigne à la pulsion.
+
+| Œuvre | Densité | Dont d'origine |
+|---|---:|---:|
+| *Drei Abhandlungen zur Sexualtheorie* (1905) | 502 ‰ | 542 ‰ |
+| *Eine Schwierigkeit der Psychoanalyse* (1917) | 500 ‰ | — |
+| *Jenseits des Lustprinzips* (1920) | 345 ‰ | — |
+| *Zeitgemäßes über Krieg und Tod* (1915) | 277 ‰ | — |
+| *Vergänglichkeit* (1916) | 250 ‰ | — |
+| *Der Moses des Michelangelo* (1914) | 226 ‰ | — |
+
+Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
+
+> « Da begann er zu meiner höchsten Überraschung, mich um Verzeihung zu bitten, daß er mich belogen habe; er habe sich so sehr geschämt, und nun enthüllte er mir gerade das Stück sexueller Ätiologie, das ich erwartet hatte, »
+> — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
+
+**Réserve.** La seconde topique formait, avant l'audit 4, une grappe minuscule et isolée ; l'ajout du vocabulaire du développement sexuel l'a rattachée à la pulsion. Elle reste sous-représentée faute de « Das Ich und das Es » (1923), absent du corpus.
+
+---
+
+## 6. Religion, anthropologie — et le discours de la science — 17 concepts, 2 045 atomes
 
 *aberglaube, animismus, beobachtung, beruehrung, exogamie, gott, krieg, opfer, primitiv, religion, tabu, theorie, totem, trauer, urhorde, verbot, wissenschaft.*
 
@@ -142,31 +166,31 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 6. La pulsion, le développement sexuel et les instances — 19 concepts, 2 027 atomes
+## 7. Le corps décrit : main, œil, visage — 5 concepts, 554 atomes
 
-*aggression, entwicklung, es, fixierung, ich, kultur, latenzzeit, libido, masochismus, narzissmus, perversion, pubertaet, reaktionsbildung, sadismus, sexualitaet, sublimierung, trieb, ueberich, wiederholungszwang.*
+*auge, bart, gesicht, hand, kopf.*
 
-Libido, sexualité, perversion, développement — et la seconde topique (Moi, Ça, Sur-Moi) qui les régit. La sublimation et la formation réactionnelle y figurent : ce sont les destins que Freud assigne à la pulsion.
+Les parties du corps que Freud DÉCRIT au lieu de les théoriser : la main et la barbe du Moïse de Michel-Ange, les yeux arrachés de l'homme au sable, le sourire de Monna Lisa. Que ce vocabulaire forme une grappe à part est un résultat, pas un artefact : le corps regardé ne voisine pas avec le corps pensé — « Körper », le somatique abstrait, reste dans la grappe de l'appareil psychique, et la zone orale dans celle de la sexualité.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Drei Abhandlungen zur Sexualtheorie* (1905) | 502 ‰ | 542 ‰ |
-| *Eine Schwierigkeit der Psychoanalyse* (1917) | 489 ‰ | — |
-| *Jenseits des Lustprinzips* (1920) | 339 ‰ | — |
-| *Zeitgemäßes über Krieg und Tod* (1915) | 273 ‰ | — |
-| *Massenpsychologie und Ich-Analyse* (1921) | 220 ‰ | — |
-| *Vergänglichkeit* (1916) | 205 ‰ | — |
+| *Der Moses des Michelangelo* (1914) | 300 ‰ | — |
+| *Das Unheimliche* (1919) | 86 ‰ | — |
+| *Der Wahn und die Träume in W. Jensens »Gradi…* (1907) | 53 ‰ | — |
+| *Traum und Telepathie* (1922) | 52 ‰ | — |
+| *Eine Kindheitserinnerung aus »Dichtung und W…* (1917) | 48 ‰ | — |
+| *Eine Kindheitserinnerung des Leonardo da Vin…* (1910) | 36 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
-> « Da begann er zu meiner höchsten Überraschung, mich um Verzeihung zu bitten, daß er mich belogen habe; er habe sich so sehr geschämt, und nun enthüllte er mir gerade das Stück sexueller Ätiologie, das ich erwartet hatte, »
-> — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
+> « London, Williams and Norgate, 1863. _Lloyd_ hat zuerst bemerkt, daß die gewöhnlichen Beschreibungen der Figur unrichtig sind, daß Moses nicht im Begriffe ist, aufzustehen[12], daß die rechte Hand nicht in den Bart gre »
+> — *Der Moses des Michelangelo*, édition d'origine (1914) — date certaine
 
-**Réserve.** La seconde topique formait, avant l'audit 4, une grappe minuscule et isolée ; l'ajout du vocabulaire du développement sexuel l'a rattachée à la pulsion. Elle reste sous-représentée faute de « Das Ich und das Es » (1923), absent du corpus.
+**Réserve.** Grappe née de l'audit 5 du lexique (2026-07) : avant lui, ce vocabulaire était invisible et le « Moses des Michelangelo » culminait à 43 % d'atomes non qualifiés, le pire du corpus. Elle décrit un GESTE de Freud (regarder une œuvre), pas une doctrine.
 
 ---
 
-## 7. La masse, l'autorité et la suggestion — 5 concepts, 387 atomes
+## 8. La masse, l'autorité et la suggestion — 5 concepts, 387 atomes
 
 *fuehrer, hypnose, institution, masse, suggestion.*
 
@@ -190,27 +214,27 @@ Citation choisie par l'agent — le passage qui croise le plus de concepts de la
 
 ---
 
-## 8. La peinture — 3 concepts, 386 atomes
+## 9. La peinture et le pacte — 3 concepts, 198 atomes
 
-*kunst, malerei, teufel.*
+*malerei, pakt, teufel.*
 
-Les trois analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le peintre possédé de la Teufelsneurose).
+Les analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le peintre possédé de la Teufelsneurose) — et le pacte signé du sang, sujet de cette dernière.
 
 | Œuvre | Densité | Dont d'origine |
 |---|---:|---:|
-| *Eine Teufelsneurose im siebzehnten Jahrhunde…* (1923) | 365 ‰ | — |
-| *Der Moses des Michelangelo* (1914) | 148 ‰ | — |
-| *Eine Kindheitserinnerung des Leonardo da Vin…* (1910) | 112 ‰ | — |
-| *Vergänglichkeit* (1916) | 68 ‰ | — |
-| *Der Dichter und das Phantasieren* (1908) | 45 ‰ | — |
-| *Das Unheimliche* (1919) | 26 ‰ | — |
+| *Eine Teufelsneurose im siebzehnten Jahrhunde…* (1923) | 424 ‰ | — |
+| *Eine Kindheitserinnerung des Leonardo da Vin…* (1910) | 31 ‰ | — |
+| *Der Moses des Michelangelo* (1914) | 14 ‰ | — |
+| *Der Dichter und das Phantasieren* (1908) | 11 ‰ | — |
+| *Das Unheimliche* (1919) | 5 ‰ | — |
+| *Über Psychoanalyse: Fünf Vorlesungen* (1910) | 4 ‰ | — |
 
 Citation choisie par l'agent — le passage qui croise le plus de concepts de la grappe, à la longueur la plus proche d'une thèse théorique :
 
-> « In einer ähnlichen Beschränkung befinden sich ja die darstellenden Künste, Malerei und Plastik, im Vergleich zur Poesie, die sich der Rede bedienen kann, und auch hier liegt der Grund des Unvermögens in dem Material, dur »
-> — *Die Traumdeutung*, retrouvé dans l'édition de 1900 — daté avec certitude
+> « Es besteht also aus drei Teilen: 1. einem farbigen Titelblatt, welches die Szene der Verschreibung und die der Erlösung in der Kapelle von Mariazell darstellt; auf dem nächsten Blatt sind acht ebenfalls farbige Zeichnun »
+> — *Eine Teufelsneurose im siebzehnten Jahrhundert*, édition d'origine (1923) — date certaine
 
-**Réserve.** Contient l'artefact le plus instructif du découpage : « Teufel » n'a rien à faire avec la peinture — il y est parce que l'unique œuvre sur le diable porte sur un peintre. Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder sous la main.
+**Réserve.** Contient l'artefact le plus instructif du découpage : « Teufel » et « pakt » n'ont rien à faire avec la peinture — ils y sont parce que l'unique œuvre sur le diable porte sur un peintre. Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder sous la main. « pakt » est de surcroît un concept mono-œuvre à ce jour.
 
 ---
 

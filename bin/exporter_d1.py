@@ -54,7 +54,10 @@ EDITORIAL_GRAPPES = [
     ("traumarbeit", "Le rêve, la mémoire et l'interprétation",
      "Le mécanisme du rêve (condensation, déplacement, censure) soudé à la mémoire et à l'acte "
      "d'interpréter : chez Freud, déchiffrer un rêve et retrouver un souvenir sont le même "
-     "geste, et le texte les dit ensemble.",
+     "geste, et le texte les dit ensemble. L'audit 5 y a fait entrer le NOM PROPRE — matière "
+     "privilégiée de l'oubli, sujet d'ouverture de « Zur Psychopathologie » — et "
+     "l'HALLUCINATION, dont la satisfaction hallucinatoire du nourrisson est le modèle même "
+     "du rêve au chapitre VII.",
      "21 % des atomes de la Traumdeutung lue (éd. 1914) sont des ajouts postérieurs à 1900 — "
      "voir la densité « d'origine » pour la version corrigée."),
     ("apparat", "L'appareil psychique et l'économie du plaisir",
@@ -93,12 +96,22 @@ EDITORIAL_GRAPPES = [
      "par le même mécanisme que la suggestion hypnotique.",
      "Grappe portée par une seule œuvre (Massenpsychologie und Ich-Analyse) : sa pureté est "
      "réelle, sa portée est celle d'un livre, pas d'un courant transversal."),
-    ("malerei", "La peinture",
-     "Les trois analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le "
-     "peintre possédé de la Teufelsneurose).",
-     "Contient l'artefact le plus instructif du découpage : « Teufel » n'a rien à faire avec la "
-     "peinture — il y est parce que l'unique œuvre sur le diable porte sur un peintre. "
-     "Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder sous la main."),
+    ("hand", "Le corps décrit : main, œil, visage",
+     "Les parties du corps que Freud DÉCRIT au lieu de les théoriser : la main et la barbe du "
+     "Moïse de Michel-Ange, les yeux arrachés de l'homme au sable, le sourire de Monna Lisa. "
+     "Que ce vocabulaire forme une grappe à part est un résultat, pas un artefact : le corps "
+     "regardé ne voisine pas avec le corps pensé — « Körper », le somatique abstrait, reste "
+     "dans la grappe de l'appareil psychique, et la zone orale dans celle de la sexualité.",
+     "Grappe née de l'audit 5 du lexique (2026-07) : avant lui, ce vocabulaire était invisible "
+     "et le « Moses des Michelangelo » culminait à 43 % d'atomes non qualifiés, le pire du "
+     "corpus. Elle décrit un GESTE de Freud (regarder une œuvre), pas une doctrine."),
+    ("malerei", "La peinture et le pacte",
+     "Les analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le peintre "
+     "possédé de la Teufelsneurose) — et le pacte signé du sang, sujet de cette dernière.",
+     "Contient l'artefact le plus instructif du découpage : « Teufel » et « pakt » n'ont rien à "
+     "faire avec la peinture — ils y sont parce que l'unique œuvre sur le diable porte sur un "
+     "peintre. Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder sous la "
+     "main. « pakt » est de surcroît un concept mono-œuvre à ce jour."),
 ]
 
 

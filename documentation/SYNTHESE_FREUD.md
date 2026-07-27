@@ -18,25 +18,25 @@ que des atomes catégorisés.
 | Œuvre | Atomes | Ce qui la distingue |
 |---|---:|---|
 | *Die Traumdeutung* (1900) | 5 996 | **rêve**, désir, topique, mémoire |
-| *Neue Folge der Vorlesungen* (1933) | 2 119 | **topique**, conflit, rêve, cure |
+| *Neue Folge der Vorlesungen* (1933) | 2 119 | **topique**, rêve, épistémè, conflit |
 | *Der Witz…* (1905) | 2 076 | **comique**, rêve, économie |
-| *Totem und Tabu* (1913) | 1 588 | **anthropologie**, famille, actes manqués |
+| *Totem und Tabu* (1913) | 1 588 | **anthropologie**, famille, mort, actes manqués |
 | *Zur Psychopathologie…* (1901) | 1 051 | **mémoire**, actes manqués, cure, conflit |
-| *Drei Abhandlungen…* (1905) | 843 | **pulsion**, développement, économie, conflit |
+| *Drei Abhandlungen…* (1905) | 843 | **pulsion**, développement, conflit, économie |
 | *Gradiva* (1907) | 756 | rêve, conflit, **esthétique**, mémoire |
-| *Massenpsychologie…* (1921) | 699 | **social**, anthropologie, pulsion, topique |
-| *Kindheitserinnerung des Leonardo* (1910) | 670 | famille, développement, mémoire, désir |
-| *Jenseits des Lustprinzips* (1920) | 545 | **pulsion**, topique, économie, conflit |
-| *Über Psychoanalyse* (1910) | 467 | **conflit**, cure, topique, développement |
-| *Das Unheimliche* (1919) | 421 | **esthétique**, anthropologie, désir |
-| *Eine Teufelsneurose…* (1923) | 337 | **famille**, conflit, cure |
+| *Massenpsychologie…* (1921) | 699 | **social**, cure, topique, anthropologie |
+| *Kindheitserinnerung des Leonardo* (1910) | 670 | famille, développement, **corps**, esthétique |
+| *Jenseits des Lustprinzips* (1920) | 545 | **pulsion**, topique, économie, mort |
+| *Über Psychoanalyse* (1910) | 467 | **conflit**, cure, topique, mémoire |
+| *Das Unheimliche* (1919) | 421 | **esthétique**, corps, développement, désir |
+| *Eine Teufelsneurose…* (1923) | 337 | **anthropologie**, esthétique, famille, conflit |
 | *Traum und Telepathie* (1922) | 287 | rêve, famille, développement, désir |
-| *Der Moses des Michelangelo* (1914) | 283 | économie |
-| *Zeitgemäßes über Krieg und Tod* (1915) | 278 | anthropologie |
-| *Eine Schwierigkeit der Psychoanalyse* (1917) | 90 | pulsion, topique, cure, conflit |
+| *Der Moses des Michelangelo* (1914) | 283 | **corps**, esthétique, économie |
+| *Zeitgemäßes über Krieg und Tod* (1915) | 278 | **mort**, social, anthropologie |
+| *Eine Schwierigkeit der Psychoanalyse* (1917) | 90 | topique, pulsion, cure, conflit |
 | *Der Dichter und das Phantasieren* (1908) | 88 | **esthétique**, désir, développement |
-| *Vergänglichkeit* (1916) | 44 | esthétique, économie |
-| *Kindheitserinnerung aus »Dichtung und Wahrheit«* (1917) | 21 | famille, développement, rêve |
+| *Vergänglichkeit* (1916) | 44 | **mort**, esthétique, social, économie |
+| *Kindheitserinnerung aus »Dichtung und Wahrheit«* (1917) | 21 | famille, développement, épistémè |
 
 **Vingt sur vingt.** Ce n'est pas un résultat sur Freud — c'est un contrôle de validité : une
 ontologie qui se tromperait de catégories ne retrouverait pas ces identités, y compris sur des
@@ -84,25 +84,26 @@ C'est ce type de regroupement qui servira la question de fond du projet : si les
 postérieurs se recomposent à partir des mêmes atomes fondateurs, ils apparaîtront d'abord comme
 des grappes.
 
-### Les paires deviennent huit grappes
+### Les paires deviennent neuf grappes
 
 L'agent `courants` va plus loin que les paires : il PARTITIONNE tout le graphe de concepts par
 maximisation gloutonne de la modularité (Newman, 2004), un algorithme déterministe — aucune
-grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 126 concepts suffisamment
-reliés, la partition atteint une **modularité de 0,372** — au-dessus du seuil de 0,30 généralement
+grappe n'est choisie à l'avance, ni leur nombre ni leur taille. Sur 136 concepts suffisamment
+reliés, la partition atteint une **modularité de 0,382** — au-dessus du seuil de 0,30 généralement
 retenu comme signe d'une vraie structure plutôt que d'un artefact du graphe (Newman & Girvan,
-2004). Huit grappes en ressortent :
+2004). Neuf grappes en ressortent :
 
 | Grappe | Concepts (extrait) | Atomes |
 |---|---|---:|
-| Le rêve, la mémoire et l'interprétation | *Traum, Verdichtung, Zensur, Erinnerung, Deutung* | 5 527 |
-| L'appareil psychique et l'économie du plaisir | *Bewußtsein, Besetzung, Lustprinzip, Körper, Witz* | 4 345 |
+| Le rêve, la mémoire et l'interprétation | *Traum, Verdichtung, Zensur, Erinnerung, Name, Halluzination* | 5 700 |
+| L'appareil psychique et l'économie du plaisir | *Bewußtsein, Besetzung, Lustprinzip, Körper, Witz* | 4 501 |
 | La clinique : névroses, cure, délire en fiction | *Hysterie, Zwangsneurose, Arzt, Behandlung, Wahn* | 3 436 |
-| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Weiblichkeit, Tod* | 3 374 |
+| La famille, la différence des sexes et la mort | *Vater, Mutter, Ödipus, Kastration, Weiblichkeit, Tod* | 3 423 |
+| La pulsion, le développement sexuel, les instances | *Trieb, Libido, Sublimierung, Ich, Es, Über-Ich* | 2 217 |
 | Religion, anthropologie, discours de la science | *Totem, Tabu, Gott, Wissenschaft, Theorie* | 2 045 |
-| La pulsion, le développement sexuel, les instances | *Trieb, Libido, Sublimierung, Ich, Es, Über-Ich* | 2 027 |
+| **Le corps décrit** | *Hand, Auge, Gesicht, Bart, Kopf* | 554 |
 | La masse, l'autorité et la suggestion | *Masse, Führer, Suggestion, Hypnose* | 387 |
-| La peinture | *Kunst, Malerei, Teufel* | 386 |
+| La peinture et le pacte | *Malerei, Teufel, Pakt* | 198 |
 
 **Contrôle de sens intégré** (pas seulement mesuré une fois, mais rejoué à chaque test) : *Ich*,
 *Es* et *Über-Ich* — la seconde topique, trois concepts inséparables par construction théorique —
@@ -117,6 +118,22 @@ d'être diluée dans la pulsion ; la différence des sexes a rejoint le roman fa
 topique, jusque-là isolée, s'est rattachée au développement sexuel. Une grappe est un état de la
 mesure, jamais une vérité sur Freud — le dossier complet de chacune, régénéré à chaque
 changement, est dans [`COURANTS_FREUD.md`](COURANTS_FREUD.md).
+
+**L'audit 5 (2026-07) a fait apparaître une grappe que personne n'avait cherchée : le corps
+DÉCRIT.** En ajoutant à l'ontologie les parties du corps concrètes — la main, l'œil, le visage,
+la barbe, la tête —, la partition les a regroupées d'elle-même en une grappe distincte
+(modularité 0,372 → **0,382**). Ce découpage n'était pas prévisible : il sépare le corps
+*regardé* du corps *pensé*. « Körper », le somatique abstrait, est resté dans la grappe de
+l'appareil psychique ; « Mundzone », la zone érogène orale, dans celle de la sexualité ; seuls
+les organes que Freud DÉCRIT en regardant une œuvre — la main du Moïse, les yeux arrachés de
+l'homme au sable, le sourire de Monna Lisa — se sont rassemblés. La grappe mesure donc un
+**geste** de Freud (décrire ce qu'il voit), pas une doctrine.
+
+Le contrôle le plus net est ailleurs : avant l'audit 5, l'agent `profil` attribuait au
+*Moses des Michelangelo* la marque « **économie** » — un contresens manifeste sur une analyse
+de sculpture, faute de vocabulaire pour la décrire. Sa marque est désormais « **corps** », et
+son taux d'atomes non qualifiés est passé de **43 % à 28 %**. Une ontologie trouée ne se
+contente pas de manquer des choses : elle en dit de fausses.
 
 ### Validation qualitative — les grappes lues, pas seulement comptées
 
