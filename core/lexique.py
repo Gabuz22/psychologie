@@ -34,7 +34,7 @@ import re
 
 from .segmentation import replier, replier_esszett
 
-LEXIQUE_VERSION = "1.0.0"
+LEXIQUE_VERSION = "1.1.0"      # 1.1.0 : lexique multilingue (tables françaises) + concepts de la controverse Le Bon/Freud
 
 # --------------------------------------------------------------------------- 1. FONCTION
 # (occurrences mesurées sur Die Traumdeutung, 4e éd. — indicatives, jamais un quota)
@@ -186,6 +186,57 @@ MARQUEURS_STATUT = {
     "rapporte":     [r"\bberichtet\b", r"\berzahlt\b", r"\bnach \w+\b", r"\bzitiert\b",
                      r"\bsoll \w+ haben\b", r"\bangeblich\b"],
 }
+
+# --------------------------------------------------------------------- 2 bis. TABLES FRANÇAISES
+# L'entrée de Le Bon (1895) rend le lexique MULTILINGUE : les identifiants (fonctions, statuts,
+# concepts) sont neutres et communs ; seuls les MOTIFS dépendent de la langue. Règle d'honnêteté :
+# une fonction ou un concept SANS motifs français n'est simplement PAS mesuré dans un texte
+# français — il apparaît alors dans les non-qualifiés, visibles, plutôt que d'être « traduit »
+# par des marqueurs approximatifs qui produiraient des faux positifs silencieux.
+# Tous les motifs sont en forme REPLIÉE (minuscules, sans accents) : « peut-être » → « peut-etre ».
+
+MARQUEURS_FONCTIONS_FR = {
+    "inference":     [r"\bdonc\b", r"\bpar consequent\b", r"\bdes lors\b", r"\bil en resulte\b",
+                      r"\bil s'ensuit\b", r"\bc'est pourquoi\b", r"\bpar suite\b",
+                      r"\bon peut conclure\b", r"\bnous pouvons conclure\b"],
+    "hypothese":     [r"\bpeut-etre\b", r"\bprobablement\b", r"\bvraisemblablement\b",
+                      r"\bsans doute\b", r"\bil semble\b", r"\bil est possible\b",
+                      r"\bsupposons\b", r"\bsi l'on admet\b", r"\bon peut supposer\b"],
+    # « procédé » est ÉCARTÉ : replié, il devient « procede » et se confond avec le verbe
+    # « procède » (« ces sentiments procèdent de… »), fréquent chez Le Bon dans un tout autre sens.
+    "methode":       [r"\bmethodes?\b", r"\banalyse", r"\bexamen\b", r"\bclassification\b"],
+    "question":      [r"\?"],
+    "analogie":      [r"\bcomme si\b", r"\bsemblables? a\b", r"\bpareils? a\b", r"\bcomparable",
+                      r"\bde meme que\b", r"\bpar exemple\b", r"\ba la facon de\b", r"\banalog"],
+    "savoir_etabli": [r"\bon sait que\b", r"\bchacun sait\b", r"\bnul n'ignore\b",
+                      r"\bil est bien connu\b", r"\bcomme on le sait\b", r"\bnous savons\b"],
+    "objection":     [r"\bon objectera\b", r"\bon pourrait objecter\b", r"\bl'objection\b",
+                      r"\bon dira que\b", r"\bon repondra\b"],
+    "auto_citation": [r"\bnous avons vu\b", r"\bnous avons dit\b", r"\bnous l'avons (?:vu|dit|montre)\b",
+                      r"\bj'ai montre\b", r"\bcomme je l'ai (?:dit|montre)\b", r"\bdit plus haut\b",
+                      r"\bavons montre\b"],
+    # « cite » est ÉCARTÉ : replié, « la cité » (Fustel de Coulanges a écrit « La Cité antique »,
+    # discuté par Le Bon) devient « la cite » et se compterait comme citation. De même « rapporte »
+    # exclut « se rapporte à » (= concerner), très fréquent dans la prose de 1895.
+    "rapport_tiers": [r"\bd'apres \w+", r"\bselon \w+", r"(?<!se )\brapporte\b", r"\braconte\b",
+                      r"\becrivait\b", r"\becrit que\b"],
+    # SANS équivalent français assumé : « association » (l'Einfall est un terme technique de la
+    # cure, absent chez Le Bon) et « revision » (le signal central du projet exige des formules
+    # explicites de correction de soi ; aucune n'est attestée chez Le Bon — plutôt aucun marqueur
+    # que des marqueurs faibles sur LE signal où un faux positif vaut pire que rien).
+}
+
+MARQUEURS_STATUT_FR = {
+    "modalise":     [r"\bpeut-etre\b", r"\bprobablement\b", r"\bsans doute\b", r"\bsemble",
+                     r"\bparait\b", r"\bvraisemblablement\b", r"\ba peine\b", r"\bpourrait\b"],
+    "interrogatif": [r"\?"],
+    "rapporte":     [r"(?<!se )\brapporte\b", r"\braconte\b", r"\bd'apres \w+", r"\bselon \w+",
+                     r"\bpretend", r"\bdit-on\b", r"\bparait-il\b"],
+}
+
+# Auteurs que Le Bon discute nommément (repérés dans le texte réel de 1895) — même rôle que
+# NOMS_AUTEURS pour la littérature onirique : nommer l'un d'eux = rapporter un propos extérieur.
+NOMS_AUTEURS_FR = ["taine", "tocqueville", "spencer", "tarde", "ribot", "fustel de coulanges"]
 
 # --------------------------------------------------------------------------- 3. CONCEPTS
 # Ontologie psychanalytique par GROUPES. Extensible : ajouter Jung/Klein/Lacan = ajouter des
@@ -645,6 +696,15 @@ CONCEPTS = {
             "staat": ["staat"],
             # « gesellschaft » couvre aussi vergesellschaftet/Gesellschaftsordnung.
             "gesellschaft": ["gesellschaft", "vergesellschaft"],
+            # LA CONTROVERSE LE BON / FREUD, mesurable des deux côtés. Freud consacre un chapitre
+            # entier de « Massenpsychologie und Ich-Analyse » (1921) à discuter Le Bon (1895) ; les
+            # trois mécanismes que Le Bon donne à la foule ont chacun leur trace dans les deux
+            # langues, comptée sur les corpus réels : Ansteckung (11 occ. chez Freud) / contagion,
+            # Prestige (8 occ. — Freud garde le mot français tel quel) / prestige, Nachahmung
+            # (4 occ.) / imitation. Les motifs français sont dans MOTIFS_FR.
+            "ansteckung": ["ansteckung"],
+            "prestige": ["prestige"],
+            "nachahmung": ["nachahmung"],
         },
     },
     # NOUVEAU GROUPE — mort, deuil, perte. Les essais de guerre (1915-1916) et la Teufelsneurose
@@ -794,6 +854,54 @@ SOUS_CONCEPTS = {
 _RE_ICH_MOI = re.compile(r"\bdas ich\b|\bich-ideal\b|\bichs\b|\bdes ichs\b")
 
 
+# ------------------------------------------------------------------ 3 bis. MOTIFS FRANÇAIS
+# Les identifiants de concepts sont NEUTRES (hérités de l'allemand par histoire du projet) ; cette
+# table donne leurs motifs français. Un concept absent d'ici n'est pas mesuré dans un texte
+# français — il reste visible comme non-qualifié plutôt que d'être approximé. Chaque entrée est
+# une décision de traduction assumée, pas un réflexe de dictionnaire : les correspondances
+# douteuses sont REFUSÉES (voir les refus en fin de table, aussi importants que les entrées).
+MOTIFS_FR = {
+    # -- social : le cœur de Le Bon, et de la controverse avec Freud (1921).
+    "masse": [r"\bfoules?\b"],
+    "fuehrer": [r"\bmeneurs?\b"],
+    "suggestion": ["suggestion", "suggestib", "suggestionn"],
+    "ansteckung": ["contagion", "contagieu"],
+    "prestige": ["prestige"],
+    "nachahmung": ["imitation", "imitateur", r"\bimitent\b", r"\bimiter\b"],
+    "panik": ["panique"],
+    "kultur": ["civilisation"],
+    "krieg": [r"\bguerres?\b"],
+    "gesellschaft": [r"\bsocietes?\b"],
+    "institution": ["institution"],
+    # -- topique : Le Bon parle d'« inconscient » dès 1895 — vingt-cinq ans avant la métapsychologie.
+    "unbewusst": ["inconscien"],
+    # « conscien » nu prendrait AUSSI « inconscient » : l'exclusion sépare les deux concepts.
+    "bewusstsein": [r"(?<!in)conscien"],
+    # « l'âme des foules » : LE terme psychologique de Le Bon, qu'il pose lui-même en équivalent
+    # de « psychologie » dans son introduction. Rattaché au psychisme, pas à la religion.
+    "psychisme": [r"\bames?\b"],
+    "phantasie": ["imagination"],
+    # -- autres groupes touchés par le texte de 1895.
+    "hypnose": ["hypnos", "hypnoti"],
+    "erinnerung": [r"\bsouvenirs?\b"],
+    "religion": ["religion", "religieu"],
+    "gott": [r"\bdieux?\b"],
+    "moral": [r"\bmoral(?:e|es|ite)?\b"],
+    "verbrechen": [r"\bcrimes?\b", "criminel"],
+    "wissenschaft": ["scientifique", r"\bsciences?\b"],
+    "beobachtung": ["observation"],
+    "theorie": ["theori"],
+    # REFUS documentés — correspondances écartées après examen :
+    #   • « instinct » ≠ trieb : la distinction Trieb/Instinkt est un débat de traduction célèbre ;
+    #     l'« instinct des foules » de 1895 n'est pas la pulsion freudienne.
+    #   • « état » ≠ staat : replié sans majuscule, « l'État » se confond avec « l'état mental ».
+    #   • « rêve » ≠ traum : chez Le Bon le mot est métaphorique (« les rêves de nos pères »),
+    #     jamais l'objet théorique de la Traumdeutung.
+    #   • « illusion » ≠ wahn : le délire n'est pas l'illusion, et « Les illusions » de Le Bon
+    #     (chapitre entier) parlent des croyances collectives, pas de la psychose.
+}
+
+
 def _compile(motifs):
     return [re.compile(m) for m in motifs]
 
@@ -802,48 +910,71 @@ _FONCTIONS_RE = {f["id"]: _compile(f["marqueurs"]) for f in FONCTIONS}
 _STATUT_RE = {k: _compile(v) for k, v in MARQUEURS_STATUT.items()}
 _AUTEURS_RE = re.compile(r"\b(" + "|".join(NOMS_AUTEURS) + r")\b")
 
+_FONCTIONS_RE_FR = {fid: _compile(m) for fid, m in MARQUEURS_FONCTIONS_FR.items()}
+_STATUT_RE_FR = {k: _compile(v) for k, v in MARQUEURS_STATUT_FR.items()}
+_AUTEURS_RE_FR = re.compile(r"\b(" + "|".join(NOMS_AUTEURS_FR) + r")\b")
+# Même convention que le chemin allemand : chaque motif est ancré sur une frontière de mot.
+_MOTIFS_FR_RE = {c: [re.compile(r"\b" + m) for m in mots] for c, mots in MOTIFS_FR.items()}
+
 
 FIABILITE = {f["id"]: f.get("fiabilite", "etablie") for f in FONCTIONS}
 
 
-def fonctions_de(texte):
+def fonctions_de(texte, langue="de"):
     """Fonctions argumentatives portées par la phrase (multigroupe, triées, jamais forcées)."""
     t = replier(texte)
-    trouvees = {fid for fid, res in _FONCTIONS_RE.items() if any(r.search(t) for r in res)}
-    if _AUTEURS_RE.search(t):
+    table = _FONCTIONS_RE if langue == "de" else _FONCTIONS_RE_FR
+    auteurs = _AUTEURS_RE if langue == "de" else _AUTEURS_RE_FR
+    trouvees = {fid for fid, res in table.items() if any(r.search(t) for r in res)}
+    if auteurs.search(t):
         trouvees.add("rapport_tiers")
     return sorted(trouvees)
 
 
-def fonctions_par_fiabilite(texte):
+def fonctions_par_fiabilite(texte, langue="de"):
     """Sépare l'ACQUIS du SIGNALÉ → (fonctions_etablies, signaux_a_confirmer).
 
     Rien de ce qui n'est pas prouvé ne rejoint les faits : les signaux rares et précieux
     (révision, objection, auto-citation) forment une liste de travail à vérifier, exactement
     comme les éléments « à vérifier » de l'audit de traçabilité AXA.
     """
-    toutes = fonctions_de(texte)
+    toutes = fonctions_de(texte, langue)
     etablies = [f for f in toutes if FIABILITE.get(f, "etablie") == "etablie"]
     a_confirmer = [f for f in toutes if FIABILITE.get(f, "etablie") == "a_confirmer"]
     return etablies, a_confirmer
 
 
-def statut_de(texte):
+def statut_de(texte, langue="de"):
     """Statut épistémique — LE PLUS PRUDENT gagne (jamais d'affirmation durcie)."""
     t = replier(texte)
+    table = _STATUT_RE if langue == "de" else _STATUT_RE_FR
     for niveau in ("interrogatif", "rapporte", "modalise"):     # ordre = du plus prudent au moins
-        if any(r.search(t) for r in _STATUT_RE[niveau]):
+        if any(r.search(t) for r in table[niveau]):
             return niveau
     return "affirme"
 
 
-def concepts_de(texte, auteur=None):
+def concepts_de(texte, auteur=None, langue="de"):
     """Concepts psychanalytiques touchés → [{groupe, concept}], multigroupe, déterministe.
 
     `auteur` restreint aux concepts pertinents pour lui : un concept marqué `auteurs: ["jung"]`
     n'est pas cherché chez Freud, qui ne l'employait pas. Sans argument, tout est cherché — c'est
     le comportement actuel, le lexique étant encore entièrement freudien.
+
+    `langue` choisit les MOTIFS, jamais les concepts : un texte français est cherché avec
+    MOTIFS_FR, sur les mêmes identifiants — c'est ce qui rend Le Bon et Freud comparables
+    concept par concept. Les particularités allemandes (ß, sous-concepts, cas « ich ») n'ont
+    pas d'équivalent français et ne s'appliquent qu'à l'allemand.
     """
+    if langue != "de":
+        t = replier(texte)
+        trouves = []
+        for groupe, meta in CONCEPTS.items():
+            for concept in meta["termes"]:
+                res = _MOTIFS_FR_RE.get(concept)
+                if res and any(r.search(t) for r in res):
+                    trouves.append({"groupe": groupe, "concept": concept})
+        return trouves
     t = replier(texte)
     t_ss = replier_esszett(texte)      # variante où le ß subsiste (voir la convention « § »)
     trouves = []
@@ -918,6 +1049,25 @@ def valider():
     for niveau in MARQUEURS_STATUT:
         if niveau not in STATUTS:
             erreurs.append("statut inconnu dans les marqueurs : %s" % niveau)
+    # Tables françaises : chaque clé doit renvoyer à un identifiant EXISTANT — une entrée
+    # orpheline serait un concept fantôme, mesuré nulle part mais cru mesuré.
+    tous_concepts = {c for meta in CONCEPTS.values() for c in meta["termes"]}
+    for concept in MOTIFS_FR:
+        if concept not in tous_concepts:
+            erreurs.append("MOTIFS_FR renvoie à un concept inconnu : %s" % concept)
+    for fid in MARQUEURS_FONCTIONS_FR:
+        if fid not in {f["id"] for f in FONCTIONS}:
+            erreurs.append("MARQUEURS_FONCTIONS_FR renvoie à une fonction inconnue : %s" % fid)
+    for niveau in MARQUEURS_STATUT_FR:
+        if niveau not in STATUTS:
+            erreurs.append("statut inconnu dans les marqueurs français : %s" % niveau)
+    for table in (MOTIFS_FR, MARQUEURS_FONCTIONS_FR, MARQUEURS_STATUT_FR):
+        for cle, motifs in table.items():
+            for m in motifs:
+                try:
+                    re.compile(m)
+                except re.error as e:
+                    erreurs.append("motif français invalide (%s) : %s — %s" % (cle, m, e))
     return {"ok": not erreurs, "erreurs": erreurs,
             "fonctions": len(FONCTIONS), "groupes": len(CONCEPTS),
             "concepts": sum(len(m["termes"]) for m in CONCEPTS.values())}

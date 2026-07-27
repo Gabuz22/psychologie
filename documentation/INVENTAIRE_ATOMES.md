@@ -463,6 +463,58 @@ grosses œuvres ne remonte plus que *Zeit*, *Frau*, *Mensch*, *Mann*, *Mädchen*
 gonflerait le taux de qualifiés sans rien ajouter à l'analyse. Le rendement des audits par scan
 est atteint ; les gains suivants viendront de nouvelles œuvres, pas de nouveaux mots.
 
+### 4.13 Le second auteur, et ce que le multilinguisme exige (2026-07)
+
+**Gustave Le Bon, *Psychologie des foules*, 1re édition, Félix Alcan, 1895** (Gutenberg #24007,
+relu par Distributed Proofreaders sur les scans BnF/Gallica) — premier texte NON allemand du
+corpus. Le choix tient en une phrase : Freud consacre un chapitre entier de *Massenpsychologie
+und Ich-Analyse* (1921) à discuter ce livre. Le corpus tient donc les **deux côtés d'une
+controverse réelle**, chacun dans sa langue d'origine — et 1895 est aussi l'année des *Studien
+über Hysterie* : deux textes fondateurs de la même année, un par langue.
+
+**L'architecture, pas la traduction.** Les concepts étaient déjà des identifiants neutres ;
+seuls les motifs étaient allemands. L'entrée du français a donc pris la forme de TABLES par
+langue, jamais d'un changement de moteur : `MOTIFS_FR` (concepts), `MARQUEURS_FONCTIONS_FR`,
+`MARQUEURS_STATUT_FR`, `NOMS_AUTEURS_FR` (lexique), `ABBREVIATIONS_FR` et la classe de
+majuscules accentuées (segmentation), `_PREMIER_TITRE_FR` (liminaires). Règle tenue partout :
+**une langue ajoutée ne touche à AUCUNE table allemande** — le test de non-régression verrouille
+le compte d'atomes d'une œuvre témoin.
+
+**Les refus comptent autant que les entrées.** Quatre correspondances ont été REFUSÉES après
+examen, et documentées dans le code : *instinct* ≠ `trieb` (la querelle Trieb/Instinkt est un
+débat de traduction célèbre — trancher ici contaminerait l'analyse), *état* ≠ `staat` (replié
+sans majuscule, « l'État » se confond avec « l'état mental »), *rêve* ≠ `traum` (métaphorique
+chez Le Bon), *illusion* ≠ `wahn`. Même chose côté fonctions : `revision` et `association` n'ont
+PAS de marqueurs français — plutôt aucun marqueur que des marqueurs faibles sur le signal
+central du projet. Et deux faux amis débusqués avant d'entrer : « la cité » (Fustel de
+Coulanges !) n'est pas une citation, « se rapporte à » n'est pas un rapport.
+
+**Trois concepts nés de la controverse.** `ansteckung` (contagion), `prestige`, `nachahmung`
+(imitation) — les trois mécanismes que Le Bon prête à la foule, chacun vérifié ATTESTÉ chez
+Freud avant d'entrer (*Ansteckung* ×11, *Prestige* ×8 — mot français qu'il garde tel quel —,
+*Nachahmung* ×4 dans *Massenpsychologie*). Sur le corpus entier : contagion 34 atomes chez
+Le Bon / 18 chez Freud, prestige 62 / 8, imitation 7 / 41 (la *Nachahmung* freudienne vit
+surtout ailleurs — dans l'hystérie d'imitation des *Studien* et la *Traumdeutung*).
+`ansteckung` et `prestige` restent HORS grappe : la partition des courants est calculée sur les atomes de
+Freud seul (le choix de l'agent `courants`, inchangé), où 8-11 occurrences ne suffisent pas à se
+lier. C'est un fait affiché, pas un défaut.
+
+**Résultat : 1 485 atomes**, recomposition et localisation exactes, 13 chapitres numérotés PAR
+LIVRE (« II.III » — la numérotation de l'édition Alcan repart à chaque livre), datation certaine
+(édition d'origine). 57 % de qualifiés seulement — le lexique français est jeune, l'écart avec
+les 80 % allemands est affiché. Et une mesure qui valait à elle seule l'intégration : **Le Bon
+AFFIRME à 90 %** (1 335 affirmé / 86 modalisé / 46 interrogatif / 18 rapporté), là où Freud
+module constamment — le contraste des styles épistémiques est désormais un chiffre, plus une
+impression de lecture. Un test le protège (`test_le_style_peremptoire_est_mesurable`).
+
+**Les 17 signaux lus.** Les marqueurs français d'auto-citation ont produit 17 candidats, tous
+lus en contexte : **15 confirmés** (Le Bon récapitule ses thèses de livre en livre, et renvoie
+deux fois nommément à un autre de ses ouvrages — « J'ai montré ailleurs… », « notre précédent
+ouvrage… »), **2 rejetés** — « nous avons vu » d'événements contemporains (la légende
+napoléonienne, l'alliance russe), où le « nous » est la société, pas l'auteur. Le protocole du
+registre vaut pour l'AUTEUR DE LA PHRASE, quel qu'il soit : établi pour Breuer, il s'applique
+tel quel à Le Bon.
+
 ---
 
 ## 5. Signal de validation

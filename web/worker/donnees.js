@@ -36,7 +36,7 @@ const CHAMPS_CITATION = `
   a.atome_id AS id, a.texte, a.chapitre, a.debut, a.fin, a.nb_mots, a.statut,
   a.couche, a.annee_min, a.annee_max, a.datation_regle AS datation,
   au.nom AS auteur, o.titre AS oeuvre, o.titre_fr AS oeuvre_fr, o.cle AS oeuvre_cle,
-  o.edition AS edition_lue, o.annee_edition, o.annee_oeuvre`;
+  o.langue AS langue, o.edition AS edition_lue, o.annee_edition, o.annee_oeuvre`;
 
 const DE_CITATION = `
   FROM atomes a
@@ -141,8 +141,10 @@ export async function obtenirAtome(env, { id } = {}) {
 export async function referentiel(env) {
   const [auteurs, oeuvres, concepts, grappes, meta] = await Promise.all([
     env.DB.prepare("SELECT nom, naissance, mort, courant FROM auteurs ORDER BY nom").all(),
-    env.DB.prepare(`SELECT cle, titre, titre_fr, annee_oeuvre, annee_edition, edition,
-                    datation_precise, collationnee FROM oeuvres ORDER BY annee_oeuvre`).all(),
+    env.DB.prepare(`SELECT o.cle, o.titre, o.titre_fr, o.langue, au.nom AS auteur,
+                    o.annee_oeuvre, o.annee_edition, o.edition, o.datation_precise, o.collationnee
+                    FROM oeuvres o JOIN auteurs au ON au.id = o.auteur_id
+                    ORDER BY o.annee_oeuvre`).all(),
     env.DB.prepare(`SELECT nom, groupe, n_atomes FROM concepts
                     WHERE n_atomes > 0 ORDER BY groupe, n_atomes DESC`).all(),
     env.DB.prepare("SELECT rang, nom, taille, atomes_concernes FROM grappes ORDER BY rang").all(),
@@ -242,7 +244,8 @@ export async function chronologieConcept(env, { concept } = {}) {
       SELECT ac.atome_id FROM atome_concepts ac
       JOIN concepts c ON c.id = ac.concept_id WHERE c.nom = ?
     )
-    SELECT o.cle, o.titre, o.titre_fr, o.annee_oeuvre, o.annee_edition, o.edition,
+    SELECT o.cle, o.titre, o.titre_fr, o.langue, au.nom AS auteur,
+      o.annee_oeuvre, o.annee_edition, o.edition,
       o.datation_regle, o.collationnee,
       COUNT(*) AS total,
       SUM(CASE WHEN ca.atome_id IS NOT NULL THEN 1 ELSE 0 END) AS porteurs,
@@ -251,11 +254,13 @@ export async function chronologieConcept(env, { concept } = {}) {
         AS porteurs_origine
     FROM atomes a
     JOIN oeuvres o ON o.id = a.oeuvre_id
+    JOIN auteurs au ON au.id = o.auteur_id
     LEFT JOIN concept_atomes ca ON ca.atome_id = a.id
     GROUP BY o.id ORDER BY o.annee_oeuvre`).bind(concept).all();
 
   const etapes = results.map((l) => ({
-    oeuvre: l.cle, titre: l.titre, titre_fr: l.titre_fr, annee_oeuvre: l.annee_oeuvre,
+    oeuvre: l.cle, titre: l.titre, titre_fr: l.titre_fr, langue: l.langue, auteur: l.auteur,
+    annee_oeuvre: l.annee_oeuvre,
     annee_edition: l.annee_edition, edition_lue: l.edition, datation_regle: l.datation_regle,
     total: l.total, porteurs: l.porteurs,
     pour_mille: l.total ? Math.round((1000 * l.porteurs) / l.total) : 0,
@@ -311,7 +316,9 @@ export async function signaux(env, { type, limite, decalage } = {}) {
  *  pertinence. Pour suivre un raisonnement plutôt que chercher un mot. */
 export async function lireOeuvre(env, { oeuvre, page, taille } = {}) {
   const o = await env.DB.prepare(
-    "SELECT cle, titre, titre_fr FROM oeuvres WHERE cle = ?").bind(oeuvre || "").first();
+    `SELECT o.cle, o.titre, o.titre_fr, o.langue, au.nom AS auteur
+     FROM oeuvres o JOIN auteurs au ON au.id = o.auteur_id
+     WHERE o.cle = ?`).bind(oeuvre || "").first();
   if (!o) throw new ErreurAPI("œuvre inconnue : " + oeuvre, 404);
 
   const t = Math.min(Math.max(Number(taille) || 20, 1), 100);

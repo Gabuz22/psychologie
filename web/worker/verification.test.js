@@ -9,7 +9,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   contexteVerification, verifierReponse, extraireCitations, segmentsVerifiables,
-  semblerAllemand,
+  semblerAllemand, semblerFrancais,
 } from "./verification.js";
 
 /* Résultat d'outil réaliste : la forme exacte que rend `donnees.rechercher`. */
@@ -149,4 +149,50 @@ test("la détection d'allemand distingue les deux langues", () => {
   assert.equal(semblerAllemand("Der Witz und seine Beziehung zum Unbewußten"), true);
   assert.equal(semblerAllemand("L'interprétation des rêves"), false);
   assert.equal(semblerAllemand("la pulsion de mort chez Freud"), false);
+});
+
+/* ------------------------------------------------ citations FRANÇAISES (Le Bon, 1895) */
+
+/* Résultat d'outil contenant un atome français réel de « Psychologie des foules ». */
+const RESULTAT_LEBON = {
+  total: 1,
+  citations: [{
+    id: "psychologie_des_foules:a16",
+    texte: "L'ensemble de caractères communs que l'hérédité impose à tous les\nindividus "
+         + "d'une race constitue l'âme de cette race.",
+    titre: "Psychologie des foules", titre_fr: "Psychologie des foules",
+    oeuvre: "Psychologie des foules", annee_oeuvre: 1895, langue: "fr",
+  }],
+};
+
+const ctxFr = () => contexteVerification([RESULTAT_LEBON]);
+
+test("une citation française authentique de Le Bon passe la vérification", () => {
+  const r = verifierReponse(
+    "Le Bon écrit : « L'ensemble de caractères communs que l'hérédité impose à tous les "
+    + "individus d'une race constitue l'âme de cette race. »", ctxFr(), { outilsAppeles: 1 });
+  assert.equal(r.ok, true, JSON.stringify(r.problemes));
+  assert.equal(r.controles.citations_verifiees, 1);
+});
+
+test("UNE CITATION FRANÇAISE INVENTÉE EST DÉTECTÉE — même exigence que pour l'allemand", () => {
+  const r = verifierReponse(
+    "Le Bon affirme : « Les foules sont toujours prêtes à massacrer quiconque ose leur "
+    + "résister par la seule force de la raison »", ctxFr(), { outilsAppeles: 1 });
+  assert.equal(r.ok, false);
+  assert.equal(r.problemes[0].type, "citation_introuvable");
+});
+
+test("un passage français COURT entre guillemets reste ignoré (titre, glose) — prudence assumée", () => {
+  // Moins de 8 mots : peut être un titre traduit ; on n'accuse pas sans preuve.
+  const r = verifierReponse(
+    "Dans « Psychologie des foules », puis dans « L'âme des races », Le Bon développe cette idée.",
+    ctxFr(), { outilsAppeles: 1 });
+  assert.equal(r.ok, true, JSON.stringify(r.problemes));
+  assert.equal(r.controles.citations_verifiees, 0);
+});
+
+test("la détection de français reconnaît la prose citée", () => {
+  assert.equal(semblerFrancais("les foules ne raisonnent pas et n'admettent que des idées"), true);
+  assert.equal(semblerFrancais("der Ablauf der seelischen Vorgänge"), false);
 });

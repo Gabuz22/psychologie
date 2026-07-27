@@ -14,15 +14,20 @@ import { z } from "zod";
 import * as donnees from "./donnees.js";
 
 export const INSTRUCTIONS =
-  "Corpus déterministe de Sigmund Freud (1900-1933, texte allemand original, 18 000+ atomes " +
-  "= phrases). AUCUN modèle de langage n'intervient dans le calcul : segmentation, " +
-  "catégorisation et datation sont produites par un pipeline Python testé, pas par une IA. " +
-  "RÈGLE IMPÉRATIVE : ne jamais répondre sur Freud à partir de connaissances générales sans " +
-  "avoir appelé un de ces outils — chaque affirmation doit s'appuyer sur un atome retourné " +
+  "Corpus déterministe de psychologie (23 000+ atomes = phrases), dans la langue ORIGINALE de " +
+  "chaque œuvre : Sigmund Freud 1895-1933 en allemand (23 œuvres, avec les contributions de " +
+  "Breuer et Rank), Gustave Le Bon 1895 en français (« Psychologie des foules » — que Freud " +
+  "discute pendant tout un chapitre de « Massenpsychologie und Ich-Analyse » : les DEUX côtés " +
+  "de cette controverse sont dans le corpus, sur les mêmes concepts). AUCUN modèle de langage " +
+  "n'intervient dans le calcul : segmentation, catégorisation et datation sont produites par " +
+  "un pipeline Python testé, pas par une IA. " +
+  "RÈGLE IMPÉRATIVE : ne jamais répondre sur ces auteurs à partir de connaissances générales " +
+  "sans avoir appelé un de ces outils — chaque affirmation doit s'appuyer sur un atome retourné " +
   "ici, cité avec sa règle de datation (un atome n'est jamais daté de l'année de l'œuvre : " +
   "Freud a cessé de signaler ses ajouts dès la 3e édition, voir `datation` sur chaque " +
-  "citation). Commencer par `referentiel` pour connaître le vocabulaire exact (allemand " +
-  "replié : « trieb », « es », « wunscherfuellung »…) à utiliser dans les autres outils.";
+  "citation). Commencer par `referentiel` pour connaître le vocabulaire exact des concepts " +
+  "(identifiants repliés, hérités de l'allemand : « trieb », « masse », « fuehrer »…) — les " +
+  "MÊMES identifiants couvrent les deux langues, c'est ce qui rend Freud et Le Bon comparables.";
 
 export const OUTILS = [
   {
@@ -38,17 +43,18 @@ export const OUTILS = [
     nom: "rechercher",
     description:
       "Cherche des citations dans le corpus. Chaque filtre restreint (ET logique) ; tous sont "
-      + "optionnels. Rend des citations COMPLÈTES (texte allemand, œuvre, position, règle de "
-      + "datation) — jamais un chiffre nu.",
+      + "optionnels. Rend des citations COMPLÈTES (texte dans la langue de l'œuvre, œuvre, "
+      + "position, règle de datation) — jamais un chiffre nu.",
     schema: {
       concept: z.string().optional().describe("nom exact d'un concept, voir `referentiel`"),
       groupe: z.string().optional().describe("nom exact d'un groupe conceptuel"),
-      auteur: z.string().optional().describe("« Sigmund Freud » ou « Otto Rank »"),
+      auteur: z.string().optional().describe(
+        "« Sigmund Freud », « Gustave Le Bon », « Josef Breuer » ou « Otto Rank »"),
       oeuvre: z.string().optional().describe("clé exacte d'une œuvre, voir `referentiel`"),
       statut: z.enum(["affirme", "modalise", "interrogatif", "rapporte"]).optional()
         .describe("force épistémique de l'énoncé"),
       mot_cle: z.string().max(120).optional()
-        .describe("sous-chaîne allemande, insensible aux diacritiques"),
+        .describe("sous-chaîne dans la langue de l'œuvre cherchée, insensible aux diacritiques"),
       annee_min: z.number().int().optional(),
       annee_max: z.number().int().optional(),
       limite: z.number().int().min(1).max(50).optional().describe("défaut 20, max 50"),

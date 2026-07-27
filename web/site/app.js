@@ -55,9 +55,9 @@ function rendreCitation(c) {
     { origine: "texte d'origine", ajout: "ajout d'édition", indecis: "non collationnable" }[c.couche]
   }</span>` : "";
   div.innerHTML = `
-    <blockquote lang="de">${texteCourt(c.texte)}</blockquote>
+    <blockquote lang="${c.langue || "de"}">${texteCourt(c.texte)}</blockquote>
     <p class="refs"><b>${c.auteur}</b> — <i>${c.oeuvre}</i>${
-      c.oeuvre_fr ? ` (${c.oeuvre_fr})` : ""}${chapitre}
+      c.oeuvre_fr && c.oeuvre_fr !== c.oeuvre ? ` (${c.oeuvre_fr})` : ""}${chapitre}
       · ${STATUTS[c.statut] || c.statut}${couche}
       · <span title="position dans le texte source">car. ${c.debut}–${c.fin}</span>
       <button type="button" class="citer">citer</button></p>
@@ -465,19 +465,21 @@ async function demarrer() {
     referentiel = await api("/api/referentiel");
     const m = referentiel.meta;
     $("#stats").textContent =
-      `${Number(m.atomes).toLocaleString("fr")} atomes · ${m.oeuvres} œuvres (1900-1933) · ` +
+      `${Number(m.atomes).toLocaleString("fr")} atomes · ${m.oeuvres} œuvres (1895-1933) · ` +
       `${Number(m.qualifies).toLocaleString("fr")} qualifiés · corpus du ${m.genere_le}`;
     $("#pied").textContent = m.licence;
 
     remplirSelect($("#f-groupe"), Object.keys(referentiel.groupes).sort(), (g) => [g, g]);
     remplirConcepts($("#f-concept"), "");
     remplirSelect($("#f-oeuvre"), referentiel.oeuvres,
-      (o) => [o.cle, `${o.titre} (${o.annee_oeuvre})`]);
+      (o) => [o.cle, `${o.titre} (${o.annee_oeuvre}${
+        o.auteur && o.auteur !== "Sigmund Freud" ? ", " + o.auteur : ""})`]);
     remplirSelect($("#f-auteur"), referentiel.auteurs, (a) => [a.nom, a.nom]);
 
     remplirConcepts($("#chrono-concept"), "");
     remplirSelect($("#lecture-oeuvre"), referentiel.oeuvres,
-      (o) => [o.cle, `${o.titre} (${o.annee_oeuvre})`]);
+      (o) => [o.cle, `${o.titre} (${o.annee_oeuvre}${
+        o.auteur && o.auteur !== "Sigmund Freud" ? ", " + o.auteur : ""})`]);
 
     const g = await api("/api/grappes");
     rendreGrappes(g.grappes);

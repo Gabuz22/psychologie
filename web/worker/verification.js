@@ -11,7 +11,11 @@
  * comme validé (même doctrine que les signaux « à confirmer » du corpus).
  *
  * TROIS CHOSES SONT MÉCANIQUEMENT VÉRIFIABLES :
- *   1. les citations allemandes entre guillemets — présentes ou non dans un atome retourné ;
+ *   1. les citations entre guillemets — présentes ou non dans un atome retourné. L'allemand se
+ *      reconnaît à ses mots-outils et se vérifie dès 4 mots ; le FRANÇAIS (Le Bon, 1895) ne se
+ *      distingue pas de la prose de la réponse, donc on ne vérifie qu'à partir de 8 mots — plus
+ *      long que le plus long titre d'œuvre du corpus (7 mots), pour ne jamais signaler un titre
+ *      traduit comme citation inventée ;
  *   2. les densités en ‰ — présentes ou non dans un résultat de `chronologie`/`grappe` ;
  *   3. les identifiants d'atomes (« traumdeutung:a915 ») — existants ou non.
  * Le reste (la prose d'analyse) ne l'est pas, et le document ne prétend pas le contraire.
@@ -51,6 +55,25 @@ export function semblerAllemand(s) {
   const mots = replier(s).split(/[^a-z]+/).filter(Boolean);
   let n = 0;
   for (const m of mots) if (MOTS_ALLEMANDS.has(m) && ++n >= 2) return true;
+  return false;
+}
+
+/* Mots-outils français — même rôle que MOTS_ALLEMANDS depuis l'entrée de Le Bon : décider si un
+ * passage entre guillemets est une CITATION du corpus français à vérifier. Formes repliées
+ * (sans accents), car la comparaison passe par replier(). */
+const MOTS_FRANCAIS = new Set([
+  "le", "la", "les", "un", "une", "des", "du", "au", "aux", "ce", "cette", "ces", "se", "sa",
+  "son", "ses", "leur", "leurs", "et", "ou", "mais", "donc", "ne", "pas", "plus", "tres",
+  "est", "sont", "etait", "etaient", "sera", "fut", "ont", "avait", "peut", "peuvent",
+  "que", "qui", "quand", "dont", "dans", "pour", "par", "avec", "sans", "sur", "sous", "chez",
+  "nous", "vous", "ils", "elles", "elle", "il", "on", "tout", "tous", "toute", "toutes",
+]);
+
+/** Un texte est-il vraisemblablement du FRANÇAIS cité (et non un mot isolé) ? */
+export function semblerFrancais(s) {
+  const mots = replier(s).split(/[^a-z]+/).filter(Boolean);
+  let n = 0;
+  for (const m of mots) if (MOTS_FRANCAIS.has(m) && ++n >= 2) return true;
   return false;
 }
 
@@ -126,9 +149,14 @@ export function verifierReponse(reponse, ctx, { outilsAppeles = 0 } = {}) {
   const controles = { citations_verifiees: 0, citations_ignorees: 0, pour_mille_verifies: 0,
                       identifiants_verifies: 0 };
 
-  // 1. Citations allemandes — le cœur du projet : une citation fausse est le pire défaut possible.
+  // 1. Citations — le cœur du projet : une citation fausse est le pire défaut possible.
+  //    L'allemand se vérifie dès qu'il est reconnu ; le français seulement à partir de 8 mots
+  //    (voir l'en-tête : en deçà, ce peut être un titre traduit ou une glose — prudence assumée).
   for (const citation of extraireCitations(reponse)) {
-    if (!semblerAllemand(citation)) { controles.citations_ignorees++; continue; }
+    const allemand = semblerAllemand(citation);
+    const francais = !allemand && semblerFrancais(citation)
+      && replier(citation).split(/[^a-z]+/).filter(Boolean).length >= 8;
+    if (!allemand && !francais) { controles.citations_ignorees++; continue; }
     const segments = segmentsVerifiables(citation);
     if (!segments.length) { controles.citations_ignorees++; continue; }
     controles.citations_verifiees++;
@@ -137,7 +165,9 @@ export function verifierReponse(reponse, ctx, { outilsAppeles = 0 } = {}) {
         problemes.push({
           type: "citation_introuvable",
           extrait: seg.length > 160 ? seg.slice(0, 160) + "…" : seg,
-          motif: "ce texte allemand n'apparaît dans aucun atome retourné par les outils",
+          motif: allemand
+            ? "ce texte allemand n'apparaît dans aucun atome retourné par les outils"
+            : "ce texte cité n'apparaît dans aucun atome retourné par les outils",
         });
         break;   // un segment fautif suffit à disqualifier la citation
       }

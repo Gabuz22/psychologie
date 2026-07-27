@@ -46,6 +46,10 @@ AUTEURS = {
     # sexualité, et défend l'état hypnoïde que celui-ci abandonnera. Le déclarer sous son propre
     # courant évite de compter sa théorie comme de la psychanalyse.
     "Josef Breuer": {"naissance": 1842, "mort": 1925, "courant": "méthode cathartique"},
+    # Second auteur du corpus (2026-07), premier non-germanophone. Freud discute son livre de
+    # 1895 pendant tout un chapitre de « Massenpsychologie und Ich-Analyse » (1921) : le corpus
+    # tient les deux côtés de la controverse, chacun dans sa langue.
+    "Gustave Le Bon": {"naissance": 1841, "mort": 1931, "courant": "psychologie des foules"},
 }
 
 # Éditorial des grappes (résumé de documentation/COURANTS_FREUD.md). L'agent `courants` ne
@@ -171,6 +175,7 @@ CREATE TABLE oeuvres (
   cle TEXT NOT NULL UNIQUE,
   titre TEXT NOT NULL,
   titre_fr TEXT,
+  langue TEXT NOT NULL DEFAULT 'de',
   auteur_id INTEGER NOT NULL REFERENCES auteurs(id),
   annee_oeuvre INTEGER NOT NULL,
   annee_edition INTEGER NOT NULL,
@@ -282,10 +287,12 @@ def construire(chemin_sqlite):
         d = sources.datation(src)
         collationnee = any(a["attestation"].get("couche") for a in corpus.par_oeuvre(cle))
         cur = db.execute(
-            "INSERT INTO oeuvres (cle, titre, titre_fr, auteur_id, annee_oeuvre, annee_edition,"
-            " edition, editeur, source, url, datation_regle, datation_precise, collationnee)"
-            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            (cle, src["titre"], src.get("titre_fr"), ids_auteur["Sigmund Freud"],
+            "INSERT INTO oeuvres (cle, titre, titre_fr, langue, auteur_id, annee_oeuvre,"
+            " annee_edition, edition, editeur, source, url, datation_regle, datation_precise,"
+            " collationnee) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (cle, src["titre"], src.get("titre_fr"), src.get("langue", "de"),
+             # L'auteur du VOLUME vient du registre — plus forcément Freud depuis Le Bon.
+             ids_auteur[src.get("auteur", "Sigmund Freud")],
              src["annee_oeuvre"], src["annee_edition"], src.get("edition"), src.get("editeur"),
              src.get("source"), src.get("url"), d["regle"], int(d["precise"]), int(collationnee)))
         ids_oeuvre[cle] = cur.lastrowid

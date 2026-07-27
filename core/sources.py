@@ -28,7 +28,8 @@ import os
 import re
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOSSIER_DE = os.path.join(RACINE, "sources", "freud", "de")
+DOSSIER_SOURCES = os.path.join(RACINE, "sources")
+DOSSIER_DE = os.path.join(DOSSIER_SOURCES, "freud", "de")
 
 # Bornes du texte utile dans un fichier Project Gutenberg (l'en-tête et la licence n'appartiennent
 # pas à l'œuvre : les inclure polluerait les atomes avec du texte administratif anglais).
@@ -88,6 +89,9 @@ PARATEXTE_FINAL = {
     "gradiva": "Anzeige.",
     "totem": "INTERNATIONALER PSYCHOANALYTISCHER VERLAG",
     "jenseits": "Werke von Prof. Sigm. Freud",
+    # L'édition de 1895 clôt le volume par sa table analytique (libellés + numéros de page) :
+    # du paratexte de navigation, pas du texte de Le Bon.
+    "psychologie_des_foules": "TABLE DES MATIÈRES",
 }
 
 # Registre des œuvres. `annee_edition` = ce qu'on LIT ; `annee_oeuvre` = première parution.
@@ -398,6 +402,28 @@ OEUVRES = {
         "source": "Project Gutenberg #29101 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/29101",
     },
+    # ---------------------------------------------------------------- SECOND AUTEUR : GUSTAVE LE BON
+    # Premier texte NON allemand du corpus — et pas un choix de circonstance : Freud consacre un
+    # chapitre entier de « Massenpsychologie und Ich-Analyse » (1921) à discuter ce livre. Le
+    # corpus tient ainsi les DEUX côtés d'une controverse réelle, chacun dans sa langue d'origine,
+    # sur les mêmes concepts (masse/foule, suggestion, meneur, contagion, prestige, imitation).
+    # Symétrie de dates : 1895 est aussi l'année des « Studien über Hysterie ».
+    "psychologie_des_foules": {
+        "fichier": "1895_psychologie_des_foules.pg.txt",
+        "dossier": ("lebon", "fr"),
+        "langue": "fr",
+        "auteur": "Gustave Le Bon",
+        "titre": "Psychologie des foules",
+        "titre_fr": "Psychologie des foules",
+        "annee_oeuvre": 1895,
+        "annee_edition": 1895,     # 1re édition, Félix Alcan, Paris — datation exacte
+        "edition": "1re édition (Bibliothèque de philosophie contemporaine)",
+        "editeur": "Félix Alcan, Paris",
+        "source": "Project Gutenberg #24007 (relu par Distributed Proofreaders, scans BnF/Gallica)",
+        "url": "https://www.gutenberg.org/ebooks/24007",
+        "licence": ("Domaine public — Gustave Le Bon (1841-1931), œuvre libre de droits depuis "
+                    "2002 (vie + 70 ans). Édition de 1895. Texte français original."),
+    },
 }
 
 # ŒUVRES ÉCARTÉES APRÈS VÉRIFICATION — à ne pas réintroduire par inadvertance.
@@ -429,25 +455,30 @@ def charger(cle):
     if cle not in OEUVRES:
         raise KeyError("œuvre inconnue : %s (connues : %s)" % (cle, ", ".join(sorted(OEUVRES))))
     meta = dict(OEUVRES[cle])
-    chemin = os.path.join(DOSSIER_DE, meta["fichier"])
+    dossier = os.path.join(DOSSIER_SOURCES, *meta["dossier"]) if meta.get("dossier") else DOSSIER_DE
+    chemin = os.path.join(dossier, meta["fichier"])
     with open(chemin, encoding="utf-8") as f:
         brut = f.read()
-    texte, bornage = _extraire_corps(brut, meta.get("provenance", "gutenberg"))
+    texte, bornage = _extraire_corps(brut, meta.get("provenance", "gutenberg"),
+                                     meta.get("langue", "de"))
     texte, note_fin = _retirer_paratexte_final(texte, cle)
     bornage += " ; " + note_fin
     meta.update({
         "cle": cle,
+        "langue": meta.get("langue", "de"),
+        "auteur": meta.get("auteur", "Sigmund Freud"),
         "empreinte_fichier": hashlib.sha256(brut.encode("utf-8")).hexdigest()[:16],
         "caracteres_fichier": len(brut),
         "caracteres_oeuvre": len(texte),
         "bornage_gutenberg": bornage,
-        "licence": LICENCE,
+        # La licence par défaut est celle de Freud ; une œuvre d'un autre auteur porte la sienne.
+        "licence": meta.get("licence", LICENCE),
         "datation": datation(meta),
     })
     return {"texte": texte, "meta": meta}
 
 
-def _extraire_corps(brut, provenance="gutenberg"):
+def _extraire_corps(brut, provenance="gutenberg", langue="de"):
     """Retire l'en-tête/licence Gutenberg PUIS le paratexte du transcripteur.
 
     Si une borne manque, on le DIT dans le rapport plutôt que de laisser croire à un texte propre :
@@ -463,6 +494,15 @@ def _extraire_corps(brut, provenance="gutenberg"):
         return brut, "bornes Gutenberg introuvables — texte pris intégralement, À VÉRIFIER"
     corps = brut[d.end():f.start()]
     notes = []
+    if langue == "fr":
+        corps, note = _retirer_liminaires_fr(corps)
+        notes.append(note)
+        # Le transcripteur regroupe les notes de bas de page sous un libellé « NOTES: » en fin
+        # de chapitre : le libellé est à lui, le contenu des notes est à l'auteur — on ne retire
+        # que le libellé.
+        corps, n = re.subn(r"(?m)^NOTES:[ \t]*\n", "", corps)
+        notes.append("%d libellés « NOTES: » du transcripteur retirés" % n)
+        return corps.strip(), "bornes Gutenberg retirées ; " + " ; ".join(notes)
     corps, n = _NOTE_TETE.subn("", corps)
     notes.append("note de transcription en tête %s" % ("retirée" if n else "absente"))
     corps, n = _NOTE_QUEUE.subn("", corps)
@@ -577,6 +617,25 @@ def _retirer_liminaires(corps):
     return corps, (" ; ".join(faits) if faits else "aucun liminaire détecté")
 
 
+# Premier vrai titre d'une œuvre FRANÇAISE (l'édition Alcan de 1895 ouvre sur la préface).
+# Regex propre au français : leçon du corpus — un correctif (ou une langue) ne doit jamais
+# déplacer le défaut vers une autre œuvre, donc jamais toucher aux regex allemandes.
+_PREMIER_TITRE_FR = re.compile(r"^[ \t]*(PRÉFACE|AVANT-PROPOS|INTRODUCTION)\b", re.M)
+
+
+def _retirer_liminaires_fr(corps):
+    """Liminaires d'un volume français : crédit du transcripteur, faux-titre, catalogue de
+    l'éditeur (« DU MÊME AUTEUR »), page de titre, dédicace — tout ce qui précède le premier
+    vrai titre. Dans « Psychologie des foules », la dédicace à Th. Ribot part avec la page de
+    titre : trois lignes d'hommage, pas du texte de l'ouvrage.
+    """
+    t = _PREMIER_TITRE_FR.search(corps)
+    if not t or t.start() == 0:
+        return corps, "aucun liminaire français détecté — À VÉRIFIER"
+    return corps[t.start():], "liminaires retirés (%d signes, jusqu'à « %s »)" % (
+        t.start(), t.group(1))
+
+
 def datation(meta):
     """Statut de datation d'un atome issu de cette œuvre — honnête par construction.
 
@@ -615,7 +674,9 @@ def manifeste():
     """Manifeste de provenance de tout le corpus — ce qu'un chercheur doit pouvoir vérifier."""
     entrees = []
     for cle in OEUVRES:
-        chemin = os.path.join(DOSSIER_DE, OEUVRES[cle]["fichier"])
+        meta = OEUVRES[cle]
+        dossier = os.path.join(DOSSIER_SOURCES, *meta["dossier"]) if meta.get("dossier") else DOSSIER_DE
+        chemin = os.path.join(dossier, meta["fichier"])
         present = os.path.exists(chemin)
         e = dict(OEUVRES[cle], cle=cle, present=present)
         if present:

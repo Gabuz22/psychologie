@@ -4,29 +4,35 @@ Transformer l'œuvre des fondateurs de la psychologie en **données exploitables
 autrement ce qu'ils ont écrit : suivre un concept d'un bout à l'autre d'un livre, distinguer ce
 qui est affirmé de ce qui est supposé, repérer où un auteur se corrige, comparer des œuvres.
 
-Première étape : **Freud**, dans le **texte allemand original**.
+Premier chantier : **Freud**, dans le **texte allemand original** (23 œuvres). Second auteur
+depuis 2026-07 : **Gustave Le Bon**, *Psychologie des foules* (1895), en **français original** —
+le livre que Freud discute pendant tout un chapitre de *Massenpsychologie und Ich-Analyse* (1921).
+Le corpus tient ainsi les **deux côtés d'une controverse réelle**, chacun dans sa langue.
 
 ---
 
-## Pourquoi l'allemand
+## Pourquoi la langue originale
 
 Deux raisons, dans cet ordre :
 
 1. **La citation reste vérifiable.** Un psychologue ou un psychanalyste retrouve le mot exact
-   qu'a écrit Freud, sans passer par une traduction qui aurait déjà tranché à sa place.
+   qu'a écrit l'auteur, sans passer par une traduction qui aurait déjà tranché à sa place.
 2. **On évite les querelles de traduction.** *Trieb* → « pulsion » ou « instinct », *Nachträglichkeit*
    → « après-coup »… Ces choix sont contestés et varient selon les écoles ; les hériter en amont
    contaminerait toute l'analyse.
 
-Le travail d'analyse, lui, se fait en français. La traduction des concepts viendra comme une
-**couche séparée**, posée sur des atomes qui, eux, restent en allemand.
+Le travail d'analyse, lui, se fait en français. Le lexique est **multilingue par construction** :
+les concepts sont des identifiants **neutres**, communs à toutes les langues (`masse`, `suggestion`,
+`prestige`) ; seuls les **motifs** qui les détectent dépendent de la langue de l'œuvre
+(`core/lexique.py:MOTIFS_FR`). C'est ce qui rend Freud et Le Bon comparables concept par concept —
+sans jamais traduire une seule phrase.
 
 ---
 
 ## Corpus
 
-**Vingt-trois œuvres, 1895-1933.** Une **★** signale une datation certaine : édition d'origine, ou
-réimpression déclarée inchangée.
+**Vingt-quatre œuvres, 1895-1933** — vingt-trois de Freud (allemand) et une de Le Bon (français).
+Une **★** signale une datation certaine : édition d'origine, ou réimpression déclarée inchangée.
 
 Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
 libre **partout** depuis 2010 (mort en 1939 + 70 ans), mais `gutenberg.org` est une organisation
@@ -60,8 +66,19 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 | *Eine Teufelsneurose im siebzehnten Jahrhundert* ★ | 1923 | 1. Auflage (Imago, Bd. IX), 1923 | [Wikisource DE](https://de.wikisource.org/wiki/Eine_Teufelsneurose_im_siebzehnten_Jahrhundert) |
 | *Neue Folge der Vorlesungen zur Einführung in die Psychoanalyse* ★ | 1933 | 1. Auflage, 1933 | [Wikisource DE](https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einführung_in_die_Psychoanalyse) |
 
-**Domaine public** — Freud (1856-1939) est libre de droits depuis 2010 (vie + 70 ans) ; les
-éditions utilisées sont antérieures à 1931.
+**Second auteur — Gustave Le Bon** (texte français, `sources/lebon/fr/`) :
+
+| Œuvre | Original | Édition lue | Source |
+|---|---|---|---|
+| *Psychologie des foules* ★ | 1895 | 1re édition, Félix Alcan, Paris, 1895 | [#24007](https://www.gutenberg.org/ebooks/24007) (scans BnF/Gallica) |
+
+Le choix n'est pas décoratif : 1895 est aussi l'année des *Studien über Hysterie*, et les
+mécanismes que Le Bon prête à la foule — *contagion*, *prestige*, *imitation* — ont chacun leur
+trace comptée chez Freud (*Ansteckung* ×11, *Prestige* ×8 — mot français qu'il conserve tel
+quel —, *Nachahmung* ×4 dans *Massenpsychologie*). La controverse est **mesurable des deux côtés**.
+
+**Domaine public** — Freud (1856-1939) est libre de droits depuis 2010, Le Bon (1841-1931)
+depuis 2002 (vie + 70 ans) ; les éditions utilisées sont antérieures à 1931.
 
 **Quatre textes de Gutenberg sont volontairement ÉCARTÉS** : les essais de *Totem und Tabu*
 publiés séparément dans *Imago* ([#37066](https://www.gutenberg.org/ebooks/37066),
@@ -106,17 +123,19 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**21 928 atomes** sur vingt-trois œuvres, **tous** localisables dans la source, produits sans aucun modèle
-de langage : le pipeline est **entièrement déterministe** (même texte → mêmes atomes).
-80 % sont qualifiés ; **18 œuvres sur 23 ont une datation certaine** rien qu'à l'échelle de
-l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
+**23 413 atomes** sur vingt-quatre œuvres et deux langues, **tous** localisables dans la source,
+produits sans aucun modèle de langage : le pipeline est **entièrement déterministe** (même texte
+→ mêmes atomes). 78 % sont qualifiés (80 % côté allemand ; 57 % pour Le Bon — le lexique
+français est jeune, et l'écart est **affiché** plutôt que comblé) ; **19 œuvres sur 24 ont une
+datation certaine** rien qu'à l'échelle de l'œuvre — quatre autres le sont phrase par phrase
+grâce à la collation (§ ci-dessous).
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
 retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 du seul
 *Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
 « *#Alix.# Les rêves. Rev. Scient.* ».
 
-**Finesse de la catégorisation** — 19 groupes conceptuels, 168 concepts, 19 sous-concepts,
+**Finesse de la catégorisation** — 19 groupes conceptuels, 171 concepts, 19 sous-concepts,
 11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
 **4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
 

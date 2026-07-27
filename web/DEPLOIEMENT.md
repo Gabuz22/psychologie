@@ -102,7 +102,7 @@ liste de sept outils que le serveur MCP). Sans clé, la route répond une erreur
 le reste du site continue de fonctionner normalement.
 
 **Ce qui distingue cet assistant d'un chatbot ordinaire : la vérification déterministe**
-(`worker/verification.js`, 14 tests — `npm test` depuis `web/`). Le function-calling garantit
+(`worker/verification.js`, 18 tests — `npm test` depuis `web/`). Le function-calling garantit
 que le modèle *appelle* les bons outils ; il ne garantit pas qu'il reste *fidèle* à leurs
 résultats en rédigeant. Chaque réponse est donc confrontée aux données réellement retournées,
 **sans aucun modèle de langage dans ce contrôle** (le faire juger par un second LLM ne ferait
@@ -110,7 +110,7 @@ que déplacer le problème) :
 
 | Vérifié mécaniquement | Comment |
 |---|---|
-| citations allemandes | présentes ou non dans un atome retourné — comparaison réduite aux lettres, comme `core/collation.py`, pour ignorer ponctuation, diacritiques, ß, retours à la ligne et marqueurs d'emphase Gutenberg (`_Stekel_`) |
+| citations (allemandes ET françaises) | présentes ou non dans un atome retourné — comparaison réduite aux lettres, comme `core/collation.py`, pour ignorer ponctuation, diacritiques, ß, retours à la ligne et marqueurs d'emphase Gutenberg (`_Stekel_`). L'allemand se vérifie dès 4 mots ; le français (Le Bon) à partir de 8 — plus long que tout titre d'œuvre, pour ne pas prendre un titre traduit pour une citation inventée |
 | densités en ‰ | présentes ou non parmi les valeurs rendues par `chronologie`/`grappe` |
 | identifiants d'atomes | existants ou non parmi ceux retournés |
 | réponse longue sans aucun appel d'outil | signalée comme « répondue de mémoire » |

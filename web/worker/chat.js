@@ -31,14 +31,15 @@ const CORRECTIONS_MAX = 1;        // tours de correction après échec de vérif
 const HISTORIQUE_MAX = 20;        // derniers messages conservés (coût + abus)
 const MESSAGE_MAX = 4000;         // caractères par message utilisateur
 
-const SYSTEM_PROMPT = INSTRUCTIONS + "\n\nTu es l'assistant du site du corpus Freud, pour un " +
+const SYSTEM_PROMPT = INSTRUCTIONS + "\n\nTu es l'assistant du site du corpus, pour un " +
   "public allant du curieux au chercheur. Réponds en français, de façon claire et concise. " +
-  "Encadre TOUTE citation allemande de guillemets français « » et reproduis-la exactement " +
-  "telle que l'outil te l'a rendue — un contrôle automatique déterministe vérifie chaque " +
-  "citation et chaque densité en ‰ contre les données retournées, et te renverra tes écarts. " +
-  "Cite systématiquement l'œuvre et la règle de datation de chaque atome utilisé. Si aucun " +
-  "outil ne retourne d'information pertinente à la question, dis-le explicitement plutôt que " +
-  "de deviner ou de t'appuyer sur ce que tu sais par ailleurs de Freud.";
+  "Encadre TOUTE citation (allemande ou française) de guillemets « » et reproduis-la " +
+  "exactement telle que l'outil te l'a rendue — un contrôle automatique déterministe vérifie " +
+  "chaque citation et chaque densité en ‰ contre les données retournées, et te renverra tes " +
+  "écarts. Cite systématiquement l'œuvre, l'auteur et la règle de datation de chaque atome " +
+  "utilisé. Si aucun outil ne retourne d'information pertinente à la question, dis-le " +
+  "explicitement plutôt que de deviner ou de t'appuyer sur ce que tu sais par ailleurs de " +
+  "ces auteurs.";
 
 function schemasOpenAI() {
   return OUTILS.map((o) => {

@@ -40,8 +40,25 @@ _EMPHASES = {
 }
 
 
-def chapitres(texte):
+# Chapitrage FRANÇAIS (édition Alcan 1895) : « LIVRE PREMIER » / « CHAPITRE II » suivis du titre.
+# La numérotation des chapitres REPART à chaque livre — le repère porte donc le livre avec lui
+# (« II.III » = livre II, chapitre III), sans quoi trois « chapitre premier » seraient indiscernables.
+_CHAPITRE_FR = re.compile(
+    r"^[ \t]*(LIVRE|CHAPITRE)[ \t]+(PREMIER|[IVX]{1,5})[ \t]*\n\s*\n[ \t]*(\S[^\n]{3,90})", re.M)
+
+
+def chapitres(texte, langue="de"):
     """[(debut, numero, titre)] — repères de chapitre, pour situer chaque atome."""
+    if langue == "fr":
+        out, livre = [], None
+        for m in _CHAPITRE_FR.finditer(texte):
+            numero = "I" if m.group(2) == "PREMIER" else m.group(2)
+            if m.group(1) == "LIVRE":
+                livre = numero
+                continue                      # le titre du livre n'est pas un chapitre
+            out.append((m.start(), "%s.%s" % (livre, numero) if livre else numero,
+                        m.group(3).strip()))
+        return out
     out = []
     for m in _CHAPITRE.finditer(texte):
         titre = m.group(2).strip()
@@ -186,8 +203,9 @@ def atomiser(cle_oeuvre):
 def _atomiser(cle_oeuvre):
     charge = sources.charger(cle_oeuvre)
     texte, meta = charge["texte"], charge["meta"]
-    phrases = segmenter(texte)
-    reperes = chapitres(texte)
+    langue = meta.get("langue", "de")
+    phrases = segmenter(texte, langue)
+    reperes = chapitres(texte, langue)
     regions = contributions(texte, meta, reperes)
     attestation = meta["datation"]
     # Collation : quand un fac-similé de première édition existe ET que l'étalonnage est concluant,
@@ -197,8 +215,8 @@ def _atomiser(cle_oeuvre):
 
     atomes = []
     for p in phrases:
-        fonctions, a_confirmer = lexique.fonctions_par_fiabilite(p["texte"])
-        concepts = lexique.concepts_de(p["texte"])
+        fonctions, a_confirmer = lexique.fonctions_par_fiabilite(p["texte"], langue)
+        concepts = lexique.concepts_de(p["texte"], langue=langue)
         atomes.append({
             "id": "%s:a%d" % (cle_oeuvre, p["index"]),
             # Clé STABLE, insensible à la position : c'est elle qui porte les jugements de
@@ -211,13 +229,14 @@ def _atomiser(cle_oeuvre):
             "fin": p["fin"],
             "nb_mots": p["nb_mots"],
             "chapitre": _chapitre_de(p["debut"], reperes),
-            # Qui écrit RÉELLEMENT cette phrase — un volume peut contenir des contributions.
-            "auteur": _auteur_de(p["debut"], regions, "Sigmund Freud"),
+            # Qui écrit RÉELLEMENT cette phrase — un volume peut contenir des contributions,
+            # et depuis Le Bon l'auteur du volume n'est plus forcément Freud.
+            "auteur": _auteur_de(p["debut"], regions, meta["auteur"]),
             "fonctions": fonctions,
             # Signaux repérés mais NON ÉTABLIS (révision, objection, auto-citation) : ils forment
             # la liste de travail à vérifier, jamais des faits acquis. Voir lexique.FIABILITE.
             "signaux_a_confirmer": a_confirmer,
-            "statut": lexique.statut_de(p["texte"]),
+            "statut": lexique.statut_de(p["texte"], langue),
             "concepts": concepts,
             "emphase": _emphases(p["texte"]),
             # Aucune catégorie reconnue : on l'AFFICHE au lieu de combler (doctrine AXA).
@@ -231,6 +250,8 @@ def _atomiser(cle_oeuvre):
             "oeuvre": meta["titre"],
             "oeuvre_fr": meta["titre_fr"],
             "cle": cle_oeuvre,
+            "langue": langue,
+            "auteur": meta["auteur"],
             "edition_lue": meta["edition"],
             "annee_edition": meta["annee_edition"],
             "annee_oeuvre": meta["annee_oeuvre"],

@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""SEGMENTATION — découpe un texte allemand en PHRASES, de façon déterministe.
+"""SEGMENTATION — découpe un texte en PHRASES, de façon déterministe.
+
+Multilingue depuis l'entrée de Le Bon (1895, français) : la mécanique (masquage par sentinelle,
+offsets exacts, recomposition prouvable) est commune à toutes les langues ; seules varient les
+DONNÉES — abréviations et classe des débuts de phrase — choisies par le paramètre `langue`.
+Le comportement allemand est inchangé au signe près : c'est la langue par défaut, et ses tables
+n'ont pas bougé (leçon du corpus : un correctif ne doit pas déplacer le défaut vers une autre
+œuvre — a fortiori vers une autre langue).
 
 Première brique de l'atomisation : sans découpage fiable, tout ce qui suit est faux. L'allemand
 de Freud (1900-1920) pose trois pièges concrets, mesurés sur le corpus réel — chacun ferait
@@ -31,18 +38,33 @@ ABBREVIATIONS = (
     "ff", "f", "S", "p", "cf",
 )
 
+# Abréviations attestées dans « Psychologie des foules » (Gutenberg #24007) — le texte de 1895 est
+# sobre : « M. Taine », « MM. », « vol. III », « p. 12 », plus quelques usuels ajoutés par prudence.
+ABBREVIATIONS_FR = (
+    "p. ex",
+    "MM", "Mme", "Mlle", "vol", "chap", "fig", "art", "etc", "cf", "sq", "St", "Dr",
+    "II", "III", "IV", "VI", "VII", "VIII",       # « vol. III. de… » : renvois en chiffres romains
+    "t", "p",
+)
 
-def _masquer(texte):
+_ABREVIATIONS_PAR_LANGUE = {"de": ABBREVIATIONS, "fr": ABBREVIATIONS_FR}
+
+# Classe des MAJUSCULES pouvant ouvrir une phrase — par langue. Le français commence volontiers
+# une phrase par « À » ou « Étant » ; l'allemand garde sa classe historique, intacte.
+_MAJUSCULES = {"de": "A-ZÄÖÜ", "fr": "A-ZÀÂÆÇÉÈÊËÎÏÔŒÙÛÜ"}
+
+
+def _masquer(texte, langue="de"):
     """Remplace par la sentinelle les points qui NE terminent PAS une phrase."""
     t = texte
     # 1. Abréviations connues. On masque TOUS les points de l'abréviation, pas seulement le
     #    dernier : « z. B. » en contient deux, et laisser le premier ferait couper après « z. »
     #    (point + espace + majuscule = frontière parfaitement plausible pour le découpeur).
-    for a in sorted(ABBREVIATIONS, key=len, reverse=True):
+    for a in sorted(_ABREVIATIONS_PAR_LANGUE[langue], key=len, reverse=True):
         motif = re.escape(a).replace("\\ ", r"\s*")     # « z. B » tolère « z.B »
         t = re.sub(r"\b" + motif + r"\.", lambda m: m.group(0).replace(".", _S), t)
     # 2. Initiale isolée : une seule majuscule suivie d'un point (« Dr. M. », « Otto R. »).
-    t = re.sub(r"\b([A-ZÄÖÜ])\.", r"\1" + _S, t)
+    t = re.sub(r"\b([%s])\." % _MAJUSCULES[langue], r"\1" + _S, t)
     # 3. Ordinal : « 3. Auflage », « 1. Kapitel ». Le mot suivant est le plus souvent un NOM, donc
     #    capitalisé en allemand — on accepte donc les deux casses. Limité à 1-2 chiffres : cela
     #    exclut volontairement les millésimes à 4 chiffres (« Er starb 1939. Seine Werke… »), où le
@@ -60,7 +82,7 @@ def _demasquer(texte):
     return texte.replace(_S, ".")
 
 
-def segmenter(texte):
+def segmenter(texte, langue="de"):
     """texte → [{index, texte, debut, fin, nb_mots}] — phrases dans l'ordre, offsets d'origine.
 
     Les offsets pointent dans le TEXTE REÇU (non modifié) : une phrase est toujours re-localisable
@@ -68,7 +90,11 @@ def segmenter(texte):
     """
     if not texte or not texte.strip():
         return []
-    masque = _masquer(texte)
+    masque = _masquer(texte, langue)
+    maj = _MAJUSCULES[langue]
+    # Le guillemet ouvrant français « peut précéder la majuscule de reprise ; il n'entre PAS dans
+    # la classe allemande (où » est ouvrant, à l'ancienne : »Wort«) pour ne rien y déplacer.
+    ouvrants = r"[»«\"„_~#(\[]?" if langue == "fr" else r"[»\"„_~#(\[]?"
     # Deux sortes de frontières :
     #   (a) fin de phrase = ponctuation forte + espace(s) + début plausible (majuscule, guillemet,
     #       souligné de mise en relief Gutenberg) ;
@@ -76,8 +102,8 @@ def segmenter(texte):
     #       toute une énumération de rêves se soudait en un seul atome de 250 mots ; avec une
     #       coupure « après le point », le numéro se serait retrouvé collé à l'atome précédent.
     frontiere = re.compile(
-        r"(?<=[.!?])[ \t]*(?:\n(?!\s*\n))?[ \t]*(?=[»\"„_~#(\[]?[A-ZÄÖÜ0-9])"
-        r"|(?<=\n)(?=[ \t]*\d{1,2}[.\x00][ \t]+[A-ZÄÖÜ])")
+        r"(?<=[.!?])[ \t]*(?:\n(?!\s*\n))?[ \t]*(?=" + ouvrants + "[" + maj + r"0-9])"
+        r"|(?<=\n)(?=[ \t]*\d{1,2}[.\x00][ \t]+[" + maj + r"])")
     phrases, debut, index = [], 0, 0
     for m in frontiere.finditer(masque):
         brut = texte[debut:m.start()]
