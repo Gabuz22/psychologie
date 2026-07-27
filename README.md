@@ -276,7 +276,9 @@ Aucune dépendance : bibliothèque standard Python uniquement.
 **Le site — [psychologie.guzan99.workers.dev](https://psychologie.guzan99.workers.dev)**
 (`web/`) expose le corpus en ligne : recherche multicritère, dossier complet de chaque grappe
 (éditorial, citation vedette choisie par l'agent, densité par œuvre), chronologie d'un concept
-visualisée, lecture séquentielle d'une œuvre, export de citation académique. Cloudflare Worker
+visualisée, **« Freud sur lui-même »** (les 109 objections, auto-citations et révisions
+confirmées, chacune avec le motif du jugement porté en contexte), lecture séquentielle d'une
+œuvre, export de citation académique. Cloudflare Worker
 + D1, frontend statique sans framework — le Worker ne calcule rien : il sert en lecture seule
 ce que `bin/exporter_d1.py` a déversé du pipeline Python (atomes, concepts, grappes, verdicts,
 fenêtres de datation). Mise à jour du site après un changement de corpus : `web/deployer.sh`

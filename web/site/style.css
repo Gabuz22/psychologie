@@ -120,6 +120,19 @@ button.secondaire { background: transparent; color: var(--accent);
 .point-suspension::after { content: "…"; animation: clignote 1.2s infinite; }
 @keyframes clignote { 50% { opacity: .3; } }
 
+/* Freud sur lui-même (signaux confirmés) */
+.onglet {
+  background: transparent; color: var(--gris); border: 1px solid var(--filet);
+  font-weight: 600; padding: .35rem .9rem;
+}
+.onglet:hover { color: var(--accent); border-color: var(--accent); }
+.onglet.actif { background: var(--accent); color: #fff; border-color: var(--accent); }
+#signaux-onglets { flex-wrap: wrap; }
+/* Le jugement est distinct de la citation : ce n'est pas Freud qui parle, c'est la lecture
+   portée sur lui. La rupture visuelle empêche de confondre les deux. */
+.jugement { margin-top: .6rem; padding-top: .5rem; border-top: 1px dashed var(--filet); }
+.jugement .motif { margin: .35rem 0 0; font-size: .85rem; color: var(--gris); }
+
 /* dossier de grappe */
 .retour { color: var(--accent); text-decoration: none; font-weight: 600; font-size: .9rem; }
 .retour:hover { text-decoration: underline; }

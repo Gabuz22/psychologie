@@ -273,6 +273,40 @@ export async function chronologieConcept(env, { concept } = {}) {
   };
 }
 
+/** « Ce que Freud dit de lui-même » — les signaux CONFIRMÉS (objection, révision, auto-citation)
+ *  lus en contexte et jugés un par un (verification/signaux_verifies.json), jamais les simples
+ *  candidats détectés par le lexique : un marqueur ne prouve rien, seule la lecture tranche.
+ *  Le `motif` du jugement est rendu à chaque fois — l'opposabilité vient de lui, pas du verdict
+ *  seul. */
+export async function signaux(env, { type, limite, decalage } = {}) {
+  const resume = await env.DB.prepare(
+    `SELECT signal, COUNT(*) AS n FROM signaux WHERE verdict = 'confirme' GROUP BY signal`).all();
+
+  const ou = ["s.verdict = 'confirme'"], params = [];
+  if (type) { ou.push("s.signal = ?"); params.push(type); }
+  const where = "WHERE " + ou.join(" AND ");
+  const lim = Math.min(Math.max(Number(limite) || 20, 1), 100);
+  const dec = Math.max(Number(decalage) || 0, 0);
+
+  const total = await env.DB.prepare(`SELECT COUNT(*) AS n FROM signaux s ${where}`)
+    .bind(...params).first("n");
+  const { results } = await env.DB.prepare(`
+    SELECT s.signal, s.motif, ${CHAMPS_CITATION}
+    FROM signaux s
+    JOIN atomes a ON a.id = s.atome_id
+    JOIN auteurs au ON au.id = a.auteur_id
+    JOIN oeuvres o ON o.id = a.oeuvre_id
+    ${where}
+    ORDER BY o.annee_oeuvre, a.debut
+    LIMIT ? OFFSET ?`).bind(...params, lim, dec).all();
+
+  return {
+    total, rendus: results.length, decalage: dec,
+    resume: Object.fromEntries(resume.results.map((r) => [r.signal, r.n])),
+    signaux: results,
+  };
+}
+
 /** Lecture séquentielle d'une œuvre — les atomes dans l'ordre du texte, pas filtrés par
  *  pertinence. Pour suivre un raisonnement plutôt que chercher un mot. */
 export async function lireOeuvre(env, { oeuvre, page, taille } = {}) {

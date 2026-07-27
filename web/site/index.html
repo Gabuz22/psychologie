@@ -22,6 +22,7 @@
   <a href="#recherche" data-vue="recherche">Recherche</a>
   <a href="#courants" data-vue="courants">Courants internes</a>
   <a href="#chronologie" data-vue="chronologie">Chronologie</a>
+  <a href="#signaux" data-vue="signaux">Freud sur lui-même</a>
   <a href="#lecture" data-vue="lecture">Lire une œuvre</a>
   <a href="#methode" data-vue="methode">Méthode</a>
 </nav>
@@ -142,6 +143,25 @@
   <div id="chrono-resultat"></div>
 </section>
 
+<section id="signaux">
+  <h2>Ce que Freud dit de lui-même</h2>
+  <p class="note">Un lexique déterministe peut <strong>repérer</strong> un passage où l'auteur
+    se corrige, s'objecte à lui-même ou se cite — il ne peut pas <strong>établir</strong> qu'il
+    le fait. Chaque candidat a donc été lu en contexte et jugé un par un (voir le motif sous
+    chaque citation) ; seuls les signaux <strong>confirmés</strong> sont montrés ici. Les
+    rejets — objections adressées à d'autres, personnages de roman qui se corrigent, purs
+    homonymes — sont documentés dans le dépôt, pas sur cette page.</p>
+  <div class="actions" id="signaux-onglets">
+    <button type="button" class="onglet actif" data-type="">Tous</button>
+    <button type="button" class="onglet" data-type="objection">Objections</button>
+    <button type="button" class="onglet" data-type="auto_citation">Auto-citations</button>
+    <button type="button" class="onglet" data-type="revision">Révisions</button>
+  </div>
+  <p id="signaux-compte" class="compte"></p>
+  <div id="signaux-resultats"></div>
+  <div class="actions"><button id="signaux-plus" hidden class="secondaire">Afficher plus</button></div>
+</section>
+
 <section id="lecture">
   <h2>Lire une œuvre dans l'ordre</h2>
   <p class="note">Les atomes tels qu'ils s'enchaînent dans le texte — pour suivre un
@@ -169,11 +189,11 @@
     <li><strong>Texte original.</strong> Allemand de premières éditions ou d'éditions
       d'époque (domaine public) — les psychanalystes retrouvent la citation exacte.</li>
     <li><strong>Aucun modèle de langage dans le calcul.</strong> Segmentation, lexique
-      (16 groupes, 120 concepts), agents d'analyse : tout est déterministe — même texte,
+      (17 groupes, 142 concepts), agents d'analyse : tout est déterministe — même texte,
       mêmes atomes, refaisable par quiconque.</li>
     <li><strong>Rien n'est durci.</strong> Ce que Freud modalise reste modalisé ; les signaux
-      rares (révisions, objections, auto-citations) sont lus en contexte un par un — 225
-      verdicts argumentés et versionnés.</li>
+      rares (révisions, objections, auto-citations) sont lus en contexte un par un — voir
+      « Freud sur lui-même » pour les 109 confirmés, motif à l'appui.</li>
     <li><strong>La datation est honnête.</strong> Freud a cessé de signaler ses ajouts dès la
       3ᵉ édition : chaque atome porte une <em>fenêtre</em> de datation. Quatre œuvres sont
       collationnées phrase à phrase avec leur première édition.</li>

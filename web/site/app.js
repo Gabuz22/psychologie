@@ -225,6 +225,68 @@ async function afficherChronologie() {
   }
 }
 
+/* ------------------------------------------------------- Freud sur lui-même (signaux) */
+
+/* Ne sont montrés QUE les signaux confirmés en contexte. Le motif du jugement accompagne
+ * chaque citation : c'est de lui que vient l'opposabilité, pas du verdict seul — un lecteur
+ * doit pouvoir contester la lecture, pas seulement la croire. */
+const LIBELLES_SIGNAL = {
+  objection: "objection à sa propre thèse",
+  auto_citation: "renvoi à son propre travail",
+  revision: "révision de soi",
+};
+
+const signaux = { type: "", decalage: 0 };
+
+async function afficherSignaux(ajouter) {
+  const zone = $("#signaux-resultats");
+  if (!ajouter) { signaux.decalage = 0; zone.textContent = ""; }
+  $("#signaux-compte").textContent = "chargement…";
+  try {
+    const r = await api("/api/signaux",
+      { type: signaux.type, limite: PAS, decalage: signaux.decalage });
+
+    for (const s of r.signaux) {
+      const bloc = rendreCitation(s);
+      const jugement = document.createElement("div");
+      jugement.className = "jugement";
+      const etiquette = document.createElement("span");
+      etiquette.className = "etiquette";
+      etiquette.textContent = LIBELLES_SIGNAL[s.signal] || s.signal;
+      jugement.appendChild(etiquette);
+      const motif = document.createElement("p");
+      motif.className = "motif";
+      motif.textContent = s.motif || "(motif non renseigné)";
+      jugement.appendChild(motif);
+      bloc.appendChild(jugement);
+      zone.appendChild(bloc);
+    }
+
+    // Le compte rappelle toujours la répartition complète : un onglet filtré ne doit pas
+    // laisser croire que le corpus ne contient que ce type de signal.
+    const repartition = Object.entries(r.resume || {})
+      .map(([k, n]) => `${n} ${LIBELLES_SIGNAL[k] || k}`).join(" · ");
+    $("#signaux-compte").textContent = r.total
+      ? `${r.total} signal(aux) confirmé(s) — ${Math.min(signaux.decalage + r.rendus, r.total)} `
+        + `affiché(s)${repartition ? ` · en tout : ${repartition}` : ""}`
+      : "aucun signal confirmé pour ce filtre";
+    $("#signaux-plus").hidden = signaux.decalage + r.rendus >= r.total;
+    signaux.decalage += r.rendus;
+  } catch (e) {
+    $("#signaux-compte").innerHTML = `<span class="erreur">erreur : ${e.message}</span>`;
+  }
+}
+
+for (const bouton of document.querySelectorAll("#signaux-onglets .onglet")) {
+  bouton.addEventListener("click", () => {
+    document.querySelectorAll("#signaux-onglets .onglet")
+      .forEach((b) => b.classList.toggle("actif", b === bouton));
+    signaux.type = bouton.dataset.type || "";
+    afficherSignaux(false);
+  });
+}
+$("#signaux-plus").addEventListener("click", () => afficherSignaux(true));
+
 /* --------------------------------------------------------------- lecture séquentielle */
 
 const lecture = { oeuvre: null, page: 0 };
@@ -419,6 +481,9 @@ async function demarrer() {
 
     const g = await api("/api/grappes");
     rendreGrappes(g.grappes);
+    // Chargés d'emblée plutôt qu'au clic : une section visiblement vide se lirait comme
+    // « le corpus n'a rien trouvé », alors qu'il s'agit du résultat le plus argumenté du projet.
+    afficherSignaux(false);
     gererHash();
   } catch (e) {
     $("#stats").innerHTML =

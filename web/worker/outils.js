@@ -95,4 +95,22 @@ export const OUTILS = [
     },
     fn: (env, p) => donnees.lireOeuvre(env, p),
   },
+  {
+    nom: "signaux",
+    description:
+      "Les passages où Freud parle de SON PROPRE travail : objections qu'il dresse contre ses "
+      + "thèses, renvois à ses écrits antérieurs, révisions de ses positions. Uniquement ceux "
+      + "CONFIRMÉS par une lecture en contexte — le `motif` du jugement accompagne chaque "
+      + "citation et doit être rapporté avec elle, car c'est de lui que vient l'opposabilité. "
+      + "Un marqueur lexical ne prouve jamais qu'un auteur se corrige : les candidats rejetés "
+      + "(personnage de roman qui se corrige, objection adressée à un tiers, homonyme) ne sont "
+      + "pas rendus ici.",
+    schema: {
+      type: z.enum(["objection", "auto_citation", "revision"]).optional()
+        .describe("restreindre à un type ; sans ce filtre, les trois sont rendus"),
+      limite: z.number().int().min(1).max(50).optional().describe("défaut 20, max 50"),
+      decalage: z.number().int().min(0).optional().describe("pagination, défaut 0"),
+    },
+    fn: (env, p) => donnees.signaux(env, p),
+  },
 ];

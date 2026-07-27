@@ -59,6 +59,7 @@ export default {
       case "/api/grappe":      return route(() => donnees.grappeDetail(env, p));
       case "/api/chronologie": return route(() => donnees.chronologieConcept(env, p));
       case "/api/lire":        return route(() => donnees.lireOeuvre(env, p));
+      case "/api/signaux":     return route(() => donnees.signaux(env, p));
       case "/api/chat":
         if (requete.method !== "POST")
           return json({ erreur: "POST requis" }, 405, false);

@@ -86,6 +86,7 @@ wrangler dev
 | `/api/grappe?rang=N` | dossier complet d'UNE grappe : éditorial, citation vedette (choisie par l'agent Python), densité par œuvre (+ densité d'origine si collationnée) |
 | `/api/chronologie?concept=X` | densité d'un concept par œuvre — miroir exact d'`AgentChronologie` |
 | `/api/lire?oeuvre=X&page=N&taille=M` | atomes d'une œuvre dans l'ordre du texte, paginés |
+| `/api/signaux?type=X` | les signaux CONFIRMÉS (objection, auto-citation, révision) avec le motif du jugement porté en contexte |
 
 Principes tenus par l'API : lecture seule, paramètres liés (jamais concaténés), toute citation
 porte sa règle de datation, le filtre par année s'appuie sur la fenêtre de chaque atome, la
@@ -97,7 +98,7 @@ tous les atomes de l'œuvre y compris ceux d'Otto Rank (comme `AgentChronologie`
 `/api/chat` (section « Assistant » du site) répond en langage naturel, mais n'utilise le LLM
 QUE pour choisir quels outils appeler et mettre leur résultat en prose — jamais pour affirmer
 un fait sur Freud de son propre chef (voir `worker/chat.js` et `worker/outils.js`, la même
-liste de six outils que le serveur MCP). Sans clé, la route répond une erreur claire (503),
+liste de sept outils que le serveur MCP). Sans clé, la route répond une erreur claire (503),
 le reste du site continue de fonctionner normalement.
 
 **Ce qui distingue cet assistant d'un chatbot ordinaire : la vérification déterministe**
@@ -122,6 +123,8 @@ citations brutes rendues par les outils sont dépliables sous chaque réponse, p
 Ce que le contrôle NE couvre PAS, et le site le dit : la prose d'analyse elle-même n'est pas
 mécaniquement vérifiable. « ✓ vérifié » signifie « tout ce qui était vérifiable l'a été »,
 jamais « l'analyse est juste ».
+
+**Pour activer l'assistant** (trois étapes, une seule fois) :
 
 1. Créer un compte sur [console.groq.com](https://console.groq.com) et générer une clé API
    (gratuit).
@@ -156,9 +159,9 @@ claude mcp add --transport http corpus-freud https://psychologie.guzan99.workers
 **Se connecter depuis Claude Desktop** — Réglages → Connecteurs → Ajouter un connecteur
 personnalisé → coller l'URL `https://psychologie.guzan99.workers.dev/mcp`.
 
-**Six outils**, décrits dans `worker/mcp.js` avec des descriptions écrites pour le modèle qui
-les lira (pas seulement pour un humain) : `referentiel`, `rechercher`, `atome`, `grappe`,
-`chronologie`, `lire`. Le serveur porte des **instructions systémiques** rappelées à la
+**Sept outils**, définis dans `worker/outils.js` (source canonique partagée avec le chat du
+site) avec des descriptions écrites pour le modèle qui les lira, pas seulement pour un humain :
+`referentiel`, `rechercher`, `atome`, `grappe`, `chronologie`, `lire`, `signaux`. Le serveur porte des **instructions systémiques** rappelées à la
 connexion : ne jamais répondre sur Freud à partir des connaissances générales du modèle sans
 avoir appelé un outil — toute affirmation doit s'appuyer sur un atome retourné par le serveur,
 cité avec sa règle de datation.
