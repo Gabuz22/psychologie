@@ -151,11 +151,24 @@ class AgentCooccurrence(Agent):
     """
 
     nom = "cooccurrence"
-    question = "Quels concepts Freud pense-t-il ensemble ?"
+    question = "Quels concepts un auteur pense-t-il ensemble ?"
 
-    def executer(self, corpus, minimum=8, sommet=25, **kw):
+    def executer(self, corpus, minimum=8, sommet=25, auteur="Sigmund Freud", **kw):
+        """Cooccurrences AU SEIN D'UN SEUL AUTEUR. `auteur` n'est pas un filtre commode, c'est
+        une nécessité : chaque auteur a son propre jeu de concepts, et mesurer sur le corpus
+        entier produirait un classement où les couples de Le Bon, de Rank et de Freud se
+        départageraient par leurs fréquences respectives, sans qu'aucune paire ne signifie plus
+        rien. Le défaut a été RÉEL — quand Rank et Abraham sont entrés, la liste des vingt-cinq
+        couples les plus liés mêlait « foule/individu », « anal/sadismus » et « aussetzung/wasser »,
+        et le couple sadisme/masochisme de Freud en était sorti. C'est un test qui l'a signalé.
+
+        Comparer deux auteurs reste possible, mais c'est une opération EXPLICITE : on exécute
+        l'agent une fois par auteur et on rapproche les deux fiches, en sachant que les concepts
+        comparés ne portent pas nécessairement le même sens.
+        """
+        atomes = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == auteur]
         presence, paires = {}, {}
-        for a in corpus.atomes:
+        for a in atomes:
             concepts = sorted({c["concept"] for c in a["concepts"]})
             for c in concepts:
                 presence[c] = presence.get(c, 0) + 1
@@ -170,11 +183,14 @@ class AgentCooccurrence(Agent):
                           "jaccard": round(n / union, 3) if union else 0.0})
         liens.sort(key=lambda l: -l["jaccard"])
         return self._fiche({
+            "auteur": auteur,
+            "atomes_mesures": len(atomes),
             "seuil_minimum": minimum,
             "liens": liens[:sommet],
-            "note": ("Jaccard = force du lien, indépendante de la fréquence brute. "
-                     "Une grappe de concepts fortement liés est un CANDIDAT de regroupement "
-                     "thématique, pas une thèse de Freud : elle demande lecture."),
+            "note": ("Jaccard = force du lien, indépendante de la fréquence brute. Mesuré sur les "
+                     "seuls atomes de %s, avec SES concepts. Une grappe de concepts fortement "
+                     "liés est un CANDIDAT de regroupement thématique, pas une thèse de l'auteur : "
+                     "elle demande lecture." % auteur),
         })
 
 
@@ -202,8 +218,12 @@ class AgentCourants(Agent):
     nom = "courants"
     question = "Les concepts que Freud pense ensemble forment-ils des grappes distinctes ?"
 
-    def executer(self, corpus, minimum=8, **kw):
-        atomes = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == "Sigmund Freud"]
+    def executer(self, corpus, minimum=8, auteur="Sigmund Freud", **kw):
+        # Une partition se calcule SUR UN SEUL AUTEUR, pour la même raison que les cooccurrences :
+        # deux lexiques distincts ne forment pas un graphe interprétable, et les communautés
+        # obtenues ne diraient que la séparation des vocabulaires, qui est acquise d'avance.
+        # Freud reste le défaut parce que l'export des « courants » du site porte sur lui.
+        atomes = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == auteur]
         graphe, presence = self._graphe(atomes, minimum)
         communautes, m = self._partitionner(graphe)
         modularite = self._modularite(graphe, m, communautes)

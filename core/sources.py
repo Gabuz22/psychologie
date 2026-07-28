@@ -104,6 +104,14 @@ PARATEXTE_FINAL = {
     # L'en-tête du catalogue est ici cassé par l'OCR — « Franz Den ticke » —, ce qui a fait
     # échouer la borne évidente. On prend donc la forme RÉELLEMENT présente dans ce scan.
     "genetische_psychologie_2": "Verlag von Franz Den ticke",
+    # Karl Abraham — catalogues d'éditeur en fin de volume.
+    "traum_und_mythus": "Verlag von Franz Deuticke",
+    "segantini": "VERLAG VON FRANZ DEUTICKE",
+    # Ces deux volumes placent leur table des matières EN FIN de livre : la borne est donc
+    # cette table, non le catalogue de l'éditeur qui vient encore après.
+    "klinische_beitraege": "Inhaltsübersicht.",
+    "entwicklungsgeschichte_libido": "Inhaltsverzeichnis",
+    "charakterbildung": "INTERNATIONALER PSYCHOANALYTISCHER",
 }
 
 # FAC-SIMILÉS ÉCARTÉS APRÈS MESURE — deux volumes de Rank existent en ligne mais ne sont PAS
@@ -120,6 +128,13 @@ FAC_SIMILES_ECARTES = {
         "Der Doppelgänger (1925, texte de 1914) — « ch » réduit à « h » : « sih », « auh », "
         "« natürlih ». 7,1 % des PHRASES atteintes, soit un atome sur quatorze. Sous le seuil "
         "du premier contrôle (écrit pour « di »), ce défaut n'a été trouvé qu'en LISANT le texte."),
+    "ZurPsychoanalyseDerKriegsneurosen": (
+        "Zur Psychoanalyse der Kriegsneurosen (1919) — écarté pour une raison de STRUCTURE, non "
+        "de qualité : son OCR est excellent. C'est un SYMPOSIUM à cinq voix — Freud signe "
+        "l'introduction, puis Ferenczi, Abraham, Simmel et Jones discutent tour à tour. Or le "
+        "lexique suit l'auteur du VOLUME, et un volume à cinq auteurs n'en a pas. L'accueillir "
+        "demanderait un lexique par RÉGION, extension de l'architecture à part entière. "
+        "À reprendre quand Ferenczi entrera : ce volume les concerne tous les deux."),
     "EineNeurosenanalyseInTraeumen": (
         "Eine Neurosenanalyse in Träumen (1924) — 2,6 % des phrases atteintes, au-dessus du seuil "
         "de 2 %. Cas limite, et c'est précisément pour ceux-là qu'un seuil existe : sans lui, "
@@ -550,6 +565,103 @@ OEUVRES = {
         "url": "https://archive.org/details/Rank_1928_Genetische_Psychologie_II_k",
         # Même piège que pour le Trauma : « Einleitung. » ouvre la table des matières.
         "debut_corps": "Die Psychoanalyse hat im",
+    },
+    # ------------------------------------------------------------ KARL ABRAHAM (1877-1925)
+    # Troisième auteur traité pour lui-même. Le cas de figure INVERSE de Rank, et c'est pourquoi
+    # il vient tout de suite après : Abraham n'a jamais rompu avec Freud. Fondateur de la société
+    # de Berlin, analyste de Klein et de Horney, il meurt à quarante-huit ans en pleine fidélité.
+    # Le corpus tient donc les deux figures de l'entourage — celui qui s'écarte et celui qui
+    # approfondit —, ce qui est la condition pour distinguer un jour, sur des mesures, un SOCLE
+    # PARTAGÉ d'une divergence.
+    #
+    # Domaine public depuis 1996 (mort en 1925 + 70 ans) ; toutes les éditions sont antérieures
+    # à 1930, donc libres aussi selon la règle américaine.
+    # Fac-similés OCRisés comme pour Rank, mais d'une qualité nettement supérieure : 0,10 à
+    # 0,95 ‰ de caractères parasites — au niveau ou SOUS celui des transcriptions relues — et
+    # 0,0 à 0,1 % de phrases corrompues.
+    "traum_und_mythus": {
+        "fichier": "1909_traum_und_mythus.ia.txt",
+        "dossier": ("abraham", "de"),
+        "provenance": "archive",
+        "auteur": "Karl Abraham",
+        "titre": "Traum und Mythus. Eine Studie zur Völkerpsychologie",
+        "titre_fr": "Rêve et mythe. Une étude de psychologie des peuples",
+        "annee_oeuvre": 1909,
+        "annee_edition": 1909,     # 1re édition — datation exacte
+        "edition": "1. Auflage (Schriften zur angewandten Seelenkunde, IV. Heft)",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/TraumUndMythus.EineStudieZurVoumllkerpsychologie",
+        # HEFT IV de la série où la « Gradiva » de Freud est le Heft I et le « Mythus » de Rank
+        # le Heft V : trois auteurs du corpus, à deux ans d'intervalle, dans la même collection.
+        "debut_corps": "Die psychologischen Theorien, welche sich an den Namen",
+    },
+    "segantini": {
+        "fichier": "1911_segantini.ia.txt",
+        "dossier": ("abraham", "de"),
+        "provenance": "archive",
+        "auteur": "Karl Abraham",
+        "titre": "Giovanni Segantini. Ein psychoanalytischer Versuch",
+        "titre_fr": "Giovanni Segantini. Un essai psychanalytique",
+        "annee_oeuvre": 1911,
+        "annee_edition": 1911,     # 1re édition — datation exacte
+        "edition": "1. Auflage (Schriften zur angewandten Seelenkunde, XI. Heft)",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/SzaS_11_Abraham_1911_Segantini",
+        "debut_corps": "Über Giovanni Segantinis Leben und Kunst besitzen wir",
+    },
+    "klinische_beitraege": {
+        "fichier": "1921_klinische_beitraege.ia.txt",
+        "dossier": ("abraham", "de"),
+        "provenance": "archive",
+        "auteur": "Karl Abraham",
+        "titre": "Klinische Beiträge zur Psychoanalyse",
+        "titre_fr": "Contributions cliniques à la psychanalyse",
+        # RECUEIL D'ARTICLES parus de 1907 à 1920, réunis en volume en 1921. L'écart de quatorze
+        # ans n'est pas une incertitude d'édition : c'est l'étendue réelle du matériau. La
+        # datation reste bornée par le volume, comme pour toute œuvre dont les couches ne sont
+        # pas signalées dans le texte.
+        "annee_oeuvre": 1907,
+        "annee_edition": 1921,
+        "edition": "1. Auflage (Internationale Psychoanalytische Bibliothek, Bd. 10)",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/KlinischeBeitraumlgeZurPsychoanalyse",
+        "debut_corps": "Wenn ich, einer Aufforderung des",
+    },
+    "entwicklungsgeschichte_libido": {
+        "fichier": "1924_entwicklungsgeschichte_libido.ia.txt",
+        "dossier": ("abraham", "de"),
+        "provenance": "archive",
+        "auteur": "Karl Abraham",
+        "titre": "Versuch einer Entwicklungsgeschichte der Libido",
+        "titre_fr": "Esquisse d'une histoire du développement de la libido",
+        "annee_oeuvre": 1924,
+        "annee_edition": 1924,     # 1re édition — datation exacte
+        "edition": "1. Auflage (Neue Arbeiten zur ärztlichen Psychoanalyse, Heft II)",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/VersuchEinerEntwicklungsgeschichteDerLibidoAufGrundDerPsychoanalyse",
+        # SON ŒUVRE MAJEURE, parue l'année même du « Trauma der Geburt » de Rank : les deux
+        # hommes proposent la même année deux prolongements opposés de Freud. Le meilleur
+        # matériau qu'on puisse souhaiter pour éprouver, plus tard, la mesure d'une divergence.
+        "debut_corps": "Vor mehr als zehn Jahren habe ich zuerst den Versuch",
+    },
+    "charakterbildung": {
+        "fichier": "1925_charakterbildung.ia.txt",
+        "dossier": ("abraham", "de"),
+        "provenance": "archive",
+        "auteur": "Karl Abraham",
+        "titre": "Psychoanalytische Studien zur Charakterbildung",
+        "titre_fr": "Études psychanalytiques sur la formation du caractère",
+        "annee_oeuvre": 1921,      # les trois études parurent de 1921 à 1925 en revue
+        "annee_edition": 1925,
+        "edition": "1. Auflage (Internationale Psychoanalytische Bibliothek, Nr. XVI)",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/PsychoanalytischeStudienZurCharakterbildung_524",
+        "debut_corps": "Das weite Gebiet, welches heute der psychoanalytischen",
     },
     # ---------------------------------------------------------------- SECOND AUTEUR : GUSTAVE LE BON
     # Premier texte NON allemand du corpus — et pas un choix de circonstance : Freud consacre un

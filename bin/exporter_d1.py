@@ -50,6 +50,10 @@ AUTEURS = {
     # 1895 pendant tout un chapitre de « Massenpsychologie und Ich-Analyse » (1921) : le corpus
     # tient les deux côtés de la controverse, chacun dans sa langue.
     "Gustave Le Bon": {"naissance": 1841, "mort": 1931, "courant": "psychologie des foules"},
+    # Troisième auteur traité pour lui-même. Fondateur de la société de Berlin, analyste de
+    # Melanie Klein et de Karen Horney, mort à quarante-huit ans sans avoir jamais rompu avec
+    # Freud : le contre-cas exact de Rank, et c'est pourquoi il vient juste après lui.
+    "Karl Abraham": {"naissance": 1877, "mort": 1925, "courant": "psychanalyse"},
 }
 
 # Éditorial des grappes (résumé de documentation/COURANTS_FREUD.md). L'agent `courants` ne

@@ -29,7 +29,7 @@ CE QU'UN MODULE D'AUTEUR DOIT EXPOSER :
     NOMS_AUTEURS      [noms cités par cet auteur — sert la fonction « rapport_tiers »]
 Tous les motifs sont en forme REPLIÉE (minuscules, sans diacritiques, ß→ss).
 """
-from . import le_bon, rank
+from . import abraham, le_bon, rank
 
 # Freud n'a pas de module ici : ses tables sont restées dans `core/lexique.py`, où elles ont été
 # écrites et où sept audits successifs les ont documentées ligne à ligne. Les déplacer n'ajouterait
@@ -37,6 +37,7 @@ from . import le_bon, rank
 # (`lexique.pour_auteur`), de sorte que Freud est traité par le même chemin que les autres.
 PAR_AUTEUR = {
     "Gustave Le Bon": le_bon,
+    "Karl Abraham": abraham,
     "Otto Rank": rank,
 }
 
