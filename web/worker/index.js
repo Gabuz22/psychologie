@@ -50,7 +50,10 @@ export default {
       case "/api/sante":
         return route(async () => {
           const n = await env.DB.prepare("SELECT COUNT(*) AS n FROM atomes").first("n");
-          return { ok: true, atomes: n };
+          // `chat` dit si l'assistant est utilisable. Le site s'en sert pour ne PAS présenter
+          // un formulaire qui échouera : un visiteur qui arrive sur une erreur en conclut que
+          // le site est cassé, alors que tout le reste fonctionne sans clé.
+          return { ok: true, atomes: n, chat: Boolean(env.GROQ_API_KEY) };
         });
       case "/api/referentiel": return route(() => donnees.referentiel(env));
       case "/api/recherche":   return route(() => donnees.rechercher(env, p));
@@ -61,6 +64,7 @@ export default {
       case "/api/lire":        return route(() => donnees.lireOeuvre(env, p));
       case "/api/signaux":     return route(() => donnees.signaux(env, p));
       case "/api/comparaison": return route(() => donnees.comparaison(env, p));
+      case "/api/arbre":       return route(() => donnees.arbre(env, p));
       case "/api/chat":
         if (requete.method !== "POST")
           return json({ erreur: "POST requis" }, 405, false);

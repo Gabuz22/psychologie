@@ -455,6 +455,67 @@ $("#form-chat").addEventListener("submit", (e) => {
   envoyerChat(question);
 });
 
+/* ---------------------------------------------------------------- PREMIER CONTACT
+ * Deux corrections d'accueil, l'une et l'autre motivées par ce que voyait un visiteur qui
+ * arrivait sur le site pour la première fois.
+ *
+ * 1. L'assistant est la PREMIÈRE section de la page. Sans clé Groq côté serveur, toute question
+ *    y répondait par « erreur : Chat indisponible… » — un visiteur en conclut que le site est
+ *    cassé, alors que la recherche, la chronologie, les courants, l'arbre et la comparaison
+ *    fonctionnent tous. On teste donc la disponibilité AVANT d'offrir le formulaire, et on
+ *    redirige vers ce qui marche.
+ * 2. Un formulaire de recherche vide ne dit pas ce qu'on peut lui demander. Trois exemples
+ *    cliquables valent mieux qu'un mode d'emploi. */
+const EXEMPLES = [
+  { libelle: "Le rêve chez Freud", champs: { concept: "traum", auteur: "Sigmund Freud" } },
+  { libelle: "La foule chez Le Bon", champs: { concept: "foule" } },
+  { libelle: "Ce que Freud avance sans trancher",
+    champs: { auteur: "Sigmund Freud", statut: "modalise" } },
+  { libelle: "L'exposition du héros chez Rank", champs: { concept: "aussetzung" } },
+];
+
+function poserExemples() {
+  const zone = $("#exemples-recherche");
+  if (!zone) return;
+  zone.innerHTML = EXEMPLES.map((ex, i) =>
+    `<button type="button" class="secondaire exemple" data-i="${i}">${ex.libelle}</button>`).join("");
+  zone.addEventListener("click", (e) => {
+    const b = e.target.closest(".exemple");
+    if (!b) return;
+    const ex = EXEMPLES[Number(b.dataset.i)];
+    $("#formulaire").reset();
+    remplirConcepts($("#f-concept"), "");
+    for (const [cle, valeur] of Object.entries(ex.champs)) {
+      const champ = $("#f-" + ({ concept: "concept", auteur: "auteur", statut: "statut",
+                                 oeuvre: "oeuvre", groupe: "groupe" }[cle] || cle));
+      if (champ) champ.value = valeur;
+    }
+    chercher(false);
+    document.getElementById("recherche").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+async function verifierAssistant() {
+  const forme = $("#form-chat");
+  const zone = $("#chat-messages");
+  if (!forme) return;
+  try {
+    const s = await api("/api/sante");
+    if (s.chat) return;                       // l'assistant répond : on ne change rien
+    forme.hidden = true;
+    zone.innerHTML =
+      `<div class="msg msg-systeme"><p style="margin:0">
+        <strong>L'assistant n'est pas encore activé sur ce déploiement.</strong>
+        Tout le reste du corpus est consultable — la
+        <a href="#recherche">recherche</a> interroge exactement les mêmes données, sans modèle de
+        langage entre elles et vous. Un assistant externe peut aussi être branché directement sur
+        le corpus par le <a href="https://github.com/Gabuz22/psychologie/blob/main/web/DEPLOIEMENT.md"
+        rel="noopener">serveur MCP</a>.</p></div>`;
+  } catch (e) {
+    /* si /api/sante échoue, la bannière d'erreur générale de demarrer() suffit */
+  }
+}
+
 /* --------------------------------------------------------------------------- démarrage */
 
 function gererHash() {
@@ -497,6 +558,14 @@ async function demarrer() {
     // « le corpus n'a rien trouvé », alors qu'il s'agit du résultat le plus argumenté du projet.
     afficherSignaux(false);
     afficherComparaison();
+    remplirSelect($("#arbre-auteur"),
+      (referentiel.auteurs || []).map((a) => a.nom), (n) => [n, n]);
+    // Freud d'abord : c'est le corpus le plus riche, donc l'arbre le plus parlant à l'ouverture.
+    arbre.auteur = "Sigmund Freud";
+    $("#arbre-auteur").value = arbre.auteur;
+    afficherArbre();
+    poserExemples();
+    verifierAssistant();
     gererHash();
   } catch (e) {
     $("#stats").innerHTML =
@@ -517,6 +586,12 @@ $("#effacer").addEventListener("click", () => {
 
 $("#form-chrono").addEventListener("submit", (e) => { e.preventDefault(); afficherChronologie(); });
 
+$("#arbre-auteur").addEventListener("change", (e) => {
+  arbre.auteur = e.target.value;
+  arbre.ouverte = null;          // changer d'auteur referme le volume ouvert
+  afficherArbre();
+});
+
 $("#form-lecture").addEventListener("submit", (e) => {
   e.preventDefault();
   lecture.page = 0;
@@ -524,6 +599,89 @@ $("#form-lecture").addEventListener("submit", (e) => {
 });
 $("#lecture-prec").addEventListener("click", () => { lecture.page--; afficherLecture(); });
 $("#lecture-suiv").addEventListener("click", () => { lecture.page++; afficherLecture(); });
+
+/* ---------------------------------------------------------------- ARBRE D'UN AUTEUR
+ * Un arbre, pas un graphe en toile d'araignée. Le choix est délibéré : une carte de nœuds reliés
+ * paraît savante mais ne se lit pas, alors qu'une hiérarchie dit exactement ce qu'elle contient —
+ * combien d'atomes, combien de liens vers ailleurs, et où cliquer pour descendre.
+ * Les barres sont proportionnelles au nombre d'atomes : la taille d'un volume se voit. */
+const arbre = { auteur: "", ouverte: null, max: 1 };
+
+function barreProportion(n, max) {
+  const pct = Math.max(2, Math.round((n / Math.max(max, 1)) * 100));
+  return `<span class="barre-atomes" style="width:${pct}%"></span>`;
+}
+
+function rendreOeuvre(o) {
+  const ouverte = arbre.ouverte === o.cle;
+  const liens = (o.liens || []).reduce((s, l) => s + l.n, 0);
+  const detail = (o.liens || []).slice(0, 4)
+    .map((l) => `${l.autre_auteur} · <em>${l.autre_oeuvre}</em> (${l.n})`).join(" · ");
+  return `<article class="noeud-oeuvre ${ouverte ? "ouverte" : ""}">
+    <button type="button" class="noeud-tete" data-oeuvre="${o.cle}"
+            aria-expanded="${ouverte ? "true" : "false"}">
+      <span class="noeud-titre">
+        <span class="chevron">${ouverte ? "▾" : "▸"}</span>
+        <strong>${o.titre}</strong>
+        <span class="compte">${o.annee_oeuvre}${o.datation_precise ? " ★" : ""}</span>
+      </span>
+      <span class="noeud-mesures">
+        <span class="compte">${Number(o.atomes).toLocaleString("fr")} atomes ·
+          ${Math.round((o.qualifies / Math.max(o.atomes, 1)) * 100)} % qualifiés</span>
+        ${liens ? `<span class="badge">${liens} lien${liens > 1 ? "s" : ""} inter-auteurs</span>` : ""}
+        ${o.qualite_source === "ocr" ? '<span class="badge">fac-similé OCR</span>' : ""}
+      </span>
+      <span class="jauge">${barreProportion(o.atomes, arbre.max)}</span>
+    </button>
+    ${liens ? `<p class="note noeud-liens">Relié à : ${detail}</p>` : ""}
+    ${ouverte ? `<div class="noeud-chapitres" data-pour="${o.cle}">chargement…</div>` : ""}
+  </article>`;
+}
+
+async function afficherArbre() {
+  const zone = $("#arbre-oeuvres");
+  if (!zone) return;
+  zone.textContent = "chargement…";
+  try {
+    const r = await api("/api/arbre", { auteur: arbre.auteur, oeuvre: arbre.ouverte });
+    arbre.max = Math.max(...r.oeuvres.map((o) => o.atomes), 1);
+
+    const totalLiens = r.oeuvres.reduce((s, o) => s + (o.liens || []).reduce((t, l) => t + l.n, 0), 0);
+    $("#arbre-resume").innerHTML = `
+      <p class="poids-grappe">${r.auteur.nom} (${r.auteur.naissance}–${r.auteur.mort}) ·
+        ${r.oeuvres.length} œuvre${r.oeuvres.length > 1 ? "s" : ""} ·
+        ${Number(r.total_atomes).toLocaleString("fr")} atomes ·
+        ${Object.keys(r.groupes).length} groupes conceptuels ·
+        ${totalLiens} lien${totalLiens > 1 ? "s" : ""} vers d'autres auteurs</p>`;
+
+    zone.innerHTML = r.oeuvres.map(rendreOeuvre).join("");
+    $("#arbre-note").textContent = r.note;
+
+    if (r.chapitres && arbre.ouverte) {
+      const cible = zone.querySelector(`.noeud-chapitres[data-pour="${arbre.ouverte}"]`);
+      if (cible) {
+        const maxCh = Math.max(...r.chapitres.map((c) => c.atomes), 1);
+        cible.innerHTML = r.chapitres.map((c) => `
+          <div class="noeud-chapitre">
+            <span class="noeud-titre">${c.chapitre}</span>
+            <span class="compte">${c.atomes} atomes ·
+              ${Math.round((c.qualifies / Math.max(c.atomes, 1)) * 100)} %</span>
+            <span class="jauge">${barreProportion(c.atomes, maxCh)}</span>
+          </div>`).join("");
+      }
+    }
+  } catch (e) {
+    zone.textContent = "erreur : " + e.message;
+  }
+}
+
+document.addEventListener("click", (e) => {
+  const tete = e.target.closest(".noeud-tete");
+  if (tete) {
+    arbre.ouverte = arbre.ouverte === tete.dataset.oeuvre ? null : tete.dataset.oeuvre;
+    afficherArbre();
+  }
+});
 
 /* ---------------------------------------------------------------- ENTRE AUTEURS
  * La seule vue qui traverse la frontière entre auteurs. Elle ne montre jamais un lien sans

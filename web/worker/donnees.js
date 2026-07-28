@@ -341,6 +341,101 @@ export async function lireOeuvre(env, { oeuvre, page, taille } = {}) {
            atomes: results };
 }
 
+/** ARBRE ATOMIQUE — la structure d'un auteur, à plusieurs niveaux de détail.
+ *
+ *  Auteur → œuvres → chapitres → concepts → atomes. Chaque niveau porte deux chiffres : combien
+ *  d'atomes il contient, et combien de liens le rattachent à d'AUTRES auteurs.
+ *
+ *  L'agrégation des liens vers les niveaux grossiers est légitime parce qu'elle ne fait que
+ *  COMPTER : un lien entre deux atomes est un lien entre leurs œuvres, entre leurs chapitres.
+ *  Rien n'est inféré en montant. C'est la différence avec un rapprochement de concepts, qui
+ *  demanderait, lui, de supposer une équivalence — raison pour laquelle il n'est pas ici.
+ *
+ *  LES ATOMES HORS CHAPITRE SONT MONTRÉS, PAS CACHÉS. 16 057 atomes (35 % du corpus) appartiennent
+ *  à des œuvres dont le découpage en chapitres n'est pas repérable — préfaces, articles de revue,
+ *  volumes sans intitulé de section. Les omettre ferait paraître ces œuvres plus petites qu'elles
+ *  ne sont ; ils forment donc un nœud explicite « hors chapitre ».
+ */
+export async function arbre(env, { auteur, oeuvre } = {}) {
+  const nom = auteur || "Sigmund Freud";
+  const existe = await env.DB.prepare("SELECT id, nom, naissance, mort, courant FROM auteurs WHERE nom = ?")
+    .bind(nom).first();
+  if (!existe) throw new ErreurAPI("auteur inconnu : " + nom, 404);
+
+  const oeuvres = await env.DB.prepare(
+    `SELECT o.cle, o.titre, o.titre_fr, o.annee_oeuvre, o.annee_edition, o.langue,
+            o.qualite_source, o.datation_precise,
+            COUNT(a.id) AS atomes,
+            SUM(CASE WHEN a.non_qualifie = 0 THEN 1 ELSE 0 END) AS qualifies,
+            SUM(a.ocr_suspect) AS ocr_suspects
+     FROM oeuvres o
+     JOIN auteurs au ON au.id = o.auteur_id
+     LEFT JOIN atomes a ON a.oeuvre_id = o.id
+     WHERE au.nom = ?
+     GROUP BY o.id ORDER BY o.annee_oeuvre`).bind(nom).all();
+
+  // Liens inter-auteurs agrégés par ŒUVRE — les deux sens réunis, puisqu'un lien n'est pas
+  // orienté par nature (son sens est une propriété séparée, souvent indécidable).
+  const liensOeuvre = await env.DB.prepare(
+    `SELECT o_mien.cle AS mienne, au_autre.nom AS autre_auteur, o_autre.titre AS autre_oeuvre,
+            COUNT(*) AS n
+     FROM liens_reprise l
+     JOIN atomes xa ON xa.id = l.atome_a
+     JOIN atomes xb ON xb.id = l.atome_b
+     JOIN auteurs aa ON aa.id = l.auteur_a
+     JOIN auteurs ab ON ab.id = l.auteur_b
+     JOIN oeuvres o_mien  ON o_mien.id  = CASE WHEN aa.nom = ?1 THEN xa.oeuvre_id ELSE xb.oeuvre_id END
+     JOIN oeuvres o_autre ON o_autre.id = CASE WHEN aa.nom = ?1 THEN xb.oeuvre_id ELSE xa.oeuvre_id END
+     JOIN auteurs au_autre ON au_autre.id = CASE WHEN aa.nom = ?1 THEN l.auteur_b ELSE l.auteur_a END
+     WHERE aa.nom = ?1 OR ab.nom = ?1
+     GROUP BY 1, 2, 3 ORDER BY n DESC`).bind(nom).all();
+
+  const parOeuvre = {};
+  for (const l of liensOeuvre.results) {
+    (parOeuvre[l.mienne] ??= []).push(l);
+  }
+
+  // Chapitres : chargés seulement pour l'œuvre demandée, pour ne pas envoyer tout l'arbre
+  // d'un coup — le corpus compte 109 chapitres et 45 588 atomes.
+  let chapitres = null;
+  if (oeuvre) {
+    const r = await env.DB.prepare(
+      `SELECT COALESCE(a.chapitre, '— hors chapitre —') AS chapitre,
+              COUNT(*) AS atomes,
+              SUM(CASE WHEN a.non_qualifie = 0 THEN 1 ELSE 0 END) AS qualifies,
+              MIN(a.debut) AS ordre
+       FROM atomes a JOIN oeuvres o ON o.id = a.oeuvre_id
+       WHERE o.cle = ?
+       GROUP BY 1 ORDER BY ordre`).bind(oeuvre).all();
+    chapitres = r.results;
+  }
+
+  // Concepts dominants de l'auteur — la matière de ses atomes, dans SON lexique.
+  const concepts = await env.DB.prepare(
+    `SELECT c.nom, c.groupe, c.n_atomes
+     FROM concepts c JOIN auteurs au ON au.id = c.auteur_id
+     WHERE au.nom = ? AND c.n_atomes > 0
+     ORDER BY c.n_atomes DESC`).bind(nom).all();
+
+  const groupes = {};
+  for (const c of concepts.results) (groupes[c.groupe] ??= []).push(c);
+
+  return {
+    auteur: existe,
+    oeuvres: oeuvres.results.map((o) => ({ ...o, liens: parOeuvre[o.cle] || [] })),
+    chapitres,
+    oeuvre_ouverte: oeuvre || null,
+    groupes,
+    total_atomes: oeuvres.results.reduce((s, o) => s + o.atomes, 0),
+    note:
+      "Les liens comptés à chaque niveau sont des liens d'ATOME à atome, simplement additionnés "
+      + "en remontant : rien n'est inféré. Un chapitre « — hors chapitre — » réunit les atomes "
+      + "des œuvres dont le découpage en sections n'est pas repérable (préfaces, articles de "
+      + "revue) — ils sont montrés plutôt que retirés, sans quoi l'œuvre paraîtrait plus petite "
+      + "qu'elle n'est.",
+  };
+}
+
 /** COMPARAISON INTER-AUTEURS — ce qu'un auteur reprend d'un autre, et où il le lit.
  *
  *  Cette vue relie des graphes construits SÉPARÉMENT (chaque auteur a ses propres concepts) et

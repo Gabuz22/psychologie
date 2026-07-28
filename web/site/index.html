@@ -24,6 +24,7 @@
   <a href="#courants" data-vue="courants">Courants internes</a>
   <a href="#chronologie" data-vue="chronologie">Chronologie</a>
   <a href="#signaux" data-vue="signaux">Les auteurs sur eux-mêmes</a>
+  <a href="#arbre" data-vue="arbre">Arbre d'un auteur</a>
   <a href="#comparaison" data-vue="comparaison">Entre auteurs</a>
   <a href="#lecture" data-vue="lecture">Lire une œuvre</a>
   <a href="#methode" data-vue="methode">Méthode</a>
@@ -58,6 +59,8 @@
   <p class="note">Chaque filtre restreint (ET logique). Chaque résultat est une citation
     complète : texte dans la langue de l'œuvre, auteur, position — et sa <strong>règle de datation</strong>,
     jamais une année nue.</p>
+
+  <div class="actions" id="exemples-recherche"></div>
 
   <form id="formulaire">
     <div class="grille">
@@ -162,6 +165,28 @@
   <p id="signaux-compte" class="compte"></p>
   <div id="signaux-resultats"></div>
   <div class="actions"><button id="signaux-plus" hidden class="secondaire">Afficher plus</button></div>
+</section>
+
+<section id="arbre">
+  <h2>L'arbre d'un auteur</h2>
+  <p class="note">L'œuvre entière d'un auteur, du volume à la phrase : <strong>œuvre → chapitre →
+    atome</strong>. Chaque niveau porte deux chiffres — combien d'atomes il contient, et combien
+    de liens le rattachent à un <em>autre</em> auteur. Ces liens sont ceux de la page « Entre
+    auteurs », simplement additionnés en remontant : un lien entre deux phrases est un lien entre
+    leurs chapitres, puis entre leurs volumes. <strong>Rien n'est inféré en montant</strong>, on
+    ne fait que compter.</p>
+
+  <form id="form-arbre">
+    <div class="grille">
+      <label>Auteur
+        <select id="arbre-auteur"></select>
+      </label>
+    </div>
+  </form>
+
+  <div id="arbre-resume"></div>
+  <div id="arbre-oeuvres"></div>
+  <p id="arbre-note" class="reserve"></p>
 </section>
 
 <section id="comparaison">

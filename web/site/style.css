@@ -101,6 +101,34 @@ button.secondaire { background: transparent; color: var(--accent);
 .carte-couple:hover { border-color: var(--accent); }
 .carte-couple h3 { margin: 0 0 .3rem; font-size: 1rem; }
 
+/* ---- Exemples de recherche : un formulaire vide ne dit pas ce qu'on peut lui demander. */
+#exemples-recherche { margin-bottom: 1rem; }
+button.exemple { font-size: .85rem; padding: .35rem .7rem; }
+
+/* ---- Arbre d'un auteur : une hiérarchie qui se lit, pas un graphe qui impressionne.
+   La barre proportionnelle fait voir la taille d'un volume sans avoir à lire le chiffre. */
+.noeud-oeuvre { border-bottom: 1px solid var(--filet); }
+.noeud-tete { display: grid; grid-template-columns: 1fr auto; gap: .3rem 1rem;
+              width: 100%; text-align: left; font: inherit; color: inherit;
+              background: transparent; border: 0; padding: .7rem .2rem .3rem; cursor: pointer; }
+.noeud-tete:hover .noeud-titre strong { color: var(--accent); }
+.noeud-titre { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.chevron { color: var(--gris); font-size: .8rem; }
+.noeud-mesures { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap;
+                 justify-content: flex-end; }
+.jauge { grid-column: 1 / -1; display: block; height: 3px; background: var(--filet);
+         border-radius: 2px; overflow: hidden; margin-top: .35rem; }
+.barre-atomes { display: block; height: 100%; background: var(--accent); opacity: .55; }
+.noeud-liens { margin: .1rem 0 .5rem 1.4rem; font-size: .85rem; }
+.noeud-chapitres { margin: .2rem 0 .9rem 1.4rem; display: grid; gap: .3rem; }
+.noeud-chapitre { display: grid; grid-template-columns: 1fr auto; gap: .2rem .8rem;
+                  padding: .35rem 0; border-bottom: 1px dotted var(--filet); font-size: .9rem; }
+.noeud-chapitre .jauge { margin-top: .25rem; }
+@media (max-width: 640px) {
+  .noeud-tete, .noeud-chapitre { grid-template-columns: 1fr; }
+  .noeud-mesures { justify-content: flex-start; }
+}
+
 /* grappes */
 .cartes { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
           gap: .9rem; margin-top: 1rem; }
