@@ -83,6 +83,24 @@ button.secondaire { background: transparent; color: var(--accent);
    citable, mais doit être vérifiée sur le fac-similé — d'où un contraste plus marqué. */
 .badge.alerte { border-color: var(--accent); color: var(--accent); }
 
+/* ---- Entre auteurs : deux passages CÔTE À CÔTE, jamais un score seul.
+   La mise en page porte la doctrine de la couche — on ne montre pas un lien, on montre ce
+   qu'il faut lire pour le juger. */
+.lien-reprise { border: 1px solid var(--filet); border-radius: 6px; padding: 1rem;
+                margin: 1rem 0; }
+.deux-colonnes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: .7rem; }
+@media (max-width: 700px) { .deux-colonnes { grid-template-columns: 1fr; } }
+.cote .ref { font-size: .85rem; color: var(--gris); margin: 0 0 .35rem; }
+.cote .passage { margin: 0; }
+/* Les suites de mots communes aux deux passages : c'est ce qui rend la reprise VISIBLE,
+   plutôt que de demander au lecteur de croire un pourcentage. */
+.lien-reprise mark { background: var(--accent-doux); color: inherit; padding: 0 .1em; }
+.carte-couple { text-align: left; cursor: pointer; font: inherit; width: 100%;
+                background: transparent; border: 1px solid var(--filet); border-radius: 6px;
+                padding: .9rem; }
+.carte-couple:hover { border-color: var(--accent); }
+.carte-couple h3 { margin: 0 0 .3rem; font-size: 1rem; }
+
 /* grappes */
 .cartes { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
           gap: .9rem; margin-top: 1rem; }

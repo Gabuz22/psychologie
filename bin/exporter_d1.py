@@ -30,7 +30,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from core import agents, lexique, ocr, sources, verification   # noqa: E402
+from core import agents, comparaison, lexique, ocr, sources, verification  # noqa: E402
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -249,6 +249,45 @@ CREATE TABLE fonctions (
   atome_id INTEGER NOT NULL REFERENCES atomes(id),
   fonction TEXT NOT NULL
 );
+-- COUCHE DE COMPARAISON INTER-AUTEURS. Elle relie des graphes construits SÉPARÉMENT et ne
+-- fusionne jamais deux concepts : un lien va d'un ATOME à un ATOME, chacun gardant son auteur.
+-- Aucune colonne ne nomme la NATURE du rapport (ni socle, ni emprunt, ni contradiction) : la
+-- couche établit qu'un TEXTE est partagé, et laisse lire les deux passages.
+CREATE TABLE liens_reprise (
+  id INTEGER PRIMARY KEY,
+  atome_a INTEGER NOT NULL REFERENCES atomes(id),
+  atome_b INTEGER NOT NULL REFERENCES atomes(id),
+  auteur_a INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_b INTEGER NOT NULL REFERENCES auteurs(id),
+  contenance REAL NOT NULL,
+  force TEXT NOT NULL,             -- « manifeste » (≥ 0,70) ou « partielle »
+  -- « a_vers_b », « b_vers_a », ou NULL quand les fenêtres de datation se chevauchent.
+  -- NULL veut dire INDÉCIDABLE, jamais « pas de lien » : c'est une information sur ce que le
+  -- corpus permet d'établir, pas une absence à combler.
+  sens TEXT,
+  -- Les deux passages nomment une source tierce (Sophocle, Shakespeare) : le partage de mots
+  -- ne prouve plus un emprunt entre les deux auteurs, et le lien n'est jamais orienté.
+  source_tierce INTEGER NOT NULL DEFAULT 0,
+  a_verifier INTEGER NOT NULL DEFAULT 1,
+  evenement INTEGER,               -- paires contiguës = un seul acte de citation
+  partages TEXT                    -- suites de mots partagées, pour surligner à l'affichage
+);
+CREATE TABLE lectures_declarees (
+  id INTEGER PRIMARY KEY,
+  auteur_id INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_lu_id INTEGER NOT NULL REFERENCES auteurs(id),
+  oeuvre_id INTEGER NOT NULL REFERENCES oeuvres(id),
+  chapitre TEXT NOT NULL,
+  portee_atomes INTEGER NOT NULL,
+  homographe TEXT
+);
+CREATE TABLE nominations (
+  auteur_id INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_nomme_id INTEGER NOT NULL REFERENCES auteurs(id),
+  atomes INTEGER NOT NULL,
+  homographe TEXT,
+  PRIMARY KEY (auteur_id, auteur_nomme_id)
+);
 CREATE TABLE signaux (
   atome_id INTEGER NOT NULL REFERENCES atomes(id),
   signal TEXT NOT NULL,
@@ -380,6 +419,57 @@ def construire(chemin_sqlite):
 
     db.execute("UPDATE concepts SET n_atomes ="
                " (SELECT COUNT(*) FROM atome_concepts ac WHERE ac.concept_id = concepts.id)")
+
+    # ---- couche de comparaison inter-auteurs (agents `reprises` et `lectures`)
+    # Recalculée ici comme les grappes : le site ne sert jamais qu'un résultat produit par le
+    # pipeline déterministe. Les identifiants d'atome sont retrouvés par leur clé textuelle.
+    ids_atome = dict(db.execute("SELECT atome_id, id FROM atomes").fetchall())
+
+    # On passe par le module et non par la fiche de l'agent : celle-ci plafonne son extrait à
+    # quarante liens par couple, ce qui convient à une réponse d'API mais tronquerait la base —
+    # 104 liens enregistrés au lieu de 132 lors du premier essai. Une troncature silencieuse est
+    # exactement ce que ce projet refuse : la base doit contenir tout ce que le calcul a produit.
+    par_auteur_atomes = {}
+    for a in corpus.atomes:
+        par_auteur_atomes.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+    index_ng = [comparaison._n_grammes_utiles(v, None) for v in par_auteur_atomes.values()]
+    df_ng = comparaison.frequences_documentaires(index_ng)
+
+    noms_auteurs = sorted(par_auteur_atomes)
+    for i, x in enumerate(noms_auteurs):
+        for y in noms_auteurs[i + 1:]:
+            bruts = comparaison.reprises(par_auteur_atomes[x], par_auteur_atomes[y], df_ng)
+            retenus = [comparaison.qualifier(l) for l in bruts
+                       if l["contenance"] >= comparaison.SEUIL_PUBLICATION]
+            if not retenus:
+                continue
+            # Les paires contiguës des deux côtés forment un seul ACTE de citation : c'est lui
+            # qu'on compte, sans quoi celui qui cite par longs blocs paraîtrait le plus lié.
+            for rang, evt in enumerate(comparaison.evenements(retenus), 1):
+                for lien in evt["paires"]:
+                    ida = ids_atome.get(lien["a"]["id"])
+                    idb = ids_atome.get(lien["b"]["id"])
+                    if ida is None or idb is None:
+                        continue
+                    db.execute(
+                        "INSERT INTO liens_reprise (atome_a, atome_b, auteur_a, auteur_b,"
+                        " contenance, force, sens, source_tierce, a_verifier, evenement, partages)"
+                        " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                        (ida, idb, ids_auteur[x], ids_auteur[y], lien["contenance"],
+                         lien["force"], lien["sens"], int(lien["source_tierce"]),
+                         int(lien["a_verifier"]), rang, " | ".join(lien["partages"][:6])))
+
+    lec = agents.AGENTS["lectures"].executer(corpus)
+    for c in lec["chapitres_declares"]:
+        db.execute(
+            "INSERT INTO lectures_declarees (auteur_id, auteur_lu_id, oeuvre_id, chapitre,"
+            " portee_atomes, homographe) VALUES (?,?,?,?,?,?)",
+            (ids_auteur[c["auteur"]], ids_auteur[c["auteur_lu"]], ids_oeuvre[c["oeuvre"]],
+             c["chapitre"], c["portee_atomes"], c["homographe"]))
+    for n in lec["nominations"]:
+        db.execute("INSERT INTO nominations VALUES (?,?,?,?)",
+                   (ids_auteur[n["auteur"]], ids_auteur[n["auteur_nomme"]],
+                    n["atomes"], n["homographe"]))
 
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
     # Elles sont calculées sur les atomes de SIGMUND FREUD seul, et le resteront tant que la

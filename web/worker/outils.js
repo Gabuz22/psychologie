@@ -109,6 +109,25 @@ export const OUTILS = [
     fn: (env, p) => donnees.lireOeuvre(env, p),
   },
   {
+    nom: "comparaison",
+    description:
+      "CE QU'UN AUTEUR REPREND D'UN AUTRE : passages partagés mot pour mot ou presque, chapitres "
+      + "où un auteur annonce qu'il en lit un autre, et qui nomme qui. Rend TOUJOURS les deux "
+      + "passages entiers côte à côte — un lien qu'on ne peut pas lire n'est pas rendu.\n"
+      + "CE QUE CET OUTIL N'ÉTABLIT PAS, et qu'il ne faut jamais lui faire dire : la NATURE du "
+      + "rapport. Reprendre une formulation n'est pas partager une thèse ; nommer n'est ni "
+      + "suivre, ni approuver, ni contredire. Aucun chiffre ici ne mesure un accord ni un "
+      + "désaccord, et il n'existe aucun champ « socle », « emprunt » ou « contradiction ». "
+      + "Le champ `sens` n'est rempli que si les dates le permettent — NULL veut dire "
+      + "INDÉCIDABLE, jamais « aucun lien ». Rapporter le champ `reserve` avec tout chiffre.",
+    schema: {
+      auteur: z.string().optional().describe("restreindre aux liens impliquant cet auteur"),
+      autre: z.string().optional().describe("second auteur, pour n'avoir qu'un couple"),
+      limite: z.number().int().min(1).max(100).optional().describe("défaut 30"),
+    },
+    fn: (env, p) => donnees.comparaison(env, p),
+  },
+  {
     nom: "signaux",
     description:
       "Les passages où Freud parle de SON PROPRE travail : objections qu'il dresse contre ses "

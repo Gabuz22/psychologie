@@ -24,6 +24,7 @@
   <a href="#courants" data-vue="courants">Courants internes</a>
   <a href="#chronologie" data-vue="chronologie">Chronologie</a>
   <a href="#signaux" data-vue="signaux">Les auteurs sur eux-mêmes</a>
+  <a href="#comparaison" data-vue="comparaison">Entre auteurs</a>
   <a href="#lecture" data-vue="lecture">Lire une œuvre</a>
   <a href="#methode" data-vue="methode">Méthode</a>
 </nav>
@@ -161,6 +162,43 @@
   <p id="signaux-compte" class="compte"></p>
   <div id="signaux-resultats"></div>
   <div class="actions"><button id="signaux-plus" hidden class="secondaire">Afficher plus</button></div>
+</section>
+
+<section id="comparaison">
+  <h2>Ce qu'un auteur reprend d'un autre</h2>
+  <p class="note">Chaque auteur du corpus est décrit avec <strong>ses propres catégories</strong> :
+    rien, dans les données, ne dit spontanément que le <em>refoulement</em> de Rank et celui de
+    Freud sont la même chose. Les rapprochements sont donc <strong>posés ici</strong>, un par un,
+    avec la preuve qui les fonde — et cette preuve est toujours un <strong>fait de texte</strong>,
+    jamais un rapprochement d'idées : deux passages partagent des suites de six mots, ce qui se
+    vérifie à l'œil. Les deux passages sont montrés en entier, côte à côte. Un lien qu'on ne
+    pourrait pas lire n'est pas affiché.</p>
+  <p class="note"><strong>Ce que cette page n'établit pas.</strong> Reprendre une formulation n'est
+    pas partager une thèse ; nommer quelqu'un n'est ni le suivre, ni l'approuver, ni le
+    contredire. Vous ne trouverez ici aucun « socle », « emprunt » ni « contradiction » : ces mots
+    nommeraient une nature que la mesure ne prouve pas. Le corpus a déjà éprouvé ce piège — un
+    repérage construit pour trouver les écarts d'un disciple avec Freud n'a rien confirmé sur cinq
+    candidats : les cinq passages étaient des renvois d'accord.</p>
+
+  <div id="comp-matrice" class="cartes"></div>
+
+  <h3>Les chapitres où un auteur en lit un autre</h3>
+  <p class="note">Quand un chapitre annonce dans son <em>titre</em> qu'il traite d'un autre auteur,
+    c'est l'édition elle-même qui déclare la lecture. C'est le lien le plus solide du corpus, et
+    le seul qui franchisse la barrière des langues : Freud lit Le Bon en traduction allemande,
+    aucune suite de mots ne peut relier les deux textes.</p>
+  <div id="comp-lectures"></div>
+
+  <h3>Passages partagés</h3>
+  <div class="actions" id="comp-filtres"></div>
+  <div id="comp-liens"></div>
+
+  <h3>Qui nomme qui</h3>
+  <p class="note">Localise les passages, ne qualifie pas le rapport. Certains noms sont en outre
+    des <strong>homographes</strong> : « Abraham » désigne aussi le patriarche biblique, que Rank
+    et Freud citent abondamment dans leurs travaux sur le mythe.</p>
+  <div id="comp-nominations"></div>
+  <p id="comp-reserve" class="reserve"></p>
 </section>
 
 <section id="lecture">

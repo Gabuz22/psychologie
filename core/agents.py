@@ -481,8 +481,148 @@ class AgentSignaux(Agent):
 
 
 # --------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
+class AgentReprises(Agent):
+    """Ce qu'un auteur REPREND d'un autre, mot pour mot ou presque.
+
+    Le premier agent qui traverse la frontière entre auteurs — et il ne peut le faire que parce
+    qu'il s'appuie sur un FAIT DE TEXTE, jamais sur un rapprochement de concepts. Deux passages
+    partagent des suites de six mots : cela se vérifie à l'œil, sans qu'aucune grille
+    d'interprétation n'ait à être partagée entre les deux auteurs.
+
+    C'est le seul terrain sur lequel comparer SANS enfreindre la règle fondatrice du corpus
+    (chaque auteur a ses catégories propres, voir core/lexiques/) : on ne rapproche pas des
+    concepts, on constate un texte commun.
+
+    Ce que l'agent REFUSE de faire : nommer la nature du rapport. Il ne dira jamais « socle »,
+    « emprunt » ni « contradiction ». Il rend deux passages, leur mesure, leur sens quand les
+    dates le permettent — et laisse lire.
+    """
+
+    nom = "reprises"
+    question = "Quels passages un auteur reprend-il d'un autre ?"
+
+    def executer(self, corpus, auteur=None, autre=None, minimum=None, **kw):
+        from . import comparaison
+        seuil = comparaison.SEUIL_PUBLICATION if minimum is None else minimum
+
+        par_auteur = {}
+        for a in corpus.atomes:
+            par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+
+        # Fréquences documentaires calculées sur le corpus ENTIER : une mesure de comparaison ne
+        # doit pas changer selon le couple d'auteurs qu'on examine.
+        index = [comparaison._n_grammes_utiles(v, None) for v in par_auteur.values()]
+        df = comparaison.frequences_documentaires(index)
+
+        noms = sorted(par_auteur)
+        couples = [(x, y) for i, x in enumerate(noms) for y in noms[i + 1:]
+                   if (auteur is None or auteur in (x, y))
+                   and (autre is None or autre in (x, y))]
+
+        fiches, total = [], 0
+        for x, y in couples:
+            bruts = comparaison.reprises(par_auteur[x], par_auteur[y], df)
+            retenus = [comparaison.qualifier(l) for l in bruts if l["contenance"] >= seuil]
+            if not retenus:
+                continue
+            total += len(retenus)
+            evts = comparaison.evenements(retenus)
+            fiches.append({
+                "couple": [x, y],
+                "paires": len(retenus),
+                "evenements": len(evts),
+                "manifestes": sum(1 for l in retenus if l["force"] == "manifeste"),
+                "source_tierce": sum(1 for l in retenus if l["source_tierce"]),
+                "sens_etabli": sum(1 for l in retenus if l["sens"]),
+                "liens": [{
+                    "contenance": l["contenance"], "force": l["force"],
+                    "source_tierce": l["source_tierce"], "sens": l["sens"],
+                    "a_verifier": l["a_verifier"],
+                    "a": {"id": l["a"]["id"], "oeuvre": l["a"]["oeuvre"], "texte": l["a"]["texte"]},
+                    "b": {"id": l["b"]["id"], "oeuvre": l["b"]["oeuvre"], "texte": l["b"]["texte"]},
+                    "partages": l["partages"][:6],
+                } for l in retenus[:40]],
+            })
+        fiches.sort(key=lambda f: -f["paires"])
+
+        return self._fiche({
+            "seuil": seuil,
+            "couples": fiches,
+            "total_paires": total,
+            "total_evenements": sum(f["evenements"] for f in fiches),
+            "note": ("Une PAIRE est deux phrases ; un ÉVÉNEMENT est une citation continue, qui "
+                     "peut en compter plusieurs. C'est l'événement qui dit combien de fois un "
+                     "auteur en cite un autre — compter les phrases avantagerait celui qui cite "
+                     "par longs blocs sur celui qui cite par touches."),
+            "reserve": ("Un lien dit qu'un TEXTE est partagé, jamais qu'une THÈSE l'est. Le sens "
+                        "n'est donné que si les fenêtres de datation sont disjointes ; et quand "
+                        "les deux passages nomment une source tierce (Sophocle, Shakespeare), "
+                        "aucun sens n'est donné — les deux peuvent tenir leur formulation d'elle "
+                        "plutôt que l'un de l'autre."),
+        })
+
+
+# --------------------------------------------------------------------------------------------
+class AgentLectures(Agent):
+    """Où un auteur LIT un autre : chapitres qui l'annoncent, passages qui le nomment.
+
+    Complète `reprises` là où celui-ci est structurellement aveugle — entre deux langues. Freud
+    consacre un chapitre entier, « II. Le Bon's Schilderung der Massenseele », à rendre compte de
+    Le Bon, qu'il lit en traduction allemande. Aucune suite de mots ne peut relier les deux
+    textes, puisqu'ils ne sont pas écrits dans la même langue. Sans cet agent, la relation
+    inter-auteurs la mieux documentée du corpus serait absente de la couche.
+    """
+
+    nom = "lectures"
+    question = "Où un auteur lit-il et nomme-t-il un autre ?"
+
+    def executer(self, corpus, auteur=None, **kw):
+        from . import comparaison
+        par_auteur = {}
+        for a in corpus.atomes:
+            par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+
+        chapitres, nominations = [], {}
+        for nom_auteur, atomes in sorted(par_auteur.items()):
+            if auteur and nom_auteur != auteur:
+                continue
+            for lec in comparaison.lectures_declarees(atomes, nom_auteur):
+                chapitres.append({
+                    "auteur": nom_auteur, "auteur_lu": lec["auteur_lu"],
+                    "chapitre": lec["chapitre"], "portee_atomes": lec["portee"],
+                    "oeuvre": lec["atomes"][0]["oeuvre"], "homographe": lec["homographe"],
+                })
+            for m in comparaison.mentions(atomes, nom_auteur):
+                cle = (nom_auteur, m["auteur_nomme"])
+                e = nominations.setdefault(cle, {
+                    "auteur": nom_auteur, "auteur_nomme": m["auteur_nomme"],
+                    "atomes": 0, "homographe": m["homographe"], "exemples": []})
+                e["atomes"] += 1
+                if len(e["exemples"]) < 5:
+                    e["exemples"].append({
+                        "id": m["atome"]["id"], "oeuvre": m["atome"]["oeuvre"],
+                        "texte": m["atome"]["texte"][:400], "statut": m["atome"]["statut"]})
+
+        chapitres.sort(key=lambda c: -c["portee_atomes"])
+        return self._fiche({
+            "chapitres_declares": chapitres,
+            "nominations": sorted(nominations.values(), key=lambda e: -e["atomes"]),
+            "note": ("Un CHAPITRE dont le titre nomme un autre auteur est le lien le plus solide "
+                     "du corpus : c'est l'édition elle-même qui déclare la lecture, et c'est le "
+                     "seul signal qui traverse la barrière des langues."),
+            "reserve": ("Nommer n'est ni suivre, ni approuver, ni contredire. Le corpus a déjà "
+                        "mesuré ce piège : un signal construit pour repérer les écarts de Rank "
+                        "avec Freud n'a rien confirmé sur cinq candidats — les cinq passages "
+                        "étaient des renvois d'ACCORD. Un motif localise, il ne qualifie pas. "
+                        "Certains noms sont en outre des HOMOGRAPHES : « Abraham » désigne aussi "
+                        "le patriarche biblique, que Rank et Freud citent abondamment."),
+        })
+
+
 AGENTS = {a.nom: a for a in (AgentProfil(), AgentConcept(), AgentCooccurrence(), AgentCourants(),
-                             AgentChronologie(), AgentTension(), AgentSignaux())}
+                             AgentChronologie(), AgentTension(), AgentSignaux(),
+                             AgentReprises(), AgentLectures())}
 
 
 def orchestrer(corpus, demande=None, **kw):

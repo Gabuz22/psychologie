@@ -496,6 +496,7 @@ async function demarrer() {
     // Chargés d'emblée plutôt qu'au clic : une section visiblement vide se lirait comme
     // « le corpus n'a rien trouvé », alors qu'il s'agit du résultat le plus argumenté du projet.
     afficherSignaux(false);
+    afficherComparaison();
     gererHash();
   } catch (e) {
     $("#stats").innerHTML =
@@ -523,6 +524,125 @@ $("#form-lecture").addEventListener("submit", (e) => {
 });
 $("#lecture-prec").addEventListener("click", () => { lecture.page--; afficherLecture(); });
 $("#lecture-suiv").addEventListener("click", () => { lecture.page++; afficherLecture(); });
+
+/* ---------------------------------------------------------------- ENTRE AUTEURS
+ * La seule vue qui traverse la frontière entre auteurs. Elle ne montre jamais un lien sans
+ * dérouler les DEUX passages entiers : c'est la contrainte fondatrice de la couche — un
+ * rapprochement qu'un lecteur ne pourrait pas vérifier ne doit pas exister.
+ * Aucun libellé ici ne nomme la nature du rapport (« socle », « emprunt », « contradiction ») :
+ * la mesure établit qu'un texte est partagé, et rien de plus. */
+const comparaison = { auteur: "", autre: "" };
+
+function surlignerPartages(texte, partages) {
+  // Les suites de mots communes sont mises en évidence dans les deux passages : c'est ce qui
+  // permet de VOIR la reprise, plutôt que de croire un score.
+  let html = texteCourt(texte, 700)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  for (const g of (partages || "").split(" | ").filter(Boolean).slice(0, 6)) {
+    const mots = g.split(" ").filter(Boolean);
+    if (mots.length < 3) continue;
+    // On surligne sur une forme souple : le texte affiché garde sa ponctuation et ses
+    // majuscules, alors que le n-gramme vient de la forme normalisée.
+    const motif = new RegExp(mots.map((m) =>
+      m.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[^a-zA-ZäöüÄÖÜß]+"), "i");
+    html = html.replace(motif, (m) => `<mark>${m}</mark>`);
+  }
+  return html;
+}
+
+function rendreLien(l) {
+  const sens = l.sens === "a_vers_b" ? `${l.auteur_a} → ${l.auteur_b}`
+    : l.sens === "b_vers_a" ? `${l.auteur_b} → ${l.auteur_a}` : null;
+  const badges = [
+    `<span class="badge">${l.force === "manifeste" ? "reprise manifeste" : "reprise partielle"}</span>`,
+    `<span class="badge">contenance ${(l.contenance * 100).toFixed(0)} %</span>`,
+    sens ? `<span class="badge">${sens}</span>`
+         : `<span class="badge" title="Les fenêtres de datation des deux passages se chevauchent : le corpus ne permet pas de dire lequel précède l'autre.">sens indécidable</span>`,
+    l.source_tierce
+      ? `<span class="badge alerte" title="Les deux passages nomment une source classique extérieure au corpus : chacun peut tenir sa formulation d'elle plutôt que de l'autre. Le lien n'est donc pas orienté.">source tierce</span>`
+      : "",
+    l.a_verifier ? `<span class="badge">à lire</span>` : "",
+  ].filter(Boolean).join("");
+
+  const cote = (auteur, oeuvre, annee, texte, source, suspect) => `
+    <div class="cote">
+      <p class="ref"><strong>${auteur}</strong> — <em>${oeuvre}</em> (${annee})
+        ${source === "ocr" ? '<span class="badge">fac-similé OCR</span>' : ""}
+        ${suspect ? '<span class="badge alerte">⚠ OCR douteux</span>' : ""}</p>
+      <p class="passage">${surlignerPartages(texte, l.partages)}</p>
+    </div>`;
+
+  return `<article class="lien-reprise">
+    <div class="etiquettes">${badges}</div>
+    <div class="deux-colonnes">
+      ${cote(l.auteur_a, l.oeuvre_a, l.annee_a, l.texte_a, l.source_a, l.suspect_a)}
+      ${cote(l.auteur_b, l.oeuvre_b, l.annee_b, l.texte_b, l.source_b, l.suspect_b)}
+    </div>
+  </article>`;
+}
+
+async function afficherComparaison() {
+  const zone = $("#comp-liens");
+  if (!zone) return;
+  zone.textContent = "chargement…";
+  try {
+    const r = await api("/api/comparaison",
+      { auteur: comparaison.auteur, autre: comparaison.autre, limite: 30 });
+
+    $("#comp-matrice").innerHTML = r.matrice.map((m) => `
+      <button type="button" class="carte carte-couple"
+              data-a="${m.auteur_a}" data-b="${m.auteur_b}">
+        <h3>${m.auteur_a} ↔ ${m.auteur_b}</h3>
+        <p class="poids-grappe">${m.evenements} citation${m.evenements > 1 ? "s" : ""}
+           <span class="compte">(${m.paires} phrase${m.paires > 1 ? "s" : ""})</span></p>
+        <p class="note">${m.manifestes} manifeste${m.manifestes > 1 ? "s" : ""} ·
+           ${m.orientes} orienté${m.orientes > 1 ? "s" : ""} par les dates</p>
+      </button>`).join("");
+
+    $("#comp-lectures").innerHTML = r.lectures_declarees.length
+      ? r.lectures_declarees.map((l) => `
+          <article class="citation">
+            <p><strong>${l.auteur}</strong> lit <strong>${l.auteur_lu}</strong> —
+               <em>${l.oeuvre}</em> (${l.annee_oeuvre})</p>
+            <p class="passage">« ${l.chapitre} »</p>
+            <p class="note">${l.portee_atomes} atomes — un chapitre entier.</p>
+          </article>`).join("")
+      : "<p class='note'>Aucun chapitre ne nomme un autre auteur dans son titre.</p>";
+
+    $("#comp-nominations").innerHTML = `<div class="table-scroll"><table class="auteurs">
+      <thead><tr><th>Auteur</th><th>nomme</th><th class="num">Atomes</th><th></th></tr></thead>
+      <tbody>${r.nominations.map((n) => `<tr>
+        <td>${n.auteur}</td><td>${n.auteur_nomme}</td>
+        <td class="num">${n.atomes}</td>
+        <td class="note">${n.homographe ? "⚠ homographe — demande lecture" : ""}</td>
+      </tr>`).join("")}</tbody></table></div>`;
+
+    zone.innerHTML = r.liens.length
+      ? r.liens.map(rendreLien).join("")
+      : "<p class='note'>Aucun passage partagé pour ce filtre.</p>";
+
+    $("#comp-filtres").innerHTML = (comparaison.auteur || comparaison.autre)
+      ? `<button type="button" class="secondaire" id="comp-tout">Tous les couples</button>`
+      : "<span class='compte'>Cliquer un couple ci-dessus pour n'afficher que le sien.</span>";
+
+    $("#comp-reserve").textContent = r.reserve + " " + r.ne_pas_conclure;
+  } catch (e) {
+    zone.textContent = "erreur : " + e.message;
+  }
+}
+
+document.addEventListener("click", (e) => {
+  const carte = e.target.closest(".carte-couple");
+  if (carte) {
+    comparaison.auteur = carte.dataset.a;
+    comparaison.autre = carte.dataset.b;
+    afficherComparaison();
+  }
+  if (e.target.id === "comp-tout") {
+    comparaison.auteur = comparaison.autre = "";
+    afficherComparaison();
+  }
+});
 
 window.addEventListener("hashchange", gererHash);
 

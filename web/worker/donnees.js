@@ -340,3 +340,88 @@ export async function lireOeuvre(env, { oeuvre, page, taille } = {}) {
   return { oeuvre: o, page: pg, taille: t, total, pages: Math.max(1, Math.ceil(total / t)),
            atomes: results };
 }
+
+/** COMPARAISON INTER-AUTEURS — ce qu'un auteur reprend d'un autre, et où il le lit.
+ *
+ *  Cette vue relie des graphes construits SÉPARÉMENT (chaque auteur a ses propres concepts) et
+ *  ne les fusionne jamais : un lien va d'un ATOME à un ATOME, et se déroule toujours jusqu'aux
+ *  deux passages entiers, affichés côte à côte. C'est la contrainte fondatrice de la couche —
+ *  un lien qu'on ne peut pas lire n'existe pas.
+ *
+ *  Aucun champ ne nomme la NATURE du rapport. Le corpus a mesuré ce piège : un signal construit
+ *  pour repérer les écarts d'un disciple avec Freud n'a rien confirmé sur cinq candidats — les
+ *  cinq étaient des renvois d'accord. La couche établit qu'un TEXTE est partagé ; l'interprétation
+ *  revient au lecteur, devant les deux passages.
+ */
+export async function comparaison(env, { auteur, autre, limite } = {}) {
+  const lim = Math.min(Math.max(Number(limite) || 30, 1), 100);
+
+  const matrice = await env.DB.prepare(
+    `SELECT a.nom AS auteur_a, b.nom AS auteur_b,
+            COUNT(*) AS paires,
+            COUNT(DISTINCT l.evenement) AS evenements,
+            SUM(CASE WHEN l.force = 'manifeste' THEN 1 ELSE 0 END) AS manifestes,
+            SUM(CASE WHEN l.sens IS NOT NULL THEN 1 ELSE 0 END) AS orientes,
+            SUM(l.source_tierce) AS source_tierce
+     FROM liens_reprise l
+     JOIN auteurs a ON a.id = l.auteur_a
+     JOIN auteurs b ON b.id = l.auteur_b
+     GROUP BY 1, 2 ORDER BY paires DESC`).all();
+
+  const filtres = [], params = [];
+  if (auteur) { filtres.push("(a.nom = ? OR b.nom = ?)"); params.push(auteur, auteur); }
+  if (autre) { filtres.push("(a.nom = ? OR b.nom = ?)"); params.push(autre, autre); }
+  const ou = filtres.length ? "WHERE " + filtres.join(" AND ") : "";
+
+  const liens = await env.DB.prepare(
+    `SELECT l.contenance, l.force, l.sens, l.source_tierce, l.a_verifier, l.partages,
+            l.evenement,
+            a.nom AS auteur_a, b.nom AS auteur_b,
+            xa.atome_id AS id_a, xa.texte AS texte_a, oa.titre AS oeuvre_a,
+            oa.annee_oeuvre AS annee_a, oa.qualite_source AS source_a, xa.ocr_suspect AS suspect_a,
+            xb.atome_id AS id_b, xb.texte AS texte_b, ob.titre AS oeuvre_b,
+            ob.annee_oeuvre AS annee_b, ob.qualite_source AS source_b, xb.ocr_suspect AS suspect_b
+     FROM liens_reprise l
+     JOIN auteurs a ON a.id = l.auteur_a
+     JOIN auteurs b ON b.id = l.auteur_b
+     JOIN atomes xa ON xa.id = l.atome_a
+     JOIN atomes xb ON xb.id = l.atome_b
+     JOIN oeuvres oa ON oa.id = xa.oeuvre_id
+     JOIN oeuvres ob ON ob.id = xb.oeuvre_id
+     ${ou}
+     ORDER BY l.contenance DESC, l.evenement LIMIT ?`).bind(...params, lim).all();
+
+  const lectures = await env.DB.prepare(
+    `SELECT a.nom AS auteur, b.nom AS auteur_lu, o.titre AS oeuvre, o.annee_oeuvre,
+            l.chapitre, l.portee_atomes, l.homographe
+     FROM lectures_declarees l
+     JOIN auteurs a ON a.id = l.auteur_id
+     JOIN auteurs b ON b.id = l.auteur_lu_id
+     JOIN oeuvres o ON o.id = l.oeuvre_id
+     ORDER BY l.portee_atomes DESC`).all();
+
+  const noms = await env.DB.prepare(
+    `SELECT a.nom AS auteur, b.nom AS auteur_nomme, n.atomes, n.homographe
+     FROM nominations n
+     JOIN auteurs a ON a.id = n.auteur_id
+     JOIN auteurs b ON b.id = n.auteur_nomme_id
+     ORDER BY n.atomes DESC`).all();
+
+  return {
+    matrice: matrice.results,
+    liens: liens.results,
+    lectures_declarees: lectures.results,
+    nominations: noms.results,
+    reserve:
+      "Un lien établit qu'un TEXTE est partagé, jamais qu'une THÈSE l'est. Le sens n'est donné "
+      + "que si les fenêtres de datation des deux passages sont disjointes — sinon il est "
+      + "INDÉCIDABLE, ce qui est une information sur ce que le corpus permet, pas une absence. "
+      + "Quand les deux passages nomment une source tierce (Sophocle, Shakespeare), aucun sens "
+      + "n'est donné : les deux auteurs peuvent tenir leur formulation d'elle plutôt que l'un de "
+      + "l'autre. Enfin, une PAIRE est deux phrases ; un ÉVÉNEMENT est une citation continue — "
+      + "c'est lui qui dit combien de fois un auteur en cite un autre.",
+    ne_pas_conclure:
+      "Nommer n'est ni suivre, ni approuver, ni contredire — et reprendre une formulation n'est "
+      + "pas partager une thèse. Aucun chiffre de cette page ne mesure un accord ni un désaccord.",
+  };
+}
