@@ -902,6 +902,60 @@ MOTIFS_FR = {
 }
 
 
+# ==================================================================== AIGUILLAGE PAR AUTEUR
+# Chaque auteur a SES catégories et se travaille séparément (voir `core/lexiques/__init__.py`
+# pour la règle et sa justification). Ce module reste le MOTEUR — segmentation des motifs,
+# multigroupe, statut le plus prudent — et ne contient plus qu'un seul jeu de données, celui de
+# Freud, laissé ici parce que sept audits l'ont documenté ligne à ligne à cet endroit.
+#
+# Les fonctions publiques prennent donc `auteur`. Sans argument, c'est Freud : le corpus a
+# commencé par lui, et l'immense majorité des appels existants le visent.
+_FREUD = "Sigmund Freud"
+
+
+class _TableFreud:
+    """Le lexique freudien, présenté comme un module d'auteur pour que l'aiguillage soit uniforme."""
+    LANGUE = "de"
+    CONCEPTS = CONCEPTS
+    FONCTIONS = FONCTIONS
+    NOMS_AUTEURS = NOMS_AUTEURS
+    MARQUEURS_STATUT = MARQUEURS_STATUT
+
+
+def pour_auteur(auteur):
+    """Table de l'auteur → module (ou équivalent). Un auteur sans lexique propre suit Freud.
+
+    Ce repli n'est pas une commodité : il concerne les CONTRIBUTIONS insérées dans un volume
+    freudien (l'appendice d'Otto Rank dans la Traumdeutung, les cas de Breuer dans les Studien).
+    Ces pages appartiennent au livre de Freud, on les décrit avec les catégories de ce livre, et
+    l'atome garde son vrai auteur pour qu'on puisse les isoler ensuite. Le jour où Rank est
+    traité POUR LUI-MÊME — ce qui est le cas depuis 2026-07 —, ce sont ses cinq œuvres propres
+    qui portent son lexique, pas les cent pages qu'il a écrites dans un livre de Freud.
+    """
+    from . import lexiques
+    return lexiques.PAR_AUTEUR.get(auteur, _TableFreud)
+
+
+_CACHE_TABLES = {}
+
+
+def _compilee(auteur):
+    """Motifs compilés de cet auteur, mémorisés (le corpus les demande une fois par atome)."""
+    if auteur not in _CACHE_TABLES:
+        t = pour_auteur(auteur)
+        _CACHE_TABLES[auteur] = {
+            "langue": t.LANGUE,
+            "concepts": {(g, c): [re.compile(r"\b" + m) for m in motifs]
+                         for g, meta in t.CONCEPTS.items()
+                         for c, motifs in meta["termes"].items()},
+            "fonctions": {f["id"]: [re.compile(m) for m in f["marqueurs"]] for f in t.FONCTIONS},
+            "fiabilite": {f["id"]: f.get("fiabilite", "etablie") for f in t.FONCTIONS},
+            "statuts": {k: [re.compile(m) for m in v] for k, v in t.MARQUEURS_STATUT.items()},
+            "noms": re.compile(r"\b(" + "|".join(t.NOMS_AUTEURS) + r")\b") if t.NOMS_AUTEURS else None,
+        }
+    return _CACHE_TABLES[auteur]
+
+
 def _compile(motifs):
     return [re.compile(m) for m in motifs]
 
@@ -920,61 +974,63 @@ _MOTIFS_FR_RE = {c: [re.compile(r"\b" + m) for m in mots] for c, mots in MOTIFS_
 FIABILITE = {f["id"]: f.get("fiabilite", "etablie") for f in FONCTIONS}
 
 
-def fonctions_de(texte, langue="de"):
+def fonctions_de(texte, auteur=_FREUD):
     """Fonctions argumentatives portées par la phrase (multigroupe, triées, jamais forcées)."""
     t = replier(texte)
-    table = _FONCTIONS_RE if langue == "de" else _FONCTIONS_RE_FR
-    auteurs = _AUTEURS_RE if langue == "de" else _AUTEURS_RE_FR
-    trouvees = {fid for fid, res in table.items() if any(r.search(t) for r in res)}
-    if auteurs.search(t):
+    tab = _compilee(auteur)
+    trouvees = {fid for fid, res in tab["fonctions"].items() if any(r.search(t) for r in res)}
+    # Nommer un auteur que celui-ci discute, c'est rapporter un propos extérieur. La fonction
+    # n'est ajoutée que si l'auteur la DÉCLARE : elle n'existe pas dans tous les lexiques.
+    if tab["noms"] and "rapport_tiers" in tab["fonctions"] and tab["noms"].search(t):
         trouvees.add("rapport_tiers")
     return sorted(trouvees)
 
 
-def fonctions_par_fiabilite(texte, langue="de"):
+def fonctions_par_fiabilite(texte, auteur=_FREUD):
     """Sépare l'ACQUIS du SIGNALÉ → (fonctions_etablies, signaux_a_confirmer).
 
     Rien de ce qui n'est pas prouvé ne rejoint les faits : les signaux rares et précieux
-    (révision, objection, auto-citation) forment une liste de travail à vérifier, exactement
-    comme les éléments « à vérifier » de l'audit de traçabilité AXA.
+    (révision, objection, auto-citation, et chez Rank l'écart déclaré avec Freud) forment une
+    liste de travail à vérifier, exactement comme les éléments « à vérifier » de l'audit AXA.
     """
-    toutes = fonctions_de(texte, langue)
-    etablies = [f for f in toutes if FIABILITE.get(f, "etablie") == "etablie"]
-    a_confirmer = [f for f in toutes if FIABILITE.get(f, "etablie") == "a_confirmer"]
+    fiab = _compilee(auteur)["fiabilite"]
+    toutes = fonctions_de(texte, auteur)
+    etablies = [f for f in toutes if fiab.get(f, "etablie") == "etablie"]
+    a_confirmer = [f for f in toutes if fiab.get(f, "etablie") == "a_confirmer"]
     return etablies, a_confirmer
 
 
-def statut_de(texte, langue="de"):
-    """Statut épistémique — LE PLUS PRUDENT gagne (jamais d'affirmation durcie)."""
+def statut_de(texte, auteur=_FREUD):
+    """Statut épistémique — LE PLUS PRUDENT gagne (jamais d'affirmation durcie).
+
+    Les quatre niveaux ne dépendent PAS de l'auteur : c'est une doctrine du projet, pas une
+    propriété d'un corpus. Seuls les marqueurs qui les repèrent lui appartiennent.
+    """
     t = replier(texte)
-    table = _STATUT_RE if langue == "de" else _STATUT_RE_FR
-    for niveau in ("interrogatif", "rapporte", "modalise"):     # ordre = du plus prudent au moins
-        if any(r.search(t) for r in table[niveau]):
+    tab = _compilee(auteur)["statuts"]
+    for niveau in ("interrogatif", "rapporte", "modalise"):     # du plus prudent au moins
+        if any(r.search(t) for r in tab.get(niveau, [])):
             return niveau
     return "affirme"
 
 
-def concepts_de(texte, auteur=None, langue="de"):
-    """Concepts psychanalytiques touchés → [{groupe, concept}], multigroupe, déterministe.
+def concepts_de(texte, auteur=_FREUD):
+    """Concepts touchés par la phrase → [{groupe, concept}], multigroupe, déterministe.
 
-    `auteur` restreint aux concepts pertinents pour lui : un concept marqué `auteurs: ["jung"]`
-    n'est pas cherché chez Freud, qui ne l'employait pas. Sans argument, tout est cherché — c'est
-    le comportement actuel, le lexique étant encore entièrement freudien.
-
-    `langue` choisit les MOTIFS, jamais les concepts : un texte français est cherché avec
-    MOTIFS_FR, sur les mêmes identifiants — c'est ce qui rend Le Bon et Freud comparables
-    concept par concept. Les particularités allemandes (ß, sous-concepts, cas « ich ») n'ont
-    pas d'équivalent français et ne s'appliquent qu'à l'allemand.
+    Les concepts cherchés sont CEUX DE L'AUTEUR, jamais ceux d'un autre : c'est la règle
+    fondatrice des lexiques séparés (voir `core/lexiques/__init__.py`). Un même nom de concept
+    peut exister chez deux auteurs sans désigner la même chose — `geburt` est chez Rank le
+    traumatisme d'origine, chez Freud un fait biologique parmi d'autres. Rien ici ne doit
+    encourager à les additionner.
     """
-    if langue != "de":
+    if auteur != _FREUD:
         t = replier(texte)
-        trouves = []
-        for groupe, meta in CONCEPTS.items():
-            for concept in meta["termes"]:
-                res = _MOTIFS_FR_RE.get(concept)
-                if res and any(r.search(t) for r in res):
-                    trouves.append({"groupe": groupe, "concept": concept})
-        return trouves
+        return [{"groupe": g, "concept": c}
+                for (g, c), res in _compilee(auteur)["concepts"].items()
+                if any(r.search(t) for r in res)]
+    # Chemin freudien : il porte des particularités qui n'existent que là — le ß conservé pour
+    # séparer « Masse » de « Maße », les sous-concepts du 3e niveau, et le cas « Ich » (voir
+    # _RE_ICH_MOI). Les mélanger au chemin générique le rendrait illisible pour rien.
     t = replier(texte)
     t_ss = replier_esszett(texte)      # variante où le ß subsiste (voir la convention « § »)
     trouves = []
@@ -1049,25 +1105,42 @@ def valider():
     for niveau in MARQUEURS_STATUT:
         if niveau not in STATUTS:
             erreurs.append("statut inconnu dans les marqueurs : %s" % niveau)
-    # Tables françaises : chaque clé doit renvoyer à un identifiant EXISTANT — une entrée
-    # orpheline serait un concept fantôme, mesuré nulle part mais cru mesuré.
-    tous_concepts = {c for meta in CONCEPTS.values() for c in meta["termes"]}
-    for concept in MOTIFS_FR:
-        if concept not in tous_concepts:
-            erreurs.append("MOTIFS_FR renvoie à un concept inconnu : %s" % concept)
-    for fid in MARQUEURS_FONCTIONS_FR:
-        if fid not in {f["id"] for f in FONCTIONS}:
-            erreurs.append("MARQUEURS_FONCTIONS_FR renvoie à une fonction inconnue : %s" % fid)
-    for niveau in MARQUEURS_STATUT_FR:
-        if niveau not in STATUTS:
-            erreurs.append("statut inconnu dans les marqueurs français : %s" % niveau)
-    for table in (MOTIFS_FR, MARQUEURS_FONCTIONS_FR, MARQUEURS_STATUT_FR):
-        for cle, motifs in table.items():
-            for m in motifs:
+    # LEXIQUES DES AUTRES AUTEURS — mêmes exigences, appliquées à chacun séparément. Un lexique
+    # d'auteur mal formé doit échouer aussi bruyamment que celui de Freud : c'est lui qui décide
+    # de tout ce qu'on lira de cet auteur.
+    from . import lexiques
+    for nom, module in sorted(lexiques.PAR_AUTEUR.items()):
+        if module.LANGUE not in ("de", "fr"):
+            erreurs.append("%s : langue inconnue %r" % (nom, module.LANGUE))
+        ids = [f["id"] for f in module.FONCTIONS]
+        if len(ids) != len(set(ids)):
+            erreurs.append("%s : identifiants de fonction dupliqués" % nom)
+        vus_c = set()
+        for groupe, meta in module.CONCEPTS.items():
+            if not meta.get("termes"):
+                erreurs.append("%s : groupe vide %s" % (nom, groupe))
+            for concept, motifs in meta["termes"].items():
+                if concept in vus_c:
+                    erreurs.append("%s : concept dupliqué %s" % (nom, concept))
+                vus_c.add(concept)
+                if not motifs:
+                    erreurs.append("%s : concept sans motif %s/%s" % (nom, groupe, concept))
+                for m in motifs:
+                    try:
+                        re.compile(m)
+                    except re.error as e:
+                        erreurs.append("%s : motif invalide (%s) %s — %s" % (nom, concept, m, e))
+        for f in module.FONCTIONS:
+            for m in f["marqueurs"]:
                 try:
                     re.compile(m)
                 except re.error as e:
-                    erreurs.append("motif français invalide (%s) : %s — %s" % (cle, m, e))
+                    erreurs.append("%s : motif de fonction invalide (%s) %s — %s"
+                                   % (nom, f["id"], m, e))
+        for niveau in module.MARQUEURS_STATUT:
+            if niveau not in STATUTS:
+                erreurs.append("%s : statut inconnu %s" % (nom, niveau))
     return {"ok": not erreurs, "erreurs": erreurs,
             "fonctions": len(FONCTIONS), "groupes": len(CONCEPTS),
-            "concepts": sum(len(m["termes"]) for m in CONCEPTS.values())}
+            "concepts": sum(len(m["termes"]) for m in CONCEPTS.values()),
+            "auteurs_avec_lexique_propre": sorted(lexiques.PAR_AUTEUR)}

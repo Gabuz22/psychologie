@@ -515,6 +515,51 @@ napoléonienne, l'alliance russe), où le « nous » est la société, pas l'aut
 registre vaut pour l'AUTEUR DE LA PHRASE, quel qu'il soit : établi pour Breuer, il s'applique
 tel quel à Le Bon.
 
+### 4.14 Otto Rank — le premier auteur traité pour lui-même (2026-07-28)
+
+**LA RÈGLE DU PROJET A ÉTÉ RENVERSÉE, et c'est une décision, pas un glissement.** Jusqu'ici le
+corpus posait un jeu de concepts COMMUN, au motif qu'on ne peut comparer deux auteurs qu'à travers
+la même grille. Désormais : **chaque auteur a ses catégories propres et se travaille séparément**,
+les rapprochements devenant une couche explicite, posée plus tard, avec des forces de liaison
+déclarées.
+
+Le coût de l'ancienne règle est apparu dès qu'on a voulu décrire Rank. Son motif central —
+l'enfant exposé, sauvé des eaux, qui revient tuer son père — n'a **aucune case** chez Freud :
+mesuré avec le lexique freudien, il n'existait tout simplement pas. Or c'est le sujet d'un de ses
+livres.
+
+**Ce que le corpus mesure de Rank, avant toute lecture.** La comparaison des fréquences avec
+Freud donne sa signature en trois traits : la constellation familiale écrase tout (*Sohn* ×20,6,
+*Gattin* ×46,2, *Stiefmutter* ×20,2), le mythe occupe la place que le rêve occupe chez Freud
+(*Überlieferung* ×54, *Sage* ×11, *Mythus* ×7,4), et la création littéraire est un objet de plein
+droit (*Drama* ×26,2, *dichterisch* ×20,2). D'où neuf groupes qui n'existent nulle part ailleurs :
+`parente` (12 190 liens à elle seule), `mythe`, `creation`, `naissance`, `interdit`, `passions`,
+`mecanismes`, `decor_mythique`, `cure`.
+
+**La preuve par Le Bon.** Le passage au lexique par auteur a été mesuré sur un cas déjà intégré :
+Le Bon était qualifié à **57 %** avec des identifiants freudiens francisés, il l'est à **75 %**
+avec ses propres catégories — sans qu'une ligne du moteur ait changé. Ce n'était pas un lexique à
+étoffer, c'était la grille d'un autre qui ne pouvait pas le voir.
+
+**Le corpus accepte pour la première fois des sources NON RELUES.** Aucune œuvre de Rank n'a été
+transcrite par des humains : le choix n'était plus « OCR ou mieux » mais « OCR ou rien ».
+`core/ocr.py` mesure, répare et marque (voir le README pour les chiffres). Deux volumes ont été
+**écartés** sur cette mesure — dont *Der Doppelgänger*, où 7,1 % des phrases sont corrompues par
+un défaut que le premier contrôle ne voyait pas et qui n'a été trouvé **qu'en lisant le texte**.
+Leçon déjà connue, à nouveau vérifiée : *un contrôle ne prouve que ce qu'il mesure.*
+
+**Les 28 signaux, lus un par un.** Objections : 13 confirmées, 5 rejetées — dont deux cas d'école
+où Rank s'objecte à lui-même (« hat sogleich bei mir selbst einige Einwendungen wachgerufen ») et
+anticipe celles de son propre camp (« ein Einwand von psychoanalytischer Seite selbst ») : c'est
+là que la rupture de 1924 s'annonce en clair. Révisions : **0 confirmée sur 5** — les cinq
+candidats corrigent Goethe, Jung, ou une leçon de texte, jamais une position antérieure de Rank.
+
+**Un résultat négatif qu'il faut dire.** Le signal `ecart_freud`, écrit exprès pour ce lexique, a
+donné **0 confirmé sur 5** : les cinq passages sont des renvois d'ACCORD, y compris dans le livre
+de la rupture. La divergence de Rank est dans la **thèse**, pas dans une formule de désaveu —
+aucun marqueur lexical ne l'attrapera. Mieux vaut l'écrire que de faire dire au corpus ce qu'il
+ne montre pas.
+
 ---
 
 ## 5. Signal de validation

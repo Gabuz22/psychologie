@@ -30,7 +30,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from core import agents, lexique, sources, verification     # noqa: E402
+from core import agents, lexique, ocr, sources, verification   # noqa: E402
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -185,7 +185,13 @@ CREATE TABLE oeuvres (
   url TEXT,
   datation_regle TEXT NOT NULL,
   datation_precise INTEGER NOT NULL,
-  collationnee INTEGER NOT NULL
+  collationnee INTEGER NOT NULL,
+  -- « relu » = transcription relue par des humains (Gutenberg, Wikisource).
+  -- « ocr »  = fac-similé océrisé, NON relu : les cinq volumes d'Otto Rank, faute de toute
+  --            transcription existante. La réserve voyage avec l'œuvre pour que le lecteur la
+  --            voie sur chaque citation, comme la règle de datation.
+  qualite_source TEXT NOT NULL DEFAULT 'relu',
+  ocr_phrases_corrompues_pct REAL
 );
 CREATE TABLE atomes (
   id INTEGER PRIMARY KEY,
@@ -205,13 +211,22 @@ CREATE TABLE atomes (
   couche TEXT,
   annee_min INTEGER NOT NULL,
   annee_max INTEGER NOT NULL,
-  datation_regle TEXT NOT NULL
+  datation_regle TEXT NOT NULL,
+  -- Cette phrase-ci porte une trace de corruption OCR (« sih » pour « sich », « nidit » pour
+  -- « nicht »). Elle reste consultable : le lecteur sait seulement qu'il doit la vérifier sur le
+  -- fac-similé avant de la publier. Marquer vaut mieux que retirer, et infiniment mieux que taire.
+  ocr_suspect INTEGER NOT NULL DEFAULT 0
 );
+-- UN CONCEPT APPARTIENT À UN AUTEUR. L'unicité porte sur le couple (nom, auteur) et non sur le
+-- nom seul : deux auteurs peuvent employer le même mot pour deux choses différentes, et le
+-- corpus doit pouvoir les tenir côte à côte sans jamais les additionner.
 CREATE TABLE concepts (
   id INTEGER PRIMARY KEY,
-  nom TEXT NOT NULL UNIQUE,
+  nom TEXT NOT NULL,
   groupe TEXT NOT NULL,
-  n_atomes INTEGER NOT NULL DEFAULT 0
+  auteur_id INTEGER NOT NULL REFERENCES auteurs(id),
+  n_atomes INTEGER NOT NULL DEFAULT 0,
+  UNIQUE (nom, auteur_id)
 );
 CREATE TABLE atome_concepts (
   atome_id INTEGER NOT NULL REFERENCES atomes(id),
@@ -286,23 +301,41 @@ def construire(chemin_sqlite):
         src = sources.OEUVRES[cle]
         d = sources.datation(src)
         collationnee = any(a["attestation"].get("couche") for a in corpus.par_oeuvre(cle))
+        ocrise = src.get("provenance") == "archive"
+        corruption = (ocr.corruption(sources.charger(cle)["texte"])["taux_phrases_pct"]
+                      if ocrise else None)
         cur = db.execute(
             "INSERT INTO oeuvres (cle, titre, titre_fr, langue, auteur_id, annee_oeuvre,"
             " annee_edition, edition, editeur, source, url, datation_regle, datation_precise,"
-            " collationnee) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            " collationnee, qualite_source, ocr_phrases_corrompues_pct)"
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (cle, src["titre"], src.get("titre_fr"), src.get("langue", "de"),
              # L'auteur du VOLUME vient du registre — plus forcément Freud depuis Le Bon.
              ids_auteur[src.get("auteur", "Sigmund Freud")],
              src["annee_oeuvre"], src["annee_edition"], src.get("edition"), src.get("editeur"),
-             src.get("source"), src.get("url"), d["regle"], int(d["precise"]), int(collationnee)))
+             src.get("source"), src.get("url"), d["regle"], int(d["precise"]), int(collationnee),
+             "ocr" if ocrise else "relu", corruption))
         ids_oeuvre[cle] = cur.lastrowid
 
-    # ---- concepts (référentiel complet du lexique, même à zéro atome)
+    # ---- concepts : UN RÉFÉRENTIEL PAR AUTEUR, jamais un référentiel commun.
+    # La clé est le COUPLE (auteur, concept), et c'est essentiel : deux auteurs peuvent porter un
+    # concept de même nom sans désigner la même chose. `geburt` est chez Rank le traumatisme
+    # d'origine de toute angoisse ; le mot n'a pas ce statut chez Freud. Les confondre dans une
+    # seule ligne ferait additionner deux notions distinctes à la première requête venue.
+    # On n'enregistre le référentiel que des auteurs qui SIGNENT UN VOLUME. Un contributeur
+    # (Breuer dans les « Studien », Rank dans la « Traumdeutung ») voit ses pages décrites avec
+    # les catégories du livre qui les contient : lui créer un référentiel propre produirait 171
+    # concepts orphelins, à zéro atome, que rien ne viendrait jamais remplir.
     ids_concept = {}
-    for groupe, meta in lexique.CONCEPTS.items():
-        for nom in meta["termes"]:
-            cur = db.execute("INSERT INTO concepts (nom, groupe) VALUES (?,?)", (nom, groupe))
-            ids_concept[nom] = cur.lastrowid
+    for nom_auteur in sorted({m.get("auteur", "Sigmund Freud") for m in sources.OEUVRES.values()}):
+        table = lexique.pour_auteur(nom_auteur)
+        for groupe, meta in table.CONCEPTS.items():
+            for nom in meta["termes"]:
+                if (nom_auteur, nom) in ids_concept:
+                    continue
+                cur = db.execute("INSERT INTO concepts (nom, groupe, auteur_id) VALUES (?,?,?)",
+                                 (nom, groupe, ids_auteur[nom_auteur]))
+                ids_concept[(nom_auteur, nom)] = cur.lastrowid
 
     # ---- atomes et jointures
     table_verdicts = verification.charger()["verdicts"]
@@ -312,20 +345,24 @@ def construire(chemin_sqlite):
         cur = db.execute(
             "INSERT INTO atomes (atome_id, empreinte, oeuvre_id, auteur_id, idx, texte,"
             " texte_replie, debut, fin, nb_mots, chapitre, statut, non_qualifie, couche,"
-            " annee_min, annee_max, datation_regle) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            " annee_min, annee_max, datation_regle, ocr_suspect)"
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (a["id"], a["empreinte"], ids_oeuvre[a["oeuvre"]],
              ids_auteur[a.get("auteur", "Sigmund Freud")], a["index"], a["texte"],
              replier(a["texte"]), a["debut"], a["fin"], a["nb_mots"],
              ("%s. %s" % (ch["numero"], ch["titre"])) if ch else None,
              a["statut"], int(a["non_qualifie"]), a["attestation"].get("couche"),
-             amin, amax, a["attestation"]["regle"]))
+             amin, amax, a["attestation"]["regle"], int(a.get("ocr_suspect", False))))
         aid = cur.lastrowid
+        # Les concepts d'un atome sont ceux du lexique de l'AUTEUR DU VOLUME — le même que celui
+        # avec lequel l'atomisation les a trouvés (voir atomisation._atomiser). Une contribution
+        # insérée dans le livre d'un autre garde donc les catégories de ce livre.
+        auteur_lexique = sources.OEUVRES[a["oeuvre"]].get("auteur", "Sigmund Freud")
         for c in a["concepts"]:
-            db.execute("INSERT OR IGNORE INTO atome_concepts VALUES (?,?)",
-                       (aid, ids_concept[c["concept"]]))
+            cid = ids_concept[(auteur_lexique, c["concept"])]
+            db.execute("INSERT OR IGNORE INTO atome_concepts VALUES (?,?)", (aid, cid))
             for sc in c.get("sous_concepts", []):
-                db.execute("INSERT INTO atome_sous_concepts VALUES (?,?,?)",
-                           (aid, ids_concept[c["concept"]], sc))
+                db.execute("INSERT INTO atome_sous_concepts VALUES (?,?,?)", (aid, cid, sc))
         for f in a["fonctions"]:
             db.execute("INSERT INTO fonctions VALUES (?,?)", (aid, f))
         for s in a["signaux_a_confirmer"]:
@@ -338,6 +375,11 @@ def construire(chemin_sqlite):
                " (SELECT COUNT(*) FROM atome_concepts ac WHERE ac.concept_id = concepts.id)")
 
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
+    # Elles sont calculées sur les atomes de SIGMUND FREUD seul, et le resteront tant que la
+    # couche de comparaison inter-auteurs n'existe pas. Ce n'est pas un oubli : une partition
+    # calculée sur deux lexiques distincts mêlerait des concepts qui ne se répondent pas, et le
+    # résultat n'aurait aucun sens interprétable. Chaque auteur aura ses propres courants le jour
+    # où on les calculera séparément — c'est le travail suivant, explicitement déclaré.
     r = agents.AGENTS["courants"].executer(corpus)
     editorial = nommer_grappes(r["grappes"])      # échoue bruyamment si l'appariement a glissé
     for rang, g in enumerate(r["grappes"], 1):
@@ -349,7 +391,7 @@ def construire(chemin_sqlite):
             (rang, nom, description, reserve, g["taille"], g["atomes_concernes"], citation_id))
         for nom_c in g["concepts"]:
             db.execute("INSERT INTO grappe_concepts VALUES (?,?)",
-                       (cur.lastrowid, ids_concept[nom_c]))
+                       (cur.lastrowid, ids_concept[("Sigmund Freud", nom_c)]))
 
     # ---- méta
     resume = corpus.resume()

@@ -23,7 +23,7 @@ Invariants (tenus par les tests) :
 import hashlib
 import re
 
-from . import lexique, sources
+from . import lexique, ocr, sources
 from .segmentation import segmenter
 
 ATOMISATION_VERSION = "1.0.0"
@@ -204,6 +204,9 @@ def _atomiser(cle_oeuvre):
     charge = sources.charger(cle_oeuvre)
     texte, meta = charge["texte"], charge["meta"]
     langue = meta.get("langue", "de")
+    # Une source OCRisée n'a pas la même fiabilité qu'une transcription relue : chaque phrase
+    # sera examinée pour d'éventuelles traces de corruption (voir `ocr_suspect` plus bas).
+    ocrise = meta.get("provenance") == "archive"
     phrases = segmenter(texte, langue)
     reperes = chapitres(texte, langue)
     regions = contributions(texte, meta, reperes)
@@ -215,8 +218,13 @@ def _atomiser(cle_oeuvre):
 
     atomes = []
     for p in phrases:
-        fonctions, a_confirmer = lexique.fonctions_par_fiabilite(p["texte"], langue)
-        concepts = lexique.concepts_de(p["texte"], langue=langue)
+        # Les catégories sont celles de l'auteur du VOLUME. Une contribution insérée dans un
+        # livre d'autrui (Rank dans la Traumdeutung, Breuer dans les Studien) reste décrite avec
+        # les catégories de ce livre : ces pages appartiennent à cet ouvrage-là. L'atome garde
+        # son auteur réel, ce qui permet de les isoler ensuite si on le souhaite.
+        auteur_lexique = meta["auteur"]
+        fonctions, a_confirmer = lexique.fonctions_par_fiabilite(p["texte"], auteur_lexique)
+        concepts = lexique.concepts_de(p["texte"], auteur_lexique)
         atomes.append({
             "id": "%s:a%d" % (cle_oeuvre, p["index"]),
             # Clé STABLE, insensible à la position : c'est elle qui porte les jugements de
@@ -236,13 +244,18 @@ def _atomiser(cle_oeuvre):
             # Signaux repérés mais NON ÉTABLIS (révision, objection, auto-citation) : ils forment
             # la liste de travail à vérifier, jamais des faits acquis. Voir lexique.FIABILITE.
             "signaux_a_confirmer": a_confirmer,
-            "statut": lexique.statut_de(p["texte"], langue),
+            "statut": lexique.statut_de(p["texte"], auteur_lexique),
             "concepts": concepts,
             "emphase": _emphases(p["texte"]),
             # Aucune catégorie reconnue : on l'AFFICHE au lieu de combler (doctrine AXA).
             "non_qualifie": not fonctions and not a_confirmer and not concepts,
             # Datation par phrase quand la collation a pu conclure ; sinon la réserve d'œuvre.
             "attestation": couches.get(empreinte(p["texte"]), attestation),
+            # Cette phrase vient-elle d'un fac-similé ET porte-t-elle une trace de corruption
+            # OCR ? On ne la retire pas et on ne la corrige pas : on la MARQUE, pour qu'une
+            # citation qui en sort soit vérifiée sur le fac-similé avant d'être publiée.
+            # Même doctrine que les signaux « à confirmer » : ce qui n'est pas sûr est affiché.
+            "ocr_suspect": ocrise and ocr.phrase_suspecte(p["texte"]),
         })
 
     return {

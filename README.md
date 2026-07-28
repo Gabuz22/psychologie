@@ -4,10 +4,32 @@ Transformer l'œuvre des fondateurs de la psychologie en **données exploitables
 autrement ce qu'ils ont écrit : suivre un concept d'un bout à l'autre d'un livre, distinguer ce
 qui est affirmé de ce qui est supposé, repérer où un auteur se corrige, comparer des œuvres.
 
-Premier chantier : **Freud**, dans le **texte allemand original** (23 œuvres). Second auteur
-depuis 2026-07 : **Gustave Le Bon**, *Psychologie des foules* (1895), en **français original** —
-le livre que Freud discute pendant tout un chapitre de *Massenpsychologie und Ich-Analyse* (1921).
-Le corpus tient ainsi les **deux côtés d'une controverse réelle**, chacun dans sa langue.
+Premier chantier : **Freud**, dans le **texte allemand original** (23 œuvres). Puis **Gustave
+Le Bon**, *Psychologie des foules* (1895), en français — le livre que Freud discute pendant tout
+un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis le 28 juillet 2026 : **Otto Rank**
+(5 œuvres, 1909-1928), premier auteur traité **pour lui-même**, avec ses propres catégories.
+
+---
+
+## Un lexique par auteur
+
+**Chaque auteur a ses catégories propres et se travaille séparément.** Les rapprochements entre
+auteurs — socles partagés, divergences, approfondissements, contradictions — feront l'objet d'une
+couche **explicite** posée par-dessus des graphes construits séparément, avec des forces de
+liaison déclarées. Ils ne doivent jamais être un effet de bord du lexique.
+
+Cette règle **renverse** celle qui prévalait au début du projet (un jeu de concepts commun, au
+motif qu'on ne peut comparer qu'à travers la même grille). L'objection était réelle, mais son coût
+est apparu à l'usage : mesurer Rank avec le vocabulaire de Freud, c'est ne voir de Rank que ce qui
+ressemble à Freud. Son motif central — **l'enfant exposé, sauvé des eaux, qui revient tuer son
+père** — n'a aucune case chez Freud et serait purement invisible.
+
+Conséquence à ne jamais perdre de vue : **deux auteurs peuvent porter un concept de même nom sans
+désigner la même chose.** `geburt` est chez Rank le traumatisme fondateur de toute angoisse ; le
+mot n'a pas ce statut chez Freud. La base les tient dans des lignes distinctes (`concepts.auteur_id`),
+et rien ne doit les additionner.
+
+Le code est dans [`core/lexiques/`](core/lexiques/) — un module par auteur.
 
 ---
 
@@ -66,11 +88,50 @@ ailleurs et sous licence libre, où elles sont légalement disponibles et relues
 | *Eine Teufelsneurose im siebzehnten Jahrhundert* ★ | 1923 | 1. Auflage (Imago, Bd. IX), 1923 | [Wikisource DE](https://de.wikisource.org/wiki/Eine_Teufelsneurose_im_siebzehnten_Jahrhundert) |
 | *Neue Folge der Vorlesungen zur Einführung in die Psychoanalyse* ★ | 1933 | 1. Auflage, 1933 | [Wikisource DE](https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einführung_in_die_Psychoanalyse) |
 
-**Second auteur — Gustave Le Bon** (texte français, `sources/lebon/fr/`) :
+**Gustave Le Bon** (texte français, `sources/lebon/fr/`) :
 
 | Œuvre | Original | Édition lue | Source |
 |---|---|---|---|
 | *Psychologie des foules* ★ | 1895 | 1re édition, Félix Alcan, Paris, 1895 | [#24007](https://www.gutenberg.org/ebooks/24007) (scans BnF/Gallica) |
+
+**Otto Rank** (texte allemand, `sources/rank/de/`) — **toutes en premières éditions**, situation
+plus favorable que pour Freud, dont la plupart des textes sont lus dans une édition tardive :
+
+| Œuvre | Original | Édition lue | Source |
+|---|---|---|---|
+| *Der Mythus von der Geburt des Helden* ★ | 1909 | 1. Auflage (Schriften zur angewandten Seelenkunde, V) | [archive.org](https://archive.org/details/SzaS_5_Rank_1909_Mythus_von_der_Geburt_des_Helden) |
+| *Die Lohengrinsage* ★ | 1911 | 1. Auflage (id., XIII) | [archive.org](https://archive.org/details/SzaS_13_Rank_1911_Die_Lohengrinsage) |
+| *Das Inzest-Motiv in Dichtung und Sage* ★ | 1912 | 1. Auflage | [archive.org](https://archive.org/details/dasinzestmotivin00rank) |
+| *Das Trauma der Geburt* ★ | 1924 | 1. Auflage | [archive.org](https://archive.org/details/DasTraumaDerGeburtUndSeineBedeutungFrDiePsychoanalyse) |
+| *Grundzüge einer Genetischen Psychologie, II* ★ | 1928 | 1. Auflage | [archive.org](https://archive.org/details/Rank_1928_Genetische_Psychologie_II_k) |
+
+### Les œuvres de Rank sont des FAC-SIMILÉS OCRISÉS, non relus
+
+Le projet avait d'abord **refusé** l'OCR : pour Freud, Gutenberg offrait une transcription relue
+par des humains, et prendre un scan aurait dégradé le texte sans contrepartie. Le refus portait sur
+un **arbitrage**, pas sur l'OCR en soi. Pour Rank — comme pour Abraham, Ferenczi, Stekel — aucune
+transcription relue n'existe, ni sur Gutenberg ni sur Wikisource. Le choix réel est **« OCR ou
+rien »**, et renoncer laisserait le corpus définitivement monopolaire.
+
+La doctrine ne bouge pas : **une limite se mesure et s'affiche.** [`core/ocr.py`](core/ocr.py)
+mesure la qualité de chaque scan dans les mêmes unités que les textes relus, répare les défauts
+déterministes, et **marque** ce qui reste douteux.
+
+| Mesure | Textes relus (étalon) | Rank après traitement |
+|---|---|---|
+| caractères parasites | 0,45 – 1,23 ‰ | 0,10 – 1,35 ‰ |
+| césures non résolues | 0 – 4 | 0 – 17 (toutes des élisions légitimes, « Kunst- und ») |
+| phrases corrompues | — | 0,0 – 1,1 % |
+
+**Deux volumes ont été ÉCARTÉS** sur cette mesure, et le dépôt garde leur chiffre
+(`sources.FAC_SIMILES_ECARTES`) : *Die Don Juan-Gestalt* (1924) — le « ch » lu « di », 30 des 92
+*nicht* écrits *nidit* — et *Der Doppelgänger* (1925) — le « ch » réduit à « h », **7,1 % des
+phrases atteintes**, soit un atome sur quatorze. Ce second défaut était invisible au premier
+contrôle, écrit pour le premier : il n'a été trouvé **qu'en lisant le texte**.
+
+Les 47 atomes où une trace de corruption subsiste portent un marqueur `ocr_suspect`, visible sur
+le site et dans l'API. Ils restent consultables — le lecteur sait seulement qu'il doit vérifier la
+citation sur le fac-similé avant de la publier.
 
 Le choix n'est pas décoratif : 1895 est aussi l'année des *Studien über Hysterie*, et les
 mécanismes que Le Bon prête à la foule — *contagion*, *prestige*, *imitation* — ont chacun leur
@@ -123,12 +184,23 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**23 413 atomes** sur vingt-quatre œuvres et deux langues, **tous** localisables dans la source,
-produits sans aucun modèle de langage : le pipeline est **entièrement déterministe** (même texte
-→ mêmes atomes). 78 % sont qualifiés (80 % côté allemand ; 57 % pour Le Bon — le lexique
-français est jeune, et l'écart est **affiché** plutôt que comblé) ; **19 œuvres sur 24 ont une
-datation certaine** rien qu'à l'échelle de l'œuvre — quatre autres le sont phrase par phrase
-grâce à la collation (§ ci-dessous).
+**37 977 atomes** sur vingt-neuf œuvres, trois auteurs et deux langues, **tous** localisables dans
+la source, produits sans aucun modèle de langage : le pipeline est **entièrement déterministe**
+(même texte → mêmes atomes). **24 œuvres sur 29 ont une datation certaine** à l'échelle de
+l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
+
+| Auteur | Atomes | Qualifiés |
+|---|---|---|
+| Sigmund Freud | 20 708 | 80 % |
+| Otto Rank | 14 898 | 76 % |
+| Gustave Le Bon | 1 485 | 75 % |
+| Josef Breuer (dans les *Studien*) | 886 | 80 % |
+
+**Le passage au lexique par auteur s'est mesuré.** Le Bon était qualifié à **57 %** tant qu'on le
+décrivait avec des identifiants freudiens francisés ; il l'est à **75 %** depuis qu'il a ses
+propres catégories (`foule`, `meneur`, `contagion`, `âme`, `révolution`…), sans qu'une seule
+ligne du moteur ait changé. Ce n'était donc pas un lexique « jeune » qu'il fallait étoffer :
+c'était la grille d'un autre auteur qui ne pouvait pas le voir.
 
 Le corpus a maigri en gagnant une œuvre : ~73 000 signes de **paratexte d'éditeur** ont été
 retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 du seul

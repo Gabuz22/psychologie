@@ -229,25 +229,42 @@ class TestLexique(unittest.TestCase):
         self.assertNotIn("ich", {x["concept"] for x in c})
 
     def test_concept_reserve_a_un_auteur(self):
-        """Un concept propre à un auteur ne doit pas être cherché chez les autres.
+        """Un concept propre à un auteur n'est JAMAIS cherché chez un autre.
 
-        Le projet vise à comparer les courants : cela n'a de sens que si l'on ne compte pas chez
-        Freud un mot qu'il n'employait pas. Éprouvé ici sur un concept ajouté puis retiré, pour ne
-        pas dépendre de l'état du lexique.
+        C'est la garantie centrale des lexiques séparés (voir `core/lexiques/__init__.py`) : on
+        ne compte pas chez Freud un mot qu'il n'employait pas, et on ne décrit pas Rank avec la
+        grille de Freud. Le test l'éprouve sur `aussetzung`, l'exposition du héros — le motif
+        signature de Rank, qui n'a aucune case dans l'ontologie freudienne.
         """
-        groupe = lexique.CONCEPTS["topique"]["termes"]
-        groupe["archetyp_test"] = {"motifs": ["archetyp"], "auteurs": ["jung"]}
-        try:
-            phrase = "Der Archetypus wirkt im Unbewußten."
-            chez_jung = {x["concept"] for x in lexique.concepts_de(phrase, "jung")}
-            chez_freud = {x["concept"] for x in lexique.concepts_de(phrase, "freud")}
-            self.assertIn("archetyp_test", chez_jung)
-            self.assertNotIn("archetyp_test", chez_freud)
-            # …et le concept commun reste vu chez les deux.
-            self.assertIn("unbewusst", chez_jung)
-            self.assertIn("unbewusst", chez_freud)
-        finally:
-            del groupe["archetyp_test"]
+        phrase = "Der ausgesetzte Knabe wird aus dem Wasser gerettet."
+        chez_rank = {x["concept"] for x in lexique.concepts_de(phrase, "Otto Rank")}
+        chez_freud = {x["concept"] for x in lexique.concepts_de(phrase, "Sigmund Freud")}
+        self.assertIn("aussetzung", chez_rank)
+        self.assertNotIn("aussetzung", chez_freud)
+
+    def test_meme_nom_deux_auteurs_deux_choses(self):
+        """Deux auteurs peuvent porter un concept de même nom sans désigner la même chose.
+
+        `geburt` est chez Rank le traumatisme d'origine de toute angoisse (122 occurrences de
+        « Geburtstrauma » à lui seul) ; le mot n'a pas ce statut chez Freud. Le test vérifie que
+        les deux lexiques restent des objets DISTINCTS, pour qu'aucun code ne soit tenté de les
+        additionner au seul motif qu'ils s'écrivent pareil.
+        """
+        from core import lexiques
+        rank = lexiques.PAR_AUTEUR["Otto Rank"].CONCEPTS
+        groupes_rank = {g for g, meta in rank.items() if "geburt" in meta["termes"]}
+        self.assertEqual(groupes_rank, {"naissance"})
+        # Chez Freud, aucun groupe ne porte ce concept : il n'a jamais été thématisé comme tel.
+        groupes_freud = {g for g, meta in lexique.CONCEPTS.items() if "geburt" in meta["termes"]}
+        self.assertEqual(groupes_freud, set())
+
+    # RETIRÉ (2026-07-28) — « test_ancien_mecanisme_concept_reserve ».
+    # Il éprouvait le champ `auteurs` d'un concept, qui permettait de réserver un terme à un
+    # auteur À L'INTÉRIEUR du lexique freudien. Ce mécanisme est SUPERSÉDÉ : chaque auteur a
+    # désormais son propre lexique, ce qui garantit la même chose par construction et non par
+    # convention. Vérifié avant de retirer : plus aucun concept du corpus ne l'utilisait.
+    # Entretenir deux dispositifs concurrents pour un même but rend seulement incertain celui
+    # qui fait foi. La garantie est maintenant portée par `test_concept_reserve_a_un_auteur`.
 
     def test_domaines_de_l_audit_2026_07(self):
         """Les 5 œuvres à fort non-qualifié ont révélé des domaines entiers hors ontologie.

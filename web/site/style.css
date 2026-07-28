@@ -79,6 +79,9 @@ button.secondaire { background: transparent; color: var(--accent);
 }
 .badge { display: inline-block; font-size: .75rem; padding: .05rem .5rem; margin-left: .4rem;
          border-radius: 99px; border: 1px solid var(--filet); color: var(--gris); }
+/* Réserve à ne pas manquer : la phrase porte une trace de corruption OCR. Elle reste lisible et
+   citable, mais doit être vérifiée sur le fac-similé — d'où un contraste plus marqué. */
+.badge.alerte { border-color: var(--accent); color: var(--accent); }
 
 /* grappes */
 .cartes { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));

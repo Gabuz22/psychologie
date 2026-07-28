@@ -42,47 +42,50 @@ class TestSegmentationFrancaise(unittest.TestCase):
             self.assertEqual(src[x["debut"]:x["fin"]], x["texte"])
 
 
+LE_BON = "Gustave Le Bon"
+
+
 class TestLexiqueFrancais(unittest.TestCase):
+    """Le Bon a SES concepts, sous SES noms — pas des identifiants freudiens francisés."""
 
     def test_concepts_de_la_controverse(self):
         trouves = {c["concept"] for c in lexique.concepts_de(
-            "La foule obéit au meneur par contagion, imitation et prestige.", langue="fr")}
-        self.assertTrue({"masse", "fuehrer", "ansteckung", "nachahmung", "prestige"} <= trouves)
+            "La foule obéit au meneur par contagion, imitation et prestige.", LE_BON)}
+        self.assertTrue({"foule", "meneur", "contagion", "imitation", "prestige"} <= trouves)
 
-    def test_identifiants_neutres_partages(self):
-        """Le MÊME identifiant est trouvé en allemand et en français — c'est ce qui rend
-        Le Bon et Freud comparables concept par concept."""
-        de = {c["concept"] for c in lexique.concepts_de("Die Masse ist der Suggestion unterworfen.")}
-        fr = {c["concept"] for c in lexique.concepts_de("La foule est soumise à la suggestion.",
-                                                        langue="fr")}
-        self.assertIn("suggestion", de & fr)
-        self.assertIn("masse", fr)
+    def test_concepts_homonymes_mais_distincts(self):
+        """Le Bon écrit « inconscient » dès 1895, dans un tout autre sens que Freud : un fonds
+        héréditaire de race, non un refoulé. Les lexiques restent séparés, sinon la seule chose
+        qu'une comparaison mesurerait serait l'homonymie."""
+        fr = {c["concept"] for c in lexique.concepts_de("L'inconscient des foules domine.", LE_BON)}
+        de = {c["concept"] for c in lexique.concepts_de("Das Unbewußte ist verdrängt.")}
+        self.assertIn("inconscient", fr)      # nom français, chez Le Bon
+        self.assertIn("unbewusst", de)        # nom allemand, chez Freud
+        self.assertNotIn("unbewusst", fr)     # aucun identifiant emprunté à l'autre
 
     def test_inconscient_et_conscience_separes(self):
         """« conscien » nu prendrait aussi « inconscient » : les deux concepts doivent rester
         distincts, sinon toute mesure de l'inconscient chez Le Bon serait doublée."""
-        seul_inconscient = {c["concept"] for c in lexique.concepts_de(
-            "L'inconscient domine.", langue="fr")}
-        self.assertIn("unbewusst", seul_inconscient)
-        self.assertNotIn("bewusstsein", seul_inconscient)
+        seul = {c["concept"] for c in lexique.concepts_de("L'inconscient domine.", LE_BON)}
+        self.assertIn("inconscient", seul)
+        self.assertNotIn("conscient", seul)
 
     def test_statut_francais(self):
-        self.assertEqual(lexique.statut_de("La foule a-t-elle peut-être raison ?", langue="fr"),
+        self.assertEqual(lexique.statut_de("La foule a-t-elle peut-être raison ?", LE_BON),
                          "interrogatif")     # le plus prudent gagne sur « peut-être »
-        self.assertEqual(lexique.statut_de("La foule est sans doute crédule.", langue="fr"),
-                         "modalise")
-        self.assertEqual(lexique.statut_de("D'après Taine, la foule détruisit tout.", langue="fr"),
+        self.assertEqual(lexique.statut_de("La foule est sans doute crédule.", LE_BON), "modalise")
+        self.assertEqual(lexique.statut_de("D'après Taine, la foule détruisit tout.", LE_BON),
                          "rapporte")
-        self.assertEqual(lexique.statut_de("La foule est crédule.", langue="fr"), "affirme")
+        self.assertEqual(lexique.statut_de("La foule est crédule.", LE_BON), "affirme")
 
     def test_faux_amis_ecartes(self):
         """« la cité » n'est pas une citation, « se rapporte à » n'est pas un rapport."""
-        self.assertEqual(lexique.statut_de("Ces faits se rapportent à la cité antique.",
-                                           langue="fr"), "affirme")
+        self.assertEqual(lexique.statut_de("Ces faits se rapportent à la cité antique.", LE_BON),
+                         "affirme")
 
     def test_fonctions_francaises(self):
         etablies, a_confirmer = lexique.fonctions_par_fiabilite(
-            "On objectera sans doute que les foules ne raisonnent pas.", langue="fr")
+            "On objectera sans doute que les foules ne raisonnent pas.", LE_BON)
         self.assertIn("hypothese", etablies)
         self.assertIn("objection", a_confirmer)       # signal, jamais un fait acquis
 

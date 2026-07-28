@@ -36,7 +36,8 @@ const CHAMPS_CITATION = `
   a.atome_id AS id, a.texte, a.chapitre, a.debut, a.fin, a.nb_mots, a.statut,
   a.couche, a.annee_min, a.annee_max, a.datation_regle AS datation,
   au.nom AS auteur, o.titre AS oeuvre, o.titre_fr AS oeuvre_fr, o.cle AS oeuvre_cle,
-  o.langue AS langue, o.edition AS edition_lue, o.annee_edition, o.annee_oeuvre`;
+  o.langue AS langue, o.edition AS edition_lue, o.annee_edition, o.annee_oeuvre,
+  o.qualite_source, a.ocr_suspect`;
 
 const DE_CITATION = `
   FROM atomes a
@@ -142,11 +143,16 @@ export async function referentiel(env) {
   const [auteurs, oeuvres, concepts, grappes, meta] = await Promise.all([
     env.DB.prepare("SELECT nom, naissance, mort, courant FROM auteurs ORDER BY nom").all(),
     env.DB.prepare(`SELECT o.cle, o.titre, o.titre_fr, o.langue, au.nom AS auteur,
-                    o.annee_oeuvre, o.annee_edition, o.edition, o.datation_precise, o.collationnee
+                    o.annee_oeuvre, o.annee_edition, o.edition, o.datation_precise,
+                    o.collationnee, o.qualite_source, o.ocr_phrases_corrompues_pct
                     FROM oeuvres o JOIN auteurs au ON au.id = o.auteur_id
-                    ORDER BY o.annee_oeuvre`).all(),
-    env.DB.prepare(`SELECT nom, groupe, n_atomes FROM concepts
-                    WHERE n_atomes > 0 ORDER BY groupe, n_atomes DESC`).all(),
+                    ORDER BY au.nom, o.annee_oeuvre`).all(),
+    // Les concepts appartiennent à UN AUTEUR : deux auteurs peuvent employer le même mot pour
+    // deux choses différentes, et l'interface doit permettre de les distinguer.
+    env.DB.prepare(`SELECT c.nom, c.groupe, c.n_atomes, au.nom AS auteur
+                    FROM concepts c JOIN auteurs au ON au.id = c.auteur_id
+                    WHERE c.n_atomes > 0
+                    ORDER BY au.nom, c.groupe, c.n_atomes DESC`).all(),
     env.DB.prepare("SELECT rang, nom, taille, atomes_concernes FROM grappes ORDER BY rang").all(),
     env.DB.prepare("SELECT cle, valeur FROM meta").all(),
   ]);

@@ -92,6 +92,33 @@ PARATEXTE_FINAL = {
     # L'édition de 1895 clôt le volume par sa table analytique (libellés + numéros de page) :
     # du paratexte de navigation, pas du texte de Le Bon.
     "psychologie_des_foules": "TABLE DES MATIÈRES",
+    # Otto Rank — catalogues d'éditeur, bibliographies et, pour l'Inzest-Motiv, la fiche de prêt
+    # de la bibliothèque de l'Université de Colombie-Britannique, scannée avec le volume.
+    "mythus_geburt_helden": "Verlag von Franz Deuticke",
+    "lohengrinsage": "Literaturverzeichnis",
+    # Espaces SIMPLES : le traitement OCR normalise les blancs avant cette coupe.
+    "inzest_motiv": "University of British Columbia",
+    # Le volume se clôt sur « Geschrieben im April 1923 », puis la liste des livres de Rank.
+    "trauma_der_geburt": "Von Dr. Otto Rank erschienen früher:",
+    # L'en-tête du catalogue est ici cassé par l'OCR — « Franz Den ticke » —, ce qui a fait
+    # échouer la borne évidente. On prend donc la forme RÉELLEMENT présente dans ce scan.
+    "genetische_psychologie_2": "Verlag von Franz Den ticke",
+}
+
+# FAC-SIMILÉS ÉCARTÉS APRÈS MESURE — deux volumes de Rank existent en ligne mais ne sont PAS
+# citables. Leur OCR confond le digramme « ch » de la typographie ancienne, et le défaut est
+# invisible au comptage de caractères parasites : les formes produites n'utilisent que des
+# lettres ordinaires. Seule la mesure de `core/ocr.py:corruption()` les distingue.
+# Trace obligatoire : une décision négative non écrite sera refaite, et le prochain qui trouvera
+# ces scans les croira utilisables.
+FAC_SIMILES_ECARTES = {
+    "DieDonJuan-gestalt": (
+        "Die Don Juan-Gestalt (1924) — « ch » lu « di » : 30 des 92 « nicht » écrits « nidit », "
+        "184 séquences impossibles, 32,6 % des mots témoins corrompus. Inutilisable pour citer."),
+    "Rank_1925_Doppelgaenger_k": (
+        "Der Doppelgänger (1925, texte de 1914) — « ch » réduit à « h » : « sih », « auh », "
+        "« natürlih ». 7,1 % des PHRASES atteintes, soit un atome sur quatorze. Sous le seuil "
+        "du premier contrôle (écrit pour « di »), ce défaut n'a été trouvé qu'en LISANT le texte."),
 }
 
 # Registre des œuvres. `annee_edition` = ce qu'on LIT ; `annee_oeuvre` = première parution.
@@ -402,6 +429,105 @@ OEUVRES = {
         "source": "Project Gutenberg #29101 (relu par Distributed Proofreaders)",
         "url": "https://www.gutenberg.org/ebooks/29101",
     },
+    # ------------------------------------------------------------------- OTTO RANK (1884-1939)
+    # Premier auteur traité POUR LUI-MÊME, avec ses propres catégories (voir core/lexiques/).
+    # Le corpus le connaissait déjà par fragment : l'appendice de la 4e édition de la
+    # Traumdeutung, 334 atomes — un cas de calibrage idéal, on avait un échantillon de sa plume
+    # avant d'avoir son œuvre.
+    #
+    # PROVENANCE « archive » : ce sont des FAC-SIMILÉS OCRISÉS, non relus par des humains. Le
+    # corpus avait refusé l'OCR pour Freud, et il avait raison de le faire : Gutenberg offrait
+    # une transcription relue, l'OCR n'aurait été qu'une dégradation gratuite. Pour Rank, aucune
+    # transcription relue n'existe — ni Gutenberg, ni Wikisource. L'arbitrage n'est donc plus
+    # « OCR ou mieux » mais « OCR ou rien », et renoncer laisserait le corpus définitivement
+    # monopolaire, contre le but même du projet. La qualité est MESURÉE œuvre par œuvre
+    # (`core/ocr.py`), les défauts sont recollés quand c'est déterministe, et chaque phrase
+    # encore suspecte est MARQUÉE individuellement. Voir FAC_SIMILES_ECARTES : deux volumes ont
+    # été refusés sur ces mesures.
+    "mythus_geburt_helden": {
+        "fichier": "1909_mythus_geburt_helden.ia.txt",
+        "dossier": ("rank", "de"),
+        "provenance": "archive",
+        "auteur": "Otto Rank",
+        "titre": "Der Mythus von der Geburt des Helden",
+        "titre_fr": "Le mythe de la naissance du héros",
+        "annee_oeuvre": 1909,
+        "annee_edition": 1909,     # 1re édition — datation exacte
+        "edition": "1. Auflage (Schriften zur angewandten Seelenkunde, V. Heft)",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/SzaS_5_Rank_1909_Mythus_von_der_Geburt_des_Helden",
+        # Même série et même éditeur que la « Gradiva » de Freud (Heft 1), déjà au corpus.
+        "debut_corps": "Vorbemerkung.",
+    },
+    "lohengrinsage": {
+        "fichier": "1911_lohengrinsage.ia.txt",
+        "dossier": ("rank", "de"),
+        "provenance": "archive",
+        "auteur": "Otto Rank",
+        "titre": "Die Lohengrinsage",
+        "titre_fr": "La légende de Lohengrin",
+        "annee_oeuvre": 1911,
+        "annee_edition": 1911,     # 1re édition — datation exacte
+        "edition": "1. Auflage (Schriften zur angewandten Seelenkunde, XIII. Heft)",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/SzaS_13_Rank_1911_Die_Lohengrinsage",
+        # Borne prise sur la PREMIÈRE PHRASE et non sur le titre « Einführung » : ce mot
+        # reparaît trois fois dans le corps du texte, et la borne y tombait en pleine phrase.
+        "debut_corps": "Die Sage von Lohengrin, dem Ritter mit dem Schwane",
+    },
+    "inzest_motiv": {
+        "fichier": "1912_inzest_motiv.ia.txt",
+        "dossier": ("rank", "de"),
+        "provenance": "archive",
+        "auteur": "Otto Rank",
+        "titre": "Das Inzest-Motiv in Dichtung und Sage",
+        "titre_fr": "Le motif de l'inceste dans la poésie et la légende",
+        "annee_oeuvre": 1912,
+        "annee_edition": 1912,     # 1re édition — datation exacte
+        "edition": "1. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/dasinzestmotivin00rank",
+        # 2,3 Mo : de loin le plus gros volume du corpus, toutes plumes confondues.
+        "debut_corps": "Vorwort.",
+    },
+    "trauma_der_geburt": {
+        "fichier": "1924_trauma_der_geburt.ia.txt",
+        "dossier": ("rank", "de"),
+        "provenance": "archive",
+        "auteur": "Otto Rank",
+        "titre": "Das Trauma der Geburt und seine Bedeutung für die Psychoanalyse",
+        "titre_fr": "Le traumatisme de la naissance",
+        "annee_oeuvre": 1924,
+        "annee_edition": 1924,     # 1re édition — datation exacte
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/DasTraumaDerGeburtUndSeineBedeutungFrDiePsychoanalyse",
+        # LE livre de la rupture avec Freud : Rank y place l'angoisse de la naissance là où
+        # Freud met le complexe d'Œdipe. Sa présence au corpus rend la divergence mesurable.
+        # « Vorbemerkung » apparaît d'abord dans la TABLE DES MATIÈRES : la borne y tombait,
+        # et le premier atome du livre était une ligne de points de conduite.
+        "debut_corps": "Die nachstehenden Ausführungen bedeuten einen ersten Versuch",
+    },
+    "genetische_psychologie_2": {
+        "fichier": "1928_genetische_psychologie_2.ia.txt",
+        "dossier": ("rank", "de"),
+        "provenance": "archive",
+        "auteur": "Otto Rank",
+        "titre": "Grundzüge einer Genetischen Psychologie, II. Teil",
+        "titre_fr": "Principes d'une psychologie génétique, IIe partie",
+        "annee_oeuvre": 1928,
+        "annee_edition": 1928,     # 1re édition — datation exacte
+        "edition": "1. Auflage (Genetische Psychologie, II. Teil)",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/Rank_1928_Genetische_Psychologie_II_k",
+        # Même piège que pour le Trauma : « Einleitung. » ouvre la table des matières.
+        "debut_corps": "Die Psychoanalyse hat im",
+    },
     # ---------------------------------------------------------------- SECOND AUTEUR : GUSTAVE LE BON
     # Premier texte NON allemand du corpus — et pas un choix de circonstance : Freud consacre un
     # chapitre entier de « Massenpsychologie und Ich-Analyse » (1921) à discuter ce livre. Le
@@ -460,9 +586,18 @@ def charger(cle):
     with open(chemin, encoding="utf-8") as f:
         brut = f.read()
     texte, bornage = _extraire_corps(brut, meta.get("provenance", "gutenberg"),
-                                     meta.get("langue", "de"))
+                                     meta.get("langue", "de"), meta)
     texte, note_fin = _retirer_paratexte_final(texte, cle)
     bornage += " ; " + note_fin
+    # Le rognage aux extrémités vient EN DERNIER pour les fac-similés : entre la fin du texte et
+    # le catalogue de l'éditeur s'intercalent des pages de garde numérisées, qui ne deviennent
+    # les dernières lignes du volume qu'une fois le catalogue retiré. Rogner avant les aurait
+    # laissées en place, et le dernier atome du « Mythus » aurait été « Pen er y ww bo: ji ».
+    if meta.get("provenance") == "archive":
+        from . import ocr
+        texte, r_rogne = ocr.rogner_aux_extremites(texte, _vocabulaire_relu())
+        bornage += " ; rognage final : %d lignes en tête, %d en queue" % (
+            r_rogne["rogne_tete"], r_rogne["rogne_queue"])
     meta.update({
         "cle": cle,
         "langue": meta.get("langue", "de"),
@@ -478,12 +613,78 @@ def charger(cle):
     return {"texte": texte, "meta": meta}
 
 
-def _extraire_corps(brut, provenance="gutenberg", langue="de"):
+def _vocabulaire_relu():
+    """Vocabulaire allemand tiré des seules sources RELUES PAR DES HUMAINS.
+
+    Sert de référence au recollage des césures d'un fac-similé. Y verser un texte OCR
+    reviendrait à faire valider les erreurs de l'OCR par elles-mêmes — d'où le filtre strict
+    sur la provenance, et le calcul mémorisé (il coûte le chargement de tout le corpus).
+    """
+    global _VOCABULAIRE_RELU
+    if _VOCABULAIRE_RELU is None:
+        from . import ocr
+        textes = []
+        for cle, m in OEUVRES.items():
+            if m.get("langue", "de") == "de" and m.get("provenance", "gutenberg") != "archive":
+                textes.append(charger(cle)["texte"])
+        _VOCABULAIRE_RELU = ocr.vocabulaire_de_reference(textes)
+    return _VOCABULAIRE_RELU
+
+
+_VOCABULAIRE_RELU = None
+
+
+def _extraire_corps_archive(brut, meta):
+    """Corps utile d'un FAC-SIMILÉ OCRisé → (texte, rapport chiffré).
+
+    Trois opérations, dans cet ordre, toutes déterministes :
+      1. couper les liminaires — couvertures, gardes en papier marbré, pages de titre en
+         caractères ornés. C'est là que l'OCR produit son charabia (« Okto Rank », « S
+         Prohesekrteke Stuclie ») ; le corps, lui, est propre. La borne est DÉCLARÉE par œuvre
+         (`debut_corps`), jamais devinée ;
+      2. recoller les césures de fin de ligne, que les relecteurs humains résolvent et que
+         l'OCR laisse ouvertes — 305 à 5 125 par volume, contre 0 à 4 dans un texte relu ;
+      3. mesurer ce qui reste, et le DIRE. Le rapport voyage avec l'œuvre.
+    """
+    from . import ocr
+    faits = []
+    borne = meta.get("debut_corps")
+    if borne:
+        i = brut.find(borne)
+        if i < 0:
+            faits.append("borne de début « %s » INTROUVABLE — texte pris entier, À VÉRIFIER"
+                         % borne[:30])
+        elif i > 0.30 * len(brut):
+            faits.append("borne de début trouvée trop tard (%d %%) — non appliquée, À VÉRIFIER"
+                         % round(100 * i / len(brut)))
+        else:
+            faits.append("liminaires du fac-similé retirés (%d signes)" % i)
+            brut = brut[i:]
+    voc = _vocabulaire_relu()
+    corps, rapport = ocr.recoller_cesures(brut, voc)
+    faits.append("césures recollées : %d attestées + %d par règle d'orthographe, %d laissées "
+                 "(élisions « Kunst- und »)" % (rapport["cesures_recollees_attestees"],
+                                                rapport["cesures_recollees_par_regle"],
+                                                rapport["cesures_laissees"]))
+    corps, r_blocs = ocr.retirer_blocs_illisibles(corps, voc)
+    faits.append("pages de garde numérisées retirées : %d lignes sur %d (%.1f %%)"
+                 % (r_blocs["lignes_retirees"], r_blocs["lignes_totales"], r_blocs["part_pct"]))
+    # Certains scans sortent le texte en colonnes justifiées, d'où des suites d'espaces au milieu
+    # des phrases (« Die  nachstehende  Arbeit  lag »). Aucun mot n'est touché — seule la largeur
+    # des blancs change —, mais sans cela chaque citation de l'Inzest-Motiv sortirait ainsi.
+    corps = re.sub(r"[ \t]{2,}", " ", corps)
+    faits.append("espaces multiples du scan normalisés")
+    return corps.strip(), "fac-similé OCRisé NON RELU — " + " ; ".join(faits)
+
+
+def _extraire_corps(brut, provenance="gutenberg", langue="de", meta=None):
     """Retire l'en-tête/licence Gutenberg PUIS le paratexte du transcripteur.
 
     Si une borne manque, on le DIT dans le rapport plutôt que de laisser croire à un texte propre :
     un corpus silencieusement pollué est pire qu'un corpus dont on connaît le défaut.
     """
+    if provenance == "archive":
+        return _extraire_corps_archive(brut, meta or {})
     if provenance != "gutenberg":
         corps, note = _nettoyer_wikisource(brut)
         corps, note_lim = _retirer_liminaires_wikisource(corps)

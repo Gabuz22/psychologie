@@ -4,7 +4,7 @@
   "objet": "Verdicts humains/LLM sur les signaux que le lexique ne peut que SIGNALER (révision, objection, auto-citation). Un marqueur lexical dit où regarder ; seule une lecture en contexte tranche.",
   "protocole": "Chaque candidat est lu avec son contexte immédiat. Verdict « confirme » seulement si l'énoncé est une prise de position de FREUD sur SON PROPRE travail antérieur — ni un personnage de fiction, ni un patient, ni un autre auteur, ni une correction d'imprimerie.",
   "verifie_par": "Claude (Opus 4.8), lecture en contexte, 2026-07-26",
-  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un. Extension du corpus (2026-07-26) : 9 nouveaux candidats sur les 8 œuvres ajoutées (Leonardo, Moses, Dichter und Phantasieren, Zeitgemäßes über Krieg und Tod absent de candidats, Traum und Telepathie, Kindheitserinnerung aus Dichtung und Wahrheit) — lus et jugés un par un, même protocole. Normalisation des blancs (2026-07-26) : 22 signaux supplémentaires devenus visibles (leurs marqueurs étaient coupés par des retours à la ligne) — lus et jugés un par un : 7 confirmés (dont DEUX révisions doctrinales majeures, Traumdeutung sur le « Nein » du rêve et Zeitgemäßes sur l'Urmensch), 15 rejetés. Entrée au corpus de « Das Motiv der Kästchenwahl » (1913) et « Einige Charaktertypen aus der psychoanalytischen Arbeit » (1916) : 4 candidats supplémentaires, lus et jugés — 3 confirmés (la chaîne d'objections que Freud s'adresse sur son analyse de Rebekka West dans « Rosmersholm »), 1 rejeté (une objection prononcée par Kroll, personnage d'Ibsen). Entrée au corpus de « Studien über Hysterie » (1895, avec Josef Breuer) : 15 candidats supplémentaires lus et jugés — 3 confirmés, 12 rejetés. Deux portaient sur des passages de BREUER : un verdict s'applique à qui a écrit la phrase, pas au signataire du volume. Entrée au corpus de « Psychologie des foules » (Le Bon, 1895, PREMIER TEXTE FRANÇAIS) : 17 candidats « auto_citation » détectés par les marqueurs français, lus et jugés un par un — 15 confirmés (Le Bon récapitule constamment ses thèses, et renvoie deux fois nommément à un autre de ses ouvrages), 2 rejetés (« nous avons vu » d'événements contemporains : la légende napoléonienne, l'alliance russe — le « nous » y est la société, pas l'auteur). Le protocole vaut pour l'AUTEUR DE LA PHRASE, quel qu'il soit : ici Le Bon, comme il valait pour Breuer.",
+  "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un. Extension du corpus (2026-07-26) : 9 nouveaux candidats sur les 8 œuvres ajoutées (Leonardo, Moses, Dichter und Phantasieren, Zeitgemäßes über Krieg und Tod absent de candidats, Traum und Telepathie, Kindheitserinnerung aus Dichtung und Wahrheit) — lus et jugés un par un, même protocole. Normalisation des blancs (2026-07-26) : 22 signaux supplémentaires devenus visibles (leurs marqueurs étaient coupés par des retours à la ligne) — lus et jugés un par un : 7 confirmés (dont DEUX révisions doctrinales majeures, Traumdeutung sur le « Nein » du rêve et Zeitgemäßes sur l'Urmensch), 15 rejetés. Entrée au corpus de « Das Motiv der Kästchenwahl » (1913) et « Einige Charaktertypen aus der psychoanalytischen Arbeit » (1916) : 4 candidats supplémentaires, lus et jugés — 3 confirmés (la chaîne d'objections que Freud s'adresse sur son analyse de Rebekka West dans « Rosmersholm »), 1 rejeté (une objection prononcée par Kroll, personnage d'Ibsen). Entrée au corpus de « Studien über Hysterie » (1895, avec Josef Breuer) : 15 candidats supplémentaires lus et jugés — 3 confirmés, 12 rejetés. Deux portaient sur des passages de BREUER : un verdict s'applique à qui a écrit la phrase, pas au signataire du volume. Entrée au corpus de « Psychologie des foules » (Le Bon, 1895, PREMIER TEXTE FRANÇAIS) : 17 candidats « auto_citation » détectés par les marqueurs français, lus et jugés un par un — 15 confirmés (Le Bon récapitule constamment ses thèses, et renvoie deux fois nommément à un autre de ses ouvrages), 2 rejetés (« nous avons vu » d'événements contemporains : la légende napoléonienne, l'alliance russe — le « nous » y est la société, pas l'auteur). Le protocole vaut pour l'AUTEUR DE LA PHRASE, quel qu'il soit : ici Le Bon, comme il valait pour Breuer. Entree au corpus d'OTTO RANK (2026-07-28, 5 oeuvres, 14 564 atomes, PREMIER AUTEUR DOTE DE SON PROPRE LEXIQUE) : 28 candidats lus et juges un par un. Objections : 13 confirmees, 5 rejetees — dont deux cas d'ecole ou Rank s'objecte a lui-meme (« hat sogleich bei mir selbst einige Einwendungen wachgerufen ») et anticipe celles de son propre camp (« ein Einwand von psychoanalytischer Seite selbst »), passages ou s'annonce la rupture de 1924. Revisions : 0 confirmee sur 5 — les cinq candidats corrigent quelqu'un d'AUTRE (Goethe, Jung, une personne observee) ou une lecon de texte, jamais une position anterieure de Rank ; c'est un resultat sur son style, non un echec du marqueur. Signal « ecart_freud », propre a ce lexique : 0 confirme sur 5, les cinq RECLASSES en renvois d'accord — Rank cite Freud pour s'appuyer sur lui, y compris dans le livre de la rupture. Sa divergence est dans la THESE, non dans une formule de desaveu : aucun marqueur lexical ne l'attrapera, et il faut le dire plutot que de faire dire au corpus ce qu'il ne montre pas. Un faux positif corrige a la source : « dorische EINWANDERUNG » (la migration dorienne) etait compte comme objection — meme homonymie que « einwandern » chez Freud, dont l'exclusion ne couvrait que le verbe.",
   "verdicts_possibles": {
    "confirme": "signal réel — l'atome dit ce que le marqueur laissait espérer",
    "rejete": "faux positif — le marqueur a été déclenché par autre chose",
@@ -1574,6 +1574,179 @@
    "verdict": "confirme",
    "motif": "« J'ai montré que les hommes en foule tendent vers l'égalisation mentale » — première personne, thèse sienne, rappelée comme preuve accumulée.",
    "ancien_id": "psychologie_des_foules:a1264"
+  },
+  "964439edf0e421ce": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les objections sont celles que LESSMANN s'adresse a lui-meme, rapportees par Rank (« trotz der Einwendungen, die Lessmann selbst gegen ... vorbringt »). Objection d'un tiers, non mise en scene par l'auteur.",
+   "ancien_id": "mythus_geburt_helden:a64"
+  },
+  "0b9557b3dda109d0": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Vor allem aber wird man ... die Lohengrinsage ueberhaupt von einer derartigen Betrachtung ausschliessen wollen » : Rank formule l'objection que son lecteur va lui faire (la legende serait historique et non mythique) avant d'y repondre.",
+   "ancien_id": "lohengrinsage:a313"
+  },
+  "7d779741add5302d": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Recit historique : les objections d'Adolf Stahr adressees a WAGNER. Rien de l'argumentation de Rank.",
+   "ancien_id": "lohengrinsage:a1571"
+  },
+  "3c06e86ac787959a": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Derartige Einwendungen durch Polemik erledigen zu wollen, waere ebenso abgeschmackt als unwirksam » : Rank prend position sur la maniere de traiter les objections faites a son travail.",
+   "ancien_id": "inzest_motiv:a232"
+  },
+  "ea4ea3c0f24df9c4": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Der naive Einwand, dass der Dichter eben nur solche Stoffe brauchen koenne ... faellt in sich selbst zusammen » : objection mise en scene puis refutee. ATOME FORTEMENT CORROMPU par l'OCR (« njiivo », « psychoki<i^iscli ») : le signal est reel, la citation exacte ne l'est pas.",
+   "ancien_id": "inzest_motiv:a237"
+  },
+  "73da5a6cc5fafe08": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Ein zweiter, scheinbar berechtigterer Einwand wird sich erheben gegen unsere Auffassung » : objection anticipee contre SA these, annoncee comme la seconde d'une serie.",
+   "ancien_id": "inzest_motiv:a244"
+  },
+  "fbd248381a5e3689": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Abweisung von Einwaenden. » : intitule de section — Rank consacre un developpement entier a refuter les objections. Le signal porte sur un TITRE, non sur une phrase argumentee.",
+   "ancien_id": "inzest_motiv:a247"
+  },
+  "6f3daab180889757": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Die Einwendung, dass ... der aesthetische Genuss an der Dichtung verloren gehe, ist vielleicht bis zu einem gewissen Grade berechtigt » : objection a sa methode, que Rank accueille en partie. Concession, donc particulierement informative.",
+   "ancien_id": "inzest_motiv:a264"
+  },
+  "fdf1d4059fcd6a37": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Der Einwand aber, dass er dies alles in den Quellen vorgefunden ... habe, besteht eigentlich noch zu recht » : Rank reconnait qu'une objection a sa methode TIENT TOUJOURS et s'engage a y repondre.",
+   "ancien_id": "inzest_motiv:a1422"
+  },
+  "aeb24b2d1ab38186": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Die Einwendung, dass es sich dabei nicht um eine ... originelle Schoepfung Schillers handle » : objection contre son interpretation de Schiller.",
+   "ancien_id": "inzest_motiv:a1876"
+  },
+  "17450c07bf0daee1": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Dem prinzipiell wichtig scheinenden Einwand, dass ... Cassius und Antonius historisch ueberlieferte Personen seien ... ist mit dem Hinweis zu begegnen » : objection posee puis refutee dans la meme phrase.",
+   "ancien_id": "inzest_motiv:a2718"
+  },
+  "e7afc5eb9c31d406": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Wir koennen es hier weder als Einwand gelten lassen, dass wir willkuerlich vom Stoff auf die ... Komplexe schliessen » : Rank ecarte deux objections de methode adressees a son procede.",
+   "ancien_id": "inzest_motiv:a2827"
+  },
+  "8646f7c73c5e7124": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« Hier verdient die Einwendung Lope de Vegas widerlegt zu werden » : objection d'un tiers (Lope de Vega sur l'Oedipe de Sophocle), mais REPRISE et refutee par Rank — c'est bien une contre-objection mise en scene.",
+   "ancien_id": "inzest_motiv:a3015"
+  },
+  "8c4414d0b3685781": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Les objections visent FREUD, et c'est Freud qui y repond (« pflegte Freud diesen unverstaendigen Einwendungen entgegenzuhalten »). Rank rapporte l'histoire du mouvement.",
+   "ancien_id": "trauma_der_geburt:a18"
+  },
+  "0fe518cbd9020838": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "CAS D'ECOLE : « Dieser Schluss ... hat sogleich bei mir selbst einige Einwendungen wachgerufen, die ich nur andeuten moechte » — Rank s'objecte A LUI-MEME, explicitement, sur la these centrale du livre (l'analyse comme liquidation apres coup du traumatisme de la naissance).",
+   "ancien_id": "trauma_der_geburt:a39"
+  },
+  "0573e0ba8277c46a": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« An dieser Stelle wird sich voraussichtlich ein Einwand von psychoanalytischer Seite selbst erheben, den wir aber um so leichter zu erledigen hoffen » : Rank anticipe l'objection de SON PROPRE CAMP. Passage precieux — la rupture de 1924 s'y annonce en clair.",
+   "ancien_id": "trauma_der_geburt:a121"
+  },
+  "08beabb55411c542": {
+   "signal": "objection",
+   "verdict": "confirme",
+   "motif": "« so muessen wir darauf gefasst sein, verschiedenen Einwendungen zu begegnen, die uns vor allem gerade die sogenannte Realitaet ... entgegenhalten werden » : objections anticipees contre la « realite du fantasme intra-uterin ».",
+   "ancien_id": "trauma_der_geburt:a510"
+  },
+  "737a7f05d94594e0": {
+   "signal": "ecart_freud",
+   "verdict": "reclasse",
+   "vers": "savoir_etabli",
+   "motif": "Note de bas de page : « Siehe dazu Ferenczis Zitat der Freudschen Auffassung eines autoplastischen Stadiums ». Renvoi bibliographique, aucune position prise.",
+   "ancien_id": "trauma_der_geburt:a1338"
+  },
+  "9a2f54f151cd0383": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "« doch stellten sich einige irrtuemliche Auffassungen heraus » : ce sont les idees fausses d'une PERSONNE OBSERVEE, non une position anterieure de Rank.",
+   "ancien_id": "lohengrinsage:a241"
+  },
+  "426e4e4efbbf73f4": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "Citation de GOETHE (« von der ich mein ganzes Leben ueber nicht abweichen konnte »). L'aveu est de Goethe, rapporte par Rank.",
+   "ancien_id": "inzest_motiv:a240"
+  },
+  "fa0aafb1522e6c0e": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "« oder wie wir auf Grund unserer Deutung korrigieren duerfen, den Vater » : Rank corrige la LECON DU RECIT (beau-pere -> pere) au nom de son interpretation, non une these sienne anterieure.",
+   "ancien_id": "inzest_motiv:a643"
+  },
+  "f1b3bab2e8614b3e": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "Meme citation de Goethe qu'en a240, reprise plus loin dans le volume. Meme verdict.",
+   "ancien_id": "inzest_motiv:a6726"
+  },
+  "8ff0e720cf947104": {
+   "signal": "revision",
+   "verdict": "rejete",
+   "motif": "« das von Jung irrtuemlich fuer das Wesentliche gehaltene ... » : c'est JUNG qui s'est trompe. Correction d'un tiers, jamais de soi.",
+   "ancien_id": "trauma_der_geburt:a161"
+  },
+  "9637d26d801586e1": {
+   "signal": "ecart_freud",
+   "verdict": "reclasse",
+   "motif": "« wie es Freud in der Traumdeutung geschildert hat », suivi d'une citation : Rank S'APPUIE sur Freud, il ne s'en ecarte pas. Reclasse en renvoi d'accord.",
+   "ancien_id": "inzest_motiv:a322",
+   "vers": "savoir_etabli"
+  },
+  "98a00ace4106b71f": {
+   "signal": "ecart_freud",
+   "verdict": "reclasse",
+   "motif": "« das zweite daraus folgende Merkmal der Freudschen Auffassung ist die den Inzestregungen eingeraeumte entscheidende Bedeutung » : expose fidele de la position de Freud, sans distance prise.",
+   "ancien_id": "inzest_motiv:a432",
+   "vers": "savoir_etabli"
+  },
+  "0d86e2c48423c6ac": {
+   "signal": "ecart_freud",
+   "verdict": "reclasse",
+   "motif": "« Wie nach der Freudschen Auffassung die Hysterie der kuenstlerischen Produktion ... nahestehen, so die Psychosen dem mythologischen Weltbild » : Rank PROLONGE le schema de Freud en y ajoutant son propre terme. Extension, non divergence.",
+   "ancien_id": "trauma_der_geburt:a431",
+   "vers": "savoir_etabli"
+  },
+  "a2a6308653709f33": {
+   "signal": "ecart_freud",
+   "verdict": "reclasse",
+   "motif": "« die wir MIT Freud als Endresultat ... » : accord explicite. Le marqueur n'a vu que la proximite des mots « Freud » et « Auffassung ».",
+   "ancien_id": "trauma_der_geburt:a832",
+   "vers": "savoir_etabli"
+  },
+  "ea9a9531d223535b": {
+   "signal": "objection",
+   "verdict": "rejete",
+   "motif": "Citation de NIETZSCHE (Crepuscule des idoles) : « Aber Haesslichkeit, an sich ein Einwand, ist unter Griechen beinahe eine Widerlegung ». Aphorisme cite, non objection de Rank.",
+   "ancien_id": "trauma_der_geburt:a1120"
   }
  }
 }

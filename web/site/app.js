@@ -54,11 +54,20 @@ function rendreCitation(c) {
   const couche = c.couche ? `<span class="badge">${
     { origine: "texte d'origine", ajout: "ajout d'édition", indecis: "non collationnable" }[c.couche]
   }</span>` : "";
+  // La provenance du TEXTE est aussi importante que sa datation : un fac-similé océrisé n'a pas
+  // été relu par des humains. On le dit sur chaque citation, et on signale à part les phrases où
+  // une trace de corruption a été repérée — celles-là sont à vérifier avant d'être publiées.
+  const source = c.qualite_source === "ocr"
+    ? `<span class="badge" title="Fac-similé océrisé, non relu par des humains. La citation doit être vérifiée sur le scan avant publication.">fac-similé OCR</span>`
+    : "";
+  const suspect = c.ocr_suspect
+    ? `<span class="badge alerte" title="Une trace de corruption OCR a été repérée dans cette phrase (confusion du digramme « ch »). À vérifier sur le fac-similé.">⚠ OCR douteux</span>`
+    : "";
   div.innerHTML = `
     <blockquote lang="${c.langue || "de"}">${texteCourt(c.texte)}</blockquote>
     <p class="refs"><b>${c.auteur}</b> — <i>${c.oeuvre}</i>${
       c.oeuvre_fr && c.oeuvre_fr !== c.oeuvre ? ` (${c.oeuvre_fr})` : ""}${chapitre}
-      · ${STATUTS[c.statut] || c.statut}${couche}
+      · ${STATUTS[c.statut] || c.statut}${couche}${source}${suspect}
       · <span title="position dans le texte source">car. ${c.debut}–${c.fin}</span>
       <button type="button" class="citer">citer</button></p>
     <span class="datation">${c.datation}</span>`;
@@ -465,7 +474,8 @@ async function demarrer() {
     referentiel = await api("/api/referentiel");
     const m = referentiel.meta;
     $("#stats").textContent =
-      `${Number(m.atomes).toLocaleString("fr")} atomes · ${m.oeuvres} œuvres (1895-1933) · ` +
+      `${Number(m.atomes).toLocaleString("fr")} atomes · ${m.oeuvres} œuvres, ` +
+      `${(referentiel.auteurs || []).length} auteurs (1895-1933) · ` +
       `${Number(m.qualifies).toLocaleString("fr")} qualifiés · corpus du ${m.genere_le}`;
     $("#pied").textContent = m.licence;
 

@@ -14,20 +14,26 @@ import { z } from "zod";
 import * as donnees from "./donnees.js";
 
 export const INSTRUCTIONS =
-  "Corpus déterministe de psychologie (23 000+ atomes = phrases), dans la langue ORIGINALE de " +
-  "chaque œuvre : Sigmund Freud 1895-1933 en allemand (23 œuvres, avec les contributions de " +
-  "Breuer et Rank), Gustave Le Bon 1895 en français (« Psychologie des foules » — que Freud " +
-  "discute pendant tout un chapitre de « Massenpsychologie und Ich-Analyse » : les DEUX côtés " +
-  "de cette controverse sont dans le corpus, sur les mêmes concepts). AUCUN modèle de langage " +
-  "n'intervient dans le calcul : segmentation, catégorisation et datation sont produites par " +
-  "un pipeline Python testé, pas par une IA. " +
+  "Corpus déterministe de psychologie (37 000+ atomes = phrases), chaque œuvre dans sa langue " +
+  "ORIGINALE : Sigmund Freud 1895-1933 en allemand (23 œuvres, avec les contributions de Breuer " +
+  "et Rank), Otto Rank 1909-1928 en allemand (5 œuvres), Gustave Le Bon 1895 en français. " +
+  "AUCUN modèle de langage n'intervient dans le calcul : segmentation, catégorisation et " +
+  "datation sont produites par un pipeline Python testé, pas par une IA.\n" +
   "RÈGLE IMPÉRATIVE : ne jamais répondre sur ces auteurs à partir de connaissances générales " +
   "sans avoir appelé un de ces outils — chaque affirmation doit s'appuyer sur un atome retourné " +
-  "ici, cité avec sa règle de datation (un atome n'est jamais daté de l'année de l'œuvre : " +
-  "Freud a cessé de signaler ses ajouts dès la 3e édition, voir `datation` sur chaque " +
-  "citation). Commencer par `referentiel` pour connaître le vocabulaire exact des concepts " +
-  "(identifiants repliés, hérités de l'allemand : « trieb », « masse », « fuehrer »…) — les " +
-  "MÊMES identifiants couvrent les deux langues, c'est ce qui rend Freud et Le Bon comparables.";
+  "ici, cité avec sa règle de datation.\n" +
+  "CHAQUE AUTEUR A SON PROPRE JEU DE CONCEPTS, et c'est essentiel : un même nom peut désigner " +
+  "deux choses différentes selon l'auteur. « geburt » est chez Rank le traumatisme d'origine de " +
+  "toute angoisse ; le mot n'a pas ce statut chez Freud. NE JAMAIS additionner ni comparer " +
+  "directement les compteurs de deux auteurs sans le dire explicitement à l'utilisateur : les " +
+  "grilles ne sont pas les mêmes, et un écart de chiffres peut ne mesurer que cela. " +
+  "Appeler `referentiel` EN PREMIER pour voir, par auteur, les concepts réellement disponibles.\n" +
+  "DEUX RÉSERVES À TRANSMETTRE quand elles s'appliquent : (1) un atome n'est jamais daté de " +
+  "l'année de l'œuvre — Freud a cessé de signaler ses ajouts dès la 3e édition, voir `datation` ; " +
+  "(2) les 5 œuvres d'Otto Rank viennent de FAC-SIMILÉS OCRISÉS NON RELUS (aucune transcription " +
+  "relue n'existe pour lui) : le champ `qualite_source` vaut alors « ocr », et un atome dont " +
+  "`ocr_suspect` vaut 1 porte une trace de corruption repérée — le signaler à l'utilisateur, qui " +
+  "doit vérifier la citation sur le scan avant de la publier.";
 
 export const OUTILS = [
   {
@@ -49,7 +55,7 @@ export const OUTILS = [
       concept: z.string().optional().describe("nom exact d'un concept, voir `referentiel`"),
       groupe: z.string().optional().describe("nom exact d'un groupe conceptuel"),
       auteur: z.string().optional().describe(
-        "« Sigmund Freud », « Gustave Le Bon », « Josef Breuer » ou « Otto Rank »"),
+        "« Sigmund Freud », « Otto Rank », « Gustave Le Bon » ou « Josef Breuer »"),
       oeuvre: z.string().optional().describe("clé exacte d'une œuvre, voir `referentiel`"),
       statut: z.enum(["affirme", "modalise", "interrogatif", "rapporte"]).optional()
         .describe("force épistémique de l'énoncé"),
