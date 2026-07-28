@@ -6,8 +6,10 @@ qui est affirmé de ce qui est supposé, repérer où un auteur se corrige, comp
 
 Premier chantier : **Freud**, dans le **texte allemand original** (23 œuvres). Puis **Gustave
 Le Bon**, *Psychologie des foules* (1895), en français — le livre que Freud discute pendant tout
-un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis le 28 juillet 2026 : **Otto Rank**
-(5 œuvres, 1909-1928), premier auteur traité **pour lui-même**, avec ses propres catégories.
+un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis le 28 juillet 2026, deux figures de
+l'entourage, traitées **pour elles-mêmes** avec leurs propres catégories : **Otto Rank**
+(6 œuvres, 1907-1928), celui qui s'écarte, et **Karl Abraham** (5 œuvres, 1909-1925), celui qui
+approfondit sans jamais rompre.
 
 ---
 
@@ -43,18 +45,20 @@ Deux raisons, dans cet ordre :
    → « après-coup »… Ces choix sont contestés et varient selon les écoles ; les hériter en amont
    contaminerait toute l'analyse.
 
-Le travail d'analyse, lui, se fait en français. Le lexique est **multilingue par construction** :
-les concepts sont des identifiants **neutres**, communs à toutes les langues (`masse`, `suggestion`,
-`prestige`) ; seuls les **motifs** qui les détectent dépendent de la langue de l'œuvre
-(`core/lexique.py:MOTIFS_FR`). C'est ce qui rend Freud et Le Bon comparables concept par concept —
-sans jamais traduire une seule phrase.
+Le travail d'analyse, lui, se fait en français. Le moteur est **multilingue par construction** :
+segmentation et repérage prennent la langue de l'œuvre en paramètre. Les CONCEPTS, eux,
+appartiennent à chaque auteur (voir ci-dessus) : ceux de Le Bon portent des noms français
+(`foule`, `meneur`, `contagion`), ceux de Freud, de Rank et d'Abraham des noms allemands. Aucune
+phrase n'est jamais traduite.
 
 ---
 
 ## Corpus
 
-**Vingt-quatre œuvres, 1895-1933** — vingt-trois de Freud (allemand) et une de Le Bon (français).
-Une **★** signale une datation certaine : édition d'origine, ou réimpression déclarée inchangée.
+**Trente-cinq œuvres, 1895-1933**, quatre auteurs, deux langues. Une **★** signale une datation
+certaine : édition d'origine, ou réimpression déclarée inchangée.
+
+**Sigmund Freud** (texte allemand, `sources/freud/de/`) :
 
 Deux provenances, pour une raison juridique qu'il faut connaître : le texte allemand de Freud est
 libre **partout** depuis 2010 (mort en 1939 + 70 ans), mais `gutenberg.org` est une organisation
@@ -105,6 +109,22 @@ plus favorable que pour Freud, dont la plupart des textes sont lus dans une édi
 | *Das Inzest-Motiv in Dichtung und Sage* ★ | 1912 | 1. Auflage | [archive.org](https://archive.org/details/dasinzestmotivin00rank) |
 | *Das Trauma der Geburt* ★ | 1924 | 1. Auflage | [archive.org](https://archive.org/details/DasTraumaDerGeburtUndSeineBedeutungFrDiePsychoanalyse) |
 | *Grundzüge einer Genetischen Psychologie, II* ★ | 1928 | 1. Auflage | [archive.org](https://archive.org/details/Rank_1928_Genetische_Psychologie_II_k) |
+
+**Karl Abraham** (texte allemand, `sources/abraham/de/`) — ses fac-similés sont les meilleurs du
+corpus : 0,05 à 0,54 ‰ de caractères parasites, soit *au niveau ou sous* les textes relus :
+
+| Œuvre | Original | Édition lue | Source |
+|---|---|---|---|
+| *Traum und Mythus* ★ | 1909 | 1. Auflage (Schriften zur angewandten Seelenkunde, IV) | [archive.org](https://archive.org/details/TraumUndMythus.EineStudieZurVoumllkerpsychologie) |
+| *Giovanni Segantini* ★ | 1911 | 1. Auflage (id., XI) | [archive.org](https://archive.org/details/SzaS_11_Abraham_1911_Segantini) |
+| *Klinische Beiträge zur Psychoanalyse* | 1907-1920 | 1. Auflage, 1921 | [archive.org](https://archive.org/details/KlinischeBeitraumlgeZurPsychoanalyse) |
+| *Versuch einer Entwicklungsgeschichte der Libido* ★ | 1924 | 1. Auflage | [archive.org](https://archive.org/details/VersuchEinerEntwicklungsgeschichteDerLibidoAufGrundDerPsychoanalyse) |
+| *Psychoanalytische Studien zur Charakterbildung* | 1921-1925 | 1. Auflage, 1925 | [archive.org](https://archive.org/details/PsychoanalytischeStudienZurCharakterbildung_524) |
+
+*Zur Psychoanalyse der Kriegsneurosen* (1919) est écarté pour une raison de **structure**, non de
+qualité : c'est un symposium à cinq voix (Freud, Ferenczi, Abraham, Simmel, Jones). Le lexique
+suivant l'auteur du volume, un volume à cinq auteurs n'en a pas — il faudrait un lexique par
+région. À reprendre quand Ferenczi entrera : ce volume les concerne tous les deux.
 
 ### Les œuvres de Rank sont des FAC-SIMILÉS OCRISÉS, non relus
 

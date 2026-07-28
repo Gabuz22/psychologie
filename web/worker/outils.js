@@ -14,9 +14,10 @@ import { z } from "zod";
 import * as donnees from "./donnees.js";
 
 export const INSTRUCTIONS =
-  "Corpus déterministe de psychologie (37 000+ atomes = phrases), chaque œuvre dans sa langue " +
+  "Corpus déterministe de psychologie (45 000+ atomes = phrases), chaque œuvre dans sa langue " +
   "ORIGINALE : Sigmund Freud 1895-1933 en allemand (23 œuvres, avec les contributions de Breuer " +
-  "et Rank), Otto Rank 1909-1928 en allemand (5 œuvres), Gustave Le Bon 1895 en français. " +
+  "et Rank), Otto Rank 1907-1928 (6 œuvres), Karl Abraham 1909-1925 (5 œuvres), tous deux en " +
+  "allemand, et Gustave Le Bon 1895 en français. " +
   "AUCUN modèle de langage n'intervient dans le calcul : segmentation, catégorisation et " +
   "datation sont produites par un pipeline Python testé, pas par une IA.\n" +
   "RÈGLE IMPÉRATIVE : ne jamais répondre sur ces auteurs à partir de connaissances générales " +
@@ -30,8 +31,8 @@ export const INSTRUCTIONS =
   "Appeler `referentiel` EN PREMIER pour voir, par auteur, les concepts réellement disponibles.\n" +
   "DEUX RÉSERVES À TRANSMETTRE quand elles s'appliquent : (1) un atome n'est jamais daté de " +
   "l'année de l'œuvre — Freud a cessé de signaler ses ajouts dès la 3e édition, voir `datation` ; " +
-  "(2) les 5 œuvres d'Otto Rank viennent de FAC-SIMILÉS OCRISÉS NON RELUS (aucune transcription " +
-  "relue n'existe pour lui) : le champ `qualite_source` vaut alors « ocr », et un atome dont " +
+  "(2) les œuvres d'Otto Rank et de Karl Abraham viennent de FAC-SIMILÉS OCRISÉS NON RELUS " +
+  "(aucune transcription relue n'existe pour eux) : le champ `qualite_source` vaut alors « ocr », et un atome dont " +
   "`ocr_suspect` vaut 1 porte une trace de corruption repérée — le signaler à l'utilisateur, qui " +
   "doit vérifier la citation sur le scan avant de la publier.";
 
@@ -55,7 +56,7 @@ export const OUTILS = [
       concept: z.string().optional().describe("nom exact d'un concept, voir `referentiel`"),
       groupe: z.string().optional().describe("nom exact d'un groupe conceptuel"),
       auteur: z.string().optional().describe(
-        "« Sigmund Freud », « Otto Rank », « Gustave Le Bon » ou « Josef Breuer »"),
+        "« Sigmund Freud », « Otto Rank », « Karl Abraham », « Gustave Le Bon » ou « Josef Breuer »"),
       oeuvre: z.string().optional().describe("clé exacte d'une œuvre, voir `referentiel`"),
       statut: z.enum(["affirme", "modalise", "interrogatif", "rapporte"]).optional()
         .describe("force épistémique de l'énoncé"),
