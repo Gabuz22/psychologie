@@ -152,11 +152,27 @@ def empreinte(texte):
     return hashlib.sha1(" ".join(str(texte or "").split()).encode("utf-8")).hexdigest()[:16]
 
 
-def _auteur_de(position, regions, defaut):
+def _auteur_de(debut, fin, regions, defaut):
+    """Auteur d'un atome — par RECOUVREMENT MAJORITAIRE, jamais par sa seule position de départ.
+
+    Une frontière de contribution tombe rarement pile sur une frontière de phrase : le marqueur
+    déclaré (« Beobachtung I. Frl. Anna O … ») ouvre une section, mais le titre qui le précède
+    peut appartenir au même atome. Attribuer d'après le premier caractère faisait alors basculer
+    tout l'atome au mauvais auteur — trente signes de titre suffisaient à reverser à Freud
+    deux cent quarante signes de Breuer. Un test l'a signalé quand un changement de segmentation
+    a déplacé la coupure.
+
+    On compte donc les signes réellement partagés avec chaque région, et le plus grand l'emporte.
+    Le résultat ne dépend plus de la façon dont la phrase a été découpée.
+    """
+    meilleur, part_max = defaut, 0
     for r in regions:
-        if r["debut"] <= position < r["fin"]:
-            return r["auteur"]
-    return defaut
+        part = min(fin, r["fin"]) - max(debut, r["debut"])
+        if part > part_max:
+            meilleur, part_max = r["auteur"], part
+    # Il faut plus de la moitié de l'atome pour le revendiquer : sinon il reste à l'auteur du
+    # volume, qui est le cas par défaut et le plus fréquent.
+    return meilleur if part_max * 2 > (fin - debut) else defaut
 
 
 def _chapitre_de(position, reperes):
@@ -239,7 +255,7 @@ def _atomiser(cle_oeuvre):
             "chapitre": _chapitre_de(p["debut"], reperes),
             # Qui écrit RÉELLEMENT cette phrase — un volume peut contenir des contributions,
             # et depuis Le Bon l'auteur du volume n'est plus forcément Freud.
-            "auteur": _auteur_de(p["debut"], regions, meta["auteur"]),
+            "auteur": _auteur_de(p["debut"], p["fin"], regions, meta["auteur"]),
             "fonctions": fonctions,
             # Signaux repérés mais NON ÉTABLIS (révision, objection, auto-citation) : ils forment
             # la liste de travail à vérifier, jamais des faits acquis. Voir lexique.FIABILITE.

@@ -52,7 +52,7 @@ FONCTIONS = [
         "label": "Hypothèse / conjecture",
         "aide": "Proposition avancée sans être affirmée — le conditionnel de la recherche.",
         "mesure_traumdeutung": 301,
-        "marqueurs": [r"\bvielleicht\b", r"\bwahrscheinlich\b", r"\bvermutlich\b", r"\bduerfte\b",
+        "marqueurs": [r"\bvielleicht\b", r"\bwahrscheinlich\w*\b", r"\bvermutlich\b", r"\bduerfte\b",
                       r"\bscheint\b", r"\bes ist moeglich\b", r"\bich vermute\b", r"\banzunehmen\b",
                       r"\bnehmen wir an\b", r"\bwenn wir annehmen\b"],
     },
@@ -61,7 +61,7 @@ FONCTIONS = [
         "label": "Énoncé méthodologique",
         "aide": "Description du procédé analytique lui-même (analyse, déchiffrement, technique).",
         "mesure_traumdeutung": 496,
-        "marqueurs": [r"\banalyse", r"\bdeutung", r"\bverfahren\b", r"\bmethode\b", r"\btechnik\b",
+        "marqueurs": [r"\banalyse", r"\bdeutung", r"\bverfahrens?\b", r"\bmethoden?\b", r"\btechniken?\b",
                       r"\bzerlegt\b", r"\bzerlegung\b", r"\bauflosung\b"],
     },
     {
@@ -163,7 +163,7 @@ FONCTIONS = [
         "label": "Rapport d'un tiers (littérature)",
         "aide": "Observation attribuée à un autre auteur — dialogue avec la littérature savante.",
         "mesure_traumdeutung": None,   # détecté par NOMS_AUTEURS, pas par marqueur lexical
-        "marqueurs": [r"\bnach \w+s (ansicht|meinung)\b", r"\bberichtet\b", r"\bzitiert\b",
+        "marqueurs": [r"\bnach \w+s (ansicht|meinung)\b", r"\bberichtet(?:e|en)?\b", r"\bzitiert(?:e|en)?\b",
                       r"\bbehauptet \w+, dass\b"],
     },
 ]
@@ -179,12 +179,22 @@ NOMS_AUTEURS = ["maury", "spitta", "hildebrandt", "strumpell", "wundt", "delboeu
 # mais toute marque de doute, d'interrogation ou d'attribution le DÉCLASSE (le plus prudent gagne).
 STATUTS = ["affirme", "modalise", "interrogatif", "rapporte"]
 
+# FLEXION ALLEMANDE — correctif SÉLECTIF (2026-07-28), et surtout pas global.
+# Constat : « Wahrscheinlicher ist eine solche Verteilung » recevait le statut « affirmé ».
+# Un énoncé modalisé durci en affirmation, c'est-à-dire exactement ce que la doctrine interdit.
+# La cause est le «  » final, que la déclinaison allemande fait échouer.
+#
+# MAIS le retirer partout aurait été pire, et la mesure l'a montré : « etwa » (à peu près)
+# deviendrait « etwas » (quelque chose) — 717 fausses modalisations à lui seul ; « als ob »
+# deviendrait « als Objekt » ; « wohl » attraperait « Wohlgefallen » et « Wohlbefinden ».
+# Le «  » final PROTÈGE dans ces cas-là ; il ne gêne que là où la flexion est régulière.
+# On a donc étendu huit marqueurs, un par un, chacun vérifié par comptage — et laissé les autres.
 MARQUEURS_STATUT = {
-    "modalise":     [r"\bvielleicht\b", r"\bwahrscheinlich\b", r"\bvermutlich\b", r"\bscheint\b",
+    "modalise":     [r"\bvielleicht\b", r"\bwahrscheinlich\w*\b", r"\bvermutlich\b", r"\bscheint\b",
                      r"\bduerfte\b", r"\bwohl\b", r"\bmoeglicherweise\b", r"\betwa\b", r"\bkaum\b"],
     "interrogatif": [r"\?"],
-    "rapporte":     [r"\bberichtet\b", r"\berzahlt\b", r"\bnach \w+\b", r"\bzitiert\b",
-                     r"\bsoll \w+ haben\b", r"\bangeblich\b"],
+    "rapporte":     [r"\bberichtet(?:e|en)?\b", r"\berzahlt(?:e|en)?\b", r"\bnach \w+\b", r"\bzitiert(?:e|en)?\b",
+                     r"\bsoll \w+ haben\b", r"\bangeblich\w*\b"],
 }
 
 # --------------------------------------------------------------------- 2 bis. TABLES FRANÇAISES
@@ -346,6 +356,11 @@ CONCEPTS = {
             "ueberich": ["uber-ich", "uberich"],
             # L'« appareil psychique » est le modèle central du chapitre VII — il manquait.
             "apparat": ["apparat", "instanz", "system"],
+            # AUDIT 8 — 1 212 occurrences de « Person »/« Persönlichkeit », dont la
+            # « Persönlichkeitsspaltung » et « die Person des Arztes ». Absent jusqu'ici parce
+            # que le mot passe pour ordinaire ; il ne l'est pas chez un auteur qui décrit des
+            # personnes en tant que telles.
+            "person": ["person", "personlichkeit", "personen"],
             "psychisme": ["seelisch", "seele", "psychisch", "psyche"],
         },
     },
@@ -389,6 +404,10 @@ CONCEPTS = {
             "erlebnis": ["erlebnis", "erlebniss"],
             "gedaechtnis": ["gedachtnis"],
             "vergessen": ["vergessen", "vergesslichkeit"],
+            # AUDIT 8 — L'APRÈS-COUP (51 occ.). Concept majeur : un événement ne prend son sens
+            # traumatique que rétroactivement. Toute une lecture de Freud (Lacan, Laplanche) part
+            # de là, et le mot n'avait aucune case.
+            "nachtraeglichkeit": ["nachtraglich", "nachtraglichkeit"],
             "deckerinnerung": ["deckerinnerung"],
             "spur": ["erinnerungsspur", "gedachtnisspur"],
             # LE NOM PROPRE — matière privilégiée de l'oubli chez Freud : « Zur Psychopathologie
@@ -413,6 +432,9 @@ CONCEPTS = {
             "sexualitaet": ["sexualitat", "sexuell", "sexuelle", "sexualtrieb"],
             # (?!ig) écarte « lustig » (amusant), qui n'a rien à voir avec le plaisir freudien.
             "lustprinzip": ["lustprinzip", r"lust(?!ig)"],
+            # Le PRINCIPE de réalité figurait au lexique, mais pas la réalité elle-même :
+            # 159 « Realität » et 649 « wirklich » passaient au travers.
+            "realitaet": ["realitat", "real\b", "reale", "wirklichkeit", "wirklich"],
             "realitaetsprinzip": ["realitatsprinzip"],
             "todestrieb": ["todestrieb"],
             "wiederholungszwang": ["wiederholungszwang"],
@@ -424,6 +446,18 @@ CONCEPTS = {
             "sadismus": ["sadismus", "sadist"],
             "masochismus": ["masochis"],
             "autoerotismus": ["autoerot"],
+            # AUDIT 8 (2026-07-28) — L'OBJET, absent après SEPT audits successifs, alors qu'il
+            # est l'un des concepts les plus lourds de la psychanalyse : 596 occurrences, dont
+            # 92 « Sexualobjekt » et 52 « Objektwahl ». C'est de lui que sortira toute la théorie
+            # des relations d'objet, chez Abraham puis chez Klein.
+            # Comment il a échappé si longtemps : aucun audit ne l'a cherché, parce que le mot
+            # « Objekt » ne SONNE pas comme un terme technique — il ressemble à un mot ordinaire.
+            # Les sept audits précédents balayaient le vocabulaire des atomes NON QUALIFIÉS, et
+            # « Objekt » apparaît presque toujours dans des phrases par ailleurs qualifiées : il
+            # était donc invisible à cette méthode. Leçon : le scan des non-qualifiés trouve les
+            # DOMAINES absents, pas les concepts isolés noyés dans du texte déjà reconnu.
+            "objekt": ["objekt", "sexualobjekt", "liebesobjekt", "objektwahl", "objektbeziehung",
+                       "objektliebe", "objektverlust"],
             "erogene_zone": ["erogen"],
             # L'agression — « Zorn » est LE sujet du « Moses des Michelangelo » (la colère que la
             # statue retient), « Wut » sa variante ; « aggress » couvre Aggression, aggressiv et
@@ -610,6 +644,10 @@ CONCEPTS = {
             # développement, articulée à l'Œdipe, et totalement absente de l'ontologie : 116
             # occurrences dans 7 œuvres. « phallisch » y est joint parce que c'est le nom du
             # stade que ce complexe conclut.
+            # AUDIT 8 — 508 occurrences. Le lexique portait « männlich »/« weiblich » (l'attribut)
+            # mais pas l'enfant SEXUÉ, alors que toute la théorie du développement repose sur la
+            # différence des trajets du garçon et de la fille.
+            "knabe_maedchen": ["knabe", "knaben", "madchen", "bube\b", "junge\b"],
             "kastration": ["kastration", "penisneid", "phallisch", "phallus"],
         },
     },
@@ -645,6 +683,9 @@ CONCEPTS = {
             # « verbiet » couvre les formes conjuguées (verbietet, verbieten) — trou décelé par
             # les tests de l'audit 2026-07, pas par intuition.
             "verbot": ["verbot", "verboten", "verbiet"],
+            # AUDIT 8 — « Allmacht der Gedanken » (42 occ.), que Freud pose dans Totem und Tabu
+            # comme le ressort commun de la magie, de l'animisme et de la névrose obsessionnelle.
+            "allmacht": ["allmacht", "allmachtig"],
             "animismus": ["animismus", "animistisch", "magie", "zauber"],
             "urhorde": ["urhorde", "urvater", "urzeit"],
             "primitiv": ["primitiv", "wilde", "wilden", "volker", "urmensch"],

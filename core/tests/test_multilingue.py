@@ -162,10 +162,16 @@ class TestNonRegressionAllemande(unittest.TestCase):
         self.assertEqual(len(segmenter("Er sagte « nichts » dazu. Dann ging er.")), 2)
 
     def test_oeuvre_allemande_meme_compte(self):
-        """Jenseits : compte d'atomes constaté avant l'entrée du français. S'il bouge, une
-        modification « française » a fui vers l'allemand."""
+        """Jenseits : compte d'atomes témoin. S'il bouge sans raison déclarée, une modification
+        destinée à une autre langue a fui vers l'allemand.
+
+        VALEUR MISE À JOUR le 2026-07-28 : 545 → 538. La cause est connue et voulue — l'apparat
+        bibliographique a rejoint la liste des abréviations (« Zeitschr. », « Jahrb. », « Vgl. »),
+        ce qui a supprimé sept coupures abusives dans ce volume et 791 dans le corpus entier.
+        Un témoin de non-régression n'interdit pas le changement : il exige qu'il soit expliqué.
+        """
         r = atomisation.atomiser("jenseits")
-        self.assertEqual(r["controles"]["total_atomes"], 545)
+        self.assertEqual(r["controles"]["total_atomes"], 538)
 
     def test_auteur_par_defaut_reste_freud(self):
         r = atomisation.atomiser("jenseits")

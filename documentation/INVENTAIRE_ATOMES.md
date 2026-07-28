@@ -574,6 +574,72 @@ de la rupture. La divergence de Rank est dans la **thèse**, pas dans une formul
 aucun marqueur lexical ne l'attrapera. Mieux vaut l'écrire que de faire dire au corpus ce qu'il
 ne montre pas.
 
+### 4.15 Jusqu'où peut monter le taux de qualification — mesuré, pas estimé (2026-07-28)
+
+La question a été posée directement : peut-on porter les corpus **au-delà de 90 %, voire à 100 %** ?
+Voici la réponse, avec ses chiffres.
+
+**Où l'on en est.** 45 588 atomes, **82 % qualifiés** — Freud 81 %, Rank 83 %, Abraham 84 %,
+Le Bon 84 %. Ces taux ont été gagnés dans cette passe : Le Bon **75 → 84 %**, Abraham **72 → 84 %**,
+Rank **76 → 83 %**, Freud **80 → 81 %**.
+
+**De quoi sont faits les 18 % restants.**
+
+| Nature | Atomes | Poids dans le corpus |
+|---|---:|---:|
+| phrase pleine (≥ 10 mots) | 4 874 | 10,7 points |
+| phrase courte (5-9 mots) | 1 477 | 3,2 points |
+| fragment (≤ 4 mots) | 1 169 | 2,6 points |
+| apparat, chiffres, références | 500 | 1,1 point |
+
+Les trois dernières lignes — **6,9 points** — sont **structurellement inqualifiables** : ce sont
+des numéros de page, des renvois de note, des titres courants, des bribes d'apparat critique.
+Leur donner une catégorie ferait monter un chiffre sans rien apporter à l'analyse. **Le plafond
+structurel est donc de 93 %**, et il ne s'atteindrait qu'en qualifiant *toutes* les phrases
+pleines restantes.
+
+**Or ces phrases pleines ne sont pas des lacunes du lexique.** Lecture faite, ce sont :
+- chez Freud, du **récit clinique** et de la correspondance citée — « Um sie aufzuheitern, nahm
+  sie der Mann auf eine Geschäftsreise nach Paris mit » ;
+- chez Rank, du **matériau littéraire** — résumés d'intrigues, citations d'Euripide, de Schiller,
+  de Wagner, et des noms propres (Lohengrin, Kyros) ;
+- partout, des phrases de liaison — « Es kann auch ein Anschein sein. »
+
+Les qualifier demanderait de taguer du vocabulaire allemand ordinaire (*Mensch*, *Leben*,
+*Jahre*, *machen*). **C'est précisément ce que la doctrine du projet interdit** : ce qui n'est pas
+qualifié est AFFICHÉ, jamais comblé. Un taux gonflé de la sorte ne mesurerait plus rien.
+
+**Conclusion assumée : le plafond honnête est de l'ordre de 85 %, pas de 90 %.** L'écart entre
+82 % et 93 % n'est pas un travail restant, c'est la part du corpus qui n'est pas de la théorie.
+Ce chiffre-là est un RÉSULTAT sur la nature des textes, pas un défaut de l'outil.
+
+**Deux hypothèses ont été essayées et rejetées par la mesure**, plutôt que retenues par
+plausibilité :
+1. *Le prétérit allemand distinguerait le récit de la théorie* — donc une fonction « récit »
+   qualifierait les narrations. **Réfuté** : 20 % des atomes non qualifiés sont au prétérit contre
+   19 % des qualifiés. Freud théorise aussi au passé.
+2. *Le « \b » final des marqueurs bloque la flexion allemande, il suffit de le retirer.* **Réfuté
+   en bloc, retenu au cas par cas** : le retirer partout ferait de « etwa » (à peu près) le mot
+   « etwas » (quelque chose) — 717 fausses modalisations —, et de « als ob » un « als Objekt ».
+   Huit marqueurs ont été étendus un par un, chacun vérifié par comptage.
+
+**Ce que cette passe a corrigé, et qui vaut mieux qu'un point de pourcentage :**
+- **791 atomes parasites supprimés** : l'apparat bibliographique (« Zeitschr. f. PsA. », « Jahrb. »,
+  « Vgl. ») coupait les phrases faute d'être déclaré comme abréviations. Chez Rank, cela
+  représentait 943 fragments non qualifiés — un cinquième de ses non-qualifiés imputables à la
+  seule segmentation.
+- **Une violation de doctrine réparée** : « *Wahrscheinlicher* ist eine solche Verteilung »
+  recevait le statut « affirmé ». Un énoncé modalisé durci en affirmation, ce que le projet
+  s'interdit depuis le premier jour.
+- **L'attribution d'auteur rendue robuste** : elle se faisait sur le premier caractère de l'atome ;
+  trente signes de titre suffisaient à reverser à Freud deux cent quarante signes de Breuer. Elle
+  se fait désormais au **recouvrement majoritaire**, indépendamment du découpage.
+- **Deux concepts majeurs ajoutés chez Freud après SEPT audits** : `objekt` (596 occurrences, dont
+  92 *Sexualobjekt* et 52 *Objektwahl* — la racine de toute la théorie des relations d'objet) et
+  `nachtraeglichkeit` (l'après-coup). Ils avaient échappé parce que le scan des non-qualifiés
+  trouve les DOMAINES absents, pas les concepts isolés noyés dans du texte déjà reconnu. La
+  méthode d'audit a donc, elle aussi, sa limite — désormais écrite dans `bin/auditer_lexique.py`.
+
 ---
 
 ## 5. Signal de validation

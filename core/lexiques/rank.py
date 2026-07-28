@@ -261,8 +261,17 @@ CONCEPTS = {
             "wasser": ["wasser", "fluss", "meer\\b", "strom\\b", "flut"],
             "tier": ["tier", "wolf", "hirsch", "hund\\b", "vogel", "schwan"],
             "gott": ["gott", "gotter", "gottlich", "gottheit"],
-            "berg_hoehle": ["berg\\b", "berge\\b", "hohle", "wald\\b"],
+            "berg_hoehle": [r"berg\b", r"berge\b", "hohle", r"wald\b"],
             "baum": ["baum", "baume"],
+            # AUDIT 3 (2026-07-28) — le décor restant du récit, relevé dans les phrases pleines
+            # encore non qualifiées. Cohérent avec ce groupe, qui traite déjà l'eau et l'animal
+            # comme des signes réguliers et non comme des ornements : chez Rank la nuit est le
+            # moment de l'exposition, l'épée l'instrument de la reconnaissance, la maison le lieu
+            # dont le héros est chassé.
+            "nacht": ["nacht", "nachts", "nachte", "dunkel", "finster"],
+            "waffe": ["schwert", "waffe", "speer", "pfeil", "bogen\\b"],
+            "haus": [r"haus\b", "hause", "hauses", "hof\\b", "burg\\b", "palast"],
+            "auge": ["auge", "augen", r"blick\b", "blind"],
         },
     },
 }

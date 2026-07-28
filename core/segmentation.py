@@ -36,6 +36,26 @@ ABBREVIATIONS = (
     "Nr", "Bd", "Abb", "Kap", "Anm", "Aufl", "Jh", "Jhdt", "Hrsg", "Verf",
     "Dr", "Prof", "Hr", "Fr", "St", "Sr",
     "ff", "f", "S", "p", "cf",
+    # APPARAT BIBLIOGRAPHIQUE (ajouté 2026-07-28, audit des atomes courts).
+    # Les volumes savants de Rank et d'Abraham sont truffés de notes en abrégé, et chaque point
+    # non déclaré y coupait une phrase : « Zeitschr. f. PsA. » produisait trois atomes de deux
+    # mots. Mesuré avant correction : 1 086 atomes de quatre mots ou moins chez Rank, dont 943
+    # non qualifiés — c'est-à-dire un cinquième de ses non-qualifiés, imputables à la seule
+    # segmentation et non au lexique.
+    # Chaque forme ci-dessous a été RELEVÉE dans le corpus par comptage des mots abrégés en fin
+    # d'atome court, jamais devinée.
+    "Vgl", "vgl", "Lit", "Gesch", "Schr", "Jahrb", "Jahrg", "Zentralbl", "Intern", "Internat",
+    "Zschr", "Zeitschr", "PsA", "psychoanalyt", "aerztl", "Ges", "Phil", "Kl", "Th", "Chr",
+    "Anmkg", "Ausg", "Bd", "Abt", "Beitr", "Forsch", "Sitzungsber", "Arch", "Ann", "Mitt",
+    "Frl", "Fam", "Sex", "ed", "Ed", "Verl", "Aufl",
+    # LES CHIFFRES ROMAINS ONT ÉTÉ ESSAYÉS PUIS RETIRÉS. Ils apparaissent bien comme numéros de
+    # tome en fin de référence (« Bd. III. », 77 occurrences), mais ils ouvrent AUSSI les titres
+    # de section — « II. Krankengeschichten. » — et les déclarer soudait le titre à la phrase
+    # suivante. Dans les « Studien über Hysterie », l'atome ainsi formé enjambait la frontière de
+    # la contribution de Breuer et repassait à Freud : un test l'a signalé.
+    # Le gain était mince, le dégât structurel. On préfère quelques références coupées à des
+    # titres avalés — et l'attribution d'auteur a par ailleurs été rendue robuste (voir
+    # `atomisation._auteur_de`).
 )
 
 # Abréviations attestées dans « Psychologie des foules » (Gutenberg #24007) — le texte de 1895 est

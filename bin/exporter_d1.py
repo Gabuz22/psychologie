@@ -70,53 +70,56 @@ EDITORIAL_GRAPPES = [
      "REPRÉSENTATION, qui les relie. C'est la plus grosse grappe du corpus, et sa taille est "
      "elle-même un résultat : chez Freud, le rêve n'est pas un objet parmi d'autres, c'est le "
      "modèle sur lequel l'appareil psychique est pensé.",
-     "44 concepts : cette grappe a FUSIONNÉ avec celle de l'appareil psychique à l'audit 7, "
-     "quand « Vorstellung » (763 occurrences) est entré dans l'ontologie et a ponté les deux. "
-     "Une grappe aussi large discrimine moins qu'une petite : elle dit un voisinage massif, pas "
-     "une articulation fine."),
+     "49 concepts. L'APRÈS-COUP (« nachtraeglichkeit ») l'a rejointe à l'audit 8, ce qui est "
+     "cohérent : un souvenir qui ne prend son sens que rétroactivement relève du même appareil "
+     "que le rêve. Une grappe aussi large discrimine moins qu'une petite — elle dit un voisinage "
+     "massif, pas une articulation fine."),
+    ("libido", "La pulsion, la famille et le développement sexuel",
+     "Libido, sexualité, stades du développement, perversion, narcissisme — noués au roman "
+     "familial (père, mère, fratrie, Œdipe, castration) et aux instances (Moi, Ça, Sur-Moi). "
+     "L'OBJET y figure depuis l'audit 8, et sa place n'est pas indifférente : c'est autour de lui "
+     "que se recomposera, chez Abraham puis chez Klein, toute la théorie des relations d'objet.",
+     "42 concepts. Cette grappe a FUSIONNÉ à l'audit 8 avec celle de la famille, que « objekt » "
+     "et « knabe_maedchen » ont pontée — l'enfant sexué et l'objet du désir appartiennent au même "
+     "voisinage. Une partition est un état de la mesure, pas une vérité sur Freud."),
     ("behandlung", "La clinique, le corps et la cure",
      "Hystérie, symptôme, angoisse, transfert, résistance ; la conversion, la paralysie, la "
      "douleur, l'état hypnoïde — et le corps que Freud DÉCRIT en même temps qu'il le traite. "
      "La mémoire y figure : « Hysterische leiden größtentheils an Reminiscenzen », écrivent "
      "Breuer et Freud en 1895. Se souvenir n'est pas ici une faculté, c'est le traitement même.",
-     "Le corps décrit (main, œil, visage, barbe) y a été absorbé à l'audit 7, après avoir formé "
-     "sa propre grappe : le vocabulaire clinique ajouté l'a rapproché du corps soigné. La grappe "
-     "doit par ailleurs beaucoup à une seule œuvre — « Studien über Hysterie », 2 909 atomes."),
-    ("kastration", "La famille, la différence des sexes et la mort",
-     "Le roman familial (père, mère, fratrie, Œdipe) noué au complexe de castration, à "
-     "l'opposition masculin/féminin, à la mort et à la culpabilité — la constellation que Freud "
-     "tient pour l'origine commune du symptôme, du mythe et du lien social.",
-     "La différence des sexes n'a rejoint cette grappe qu'à l'audit 4 du lexique (2026-07) : "
-     "avant cela, 526 occurrences dans 17 œuvres étaient invisibles."),
+     "La grappe doit beaucoup à une seule œuvre — « Studien über Hysterie », près de 3 000 atomes. "
+     "Le CARACTÈRE l'a rejointe : chez Freud il se décrit au chevet du malade, non en théorie."),
     ("totem", "Religion, anthropologie, morale et lien social",
      "Le totémisme, le tabou, le sacrifice, le dieu ; l'interdit moral et la punition ; la masse "
-     "et son meneur. La NÉVROSE OBSESSIONNELLE y a rejoint le religieux à l'audit 7 — voisinage "
-     "que Freud pose lui-même dès 1907 dans « Zwangshandlungen und Religionsübungen » : le "
-     "cérémonial du névrosé et le rite du croyant ont la même structure.",
-     "Le rapprochement science/religion, quand il apparaît, est un fait de COOCCURRENCE : Freud "
-     "oppose souvent les deux, et deux termes opposés dans un même énoncé voisinent autant que "
-     "deux termes alliés."),
-    ("libido", "La pulsion, le développement sexuel et les instances",
-     "Libido, sexualité, perversion, stades du développement, destins de la pulsion "
-     "(sublimation, formation réactionnelle) — et la seconde topique (Moi, Ça, Sur-Moi) avec la "
-     "conscience morale.",
-     "Cette grappe a changé de composition à chacun des quatre derniers audits : la seconde "
-     "topique l'a rejointe, quittée, puis reprise. Une grappe est un état de la mesure, pas une "
-     "vérité sur Freud. Le Sur-Moi reste sous-représenté faute de « Das Ich und das Es » (1923), "
-     "absent du corpus."),
-    ("dichter", "La fiction, le délire et la création",
+     "et son meneur. La névrose obsessionnelle y voisine le religieux — rapprochement que Freud "
+     "pose lui-même dès 1907 dans « Zwangshandlungen und Religionsübungen » : le cérémonial du "
+     "névrosé et le rite du croyant ont la même structure.",
+     "La TOUTE-PUISSANCE DES PENSÉES (« allmacht ») y est entrée à l'audit 8, à sa place exacte : "
+     "Freud en fait le ressort commun de la magie, de l'animisme et de l'obsession."),
+    ("dichter", "La fiction, le délire et la réalité",
      "Le poète, le récit, l'art, le fantasme et le délire — Freud lit la fiction avec les outils "
-     "de la clinique, et le délire comme une œuvre. La grappe s'est détachée quand le corpus a "
-     "gagné assez de matière clinique réelle pour que les deux se distinguent.",
+     "de la clinique, et le délire comme une œuvre. La RÉALITÉ y a rejoint le délire à l'audit 8, "
+     "et le voisinage est parlant : ce qui définit le délire, c'est son rapport à elle.",
      "Grappe portée par les œuvres d'analyse littéraire (Gradiva, le Dichter, le Kästchenwahl) : "
      "elle décrit autant un GENRE d'écrit de Freud qu'un domaine de sa doctrine."),
     ("malerei", "La peinture et le pacte",
-     "Les analyses d'œuvres visuelles du corpus (Léonard, le Moïse de Michel-Ange, le peintre "
-     "possédé de la Teufelsneurose) — et le pacte signé du sang, sujet de cette dernière.",
-     "Contient l'artefact le plus instructif du découpage : « Teufel » et « pakt » n'ont rien à "
-     "faire avec la peinture — ils y sont parce que l'unique œuvre sur le diable porte sur un "
-     "peintre. Cooccurrence réelle, lien conceptuel absent : le contre-exemple à garder sous la "
-     "main. « pakt » est de surcroît un concept mono-œuvre à ce jour."),
+     "Trois concepts seulement, tirés de deux œuvres : le Léonard, le Moïse de Michel-Ange et la "
+     "névrose démoniaque du peintre Haizmann.",
+     "CONTRE-EXEMPLE À GARDER SOUS LA MAIN. « teufel » et « pakt » n'ont rien à faire avec la "
+     "peinture — ils y sont parce que l'unique œuvre sur le diable porte sur un peintre. "
+     "Cooccurrence réelle, lien conceptuel absent. « pakt » est de surcroît mono-œuvre."),
+    ("verbrechen", "La faute et le crime",
+     "Deux concepts : la culpabilité et le crime. Ils se sont détachés à l'audit 8, quand la "
+     "morale et la punition sont parties vers la grappe religieuse — ce qui isole la faute "
+     "SUBJECTIVE de l'interdit collectif qui la sanctionne.",
+     "Grappe minuscule (192 atomes) : une séparation nette à ce niveau de finesse tient autant "
+     "à la rareté des deux termes qu'à leur autonomie conceptuelle. À surveiller."),
+    ("sadismus", "Sadisme, masochisme, agression",
+     "Le couple sadisme/masochisme et l'agression, détachés en grappe propre à l'audit 8. C'est "
+     "le voisinage le plus serré du corpus — Freud ne nomme presque jamais l'un sans l'autre.",
+     "Grappe de trois concepts et 178 atomes. Son autonomie est un fait de mesure robuste "
+     "(le couple ressort de l'agent `cooccurrence` depuis les toutes premières versions), mais "
+     "sa petite taille la rend sensible au moindre changement de lexique."),
 ]
 
 

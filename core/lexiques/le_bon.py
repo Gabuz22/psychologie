@@ -80,6 +80,46 @@ CONCEPTS = {
             "credulite": ["credul", "naif", "naivete"],
         },
     },
+    # ------------------------------------------------------------------ LES IDÉES (audit 2)
+    # OMISSION FLAGRANTE du premier lexique : `idee` compte 142 occurrences et Le Bon consacre un
+    # CHAPITRE ENTIER aux « idées des foules » (livre I, ch. III, § 1). Le titre même du chapitre
+    # ne trouvait aucune case. C'est le rappel que le vocabulaire d'un auteur se relève dans son
+    # texte, jamais dans l'idée qu'on se fait de son sujet.
+    "pensee": {
+        "label": "Idées, opinions, esprit",
+        "termes": {
+            "idee": [r"idees?\b"],
+            "opinion": [r"opinions?\b"],
+            "esprit": [r"esprits?\b", "mental", "intellectuel"],
+            "caractere": ["caractere"],
+            "volonte": ["volonte", r"vouloir\b", r"veulent\b"],
+        },
+    },
+    # ------------------------------------------------------------------ FORCE ET ACTION (audit 2)
+    # Le Bon écrit une psychologie du POUVOIR : ce qui fait agir, ce qui domine, ce qui réussit.
+    # 182 + 110 occurrences, et rien pour les entendre dans le premier lexique.
+    "puissance": {
+        "label": "Force, pouvoir, action",
+        "termes": {
+            "force": [r"forces?\b", "puissance", "pouvoir", "energie"],
+            "acte": [r"actes?\b", r"agir\b", "action"],
+            "succes": ["succes", "triomph", "victoire", "echec", "defaite"],
+            "besoin": ["besoin", "instinct", "appetit", "desir"],
+            "armee": ["armee", "soldat", "militaire", r"general\b"],
+        },
+    },
+    # ------------------------------------------------------------------ LA PREUVE (audit 2)
+    # Le Bon argumente en naturaliste — il invoque le fait, la loi, l'expérience. Ce registre
+    # épistémique est absent de sa théorie mais partout dans sa prose.
+    "episteme": {
+        "label": "Fait, loi, preuve",
+        "termes": {
+            "fait": [r"faits?\b", "phenomene", "observation"],
+            "loi": [r"lois?\b", "regle", "principe"],
+            "preuve": ["preuve", "demontr", "prouv", "experience", "experim"],
+            "morale": ["moral", "vertu", r"devoir\b", "honneur"],
+        },
+    },
     # ------------------------------------------------------------------ L'HISTOIRE
     # Le Bon écrit une psychologie POLITIQUE : la Révolution, la Terreur, le suffrage universel,
     # les assemblées parlementaires. C'est son terrain d'observation, comme la cure est celui
