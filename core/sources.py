@@ -94,6 +94,7 @@ PARATEXTE_FINAL = {
     "psychologie_des_foules": "TABLE DES MATIÈRES",
     # Otto Rank — catalogues d'éditeur, bibliographies et, pour l'Inzest-Motiv, la fiche de prêt
     # de la bibliothèque de l'Université de Colombie-Britannique, scannée avec le volume.
+    "der_kuenstler": "Hugo Heller",
     "mythus_geburt_helden": "Verlag von Franz Deuticke",
     "lohengrinsage": "Literaturverzeichnis",
     # Espaces SIMPLES : le traitement OCR normalise les blancs avant cette coupe.
@@ -119,6 +120,10 @@ FAC_SIMILES_ECARTES = {
         "Der Doppelgänger (1925, texte de 1914) — « ch » réduit à « h » : « sih », « auh », "
         "« natürlih ». 7,1 % des PHRASES atteintes, soit un atome sur quatorze. Sous le seuil "
         "du premier contrôle (écrit pour « di »), ce défaut n'a été trouvé qu'en LISANT le texte."),
+    "EineNeurosenanalyseInTraeumen": (
+        "Eine Neurosenanalyse in Träumen (1924) — 2,6 % des phrases atteintes, au-dessus du seuil "
+        "de 2 %. Cas limite, et c'est précisément pour ceux-là qu'un seuil existe : sans lui, "
+        "chaque volume douteux se discuterait au cas par cas et finirait par entrer."),
 }
 
 # Registre des œuvres. `annee_edition` = ce qu'on LIT ; `annee_oeuvre` = première parution.
@@ -444,6 +449,24 @@ OEUVRES = {
     # (`core/ocr.py`), les défauts sont recollés quand c'est déterministe, et chaque phrase
     # encore suspecte est MARQUÉE individuellement. Voir FAC_SIMILES_ECARTES : deux volumes ont
     # été refusés sur ces mesures.
+    "der_kuenstler": {
+        "fichier": "1907_der_kuenstler.ia.txt",
+        "dossier": ("rank", "de"),
+        "provenance": "archive",
+        "auteur": "Otto Rank",
+        "titre": "Der Künstler. Ansätze zu einer Sexual-Psychologie",
+        "titre_fr": "L'artiste. Éléments d'une psychologie sexuelle",
+        "annee_oeuvre": 1907,
+        "annee_edition": 1907,     # 1re édition — datation exacte
+        "edition": "1. Auflage",
+        "editeur": "Hugo Heller & Cie, Wien",
+        "source": "Internet Archive (numérisation Google) — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/derknstleranstz00rankgoog",
+        # LE PREMIER LIVRE DE RANK, publié à vingt-trois ans, celui qui lui a valu l'attention de
+        # Freud. Sa thèse de l'artiste y est déjà entière, dix-sept ans avant la rupture : le
+        # corpus tient donc son point de départ ET son point d'arrivée.
+        "debut_corps": "Eine richtige Erkenntnis vom Wesen des Künstlers",
+    },
     "mythus_geburt_helden": {
         "fichier": "1909_mythus_geburt_helden.ia.txt",
         "dossier": ("rank", "de"),

@@ -99,6 +99,7 @@ plus favorable que pour Freud, dont la plupart des textes sont lus dans une édi
 
 | Œuvre | Original | Édition lue | Source |
 |---|---|---|---|
+| *Der Künstler* ★ | 1907 | 1. Auflage, Hugo Heller, Wien | [archive.org](https://archive.org/details/derknstleranstz00rankgoog) |
 | *Der Mythus von der Geburt des Helden* ★ | 1909 | 1. Auflage (Schriften zur angewandten Seelenkunde, V) | [archive.org](https://archive.org/details/SzaS_5_Rank_1909_Mythus_von_der_Geburt_des_Helden) |
 | *Die Lohengrinsage* ★ | 1911 | 1. Auflage (id., XIII) | [archive.org](https://archive.org/details/SzaS_13_Rank_1911_Die_Lohengrinsage) |
 | *Das Inzest-Motiv in Dichtung und Sage* ★ | 1912 | 1. Auflage | [archive.org](https://archive.org/details/dasinzestmotivin00rank) |
@@ -123,10 +124,12 @@ déterministes, et **marque** ce qui reste douteux.
 | césures non résolues | 0 – 4 | 0 – 17 (toutes des élisions légitimes, « Kunst- und ») |
 | phrases corrompues | — | 0,0 – 1,1 % |
 
-**Deux volumes ont été ÉCARTÉS** sur cette mesure, et le dépôt garde leur chiffre
+**Trois volumes ont été ÉCARTÉS** sur cette mesure, et le dépôt garde leur chiffre
 (`sources.FAC_SIMILES_ECARTES`) : *Die Don Juan-Gestalt* (1924) — le « ch » lu « di », 30 des 92
-*nicht* écrits *nidit* — et *Der Doppelgänger* (1925) — le « ch » réduit à « h », **7,1 % des
-phrases atteintes**, soit un atome sur quatorze. Ce second défaut était invisible au premier
+*nicht* écrits *nidit* —, *Der Doppelgänger* (1925) — le « ch » réduit à « h », **7,1 % des
+phrases atteintes**, soit un atome sur quatorze — et *Eine Neurosenanalyse in Träumen* (1924),
+à 2,6 %, cas limite : c'est pour ceux-là qu'un seuil existe, sinon chaque volume douteux se
+discuterait au cas par cas et finirait par entrer. Ce second défaut était invisible au premier
 contrôle, écrit pour le premier : il n'a été trouvé **qu'en lisant le texte**.
 
 Les 47 atomes où une trace de corruption subsiste portent un marqueur `ocr_suspect`, visible sur
@@ -184,15 +187,15 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**37 977 atomes** sur vingt-neuf œuvres, trois auteurs et deux langues, **80 % qualifiés**, **tous**
+**38 351 atomes** sur trente œuvres, trois auteurs et deux langues, **80 % qualifiés**, **tous**
 localisables dans la source, produits sans aucun modèle de langage : le pipeline est **entièrement déterministe**
-(même texte → mêmes atomes). **24 œuvres sur 29 ont une datation certaine** à l'échelle de
+(même texte → mêmes atomes). **25 œuvres sur 30 ont une datation certaine** à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 | Auteur | Atomes | Qualifiés |
 |---|---|---|
 | Sigmund Freud | 20 708 | 80 % |
-| Otto Rank | 14 898 | 81 % |
+| Otto Rank | 15 272 | 81 % |
 | Gustave Le Bon | 1 485 | 75 % |
 | Josef Breuer (dans les *Studien*) | 886 | 80 % |
 
