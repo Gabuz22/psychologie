@@ -158,6 +158,9 @@ def nommer_grappes(grappes):
     return par_rang
 
 SCHEMA = """
+DROP TABLE IF EXISTS nominations;
+DROP TABLE IF EXISTS lectures_declarees;
+DROP TABLE IF EXISTS liens_reprise;
 DROP TABLE IF EXISTS grappe_concepts;
 DROP TABLE IF EXISTS grappes;
 DROP TABLE IF EXISTS signaux;
@@ -523,13 +526,45 @@ def dumper_sql(db, dossier, taille_tranche=3_500_000):
     Les INSERT sont groupés (40 lignes par ordre) : D1 exécute un fichier comme une suite
     d'ordres SQL, et 18 000 INSERT unitaires seraient inutilement lents à charger.
     """
+    # Le schéma doit rester REJOUABLE sur une base déjà peuplée : chaque CREATE a son DROP.
+    # Sans cela, un rechargement échoue à mi-parcours et laisse la base distante dans un état
+    # mixte — c'est arrivé lors de l'ajout des tables de comparaison, dont les DROP manquaient.
+    import re as _re
+    crees = set(_re.findall(r"CREATE TABLE (\w+)", SCHEMA))
+    supprimes = set(_re.findall(r"DROP TABLE IF EXISTS (\w+);", SCHEMA))
+    if crees - supprimes:
+        raise SystemExit(
+            "SCHÉMA NON REJOUABLE — ces tables sont créées sans être supprimées d'abord : %s.\n"
+            "Un rechargement sur une base déjà peuplée échouerait à mi-parcours et la laisserait "
+            "incomplète. Ajouter le DROP correspondant en tête de SCHEMA." % ", ".join(sorted(crees - supprimes)))
+
     with open(os.path.join(dossier, "01_schema.sql"), "w", encoding="utf-8") as f:
         f.write("-- Schéma du corpus (généré par bin/exporter_d1.py — ne pas éditer)\n")
         f.write(SCHEMA.strip() + "\n")
 
+    # ORDRE DE CHARGEMENT : les tables référencées d'abord, puisque D1 applique les clés
+    # étrangères. L'ordre doit donc rester explicite ; en revanche, l'OUBLI d'une table ne doit
+    # plus jamais être possible en silence.
+    #
+    # DÉFAUT RÉEL, corrigé ici : cette liste était figée, et l'ajout des trois tables de la
+    # couche de comparaison ne l'a pas mise à jour. Le résultat était le pire qui soit — la base
+    # locale contenait 132 liens, la base distante zéro, et RIEN ne le signalait : le site
+    # affichait une section vide, ce qui se lit comme « le corpus n'a rien trouvé » alors que le
+    # calcul avait abouti. D'où le contrôle ci-dessous, qui compare la liste au schéma réel et
+    # fait ÉCHOUER l'export plutôt que de produire une base incomplète.
     tables = ["auteurs", "oeuvres", "concepts", "atomes", "atome_concepts",
               "atome_sous_concepts", "fonctions", "signaux", "grappes", "grappe_concepts",
-              "meta"]
+              "liens_reprise", "lectures_declarees", "nominations", "meta"]
+    reelles = {r[0] for r in db.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
+    oubliees = reelles - set(tables)
+    if oubliees:
+        raise SystemExit(
+            "TABLE(S) ABSENTE(S) DE L'EXPORT : %s.\n"
+            "Elles existent dans le schéma mais ne seraient pas versées dans la base distante — "
+            "le site les afficherait vides, sans qu'aucune erreur ne le signale. Ajouter chaque "
+            "table à `tables` dans bin/exporter_d1.py, à sa place dans l'ordre des dépendances."
+            % ", ".join(sorted(oubliees)))
     numero, tampon, taille = 1, [], 0
     chemins = []
 
