@@ -184,15 +184,15 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**37 977 atomes** sur vingt-neuf œuvres, trois auteurs et deux langues, **tous** localisables dans
-la source, produits sans aucun modèle de langage : le pipeline est **entièrement déterministe**
+**37 977 atomes** sur vingt-neuf œuvres, trois auteurs et deux langues, **80 % qualifiés**, **tous**
+localisables dans la source, produits sans aucun modèle de langage : le pipeline est **entièrement déterministe**
 (même texte → mêmes atomes). **24 œuvres sur 29 ont une datation certaine** à l'échelle de
 l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
 
 | Auteur | Atomes | Qualifiés |
 |---|---|---|
 | Sigmund Freud | 20 708 | 80 % |
-| Otto Rank | 14 898 | 76 % |
+| Otto Rank | 14 898 | 81 % |
 | Gustave Le Bon | 1 485 | 75 % |
 | Josef Breuer (dans les *Studien*) | 886 | 80 % |
 

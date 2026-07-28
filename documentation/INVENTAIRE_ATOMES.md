@@ -536,6 +536,20 @@ droit (*Drama* ×26,2, *dichterisch* ×20,2). D'où neuf groupes qui n'existent 
 `parente` (12 190 liens à elle seule), `mythe`, `creation`, `naissance`, `interdit`, `passions`,
 `mecanismes`, `decor_mythique`, `cure`.
 
+**Le lexique de Rank a reçu son second audit** (même méthode que les sept de Freud : scanner le
+vocabulaire des atomes NON QUALIFIÉS pour y trouver les domaines absents). Cinq groupes entiers
+manquaient, et le plus gros crevait les yeux une fois mesuré : `mort` — 1 310 occurrences, alors
+que chez Rank le héros TUE le père et que l'exposition de l'enfant est une mise à mort déguisée.
+Avec `vie_psychique` (Seele 589, Entwicklung 563, Charakter 492 — « Charakter und Selbst » est un
+chapitre entier de son dernier livre), `sexualite` (851), `clinique` et `episteme` (794, Rank
+parlant sans cesse de la psychanalyse elle-même), la qualification passe de **76 % à 81 %** —
+au-dessus de Freud. Le piège Traum/Trauma n'a pas été redécouvert : le motif éprouvé du lexique
+freudien a été repris tel quel.
+
+Ce qui reste non qualifié est désormais, comme chez Freud, du vocabulaire **ordinaire** et des
+noms propres (Schiller, Kyros, Lohengrin), plus l'appareil bibliographique des notes. Le rendement
+des audits par scan est atteint pour cet auteur aussi.
+
 **La preuve par Le Bon.** Le passage au lexique par auteur a été mesuré sur un cas déjà intégré :
 Le Bon était qualifié à **57 %** avec des identifiants freudiens francisés, il l'est à **75 %**
 avec ses propres catégories — sans qu'une ligne du moteur ait changé. Ce n'était pas un lexique à

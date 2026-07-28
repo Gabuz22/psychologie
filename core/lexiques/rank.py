@@ -170,6 +170,87 @@ CONCEPTS = {
             "selbstaendigkeit": ["selbstandig", "unabhangig", "abhangigkeit"],
         },
     },
+    # ------------------------------------------------------------------ LA MORT (audit 2)
+    # 1 310 occurrences — le plus gros manque du premier lexique. Chez Rank la mort n'est pas un
+    # thème parmi d'autres : le héros TUE le père, les frères s'entretuent, l'exposition de
+    # l'enfant est une mise à mort déguisée. Sans ce groupe, un quart de ses récits parlait dans
+    # le vide.
+    "mort": {
+        "label": "Mort, meurtre, deuil",
+        "termes": {
+            # « tot » exclut « total » et « Totem » — deux mots sans rapport que le motif nu
+            # ramassait (leçon des audits freudiens : vérifier les FORMES réellement captées).
+            "tod": ["tod", r"tot(?!al|em)", "sterb", "gestorben", "todlich"],
+            "toetung": ["totung", "mord", "ermord", "erschlag", "opfertod"],
+            "trauer": ["trauer", "klage\\b"],
+            "unterwelt": ["unterwelt", "grab\\b", "graber", "hades", "jenseits\\b"],
+        },
+    },
+    # ------------------------------------------------------------------ LA VIE PSYCHIQUE (audit 2)
+    # Vocabulaire que Rank partage avec la psychologie de son temps, et qui manquait entièrement :
+    # Seele 589, Entwicklung 563, Charakter 492, Gefühl 453. « Charakter und Selbst » est un
+    # chapitre entier de la Genetische Psychologie — l'omettre revenait à ne pas voir son dernier
+    # livre.
+    "vie_psychique": {
+        "label": "Âme, caractère, développement, affect",
+        "termes": {
+            "seele": ["seele", "seelisch", "seelen"],
+            "charakter": ["charakter"],
+            "entwicklung": ["entwicklung", "entwickel", "entwickl"],
+            "gefuehl": ["gefuhl"],
+            "erinnerung": ["erinner", "gedachtnis"],
+            # Le piège Traum/Trauma, déjà mesuré chez Freud : « traum(?!a) » rejetterait
+            # « Traumarbeit ». On discrimine sur la FAMILLE MORPHOLOGIQUE attestée, jamais sur la
+            # lettre suivante. Motif repris tel quel du lexique freudien, où il a été éprouvé.
+            "traum": [r"traum(?!a(?:s?\b|ti(?:sch|sier)|tolog))"],
+            "schlaf": ["schlaf"],
+            "ideal": ["ideal"],
+            # 756 occurrences. Chez le dernier Rank, « Leben » n'est plus un mot ordinaire : il
+            # s'oppose à l'analyse elle-même (« zurück ins Leben », le patient qu'on rend à la
+            # vie plutôt qu'on ne le maintient dans la cure). C'est le tournant vitaliste qui
+            # l'éloigne définitivement de Freud.
+            "leben": ["leben", "lebendig", "lebens"],
+        },
+    },
+    # ------------------------------------------------------------------ SEXUALITÉ (audit 2)
+    # 851 occurrences. Rank ne parle pas de sexualité comme Freud — il l'aborde par la GÉNÉALOGIE
+    # (qui engendre qui, avec qui) plutôt que par la pulsion. D'où un groupe distinct de
+    # `interdit`, qui, lui, porte la transgression.
+    "sexualite": {
+        "label": "Sexualité, génération, différence des sexes",
+        "termes": {
+            "sexualitaet": ["sexual", "sexuell", "geschlechtlich"],
+            "geschlecht": [r"geschlecht(?!lich)"],
+            "zeugung": ["zeugung", "erzeugt", "fortpflanz", "empfangnis"],
+            "kastration": ["kastration"],
+            "libido": ["libido", "libidin"],
+            "narzissmus": ["narziss"],
+        },
+    },
+    # ------------------------------------------------------------------ CLINIQUE (audit 2)
+    # Petit mais réel : Rank reste analyste praticien, surtout dans le Trauma der Geburt.
+    "clinique": {
+        "label": "Névrose et symptôme",
+        "termes": {
+            "neurose": ["neuros", "neurotik", "nervos"],
+            "hysterie": ["hysteri"],
+            "symptom": ["symptom"],
+            "fixierung": ["fixier"],
+            "regression": ["regress"],
+        },
+    },
+    # ------------------------------------------------------------------ MÉTA-DISCOURS (audit 2)
+    # 794 occurrences : Rank parle beaucoup de la psychanalyse elle-même — de ce qu'elle peut,
+    # de ce qu'elle a manqué. C'est là que se joue sa séparation, et le corpus doit pouvoir
+    # retrouver ces passages.
+    "episteme": {
+        "label": "La psychanalyse prise pour objet",
+        "termes": {
+            "psychoanalyse": ["psychoanaly", "psychologi"],
+            "problem": ["problem"],
+            "forschung": ["forschung", "wissenschaft", "erkenntnis"],
+        },
+    },
     # ------------------------------------------------------------------ LE DÉCOR MYTHIQUE
     # Ces éléments ne sont pas des ornements : chez Rank, l'eau est la matrice, l'animal le
     # sauveteur, la montagne l'exposition. Il les lit comme des signes réguliers, et leur
