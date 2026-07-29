@@ -652,8 +652,12 @@ export async function carte(env, { auteur, autre, limite } = {}) {
     : { results: [] };
 
   // CE QUE LA CARTE NE VOIT PAS — servi avec elle, jamais relégué en note de bas de page.
+  // `atomes` compte des atomes DISTINCTS, et `part_touchee` a sa propre colonne : elle était
+  // rangée dans `part_trop_courts` et relue sous alias, si bien que le détournement ne se lisait
+  // nulle part. Le chiffre lui-même était faux de +14,5 % (des côtés d'acte comptés pour des
+  // atomes) — voir `carte.couverture`.
   const totaux = await env.DB.prepare(
-    `SELECT atomes AS atomes_touches, part_trop_courts AS part_touchee
+    `SELECT atomes AS atomes_touches, part_touchee
      FROM carte_couverture WHERE cle IS NULL`).first();
   const muettes = await env.DB.prepare(
     `SELECT c.cle, c.atomes, c.part_trop_courts, o.titre, a.nom AS auteur

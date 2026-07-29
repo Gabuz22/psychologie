@@ -62,9 +62,23 @@ def evenements_de_carte(liens_par_couple, concepts_par_atome):
             noms_a = {c for _, c in ca}
             noms_b = {c for _, c in cb}
             communs = sorted(noms_a & noms_b)
+            # UN TIERS PARTAGÉ INTERDIT D'ORIENTER, ET CELA DOIT SURVIVRE À L'AGRÉGATION.
+            # `qualifier` pose déjà `sens = None` dès qu'un lien nomme des deux côtés une source
+            # extérieure au corpus : les deux auteurs peuvent tenir leur formulation de ce tiers
+            # plutôt que l'un de l'autre. Mais `_unanime` IGNORE les None — c'est ce qu'il faut
+            # pour un verdict pas encore lu, et c'est faux ici, où le None est un refus délibéré.
+            # Mesuré avant correction : 2 actes sur 4 portant une source tierce étaient publiés
+            # ORIENTÉS, alors qu'aucun de leurs liens ne l'était. Un acte mêlant une paire à tiers
+            # et une paire sans tiers héritait du sens de la seconde et effaçait le refus de la
+            # première. Le refus l'emporte, comme au niveau du lien.
+            tierce = any(p["source_tierce"] for p in paires)
             out.append({
                 "auteur_a": auteur_a, "auteur_b": auteur_b, "rang": rang,
                 "poids": len(paires),
+                # Les atomes RÉELLEMENT touchés, pour que la couverture se compte sans surcompte
+                # (voir `couverture`) : un même atome peut appartenir à plusieurs actes.
+                "atomes_a": [p["a"]["id"] for p in paires],
+                "atomes_b": [p["b"]["id"] for p in paires],
                 "contenance_max": evt["contenance_max"],
                 "contenance_moyenne": evt["contenance_moyenne"],
                 "oeuvre_a": paires[0]["a"]["oeuvre"], "oeuvre_b": paires[0]["b"]["oeuvre"],
@@ -74,11 +88,11 @@ def evenements_de_carte(liens_par_couple, concepts_par_atome):
                 # sont UNANIMES : deux paires du même acte qui se contrediraient signaleraient
                 # une erreur de regroupement, et il vaut mieux ne rien dire que trancher.
                 "force": _unanime(p["force"] for p in paires),
-                "sens": _unanime(p["sens"] for p in paires),
-                "sens_lu": _unanime(p.get("sens_lu") for p in paires),
+                "sens": None if tierce else _unanime(p["sens"] for p in paires),
+                "sens_lu": None if tierce else _unanime(p.get("sens_lu") for p in paires),
                 "verdict": _unanime(p.get("verdict") for p in paires),
                 "reclasse_vers": _unanime(p.get("reclasse_vers") for p in paires),
-                "source_tierce": any(p["source_tierce"] for p in paires),
+                "source_tierce": tierce,
                 "concepts_communs": communs,
                 "concepts_a_seul": sorted(noms_a - noms_b),
                 "concepts_b_seul": sorted(noms_b - noms_a),
@@ -268,13 +282,23 @@ def couverture(evenements, atomes, oeuvres):
     S'y ajoute un plafond dur, jamais annoncé jusqu'ici : `comparaison.MOTS_MINIMUM` écarte de
     toute comparaison les atomes de moins de vingt mots — 32,8 % du corpus, et jusqu'à 47,6 % chez
     Karl Abraham. Une œuvre peut donc être « muette » pour cette seule raison.
+
+    DÉFAUT CORRIGÉ, ET IL PORTAIT SUR LE CHIFFRE LE PLUS EN VUE DE LA PAGE. Cette fonction rendait
+    `sum(poids * 2)` : le nombre de CÔTÉS d'acte, non d'atomes. Un atome cité par deux actes était
+    compté deux fois, et le corpus publiait **284 atomes touchés, 0,52 %** là où il y en a **248,
+    soit 0,454 %** — un surcompte de 14,5 % sur la seule mesure dont ce module a la charge, qui est
+    de dire ce que la carte NE voit PAS. La docstring portait déjà le bon chiffre : le code et sa
+    propre documentation se contredisaient depuis le premier jour.
     """
     from . import comparaison
     touches = set()
+    vus = set()
     for e in evenements:
         touches.add(e["oeuvre_a"])
         touches.add(e["oeuvre_b"])
-    atomes_touches = sum(e["poids"] * 2 for e in evenements)
+        vus.update(e.get("atomes_a") or ())
+        vus.update(e.get("atomes_b") or ())
+    atomes_touches = len(vus)
     par_oeuvre = collections.Counter(a["oeuvre"] for a in atomes)
     courts = collections.Counter(a["oeuvre"] for a in atomes
                                  if a.get("nb_mots", 0) < comparaison.MOTS_MINIMUM)

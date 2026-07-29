@@ -897,12 +897,23 @@ async function afficherCarte() {
       { auteur: carteEtat.auteur, autre: carteEtat.autre, limite: 40 });
 
     const cov = r.couverture || {};
+    // `atomes_touches` compte des phrases DISTINCTES : c'était une somme de côtés d'acte, qui
+    // comptait deux fois toute phrase citée par deux actes et annonçait 0,52 % pour 0,45 %.
     $("#carte-couverture").innerHTML = `
       <p class="poids-grappe">${Number(cov.atomes_touches || 0).toLocaleString("fr")} phrases
          touchées — soit ${((cov.part_touchee || 0) * 100).toFixed(2)} % du corpus.</p>
+      <p class="note"><strong>Le plafond est mesuré, et il est bas.</strong> Même en admettant tout
+         ce que le détecteur peut former, on ne dépasse pas 1,2 % du corpus ni 8 couples d'auteurs
+         sur 15. Ce n'est pas un réglage à changer : dans les œuvres absentes de cette page, les
+         citations sont annoncées mais le texte cité n'est pas au corpus — 4 % seulement partagent
+         réellement des mots avec l'auteur qu'elles nomment. Ces auteurs citent par référence, pas
+         par transcription : le corpus porte 248 phrases de reprise textuelle contre environ
+         2 900 de renvoi bibliographique.</p>
       <p class="note">${(cov.muettes || []).length} œuvres n'apparaissent
-         <strong>jamais</strong> dans cette page. Pour chacune, la part de ses phrases trop
-         courtes pour être comparables (le détecteur ignore les phrases de moins de vingt mots) :</p>
+         <strong>jamais</strong> dans cette page — mais la plupart sont visibles ailleurs : sept
+         seulement sont absentes AUSSI de « Qui nomme qui ». Pour chacune, la part de ses phrases
+         trop courtes pour être comparables (le détecteur ignore les phrases de moins de vingt
+         mots) :</p>
       <div class="etiquettes">${(cov.muettes || []).slice(0, 12).map((m) => `
         <span class="etiquette" title="${echapper(m.auteur)}">${echapper(m.titre)}
           <span class="compte">${m.atomes} phrases · ${Math.round(m.part_trop_courts * 100)} % trop courtes</span>

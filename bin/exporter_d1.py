@@ -387,11 +387,16 @@ CREATE TABLE carte_couples (
 -- CE QUE LA CARTE NE VOIT PAS, servi avec elle. Une œuvre absente de la carte ne dit pas que son
 -- auteur n'y cite personne : elle peut être hors d'atteinte. `part_trop_courts` donne la part de
 -- ses phrases écartées d'office par le seuil de vingt mots de la couche de comparaison.
+-- DEUX COLONNES SÉPARÉES, ET C'EST UNE CORRECTION. La ligne de totaux rangeait sa couverture
+-- dans `part_trop_courts`, colonne qui veut dire tout autre chose ; le worker la relisait sous un
+-- alias (« part_trop_courts AS part_touchee ») et le détournement ne se lisait nulle part. Chaque
+-- mesure a désormais sa colonne, et celle qui ne s'applique pas à la ligne vaut NULL.
 CREATE TABLE carte_couverture (
   oeuvre_id INTEGER REFERENCES oeuvres(id),
   cle TEXT,                        -- NULL pour la ligne de totaux
-  atomes INTEGER NOT NULL,
-  part_trop_courts REAL NOT NULL,
+  atomes INTEGER NOT NULL,         -- œuvre muette : ses atomes ; totaux : atomes DISTINCTS touchés
+  part_trop_courts REAL,           -- œuvre muette seulement
+  part_touchee REAL,               -- ligne de totaux seulement
   muette INTEGER NOT NULL DEFAULT 1
 );
 -- USAGE DES MOTS. Un motif est appliqué à TOUS les corpus de sa langue, et on compte. C'est la
@@ -653,10 +658,12 @@ def construire(chemin_sqlite):
 
     cov = carte.couverture(actes, corpus.atomes, corpus.oeuvres)
     for m in cov["muettes"]:
-        db.execute("INSERT INTO carte_couverture VALUES (?,?,?,?,1)",
+        db.execute("INSERT INTO carte_couverture VALUES (?,?,?,?,NULL,1)",
                    (ids_oeuvre[m["oeuvre"]], m["oeuvre"], m["atomes"], m["part_trop_courts"]))
     # Ligne de totaux, sans œuvre : c'est elle qui porte ce que la carte ne voit pas du tout.
-    db.execute("INSERT INTO carte_couverture VALUES (NULL,NULL,?,?,0)",
+    # `atomes` y compte des atomes DISTINCTS — c'était une somme de côtés d'acte, qui comptait
+    # deux fois tout atome cité par deux actes et gonflait la couverture de 14,5 %.
+    db.execute("INSERT INTO carte_couverture VALUES (NULL,NULL,?,NULL,?,0)",
                (cov["atomes_touches"], cov["part_touchee"]))
 
     # ---- usage des mots : chaque sous-concept de chaque lexique, mesuré sur tous les corpus

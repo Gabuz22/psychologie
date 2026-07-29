@@ -553,10 +553,16 @@ Restent à faire :
 3. **Achever le corpus freudien**, si un meilleur fac-similé ou une transcription Wikisource
    apparaît un jour pour l'un des treize textes documentés en §5 de `SYNTHESE_FREUD.md` — sinon,
    la limite est structurelle et documentée, pas une tâche en attente.
-4. **Élargir la couverture de la comparaison.** Les actes de citation ne touchent que 0,5 % des
-   phrases, et 22 œuvres sur 40 n'y apparaissent dans aucun acte. Une part s'explique (langue,
-   phrases trop courtes, OCR) ; le reste pose une question ouverte — est-ce la méthode qu'il faut
-   élargir, ou le corpus qui manque d'auteurs ?
+4. **Élargir la couverture de la comparaison — question TRANCHÉE, et par la mesure :
+   c'est le corpus, pas la méthode.** Six pistes d'élargissement ont été mesurées puis soumises à
+   contradiction ; **cinq sont écartées**, et le détail chiffré est dans
+   [`documentation/COUVERTURE_MESUREE.md`](documentation/COUVERTURE_MESUREE.md). Le plafond absolu de
+   la méthode est de **1,2 % du corpus et 8 couples d'auteurs sur 15** : aucun réglage n'ouvre un
+   seul couple nouveau. La raison est un fait de texte — ces auteurs **citent par référence, pas par
+   transcription** (248 phrases de reprise contre ~2 900 de renvoi bibliographique), et 96 % des
+   citations qu'ils annoncent portent sur un texte **absent du corpus**. Deux défauts de la couche
+   déjà livrée ont été trouvés en chemin et corrigés : la couverture était surcomptée de 14,5 %, et
+   2 actes sur 4 à source tierce étaient publiés orientés contre la doctrine du module.
 5. **Comparer les auteurs plus avant** : l'ontologie est conçue pour accueillir de nouvelles plumes
    et voir comment les courants se recomposent. Attention à ce qui est légalement accessible : Jung
    (mort en 1961) et Klein (1960) ne sont pas dans le domaine public avant 2032 et 2031, et Lacan

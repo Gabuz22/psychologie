@@ -158,6 +158,37 @@ class TestCouverture(unittest.TestCase):
         self.assertEqual(cov["actes_non_lus"], 1)
         self.assertEqual(cov["actes"], 2)
 
+    def test_un_atome_cite_deux_fois_ne_compte_qu_une_fois(self):
+        """DÉFAUT MESURÉ SUR LA MESURE ELLE-MÊME, et sur le chiffre le plus en vue de la page.
+
+        La couverture rendait `somme(poids × 2)` : un nombre de CÔTÉS d'acte. Or un même atome
+        peut appartenir à plusieurs actes — il est alors compté autant de fois. Le corpus publiait
+        284 atomes touchés (0,52 %) là où il y en a 248 (0,454 %) : un surcompte de 14,5 % sur la
+        seule mesure dont ce module a la charge, celle de dire ce que la carte NE voit PAS. La
+        docstring de `couverture` portait déjà le bon chiffre — code et documentation se
+        contredisaient.
+
+        Ici, trois actes couvrent quatre côtés mais seulement TROIS atomes distincts : `x:a1`
+        apparaît dans deux actes.
+        """
+        evts = [{"oeuvre_a": "x", "oeuvre_b": "y", "poids": 1, "verdict": None,
+                 "atomes_a": ["x:a1"], "atomes_b": ["y:b1"]},
+                {"oeuvre_a": "x", "oeuvre_b": "y", "poids": 1, "verdict": None,
+                 "atomes_a": ["x:a1"], "atomes_b": ["y:b2"]}]
+        atomes = [{"oeuvre": "x", "nb_mots": 40} for _ in range(100)]
+        cov = carte.couverture(evts, atomes, {})
+        self.assertEqual(cov["atomes_touches"], 3,
+                         "un atome cité par deux actes a été compté deux fois")
+        self.assertAlmostEqual(cov["part_touchee"], 0.03, places=4)
+
+    def test_la_couverture_se_compte_sur_les_atomes_que_les_actes_declarent(self):
+        """Contre-épreuve du test précédent : sans recouvrement, le compte est bien la somme des
+        côtés — pour qu'on ne « corrige » pas un surcompte en fabriquant un sous-compte."""
+        evts = [{"oeuvre_a": "x", "oeuvre_b": "y", "poids": 2, "verdict": None,
+                 "atomes_a": ["x:a1", "x:a2"], "atomes_b": ["y:b1", "y:b2"]}]
+        cov = carte.couverture(evts, [{"oeuvre": "x", "nb_mots": 40}] * 100, {})
+        self.assertEqual(cov["atomes_touches"], 4)
+
 
 class TestUnanimite(unittest.TestCase):
     def test_deux_paires_qui_se_contredisent_font_taire_l_acte(self):
@@ -171,6 +202,28 @@ class TestUnanimite(unittest.TestCase):
         e = carte.evenements_de_carte({("A", "B"): paires}, {})[0]
         self.assertEqual(e["poids"], 2)
         self.assertIsNone(e["sens"])
+
+    def test_une_source_tierce_dans_une_seule_paire_desoriente_tout_l_acte(self):
+        """DOCTRINE VIOLÉE PAR L'AGRÉGATION, mesurée : 2 des 4 actes portant une source tierce
+        étaient publiés ORIENTÉS, alors qu'aucun de leurs liens ne l'était.
+
+        `comparaison.qualifier` pose `sens = None` dès que les deux passages nomment un auteur
+        extérieur au corpus : chacun peut tenir sa formulation de ce tiers plutôt que de l'autre.
+        Mais `_unanime` IGNORE les None — ce qu'il faut pour un verdict pas encore lu, et ce qui
+        est faux ici, où le None est un refus délibéré de conclure. Un acte mêlant une paire à
+        tiers et une paire sans tiers héritait donc du sens de la seconde et effaçait le refus de
+        la première.
+        """
+        paires = [_paire("x:a1", "y:b1", 1, 1, "Sancho Pansa sagt es mit vielen Woertern hier.",
+                         "Sancho Pansa sagt es mit vielen Woertern hier.",
+                         source_tierce=True, sens=None),
+                  _paire("x:a2", "y:b2", 2, 2, "Noch ein Satz mit vielen Woertern.",
+                         "Noch ein Satz mit vielen Woertern.",
+                         source_tierce=False, sens="a_vers_b")]
+        e = carte.evenements_de_carte({("A", "B"): paires}, {})[0]
+        self.assertTrue(e["source_tierce"], "le tiers d'une seule paire marque tout l'acte")
+        self.assertIsNone(e["sens"], "un acte à source tierce ne doit JAMAIS être orienté")
+        self.assertIsNone(e["sens_lu"], "y compris par une attribution écrite")
 
 
 class TestReserve(unittest.TestCase):

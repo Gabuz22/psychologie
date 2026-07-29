@@ -99,7 +99,10 @@ Chaque couple porte donc la **raison de son silence** :
 
 Et la couverture est affichée **avant** les actes, non après :
 
-- **0,45 % du corpus** touché (248 phrases sur 54 626) ;
+- **0,454 % du corpus** touché (248 phrases sur 54 626) — chiffre corrigé le 2026-07-30 : le code
+  rendait une somme de *côtés d'acte* et annonçait 284 phrases, soit 0,52 %, en comptant deux fois
+  toute phrase citée par deux actes. La docstring de `carte.couverture` portait déjà le bon chiffre.
+  Voir [COUVERTURE_MESUREE.md](COUVERTURE_MESUREE.md) § 1 ;
 - **22 œuvres sur 40 n'y apparaissent jamais** — dont *Totem und Tabu*, *Massenpsychologie und
   Ich-Analyse*, les *Neue Folge*, toute la *Genitaltheorie*, et les 3 627 atomes des *Bausteine III* ;
 - **un tiers des phrases sont trop courtes** pour être comparables (le détecteur écarte d'office
