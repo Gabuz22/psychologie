@@ -66,6 +66,7 @@ export default {
       case "/api/comparaison": return route(() => donnees.comparaison(env, p));
       case "/api/arbre":       return route(() => donnees.arbre(env, p));
       case "/api/usages":      return route(() => donnees.usages(env, p));
+      case "/api/carte":       return route(() => donnees.carte(env, p));
       case "/api/chat":
         if (requete.method !== "POST")
           return json({ erreur: "POST requis" }, 405, false);

@@ -249,3 +249,16 @@ footer { border-top: 1px solid var(--filet); margin-top: 2.5rem; padding: 1.2rem
 /* La ligne de l'auteur qui a défini le motif est mise en retrait visuel, pas en avant : elle est
    haute par construction et ne doit pas se lire comme le résultat de la mesure. */
 .tableau-usage .ligne-lexique { color: var(--gris); }
+
+/* Carte des actes de citation. Les deux passages sont montrés CÔTE À CÔTE : c'est la
+   confrontation des deux orthographes — celle de 1895 et celle d'après la réforme de 1901 —
+   qui rend la reprise vérifiable, et une colonne unique la ferait disparaître. */
+.cote-a-cote { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.cote-a-cote blockquote { margin: .2rem 0 0; padding-left: .7rem;
+  border-left: 2px solid var(--filet); font-family: var(--serif); }
+@media (max-width: 46rem) { .cote-a-cote { grid-template-columns: 1fr; } }
+/* Un couple SANS acte reste affiché, mais en retrait : c'est une absence qualifiée, pas un
+   résultat. Le lecteur doit voir qu'on ne lui cache rien, sans croire qu'on lui montre quelque
+   chose. */
+.carte-silence { opacity: .62; border-style: dashed; }
+.carte-silence h3 { font-weight: 500; }

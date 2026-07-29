@@ -564,6 +564,7 @@ async function demarrer() {
     afficherSignaux(false);
     afficherComparaison();
     afficherUsages();
+    afficherCarte();
     remplirSelect($("#arbre-auteur"),
       (referentiel.auteurs || []).map((a) => a.nom), (n) => [n, n]);
     // Freud d'abord : c'est le corpus le plus riche, donc l'arbre le plus parlant à l'ouverture.
@@ -843,6 +844,16 @@ async function afficherUsages() {
 }
 
 document.addEventListener("click", (e) => {
+  const acte = e.target.closest(".carte-acte");
+  if (acte) {
+    carteEtat.auteur = acte.dataset.a;
+    carteEtat.autre = acte.dataset.b;
+    afficherCarte();
+  }
+  if (e.target.id === "carte-tout") {
+    carteEtat.auteur = carteEtat.autre = "";
+    afficherCarte();
+  }
   const carte = e.target.closest(".carte-couple");
   if (carte) {
     comparaison.auteur = carte.dataset.a;
@@ -860,3 +871,102 @@ $("#usage-mot").addEventListener("change", afficherUsages);
 window.addEventListener("hashchange", gererHash);
 
 demarrer();
+
+// --------------------------------------------------------------------------------------------
+// CARTE DES ACTES DE CITATION.
+//
+// Trois principes d'affichage, chacun tiré d'un défaut mesuré :
+//   • la couverture est montrée AVANT les actes — une œuvre absente peut être hors d'atteinte,
+//     et le lecteur doit le savoir avant de conclure d'un silence ;
+//   • les couples SANS acte sont affichés avec la raison de leur silence ;
+//   • chaque acte donne ses deux passages TELS QU'IMPRIMÉS, orthographe d'époque comprise.
+const carteEtat = { auteur: "", autre: "", charge: false };
+
+async function afficherCarte() {
+  const zone = $("#carte-actes");
+  if (!zone) return;
+  zone.textContent = "chargement…";
+  try {
+    const r = await api("/api/carte",
+      { auteur: carteEtat.auteur, autre: carteEtat.autre, limite: 40 });
+
+    const cov = r.couverture || {};
+    $("#carte-couverture").innerHTML = `
+      <p class="poids-grappe">${Number(cov.atomes_touches || 0).toLocaleString("fr")} phrases
+         touchées — soit ${((cov.part_touchee || 0) * 100).toFixed(2)} % du corpus.</p>
+      <p class="note">${(cov.muettes || []).length} œuvres n'apparaissent
+         <strong>jamais</strong> dans cette page. Pour chacune, la part de ses phrases trop
+         courtes pour être comparables (le détecteur ignore les phrases de moins de vingt mots) :</p>
+      <div class="etiquettes">${(cov.muettes || []).slice(0, 12).map((m) => `
+        <span class="etiquette" title="${echapper(m.auteur)}">${echapper(m.titre)}
+          <span class="compte">${m.atomes} phrases · ${Math.round(m.part_trop_courts * 100)} % trop courtes</span>
+        </span>`).join("")}</div>`;
+
+    $("#carte-couples").innerHTML = (r.couples || []).map((c) => {
+      if (!c.evenements) {
+        const raison = c.silence === "langues"
+          ? `Indétectable : corpus en <strong>${c.langue_a}</strong> et
+             <strong>${c.langue_b}</strong>. Aucune suite de six mots ne peut les relier.`
+          : `Même langue, mais aucun texte partagé trouvé.`;
+        return `<div class="carte carte-silence">
+                  <h3>${echapper(c.auteur_a)} ↔ ${echapper(c.auteur_b)}</h3>
+                  <p class="note">${raison}</p></div>`;
+      }
+      return `<button type="button" class="carte carte-acte"
+                      data-a="${echapper(c.auteur_a)}" data-b="${echapper(c.auteur_b)}">
+        <h3>${echapper(c.auteur_a)} ↔ ${echapper(c.auteur_b)}</h3>
+        <p class="poids-grappe">${c.evenements} acte${c.evenements > 1 ? "s" : ""}
+           <span class="compte">(${c.atomes} phrase${c.atomes > 1 ? "s" : ""})</span></p>
+        <p class="note">${c.lus} relu${c.lus > 1 ? "s" : ""} · ${c.confirmes} confirmé${c.confirmes > 1 ? "s" : ""}
+           · ${c.orientes} orienté${c.orientes > 1 ? "s" : ""}</p></button>`;
+    }).join("");
+
+    $("#carte-filtres").innerHTML = (carteEtat.auteur || carteEtat.autre)
+      ? `<button type="button" id="carte-tout" class="secondaire">← tous les couples</button>`
+      : "";
+
+    zone.innerHTML = (r.actes || []).map(rendreActe).join("")
+      || `<p class="note">Aucun acte pour ce filtre.</p>`;
+    $("#carte-reserve").innerHTML =
+      `${echapper(r.reserve)}<br><br><strong>${echapper(r.ne_pas_conclure)}</strong>`;
+  } catch (e) {
+    zone.innerHTML = `<p class="erreur">Carte indisponible (${e.message}).</p>`;
+  }
+}
+
+function rendreActe(k) {
+  const sens = k.sens_lu || k.sens;
+  const fleche = sens === "a_vers_b" ? `${k.auteur_a} → ${k.auteur_b}`
+    : sens === "b_vers_a" ? `${k.auteur_b} → ${k.auteur_a}` : null;
+  const badges = [
+    `<span class="etiquette">${k.poids} phrase${k.poids > 1 ? "s" : ""}</span>`,
+    k.force === "manifeste" ? `<span class="etiquette">reprise manifeste</span>` : "",
+    // Le sens LU prime sur le sens calculé, mais on dit lequel parle : l'un vient des dates,
+    // l'autre d'une attribution écrite dans le texte.
+    fleche ? `<span class="etiquette">${echapper(fleche)}<span class="compte">${
+      k.sens_lu ? " (déclaré dans le texte)" : " (par les dates)"}</span></span>` : "",
+    k.verdict === "confirme" ? `<span class="etiquette">relu et confirmé</span>` : "",
+    k.verdict === "reclasse" ? `<span class="etiquette">les deux citent un tiers</span>` : "",
+    !k.verdict ? `<span class="etiquette compte">pas encore relu</span>` : "",
+    k.source_tierce ? `<span class="etiquette">source tierce possible</span>` : "",
+  ].filter(Boolean).join(" ");
+
+  const contexte = k.concepts_communs
+    ? `<p class="note">Concepts portés par les <strong>deux</strong> passages :
+         ${echapper(k.concepts_communs)}</p>` : "";
+  const tiers = k.reclasse_vers
+    ? `<p class="note"><strong>Ni l'un ni l'autre :</strong> ${echapper(k.reclasse_vers)}</p>` : "";
+
+  return `<div class="lien-reprise">
+    <div class="actions">${badges}</div>
+    ${tiers}
+    <div class="cote-a-cote">
+      <div><p class="compte">${echapper(k.auteur_a)} · ${echapper(k.oeuvre_a)} (${k.annee_a})
+             · ${echapper(k.id_debut_a)}</p>
+           <blockquote>${echapper(k.citation_a || "—")}</blockquote></div>
+      <div><p class="compte">${echapper(k.auteur_b)} · ${echapper(k.oeuvre_b)} (${k.annee_b})
+             · ${echapper(k.id_debut_b)}</p>
+           <blockquote>${echapper(k.citation_b || "—")}</blockquote></div>
+    </div>
+  </div>`;
+}

@@ -30,7 +30,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from core import agents, comparaison, lexique, ocr, sources, verification  # noqa: E402
+from core import agents, carte, comparaison, lexique, ocr, sources, verification  # noqa: E402
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -163,6 +163,9 @@ def nommer_grappes(grappes):
     return par_rang
 
 SCHEMA = """
+DROP TABLE IF EXISTS carte_couverture;
+DROP TABLE IF EXISTS carte_couples;
+DROP TABLE IF EXISTS carte_actes;
 DROP TABLE IF EXISTS usages;
 DROP TABLE IF EXISTS nominations;
 DROP TABLE IF EXISTS lectures_declarees;
@@ -306,6 +309,66 @@ CREATE TABLE nominations (
   homographe TEXT,
   PRIMARY KEY (auteur_id, auteur_nomme_id)
 );
+-- CARTE DES ACTES DE CITATION. L'unité est l'ACTE — des paires de phrases contiguës des deux
+-- côtés forment un seul acte de citation — et non le couple de concepts. Ce choix n'est pas de
+-- confort : agréger les concepts de part et d'autre donnerait 1 366 « arêtes » là où il y a 107
+-- actes réels, chaque phrase portant 3,5 concepts en moyenne. C'est la même accumulation
+-- combinatoire qui a fait écarter l'appariement de concepts (documentation/APPARIEMENT_ECARTE.md).
+CREATE TABLE carte_actes (
+  id INTEGER PRIMARY KEY,
+  auteur_a INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_b INTEGER NOT NULL REFERENCES auteurs(id),
+  oeuvre_a INTEGER NOT NULL REFERENCES oeuvres(id),
+  oeuvre_b INTEGER NOT NULL REFERENCES oeuvres(id),
+  poids INTEGER NOT NULL,          -- nombre de phrases couvertes ; JAMAIS un produit de concepts
+  contenance_max REAL NOT NULL,
+  contenance_moyenne REAL NOT NULL,
+  id_debut_a TEXT NOT NULL, id_fin_a TEXT NOT NULL,
+  id_debut_b TEXT NOT NULL, id_fin_b TEXT NOT NULL,
+  force TEXT, sens TEXT, sens_lu TEXT, verdict TEXT, reclasse_vers TEXT,
+  source_tierce INTEGER NOT NULL DEFAULT 0,
+  -- La preuve est portée DEUX FOIS. `partage_replie` est la forme normalisée sur laquelle la
+  -- comparaison a travaillé (orthographe d'avant 1901 neutralisée, géminations instables de
+  -- l'OCR ramenées) : elle permet de refaire le calcul. `citation_a` / `citation_b` sont les
+  -- passages TELS QU'ILS SONT IMPRIMÉS de chaque côté : eux seuls permettent de vérifier dans le
+  -- livre. Publier la seule forme repliée était le défaut de la première version — « hattest » y
+  -- devient « hatest », illisible et introuvable dans le texte.
+  partage_replie TEXT,
+  citation_a TEXT,
+  citation_b TEXT,
+  -- Les concepts sont du CONTEXTE, jamais des arêtes. Seuls ceux que les DEUX passages portent
+  -- renseignent ; les deux autres colonnes sont là pour qu'on puisse constater ce qu'un produit
+  -- croisé aurait fabriqué.
+  concepts_communs TEXT,
+  concepts_a_seul TEXT,
+  concepts_b_seul TEXT
+);
+-- Résumé par couple d'auteurs, Y COMPRIS LES COUPLES SANS AUCUN ACTE. `silence` dit pourquoi :
+-- « langues » (indétectable par construction — les corpus français et allemand du projet
+-- partagent UN seul groupe de six mots, alors que Freud consacre un chapitre entier à Le Bon)
+-- ou « aucun_acte ». Taire ces couples, comme le faisait la première version, présentait un
+-- aveuglement de méthode comme un fait de corpus.
+CREATE TABLE carte_couples (
+  auteur_a INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_b INTEGER NOT NULL REFERENCES auteurs(id),
+  evenements INTEGER NOT NULL, atomes INTEGER NOT NULL,
+  manifestes INTEGER NOT NULL, orientes INTEGER NOT NULL,
+  lus INTEGER NOT NULL, confirmes INTEGER NOT NULL,
+  reclasses INTEGER NOT NULL, rejetes INTEGER NOT NULL,
+  source_tierce INTEGER NOT NULL,
+  silence TEXT, langue_a TEXT, langue_b TEXT,
+  PRIMARY KEY (auteur_a, auteur_b)
+);
+-- CE QUE LA CARTE NE VOIT PAS, servi avec elle. Une œuvre absente de la carte ne dit pas que son
+-- auteur n'y cite personne : elle peut être hors d'atteinte. `part_trop_courts` donne la part de
+-- ses phrases écartées d'office par le seuil de vingt mots de la couche de comparaison.
+CREATE TABLE carte_couverture (
+  oeuvre_id INTEGER REFERENCES oeuvres(id),
+  cle TEXT,                        -- NULL pour la ligne de totaux
+  atomes INTEGER NOT NULL,
+  part_trop_courts REAL NOT NULL,
+  muette INTEGER NOT NULL DEFAULT 1
+);
 -- USAGE DES MOTS. Un motif est appliqué à TOUS les corpus de sa langue, et on compte. C'est la
 -- seule comparaison inter-auteurs de concepts que le corpus autorise : elle ne suppose à aucun
 -- moment que deux auteurs veulent dire la même chose, elle mesure qui écrit quel mot.
@@ -359,6 +422,7 @@ CREATE INDEX idx_asc_sous ON atome_sous_concepts(sous);
 CREATE INDEX idx_fonctions_f ON fonctions(fonction);
 CREATE INDEX idx_signaux_s ON signaux(signal);
 CREATE INDEX idx_usages_sc ON usages(sous_concept);
+CREATE INDEX idx_carte_poids ON carte_actes(poids DESC);
 """
 
 
@@ -476,6 +540,7 @@ def construire(chemin_sqlite):
     df_ng = comparaison.frequences_documentaires(index_ng)
 
     noms_auteurs = sorted(par_auteur_atomes)
+    liens_carte = {}
     for i, x in enumerate(noms_auteurs):
         for y in noms_auteurs[i + 1:]:
             bruts = comparaison.reprises(par_auteur_atomes[x], par_auteur_atomes[y], df_ng)
@@ -485,22 +550,34 @@ def construire(chemin_sqlite):
                 continue
             # Les paires contiguës des deux côtés forment un seul ACTE de citation : c'est lui
             # qu'on compte, sans quoi celui qui cite par longs blocs paraîtrait le plus lié.
+            # Chaque lien reçoit son verdict de lecture AVANT tout usage : la table des liens et
+            # la carte doivent voir exactement la même chose, sans quoi le site montrerait deux
+            # comptes différents du même travail.
+            for lien in retenus:
+                # Le verdict est retrouvé par EMPREINTES, jamais par identifiants d'atome :
+                # ceux-ci se décalent à la moindre correction de paratexte en amont.
+                j = verification.verdict_reprise(
+                    lien["a"]["empreinte"], lien["b"]["empreinte"], lus) or {}
+                sens_lu = j.get("sens_lu")
+                # Le verdict a été rendu sur un couple ORDONNÉ (id_a, id_b) que la clé triée a
+                # perdu. Si le calcul présente le couple dans l'autre ordre, le sens lu doit être
+                # retourné — sans quoi on publierait l'emprunt à l'envers.
+                if sens_lu and j.get("id_a") != lien["a"]["id"]:
+                    sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
+                lien["verdict"] = j.get("verdict")
+                lien["sens_lu"] = sens_lu
+                lien["reclasse_vers"] = j.get("vers")
+                lien["motif_lecture"] = j.get("motif")
+                lien["_juge"] = bool(j)
+            liens_carte[(x, y)] = retenus
+
             for rang, evt in enumerate(comparaison.evenements(retenus), 1):
                 for lien in evt["paires"]:
                     ida = ids_atome.get(lien["a"]["id"])
                     idb = ids_atome.get(lien["b"]["id"])
                     if ida is None or idb is None:
                         continue
-                    # Le verdict est retrouvé par EMPREINTES, jamais par identifiants d'atome :
-                    # ceux-ci se décalent à la moindre correction de paratexte en amont.
-                    j = verification.verdict_reprise(
-                        lien["a"]["empreinte"], lien["b"]["empreinte"], lus) or {}
-                    sens_lu = j.get("sens_lu")
-                    # Le verdict a été rendu sur un couple ORDONNÉ (id_a, id_b) que la clé triée
-                    # a perdu. Si le calcul présente le couple dans l'autre ordre, le sens lu doit
-                    # être retourné — sans quoi on publierait l'emprunt à l'envers.
-                    if sens_lu and j.get("id_a") != lien["a"]["id"]:
-                        sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
+                    sens_lu = lien["sens_lu"]
                     db.execute(
                         "INSERT INTO liens_reprise (atome_a, atome_b, auteur_a, auteur_b,"
                         " contenance, force, sens, source_tierce, a_verifier, evenement, partages,"
@@ -508,9 +585,53 @@ def construire(chemin_sqlite):
                         " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                         (ida, idb, ids_auteur[x], ids_auteur[y], lien["contenance"],
                          lien["force"], lien["sens"], int(lien["source_tierce"]),
-                         int(lien["a_verifier"] and not j), rang,
+                         int(lien["a_verifier"] and not lien["_juge"]), rang,
                          " | ".join(lien["partages"][:6]),
-                         j.get("verdict"), sens_lu, j.get("vers"), j.get("motif")))
+                         lien["verdict"], sens_lu, lien["reclasse_vers"],
+                         lien["motif_lecture"]))
+
+    # ---- carte des actes de citation
+    # Elle ne recalcule RIEN : elle regroupe les mêmes liens en actes, et y ajoute ce que la
+    # table des liens ne peut pas porter — le passage recollé, sa forme imprimée des deux côtés,
+    # les concepts communs, et surtout les couples SANS acte avec la raison de leur silence.
+    concepts_par_atome = {}
+    for a in corpus.atomes:
+        cs = {(x["groupe"], x["concept"]) for x in a.get("concepts", [])}
+        if cs:
+            concepts_par_atome[a["id"]] = cs
+    actes = carte.evenements_de_carte(liens_carte, concepts_par_atome)
+    for e in actes:
+        db.execute(
+            "INSERT INTO carte_actes (auteur_a, auteur_b, oeuvre_a, oeuvre_b, poids,"
+            " contenance_max, contenance_moyenne, id_debut_a, id_fin_a, id_debut_b, id_fin_b,"
+            " force, sens, sens_lu, verdict, reclasse_vers, source_tierce, partage_replie,"
+            " citation_a, citation_b, concepts_communs, concepts_a_seul, concepts_b_seul)"
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (ids_auteur[e["auteur_a"]], ids_auteur[e["auteur_b"]],
+             ids_oeuvre[e["oeuvre_a"]], ids_oeuvre[e["oeuvre_b"]], e["poids"],
+             e["contenance_max"], e["contenance_moyenne"],
+             e["id_debut_a"], e["id_fin_a"], e["id_debut_b"], e["id_fin_b"],
+             e["force"], e["sens"], e["sens_lu"], e["verdict"], e["reclasse_vers"],
+             int(e["source_tierce"]), " | ".join(e["partages"][:3]),
+             e["citation_a"], e["citation_b"],
+             ", ".join(e["concepts_communs"]), ", ".join(e["concepts_a_seul"]),
+             ", ".join(e["concepts_b_seul"])))
+
+    langues_carte = comparaison.langues_par_auteur(corpus.atomes, corpus.oeuvres)
+    for c in carte.couples(actes, par_auteur_atomes.keys(), langues_carte):
+        db.execute(
+            "INSERT INTO carte_couples VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (ids_auteur[c["auteur_a"]], ids_auteur[c["auteur_b"]], c["evenements"], c["atomes"],
+             c["manifestes"], c["orientes"], c["lus"], c["confirmes"], c["reclasses"],
+             c["rejetes"], c["source_tierce"], c["silence"], c["langue_a"], c["langue_b"]))
+
+    cov = carte.couverture(actes, corpus.atomes, corpus.oeuvres)
+    for m in cov["muettes"]:
+        db.execute("INSERT INTO carte_couverture VALUES (?,?,?,?,1)",
+                   (ids_oeuvre[m["oeuvre"]], m["oeuvre"], m["atomes"], m["part_trop_courts"]))
+    # Ligne de totaux, sans œuvre : c'est elle qui porte ce que la carte ne voit pas du tout.
+    db.execute("INSERT INTO carte_couverture VALUES (NULL,NULL,?,?,0)",
+               (cov["atomes_touches"], cov["part_touchee"]))
 
     # ---- usage des mots : chaque sous-concept de chaque lexique, mesuré sur tous les corpus
     # Déduite des ATOMES : une table bâtie sur les œuvres ignorerait Josef Breuer, qui est
@@ -614,7 +735,8 @@ def dumper_sql(db, dossier, taille_tranche=3_500_000):
     # fait ÉCHOUER l'export plutôt que de produire une base incomplète.
     tables = ["auteurs", "oeuvres", "concepts", "atomes", "atome_concepts",
               "atome_sous_concepts", "fonctions", "signaux", "grappes", "grappe_concepts",
-              "liens_reprise", "lectures_declarees", "nominations", "usages", "meta"]
+              "liens_reprise", "lectures_declarees", "nominations", "usages",
+              "carte_actes", "carte_couples", "carte_couverture", "meta"]
     reelles = {r[0] for r in db.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
     oubliees = reelles - set(tables)

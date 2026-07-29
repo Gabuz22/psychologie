@@ -26,6 +26,7 @@
   <a href="#signaux" data-vue="signaux">Les auteurs sur eux-mêmes</a>
   <a href="#arbre" data-vue="arbre">Arbre d'un auteur</a>
   <a href="#comparaison" data-vue="comparaison">Entre auteurs</a>
+  <a href="#carte" data-vue="carte">Carte des citations</a>
   <a href="#lecture" data-vue="lecture">Lire une œuvre</a>
   <a href="#methode" data-vue="methode">Méthode</a>
 </nav>
@@ -243,6 +244,38 @@
     et Freud citent abondamment dans leurs travaux sur le mythe.</p>
   <div id="comp-nominations"></div>
   <p id="comp-reserve" class="reserve"></p>
+</section>
+
+<section id="carte">
+  <h2>Où un texte passe d'une œuvre à une autre</h2>
+  <p class="note">Cette page ne montre qu'une chose, et elle la montre en entier : les endroits
+    où <strong>un texte</strong> passe d'une œuvre à une autre. Chaque <em>acte de citation</em>
+    est un passage recopié — repéré par le partage de suites de six mots, puis relu en contexte.
+    Les deux versions sont données <strong>telles qu'elles sont imprimées</strong>, avec leur
+    orthographe d'époque : c'est ce qui permet d'aller vérifier dans le livre.</p>
+  <p class="note"><strong>Le poids d'un acte est un nombre de phrases</strong>, jamais un nombre
+    de concepts. Cette précision est le résultat d'un échec : agréger les concepts de part et
+    d'autre produirait 1 366 « liens » là où il y a 107 actes réels, chaque phrase portant 3,5
+    concepts en moyenne. Un graphe de concepts a été tenté, mesuré, puis
+    <a href="https://github.com/Gabuz22/psychologie/blob/main/documentation/APPARIEMENT_ECARTE.md"
+       rel="noopener">écarté</a>.</p>
+
+  <h3>Ce que la carte ne voit pas</h3>
+  <p class="note">À lire <em>avant</em> les actes, et non après. Une œuvre absente de cette page
+    ne dit pas que son auteur n'y cite personne : elle peut être hors d'atteinte.</p>
+  <div id="carte-couverture"></div>
+
+  <h3>Par couple d'auteurs</h3>
+  <p class="note">Les couples <strong>sans aucun acte</strong> figurent aussi, avec la raison de
+    leur silence. Entre deux langues, la détection est impossible par construction — les corpus
+    français et allemand du projet partagent <em>un seul</em> groupe de six mots, alors même que
+    Freud consacre à Le Bon un chapitre entier.</p>
+  <div id="carte-couples" class="cartes"></div>
+
+  <h3>Les actes</h3>
+  <div class="actions" id="carte-filtres"></div>
+  <div id="carte-actes"></div>
+  <p id="carte-reserve" class="reserve"></p>
 </section>
 
 <section id="lecture">

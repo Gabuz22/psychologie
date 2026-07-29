@@ -135,6 +135,16 @@ NOMS = {
     "Karl Abraham": [r" abraham ", r" abrahams "],
     "Josef Breuer": [r" breuer ", r" breuers ", r" breuersch\w* "],
     "Gustave Le Bon": [r" le bon ", r" le bons "],
+    # OUBLI RÉEL, trouvé en auditant la carte des citations et corrigé le 2026-07-29. Sándor
+    # Ferenczi est entré dans le corpus sans que son nom entre dans cette table : il pesait 16,8 %
+    # des atomes et AUCUN auteur ne pouvait être enregistré comme le nommant. Mesuré après
+    # correction : 80 atomes le nomment (Freud 32, Rank 30, Abraham 18). Le couple
+    # Freud ↔ Ferenczi paraissait donc unidirectionnel — un accident de configuration présenté
+    # comme un fait de texte, ce que ce projet doit précisément éviter.
+    "Sándor Ferenczi": [r" ferenczi ", r" ferenczis ", r" ferenczisch\w* ",
+                        # L'OCR des Bausteine lit régulièrement « Ferenezi » (n pour n, c pour c) :
+                        # relevé dans le texte, non supposé.
+                        r" ferenezi ", r" ferenezis "],
 }
 
 # HOMOGRAPHES CONNUS — un nom d'auteur qui est aussi autre chose. Ils ne sont PAS filtrés

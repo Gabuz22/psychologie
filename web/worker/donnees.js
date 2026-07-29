@@ -579,3 +579,78 @@ const RESERVE_USAGE =
   + "peut soutenir une thèse sans jamais employer le terme qui la nomme, et employer ce terme "
   + "sans cesse pour la combattre. La colonne « lexique » dit qui a défini le motif : la ligne "
   + "de cet auteur est haute par construction, ce sont les AUTRES lignes qui informent.";
+
+
+/** CARTE DES ACTES DE CITATION — les endroits où un texte passe d'une œuvre à une autre.
+ *
+ * L'unité est l'ACTE (des phrases contiguës des deux côtés = un seul acte), jamais le couple de
+ * concepts : agréger les concepts de part et d'autre donnerait 1 366 « arêtes » là où il y a 107
+ * actes réels. Les concepts sont rendus comme CONTEXTE, et seuls ceux que les deux passages
+ * portent ensemble sont présentés comme informatifs.
+ *
+ * Les couples SANS acte sont rendus eux aussi, avec la raison de leur silence — un silence de
+ * méthode (langues différentes, détection impossible) n'est pas un silence de corpus.
+ */
+export async function carte(env, { auteur, autre, limite } = {}) {
+  const lim = Math.min(Math.max(Number(limite) || 40, 1), 200);
+
+  const couples = await env.DB.prepare(
+    `SELECT a.nom AS auteur_a, b.nom AS auteur_b, c.evenements, c.atomes, c.manifestes,
+            c.orientes, c.lus, c.confirmes, c.reclasses, c.rejetes, c.source_tierce,
+            c.silence, c.langue_a, c.langue_b
+     FROM carte_couples c
+     JOIN auteurs a ON a.id = c.auteur_a
+     JOIN auteurs b ON b.id = c.auteur_b
+     ORDER BY c.evenements DESC, a.nom, b.nom`).all();
+
+  const filtres = [], params = [];
+  if (auteur) { filtres.push("(a.nom = ? OR b.nom = ?)"); params.push(auteur, auteur); }
+  if (autre) { filtres.push("(a.nom = ? OR b.nom = ?)"); params.push(autre, autre); }
+  const ou = filtres.length ? "WHERE " + filtres.join(" AND ") : "";
+
+  const actes = await env.DB.prepare(
+    `SELECT k.poids, k.contenance_max, k.force, k.sens, k.sens_lu, k.verdict, k.reclasse_vers,
+            k.source_tierce, k.partage_replie, k.citation_a, k.citation_b,
+            k.concepts_communs, k.concepts_a_seul, k.concepts_b_seul,
+            k.id_debut_a, k.id_fin_a, k.id_debut_b, k.id_fin_b,
+            a.nom AS auteur_a, b.nom AS auteur_b,
+            oa.titre AS oeuvre_a, oa.annee_oeuvre AS annee_a, oa.qualite_source AS source_a,
+            ob.titre AS oeuvre_b, ob.annee_oeuvre AS annee_b, ob.qualite_source AS source_b
+     FROM carte_actes k
+     JOIN auteurs a ON a.id = k.auteur_a
+     JOIN auteurs b ON b.id = k.auteur_b
+     JOIN oeuvres oa ON oa.id = k.oeuvre_a
+     JOIN oeuvres ob ON ob.id = k.oeuvre_b
+     ${ou}
+     ORDER BY k.poids DESC, k.contenance_max DESC LIMIT ?`).bind(...params, lim).all();
+
+  // CE QUE LA CARTE NE VOIT PAS — servi avec elle, jamais relégué en note de bas de page.
+  const totaux = await env.DB.prepare(
+    `SELECT atomes AS atomes_touches, part_trop_courts AS part_touchee
+     FROM carte_couverture WHERE cle IS NULL`).first();
+  const muettes = await env.DB.prepare(
+    `SELECT c.cle, c.atomes, c.part_trop_courts, o.titre, a.nom AS auteur
+     FROM carte_couverture c
+     JOIN oeuvres o ON o.id = c.oeuvre_id
+     JOIN auteurs a ON a.id = o.auteur_id
+     WHERE c.muette = 1 ORDER BY c.atomes DESC`).all();
+
+  return {
+    couples: couples.results,
+    actes: actes.results,
+    couverture: { ...(totaux || {}), muettes: muettes.results },
+    reserve:
+      "Cette carte montre des ACTES DE CITATION — des endroits où un texte passe d'une œuvre à "
+      + "une autre, établis par le partage de suites de six mots et vérifiés par lecture. Elle ne "
+      + "relie pas des CONCEPTS et ne pondère aucune proximité d'idées : un graphe de concepts a "
+      + "été tenté, mesuré, puis écarté. Le poids d'un acte est le nombre de phrases qu'il "
+      + "couvre, jamais un produit de concepts.",
+    ne_pas_conclure:
+      "Ce que la carte ne montre pas ne veut PAS dire que rien n'a eu lieu. Elle touche moins "
+      + "d'un demi pour cent du corpus, plus de la moitié des œuvres n'y apparaissent jamais, et "
+      + "un tiers des phrases sont trop courtes pour être comparables. Entre deux auteurs de "
+      + "langues différentes elle est aveugle par construction — les corpus français et allemand "
+      + "du projet partagent UN seul groupe de six mots, alors même que Freud consacre à Le Bon "
+      + "un chapitre entier. Chaque couple sans acte porte donc la raison de son silence.",
+  };
+}
