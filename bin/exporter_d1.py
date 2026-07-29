@@ -163,6 +163,7 @@ def nommer_grappes(grappes):
     return par_rang
 
 SCHEMA = """
+DROP TABLE IF EXISTS mentions;
 DROP TABLE IF EXISTS carte_couverture;
 DROP TABLE IF EXISTS carte_couples;
 DROP TABLE IF EXISTS carte_actes;
@@ -309,6 +310,30 @@ CREATE TABLE nominations (
   homographe TEXT,
   PRIMARY KEY (auteur_id, auteur_nomme_id)
 );
+-- MENTIONS NOMINALES — la SECONDE couche de la carte, et elle en est presque tout le volume :
+-- 2 216 mentions sur 2 135 phrases, contre 248 phrases d'acte de citation, et 11 couples
+-- d'auteurs contre 6. Le recouvrement entre les deux est quasi nul (1,7 %) : ce ne sont pas deux
+-- mesures du même fait, mais deux faits différents.
+--
+-- ELLES NE SONT JAMAIS FUSIONNÉES AVEC LES ACTES. Un acte est un TEXTE partagé ; une mention est
+-- un NOM écrit. Les additionner ferait exactement l'erreur que la carte a été bâtie pour éviter.
+-- Sans cette couche, pourtant, la carte ment par omission : Ferenczi nomme Freud dans 960 de ses
+-- phrases et ne partage un texte avec lui que dans 9 — la carte des seuls actes le montrerait
+-- comme un satellite lointain.
+--
+-- CE QU'UNE MENTION N'ÉTABLIT PAS : la nature du rapport. Nommer n'est ni suivre, ni approuver,
+-- ni contredire. Le corpus a déjà éprouvé ce piège — un marqueur construit pour repérer les
+-- écarts d'un disciple avec Freud a donné 0 confirmé sur 5, les cinq passages étant des renvois
+-- d'accord. Le passage est donc stocké en entier, pour qu'on aille lire.
+CREATE TABLE mentions (
+  atome_id INTEGER NOT NULL REFERENCES atomes(id),
+  auteur_id INTEGER NOT NULL REFERENCES auteurs(id),         -- celui qui écrit
+  auteur_nomme_id INTEGER NOT NULL REFERENCES auteurs(id),   -- celui qui est nommé
+  -- Avertissement porté par la mention elle-même : « Abraham » désigne aussi le patriarche
+  -- biblique, que Rank et Freud citent abondamment dans leurs travaux sur le mythe. 104 des
+  -- 2 216 mentions sont dans ce cas et ne doivent pas être lues comme des renvois à Karl Abraham.
+  homographe TEXT
+);
 -- CARTE DES ACTES DE CITATION. L'unité est l'ACTE — des paires de phrases contiguës des deux
 -- côtés forment un seul acte de citation — et non le couple de concepts. Ce choix n'est pas de
 -- confort : agréger les concepts de part et d'autre donnerait 1 366 « arêtes » là où il y a 107
@@ -423,6 +448,7 @@ CREATE INDEX idx_fonctions_f ON fonctions(fonction);
 CREATE INDEX idx_signaux_s ON signaux(signal);
 CREATE INDEX idx_usages_sc ON usages(sous_concept);
 CREATE INDEX idx_carte_poids ON carte_actes(poids DESC);
+CREATE INDEX idx_mentions_couple ON mentions(auteur_id, auteur_nomme_id);
 """
 
 
@@ -655,6 +681,17 @@ def construire(chemin_sqlite):
                    (ids_auteur[n["auteur"]], ids_auteur[n["auteur_nomme"]],
                     n["atomes"], n["homographe"]))
 
+    # Les PASSAGES des mentions, un par un. La table `nominations` ci-dessus ne porte que des
+    # comptes ; sans les passages, un lecteur ne peut pas vérifier une seule de ces 2 216
+    # affirmations — et la doctrine du projet est qu'un chiffre non vérifiable ne vaut rien.
+    for auteur, atomes in sorted(par_auteur_atomes.items()):
+        for m in comparaison.mentions(atomes, auteur):
+            aid = ids_atome.get(m["atome"]["id"])
+            if aid is None:
+                continue
+            db.execute("INSERT INTO mentions VALUES (?,?,?,?)",
+                       (aid, ids_auteur[auteur], ids_auteur[m["auteur_nomme"]], m["homographe"]))
+
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
     # Elles sont calculées sur les atomes de SIGMUND FREUD seul, et le resteront tant que la
     # couche de comparaison inter-auteurs n'existe pas. Ce n'est pas un oubli : une partition
@@ -736,7 +773,8 @@ def dumper_sql(db, dossier, taille_tranche=3_500_000):
     tables = ["auteurs", "oeuvres", "concepts", "atomes", "atome_concepts",
               "atome_sous_concepts", "fonctions", "signaux", "grappes", "grappe_concepts",
               "liens_reprise", "lectures_declarees", "nominations", "usages",
-              "carte_actes", "carte_couples", "carte_couverture", "meta"]
+              "mentions", "carte_actes", "carte_couples", "carte_couverture",
+              "meta"]
     reelles = {r[0] for r in db.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
     oubliees = reelles - set(tables)

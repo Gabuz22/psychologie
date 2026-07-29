@@ -143,19 +143,28 @@ configuration présenté comme un fait de texte. Mesuré après correction : **8
 
 ## 6. Ce qui reste ouvert
 
-**Le détecteur de chapitres ne voit pas Ferenczi.** `lectures_declarees` ne compte qu'**une seule
-ligne** dans toute la base, alors que la couche de comparaison désigne la lecture déclarée comme
-« le lien le plus fort du corpus, et le seul qui traverse la barrière des langues ». Ce n'est pas
-un fait de corpus mais un défaut de détecteur, à deux étages : le repérage de chapitre est taillé
-sur le format de la *Traumdeutung*, 46 % des atomes n'ont aucun chapitre, et **les cinq volumes de
-Ferenczi en ont zéro** — 100 % de son corpus. L'audit a relevé dans les sources brutes au moins
-cinq sections de Ferenczi consacrées à un autre auteur, dont « Zur Kritik der Rankschen *Technik
-der Psychoanalyse* » : leur rupture, 81 atomes consécutifs portant 12 mentions de Rank. C'est un
-chantier à part entière.
+**Le détecteur de chapitres a été réparé** (2026-07-29, voir [CHAPITRAGE.md](CHAPITRAGE.md)).
+Il était taillé sur le format de la *Traumdeutung* et laissait 20 œuvres sur 40 sans aucun
+chapitre — dont les cinq volumes de Ferenczi, 100 % de son corpus. Seize œuvres déclarent
+désormais leur propre motif : 295 sections contre 111, atomes sans chapitre ramenés de 46 % à
+13 %, et surtout **sept lectures déclarées contre une**. Dont celle qui justifiait le chantier :
+« Zur Kritik der Rankschen *Technik der Psychoanalyse* », la rupture entre Ferenczi et Rank,
+80 atomes.
 
-**Les mentions nominales sont la moitié manquante.** Elles couvrent 11 couples sur 15 contre 6
-pour les actes, et 2 136 atomes contre 248 — avec un recouvrement quasi nul (1,7 %). Le cas
-Ferenczi est parlant : 9 phrases d'acte contre 1 090 de mention, soit 1 pour 121. Une carte qui
-n'affiche que les actes le montre comme un satellite lointain de Freud, alors qu'il le nomme dans
-une phrase sur dix de son œuvre. Les y intégrer sans les confondre avec des actes — ce sont des
-liens auteur-à-auteur, pas des passages partagés — est l'étape suivante la plus utile.
+**Les mentions nominales sont désormais la seconde couche** (2026-07-29). Elles couvrent 11
+couples sur 15 contre 6 pour les actes, et 2 135 phrases contre 248 — avec un recouvrement quasi
+nul (1,7 %) : ce ne sont pas deux mesures du même fait, ce sont deux faits. Le cas Ferenczi
+justifiait à lui seul le chantier : il nomme Freud dans **960** de ses phrases et ne partage un
+texte avec lui que dans neuf. La carte des seuls actes le montrait comme un satellite lointain.
+
+Elles ne sont **jamais additionnées** aux actes — un nom écrit n'est pas un texte partagé — et
+tous les passages sont stockés, pas un échantillon : un compte qu'on ne peut pas aller lire ne
+vaut rien. 104 des 2 216 mentions portent l'avertissement d'homographe (« Abraham » désigne aussi
+le patriarche biblique, que Rank et Freud citent abondamment dans leurs travaux sur le mythe).
+
+Un oubli réel a été trouvé au passage : `comparaison.NOMS` n'avait **aucun jeton pour Sándor
+Ferenczi**, entré dans le corpus sans que son nom entre dans la table des mentions. Il pèse 16,8 %
+des atomes, et aucun auteur ne pouvait être enregistré comme le nommant — le couple Freud ↔
+Ferenczi paraissait unidirectionnel par accident de configuration. Mesuré après correction :
+**80 atomes le nomment** (Freud 32, Rank 30, Abraham 18). Un test vérifie désormais que tout
+auteur ayant des atomes possède un jeton, pour que l'oubli ne se reproduise pas au prochain.

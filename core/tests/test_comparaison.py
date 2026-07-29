@@ -180,14 +180,37 @@ class TestSurLeCorpus(unittest.TestCase):
         self.assertGreater(lebon[0]["portee_atomes"], 90)
 
     def test_un_intitule_nest_pas_une_amorce_de_texte(self):
-        """DÉFAUT MESURÉ. Le repérage de chapitre prend la ligne suivant le chiffre romain ; pour
-        les œuvres sans intitulé de section, c'est la première PHRASE, tronquée à 90 signes.
-        « II. Ich knüpfe nun an meine früheren Bemerkungen an, … die Breuer'sche Meth » passait
-        alors pour un chapitre consacré à Breuer."""
+        """DÉFAUT MESURÉ, et la règle qui le corrige a dû être RESSERRÉE.
+
+        Le détecteur COMMUN prend la ligne suivant le chiffre romain ; pour une œuvre sans
+        intitulé de section, c'est la première PHRASE, tronquée à 90 signes. « II. Ich knüpfe nun
+        an meine früheren Bemerkungen an, … die Breuer'sche Meth » passait alors pour un chapitre
+        que Freud consacrerait à Breuer.
+
+        La parade était d'exiger une ponctuation finale. Elle valait pour ce détecteur-là, mais
+        seize œuvres déclarent désormais leur propre motif (`sources.MOTIFS_CHAPITRE`), et leurs
+        titres sont de vrais intitulés qui ne se terminent souvent par rien — « Zur Kritik der
+        Rankschen ›Technik der Psychoanalyse‹ » de Ferenczi, sa rupture avec Rank, était écartée
+        par ce filtre. Le corpus ne comptait qu'UNE lecture déclarée là où il en porte sept.
+
+        Ce que ce test protège désormais : un intitulé venu du détecteur COMMUN doit toujours être
+        complet ; un intitulé venu d'un motif déclaré ne doit pas être une phrase tronquée en
+        plein mot — ce qui est le vrai défaut, la ponctuation n'en étant qu'un symptôme.
+        """
+        declarees = set(sources.MOTIFS_CHAPITRE)
         r = agents.AGENTS["lectures"].executer(self.corpus)
+        self.assertGreaterEqual(len(r["chapitres_declares"]), 5,
+                                "les lectures déclarées ont disparu")
         for c in r["chapitres_declares"]:
-            self.assertRegex(c["chapitre"].strip(), r"[.!?»]$",
-                             "intitulé tronqué retenu à tort : %r" % c["chapitre"])
+            titre = c["chapitre"].strip()
+            if c["oeuvre"] not in declarees:
+                self.assertRegex(titre, r"[.!?»]$",
+                                 "intitulé tronqué retenu à tort : %r" % titre)
+            else:
+                # Un motif déclaré peut rendre un titre sans ponctuation, mais jamais une phrase
+                # coupée : le dernier mot doit être entier.
+                self.assertNotRegex(titre, r"\b\w{1,3}$|[a-zäöüß]-$",
+                                    "titre coupé en plein mot : %r" % titre)
 
     def test_les_reprises_sont_orientees_dans_le_bon_sens(self):
         """CONTRÔLE DE COHÉRENCE, non utilisé pour fixer un seuil. Freud précède ses disciples :

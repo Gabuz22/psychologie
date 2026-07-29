@@ -844,6 +844,12 @@ async function afficherUsages() {
 }
 
 document.addEventListener("click", (e) => {
+  const mention = e.target.closest(".carte-mention");
+  if (mention) {
+    carteEtat.auteur = mention.dataset.a;
+    carteEtat.autre = mention.dataset.b;
+    afficherCarte();
+  }
   const acte = e.target.closest(".carte-acte");
   if (acte) {
     carteEtat.auteur = acte.dataset.a;
@@ -927,6 +933,7 @@ async function afficherCarte() {
 
     zone.innerHTML = (r.actes || []).map(rendreActe).join("")
       || `<p class="note">Aucun acte pour ce filtre.</p>`;
+    rendreMentions(r);
     $("#carte-reserve").innerHTML =
       `${echapper(r.reserve)}<br><br><strong>${echapper(r.ne_pas_conclure)}</strong>`;
   } catch (e) {
@@ -969,4 +976,34 @@ function rendreActe(k) {
            <blockquote>${echapper(k.citation_b || "—")}</blockquote></div>
     </div>
   </div>`;
+}
+
+// Les MENTIONS, rendues sous les couples et au-dessus des actes : elles pèsent presque tout le
+// volume de la carte (2 216 phrases contre 248) et les taire la ferait mentir par omission.
+// Elles restent une couche à part — un nom écrit n'est pas un texte partagé.
+function rendreMentions(r) {
+  const zone = $("#carte-mentions");
+  if (!zone) return;
+  const m = r.mentions || [];
+  const max = Math.max(...m.map((x) => x.n), 1);
+  zone.innerHTML = m.map((x) => `
+    <button type="button" class="carte carte-mention"
+            data-a="${echapper(x.auteur)}" data-b="${echapper(x.auteur_nomme)}">
+      <h3>${echapper(x.auteur)} <span class="compte">nomme</span> ${echapper(x.auteur_nomme)}</h3>
+      <p class="poids-grappe">${x.n} phrase${x.n > 1 ? "s" : ""}</p>
+      ${barreProportion(x.n, max)}
+      ${x.homographes ? `<p class="note">dont ${x.homographes} où le nom est un
+         <strong>homographe</strong> — à lire avant de conclure</p>` : ""}
+    </button>`).join("");
+
+  const p = r.mentions_passages || [];
+  $("#carte-mentions-passages").innerHTML = p.length ? `
+    <p class="compte">${p.length} passage${p.length > 1 ? "s" : ""} affiché${p.length > 1 ? "s" : ""}
+       — le texte entier, pour qu'on puisse juger sur pièce.</p>
+    ${p.map((x) => `<div class="lien-reprise">
+        <p class="compte">${echapper(x.auteur)} nomme ${echapper(x.auteur_nomme)} ·
+           ${echapper(x.oeuvre)} (${x.annee_oeuvre}) · ${echapper(x.atome_id)}
+           ${x.homographe ? `· <strong>homographe : ${echapper(x.homographe)}</strong>` : ""}</p>
+        <blockquote>${echapper(x.texte)}</blockquote></div>`).join("")}
+    <p class="reserve">${echapper(r.mentions_reserve || "")}</p>` : "";
 }

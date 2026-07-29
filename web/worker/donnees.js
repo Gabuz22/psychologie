@@ -624,6 +624,33 @@ export async function carte(env, { auteur, autre, limite } = {}) {
      ${ou}
      ORDER BY k.poids DESC, k.contenance_max DESC LIMIT ?`).bind(...params, lim).all();
 
+  // LES MENTIONS — seconde couche, jamais fusionnée avec les actes. Un acte est un TEXTE
+  // partagé ; une mention est un NOM écrit. Les additionner referait l'erreur que cette carte
+  // a été bâtie pour éviter. Mais les taire ferait mentir la carte par omission : Ferenczi
+  // nomme Freud dans 960 phrases et ne partage un texte avec lui que dans 9.
+  const mentions = await env.DB.prepare(
+    `SELECT a.nom AS auteur, b.nom AS auteur_nomme, COUNT(*) AS n,
+            SUM(CASE WHEN m.homographe IS NOT NULL THEN 1 ELSE 0 END) AS homographes
+     FROM mentions m
+     JOIN auteurs a ON a.id = m.auteur_id
+     JOIN auteurs b ON b.id = m.auteur_nomme_id
+     GROUP BY 1, 2 ORDER BY n DESC`).all();
+
+  // Les PASSAGES, quand un couple est demandé : un compte qu'on ne peut pas aller lire ne vaut
+  // rien. Sans filtre on ne les charge pas — 2 216 passages sur une page d'accueil noieraient
+  // les actes, qui sont le sujet de la page.
+  const passages = (auteur || autre) ? await env.DB.prepare(
+    `SELECT x.atome_id, x.texte, o.titre AS oeuvre, o.annee_oeuvre,
+            a.nom AS auteur, b.nom AS auteur_nomme, m.homographe
+     FROM mentions m
+     JOIN atomes x ON x.id = m.atome_id
+     JOIN oeuvres o ON o.id = x.oeuvre_id
+     JOIN auteurs a ON a.id = m.auteur_id
+     JOIN auteurs b ON b.id = m.auteur_nomme_id
+     ${ou}
+     ORDER BY o.annee_oeuvre, x.atome_id LIMIT ?`).bind(...params, lim).all()
+    : { results: [] };
+
   // CE QUE LA CARTE NE VOIT PAS — servi avec elle, jamais relégué en note de bas de page.
   const totaux = await env.DB.prepare(
     `SELECT atomes AS atomes_touches, part_trop_courts AS part_touchee
@@ -638,6 +665,8 @@ export async function carte(env, { auteur, autre, limite } = {}) {
   return {
     couples: couples.results,
     actes: actes.results,
+    mentions: mentions.results,
+    mentions_passages: passages.results,
     couverture: { ...(totaux || {}), muettes: muettes.results },
     reserve:
       "Cette carte montre des ACTES DE CITATION — des endroits où un texte passe d'une œuvre à "
@@ -645,6 +674,14 @@ export async function carte(env, { auteur, autre, limite } = {}) {
       + "relie pas des CONCEPTS et ne pondère aucune proximité d'idées : un graphe de concepts a "
       + "été tenté, mesuré, puis écarté. Le poids d'un acte est le nombre de phrases qu'il "
       + "couvre, jamais un produit de concepts.",
+    mentions_reserve:
+      "Une MENTION est un nom écrit, pas un texte partagé — les deux couches ne sont jamais "
+      + "additionnées. Nommer n'est d'ailleurs ni suivre, ni approuver, ni contredire : le corpus "
+      + "a éprouvé ce piège, un marqueur construit pour repérer les écarts d'un disciple avec "
+      + "Freud n'a rien confirmé sur cinq candidats, les cinq passages étant des renvois "
+      + "d'accord. Le passage est donné en entier pour qu'on aille lire. Attention enfin aux "
+      + "homographes : « Abraham » désigne aussi le patriarche biblique, que Rank et Freud citent "
+      + "abondamment dans leurs travaux sur le mythe — 104 mentions sur 2 216 sont dans ce cas.",
     ne_pas_conclure:
       "Ce que la carte ne montre pas ne veut PAS dire que rien n'a eu lieu. Elle touche moins "
       + "d'un demi pour cent du corpus, plus de la moitié des œuvres n'y apparaissent jamais, et "

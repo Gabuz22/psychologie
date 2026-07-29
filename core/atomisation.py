@@ -47,8 +47,28 @@ _CHAPITRE_FR = re.compile(
     r"^[ \t]*(LIVRE|CHAPITRE)[ \t]+(PREMIER|[IVX]{1,5})[ \t]*\n\s*\n[ \t]*(\S[^\n]{3,90})", re.M)
 
 
-def chapitres(texte, langue="de"):
-    """[(debut, numero, titre)] — repères de chapitre, pour situer chaque atome."""
+def chapitres(texte, langue="de", motif_declare=None):
+    """[(debut, numero, titre)] — repères de chapitre, pour situer chaque atome.
+
+    UN MOTIF PAR ŒUVRE QUAND IL EN FAUT UN. `_CHAPITRE` exige un chiffre romain suivi d'un POINT,
+    seul sur sa ligne, puis une ligne vide. C'est la mise en page de « Die Traumdeutung », et de
+    presque rien d'autre : mesuré, 20 œuvres sur 40 n'avaient AUCUN chapitre, soit 36 % du corpus
+    — dont les cinq volumes de Ferenczi, qui numérote sans point et compose ses titres en
+    capitales. Conséquence en cascade : la « lecture déclarée », que `core/comparaison.py` désigne
+    comme le lien le plus fort du corpus et le seul qui traverse la barrière des langues, ne
+    comptait qu'UNE ligne dans toute la base.
+
+    On ne cherche pas un détecteur universel : il n'y en a pas. Chaque fac-similé a sa propre mise
+    en page, et le projet déclare déjà ses bornes œuvre par œuvre (`debut_corps`,
+    `PARATEXTE_FINAL`, `REGIONS_ECARTEES`). Le motif de chapitre suit la même règle, et chacun a
+    été RELEVÉ dans le texte puis rejoué avant d'être inscrit.
+
+    CONTRAT DU MOTIF DÉCLARÉ. Groupes nommés `t` (titre) et `n` (numéro) s'ils sont présents ;
+    sinon un groupe unique vaut titre, et à partir de deux le premier vaut numéro et les suivants
+    composent le titre.
+    """
+    if motif_declare:
+        return _chapitres_declares(texte, motif_declare)
     if langue == "fr":
         out, livre = [], None
         for m in _CHAPITRE_FR.finditer(texte):
@@ -64,6 +84,29 @@ def chapitres(texte, langue="de"):
         titre = m.group(2).strip()
         if len(titre) > 3:
             out.append((m.start(), m.group(1), titre))
+    return out
+
+
+def _chapitres_declares(texte, motif):
+    """Applique le motif de chapitre propre à une œuvre. Voir le contrat dans `chapitres`."""
+    r = re.compile(motif, re.M)
+    out = []
+    for m in r.finditer(texte):
+        groupes = m.groupdict()
+        if "t" in groupes:
+            numero, titre = groupes.get("n") or "", groupes.get("t") or ""
+        elif r.groups <= 1:
+            numero, titre = "", m.group(1) if r.groups else m.group(0)
+        else:
+            numero = m.group(1) or ""
+            titre = " ".join(g for g in m.groups()[1:] if g)
+        # Les fac-similés laissent passer des barres de scan au milieu des titres ; elles ne sont
+        # pas du texte et n'ont pas à voyager avec le repère.
+        titre = re.sub(r"[|\\/¦]", " ", titre or "")
+        titre = re.sub(r"\s+", " ", titre).strip(" .")
+        numero = re.sub(r"\s+", "", (numero or "")).strip(".")
+        if titre or numero:
+            out.append((m.start(), numero, titre or numero))
     return out
 
 
@@ -175,12 +218,19 @@ def _auteur_de(debut, fin, regions, defaut):
     return meilleur if part_max * 2 > (fin - debut) else defaut
 
 
-def _chapitre_de(position, reperes):
-    """Chapitre courant pour une position donnée (le dernier repère franchi)."""
+def _chapitre_de(position, reperes, declare=False):
+    """Chapitre courant pour une position donnée (le dernier repère franchi).
+
+    `declare` dit si le repère vient d'un motif propre à l'œuvre (relevé dans le texte, éprouvé,
+    rejoué) ou du détecteur commun. La distinction n'est pas décorative : le détecteur commun
+    peut prendre la PREMIÈRE PHRASE d'un chapitre pour son titre quand l'œuvre n'en a pas, et la
+    couche des lectures déclarées doit s'en méfier. Un titre extrait par un motif déclaré, lui,
+    est un vrai intitulé — le lui faire subir le même filtre écarterait des lectures réelles.
+    """
     courant = None
     for debut, numero, titre in reperes:
         if debut <= position:
-            courant = {"numero": numero, "titre": titre}
+            courant = {"numero": numero, "titre": titre, "declare": declare}
         else:
             break
     return courant
@@ -224,7 +274,8 @@ def _atomiser(cle_oeuvre):
     # sera examinée pour d'éventuelles traces de corruption (voir `ocr_suspect` plus bas).
     ocrise = meta.get("provenance") == "archive"
     phrases = segmenter(texte, langue)
-    reperes = chapitres(texte, langue)
+    motif_chapitre = meta.get("motif_chapitre")
+    reperes = chapitres(texte, langue, motif_chapitre)
     regions = contributions(texte, meta, reperes)
     attestation = meta["datation"]
     # Collation : quand un fac-similé de première édition existe ET que l'étalonnage est concluant,
@@ -252,7 +303,7 @@ def _atomiser(cle_oeuvre):
             "debut": p["debut"],
             "fin": p["fin"],
             "nb_mots": p["nb_mots"],
-            "chapitre": _chapitre_de(p["debut"], reperes),
+            "chapitre": _chapitre_de(p["debut"], reperes, bool(motif_chapitre)),
             # Qui écrit RÉELLEMENT cette phrase — un volume peut contenir des contributions,
             # et depuis Le Bon l'auteur du volume n'est plus forcément Freud.
             "auteur": _auteur_de(p["debut"], p["fin"], regions, meta["auteur"]),

@@ -193,6 +193,66 @@ FAC_SIMILES_ECARTES = {
         "chaque volume douteux se discuterait au cas par cas et finirait par entrer."),
 }
 
+# MOTIFS DE CHAPITRE, DÉCLARÉS ŒUVRE PAR ŒUVRE.
+#
+# `atomisation._CHAPITRE` exige un chiffre romain SUIVI D'UN POINT, seul sur sa ligne, puis une
+# ligne vide. C'est la mise en page de « Die Traumdeutung » et de presque rien d'autre : mesuré,
+# 20 œuvres sur 40 n'avaient AUCUN chapitre — 36 % du corpus, dont les cinq volumes de Ferenczi,
+# qui numérote sans point et compose ses titres en capitales.
+#
+# La conséquence était en cascade et invisible : la LECTURE DÉCLARÉE — qu'un chapitre annonce dans
+# son titre qu'il traite d'un autre auteur — ne comptait qu'UNE ligne dans toute la base, alors
+# que `core/comparaison.py` la désigne comme « le lien le plus fort du corpus, et le seul qui
+# traverse la barrière des langues ». Ce n'était pas un fait de corpus mais un aveuglement.
+#
+# ON NE CHERCHE PAS DE DÉTECTEUR UNIVERSEL : il n'y en a pas. Chaque fac-similé a sa mise en page,
+# et le projet déclare déjà ses bornes œuvre par œuvre. Chaque motif ci-dessous a été relevé dans
+# le texte, éprouvé contre ses faux positifs, puis REJOUÉ avant d'être inscrit — ceux qui
+# reculaient par rapport au détecteur commun ont été écartés.
+#
+# Contrat : groupes nommés `t` (titre) et `n` (numéro) s'ils existent ; sinon un groupe unique
+# vaut titre, et à partir de deux le premier vaut numéro et les suivants composent le titre.
+MOTIFS_CHAPITRE = {
+    # bausteine_1 : 17 sections (contre 0) — dont 2 titre(s) nommant un autre auteur :
+    #   Die wissenschaftliche Bedeutung von Freuds „Drei Abhandlungen zur Sexualtheorie“
+    #   Zum 70. Geburtstage Sigmund Freuds Fine Begrüßung
+    'bausteine_1': '^(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){2,}(?P<t>[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])[A-ZÄÖÜÉ„/][A-Za-zÄÖÜäöüß](?:[^\\n]{0,98}?(?:[^\\s.,;:!?)\\]\\d—–][“”»’]?[!*¹]?|-)|[^\\n]{0,90}\\([^\\n]{1,40}[A-Za-zÄÖÜäöü]\\))[ \\t]*\\.?[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){0,6}(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])[A-Za-zÄÖÜäöü„][A-Za-zÄÖÜäöüß](?:[^\\n]{0,98}?(?:[^\\s.,;:!?)\\]\\d—–][“”»’]?[!*¹]?|-)|[^\\n]{0,90}\\([^\\n]{1,40}[A-Za-zÄÖÜäöü]\\))[ \\t]*\\.?[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){0,6}){0,3})(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\((?P<s>[^()\\n]{3,140})\\)[ \\t]*\\n(?:[ \\t]*\\n)*)?(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\((?P<n>[^()\\n]{3,140})\\)[ \\t]*\\.?[ \\t]*\\n|(?=[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\(?(?:Vortrag|Festvortrag|Vorgetragen|Nach einem|Gehalten|Diese Zeilen|Mit diesem|Aus Anla|Antwort auf|Erschienen)[^\\n]{0,130}[^.\\s][ \\t]*\\n))',
+    # bausteine_2 : 36 sections (contre 0) — dont 1 titre(s) nommant un autre auteur :
+    #   Zur Kritik der Rankschen „Technik der   Psychoanalyse”
+    'bausteine_2': '^(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){2,}(?P<t>[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])[A-ZÄÖÜÉ„/][A-Za-zÄÖÜäöüß](?:[^\\n]{0,98}?(?:[^\\s.,;:!?)\\]\\d—–][“”»’]?[!*¹]?|-)|[^\\n]{0,90}\\([^\\n]{1,40}[A-Za-zÄÖÜäöü]\\))[ \\t]*\\.?[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){0,6}(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])[A-Za-zÄÖÜäöü„][A-Za-zÄÖÜäöüß](?:[^\\n]{0,98}?(?:[^\\s.,;:!?)\\]\\d—–][“”»’]?[!*¹]?|-)|[^\\n]{0,90}\\([^\\n]{1,40}[A-Za-zÄÖÜäöü]\\))[ \\t]*\\.?[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){0,6}){0,3})(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\((?P<s>[^()\\n]{3,140})\\)[ \\t]*\\n(?:[ \\t]*\\n)*)?(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\((?P<n>[^()\\n]{3,140})\\)[ \\t]*\\.?[ \\t]*\\n|(?=[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\(?(?:Vortrag|Festvortrag|Vorgetragen|Nach einem|Gehalten|Diese Zeilen|Mit diesem|Aus Anla|Antwort auf|Erschienen)[^\\n]{0,130}[^.\\s][ \\t]*\\n))',
+    # der_kuenstler : 2 sections (contre 0)
+    'der_kuenstler': '\\n[ \\t]*\\n[ \\t]*([A-ZÄÖÜ][A-Za-zÄÖÜäöüß]{2,20}(?:[ \\t]+[A-Za-zÄÖÜäöüß]{2,20}){1,4})\\.[ \\t]*\\n[ \\t]*\\n',
+    # entwicklungsgeschichte_libido : 5 sections (contre 0)
+    'entwicklungsgeschichte_libido': '(?:^[ \\t]*\\n){2}[ \\t]*([IVXL]{1,6})[ \\t]*\\n(?:[ \\t]*\\n)*[ \\t]*([A-ZÄÖÜ][^\\n]{4,70})[ \\t]*\\n(?:(?:[ \\t]*\\n){0,2}[ \\t]*((?=[^\\n]*[A-Za-zÄÖÜäöüß]{3})[^\\n\\W\\d][^\\n]{2,70})[ \\t]*\\n)?[ \\t]*\\n',
+    # genetische_psychologie_2 : 6 sections (contre 0)
+    'genetische_psychologie_2': '\\n[ \\t]*\\n[ \\t]*([A-ZÄÖÜ][a-zäöüß]{3,20}(?:[ \\t]+[a-zäöüßA-ZÄÖÜ][a-zäöüßA-ZÄÖÜ]{1,20}){1,3})(?:\\.[ \\t]*\\n[ \\t]*\\n|[ \\t]*\\n(?:[ \\t]*\\n)+[ \\t]*[„\\"“])',
+    # genitaltheorie : 10 sections (contre 0)
+    'genitaltheorie': '^[ \\t]*\\n(?:[ \\t]*\\n)*[ \\t]*(?P<n>[IVXilvun]{1,5})\\.?[ \\t]*\\n(?:[ \\t]*\\n)*[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?P<t>[A-ZÄÖÜ][A-ZÄÖÜẞ \\t.’-]{8,70}[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?[A-ZÄÖÜ„“”][A-ZÄÖÜẞ„“” \\t.:’-]{2,70}[ \\t]*\\n)?)',
+    # inzest_motiv : 23 sections (contre 7)
+    'inzest_motiv': '\\n[ \\t]*\\n[ \\t]*((?=[^\\n]*[IVXLHYNivxlhyn])[IVXLHYNivxlhyn]{1,6})\\.?[ \\t]*\\n(?:[ \\t]*\\n)*[ \\t]*((?=[^\\n]*[a-zäöüß]{3})[A-ZÄÖÜ][^\\n:]{4,85})[ \\t]*\\n',
+    # klinische_beitraege : 28 sections (contre 6) — dont 1 titre(s) nommant un autre auteur :
+    #   Bemerkungen zu Ferenczis Mitteilung über „Sonntagsneurosen“'.
+    'klinische_beitraege': '(?:^[ \\t]*\\n){7,}(?:[ \\t]*[^\\W\\d]{1,3}[ \\t]*\\n(?:[ \\t]*\\n)+)?([A-ZÄÖÜ][^\\n]{6,52}?(?:(?:[ \\t]*\\n){1,3}[ \\t]*(?:[^\\W\\d\\n]|[„«»“\\"])[^\\n]{2,52}?){1,3}|[A-ZÄÖÜ][^\\n]{6,92}?)[.?,][^\\w\\n]{0,4}\\n[ \\t]*\\n',
+    # lohengrinsage : 7 sections (contre 4)
+    'lohengrinsage': '\\n[ \\t]*\\n[ \\t]*([IVXLUilvxu|]{1,5})\\.?[ \\t]*\\n(?:[ \\t]*\\n)*[ \\t]*(?:(?=[^\\n]{40,})[A-ZÄÖÜ]|([A-ZÄÖÜ][^\\n]{4,60})\\.[ \\t]*\\n[ \\t]*\\n)',
+    # mythus_geburt_helden : 12 sections (contre 0)
+    'mythus_geburt_helden': '\\n[ \\t]*\\n[ \\t]*[^\\w\\n]{0,3}[ \\t]*([A-ZÄÖÜ][a-zäöüß]{2,15})\\.[^\\w\\n]{0,4}[ \\t]*\\n(?:[ \\t]*\\n)*[ \\t]*(?=[^\\n]{40,})[^\\n]*[a-zäöüß]',
+    # neue_folge : 7 sections (contre 0)
+    'neue_folge': '(?m)^[ \\t]*([^\\na-zäöüß]{4,80}?)[ \\t]*\\n[ \\t]*\\n[ \\t]*([IVXLC]{2,8})\\.[ \\t]*VORLESUNG\\.?[ \\t]*$',
+    # populaere_vortraege : 17 sections (contre 0) — dont 2 titre(s) nommant un autre auteur :
+    #   Über Aktual- und Psychoneurosen im Lichte der Freudschen Forschungen und über die Psycho
+    #   Die wissenschaftliche Bedeutung von Freuds „Drei Abhandlungen zur Sexualtheorie“ *
+    'populaere_vortraege': '^(?:[ \\t]*\\n){2,}(?P<t>[ \\t]*(?=[^\\n]*[a-zäöüß]{3})(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])(?![^\\n]*[—–])[A-ZÄÖÜ„][^\\n]{4,84}?[^\\s.,;:!?)\\d—–-][“”»*®’]{0,3}[ \\t]*\\n(?:[ \\t]*(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])(?![^\\n]*[—–])[^\\s\\d([][^\\n]{2,84}?[^\\s.,;:!?)\\d—–-][“”»*®’]{0,3}[ \\t]*\\n){0,2})(?:[ \\t]*\\n){2,}',
+    # segantini : 4 sections (contre 3)
+    'segantini': '(?:^[ \\t]*\\n){2}[ \\t]*(AV|[IVXL]{1,6})\\.[ \\t]*\\n[ \\t]*\\n',
+    # traum_und_mythus : 12 sections (contre 1)
+    'traum_und_mythus': '(?:^[ \\t]*\\n){2}[ \\t]*(Vill|[IVXL]{1,6})\\.[ \\t]+(\\S[^\\n]{3,110})[ \\t]*\\n(?:[ \\t]*([A-ZÄÖÜa-zäöüß][^\\n]{2,90})[ \\t]*\\n)?[ \\t]*\\n(?=(?:[ \\t]*\\n)*[ \\t]*[^\\n]{45,})',
+    # trauma_der_geburt : 11 sections (contre 0)
+    'trauma_der_geburt': '\\n[ \\t]*\\n[ \\t]*([A-ZÄÖÜ][a-zäöüß]{2,12}[ \\t]+[a-zäöüßA-ZÄÖÜ]{4,20}[ \\t]+[A-ZÄÖÜ][a-zäöüß]{4,20})[^\\w\\n]{0,3}[ \\t]*\\n[ \\t]*\\n',
+    # witz : 10 sections (contre 0)
+    'witz': '(?m)(?<=\\n\\n\\n\\n)^[ \\t]*([A-C]|[IVXLC]{1,6})\\.[ \\t]+(\\S[^\\n]{2,88}?)[ \\t]*$(?=\\n\\n\\n)',
+}
+
 # Registre des œuvres. `annee_edition` = ce qu'on LIT ; `annee_oeuvre` = première parution.
 # L'écart entre les deux EST l'incertitude de datation, portée explicitement.
 OEUVRES = {
@@ -921,6 +981,8 @@ def charger(cle):
         texte, r_rogne = ocr.rogner_aux_extremites(texte, _vocabulaire_relu())
         bornage += " ; rognage final : %d lignes en tête, %d en queue" % (
             r_rogne["rogne_tete"], r_rogne["rogne_queue"])
+    if cle in MOTIFS_CHAPITRE:
+        meta["motif_chapitre"] = MOTIFS_CHAPITRE[cle]
     meta.update({
         "cle": cle,
         "langue": meta.get("langue", "de"),

@@ -184,3 +184,56 @@ class TestReserve(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestMentions(unittest.TestCase):
+    """LA SECONDE COUCHE, et elle pèse presque tout le volume de la carte.
+
+    Mesuré : 2 216 mentions sur 2 135 phrases, contre 248 phrases d'acte de citation ; onze
+    couples d'auteurs contre six ; recouvrement entre les deux quasi nul (1,7 %). Ce ne sont pas
+    deux mesures du même fait, ce sont deux faits.
+
+    Sans elle, la carte ment par omission : Ferenczi nomme Freud dans 960 de ses phrases et ne
+    partage un texte avec lui que dans neuf. Une carte des seuls actes le montrerait comme un
+    satellite lointain de Freud.
+    """
+
+    def test_un_auteur_ne_se_nomme_pas_lui_meme(self):
+        from core import comparaison
+        atomes = [{"id": "x:1", "texte": "Nach Freuds Auffassung ist der Traum eine Erfüllung.",
+                   "oeuvre": "x"}]
+        m = comparaison.mentions(atomes, "Sigmund Freud")
+        self.assertEqual(m, [], "se nommer soi-même n'est pas nommer autrui")
+
+    def test_ferenczi_est_dans_la_table_des_noms(self):
+        """OUBLI RÉEL, trouvé en auditant la carte. Sándor Ferenczi est entré dans le corpus sans
+        que son nom entre dans `comparaison.NOMS` : il pesait 16,8 % des atomes et AUCUN auteur
+        ne pouvait être enregistré comme le nommant. Le couple Freud ↔ Ferenczi paraissait donc
+        unidirectionnel — un accident de configuration présenté comme un fait de texte.
+        Mesuré après correction : 80 atomes le nomment."""
+        from core import comparaison
+        self.assertIn("Sándor Ferenczi", comparaison.NOMS)
+        atomes = [{"id": "x:1", "texte": "Wie Ferenczi in seiner Genitaltheorie zeigte.",
+                   "oeuvre": "x"}]
+        m = comparaison.mentions(atomes, "Sigmund Freud")
+        self.assertEqual([x["auteur_nomme"] for x in m], ["Sándor Ferenczi"])
+
+    def test_tous_les_auteurs_du_corpus_ont_un_jeton(self):
+        """Le garde-fou qui empêche l'oubli de se reproduire : tout auteur ayant des atomes doit
+        pouvoir être nommé, sinon la couche des mentions le rend invisible en silence."""
+        from core import comparaison
+        from core.corpus import Corpus
+        auteurs = {a.get("auteur", "Sigmund Freud") for a in Corpus().atomes}
+        manquants = auteurs - set(comparaison.NOMS)
+        self.assertFalse(manquants, "auteurs sans jeton de nom : %s" % sorted(manquants))
+
+    def test_l_homographe_est_porte_par_la_mention(self):
+        """« Abraham » désigne aussi le patriarche biblique, que Rank et Freud citent abondamment
+        dans leurs travaux sur le mythe : 104 mentions sur 2 216 sont dans ce cas. L'avertissement
+        voyage avec la mention, il n'est pas relégué dans une note."""
+        from core import comparaison
+        atomes = [{"id": "x:1", "texte": "Der Traum Abrahams von der Opferung des Sohnes Isaak.",
+                   "oeuvre": "x"}]
+        m = comparaison.mentions(atomes, "Otto Rank")
+        self.assertEqual(len(m), 1)
+        self.assertTrue(m[0]["homographe"], "l'avertissement d'homographe manque")

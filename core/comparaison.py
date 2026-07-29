@@ -191,8 +191,16 @@ def mentions(atomes, auteur_atome):
 # Bemerkungen an, bei meinen Versuchen, die Breuer'sche Meth » passait pour un chapitre que Freud
 # consacrerait à Breuer : le fait est réel — il y parle bien de la méthode de Breuer — mais le
 # présenter comme une déclaration d'édition le surinterprète.
-# Mesuré sur le corpus : 57 intitulés complets retenus, 52 amorces de texte écartées. Le contrôle
-# qui compte : « II. Le Bon's Schilderung der Massenseele. » est conservé.
+# Mesuré alors : 57 intitulés complets retenus, 52 amorces de texte écartées. Le contrôle qui
+# comptait : « II. Le Bon's Schilderung der Massenseele. » était conservé.
+#
+# CE FILTRE NE S'APPLIQUE PLUS QU'AU DÉTECTEUR COMMUN, et la nuance a été payée cher. Seize œuvres
+# déclarent désormais leur propre motif de chapitre (`sources.MOTIFS_CHAPITRE`), relevé dans le
+# texte et rejoué : leurs titres sont de VRAIS intitulés, et beaucoup ne se terminent par aucune
+# ponctuation. Leur imposer ce filtre écartait des lectures bien réelles — « Zur Kritik der
+# Rankschen ›Technik der Psychoanalyse‹ » de Ferenczi, qui est sa rupture avec Rank, ou « Die
+# wissenschaftliche Bedeutung von Freuds ›Drei Abhandlungen zur Sexualtheorie‹ ». Le corpus n'en
+# comptait qu'UNE alors qu'il en porte plusieurs.
 _INTITULE_COMPLET = re.compile(r"[.!?»]\s*$")
 
 
@@ -208,18 +216,25 @@ def lectures_declarees(atomes, auteur_atome):
     ne sont pas écrits dans la même langue. Sans cette dimension, la relation inter-auteurs la
     mieux documentée du corpus — 105 atomes — serait absente de la couche.
     """
-    par_chapitre = {}
+    par_chapitre, declares = {}, set()
     for a in atomes:
         ch = a.get("chapitre")
         if not ch:
             continue
-        cle = ch if isinstance(ch, str) else "%s. %s" % (ch["numero"], ch["titre"])
+        if isinstance(ch, str):
+            cle = ch
+        else:
+            cle = ("%s. %s" % (ch["numero"], ch["titre"])) if ch.get("numero") else ch["titre"]
+            if ch.get("declare"):
+                declares.add(cle)
         par_chapitre.setdefault(cle, []).append(a)
 
     out = []
     for titre, groupe in sorted(par_chapitre.items()):
-        if not _INTITULE_COMPLET.search(titre):
-            continue                      # amorce de texte, pas un intitulé — voir ci-dessus
+        # Le filtre de complétude ne vaut que pour le détecteur COMMUN, qui peut prendre une
+        # amorce de texte pour un titre. Un motif déclaré extrait un vrai intitulé.
+        if titre not in declares and not _INTITULE_COMPLET.search(titre):
+            continue
         plat = aplatir(titre)
         for nomme, jetons in NOMS.items():
             if nomme == auteur_atome:
@@ -228,6 +243,10 @@ def lectures_declarees(atomes, auteur_atome):
                 out.append({
                     "auteur_lu": nomme,
                     "chapitre": titre,
+                    # L'œuvre où se trouve le chapitre. Elle dit aussi d'où vient le repère —
+                    # motif déclaré ou détecteur commun — ce dont dépend la confiance à lui
+                    # accorder, le second pouvant prendre une amorce de texte pour un titre.
+                    "oeuvre": groupe[0]["oeuvre"],
                     "atomes": groupe,
                     "portee": len(groupe),
                     "homographe": HOMOGRAPHES.get(nomme),
