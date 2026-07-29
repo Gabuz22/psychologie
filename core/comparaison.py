@@ -20,13 +20,27 @@ Trois dimensions seulement, retenues parce que chacune se vérifie à l'œil sur
   3. LECTURE DÉCLARÉE — un chapitre annonce dans son TITRE qu'il traite d'un autre auteur.
      Fait d'édition, le plus fort des trois, et le seul qui traverse la barrière des langues.
 
-Ce qui a été ESSAYÉ PUIS ÉCARTÉ pour ce jalon (le détail est dans la documentation) :
-l'appariement de concepts par similarité de voisinage. Non parce que l'idée est mauvaise —
-c'est la plus prometteuse pour la suite — mais parce qu'aucun témoin positif VALIDE n'existe
-aujourd'hui dans la base. Le seul disponible (« un concept comparé à lui-même, coupé en deux
-moitiés ») mesure la stabilité d'échantillonnage d'une signature, pas la correspondance entre
-deux auteurs. Un seuil calibré là-dessus mesurerait la reproductibilité et serait présenté comme
-mesurant l'équivalence. La doctrine du projet interdit exactement cela.
+Ce qui a été ESSAYÉ PUIS ÉCARTÉ, DEUX FOIS : l'appariement de concepts par similarité de
+voisinage. Le premier refus (2026-07-28) tenait à l'absence de témoin positif valide — le seul
+disponible, « un concept comparé à lui-même coupé en deux moitiés », mesure la stabilité d'un
+échantillon et non la correspondance entre deux auteurs.
+
+CE VERROU-LÀ A ÉTÉ LEVÉ le lendemain, et le diagnostic était donc le mauvais. La couche « usage
+des mots » fournit un vrai témoin inter-auteurs : le même motif appliqué à deux corpus distincts.
+Il fonctionne — AUC 0,893, R-précision cent fois le hasard, et le signal survit au retrait des
+mots qui le portent le plus.
+
+LA MÉTHODE A ÉCHOUÉ AILLEURS, et il fallait la construire pour le voir. Sur la tâche réelle — tous
+les concepts de A contre tous ceux de B — la précision est de 6 % au seuil courant. Elle ne
+distingue un mot ni de son synonyme (`behandlung`/`kur` : 0,32) ni de son CONTRAIRE
+(`männlichkeit`/`weiblichkeit` : 0,29, autant que deux occurrences du même mot). Ses plus hauts
+scores sont portés par l'autre moitié du terme (`erogene` validé à 72 % par `zone`). Et la lecture
+des divergences qu'elle produit n'en a confirmé QU'UNE SUR SEIZE : sept étaient des artefacts
+d'œuvre unique, six le même sens appliqué à une autre matière.
+
+Le module de mesure est conservé dans `core/appariement.py`, avec ses témoins ; il n'alimente ni la
+base ni le site. Les chiffres, les cas lus et les quatre conditions pour rouvrir le chantier sont
+dans `documentation/APPARIEMENT_ECARTE.md`. Y revenir sans les lire serait refaire le travail.
 
 LE PIÈGE CENTRAL, MESURÉ AVANT D'ÉCRIRE UNE LIGNE.
 

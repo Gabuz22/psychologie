@@ -11,13 +11,22 @@
     }
   },
   "meta": {
+    "controle_orientations_2026_07_29": "Les 26 liens orientés au second passage de lecture ont été repassés à un contrôle adversarial chargé de chercher une INVERSION — publier un emprunt à l'envers étant pire que ne rien publier. Vérification faite par le champ `auteur` de chaque ATOME et non par le nom du volume, ce qui seul permet d'attribuer correctement les contributions internes (Breuer dans les Studien, Rank dans l'appendice de la Traumdeutung). Résultat : 25 orientations tiennent, AUCUNE inversion, une seule reclassée (tiers : David Spitzer). DEUX RÉSERVES SIGNALÉES PAR LE CONTRÔLE, à instruire : les liens klinische_beitraege:a210 ↔ psychopathologie:a751 (Don Quichotte) et inzest_motiv:a609 ↔ traumdeutung:a2491 (Œdipe) sont orientés par la lecture alors que `comparaison.SOURCES_TIERCES` les marque source_tierce et refuse de les orienter. La lecture montre que les mots partagés sont la prose allemande de Freud et non celle du tiers — mais le garde-fou du code prime tant qu'aucune exception n'est écrite.",
     "convention_sens": "« a_vers_b » = A est la SOURCE et B la reprend. A et B sont donnés par id_a/id_b, jamais par la clé, qui est triée.",
     "couverture": "38 des 63 liens. Trois lots sur six ont échoué sur erreur réseau ; les 25 liens restants sont NON LUS, pas rejetés — ils gardent a_verifier=1.",
+    "lecture_2026_07_29": "Deuxième passage de lecture : les liens « à vérifier » restés non lus au premier passage, plus ceux qu'a fait apparaître l'entrée de Sándor Ferenczi. Les liens ORIENTÉS ont été repassés à un contrôle adversarial chargé de réfuter le sens ; 0 orientations ont été retirées.",
     "methode": "Chaque lien « à vérifier » (contenance entre 0,30 et 0,70) a été relu avec ses atomes voisins des deux côtés, pour retrouver l'attribution que la phrase seule ne porte pas. Le motif cite le texte qui fonde le verdict.",
     "reancrage_2026_07_29": "3 liens réancrés après le retrait des têtes courantes, par appariement vérifié des atomes avant/après.",
     "verifie_par": "Claude (Sonnet 5), lecture en contexte de chaque couple dans la base D1"
   },
   "verdicts": {
+    "03e69d5137adbe2e|b7592dada3f7dd24": {
+      "id_a": "der_kuenstler:a70",
+      "id_b": "witz:a2024",
+      "motif": "Le passage de Rank appartient à un compte rendu suivi des livres de Freud (« Im Anschlusse an die Untersuchungen über den Witz gibt Freud noch die Aufklärung für eine Reihe hierher gehöriger Erscheinungen », der_kuenstler:a68), et l'attribution est dans l'atome immédiatement précédent : « Den Humor, mit dessen Erklärung das Buch schließt, faßt Freud als die am höchsten stehende aller seelischen Abwehrleistungen auf. » (der_kuenstler:a69) — décalque de « Der Humor kann nun als die höchststehende dieser Abwehrleistungen aufgefaßt werden. » (witz:a2023). La phrase suivante reprend alors mot pour mot celle de Freud, en remplaçant seulement son sujet pronominal : « Denn der Humor verschmäht es... » (der_kuenstler:a70) pour « Er verschmäht es... » (witz:a2024). La contenance de 0,391 vient d'un résidu de numérisation inséré au milieu de la phrase de Rank (« Digitized by VjOOQIC ») et de soudures typographiques (« bereitgehaltenen » / « bereit gehaltenen », « zustande » / « zu stande », « so » / « somit ») : motif de score, non motif de rejet. Freud source, Rank reprend.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "03f6abe4bcf6f2c8|a9c9fcf517425e43": {
       "id_a": "inzest_motiv:a613",
       "id_b": "traumdeutung:a2492",
@@ -36,6 +45,13 @@
       "id_a": "traum_und_mythus:a327",
       "id_b": "lohengrinsage:a242",
       "motif": "L'attribution est portée par l'atome précédent de Rank (lohengrinsage:a239) : « Als unmittelbaren Anlaß des Traumes führt Abraham außer dem Zustand der Gravidität folgendes an: »Am Abend hat sie sich von ihrem Arzte… » ; le guillemet ouvert court sur trois phrases et se ferme précisément sur la phrase en cause, suivie du renvoi de page « vor« (S. 23) ». Chez Abraham (a324-327) le passage est son propre protocole de cas. Citation littérale d'Abraham par Rank. La contenance n'est basse que parce que l'atome d'Abraham agrège la phrase suivante (« Der Kanal, der direkt ins Wasser führt = Geburtsweg »), que Rank rejette dans un atome ultérieur (a244).",
+      "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
+    "0ed31a68000fc615|70fac4d73e2fb256": {
+      "id_a": "witz:a545",
+      "id_b": "populaere_vortraege:a781",
+      "motif": "Ferenczi déclare l'emprunt et nomme sa source dans la phrase même : « Ich zitiere nach Freud folgenden „Serenissimuswitz“ » (populaere_vortraege:a781). Le mot d'esprit n'est pas un bien commun de l'époque relayé par les deux : chez Freud il figure sans aucune attribution, à la différence de celui qui le précède immédiatement dans le même atome, marqué « (Nach +Überhorst+, Das Komische, II, 1900.) » (witz:a545) — Freud sait renvoyer à un tiers quand il y en a un, et ici il n'en donne pas. La chute est reprise mot pour mot : « Hat seine Mutter wohl einmal in der Residenz gedient?“ -- „Nein, Durchlaucht,“ lautet die Antwort, „aber mein Vater“ » (witz:a546), repris en populaere_vortraege:a782. Le seul écart est typographique et lexical minime — « auffällig ähnlich sieht » (witz:a545) contre « auffallend ähnlich sieht » (populaere_vortraege:a781). A est la source, B la reprend.",
       "sens_lu": "a_vers_b",
       "verdict": "confirme"
     },
@@ -59,11 +75,45 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "19ca5b96add84402|d51857e07ad02579": {
+      "id_a": "inzest_motiv:a801",
+      "id_b": "traumdeutung:a3587",
+      "motif": "L'attribution est déclarée, mais coupée en deux par un saut de page : la note de Rank commence en inzest_motiv:a796 « Gelegentlich hat Freud, auf Grund seiner Beobachtung, „dali die Personen, die sich von der Mutter bevor- » et se termine dans l'atome jugé, inzest_motiv:a801 : « zugt oder ausgezeichnet wissen, im Leben jene besondere Zuversicht zu sich selbst, jenen unerschütterlichen Optimismus bekunden, die nicht selten als heldenhaft erscheinen und den wirklichen Erfolg erzwingen“ (Traumdtg., 3. Aufl., S. 207, Anmkg.) ». La référence est vérifiable dans la base : traumdeutung:a3587 est bien la fin d'une NOTE — la note (156) du chapitre VI, ouverte en a3578 — et porte la phrase citée : « Ich habe gefunden, daß die Personen, die sich von der Mutter bevorzugt oder ausgezeichnet wissen, im Leben jene besondere Zuversicht zu sich selbst, jenen unerschütterlichen Optimismus bekunden, die nicht selten als heldenhaft erscheinen und den wirklichen Erfolg erzwingen. » Contrôle du tiers, car cette note de Freud cite Rank juste au-dessus (traumdeutung:a3582 : « Vgl. O. _Rank_, Jahrb. II, p. 534 », suivi du songe de César et de l'oracle des Tarquins) : les 21 suites partagées tombent toutes dans la phrase « Ich habe gefunden … », c'est-à-dire dans les mots propres de Freud, aucune dans le passage emprunté à Rank. Pas de reclassement : Freud (id_b) est la source, Rank le cite.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "1ff70cede48c6124|3558efd5cbabec62": {
+      "id_a": "inzest_motiv:a286",
+      "id_b": "traumdeutung:a2465",
+      "motif": "Citation explicite avec référence de page : « Freud sagt darüber in der Traumdeutung (S. 180) weiter: „Nach meinen bereits Zahlzeichen Erfahrungen spielen die Eltern im Kinderseelenleben aller späteren Psychoneurotiker die Hauptrolle » (inzest_motiv:a286) — « Zahlzeichen » y est une corruption d'OCR de « zahlreichen ». Le contexte amont pose la dette dès l'ouverture du chapitre : « In der „Traumdeutung“ (1900) hat Freud zum erstenmal auf den regelmäßigen sexuellen Einschlag im Verhältnis des Kindes zu seinen Eltern hingewiesen » (inzest_motiv:a284), et l'atome précédent cite déjà la même page — « (Traumdeutung, 2. Aufl., 182) » (inzest_motiv:a285). La citation se poursuit après la note de bas de page et se referme deux atomes plus loin sur « was minder deutlich und weniger intensiv in der Seele der meisten Kinder vorgeht.“ » (inzest_motiv:a288), soit traumdeutung:a2465 à a2467. B est la source : « Nach meinen bereits zahlreichen Erfahrungen spielen die Eltern im Kinderseelenleben aller späteren Psychoneurotiker die Hauptrolle » (traumdeutung:a2465).",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "220f779988a652cf|9c3a37cdf87fb594": {
       "id_a": "studien_ueber_hysterie:a241",
       "id_b": "ueber_psychoanalyse:a49",
       "motif": "Freud cite Breuer en toutes lettres dans les conférences de 1910 : le bloc s'ouvre en a48 sur un guillemet (« Es war im Sommer eine Zeit intensiver Hitze gewesen … ») et se referme en a55 sur l'appel de note « Studien über Hysterie, 2. Aufl., p. 26 » ; Breuer est nommé alentour (a23, a37, a58). La reprise couvre huit atomes consécutifs. Le seul écart est orthographique : Breuer écrit « aber so wie es die Lippen berührte », Freud « aber sowie ». Cette soudure d'un mot suffit à détruire six des dix-sept suites de six mots et explique à elle seule un score de 0,647 pour une citation pourtant mot pour mot.",
       "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
+    "227591bea78d7d7f|9520a6c99dea23e6": {
+      "id_a": "inzest_motiv:a402",
+      "id_b": "traumdeutung:a3621",
+      "motif": "Faux positif d'apparat bibliographique : les six suites partagées sont, en totalité, le titre d'un article de Freud et sa référence de revue, sans une seule phrase de pensée en commun. Les deux atomes sont des fragments de notes, non du corps du texte. Côté Rank, inzest_motiv:a402 est la queue d'une note où s'empilent des références hétérogènes : « Kleist\", Wiesbaden 1909. •\"•j Beiträge zur Psychologie des Liebeslebens, I. Über einen besonderen Typus der (3bjektwahl beim Manne (Jahrbuch f. psa. Forschungen, Bd. III, 1911). » — l'atome commence même au milieu d'une référence à Kleist qui appartient à la note précédente. Côté Freud, traumdeutung:a3621 est une auto-citation en fin de renvois : « Zentralblatt für Psychoanalyse, Nr. 1, 1910, sowie: Beiträge zur Psychologie des Liebeslebens, I. Über einen besonderen Typus der Objektwahl beim Manne, Jahrbuch f. Ps.-A., Bd. II, 1910(159). » Ni reclassement vers un tiers (l'ouvrage cité est de Freud lui-même, qui est l'auteur du côté b), ni reprise : la vraie reprise de pensée existe bien chez Rank mais elle est ailleurs, dans le corps du texte (inzest_motiv:a400 « hat Freud jüngst als einen „besonderen Typus der männlichen Objektwahl\" zusammengefaßt »), et ce n'est pas ce lien-ci.",
+      "verdict": "rejete"
+    },
+    "22caafc0fb43f39b|f77e80385e2a7ed1": {
+      "id_a": "inzest_motiv:a1850",
+      "id_b": "witz:a1135",
+      "motif": "Les six suites partagées ne sont ni de Rank ni de Freud : ce sont les mots de Fechner, que les deux auteurs citent chacun de son côté. Côté Rank, la note de bas de page nomme le tiers ET le relais par lequel il y est venu — inzest_motiv:a1846 : « Dieses Prinzip der ästhetischen Lustwirkung findet sich, wie ich nachträglich aus der Arbeit D i 1 t h e v s erfuhr, schon von G. Th. F e c h n e r in seiner „Vorschule der Ästhetik\" vorgebildet. », puis inzest_motiv:a1849 : « Dilthey sagt datübcr (dicht. Schaffen 1. c. S. 37ü) … Hieraus hat F e c ii n e r das folgende ästhetische Prinzip ableiten zu dürfen geglaubt … (I, 50). » — le « nachträglich … erfuhr » est décisif : Rank déclare avoir découvert le principe après coup, par Dilthey, et non chez Freud. Côté Freud, witz:a1135 cite Fechner directement et de première main : « G. Th. +Fechner+ hat in seiner Vorschule der Ästhetik (I. Bd., V) das „Prinzip der ästhetischen Hilfe oder Steigerung“ aufgestellt, das er in folgenden Worten ausführt: „+Aus dem widerspruchslosen Zusammentreffen von Lustbedingungen…+“ ». Aucun des deux ne renvoie à l'autre en ce point : ressemblance par tiers commun. Le champ source_tierce était à False, le calcul n'a rien vu, l'attribution ne figurant que dans les atomes voisins. Le sens calculé b_vers_a est donc caduc et sens_lu reste vide.",
+      "verdict": "reclasse",
+      "vers": "G. Th. Fechner, « Vorschule der Ästhetik » — « Prinzip der ästhetischen Hilfe oder Steigerung » (I. Bd., V ; principe cité I, 50). Auteur hors corpus : pas d'atome propre dans la base ; il est nommé en witz:a1135 et en inzest_motiv:a1846 / a1850. Le relais de Rank n'est pas Freud mais Wilhelm Dilthey, « Das dichterische Schaffen », S. 370 (inzest_motiv:a1847-a1849), lui aussi hors corpus."
+    },
+    "29167270976e878c|33a7eaa108033b26": {
+      "id_a": "jenseits:a310",
+      "id_b": "bausteine_1:a452",
+      "motif": "Freud cite Ferenczi en note, avec titre, revue, année et page : « [15] Auf anderem Wege ist _Ferenczi_ zur Möglichkeit derselben Auffassung gelangt (Entwicklungsstufen des Wirklichkeitssinnes, Internationale Zeitschrift für Psychoanalyse, I, 1913): »Bei konsequenter Durchführung dieses Gedankenganges muß man sich mit der Idee einer auch das organische Leben beherrschenden Beharrungs- resp. Regressionstendenz vertraut machen...« (S. 137.) » (jenseits:a310). Côté Ferenczi, le passage partagé n'est pas une citation d'un tiers mais sa propre note de bas de page 2), appelée par « Dasselbe grausame Spiel wiederholt sich bei jedem neuen Stadium der Entwicklung.? » (bausteine_1:a450) dans l'article réimprimé dont l'en-tête courant est visible sur les atomes voisins (« Entwidlungsstufen des Wirklichkeitssinnes 8 », bausteine_1:a446) ; l'atome mêle cette note à la fin de la note 1) sur Totem und Tabu et à une ligne de pied de page, d'où la contenance basse (0,339) et la coquille « Trendenz » pour « Tendenz ». Le calcul répondait indécidable, faute de fenêtres de datation disjointes (Bausteine est un recueil tardif d'un texte de 1913) ; le texte tranche : Ferenczi est la source nommée, Freud la reprend, sens lu b_vers_a.",
+      "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
     "2c5d93d802ab18cd|cb7d063830d58f6f": {
@@ -101,6 +151,13 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "3423be0e16c74a8b|eba49c63ea045a4a": {
+      "id_a": "der_kuenstler:a35",
+      "id_b": "traumdeutung:a5471",
+      "motif": "Reprise sans guillemets, mais dans un chapitre qui est un compte rendu déclaré de la Traumdeutung : l'ouvrage est nommé six atomes plus haut, der_kuenstler:a29 : « Diese Ergebnisse seiner Traumforschung, die auf allen Gebieten der Psychologie von weittragender Bedeutung sind, legte Freud in der Traumdeutung (Leipzig und Wien, 1900) dar. » ; puis a30 : « Bei der Besprechung der Psychologie der Traumvorgänge kommt Freud zu dem Resultat, daß … » et a31 : « Auf dieser Basis erweitert nun Freud den Einblick in die Psychologie der Neurosen. » L'atome jugé recopie deux phrases consécutives de Freud, chacune retrouvée au même endroit du chapitre VII « Zur Psychologie der Traumvorgänge » : traumdeutung:a5468 « … weil er eine Leistung des Systems ~Ubw~ ist, welches kein anderes Ziel seiner Arbeit als Wunscherfüllung kennt und über keine anderen Kräfte als die der Wunschregungen verfügt », et traumdeutung:a5471 « Und wirklich gipfelt die Theorie aller psychoneurotischen Symptome in dem einen Satze, _daß auch sie als Wunscherfüllungen des Unbewußten aufgefaßt werden müssen_ ». Rank : « Da ferner jeder Traum darum eine Wunscherfüllung ist, weil er eine Leistung des unbewußten ist, das kein anderes Ziel seiner Arbeit als Wunscherfüllung kennt … und tatsächlich gipfelt die Theorie aller psychoneurotischen Symptome in dem einen Satz, daß auch sie als Wunscherfüllungen des Unbewußten aufgefaßt werden müssen. » La contenance de 0,529 tient à la refonte de l'ouverture de phrase et à l'OCR abîmé de a35 (« Da femer ' *^** », « imd », « md »), pas à un doute sur la reprise. Freud (id_b) est la source.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "349a538d8fc4397a|cf866eb2500db195": {
       "id_a": "der_kuenstler:a88",
       "id_b": "drei_abhandlungen:a804",
@@ -122,6 +179,13 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "3928cd06d2305638|84d9268bd8a446f9": {
+      "id_a": "witz:a546",
+      "id_b": "populaere_vortraege:a782",
+      "motif": "L'attribution tient en un atome, celui qui précède immédiatement : « Ich zitiere nach Freud folgenden „Serenissimuswitz“: » (populaere_vortraege:a781), avec guillemet ouvrant qui déborde sur l'atome jugé. Ferenczi reprend l'anecdote dans les mots de Freud, y compris la phrase d'amorce « Serenissimus macht eine Reise durch seine Staaten und bemerkt in der Menge einen Mann » (populaere_vortraege:a781, contre witz:a545). La dépendance est générale et déclarée dans la suite du texte : « Die Lustwirkung der Aktualität ist nach Freud gerade so mit der Freude an der Wiederholung zu erklären » et « so folge ich treu dem Werke Freuds » (populaere_vortraege:a785). La contenance de 0,333 s'explique par la coupe : l'atome de Freud agrège trois exemples successifs (Serenissimus, le teinturier de Karl von Württemberg, la « Retourkutsche ») là où Ferenczi n'en retient qu'un et le commente. Le score bas mesure la longueur de l'atome, pas la fidélité de la reprise. Sens lu : Freud source nommée.",
+      "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
     "3c63c5e9724b04d3|c9f3b0ecdea0caf7": {
       "id_a": "inzest_motiv:a473",
       "id_b": "traumdeutung:a2507",
@@ -129,11 +193,45 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "3f603beaaa38e712|aa4550b82d582b81": {
+      "id_a": "witz:a58",
+      "id_b": "populaere_vortraege:a718",
+      "motif": "Ferenczi annonce dix atomes plus haut qu'il va rendre compte du livre de Freud : populaere_vortraege:a708 « Ich will Sie mit einem Werke Prof. Freuds über den Witz bekannt machen », note résolue en a709 « *** Prof, Freud: Der Witz und seine Beziehung zum Unbewußten » (a710-a712 : « Il. Auflage. Wien 1921 »), et il enchaîne juste avant le passage jugé, populaere_vortraege:a717 : « Hören wir einmal, wie Freud diese „Reduktion“ an einem bekannten Wortspiel demonstriert. » Contrôle de la citation de Heine, puisque la plupart des suites partagées sont les mots du poète : le partage ne s'y limite pas. « seiner beziehungen zum reichen baron rotschild » et « und zuletzt sagt und so wahr » appartiennent à l'encadrement allemand de FREUD, witz:a58 : « … führt +H. Heine+ die köstliche Gestalt des Lotteriekollekteurs und Hühneraugenoperateurs Hirsch-Hyacinth aus Hamburg auf, der sich gegen den Dichter seiner Beziehungen zum reichen Baron Rothschild berühmt und zuletzt sagt » ; Ferenczi le recopie en ne changeant que le tour : « der sich dem Dichter gegenüber seiner Beziehungen zum reichen Baron Rothschild rühmt und zuletzt sagt ». Le désignateur du personnage est repris de même, à la flexion près (« Lotteriekollekteurs und Hühneraugenoperateurs » chez Freud, « Lotteriekollekteur und Hühneraugenoperateur » chez Ferenczi) : un génitif suffit à détruire les suites de six mots, d'où la contenance basse de 0,309. Ce n'est donc pas un partage de citation de Heine, mais la reprise de l'exposé de Freud. Freud (id_a) est la source.",
+      "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
+    "42c068455a1a53cd|ebd934bb92c7397e": {
+      "id_a": "der_kuenstler:a44",
+      "id_b": "psychopathologie:a959",
+      "motif": "Citation littérale de Freud par Rank, avec attribution déclarée en amont et en aval. En amont : « Sehr instruktiv ist die Bemerkung, die er über den Aberglauben macht: „Der Unterschiede zwischen mir und dem Abergläubischen sind zwei... » (der_kuenstler:a42), « er » renvoyant à Freud nommé deux atomes plus haut avec le titre de l'ouvrage (der_kuenstler:a40). La citation traverse a43 puis se ferme dans l'atome litigieux, où Rank renomme immédiatement l'auteur avant d'enchaîner une seconde citation : « ist.\" Aber noch weiter dehnt Freud den Begriff der unbewußten psychischen Projektion aus: „Ich glaube in der Tat, daß ein großes Stück der mythologischen Weltauffassung... » (der_kuenstler:a44) — seconde citation qui reprend psychopathologie:a962. Côté Freud, le passage est son propre raisonnement sur les racines de la superstition (psychopathologie:a958-a960). La contenance basse (0,396) tient seulement à ce que l'atome de Rank agrège deux citations plus le raccord allemand, non à un défaut de la reprise. Freud source, Rank reprend : sens lu b_vers_a.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "49d76b9a33b9cf38|5312431a78bcd5f2": {
+      "id_a": "studien_ueber_hysterie:a2107",
+      "id_b": "studien_ueber_hysterie:a31",
+      "motif": "La citation est réelle — Breuer met bien des guillemets en studien_ueber_hysterie:a2107 : « sogleich und ohne Wiederkehr verschwanden, wenn es gelungen war, die Erinnerung an den veranlassenden Vorgang zu voller Helligkeit zu erwecken … und dem Affect Worte gab“ », et il poursuit la même citation à l'atome suivant, studien_ueber_hysterie:a2109 : « In Umkehrung des Satzes: cessante causa cessat effectus … der Hysterische leide grösstentheils an Reminiscenzen“. » Mais ce qu'il cite n'est pas du Freud : c'est la « Vorläufige Mittheilung » de 1893, CO-SIGNÉE, réimprimée en tête du même volume. Le texte le dit deux fois. studien_ueber_hysterie:a9 porte l'en-tête de la section d'où vient a31 : « I. Ueber den psychischen Mechanismus hysterischer Phänomene. (Vorläufige Mittheilung.) Von Dr. Josef Breuer und Dr. Sigm. » ; et studien_ueber_hysterie:a1 : « Diese „Vorläufige Mittheilung“ wird hier, als die zu illustrirende und zu erweisende These, nochmals abgedruckt. » L'attribution « Freud » de a31 est un défaut du calcul : les métadonnées de l'œuvre ne déclarent que deux régions Breuer (Anna O. et « III. Theoretisches »), tout le reste retombe sur l'auteur du volume. Il n'y a donc pas reprise d'un auteur par l'autre, mais un ouvrage qui se cite lui-même — le piège de la Vorläufige Mitteilung, ici sous sa forme la plus trompeuse : non pas le doublon du texte réimprimé, mais Breuer citant en propres termes le texte qu'il a co-signé. Pas de sens donné : l'orienter reviendrait à affirmer un emprunt qui n'existe pas.",
+      "verdict": "rejete"
+    },
     "4fc1d3d1aa034c51|adebf5c1593421ac": {
       "id_a": "inzest_motiv:a469",
       "id_b": "traumdeutung:a2483",
       "motif": "L'attribution est incluse dans la phrase même, en incise : « Sein Schicksal, heißt es in der Traumdeutung weiter, ergreift uns nur darum, weil es auch das unserige hätte werden können … ». La citation se poursuit sur les atomes a470-a472 (littéraux : « Uns allen vielleicht war es beschieden, die erste sexuelle Regung auf die Mutter… ») et se ferme sur la référence « (l. c., S. 182) ». Reprise citée, abrégée par points de suspension.",
       "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "5087a4f901d22a01|63e49f68d14101c6": {
+      "id_a": "traum_und_mythus:a313",
+      "id_b": "lohengrinsage:a238",
+      "motif": "Rank reproduit mot pour mot le rêve de grossesse publié par Abraham. Le guillemet ouvrant est neuf atomes plus haut : « Er lautet: »Ich bin allein in einem länglichen Zimmer. » (lohengrinsage:a229), et la citation court sans interruption jusqu'au guillemet fermant de l'atome litigieux. L'attribution que la phrase partagée ne porte pas est dans le même atome, juste après la fermeture : « Als unmittelbaren Anlaß des Traumes führt Abraham außer dem Zustand der Gravidität folgendes an » (lohengrinsage:a238), redite quatre atomes plus loin : « Aus der Analyse hebt Abraham nur die wesentlichsten Ergebnisse der nicht vollständig durchgeführten Deutungsarbeit hervor » (lohengrinsage:a242). Côté Abraham, le rêve est son propre matériel clinique, suivi de son commentaire : « Die Träumerin ist seit einiger Zeit verheiratet und befindet sich im Anfang der Gravidität » (traum_und_mythus:a313). Pas de tiers : le tiers apparent, la rêveuse, est une patiente d'Abraham, pas une source citée en commun. Abraham est donc la source nommée, Rank la reprend : sens lu a_vers_b, conforme au calcul.",
+      "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
+    "51d95c63d8306e99|5e73d3d7554ed71c": {
+      "id_a": "traum_und_mythus:a307",
+      "id_b": "lohengrinsage:a232",
+      "motif": "Reprise déclarée, attribution trouvée de part et d'autre en remontant de quelques atomes. Côté Abraham, le rêve est son propre matériel clinique, introduit en traum_und_mythus:a294 : « Der Traum, welchen mir eine Bekannte mitteilte, lautet wie folgt: »Ich bin allein in einem länglichen Zimmer. » — l'analyse qui suit (a313 « Die Träumerin ist seit einiger Zeit verheiratet und befindet sich im Anfang der Gravidität. ») est de sa main. Côté Rank, la citation est nommée et paginée quelques atomes après l'atome apparié : lohengrinsage:a238 « Als unmittelbaren Anlaß des Traumes führt Abraham außer dem Zustand der Gravidität folgendes an », lohengrinsage:a241 « (S. 23) », puis lohengrinsage:a242 « Aus der Analyse hebt Abraham nur die wesentlichsten Ergebnisse der nicht vollständig durchgeführten Deutungsarbeit hervor ». Corroboration externe dans un troisième texte du corpus, traumdeutung:a3613 : « Einen weiteren Geburtstraum erzählt _Abraham_ von einer jungen, ihrer ersten Entbindung entgegensehenden Frau. » Le sens calculé a_vers_b est donc confirmé par le texte : Abraham source, Rank reprend. La contenance de 0,667 tient à une variante lexicale (« Unterkunft zu geben » chez Abraham, « Unterkunft zu gewähren » chez Rank) et à une coquille d'OCR (« olıne » pour « ohne »), non à une différence de fond.",
+      "sens_lu": "a_vers_b",
       "verdict": "confirme"
     },
     "52154a5912d60542|793d5d87a28fce92": {
@@ -150,10 +248,24 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "5312431a78bcd5f2|e065ad662810fb8f": {
+      "id_a": "studien_ueber_hysterie:a2107",
+      "id_b": "studien_ueber_hysterie:a2419",
+      "motif": "Aucun des deux passages ne reprend l'autre : tous deux citent, entre guillemets, la « Vorläufige Mittheilung » de 1893 que les Studien réimpriment en tête. Côté B, l'atome immédiatement précédent porte l'attribution — « Wir haben in der „Vorläufigen Mittheilung“ berichtet, dass sich uns während der Forschung nach der Aetiologie hysterischer Symptome auch eine therapeutische Methode ergeben hat » (studien_ueber_hysterie:a2418) — et la citation se referme sur la pagination « (p. 4.) » (studien_ueber_hysterie:a2419). Côté A, Breuer ouvre lui aussi le guillemet en pleine phrase : « nach jahrelangem Bestände „sogleich und ohne Wiederkehr verschwanden » (studien_ueber_hysterie:a2107), et poursuit deux atomes plus loin par une seconde citation du même texte, « In Umkehrung des Satzes: cessante causa cessat effectus » (studien_ueber_hysterie:a2109). La source commune est retrouvée dans la base : « Wir fanden nämlich, anfangs zu unserer grössten Ueberraschung, dass die einzelnen hysterischen Symptome sogleich und ohne Wiederkehr verschwanden, wenn es gelungen war, die Erinnerung an den veranlassenden Vorgang zu voller Helligkeit zu erwecken » (studien_ueber_hysterie:a31). Cas du corpus se rapprochant de lui-même.",
+      "verdict": "reclasse",
+      "vers": "Breuer & Freud, « Über den psychischen Mechanismus hysterischer Phänomene (Vorläufige Mittheilung) », 1893, réimprimée en tête du volume — studien_ueber_hysterie:a31"
+    },
     "55de9bda9e0212ca|5ffcfb9c6f6029b8": {
       "id_a": "der_kuenstler:a74",
       "id_b": "drei_abhandlungen:a753",
       "motif": "Rank résume au discours indirect le chapitre récapitulatif des Drei Abhandlungen, annoncé en a71 : « so ist auch der Keim seines jüngsten Werkes, der drei Abhandlungen zur Sexualtheorie (Leipzig und Wien, 1905) ». La proposition est reprise mot pour mot, subjonctif compris : « daß der Geschlechtstrieb des Erwachsenen durch die Zusammenfassung vielfacher Regungen des Kinderlebens zu einer Einheit, einer Strebung mit einem einzigen Ziel entstehe », Rank n'ajoutant que la glose « dem Begattungsakt ». La filiation est encore visible à l'atome a77, « Freud wendet sich nun der Betrachtung des Sexuallebens im Kindesalter zu », décalque de la fin de drei_abhandlungen:a753.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "5f77314b2082bcfc|6e594d4fdfcbebf4": {
+      "id_a": "klinische_beitraege:a2202",
+      "id_b": "drei_abhandlungen:a373",
+      "motif": "Abraham cite Freud avec référence de page explicite, à l'intérieur d'une note de bas de page de sa polémique contre Jung : « 1 Ich zitiere wörtlich (Drei Abhandlungen zur Sexualtheorie, Seite 37): „Es ist ferner deutlich, daß die Handlung des lutschenden Kindes durch das Suchen nach einer — bereits erlebten und nun erinnerten Lust bestimmt wird... . » (klinische_beitraege:a2202). La citation se poursuit sur les atomes suivants, toujours mot pour mot (klinische_beitraege:a2203-a2205 contre drei_abhandlungen:a375-a376). Le contexte amont confirme l'usage : Abraham oppose à Jung ce que Freud a réellement écrit — « Was Jung zitiert, deckt sich mit Freuds Ansicht von der Bedeutung des Lutschens des Kindes » (klinische_beitraege:a2199). Côté Freud, le passage est son texte propre, dans le développement sur l'autoérotisme (drei_abhandlungen:a373). Freud est la source déclarée, Abraham la reprend : sens lu b_vers_a, conforme au calcul.",
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
@@ -171,12 +283,26 @@
       "verdict": "reclasse",
       "vers": "Sigmund Freud, Die Traumdeutung (1900) — traumdeutung:a2470"
     },
+    "693ceed268a39a42|b1d67b4e7a260432": {
+      "id_a": "traum_und_mythus:a127",
+      "id_b": "inzest_motiv:a460",
+      "motif": "Abraham et Rank ne se doivent rien : ils reproduisent l'un et l'autre le résumé de la légende d'Œdipe tel que Freud l'a rédigé dans la Traumdeutung. L'attribution est portée par l'atome précédant A — « Ich zitiere den folgenden Passus wörtlich nach Freud.!) » (traum_und_mythus:a126) — et l'appel de note se résout dans A même : « !) Traumdeutung, Seite 180f. » (traum_und_mythus:a127). Côté Rank, la note de bas de page située quelques atomes plus haut déclare la même dette : « Die zum Ödipusproblem hier angeführten Darlegungen Freuds sind den Seiten 176 u. ff. der „Traumdeutung“ (1900) entnommen (2. Auflage, 1909, S. 185 u. ff.) » (inzest_motiv:a452), Rank réenchâssant ensuite la phrase dans son propre récit — « Die Sage, der Sophokles bei seiner dramatischen Schöpfung ziemlich treu folgte, erzählt » (inzest_motiv:a459). Les mots partagés sont mot pour mot ceux du tiers : « Er wird gerettet und wächst als Königssohn an einem fremden Hofe auf, bis er, seiner Herkunft unsicher, selbst das Orakel befragt und von ihm den Rat erhält, die Heimat zu meiden, weil er der Mörder seines Vaters und der Ehegemahl seiner Mutter werden müßte » (traumdeutung:a2470).",
+      "verdict": "reclasse",
+      "vers": "Sigmund Freud, Die Traumdeutung (résumé de la légende d'Œdipe) — traumdeutung:a2470"
+    },
     "6bfa5a53f8da535b|ebd07317c04e5ac1": {
       "id_a": "der_kuenstler:a61",
       "id_b": "witz:a1427",
       "motif": "L'attribution est de rang chapitre : Rank a annoncé à der_kuenstler:a48 « Diesem Nachweise gilt Freuds nächstes Buch: Der Witz und seine Beziehung zum Unbewußten (Leipzig und Wien, 1905) », et résume ce livre depuis. L'atome a61 reprend la thèse que Freud avait lui-même mise en relief typographique dans witz:a1427 (« +Ein vorbewußter Gedanke wird für einen Moment der unbewußten Bearbeitung überlassen, und deren Ergebnis alsbald von der bewußten Wahrnehmung erfaßt.+ ») ; Rank écrit : « …daß ein vorbewußter Gedanke für einen Moment der unbewußten Bearbeitung überlassen und deren Ergebnis alsbald von der bewußten Wahrnehmung erfaßt wird. » Seule la construction de la tête de phrase change (indépendante chez Freud, complétive chez Rank) : c'est la reprise littérale d'une formule que Freud avait marquée comme sa conclusion.",
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
+    },
+    "6f18f05f1abe6fd9|fb30f66271599ce6": {
+      "id_a": "traum_und_mythus:a89",
+      "id_b": "inzest_motiv:a293",
+      "motif": "Abraham et Rank ne se doivent rien : ils citent tous deux la même phrase de Freud. Abraham signe la sienne à la fin de l'atome, « ...wenig anderes gemein hat» (Freud). » (traum_und_mythus:a89) ; Rank annonce la sienne, « In der ,, Traumdeutung\" heißt es: » (inzest_motiv:a293), et donne la référence deux atomes plus loin, « (2. Aufl., 179 f.) » (inzest_motiv:a295). L'original a été retrouvé dans la base : « Wer so spricht, erwägt nicht, daß die Vorstellung des Kindes vom »Totsein« mit der unserigen das Wort und dann nur noch _wenig_ anderes gemein hat. » (traumdeutung:a2410), sous l'intertitre « Die Vorstellung des Kindes vom »Totsein«. » (traumdeutung:a2409). Abraham en conserve même l'incipit « Wer so spricht, erwägt nicht » que Rank, lui, coupe — deux prélèvements indépendants sur la source, non un emprunt de l'un à l'autre.",
+      "verdict": "reclasse",
+      "vers": "Sigmund Freud, Die Traumdeutung — atome traumdeutung:a2410"
     },
     "6fbabbfbe0ed9522|b6fc1cb631e962f9": {
       "id_a": "klinische_beitraege:a2207",
@@ -185,10 +311,24 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "745bd1f2bc160197|a0c644a6b0adc6cc": {
+      "id_a": "der_kuenstler:a46",
+      "id_b": "psychopathologie:a964",
+      "motif": "Citation littérale, ouverte deux atomes plus haut et attribuée en toutes lettres. Le guillemet ouvrant et le nom sont en der_kuenstler:a44 : « Aber noch weiter dehnt Freud den Begriff der unbewußten psychischen Projektion aus: „Ich glaube in der Tat, daß ein großes Stück der mythologischen Weltauffassung, die weit bis in die modernsten Religionen hineinreicht, nichts anderes ist als in die Außenwelt projizierte Psycholo[gie] » ; la citation court sur a45 et se ferme dans l'atome jugé, der_kuenstler:a46 : « … die Metaphysik in Metapsychologie umzusetzen.“ » L'ouvrage repris est nommé six atomes plus haut, der_kuenstler:a40 : « Diesem Nachweise ist F r e u d s nächste Arbeit :ZurPsychopathologie [des Alltagslebens] ». Côté Freud, l'enchaînement psychopathologie:a962-a963-a964 est continu et de sa main (chapitre X, « Determinismus. -- Zufalls- und Aberglauben »), a962 : « Ich glaube in der Tat, dass ein grosses Stück der mythologischen Weltauffassung … nichts anderes ist als in die Aussenwelt projizierte Psychologie. » Le texte donne le sens : Freud (id_b) est la source, Rank le cite.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "768aeebe592eb1cb|8a3c62d806adb6bf": {
       "id_a": "der_kuenstler:a71",
       "id_b": "drei_abhandlungen:a746",
       "motif": "Rank nomme sa source dans l'atome même : « Li [In] der Sexualtheorie geht Freud von den Abirrungen des Geschlechtstriebes in bezug auf sein Objekt und sein Ziel aus und führt als Ergebnis seiner psychoanalytischen Untersuchungen an, daß… » — décalque de drei_abhandlungen:a744 (« Wir sind von den Abirrungen des Geschlechtstriebes in bezug auf sein Objekt und sein Ziel ausgegangen »). La suite reprend mot à mot a745-a746 : « bei den Psychoneurotikern, einer zahlreichen und den Gesunden nicht ferne stehenden Menschengruppe, die Neigungen zu allen Perversionen als unbewußte Mächte nachweisbar sind und sich als Symptombildner verraten ». L'atome suivant de Rank (a72) achève la phrase de Freud : « Die Neurose ist also gleichsam ein Negativ der Perversion. » Rank suit la Zusammenfassung des Drei Abhandlungen phrase à phrase.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "7c59eb2e599ba1a6|bfed678e7aa4391d": {
+      "id_a": "der_kuenstler:a272",
+      "id_b": "psychopathologie:a937",
+      "motif": "Rank enchâsse trois citations guillemetées de Freud dans une seule phrase sur la parenté artiste/paranoïaque : « denn „in der Paranoia drängt sich eben so vielerlei zum Bewußtsein durch, was wir bei Normalen und Neurotikem erst durch die Psychoanalyse als im Bewußtsein vorhanden nachweisen\" » (der_kuenstler:a272), puis « „sieht schärfer als das normale Denkvermögen\" » et « „die Verschiebung des so erkannten Sachverhaltes auf andere, seine Erkenntnis wertlos macht\" », qui décalquent psychopathologie:a938. L'appel de note *) placé en fin de phrase est résolu six atomes plus loin, et c'est lui qui porte l'attribution absente de la phrase : « *) Die Bemerkungen über den Paranoiker sind der Psychopathologie des Alltagslebens entnommen. » (der_kuenstler:a278) — ouvrage de Freud identifié dès l'ouverture du livre : « Diesem Nachweise ist F r e u d s nächste Arbeit :ZurPsychopathologie des Alltagslebens (Berlin 1904) gewidmet » (der_kuenstler:a40). La divergence « als im Bewußtsein vorhanden » (Rank) contre « als im Unbewussten vorhanden » (psychopathologie:a937) est une altération de copie ou d'OCR sur un seul mot, pas un indice de faux positif. Freud source, Rank reprend : sens lu b_vers_a.",
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
@@ -206,12 +346,33 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "7fdf32aec5faba46|f8977407cac2c4d5": {
+      "id_a": "klinische_beitraege:a210",
+      "id_b": "psychopathologie:a751",
+      "motif": "Piège de tiers écarté : Don Quichotte est bien la matière de l'anecdote, mais les mots PARTAGÉS sont l'allemand de Freud, pas celui de Cervantès, et Abraham le dit expressément trois atomes plus haut : « Ich verweise ferner auf die vortreffliche kleine Geschichte aus Don Quijote, welche Freud (Psychopathologie des Alltagslebens, I. Aufl. S. 87) mitteilt » (klinische_beitraege:a207), suivi du guillemet ouvrant qui englobe les atomes a207 à a210. Abraham ne va pas au roman, il va à la page 87 de Freud : la restitution allemande est reprise mot pour mot (« Sancho entschädigt sie durch die volle Geldbörse, die er dem Angeklagten abnimnıt » a208 contre psychopathologie:a749), y compris le mot d'esprit final. Le contexte des deux côtés porte d'ailleurs la même thèse — la « vis haud ingrata », l'attentat sexuel où l'agressée est « comme paralysée » (psychopathologie:a745-746) — donc reprise de pensée et non simple coïncidence d'illustration. Reclassement vers Cervantès refusé : le tiers n'est pas la source des mots partagés. Sens lu : Freud est la source nommée.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "806b94baf6c2ee5d|e0173e22e1ab7164": {
       "id_a": "traum_und_mythus:a134",
       "id_b": "traumdeutung:a2476",
       "motif": "Abraham annonce la citation cinq atomes plus haut, avec appel de note : « Ich zitiere den folgenden Passus wörtlich nach Freud » et, en note, « Traumdeutung, Seite 180 f. » (traum_und_mythus:a129-a130). Le récit d'Œdipe est recopié phrase à phrase (Abraham a129-a134 face à Freud a2470-a2476) et le guillemet fermant apparaît dans l'atome même, après « der Sohn des Ermordeten und der Jokaste ist. ». La contenance n'est que de 0,66 parce que l'atome d'Abraham enchaîne aussitôt sur sa propre phrase (« Die Ödipustragödie vermag uns heutzutage ebenso tief zu erschüttern … ») et parce que Freud insère avant la sienne les deux vers de Sophocle traduits par Donner.",
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
+    },
+    "812a954b81ef243f|bbb087528e2316b5": {
+      "id_a": "drei_abhandlungen:a11",
+      "id_b": "populaere_vortraege:a690",
+      "motif": "Contenance basse (0,304) pour une raison purement matérielle — l'atome A agrège toute la fin du Vorwort zur dritten Auflage plus le début du Vorwort zur vierten Auflage, alors que B ne cite qu'une phrase — mais l'attribution est déclarée et sans ambiguïté : Ferenczi guillemète et nomme le lieu du texte, « „Mein Ziel war, zu erkunden, wieviel zur Biologie des menschlichen Sexuallebens mit den Mitteln der psychoanalytischen Erforschung zu erraten ist,“ erklärt der Verfasser im Vorwort zu seinen Abhandlungen » (populaere_vortraege:a690). Le titre courant du chapitre, quelques atomes plus haut, désigne l'ouvrage et l'auteur : « Die Bedeutung von Freuds „Drei Abhandlungen zur Sexualtheorie“ » (populaere_vortraege:a686), et l'atome précédent parle bien de « dieser „Abhandlungen“ » (populaere_vortraege:a688). La phrase source est dans A : « Mein Ziel war allerdings zu erkunden, wieviel zur Biologie des menschlichen Sexuallebens mit den Mitteln der psychologischen Erforschung zu erraten ist » (drei_abhandlungen:a11) — Ferenczi substitue « psychoanalytischen » à « psychologischen », substitution qui casse à elle seule six suites de six mots. A est la source, B la reprend.",
+      "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
+    "82db0a992f58e454|b1d67b4e7a260432": {
+      "id_a": "traum_und_mythus:a127",
+      "id_b": "inzest_motiv:a461",
+      "motif": "Les deux auteurs DÉCLARENT emprunter à Freud, chacun de son côté, et l'attribution est hors de la phrase détectée. Abraham l'annonce à l'atome précédent, traum_und_mythus:a126 : « Ich zitiere den folgenden Passus wörtlich nach Freud.!) » — le guillemet ouvrant »Ödipus, der Sohn des Laios… s'ouvre là et ne se ferme qu'en a131 — et l'appel de note se résout dans l'atome jugé lui-même, traum_und_mythus:a127 : « !) Traumdeutung, Seite 180f. » Rank fait la même déclaration en note, neuf atomes plus haut, inzest_motiv:a452 : « Die zum Ödipusproblem hier angeführten Darlegungen Freuds sind den Seiten 176 u. ff. der „Traumdeutung“ (1900) entnommen (2. Auflage, 1909, S. 185 u. ff.). » ; il renomme encore sa source en aval, inzest_motiv:a465 : « Die Handlung des Stückes besteht nun, nach Freud, in nichts anderem … » et a467 : « Sein Schicksal, heißt es in der Traumdeutung weiter … ». Vérification du signalement source_tierce : les 8 suites partagées ne sont pas des mots de Sophocle mais la prose allemande de Freud, retrouvée telle quelle dans la base à traumdeutung:a2471 : « Auf dem Wege von seiner vermeintlichen Heimat weg trifft er mit König _Laïos_ zusammen und erschlägt ihn in rasch entbranntem Streite. » Abraham la recopie mot pour mot, Rank l'abrège (« … trifft er mit König Laios, seinem Vater, zusammen, den er nicht kennt und erschlägt ihn im Streite »). Le tiers est donc Freud, pas Sophocle.",
+      "verdict": "reclasse",
+      "vers": "Sigmund Freud, Die Traumdeutung — atome traumdeutung:a2471"
     },
     "84e6aab72b523789|8e6b2afe26a628a0": {
       "id_a": "studien_ueber_hysterie:a2109",
@@ -234,10 +395,31 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "94de5966b3f872c2|f7545890797b4816": {
+      "id_a": "inzest_motiv:a609",
+      "id_b": "traumdeutung:a2491",
+      "motif": "L'attribution est coupée par l'atomisation : la phrase jugée commence au milieu d'une référence, dont la tête est dans l'atome précédent — « Freud beruft sich auch bei seiner Deutung der 0 d i p u s-Fabel (a. a. » (inzest_motiv:a608), l'atome jugé enchaînant sur « 0. S. 182) auf diese Tatsache: ,,Daß die Sage von Ödipus einem uralten Traumstoff entsprossen ist » (inzest_motiv:a609). Le guillemet ouvrant allemand ,, et la page 182 désignent la Traumdeutung, où la phrase se lit à l'identique (traumdeutung:a2491). Rank poursuit la citation sur les atomes suivants, jusqu'aux vers de Jokaste (a610-a611) qui sont ceux mêmes cités par Freud en traumdeutung:a2492. Piège de tiers écarté : Sophocle est nommé des deux côtés, mais les six suites partagées sont la prose allemande de Freud (« jene peinliche Störung des Verhältnisses zu den Eltern durch die ersten Regungen der Sexualität »), non les vers du tragique. Sens lu : Rank cite Freud, page à l'appui.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "9637d26d801586e1|b92b5e5f8bc1e960": {
+      "id_a": "inzest_motiv:a314",
+      "id_b": "traumdeutung:a2440",
+      "motif": "Reprise déclarée, dans la phrase même : Rank nomme l'auteur, l'ouvrage, et ouvre le guillemet — « wie es Freud in der „Traumdeutung“ geschildert hat: „Die sexuelle Auswahl macht sich in der Regel bereits bei den Eltern geltend » (inzest_motiv:a314). La citation court sur trois atomes et se referme sur la pagination : « wenn es seine Wahl zwischen den Eltern im gleichen Sinne wie diese trifft“ (S. 182) » (inzest_motiv:a316), ce qui recouvre exactement traumdeutung:a2440 puis a2441 et a2443. B est bien la phrase source : « Die sexuelle Auswahl macht sich in der Regel bereits bei den Eltern geltend; ein natürlicher Zug sorgt dafür, daß der Mann die kleinen Töchter verzärtelt, die Frau den Söhnen die Stange hält » (traumdeutung:a2440). Le texte établit donc que B est la source et A la reprise — b_vers_a, conforme au sens calculé.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "9bb2cfdba6170c55|e15a51d494a0abf4": {
       "id_a": "inzest_motiv:a3177",
       "id_b": "traumdeutung:a2518",
       "motif": "Citation annoncée et référencée des deux bouts. Rank écrit en a3176 « findet Freud in zwei Momenten », ouvre en a3177 par « Vom Todestraum des Vaters sagt er: Erstens gibt es keinen Wunsch, von dem wir uns ferner glauben … », et referme en a3178 sur « (Traumdeutung 2. Aufl. S. 188) ». Le texte est littéral, y compris la comparaison « ähnlich wie etwa die Gesetzgebung Solons keine Strafe für den Vatermord aufzustellen wußte ». La contenance reste sous 0,70 parce que la phrase de Rank commence par son propre incise et que l'atome absorbe le début de la phrase suivante de Freud.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "a101aa9ac39ec239|d785d722fee7a03a": {
+      "id_a": "traum_und_mythus:a541",
+      "id_b": "traumdeutung:a2311",
+      "motif": "Abraham cite Freud nommément, à l'appui de sa lecture du récit biblique amorcée à l'atome précédent (« Betrachten wir die biblische Schilderung des Paradieses! », traum_und_mythus:a540) : « Freud hat sie mit treffenden Worten charakterisiert: »Das Paradies ist nichts anderes als die Massenphantasie von der Kindheit des einzelnen«. » (traum_und_mythus:a541). La phrase source est bien dans l'atome apparié, à sa toute fin : « Diese der Scham entbehrende Kindheit erscheint unserer Rückschau später als ein Paradies, und das Paradies selbst ist nichts anderes als die Massenphantasie von der Kindheit des einzelnen. » (traumdeutung:a2311), que la suite confirme (« Darum sind auch im Paradies die Menschen nackt und schämen sich nicht voreinander », traumdeutung:a2312). La contenance basse (0,40) ne tient qu'à l'apparat agrégé dans l'atome de Freud (note « (85) » et intertitre « Der Nacktheitstraum als Exhibitionstraum aufzuklären. ») et à la chute de « selbst », non à la citation. Freud source, Abraham reprend.",
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
@@ -248,6 +430,20 @@
       "verdict": "reclasse",
       "vers": "Sigmund Freud, Die Traumdeutung (1900), résumé de la fable d'Œdipe — atome traumdeutung:a2473"
     },
+    "acb3d06a3bef35de|bca43c39eccc9827": {
+      "id_a": "traumdeutung:a5513",
+      "id_b": "bausteine_2:a773",
+      "motif": "Citation nominative en note, avec guillemets ouvrants et fermants : traumdeutung:a5513 « (240) Über andere Beobachtungen von Lenkung der Träume sagt _Ferenczi_: »Der Traum bearbeitet den das Seelenleben gerade beschäftigenden Gedanken von allen Seiten her, läßt das eine Traumbild bei drohender Gefahr des Mißlingens der Wunscherfüllung fallen, versucht es mit einer neuen Art der Lösung, bis es ihm endlich gelingt, eine die beiden Instanzen des Seelenlebens kompromissuell befriedigende Wunscherfüllung zu schaffen.« ». Le contexte amont montre que Freud est exactement sur le sujet de Ferenczi (traumdeutung:a5508 « denen also eine bewußte Fähigkeit, das Traumleben zu lenken, eigen scheint »). Côté Ferenczi, la phrase est la conclusion de son propre article, dont le titre figure quelques atomes plus haut — bausteine_2:a767 « Über lenkbare Träume (1911) » — et qui repose sur son matériel clinique personnel, bausteine_2:a769 : « Einer dieser Patienten berichtet mir nun häufig von einer eigentümlichen Art des Bewußtwerdens des Traumzustandes im Schlafe. » Ferenczi est donc la source, Freud le citateur : sens lu b_vers_a, là où le calcul répondait INDÉCIDABLE (fenêtres de datation chevauchantes, la Traumdeutung étant rééditée). La contenance de 0,487 vient d'une variante d'un seul mot (« Traumgedanken » chez Ferenczi, « Gedanken » sous la plume de Freud) et de l'agrégation, dans l'atome Freud, de la phrase de corps et des titres de section qui suivent.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "b2d6372a4a2e293b|d61e8cfe760f2759": {
+      "id_a": "der_kuenstler:a86",
+      "id_b": "drei_abhandlungen:a778",
+      "motif": "Le chapitre de Rank est un compte rendu déclaré des « Drei Abhandlungen », et l'atome jugé en est la paraphrase du résumé final de Freud. L'ouvrage est nommé quinze atomes plus haut, avec lieu et date : « so ist auch der Keim seines jüngsten Werkes, der drei Abhandlungen zur Sexualtheorie (Leipzig und Wien, 1905), bereits in der Traumdeutung enthalten » (der_kuenstler:a71). L'attribution est ensuite reprise juste avant le passage : « Freud schließt seine Ausführungen mit der Besprechung der Veränderungen, die durch den Eintritt der Pubertät gesetzt werden » (der_kuenstler:a84), phrase qui décalque drei_abhandlungen:a774. Le discours indirect au Konjunktiv signe le rapport et explique à lui seul la contenance basse : Freud écrit « Die Objektwahl endlich fanden wir geleitet » (drei_abhandlungen:a778), Rank transpose en « Die Objektwahl aber werde geleitet » (der_kuenstler:a86). Ce n'est pas un faux positif de score mais une reprise avouée. Sens lu : Freud source, Rank rapporteur.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
     "b8dff20583be7d2c|e5d017b5c82e103a": {
       "id_a": "klinische_beitraege:a2314",
       "id_b": "drei_abhandlungen:a352",
@@ -255,11 +451,46 @@
       "sens_lu": "b_vers_a",
       "verdict": "confirme"
     },
+    "c0c62058cb7fdf18|e1f71dbfb5e5a2d5": {
+      "id_a": "witz:a247",
+      "id_b": "populaere_vortraege:a743",
+      "motif": "RENVERSÉ AU CONTRÔLE ADVERSARIAL. Le premier lecteur avait retenu la déclaration de Ferenczi « Nur noch ein Beispiel will ich aus Freuds Witzbuch anführen » (populaere_vortraege:a742) et conclu à une reprise de Freud. Cette déclaration est réelle, mais elle est dans l'atome PRÉCÉDENT, et le contrôle a mesuré que les 25 suites de six mots partagées sont, sans exception, la phrase de David Spitzer — « nach der Ansicht der einen soll der Mann viel verdient und sich dabei etwas zurückgelegt haben… » — et aucune de Freud. Les deux atomes nomment d'ailleurs le tiers : « der auf Seite 22 mitgeteilte von +D. Spitzer+ » (witz:a247) et « In einem der „Wiener Spaziergänge\" David Spitzers heißt es » (populaere_vortraege:a743). Second argument, décisif : witz:a247 n'est même pas l'atome copié. Ferenczi reprend « Das Ehepaar X. lebt auf ziemlich großem Fuße », absent de a247 et présent en witz:a189, avec une contenance de 0,83 contre 0,33. L'orientation est retirée.",
+      "verdict": "reclasse",
+      "vers": "David Spitzer, « Wiener Spaziergänge » II, S. 42 — le mot d'esprit lui appartient"
+    },
     "c1be4c14ab7be5b1|f2a8e7c7b42efda3": {
       "id_a": "inzest_motiv:a452",
       "id_b": "traumdeutung:a2494",
       "motif": "Rank annonce et guillemette : « Auf Grund dieser Erkenntnis ist es Freud gelungen, im Zusammenhang der Traumdeutung die psychologische Wurzel dieses Mythus, der Ödipus-Sage, aufzudecken : „Die Ödipus-Fabel ist die Reaktion der Phantasie auf die beiden typischen Träume … so muß die Sage Schreck und Selbstbestrafung in ihren Inhalt mit aufnehmen.“ » Le texte cité est traumdeutung:a2494, et la note de Rank (inzest_motiv:a454) donne la page : « Die zum Ödipusproblem hier angeführten Darlegungen Freuds sind den Seiten 176 u. ff. der „Traumdeutung“ (1900) entnommen ». Le seul écart est une glose que Rank insère entre parenthèses (« vom Tode des Vaters und vom geschlechtlichen Verkehr mit der Mutter »), qui explicite le « diese beiden typischen Träume » de Freud — c'est elle qui abaisse la contenance.",
       "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "c74e4cb1490a67c7|de6b2551570a0ced": {
+      "id_a": "inzest_motiv:a285",
+      "id_b": "traumdeutung:a2437",
+      "motif": "Rank cite entre guillemets avec renvoi paginé, dans l'atome même : « „Mit einer alle Zweifel ausschließenden Sicherheit bestätigt sich diese Vermutung für die Psychoneurotiker bei den mit ihnen vorgenommenen Analysen\" (Traumdeutung, 2. Aufl., 182) » (inzest_motiv:a285), et prolonge la phrase de Freud par sa propre incise (« die zum Zwecke der Heilung ihrer Beschwerden unternommen werden »). L'atome précédent avait déjà installé l'attribution : « In der „Traumdeutung\" (1900) hat Freud zum erstenmal auf den re[g]elmäßigen sexuellen Einschlag im Verhältnis des Kindes zu seinen Eltern hingewiesen » (inzest_motiv:a284), et le suivant enchaîne « Freud sagt darüber in der Traumdeutung (S. 180) weiter » (inzest_motiv:a286). Côté source, la phrase ouvre la section « Die sexuellen Regungen der Kinder gegen die Eltern » (traumdeutung:a2437). Freud source, Rank reprend.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "d1412cdd52c4fec8|d9b5b6deaff8c88b": {
+      "id_a": "studien_ueber_hysterie:a285",
+      "id_b": "ueber_psychoanalyse:a72",
+      "motif": "Freud cite Breuer mot pour mot, et l'apparat le déclare trois fois. Six atomes plus haut, l'attribution est nommée : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten »in der Art, daß Patientin mit Tränen im Auge, am Krankenbett sitzend, plötzlich vom Vater gefragt wurde, wieviel Uhr es sei » (ueber_psychoanalyse:a65), guillemet ouvrant qui court jusqu'à l'atome jugé. Celui-ci referme la citation et donne la page : « ...fortdenken und beten konnte.«[6] » puis « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. » (ueber_psychoanalyse:a72). Les atomes voisins reprennent le récit d'Anna O. phrase par phrase depuis studien_ueber_hysterie:a281 (« Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken »), avec les seules retouches orthographiques de 1910 (Hallucination→Halluzination, Thier→Tier). Ce n'est donc pas le rapprochement des « Studien » avec leur propre « Vorläufige Mitteilung » : deux œuvres distinctes, la seconde citant la première avec référence de page. Le sens est lu dans le texte, pas seulement calculé : Freud renvoie à la 2e édition des Studien, Breuer est la source.",
+      "sens_lu": "a_vers_b",
+      "verdict": "confirme"
+    },
+    "d18ca4beeb62ede8|da464007c3d787af": {
+      "id_a": "klinische_beitraege:a3310",
+      "id_b": "drei_abhandlungen:a507",
+      "motif": "Citation mot pour mot avec attribution explicite portée par l'atome lui-même : klinische_beitraege:a3310 « Freud fügt eine für das Verständnis des Lutschens wichtige Bemerkung hinzu: „Als Rest dieser fiktiven, uns durch die Pathologie aufgenötigten Organisationsphase kann das Lutschen angesehen werden, indem die Sexualtätigkeit, von der Ernährungstätigkeit abgelöst, das fremde Objekt gegen eines am eigenen Körper aufgegeben hat.“ ». L'atome précédent donne déjà la page de l'ouvrage cité, klinische_beitraege:a3309 : « „Das Objekt der einen Tätigkeit ist auch das der anderen, das Sexualziel besteht in der Einverleibung des Objektes.“ (S. 60). », et le contexte amont enchaîne les renvois nominatifs (a3304 « hat Freud nun neuerdings mit dem eingangs erwähnten Namen als „prägenitale“ bezeichnet », a3307 « man könnte sie — fügt Freud hinzu — auch die kannibalische nennen »). Côté Freud, drei_abhandlungen:a507 est bien le texte source, dans la section « Prägenitale Organisationen ». Freud y renvoie d'ailleurs à Abraham en note (56) « Vgl. über Reste dieser Phase bei erwachsenen Neurotikern die Arbeit von _Abraham_ », ce qui atteste la circulation dans les deux sens mais n'inverse pas la source de CETTE phrase. La contenance basse (0,412) est un artefact d'atomisation : l'atome Freud agrège la phrase citée, la note (56) et la phrase suivante « Eine zweite prägenitale Phase ist die der _sadistisch-analen_ Organisation. » ; ne pas rejeter sur le score. Sens lu : Freud (b) source, Abraham (a) reprend.",
+      "sens_lu": "b_vers_a",
+      "verdict": "confirme"
+    },
+    "d44af7e9160f9380|d9b5b6deaff8c88b": {
+      "id_a": "studien_ueber_hysterie:a285",
+      "id_b": "ueber_psychoanalyse:a71",
+      "motif": "Freud recopie la vignette d'Anna O. de Breuer, et l'attribution est six atomes en amont : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten » (ueber_psychoanalyse:a65). Le guillemet ouvrant s'ouvre à ueber_psychoanalyse:a67 (« Einmal wachte sie nachts in großer Angst um den hochfiebernden Kranken ») et ne se referme qu'à ueber_psychoanalyse:a72, immédiatement suivi des deux appels de note « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. ». Côté Breuer, la même scène est la narration première, non citée : « Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken » (studien_ueber_hysterie:a281). Les écarts (Arm/Hand, « Association »/« Assoziation », « Hallucination »/« Halluzination ») sont la modernisation orthographique de 1910, pas un autre texte. Reprise établie, sens donné par la note de bas de page : Breuer source, Freud reprend.",
+      "sens_lu": "a_vers_b",
       "verdict": "confirme"
     },
     "eb18318c89a54637|fb30f66271599ce6": {

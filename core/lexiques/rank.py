@@ -259,7 +259,21 @@ CONCEPTS = {
         "label": "Éléments récurrents du récit mythique",
         "termes": {
             "wasser": ["wasser", "fluss", "meer\\b", "strom\\b", "flut"],
-            "tier": ["tier", "wolf", "hirsch", "hund\\b", "vogel", "schwan"],
+            # DÉFAUT MESURÉ, trouvé en lisant les voisinages de ce concept. Les trois motifs
+            # d'animaux les plus courts attrapaient massivement autre chose, et le pire tombait
+            # chez l'auteur qu'il pouvait le plus fausser :
+            #   « schwan »  → SCHWANGER, schwangerschaft, schwangere (65 occurrences) — chez Rank,
+            #                 dont la thèse centrale est la naissance, « enceinte » était compté
+            #                 comme « animal » ; plus schwanken/schwankend (32), hésiter.
+            #                 28 % des 415 captures étaient fausses.
+            #   « wolf »    → WOLFRAM von Eschenbach (25) et Wolfdietrich (4), noms propres de la
+            #                 littérature médiévale qu'il cite sans cesse. 46 % de 92 captures.
+            #   « hirsch »  → Hirschfeld, nom d'un contemporain. 7 %.
+            # « Schwanritter » et « Schwanenritter » (le Chevalier au Cygne) sont VOLONTAIREMENT
+            # retenus : c'est bien l'animal qui fait le personnage, et c'est le motif central de
+            # la Lohengrinsage.
+            "tier": ["tier", r"wolf(?!ram|dietrich)", r"hirsch(?!feld)", r"hund\b", "vogel",
+                     r"schwan(?!g|k|z|d\b)"],
             "gott": ["gott", "gotter", "gottlich", "gottheit"],
             "berg_hoehle": [r"berg\b", r"berge\b", "hohle", r"wald\b"],
             "baum": ["baum", "baume"],
