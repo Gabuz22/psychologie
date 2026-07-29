@@ -386,6 +386,128 @@ def qualifier(lien):
     })
 
 
+def densite_comparee(motif, atomes_par_auteur, langue_par_auteur=None, langue_motif=None):
+    """UN SEUL motif, appliqué à TOUS les corpus → densité par auteur et par œuvre.
+
+    LA MÉTHODE QUI RÉSOUT LE PROBLÈME DE LA COMPARAISON, en le contournant.
+
+    Comparer deux CONCEPTS d'auteurs différents demanderait de supposer qu'ils désignent la même
+    chose — et cette supposition ne peut pas être validée : le seul témoin disponible dans la base
+    (un concept comparé à lui-même, coupé en deux moitiés) mesure la stabilité d'échantillonnage
+    d'une signature, pas une correspondance entre auteurs. C'est pourquoi l'appariement de concepts
+    a été écarté.
+
+    Comparer un MOT ne demande rien de tel. On applique le même motif partout et on compte : la
+    mesure ne dépend plus d'aucune décision de lexicographe, seulement du texte.
+
+    LA MÉTHODE A ÉTÉ VALIDÉE AVANT D'ÊTRE ÉCRITE, sur un cas où les deux mesures existent.
+    Le concept « oedipus » a des motifs DIFFÉRENTS selon les lexiques — ['oedipus','odipus'] chez
+    Freud, ['odipus','odipal'] chez Rank, ['odipus'] chez Abraham. Mesuré avec ces motifs propres :
+    Freud 3,6 ‰, Rank 20,6 ‰. Mesuré avec un motif UNIQUE appliqué aux trois : Freud 3,2 ‰,
+    Rank 21,6 ‰, Abraham 5,4 ‰. L'écart persiste presque à l'identique — il vient donc des
+    AUTEURS, non des choix de motifs. C'est ce contrôle qui autorise à publier la mesure.
+
+    CE QU'ELLE N'ÉTABLIT PAS, et qu'il ne faut jamais lui faire dire : que deux auteurs pensent
+    la même chose quand ils emploient le même mot, ni qu'ils divergent quand l'un l'emploie moins.
+    Elle mesure un USAGE DE MOT. Le reste demande de lire — et le corpus rend les passages.
+
+    LIMITE DE LANGUE, dirimante : un motif allemand ne dit rien d'un corpus français. Les auteurs
+    dont la langue diffère de celle du motif sont rendus avec une densité NULLE et non zéro —
+    l'absence de mesure n'est pas une absence d'emploi.
+    """
+    # La langue du motif est DÉCLARÉE, jamais devinée. Une première version la déduisait du
+    # premier auteur rencontré : le motif français « \bfoule » se retrouvait alors marqué
+    # « non mesurable » sur le corpus de Le Bon, qui est précisément celui où il a un sens.
+    # Deviner la langue d'une expression régulière n'est pas faisable de façon fiable — et ce
+    # projet ne devine pas.
+    langues = langue_par_auteur or {}
+    re_motif = re.compile(motif)
+
+    out = []
+    for auteur in sorted(atomes_par_auteur):
+        atomes = atomes_par_auteur[auteur]
+        if not atomes:
+            continue
+        langue_auteur = langues.get(auteur)
+        # DÉFAUT MESURÉ. Une langue inconnue valait auparavant « mesure quand même », et le
+        # résultat était pire qu'inutile : Josef Breuer, dont le corpus est allemand, ressortait
+        # à 0,0 ‰ sur le motif FRANÇAIS « \bfoule ». Ce zéro était vrai et vide de sens, et il
+        # descendait le minimum du classement par contraste. Breuer passait au travers parce
+        # qu'il est auteur d'ATOMES (ses parts des « Studien über Hysterie ») sans être auteur
+        # d'une ŒUVRE : la table des langues, bâtie sur les œuvres, ne le connaissait pas.
+        # On préfère désormais le silence à un zéro faux — voir `langues_par_auteur()`.
+        if langue_auteur is None and langue_motif is not None and langues:
+            out.append({"auteur": auteur, "atomes": len(atomes), "porteurs": None,
+                        "pour_mille": None,
+                        "non_mesurable": "langue du corpus de %s inconnue — on ne mesure pas un "
+                                         "motif de langue déclarée sur un texte dont on ignore "
+                                         "la langue" % auteur})
+            continue
+        comparable = langue_auteur is None or langue_motif is None or langue_auteur == langue_motif
+        if not comparable:
+            out.append({"auteur": auteur, "atomes": len(atomes), "porteurs": None,
+                        "pour_mille": None,
+                        "non_mesurable": "corpus en %s, motif en %s — un motif d'une langue ne dit "
+                                         "rien d'un texte écrit dans une autre" % (langue_auteur, langue_motif)})
+            continue
+        porteurs = [a for a in atomes if re_motif.search(_replie(a))]
+        par_oeuvre = {}
+        for a in porteurs:
+            par_oeuvre[a["oeuvre"]] = par_oeuvre.get(a["oeuvre"], 0) + 1
+        total_oeuvre = {}
+        for a in atomes:
+            total_oeuvre[a["oeuvre"]] = total_oeuvre.get(a["oeuvre"], 0) + 1
+        out.append({
+            "auteur": auteur,
+            "atomes": len(atomes),
+            "porteurs": len(porteurs),
+            "pour_mille": round(1000 * len(porteurs) / len(atomes), 1),
+            "par_oeuvre": sorted(
+                ({"oeuvre": o, "atomes": total_oeuvre[o], "porteurs": par_oeuvre.get(o, 0),
+                  "pour_mille": round(1000 * par_oeuvre.get(o, 0) / total_oeuvre[o], 1)}
+                 for o in total_oeuvre), key=lambda x: -x["pour_mille"]),
+            "exemples": [{"id": a["id"], "oeuvre": a["oeuvre"], "texte": a["texte"][:400]}
+                         for a in porteurs[:3]],
+        })
+    return {
+        "motif": motif,
+        "auteurs": out,
+        "note": ("Le MÊME motif est appliqué à tous les corpus : la mesure ne dépend d'aucun "
+                 "lexique, seulement du texte. Elle compare un USAGE DE MOT — pas une pensée."),
+    }
+
+
+def replier_comparaison(texte):
+    """Forme repliée commune à la mesure de densité — minuscules, sans diacritiques, ß→ss."""
+    s = unicodedata.normalize("NFD", (texte or "").replace("ß", "ss"))
+    return "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
+
+
+# Le pliage est de loin l'opération la plus chère de la mesure de densité, et `table_des_usages`
+# repasse ~200 motifs sur les ~45 000 atomes du corpus : replier à chaque fois faisait 9 millions
+# de normalisations Unicode et dépassait les dix minutes. On plie donc UNE fois par atome.
+#
+# Le cache est EXTÉRIEUR aux atomes, volontairement. Ranger la forme repliée dans le dictionnaire
+# de l'atome serait plus court, mais les atomes traversent les fiches d'agents et les exports :
+# une clé technique ajoutée là ressortirait un jour dans une réponse d'API sans que personne ne
+# l'ait voulu.
+#
+# La clé est le TEXTE, pas l'identifiant d'atome. Une première version indexait par identifiant,
+# ce qui paraissait plus économique — un test l'a prise en défaut : deux jeux d'atomes distincts
+# peuvent réutiliser les mêmes identifiants, et le cache rendait alors le pliage du MAUVAIS texte,
+# sans rien signaler. Le corpus réel n'a pas de collision, mais un cache qui peut mentir en
+# silence n'a pas sa place ici. Indexé par le texte, il est juste par construction.
+_REPLIES = {}
+
+
+def _replie(atome):
+    texte = atome["texte"]
+    r = _REPLIES.get(texte)
+    if r is None:
+        r = _REPLIES[texte] = replier_comparaison(texte)
+    return r
+
+
 def temoin_negatif(atomes_par_auteur):
     """Plancher de bruit, DÉTERMINISTE : deux auteurs allemands partagent-ils un n-gramme par
     hasard ? Appariement forcé par RANG, sans tirage aléatoire — donc reproductible à l'identique.
@@ -412,3 +534,67 @@ def temoin_negatif(atomes_par_auteur):
         "couples": pires,
         "plancher": round(max([p["contenance_max"] for p in pires] or [0.0]), 4),
     }
+
+
+def table_des_usages(atomes_par_auteur, langue_par_auteur):
+    """Chaque sous-concept de CHAQUE lexique, mesuré sur TOUS les corpus de sa langue.
+
+    C'est `densite_comparee` appliquée systématiquement. L'intérêt n'est pas la ligne d'un auteur
+    sur son propre motif — le lexique a été écrit pour lui, elle est haute par construction — mais
+    la ligne des AUTRES sur ce motif, que personne n'a choisie pour eux.
+
+    Le motif garde la mention de qui l'a défini (`lexique`). Ce n'est pas un détail de traçabilité :
+    tant qu'on sait que « geburtstrauma » vient du lexique de Rank, on lit le 141,4 ‰ de Rank comme
+    une évidence et le 0,0 ‰ de Freud comme une information. Effacer la provenance ferait croire à
+    une mesure neutre des deux côtés.
+
+    Rend une liste de lignes plates, prête pour l'export SQL.
+    """
+    from . import lexiques as _lex, lexique as _base
+
+    catalogue = [("Sigmund Freud", _base.CONCEPTS, "de")]
+    for auteur, module in sorted(_lex.PAR_AUTEUR.items()):
+        catalogue.append((auteur, module.CONCEPTS, module.LANGUE))
+
+    lignes, vus = [], set()
+    for proprietaire, concepts, langue in catalogue:
+        for groupe, meta in sorted(concepts.items()):
+            for sous, motifs in sorted(meta["termes"].items()):
+                motif = r"\b(" + "|".join(motifs) + ")"
+                # Deux lexiques peuvent définir le même sous-concept avec les mêmes motifs ; on
+                # ne mesure qu'une fois, et on garde le premier propriétaire par ordre alphabétique.
+                if (motif, langue) in vus:
+                    continue
+                vus.add((motif, langue))
+                mesure = densite_comparee(motif, atomes_par_auteur, langue_par_auteur,
+                                          langue_motif=langue)
+                for a in mesure["auteurs"]:
+                    if a["pour_mille"] is None:
+                        continue
+                    lignes.append({
+                        "sous_concept": sous, "groupe": groupe, "libelle": meta["label"],
+                        "lexique": proprietaire, "langue": langue, "motif": motif,
+                        "auteur": a["auteur"], "atomes": a["atomes"],
+                        "porteurs": a["porteurs"], "pour_mille": a["pour_mille"],
+                    })
+    return lignes
+
+
+def langues_par_auteur(atomes, oeuvres):
+    """Langue de chaque auteur, déduite de SES ATOMES et non des métadonnées d'œuvre.
+
+    La différence n'est pas cosmétique. Une œuvre déclare UN auteur ; ses atomes peuvent en
+    porter plusieurs. Les « Studien über Hysterie » sont enregistrées sous Freud, et Josef Breuer
+    n'existe qu'au niveau des atomes — il était donc absent d'une table bâtie sur les œuvres, et
+    se retrouvait mesuré contre des motifs français.
+
+    Un auteur dont les atomes traversent plusieurs langues rend None : c'est un cas que le corpus
+    ne connaît pas encore, et il vaut mieux qu'il soit signalé comme non mesurable que traité au
+    petit bonheur.
+    """
+    vues = {}
+    for a in atomes:
+        auteur = a.get("auteur", "Sigmund Freud")
+        lg = oeuvres.get(a["oeuvre"], {}).get("langue", "de")
+        vues.setdefault(auteur, set()).add(lg)
+    return {auteur: (lgs.pop() if len(lgs) == 1 else None) for auteur, lgs in vues.items()}

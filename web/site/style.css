@@ -235,3 +235,17 @@ footer { border-top: 1px solid var(--filet); margin-top: 2.5rem; padding: 1.2rem
 
 .erreur { color: var(--accent); font-weight: 600; }
 @media (max-width: 40rem) { h1 { font-size: 2rem; } .grille { grid-template-columns: 1fr 1fr; } }
+
+/* Usage des mots — un tableau, parce que la comparaison porte sur des CHIFFRES alignés :
+   c'est le seul endroit du site où l'on demande de lire une colonne de haut en bas. */
+.tableau-usage { width: 100%; border-collapse: collapse; margin: .6rem 0; }
+.tableau-usage th { text-align: left; font-weight: 600; font-size: .82rem;
+  text-transform: uppercase; letter-spacing: .04em; color: var(--gris);
+  border-bottom: 1px solid var(--filet); padding: .3rem .5rem; }
+.tableau-usage td { padding: .35rem .5rem; border-bottom: 1px solid var(--filet); }
+.tableau-usage .chiffre { text-align: right; font-variant-numeric: tabular-nums;
+  white-space: nowrap; }
+.tableau-usage .cellule-barre { width: 40%; }
+/* La ligne de l'auteur qui a défini le motif est mise en retrait visuel, pas en avant : elle est
+   haute par construction et ne doit pas se lire comme le résultat de la mesure. */
+.tableau-usage .ligne-lexique { color: var(--gris); }

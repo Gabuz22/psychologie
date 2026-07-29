@@ -620,9 +620,52 @@ class AgentLectures(Agent):
         })
 
 
+# --------------------------------------------------------------------------------------------
+class AgentUsage(Agent):
+    """Comment un MOT se distribue entre les auteurs — un seul motif, appliqué à tous.
+
+    RÉPOND À LA QUESTION DE LA COMPARAISON EN LA CONTOURNANT. Demander si la `verdraengung` de
+    Rank est « la même » que celle de Freud suppose une équivalence qu'aucun témoin disponible
+    ne permet de valider. Demander combien de fois chacun ÉCRIT le mot ne suppose rien : on
+    applique le même motif partout et on compte.
+
+    La méthode a été validée sur un cas où les deux mesures existent. Le concept « oedipus » a
+    des motifs différents selon les lexiques ; mesuré avec ces motifs propres, l'écart Freud/Rank
+    est de 3,6 ‰ contre 20,6 ‰ ; mesuré avec un motif UNIQUE, de 3,4 ‰ contre 21,5 ‰. L'écart
+    persiste, donc il vient des auteurs et non du lexicographe.
+
+    Ce que l'agent ne dit pas : que deux auteurs pensent la même chose quand ils emploient le
+    même mot. Il rend les passages pour qu'on aille lire.
+    """
+
+    nom = "usage"
+    question = "Comment un mot se distribue-t-il entre les auteurs ?"
+
+    def executer(self, corpus, motif=None, langue=None, **kw):
+        from . import comparaison
+        if not motif:
+            raise ValueError("l'agent `usage` demande un motif (par exemple « \\bverdrang »)")
+        par_auteur = {}
+        for a in corpus.atomes:
+            par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+        langues = comparaison.langues_par_auteur(corpus.atomes, corpus.oeuvres)
+        r = comparaison.densite_comparee(motif, par_auteur, langues, langue_motif=langue)
+        return self._fiche({
+            "motif": motif,
+            "langue_motif": langue,
+            "auteurs": r["auteurs"],
+            "note": r["note"],
+            "reserve": ("Un écart de densité mesure un USAGE DE MOT, jamais un accord ni un "
+                        "désaccord. Un auteur peut soutenir une thèse sans employer le terme "
+                        "qui la nomme, et l'employer souvent pour la combattre. Les passages "
+                        "sont rendus pour qu'on aille voir. Sans `langue`, la mesure porte sur "
+                        "tous les corpus — n'a de sens que pour un mot commun aux deux langues."),
+        })
+
+
 AGENTS = {a.nom: a for a in (AgentProfil(), AgentConcept(), AgentCooccurrence(), AgentCourants(),
                              AgentChronologie(), AgentTension(), AgentSignaux(),
-                             AgentReprises(), AgentLectures())}
+                             AgentReprises(), AgentLectures(), AgentUsage())}
 
 
 def orchestrer(corpus, demande=None, **kw):

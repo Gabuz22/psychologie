@@ -16,6 +16,11 @@ async function api(route, params) {
   return r.json();
 }
 
+function echapper(t) {
+  return String(t == null ? "" : t)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function texteCourt(t, max = 420) {
   const plat = t.replace(/\s+/g, " ").trim();
   return plat.length > max ? plat.slice(0, max) + "…" : plat;
@@ -558,6 +563,7 @@ async function demarrer() {
     // « le corpus n'a rien trouvé », alors qu'il s'agit du résultat le plus argumenté du projet.
     afficherSignaux(false);
     afficherComparaison();
+    afficherUsages();
     remplirSelect($("#arbre-auteur"),
       (referentiel.auteurs || []).map((a) => a.nom), (n) => [n, n]);
     // Freud d'abord : c'est le corpus le plus riche, donc l'arbre le plus parlant à l'ouverture.
@@ -789,6 +795,53 @@ async function afficherComparaison() {
   }
 }
 
+// --------------------------------------------------------------------------------------------
+// USAGE DES MOTS — un motif, tous les corpus.
+//
+// La liste est ordonnée par CONTRASTE (écart entre la densité la plus haute et la plus basse) et
+// non par densité : les mots les plus fréquents du corpus sont « vater », « mutter », « kind »,
+// que tout le monde emploie. Un palmarès par densité les remonterait tous et ne dirait rien. Ce
+// qui informe, c'est un mot que l'un écrit sans cesse et l'autre presque jamais.
+const usage = { mots: [], choisi: "" };
+
+async function afficherUsages() {
+  const zone = $("#usage-detail");
+  if (!zone) return;
+  try {
+    if (!usage.mots.length) {
+      const r = await api("/api/usages", { limite: 60 });
+      usage.mots = r.mots || [];
+      $("#usage-mot").innerHTML = usage.mots.map((m, i) => {
+        const ecart = (m.maximum - m.minimum).toFixed(1);
+        return `<option value="${i}">${m.sous_concept} — écart ${ecart} ‰ (${m.libelle})</option>`;
+      }).join("");
+      zone.dataset.reserve = r.reserve || "";
+    }
+    const m = usage.mots[Number($("#usage-mot").value) || 0];
+    if (!m) { zone.innerHTML = `<p class="note">Aucun mot mesuré.</p>`; return; }
+    const max = Math.max(...m.auteurs.map((a) => a.pour_mille), 1);
+    zone.innerHTML = `
+      <p class="note">Motif cherché : <code>${echapper(m.motif)}</code> ·
+        langue ${m.langue} · défini dans le lexique de <strong>${m.lexique}</strong> ·
+        groupe « ${m.libelle} »</p>
+      <table class="tableau-usage">
+        <thead><tr><th>Auteur</th><th>Densité</th><th>Phrases</th><th></th></tr></thead>
+        <tbody>${m.auteurs.map((a) => `
+          <tr${a.auteur === m.lexique ? ' class="ligne-lexique"' : ""}>
+            <td>${a.auteur}${a.auteur === m.lexique
+              ? ' <span class="compte">(a défini le motif)</span>' : ""}</td>
+            <td class="chiffre">${a.pour_mille.toFixed(1)} ‰</td>
+            <td class="chiffre compte">${a.porteurs} / ${a.atomes}</td>
+            <td class="cellule-barre">${barreProportion(a.pour_mille, max)}</td>
+          </tr>`).join("")}
+        </tbody>
+      </table>
+      <p class="reserve">${zone.dataset.reserve}</p>`;
+  } catch (e) {
+    zone.innerHTML = `<p class="erreur">Usages indisponibles (${e.message}).</p>`;
+  }
+}
+
 document.addEventListener("click", (e) => {
   const carte = e.target.closest(".carte-couple");
   if (carte) {
@@ -801,6 +854,8 @@ document.addEventListener("click", (e) => {
     afficherComparaison();
   }
 });
+
+$("#usage-mot").addEventListener("change", afficherUsages);
 
 window.addEventListener("hashchange", gererHash);
 

@@ -6,10 +6,17 @@ qui est affirmé de ce qui est supposé, repérer où un auteur se corrige, comp
 
 Premier chantier : **Freud**, dans le **texte allemand original** (23 œuvres). Puis **Gustave
 Le Bon**, *Psychologie des foules* (1895), en français — le livre que Freud discute pendant tout
-un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis le 28 juillet 2026, deux figures de
-l'entourage, traitées **pour elles-mêmes** avec leurs propres catégories : **Otto Rank**
-(6 œuvres, 1907-1928), celui qui s'écarte, et **Karl Abraham** (5 œuvres, 1909-1925), celui qui
-approfondit sans jamais rompre.
+un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis juillet 2026, trois figures de
+l'entourage, traitées **pour elles-mêmes** avec leurs propres catégories, et choisies parce
+qu'elles donnent trois formes distinctes du rapport au maître :
+
+- **Otto Rank** (6 œuvres, 1907-1928) — celui qui **déplace une thèse** et rompt ;
+- **Karl Abraham** (5 œuvres, 1909-1925) — celui qui **prolonge** et ne rompt jamais ;
+- **Sándor Ferenczi** (5 volumes, 1922-1939) — le plus proche de Freud pendant vingt ans, et
+  celui dont la divergence porte sur la **technique**, non sur la doctrine.
+
+Ces trois formes ne sont pas un ornement biographique : c'est la condition pour qu'un jour
+« socle partagé » et « écart » cessent d'être des mots et deviennent des mesures.
 
 ---
 
@@ -55,7 +62,7 @@ phrase n'est jamais traduite.
 
 ## Corpus
 
-**Trente-cinq œuvres, 1895-1933**, quatre auteurs, deux langues. Une **★** signale une datation
+**Quarante œuvres, 1895-1939**, cinq auteurs traités pour eux-mêmes, deux langues. Une **★** signale une datation
 certaine : édition d'origine, ou réimpression déclarée inchangée.
 
 **Sigmund Freud** (texte allemand, `sources/freud/de/`) :
@@ -121,10 +128,41 @@ corpus : 0,05 à 0,54 ‰ de caractères parasites, soit *au niveau ou sous* les
 | *Versuch einer Entwicklungsgeschichte der Libido* ★ | 1924 | 1. Auflage | [archive.org](https://archive.org/details/VersuchEinerEntwicklungsgeschichteDerLibidoAufGrundDerPsychoanalyse) |
 | *Psychoanalytische Studien zur Charakterbildung* | 1921-1925 | 1. Auflage, 1925 | [archive.org](https://archive.org/details/PsychoanalytischeStudienZurCharakterbildung_524) |
 
-*Zur Psychoanalyse der Kriegsneurosen* (1919) est écarté pour une raison de **structure**, non de
-qualité : c'est un symposium à cinq voix (Freud, Ferenczi, Abraham, Simmel, Jones). Le lexique
-suivant l'auteur du volume, un volume à cinq auteurs n'en a pas — il faudrait un lexique par
-région. À reprendre quand Ferenczi entrera : ce volume les concerne tous les deux.
+**Sándor Ferenczi** (texte allemand, `sources/ferenczi/de/`) — **deuxième corpus du projet en
+volume de texte**, après Freud : 2,6 millions de signes. Ses cinq fac-similés sont les mieux
+océrisés du corpus, de 0,00 % à 0,30 % de phrases atteintes contre 2,0 % admis.
+
+| Œuvre | Original | Édition lue | Source |
+|---|---|---|---|
+| *Populäre Vorträge über Psychoanalyse* | 1907-1919 | 1. Auflage, 1922 (IPB XII) | [archive.org](https://archive.org/details/PopulaumlreVortraumlgeuumlberPsychoanalyse) |
+| *Versuch einer Genitaltheorie* ★ | 1924 | 1. Auflage (IPB XV) | [archive.org](https://archive.org/details/VersuchEinerGenitaltheorie) |
+| *Bausteine zur Psychoanalyse I: Theorie* | 1909-1926 | 1. Auflage, 1927 | [archive.org](https://archive.org/details/BausteineITheorie) |
+| *Bausteine zur Psychoanalyse II: Praxis* | 1908-1927 | 1. Auflage, 1927 | [archive.org](https://archive.org/details/BausteineZurPsychoanalyseIiPraxis) |
+| *Bausteine zur Psychoanalyse III* | 1908-1933 | Posthume, Hans Huber, 1939 | [archive.org](https://archive.org/details/BausteineZurPsychoananalyseIiiArbeitenAusDenJahren1908-1933) |
+
+Son intégration a posé **deux problèmes que le corpus n'avait pas rencontrés**, et chacun a laissé
+un mécanisme derrière lui.
+
+*Le même texte imprimé deux fois.* Trois de ses articles existent en tirés à part sur Internet
+Archive **et** sont réimprimés dans les *Bausteine* — recouvrement mesuré de **49,6 %, 56,4 % et
+46,4 %** en suites de huit mots. Les retenir aurait compté deux fois les mêmes phrases et faussé
+*toutes* les densités du corpus, y compris celles des autres auteurs par comparaison. Les recueils
+l'emportent, parce qu'ils contiennent en outre tout le reste ; le prix payé est une fenêtre de
+datation large, portée explicitement.
+
+*Un texte d'un autre auteur au milieu d'un volume.* Les *Bausteine III* réimpriment
+*Entwicklungsziele der Psychoanalyse* (1924), tiré du livre **co-signé avec Otto Rank**. Les
+éditeurs l'écrivent eux-mêmes en note : seul le chapitre III est attesté de Ferenczi ; les
+chapitres I et V lui sont attribués parce que sa veuve croit s'en souvenir et qu'ils croient
+reconnaître son style — leur lettre à Rank est restée sans réponse. Un corpus qui existe pour
+rendre ses attributions vérifiables ne peut pas retenir un texte attribué sur un souvenir : la
+région est **retirée**. Retirer est décidable ; attribuer ne l'est pas ici.
+
+*Zur Psychoanalyse der Kriegsneurosen* (1919) reste écarté pour une raison de **structure**,
+non de qualité : c'est un symposium à cinq voix (Freud, Ferenczi, Abraham, Simmel, Jones). Son
+motif a toutefois changé avec l'arrivée de Ferenczi. Le corpus sait désormais **retirer** une
+région d'un volume (voir `REGIONS_ECARTEES`) ; il faudrait ici en **retenir** cinq et les
+attribuer chacune, sur des bornes vérifiables. C'est un autre chantier, et il n'est pas ouvert.
 
 ### Les œuvres de Rank sont des FAC-SIMILÉS OCRISÉS, non relus
 
@@ -207,18 +245,42 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**45 588 atomes** sur trente-cinq œuvres, quatre auteurs et deux langues, **82 % qualifiés**, **tous**
-localisables dans la source, produits sans aucun modèle de langage : le pipeline est **entièrement déterministe**
-(même texte → mêmes atomes). **29 œuvres sur 35 ont une datation certaine** à l'échelle de
-l'œuvre — quatre autres le sont phrase par phrase grâce à la collation (§ ci-dessous).
+**54 626 atomes** sur quarante œuvres, cinq auteurs et deux langues, **82 % qualifiés**, **tous**
+localisables dans la source, produits sans aucun modèle de langage : le pipeline est **entièrement
+déterministe** (même texte → mêmes atomes).
 
 | Auteur | Atomes | Qualifiés |
 |---|---|---|
-| Sigmund Freud | 20 617 | 81 % |
-| Otto Rank | 14 990 | 83 % |
-| Karl Abraham | 7 611 | 84 % |
-| Gustave Le Bon | 1 485 | 84 % |
-| Josef Breuer (dans les *Studien*) | 885 | 81 % |
+| Sigmund Freud | 20 617 | 78 % |
+| Otto Rank | 14 938 | 80 % |
+| Sándor Ferenczi | 9 158 | 78 % |
+| Karl Abraham | 7 543 | 82 % |
+| Gustave Le Bon | 1 485 | 81 % |
+| Josef Breuer (dans les *Studien*) | 885 | 80 % |
+
+**Un défaut de tout le corpus, trouvé en intégrant Ferenczi et corrigé pour tout le monde.**
+L'imprimeur répète en haut de chaque page une **tête courante** — titre de l'ouvrage, du chapitre,
+ou nom de l'auteur. L'OCR la lit comme une ligne ordinaire, et comme elle tombe entre les deux
+moitiés d'une phrase que la page a coupée, elle se retrouve *soudée au milieu de cette phrase*.
+Elle échappait au filtre d'illisibilité, pour une raison simple : « 122 S. Ferenczi » est
+parfaitement lisible.
+
+**1 544 lignes** retirées sur l'ensemble des fac-similés. Le dégât n'était pas la longueur des
+atomes — mesurée avant et après, elle ne bouge pas — mais deux choses plus graves :
+
+- les **suites de six mots** brisées au milieu des phrases, c'est-à-dire l'unité exacte sur
+  laquelle travaille la couche de comparaison entre auteurs ;
+- le **compte des concepts** : « Das Trauma der Geburt » figure 85 fois en tête de page dans le
+  livre de Rank de 1924, « Versuch einer Genitaltheorie » 48 fois chez Ferenczi. Le titre de
+  l'ouvrage venait gonfler la densité du concept dont l'ouvrage traite — le pire cas possible,
+  un artefact typographique qui ressemble exactement au résultat attendu.
+
+La règle qui les retire **ne connaît aucun titre** : elle ne cherche pas ce qu'on lui a dit de
+chercher, elle repère ce qui *se répète* — une même ligne courte, accompagnée de numéros de page
+**différents**, au moins cinq fois dans le volume. Un vers refrain ou une phrase deux fois écrite
+ne remplit pas ces conditions. La baisse de deux à trois points de qualification qu'on lit
+ci-dessus vient de là, et c'est une **correction** : ces atomes n'étaient qualifiés que par le
+titre imprimé au-dessus d'eux.
 
 **Le passage au lexique par auteur s'est mesuré.** Le Bon était qualifié à **57 %** tant qu'on le
 décrivait avec des identifiants freudiens francisés ; il l'est à **75 %** depuis qu'il a ses

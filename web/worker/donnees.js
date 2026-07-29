@@ -520,3 +520,62 @@ export async function comparaison(env, { auteur, autre, limite } = {}) {
       + "pas partager une thèse. Aucun chiffre de cette page ne mesure un accord ni un désaccord.",
   };
 }
+
+
+/** USAGE D'UN MOT — le même motif appliqué à tous les corpus de sa langue.
+ *
+ * Sans `sous`, rend le palmarès des mots les plus CONTRASTÉS : ceux dont la densité varie le
+ * plus d'un auteur à l'autre. Le contraste est un écart de densité, pas un désaccord — un mot
+ * peut manquer chez un auteur parce qu'il ne traite pas le sujet, parce qu'il le nomme
+ * autrement, ou parce qu'il le combat sans le nommer.
+ */
+export async function usages(env, { sous, limite } = {}) {
+  const lim = Math.min(Math.max(Number(limite) || 40, 1), 200);
+
+  if (sous) {
+    const lignes = await env.DB.prepare(
+      `SELECT u.sous_concept, u.groupe, u.libelle, u.langue, u.motif, u.atomes, u.porteurs,
+              u.pour_mille, a.nom AS auteur, x.nom AS lexique
+       FROM usages u
+       JOIN auteurs a ON a.id = u.auteur_id
+       JOIN auteurs x ON x.id = u.lexique
+       WHERE u.sous_concept = ? ORDER BY u.motif, u.pour_mille DESC`).bind(sous).all();
+    return { sous_concept: sous, lignes: lignes.results, reserve: RESERVE_USAGE };
+  }
+
+  // Le contraste se calcule par MOTIF et non par sous-concept : deux lexiques peuvent définir le
+  // même mot avec des motifs légèrement différents, et mêler leurs densités additionnerait des
+  // mesures qui ne portent pas exactement sur la même chose.
+  const contrastes = await env.DB.prepare(
+    `SELECT u.sous_concept, u.groupe, u.libelle, u.motif, u.langue, x.nom AS lexique,
+            COUNT(*) AS auteurs_mesures,
+            MAX(u.pour_mille) AS maximum, MIN(u.pour_mille) AS minimum
+     FROM usages u JOIN auteurs x ON x.id = u.lexique
+     GROUP BY u.motif HAVING auteurs_mesures > 1
+     ORDER BY (maximum - minimum) DESC LIMIT ?`).bind(lim).all();
+
+  const motifs = contrastes.results.map((c) => c.motif);
+  const detail = motifs.length ? await env.DB.prepare(
+    `SELECT u.motif, u.pour_mille, u.porteurs, u.atomes, a.nom AS auteur
+     FROM usages u JOIN auteurs a ON a.id = u.auteur_id
+     WHERE u.motif IN (${motifs.map(() => "?").join(",")})
+     ORDER BY u.pour_mille DESC`).bind(...motifs).all() : { results: [] };
+
+  const parMotif = new Map();
+  for (const d of detail.results) {
+    if (!parMotif.has(d.motif)) parMotif.set(d.motif, []);
+    parMotif.get(d.motif).push(d);
+  }
+  return {
+    mots: contrastes.results.map((c) => ({ ...c, auteurs: parMotif.get(c.motif) || [] })),
+    reserve: RESERVE_USAGE,
+  };
+}
+
+const RESERVE_USAGE =
+  "Cette page compare un USAGE DE MOT, jamais une pensée. Le même motif est appliqué à tous les "
+  + "corpus de sa langue et on compte les phrases qui le portent : la mesure ne dépend d'aucun "
+  + "lexique, seulement du texte. Un écart de densité ne dit ni accord ni désaccord — un auteur "
+  + "peut soutenir une thèse sans jamais employer le terme qui la nomme, et employer ce terme "
+  + "sans cesse pour la combattre. La colonne « lexique » dit qui a défini le motif : la ligne "
+  + "de cet auteur est haute par construction, ce sont les AUTRES lignes qui informent.";

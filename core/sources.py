@@ -112,6 +112,38 @@ PARATEXTE_FINAL = {
     "klinische_beitraege": "Inhaltsübersicht.",
     "entwicklungsgeschichte_libido": "Inhaltsverzeichnis",
     "charakterbildung": "INTERNATIONALER PSYCHOANALYTISCHER",
+    # Sándor Ferenczi — tables des matières de fin, bibliographies et index dressés par l'éditeur.
+    "populaere_vortraege": "Inhaltsverzeichnis",
+    # La borne est relevée sur le texte APRÈS recollage des césures : le fac-similé imprime
+    # « psycho-\nanalytische », que le traitement ressoude avant que cette coupe s'applique.
+    # Relevée sur le fac-similé brut, elle était introuvable — et le garde-fou l'a dit.
+    "genitaltheorie": "Introjektion und Übertragung. Eine psychoanalytische Studie",
+    "bausteine_1": "Von Dr. S. Ferenczi ist früher im Internationalen",
+    # Le « Register » des Bausteine II est un index de matières couvrant les DEUX tomes, dressé
+    # par l'éditeur : ce n'est pas Ferenczi, et il pèse 10 % du volume.
+    "bausteine_2": "Register",
+    # Ce volume-ci n'a ni bibliographie ni catalogue : seule la dernière page, que l'OCR ne lit
+    # pas, est écartée — d'où une borne qui est une tête courante mutilée, relevée telle quelle.
+    "bausteine_3": "Freuds Einfluss auf die en",
+}
+
+
+# RÉGIONS ÉCARTÉES AU MILIEU D'UN VOLUME — attribution NON ÉTABLIE, donc texte non retenu.
+# Le format est (début, fin, motif). Les deux bornes sont relevées dans le texte ; leur absence
+# fait ÉCHOUER le chargement, pour qu'une région qu'on croit écartée ne reste jamais en place.
+REGIONS_ECARTEES = {
+    "bausteine_3": [(
+        "Entwicklungsziele der Psychoanalyse",
+        "von Sexualgewohnheiten",
+        "« Entwicklungsziele der Psychoanalyse » (1924) est tiré du livre CO-SIGNÉ par Ferenczi "
+        "et Otto Rank. Les éditeurs du volume l'écrivent eux-mêmes en note : seul le chapitre III "
+        "est attesté de Ferenczi (le chapitre II est de Rank et n'est pas réimprimé ici) ; les "
+        "chapitres I et V lui sont attribués parce que « Frau Dr. Ferenczi glaubt sich erinnern "
+        "zu können » et parce qu'ils croient y reconnaître son style. Leur lettre à Rank est "
+        "restée sans réponse. Un corpus qui existe pour rendre ses attributions vérifiables ne "
+        "peut pas retenir un texte attribué sur un souvenir et un jugement de style. On RETIRE "
+        "— ce qui est décidable — au lieu d'attribuer, ce qui ne l'est pas ici."
+    )],
 }
 
 # FAC-SIMILÉS ÉCARTÉS APRÈS MESURE — deux volumes de Rank existent en ligne mais ne sont PAS
@@ -135,6 +167,26 @@ FAC_SIMILES_ECARTES = {
         "lexique suit l'auteur du VOLUME, et un volume à cinq auteurs n'en a pas. L'accueillir "
         "demanderait un lexique par RÉGION, extension de l'architecture à part entière. "
         "À reprendre quand Ferenczi entrera : ce volume les concerne tous les deux."),
+    # SÁNDOR FERENCZI — trois tirés à part ÉCARTÉS POUR DUPLICATION, non pour qualité : leur OCR
+    # est excellent. Chacun est réimprimé dans les Bausteine, et les garder aurait compté deux
+    # fois les mêmes phrases. Le recouvrement est mesuré en suites de HUIT mots ; il plafonne
+    # vers 50 % parce que l'OCR des deux tirages diffère, non parce que la moitié du texte
+    # manquerait.
+    "IntrojektioneUndUbertragung": (
+        "Introjektion und \u00dcbertragung (1910) \u2014 49,6 % de ses suites de huit mots se retrouvent "
+        "dans les Bausteine I (1927), qui le r\u00e9impriment. C'est l'article fondateur de "
+        "l'introjection : il EST dans le corpus, par le recueil."),
+    "HysterieUndPathoneurosen": (
+        "Hysterie und Pathoneurosen (1919) \u2014 56,4 % de recouvrement avec les Bausteine III."),
+    "Ferenczi_1925_Sexualgewohnheiten_k": (
+        "Psychoanalyse der Sexualgewohnheiten (1925) \u2014 46,4 % de recouvrement avec les "
+        "Bausteine III, qui le r\u00e9impriment sous le titre \u00ab Zur Psychoanalyse von "
+        "Sexualgewohnheiten \u00bb."),
+    # Ce volume-ci reste écarté, mais son motif a CHANGÉ avec l'arrivée de Ferenczi : le problème
+    # n'est plus qu'on ignore comment traiter un volume à cinq auteurs, c'est qu'on ne saurait
+    # pas découper les cinq contributions sur des bornes vérifiables. REGIONS_ECARTEES sait
+    # désormais RETIRER une région ; il faudrait ici en RETENIR cinq, et les attribuer chacune.
+    # Chantier à part, et toujours pas ouvert.
     "EineNeurosenanalyseInTraeumen": (
         "Eine Neurosenanalyse in Träumen (1924) — 2,6 % des phrases atteintes, au-dessus du seuil "
         "de 2 %. Cas limite, et c'est précisément pour ceux-là qu'un seuil existe : sans lui, "
@@ -685,6 +737,139 @@ OEUVRES = {
         "licence": ("Domaine public — Gustave Le Bon (1841-1931), œuvre libre de droits depuis "
                     "2002 (vie + 70 ans). Édition de 1895. Texte français original."),
     },
+    # ------------------------------------------------------------------ SÁNDOR FERENCZI
+    # Quatrième auteur traité pour lui-même (2026-07). Le plus proche de Freud pendant vingt
+    # ans, et celui dont la divergence finale porte sur la TECHNIQUE, non sur la doctrine : là
+    # où Rank déplace une thèse et Abraham prolonge, Ferenczi change ce que l'analyste FAIT.
+    # Le corpus tient donc trois formes distinctes du rapport au maître.
+    #
+    # Cinq volumes, 2,6 millions de signes retenus : le deuxième corpus du projet après Freud.
+    # Tous mesurés sous le seuil OCR avec une marge large — 0,00 à 0,30 % de phrases atteintes
+    # contre 2,0 % admis, et zéro à quatre séquences impossibles par volume.
+    #
+    # TROIS VOLUMES ÉCARTÉS APRÈS MESURE, pour une raison qui n'est pas la qualité mais la
+    # DUPLICATION : « Introjektion und Übertragung » (1910), « Hysterie und Pathoneurosen »
+    # (1919) et « Psychoanalyse der Sexualgewohnheiten » (1925) existent en tirés à part sur
+    # Internet Archive, et sont réimprimés dans les Bausteine — recouvrement mesuré de 49,6 %,
+    # 56,4 % et 46,4 % en suites de huit mots. Les retenir aurait compté deux fois les mêmes
+    # phrases et faussé TOUTES les densités du corpus, y compris celles des autres auteurs par
+    # comparaison. Les recueils l'emportent parce qu'ils contiennent en outre tout le reste ;
+    # le prix payé est une fenêtre de datation large, portée explicitement.
+    "populaere_vortraege": {
+        "fichier": "1922_populaere_vortraege.ia.txt",
+        "dossier": ("ferenczi", "de"),
+        "provenance": "archive",
+        "auteur": "S\u00e1ndor Ferenczi",
+        "titre": "Popul\u00e4re Vortr\u00e4ge \u00fcber Psychoanalyse",
+        "titre_fr": "Conf\u00e9rences populaires sur la psychanalyse",
+        # Le volume date lui-même ses pièces en note : 1908, 1909, 1910, Imago I (1912),
+        # oct. 1913, congrès de Munich 1913, IZ IV (1916), Imago V (1917-19), IZ V (1919).
+        # La préface, datée « Budapest, im Mai 1921 », dit que certaines remontent à 1907/08.
+        "annee_oeuvre": 1907,
+        "annee_edition": 1922,
+        "edition": "Internationale Psychoanalytische Bibliothek, Band XII",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Z\u00fcrich",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/PopulaumlreVortraumlgeuumlberPsychoanalyse",
+        # La préface est de Ferenczi (signée de sa main) : elle fait partie de son texte.
+        "debut_corps": "Vorwort",
+    },
+    "genitaltheorie": {
+        "fichier": "1924_genitaltheorie.ia.txt",
+        "dossier": ("ferenczi", "de"),
+        "provenance": "archive",
+        "auteur": "S\u00e1ndor Ferenczi",
+        "titre": "Versuch einer Genitaltheorie",
+        "titre_fr": "Essai d'une th\u00e9orie g\u00e9nitale (\u00ab Thalassa \u00bb)",
+        # Ouvrage INÉDIT, non un recueil : datation exacte. L'introduction retrace sa genèse
+        # (idées de 1914-15, exposées à Freud en 1915 puis 1919) et est signée d'août 1923.
+        "annee_oeuvre": 1924,
+        "annee_edition": 1924,
+        "edition": "Internationale Psychoanalytische Bibliothek, Band XV",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Z\u00fcrich",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/VersuchEinerGenitaltheorie",
+        # L'œuvre la plus personnelle de Ferenczi, et la seule du corpus à faire de la biologie
+        # une méthode d'interprétation. Aucun autre auteur n'écrit « amphimixis » ni « thalassal ».
+        "debut_corps": "EINLEITUNG",
+    },
+    "bausteine_1": {
+        "fichier": "1927_bausteine_1_theorie.ia.txt",
+        "dossier": ("ferenczi", "de"),
+        "provenance": "archive",
+        "auteur": "S\u00e1ndor Ferenczi",
+        "titre": "Bausteine zur Psychoanalyse. I. Band: Theorie",
+        "titre_fr": "Mat\u00e9riaux pour la psychanalyse. Tome I : Th\u00e9orie",
+        # La table des matières donne entre crochets le lieu et l'année de première parution de
+        # chaque article, de [Jb I, 1909] à [IZ XII, 1926] : la fenêtre est LUE, non estimée.
+        "annee_oeuvre": 1909,
+        "annee_edition": 1927,
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Z\u00fcrich",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/BausteineITheorie",
+        # BORNE CONTRE-INTUITIVE, et c'est pourquoi elle est commentée. Le « Vorwort des
+        # Verlags » (p. 7-8) est de l'ÉDITEUR, pas de Ferenczi : il doit rester dehors. Le titre
+        # du premier article ne peut pas servir de borne, sa première occurrence étant dans la
+        # table des matières, en amont. On prend donc l'année de parution qui suit ce titre —
+        # que l'OCR a lue « (7909) » pour « (1909) ». On relève ce qui est écrit, jamais ce qui
+        # devrait l'être.
+        "debut_corps": "(7909)",
+    },
+    "bausteine_2": {
+        "fichier": "1927_bausteine_2_praxis.ia.txt",
+        "dossier": ("ferenczi", "de"),
+        "provenance": "archive",
+        "auteur": "S\u00e1ndor Ferenczi",
+        "titre": "Bausteine zur Psychoanalyse. II. Band: Praxis",
+        "titre_fr": "Mat\u00e9riaux pour la psychanalyse. Tome II : Pratique",
+        # Crochets de la table des matières : de [Psychiatr.-Neurol. Wschr. X, 1908] à
+        # [IZ XII, 1927].
+        "annee_oeuvre": 1908,
+        "annee_edition": 1927,
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Z\u00fcrich",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/BausteineZurPsychoanalyseIiPraxis",
+        # Pas de préface d'éditeur dans ce tome : le corps commence au premier article. Le titre
+        # de celui-ci est coupé par un saut de ligne et figure d'abord dans la table des
+        # matières ; on prend donc le premier mot du corps, que l'OCR a privé de son « k ».
+        "debut_corps": "Ausdrucsverschiebung",
+    },
+    "bausteine_3": {
+        "fichier": "1939_bausteine_3.ia.txt",
+        "dossier": ("ferenczi", "de"),
+        "provenance": "archive",
+        "auteur": "S\u00e1ndor Ferenczi",
+        "titre": "Bausteine zur Psychoanalyse. III. Band: Arbeiten aus den Jahren 1908-1933",
+        "titre_fr": "Mat\u00e9riaux pour la psychanalyse. Tome III : Travaux des ann\u00e9es 1908-1933",
+        # Fenêtre DÉCLARÉE PAR LE VOLUME LUI-MÊME, jusque dans son sous-titre, chaque pièce de
+        # la table des matières portant son année (parfois « etwa 1909 »). Ce tome posthume
+        # contient le dernier Ferenczi, celui de la « Sprachverwirrung » (1933).
+        "annee_oeuvre": 1908,
+        # Le volume porte 1939, non 1938 comme l'annonce la notice d'Internet Archive : c'est la
+        # page de titre qui fait foi (« VERLAG HANS HUBER BERN / 1939 »).
+        "annee_edition": 1939,
+        "edition": "Posthume, \u00e9dit\u00e9 par Vilma Kov\u00e1cs avec I. Hermann, A. et M. B\u00e1lint",
+        "editeur": "Verlag Hans Huber, Bern",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/BausteineZurPsychoananalyseIiiArbeitenAusDenJahren1908-1933",
+        # La préface de ce tome est signée VILMA KOVÁCS, non Ferenczi : la borne la laisse
+        # dehors.
+        "debut_corps": "Psychoanalyse und Padagogik",
+        # RÉSERVE PORTÉE DANS LA BASE, et non seulement en commentaire. Deux pièces de ce volume
+        # ne sont pas de sa seule main : « Entwicklungsziele der Psychoanalyse » (1924),
+        # co-signé avec Otto Rank, est ÉCARTÉ (voir REGIONS_ECARTEES) ; « Zur Psychoanalyse der
+        # paralytischen Geistesstörung » (1922) vient d'une monographie co-signée avec Stefan
+        # Hollós, dont les éditeurs n'ont retenu que la part de Ferenczi — il y cite Hollós à la
+        # troisième personne, ce qui est vérifiable dans le texte. Enfin, des notes de bas de
+        # page signées « (Herausgeber.) » subsistent dans le corps.
+        "reserve_attribution":
+            "Volume posthume. Une pi\u00e8ce co-sign\u00e9e avec Otto Rank en a \u00e9t\u00e9 retir\u00e9e, faute "
+            "d'attribution \u00e9tablie. Une autre provient d'une monographie co-sign\u00e9e avec Stefan "
+            "Holl\u00f3s, dont les \u00e9diteurs d\u00e9clarent n'avoir repris que la part de Ferenczi. "
+            "Quelques notes de bas de page sont des \u00e9diteurs, non de l'auteur.",
+    },
 }
 
 # ŒUVRES ÉCARTÉES APRÈS VÉRIFICATION — à ne pas réintroduire par inadvertance.
@@ -724,6 +909,9 @@ def charger(cle):
                                      meta.get("langue", "de"), meta)
     texte, note_fin = _retirer_paratexte_final(texte, cle)
     bornage += " ; " + note_fin
+    texte, note_regions = _retirer_regions_ecartees(texte, cle)
+    if note_regions:
+        bornage += " ; " + note_regions
     # Le rognage aux extrémités vient EN DERNIER pour les fac-similés : entre la fin du texte et
     # le catalogue de l'éditeur s'intercalent des pages de garde numérisées, qui ne deviennent
     # les dernières lignes du volume qu'une fois le catalogue retiré. Rogner avant les aurait
@@ -804,6 +992,12 @@ def _extraire_corps_archive(brut, meta):
     corps, r_blocs = ocr.retirer_blocs_illisibles(corps, voc)
     faits.append("pages de garde numérisées retirées : %d lignes sur %d (%.1f %%)"
                  % (r_blocs["lignes_retirees"], r_blocs["lignes_totales"], r_blocs["part_pct"]))
+    # Les têtes courantes viennent APRÈS le retrait des blocs illisibles et AVANT la normalisation
+    # des blancs : elles sont lisibles (donc le filtre précédent les garde) et doivent disparaître
+    # pendant qu'elles occupent encore une ligne à elles.
+    corps, r_tetes = ocr.retirer_tetes_courantes(corps)
+    faits.append("têtes courantes retirées : %d (%d formes)"
+                 % (r_tetes["tetes_retirees"], len(r_tetes["formes"])))
     # Certains scans sortent le texte en colonnes justifiées, d'où des suites d'espaces au milieu
     # des phrases (« Die  nachstehende  Arbeit  lag »). Aucun mot n'est touché — seule la largeur
     # des blancs change —, mais sans cela chaque citation de l'Inzest-Motiv sortirait ainsi.
@@ -898,6 +1092,39 @@ def _retirer_paratexte_final(corps, cle):
         return corps, "borne « %s » trouvée trop tôt (%d %%) — non appliquée" % (
             marqueur[:24], round(100 * i / len(corps)))
     return corps[:i].strip(), "paratexte final retiré (%d signes)" % (len(corps) - i)
+
+
+def _retirer_regions_ecartees(corps, cle):
+    """Retire du CORPS des régions dont l'attribution à l'auteur du volume n'est pas établie.
+
+    Les deux bornes précédentes coupent aux extrémités : elles suffisent pour du paratexte
+    d'éditeur, qui se trouve toujours en tête ou en queue. Elles ne peuvent rien pour un texte
+    d'un autre auteur imprimé AU MILIEU d'un recueil — et le corpus en contient un.
+
+    Ce mécanisme est la forme minimale de l'extension que `FAC_SIMILES_ECARTES` annonçait à propos
+    du symposium sur les névroses de guerre : on ne cherche pas à attribuer chaque région à son
+    auteur (ce serait un lexique par région, autre chantier), on RETIRE ce dont on ne peut pas
+    dire qu'il est de l'auteur du volume. Retirer est décidable ; attribuer ne l'est pas ici.
+
+    Chaque borne échoue BRUYAMMENT si elle ne se retrouve pas : une région qu'on croit écartée et
+    qui reste dans le texte est pire que pas de mécanisme du tout.
+    """
+    regions = REGIONS_ECARTEES.get(cle)
+    if not regions:
+        return corps, ""
+    notes = []
+    for debut, fin, _motif in regions:
+        i = corps.find(debut)
+        if i < 0:
+            raise ValueError("région à écarter introuvable dans « %s » : début « %s »"
+                             % (cle, debut[:40]))
+        j = corps.find(fin, i + len(debut))
+        if j < 0:
+            raise ValueError("région à écarter non refermée dans « %s » : fin « %s »"
+                             % (cle, fin[:40]))
+        notes.append("%d signes" % (j - i))
+        corps = corps[:i] + corps[j:]
+    return corps, "région(s) écartée(s) : " + ", ".join(notes)
 
 
 def _retirer_liminaires_wikisource(corps):

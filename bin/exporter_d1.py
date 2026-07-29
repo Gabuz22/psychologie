@@ -54,6 +54,11 @@ AUTEURS = {
     # Melanie Klein et de Karen Horney, mort à quarante-huit ans sans avoir jamais rompu avec
     # Freud : le contre-cas exact de Rank, et c'est pourquoi il vient juste après lui.
     "Karl Abraham": {"naissance": 1877, "mort": 1925, "courant": "psychanalyse"},
+    # Quatrième auteur traité pour lui-même. Le plus proche de Freud pendant vingt ans, et le
+    # seul dont la divergence porte sur la TECHNIQUE plutôt que sur la doctrine : avec Rank qui
+    # déplace une thèse et Abraham qui prolonge, le corpus tient trois formes du rapport au
+    # maître — condition pour que « socle » et « écart » cessent d'être des mots.
+    "S\u00e1ndor Ferenczi": {"naissance": 1873, "mort": 1933, "courant": "psychanalyse"},
 }
 
 # Éditorial des grappes (résumé de documentation/COURANTS_FREUD.md). L'agent `courants` ne
@@ -158,6 +163,7 @@ def nommer_grappes(grappes):
     return par_rang
 
 SCHEMA = """
+DROP TABLE IF EXISTS usages;
 DROP TABLE IF EXISTS nominations;
 DROP TABLE IF EXISTS lectures_declarees;
 DROP TABLE IF EXISTS liens_reprise;
@@ -273,7 +279,16 @@ CREATE TABLE liens_reprise (
   source_tierce INTEGER NOT NULL DEFAULT 0,
   a_verifier INTEGER NOT NULL DEFAULT 1,
   evenement INTEGER,               -- paires contiguës = un seul acte de citation
-  partages TEXT                    -- suites de mots partagées, pour surligner à l'affichage
+  partages TEXT,                   -- suites de mots partagées, pour surligner à l'affichage
+  -- Ce que la LECTURE ajoute au calcul (registre verification/reprises_lues.json). Le détecteur
+  -- s'arrête à la phrase ; le lecteur remonte de quelques atomes et trouve l'attribution
+  -- (« Ich zitiere wörtlich », un appel de note). D'où deux colonnes de sens : `sens`, ce que le
+  -- calcul établit à partir des seules dates, et `sens_lu`, ce que le texte déclare. La seconde
+  -- ne remplace pas la première — on garde les deux pour que l'écart reste visible.
+  verdict TEXT,                    -- « confirme », « rejete », « reclasse », ou NULL = non lu
+  sens_lu TEXT,
+  reclasse_vers TEXT,              -- source tierce commune, quand aucun des deux ne lit l'autre
+  motif_lecture TEXT               -- le texte qui fonde le verdict, cité
 );
 CREATE TABLE lectures_declarees (
   id INTEGER PRIMARY KEY,
@@ -290,6 +305,26 @@ CREATE TABLE nominations (
   atomes INTEGER NOT NULL,
   homographe TEXT,
   PRIMARY KEY (auteur_id, auteur_nomme_id)
+);
+-- USAGE DES MOTS. Un motif est appliqué à TOUS les corpus de sa langue, et on compte. C'est la
+-- seule comparaison inter-auteurs de concepts que le corpus autorise : elle ne suppose à aucun
+-- moment que deux auteurs veulent dire la même chose, elle mesure qui écrit quel mot.
+--
+-- `lexique` retient QUI a défini le motif, et cette colonne n'est pas décorative. La ligne d'un
+-- auteur sur son propre motif est haute par construction — le lexique a été écrit pour lui. Ce
+-- sont les lignes des AUTRES qui portent l'information, parce que personne ne les a choisies
+-- pour eux. Effacer la provenance ferait passer pour neutre une mesure qui ne l'est qu'à moitié.
+CREATE TABLE usages (
+  sous_concept TEXT NOT NULL,
+  groupe TEXT NOT NULL,
+  libelle TEXT NOT NULL,
+  lexique INTEGER NOT NULL REFERENCES auteurs(id),
+  langue TEXT NOT NULL,
+  motif TEXT NOT NULL,
+  auteur_id INTEGER NOT NULL REFERENCES auteurs(id),
+  atomes INTEGER NOT NULL,
+  porteurs INTEGER NOT NULL,
+  pour_mille REAL NOT NULL
 );
 CREATE TABLE signaux (
   atome_id INTEGER NOT NULL REFERENCES atomes(id),
@@ -323,6 +358,7 @@ CREATE INDEX idx_ac_concept ON atome_concepts(concept_id);
 CREATE INDEX idx_asc_sous ON atome_sous_concepts(sous);
 CREATE INDEX idx_fonctions_f ON fonctions(fonction);
 CREATE INDEX idx_signaux_s ON signaux(signal);
+CREATE INDEX idx_usages_sc ON usages(sous_concept);
 """
 
 
@@ -432,6 +468,7 @@ def construire(chemin_sqlite):
     # quarante liens par couple, ce qui convient à une réponse d'API mais tronquerait la base —
     # 104 liens enregistrés au lieu de 132 lors du premier essai. Une troncature silencieuse est
     # exactement ce que ce projet refuse : la base doit contenir tout ce que le calcul a produit.
+    lus = verification.charger_reprises()
     par_auteur_atomes = {}
     for a in corpus.atomes:
         par_auteur_atomes.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
@@ -454,13 +491,36 @@ def construire(chemin_sqlite):
                     idb = ids_atome.get(lien["b"]["id"])
                     if ida is None or idb is None:
                         continue
+                    # Le verdict est retrouvé par EMPREINTES, jamais par identifiants d'atome :
+                    # ceux-ci se décalent à la moindre correction de paratexte en amont.
+                    j = verification.verdict_reprise(
+                        lien["a"]["empreinte"], lien["b"]["empreinte"], lus) or {}
+                    sens_lu = j.get("sens_lu")
+                    # Le verdict a été rendu sur un couple ORDONNÉ (id_a, id_b) que la clé triée
+                    # a perdu. Si le calcul présente le couple dans l'autre ordre, le sens lu doit
+                    # être retourné — sans quoi on publierait l'emprunt à l'envers.
+                    if sens_lu and j.get("id_a") != lien["a"]["id"]:
+                        sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
                     db.execute(
                         "INSERT INTO liens_reprise (atome_a, atome_b, auteur_a, auteur_b,"
-                        " contenance, force, sens, source_tierce, a_verifier, evenement, partages)"
-                        " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                        " contenance, force, sens, source_tierce, a_verifier, evenement, partages,"
+                        " verdict, sens_lu, reclasse_vers, motif_lecture)"
+                        " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                         (ida, idb, ids_auteur[x], ids_auteur[y], lien["contenance"],
                          lien["force"], lien["sens"], int(lien["source_tierce"]),
-                         int(lien["a_verifier"]), rang, " | ".join(lien["partages"][:6])))
+                         int(lien["a_verifier"] and not j), rang,
+                         " | ".join(lien["partages"][:6]),
+                         j.get("verdict"), sens_lu, j.get("vers"), j.get("motif")))
+
+    # ---- usage des mots : chaque sous-concept de chaque lexique, mesuré sur tous les corpus
+    # Déduite des ATOMES : une table bâtie sur les œuvres ignorerait Josef Breuer, qui est
+    # auteur de passages sans être auteur d'un volume — et le mesurerait en français.
+    langues_auteur = comparaison.langues_par_auteur(corpus.atomes, corpus.oeuvres)
+    for u in comparaison.table_des_usages(par_auteur_atomes, langues_auteur):
+        db.execute("INSERT INTO usages VALUES (?,?,?,?,?,?,?,?,?,?)",
+                   (u["sous_concept"], u["groupe"], u["libelle"], ids_auteur[u["lexique"]],
+                    u["langue"], u["motif"], ids_auteur[u["auteur"]], u["atomes"],
+                    u["porteurs"], u["pour_mille"]))
 
     lec = agents.AGENTS["lectures"].executer(corpus)
     for c in lec["chapitres_declares"]:
@@ -554,7 +614,7 @@ def dumper_sql(db, dossier, taille_tranche=3_500_000):
     # fait ÉCHOUER l'export plutôt que de produire une base incomplète.
     tables = ["auteurs", "oeuvres", "concepts", "atomes", "atome_concepts",
               "atome_sous_concepts", "fonctions", "signaux", "grappes", "grappe_concepts",
-              "liens_reprise", "lectures_declarees", "nominations", "meta"]
+              "liens_reprise", "lectures_declarees", "nominations", "usages", "meta"]
     reelles = {r[0] for r in db.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
     oubliees = reelles - set(tables)

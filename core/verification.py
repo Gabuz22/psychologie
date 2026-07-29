@@ -103,3 +103,57 @@ def valider(table=None):
         if j.get("verdict") == "reclasse" and not j.get("vers"):
             erreurs.append("reclassement sans cible pour %s" % aid)
     return {"ok": not erreurs, "erreurs": erreurs, "juges": len(t["verdicts"])}
+
+
+# ------------------------------------------------------------------------------------------
+# REGISTRE DES REPRISES LUES — même doctrine, autre unité.
+#
+# Le registre ci-dessus juge un ATOME. Une reprise est un COUPLE d'atomes : le jugement ne porte
+# ni sur l'un ni sur l'autre, mais sur le rapport entre les deux. Il lui faut donc sa propre clé
+# — le couple d'empreintes — et son propre fichier.
+#
+# Ce que la lecture ajoute que le calcul ne peut pas donner : le détecteur voit un partage de
+# mots et s'arrête à la phrase ; le lecteur remonte de quelques atomes et trouve l'attribution
+# (« Ich zitiere wörtlich », « nach Freud », un appel de note). C'est cette attribution qui
+# oriente le lien, y compris quand les fenêtres de datation se chevauchent et que le calcul doit
+# répondre INDÉCIDABLE.
+#
+# Quatrième verdict, propre à cette unité : « reclasse » avec une cible qui n'est ni A ni B. Deux
+# auteurs citant le même passage d'un TIERS se ressemblent sans rien se devoir. Le calcul ne le
+# voit pas ; la lecture, oui.
+FICHIER_REPRISES = os.path.join(RACINE, "verification", "reprises_lues.json")
+
+
+def charger_reprises():
+    if not os.path.exists(FICHIER_REPRISES):
+        return {"meta": {}, "verdicts": {}}
+    with open(FICHIER_REPRISES, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def cle_reprise(emp_a, emp_b):
+    """Clé d'un couple : les deux empreintes TRIÉES, pour que l'ordre de lecture ne compte pas."""
+    return "|".join(sorted((emp_a, emp_b)))
+
+
+def verdict_reprise(emp_a, emp_b, table=None):
+    return (table or charger_reprises())["verdicts"].get(cle_reprise(emp_a, emp_b))
+
+
+def valider_reprises(table=None):
+    t = table or charger_reprises()
+    erreurs = []
+    for k, j in t["verdicts"].items():
+        if j.get("verdict") not in VERDICTS:
+            erreurs.append("verdict inconnu pour %s : %r" % (k, j.get("verdict")))
+        if not j.get("motif"):
+            erreurs.append("verdict sans motif pour %s — un jugement doit être argumenté" % k)
+        if j.get("verdict") == "reclasse" and not j.get("vers"):
+            erreurs.append("reclassement sans cible pour %s" % k)
+        if j.get("sens_lu") not in (None, "a_vers_b", "b_vers_a"):
+            erreurs.append("sens illisible pour %s : %r" % (k, j.get("sens_lu")))
+        # `sens_lu` est relatif à l'ordre (a, b) DÉCLARÉ dans le verdict, que la clé triée perd.
+        # Sans les identifiants d'origine, on ne saurait plus à qui « a » renvoie.
+        if j.get("sens_lu") and not (j.get("id_a") and j.get("id_b")):
+            erreurs.append("sens donné sans id_a/id_b pour %s — le sens deviendrait ambigu" % k)
+    return {"ok": not erreurs, "erreurs": erreurs, "juges": len(t["verdicts"])}

@@ -106,3 +106,58 @@ class TestEtat(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestRegistreDesReprises(unittest.TestCase):
+    """Le registre des reprises LUES — jugements portés sur des COUPLES, non sur des atomes."""
+
+    def test_le_registre_est_valide(self):
+        r = verification.valider_reprises()
+        self.assertTrue(r["ok"], r["erreurs"])
+        self.assertGreater(r["juges"], 0)
+
+    def test_la_cle_ne_depend_pas_de_l_ordre_de_lecture(self):
+        """Le même couple lu dans un sens ou dans l'autre doit retrouver le même verdict : sinon
+        un changement d'ordre d'itération dans le calcul perdrait silencieusement la lecture."""
+        self.assertEqual(verification.cle_reprise("aaa", "bbb"),
+                         verification.cle_reprise("bbb", "aaa"))
+
+    def test_un_sens_sans_identifiants_est_refuse(self):
+        """PIÈGE RÉEL. La clé est triée, donc elle perd l'ordre (a, b) sur lequel le sens a été
+        rendu. Sans id_a/id_b, « a_vers_b » ne désigne plus personne — et publier l'emprunt à
+        l'envers serait pire que ne rien publier."""
+        faux = {"verdicts": {"x|y": {"verdict": "confirme", "motif": "m", "sens_lu": "a_vers_b"}}}
+        self.assertFalse(verification.valider_reprises(faux)["ok"])
+
+    def test_un_verdict_sans_motif_est_refuse(self):
+        faux = {"verdicts": {"x|y": {"verdict": "confirme"}}}
+        self.assertFalse(verification.valider_reprises(faux)["ok"])
+
+    def test_un_reclassement_sans_cible_est_refuse(self):
+        """« Reclassé » veut dire : ces deux-là citent un TIERS. Sans nommer le tiers, l'énoncé
+        est vide — et le lien resterait affiché comme un rapport entre les deux auteurs."""
+        faux = {"verdicts": {"x|y": {"verdict": "reclasse", "motif": "m"}}}
+        self.assertFalse(verification.valider_reprises(faux)["ok"])
+
+    def test_les_verdicts_lus_portent_bien_sur_des_couples_du_corpus(self):
+        """Un verdict qui ne s'ancre plus sur aucun couple calculé est du travail de lecture
+        PERDU : c'est arrivé deux fois quand la segmentation a changé. Le test le dit tout de
+        suite au lieu de laisser la perte passer inaperçue à l'export.
+        """
+        from core import comparaison
+        from core.corpus import Corpus
+        corpus = Corpus()
+        par_auteur = {}
+        for a in corpus.atomes:
+            par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+        index = [comparaison._n_grammes_utiles(v, None) for v in par_auteur.values()]
+        df = comparaison.frequences_documentaires(index)
+        vus = set()
+        noms = sorted(par_auteur)
+        for i, x in enumerate(noms):
+            for y in noms[i + 1:]:
+                for l in comparaison.reprises(par_auteur[x], par_auteur[y], df):
+                    if l["contenance"] >= comparaison.SEUIL_PUBLICATION:
+                        vus.add(verification.cle_reprise(l["a"]["empreinte"], l["b"]["empreinte"]))
+        orphelins = set(verification.charger_reprises()["verdicts"]) - vus
+        self.assertFalse(orphelins, "verdicts de lecture désancrés : %s" % sorted(orphelins))

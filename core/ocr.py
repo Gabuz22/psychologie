@@ -30,6 +30,7 @@ quel — le repérer demanderait de deviner, et le projet ne devine pas. Ces ré
 par `mesurer()` et portés par l'œuvre comme une réserve explicite.
 """
 import re
+import unicodedata
 
 # Césure de fin de ligne : une lettre, un trait d'union, un saut de ligne, puis la suite du mot.
 # On exige une MINUSCULE après le saut : en allemand, un trait d'union suivi d'une majuscule est
@@ -321,3 +322,66 @@ def vocabulaire_de_reference(textes):
     for t in textes:
         voc |= set(re.findall(r"[a-zäöüßA-ZÄÖÜ]+", t.lower()))
     return voc
+
+
+# Une TÊTE COURANTE est la ligne que l'imprimeur répète en haut de chaque page : numéro de page
+# et titre de l'ouvrage, du chapitre, ou nom de l'auteur. L'OCR la lit comme n'importe quelle
+# autre ligne, et comme elle tombe entre les deux moitiés d'une phrase que la page a coupée,
+# elle se retrouve SOUDÉE au milieu de cette phrase.
+#
+# Elle échappe à `retirer_blocs_illisibles` : « 122 S. Ferenczi » est parfaitement lisible.
+#
+# LE DÉGÂT EST MESURÉ, et il n'est pas celui qu'on croit. Il ne porte presque pas sur la longueur
+# des atomes (281 signes avant, 281 après sur le corpus de Ferenczi). Il porte sur deux choses :
+#   • les suites de six mots, brisées au milieu des phrases — c'est-à-dire l'unité exacte sur
+#     laquelle travaille la couche de comparaison inter-auteurs ;
+#   • le COMPTE DES CONCEPTS. « Das Trauma der Geburt » figure 85 fois en tête de page dans le
+#     livre de Rank de 1924, « Versuch einer Genitaltheorie » 48 fois chez Ferenczi : le titre de
+#     l'ouvrage vient gonfler la densité du concept dont l'ouvrage traite. C'est le pire cas
+#     possible — un artefact typographique qui ressemble exactement au résultat attendu.
+#
+# LA RÈGLE NE CONNAÎT AUCUN TITRE. Elle ne repère pas ce qu'on lui a dit de chercher, elle repère
+# ce qui SE RÉPÈTE : une même ligne courte, accompagnée de numéros de page DIFFÉRENTS, au moins
+# cinq fois dans le volume. Un vers refrain ou une phrase deux fois écrite ne remplit pas ces
+# conditions ; une tête courante les remplit toutes.
+_LIGNE_TETE = re.compile(r"^[^\w\n]*(?:(\d{1,4})[^\w\n]+)?(.{3,60}?)(?:[^\w\n]+(\d{1,4}))?[^\w\n]*$")
+
+REPETITIONS_MINIMUM = 5
+NUMEROS_DISTINCTS_MINIMUM = 3
+
+
+def _cle_tete(s):
+    s = unicodedata.normalize("NFD", s.lower())
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return re.sub(r"[^a-z]+", " ", s).strip()
+
+
+def retirer_tetes_courantes(texte):
+    """Retire les lignes de tête courante répétée. Rend (texte, rapport)."""
+    groupes = {}
+    for ligne in texte.split("\n"):
+        m = _LIGNE_TETE.match(ligne)
+        if not m or not (m.group(1) or m.group(3)):
+            continue
+        cle = _cle_tete(m.group(2))
+        if len(cle) < 4:
+            continue
+        groupes.setdefault(cle, []).append((ligne, m.group(1) or m.group(3)))
+
+    a_retirer, formes = set(), []
+    for cle, cas in groupes.items():
+        numeros = {n for _, n in cas}
+        # Deux conditions, et la seconde compte autant que la première : une ligne répétée avec
+        # TOUJOURS LE MÊME numéro n'est pas une tête courante, c'est un artefact de scan ou une
+        # vraie répétition du texte. Une tête courante change de numéro à chaque page.
+        if len(cas) >= REPETITIONS_MINIMUM and len(numeros) >= NUMEROS_DISTINCTS_MINIMUM:
+            formes.append((cle, len(cas)))
+            a_retirer.update(l for l, _ in cas)
+
+    if not a_retirer:
+        return texte, {"tetes_retirees": 0, "formes": []}
+    gardees = [l for l in texte.split("\n") if l not in a_retirer]
+    return "\n".join(gardees), {
+        "tetes_retirees": sum(n for _, n in formes),
+        "formes": sorted(formes, key=lambda x: -x[1]),
+    }

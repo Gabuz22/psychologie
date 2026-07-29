@@ -206,3 +206,143 @@ class TestSurLeCorpus(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestDensiteComparee(unittest.TestCase):
+    """La mesure qui compare des auteurs SANS supposer que leurs concepts se correspondent.
+
+    On n'y demande jamais si deux concepts sont équivalents — question indécidable sans témoin —
+    mais comment un MOT donné se distribue. Ces tests protègent l'honnêteté de cette réponse.
+    """
+
+    ATOMES = {
+        "A": [{"id": "x:a1", "texte": "Die Verdrängung ist der Kern.", "oeuvre": "x"},
+              {"id": "x:a2", "texte": "Nichts hier.", "oeuvre": "x"}],
+        "B": [{"id": "y:a1", "texte": "Das Verdrängte kehrt wieder.", "oeuvre": "y"}],
+    }
+    LANGUES = {"A": "de", "B": "de"}
+
+    def test_la_langue_du_motif_est_declaree_jamais_devinee(self):
+        """DÉFAUT MESURÉ pendant l'écriture. Une première version déduisait la langue du motif du
+        premier auteur rencontré dans le dictionnaire. Le motif français « \bfoule » se retrouvait
+        alors marqué « non mesurable » sur le corpus de Le Bon, le seul où il ait un sens — parce
+        que l'ordre d'itération avait fait tomber « de » en premier. Deviner la langue d'une
+        expression régulière n'est pas faisable ; ce projet ne devine pas.
+        """
+        atomes = {"fr": [{"id": "f:a1", "texte": "La foule est impulsive.", "oeuvre": "f"}],
+                  "de": [{"id": "d:a1", "texte": "Die Masse ist impulsiv.", "oeuvre": "d"}]}
+        r = comparaison.densite_comparee(r"\bfoule", atomes, {"fr": "fr", "de": "de"},
+                                         langue_motif="fr")
+        par_auteur = {a["auteur"]: a for a in r["auteurs"]}
+        self.assertEqual(par_auteur["fr"]["porteurs"], 1)
+        self.assertIsNone(par_auteur["de"]["porteurs"])
+
+    def test_sans_langue_declaree_tous_les_corpus_sont_mesures(self):
+        """Un mot commun aux deux langues (« suggestion ») doit pouvoir être comparé à travers
+        elles : l'absence de langue vaut « je mesure partout », pas « je ne mesure rien »."""
+        atomes = {"fr": [{"id": "f:a1", "texte": "C'est la suggestion.", "oeuvre": "f"}],
+                  "de": [{"id": "d:a1", "texte": "Das ist Suggestion.", "oeuvre": "d"}]}
+        r = comparaison.densite_comparee(r"\bsuggestion", atomes, {"fr": "fr", "de": "de"})
+        self.assertTrue(all(a["porteurs"] == 1 for a in r["auteurs"]))
+
+    def test_la_densite_est_rapportee_au_nombre_d_atomes(self):
+        """Un corpus deux fois plus gros n'est pas deux fois plus concerné : on compare des
+        densités, jamais des effectifs bruts."""
+        r = comparaison.densite_comparee(r"\bverdrang", self.ATOMES, self.LANGUES,
+                                         langue_motif="de")
+        par_auteur = {a["auteur"]: a for a in r["auteurs"]}
+        self.assertEqual(par_auteur["A"]["pour_mille"], 500.0)     # 1 sur 2
+        self.assertEqual(par_auteur["B"]["pour_mille"], 1000.0)    # 1 sur 1
+
+    def test_le_pliage_neutralise_majuscules_et_diacritiques(self):
+        """« Verdrängung » et « verdrangung » doivent tomber sous le même motif : sans quoi la
+        densité mesurerait la typographie de l'édition, pas l'usage de l'auteur."""
+        self.assertEqual(comparaison.replier_comparaison("Verdrängung"), "verdrangung")
+        self.assertEqual(comparaison.replier_comparaison("Straße"), "strasse")
+
+    def test_le_cache_de_pliage_ne_touche_pas_les_atomes(self):
+        """Le pliage est mis en cache pour tenir la table des usages en moins de deux minutes.
+        Ce cache doit rester EXTÉRIEUR : une clé technique glissée dans le dictionnaire d'atome
+        ressortirait un jour dans une réponse d'API que personne n'a voulue."""
+        atomes = {"A": [dict(a) for a in self.ATOMES["A"]]}
+        avant = [sorted(a) for a in atomes["A"]]
+        comparaison.densite_comparee(r"\bverdrang", atomes, {"A": "de"}, langue_motif="de")
+        self.assertEqual([sorted(a) for a in atomes["A"]], avant)
+
+    def test_l_ecart_mesure_ne_vient_pas_du_lexicographe(self):
+        """LE TEST QUI FONDE TOUTE LA COMPARAISON DE CONCEPTS.
+
+        Comparer la densité du concept « Œdipe » de Rank à celui de Freud est suspect : les deux
+        motifs viennent de lexiques DIFFÉRENTS, écrits séparément. L'écart pourrait donc venir
+        des lexicographes et non des auteurs. Un seul motif appliqué aux deux corpus tranche —
+        et l'écart persiste (mesuré : 3,4 ‰ contre 21,5 ‰, quand les motifs propres donnaient
+        3,6 ‰ contre 20,6 ‰). Il vient donc bien des auteurs.
+
+        Si ce test tombe un jour, ce n'est pas un détail d'implémentation : c'est la comparaison
+        de concepts entre auteurs qui redevient indéfendable.
+        """
+        corpus = Corpus()
+        par_auteur = {}
+        for a in corpus.atomes:
+            par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+        langues = {m.get("auteur", "Sigmund Freud"): m.get("langue", "de")
+                   for m in corpus.oeuvres.values()}
+        r = comparaison.densite_comparee(r"\bodipus|\boedipus", par_auteur, langues,
+                                         langue_motif="de")
+        d = {a["auteur"]: a["pour_mille"] for a in r["auteurs"]}
+        self.assertGreater(d["Otto Rank"], 4 * d["Sigmund Freud"])
+
+    def test_l_agent_usage_exige_un_motif(self):
+        """Sans motif, l'agent ne doit pas inventer un défaut : la question n'a pas de sens."""
+        with self.assertRaises(ValueError):
+            agents.AGENTS["usage"].executer(Corpus())
+
+
+class TestTableDesUsages(unittest.TestCase):
+    def test_la_provenance_du_motif_est_conservee(self):
+        """La ligne d'un auteur sur SON motif est haute par construction — le lexique a été écrit
+        pour lui. Sans la colonne `lexique`, on lirait cette évidence comme un résultat."""
+        atomes = {"Otto Rank": [{"id": "r:a1", "texte": "Das Geburtstrauma.", "oeuvre": "r"}],
+                  "Sigmund Freud": [{"id": "f:a1", "texte": "Der Traum.", "oeuvre": "f"}]}
+        lignes = comparaison.table_des_usages(atomes, {"Otto Rank": "de", "Sigmund Freud": "de"})
+        self.assertTrue(lignes)
+        self.assertTrue(all(l["lexique"] and l["motif"] for l in lignes))
+        # chaque motif est mesuré sur TOUS les corpus de sa langue, pas seulement sur le sien
+        par_motif = {}
+        for l in lignes:
+            par_motif.setdefault(l["motif"], set()).add(l["auteur"])
+        self.assertTrue(any(len(v) == 2 for v in par_motif.values()))
+
+
+class TestLangueParAuteur(unittest.TestCase):
+    """DÉFAUT MESURÉ dans la table des usages exportée : Josef Breuer, dont le corpus est
+    allemand, ressortait à 0,0 ‰ sur le motif FRANÇAIS « \bfoule » — un zéro vrai et vide de
+    sens, qui descendait le minimum du classement par contraste.
+
+    La cause : la table des langues était bâtie sur les métadonnées d'ŒUVRE, or Breuer est auteur
+    d'ATOMES (ses parts des « Studien über Hysterie ») sans être auteur d'un volume. Il n'y
+    figurait pas, et une langue inconnue valait « mesure quand même ».
+    """
+
+    def test_la_langue_se_deduit_des_atomes_pas_des_oeuvres(self):
+        corpus = Corpus()
+        langues = comparaison.langues_par_auteur(corpus.atomes, corpus.oeuvres)
+        self.assertEqual(langues.get("Josef Breuer"), "de")
+        self.assertEqual(langues.get("Gustave Le Bon"), "fr")
+
+    def test_un_auteur_de_langue_inconnue_n_est_pas_mesure(self):
+        """Le silence vaut mieux qu'un zéro faux : une case vide se lit « on ne sait pas », un
+        0,0 ‰ se lit « il ne l'écrit jamais »."""
+        atomes = {"connu": [{"id": "a:1", "texte": "La foule.", "oeuvre": "a"}],
+                  "inconnu": [{"id": "b:1", "texte": "Die Masse.", "oeuvre": "b"}]}
+        r = comparaison.densite_comparee(r"\bfoule", atomes, {"connu": "fr"}, langue_motif="fr")
+        par_auteur = {a["auteur"]: a for a in r["auteurs"]}
+        self.assertEqual(par_auteur["connu"]["porteurs"], 1)
+        self.assertIsNone(par_auteur["inconnu"]["pour_mille"])
+
+    def test_un_auteur_a_cheval_sur_deux_langues_est_signale(self):
+        """Cas que le corpus ne connaît pas encore. Mieux vaut le déclarer non mesurable que le
+        trancher au petit bonheur — et le jour où il se présentera, le silence le signalera."""
+        atomes = [{"oeuvre": "fr1", "auteur": "X"}, {"oeuvre": "de1", "auteur": "X"}]
+        oeuvres = {"fr1": {"langue": "fr"}, "de1": {"langue": "de"}}
+        self.assertIsNone(comparaison.langues_par_auteur(atomes, oeuvres)["X"])
