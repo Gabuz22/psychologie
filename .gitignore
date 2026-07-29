@@ -7,6 +7,9 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Cloudflare local
+# Cloudflare local. Le second chemin existe parce qu'un `wrangler` lancé depuis la racine du
+# dépôt (au lieu de `web/`) y dépose son cache de compte avant de s'apercevoir qu'il n'y a pas
+# de configuration à cet endroit.
 web/.wrangler/
+.wrangler/
 node_modules/

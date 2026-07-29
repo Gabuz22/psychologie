@@ -230,6 +230,14 @@ nav a.actif { color: var(--accent); }
 .engagements { max-width: 46rem; padding-left: 1.2rem; }
 .engagements li { margin: .55rem 0; }
 
+/* Pour les chercheurs — la seule page du site qui s'adresse à un lecteur qui va chercher à
+   prendre le corpus en défaut. Les réserves y sont composées comme le reste, et non en petit :
+   elles pèsent autant que ce qui les précède. */
+.preambule { max-width: 46rem; }
+.reserves { max-width: 46rem; padding-left: 1.2rem; list-style: none; }
+.reserves li { margin: .55rem 0; position: relative; }
+.reserves li::before { content: "—"; position: absolute; left: -1.2rem; color: var(--gris); }
+
 footer { border-top: 1px solid var(--filet); margin-top: 2.5rem; padding: 1.2rem;
          color: var(--gris); font-size: .85rem; text-align: center; }
 

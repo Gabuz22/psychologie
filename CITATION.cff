@@ -1,0 +1,52 @@
+# Métadonnées de citation, au format Citation File Format 1.2.0 (https://citation-file-format.github.io).
+# GitHub les lit et affiche un bouton « Cite this repository » ; Zenodo les reprend telles quelles
+# lors d'un archivage.
+#
+# DEUX CHAMPS MANQUENT ENCORE, et ils ne peuvent pas être remplis sans décision de l'auteur :
+#   • `orcid` — un identifiant ORCID (gratuit, https://orcid.org/register) rend l'attribution
+#     stable même en cas d'homonymie ; sans lui, une citation reste attachée à une chaîne de
+#     caractères ;
+#   • `doi` et `identifiers` — un archivage Zenodo du dépôt délivre un DOI citable et une copie
+#     figée. Sans DOI, un article qui s'appuie sur ce corpus ne peut pointer que vers une branche
+#     susceptible de changer sous lui.
+# Voir documentation/POUR_LES_CHERCHEURS.md, section « Ce qui manque pour être citable ».
+cff-version: 1.2.0
+message: >-
+  Si vous utilisez ce corpus ou ce code dans un travail de recherche, merci de le citer comme suit.
+title: >-
+  Psychologie — atomisation déterministe du corpus psychanalytique du domaine public
+abstract: >-
+  Quarante œuvres de Sigmund Freud, Otto Rank, Karl Abraham, Sándor Ferenczi, Josef Breuer et
+  Gustave Le Bon (1895-1939), dans leur langue d'écriture, découpées en une phrase par unité et
+  décrites de façon entièrement déterministe : position dans l'œuvre, fonction rhétorique, statut
+  épistémique (affirmé, modalisé, interrogatif, rapporté), concepts d'un lexique PROPRE À CHAQUE
+  AUTEUR, et fenêtre de datation plutôt qu'une année nue. Aucun modèle de langage n'intervient dans
+  le calcul : le même texte produit les mêmes unités, et chaque mesure est rejouable. Trois couches
+  de comparaison inter-auteurs sont posées séparément et jamais additionnées : les actes de citation
+  (partage attesté de suites de six mots, avec les deux passages tels qu'imprimés), les mentions
+  nominales, et les lectures déclarées par un titre de chapitre. Les silences de méthode et les
+  résultats négatifs mesurés sont publiés avec le reste.
+type: dataset
+authors:
+  - given-names: Gabriel
+    family-names: Uzan
+    email: guzan99@gmail.com
+    # orcid: "https://orcid.org/0000-0000-0000-0000"   # à créer, puis décommenter
+repository-code: "https://github.com/Gabuz22/psychologie"
+url: "https://psychologie.guzan99.workers.dev"
+keywords:
+  - psychanalyse
+  - histoire des idées
+  - humanités numériques
+  - Freud
+  - Ferenczi
+  - Rank
+  - Abraham
+  - Le Bon
+  - corpus déterministe
+  - détection de citations
+languages:
+  - deu
+  - fra
+version: "0.9"
+date-released: "2026-07-30"

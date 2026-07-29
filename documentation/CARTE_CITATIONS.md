@@ -143,13 +143,19 @@ configuration présenté comme un fait de texte. Mesuré après correction : **8
 
 ## 6. Ce qui reste ouvert
 
-**Le détecteur de chapitres a été réparé** (2026-07-29, voir [CHAPITRAGE.md](CHAPITRAGE.md)).
-Il était taillé sur le format de la *Traumdeutung* et laissait 20 œuvres sur 40 sans aucun
-chapitre — dont les cinq volumes de Ferenczi, 100 % de son corpus. Seize œuvres déclarent
-désormais leur propre motif : 295 sections contre 111, atomes sans chapitre ramenés de 46 % à
-13 %, et surtout **sept lectures déclarées contre une**. Dont celle qui justifiait le chantier :
-« Zur Kritik der Rankschen *Technik der Psychoanalyse* », la rupture entre Ferenczi et Rank,
-80 atomes.
+**Le détecteur de chapitres a été réparé** (2026-07-29, puis achevé le 2026-07-30 — voir
+[CHAPITRAGE.md](CHAPITRAGE.md)). Il était taillé sur le format de la *Traumdeutung* et laissait
+20 œuvres sur 40 sans aucun chapitre — dont les cinq volumes de Ferenczi, 100 % de son corpus.
+Dix-huit œuvres déclarent désormais leur propre motif : **349 sections contre 111**, atomes sans
+chapitre ramenés de 46 % à **5,6 %**, et **neuf lectures déclarées contre une**. Aucun volume n'est
+plus muet ; les sept œuvres sans chapitre sont de courts articles qui n'en ont pas.
+
+Trois de ces lectures justifiaient le chantier à elles seules : « Zur Kritik der Rankschen
+*Technik der Psychoanalyse* », la rupture entre Ferenczi et Rank (80 atomes), et les deux textes des
+*Bausteine III* où Ferenczi rend compte de Freud — « Die Bedeutung Freuds für die Mental
+Hygiene-Bewegung » (223 atomes) et « Freuds Einfluss auf die Medizin » (181). Ce sont les deux plus
+longues lectures déclarées du corpus, et elles dormaient dans le seul volume que le détecteur ne
+voyait pas du tout.
 
 **Les mentions nominales sont désormais la seconde couche** (2026-07-29). Elles couvrent 11
 couples sur 15 contre 6 pour les actes, et 2 135 phrases contre 248 — avec un recouvrement quasi

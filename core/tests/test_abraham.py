@@ -116,6 +116,29 @@ class TestOeuvresAbraham(unittest.TestCase):
         # La « Charakterbildung » (1925) porte sur le caractère.
         self.assertEqual(max(OEUVRES, key=lambda c: densite(c, "charakterzug")), "charakterbildung")
 
+    def test_les_trois_etudes_du_volume_sur_le_caractere_ont_leur_titre(self):
+        """DÉFAUT DE BORNE, PAS DE MOTIF — et c'est ce qui l'avait rendu invisible.
+
+        Le volume réunit TROIS études. Son motif de chapitre en captait deux, et il fut écarté à ce
+        titre au premier passage. La cause était ailleurs : `debut_corps` visait la première phrase
+        du corps et laissait dehors le titre de la première étude, « I / Ergänzungen zur Lehre vom
+        Analcharakter ». Une étude sur trois entrait donc au corpus sans titre, quel que soit le
+        motif.
+
+        Ce test garde les deux réglages ensemble, parce qu'aucun des deux ne vaut sans l'autre : la
+        borne doit inclure le titre, et le motif doit savoir lire un premier titre dont le chiffre
+        romain — une ligne d'un seul signe — est emporté par le retrait des blocs illisibles du
+        fac-similé.
+        """
+        d = sources.charger("charakterbildung")
+        titres = [t for _, _, t in atomisation.chapitres(
+            d["texte"], "de", sources.MOTIFS_CHAPITRE["charakterbildung"])]
+        self.assertEqual(len(titres), 3, "les trois études du volume : %r" % titres)
+        self.assertTrue(d["texte"].startswith("Ergänzungen zur Lehre vom Analcharakter"),
+                        "la borne de début est retombée après le titre de la première étude")
+        for t in titres:
+            self.assertIn("harakter", t, "titre inattendu dans ce volume : %r" % t)
+
     def test_la_seule_revision_datee_du_corpus(self):
         """Abraham réédite en 1921 un article de 1907 et signale en post-scriptum ce qu'il y tient
         désormais pour faux — « Nachwort (1920) … enthält mancherlei Irrtümliches ».

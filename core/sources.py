@@ -191,6 +191,21 @@ FAC_SIMILES_ECARTES = {
         "Eine Neurosenanalyse in Träumen (1924) — 2,6 % des phrases atteintes, au-dessus du seuil "
         "de 2 %. Cas limite, et c'est précisément pour ceux-là qu'un seuil existe : sans lui, "
         "chaque volume douteux se discuterait au cas par cas et finirait par entrer."),
+    # WILHELM STEKEL — écarté AVANT acquisition, pour que ces titres ne soient pas reproposés le
+    # jour où il entrera. Son inventaire complet est dans documentation/STEKEL_INVENTAIRE.md.
+    "autobiography0000stek": (
+        "The Autobiography of Wilhelm Stekel (Liveright, New York, 1950) — ÉCARTÉE POUR RAISON "
+        "LÉGALE, comme Lacan. Œuvre américaine de 1950, éditée et vraisemblablement traduite par "
+        "Emil A. Gutheil (mort en 1959) : la seule couche éditoriale serait protégée jusqu'en 2029, "
+        "et aucun original allemand publié n'a été retrouvé. Internet Archive la classe elle-même "
+        "en accès contrôlé (« Access-restricted-item »), ce qu'elle ne fait pas quand le domaine "
+        "public est établi."),
+    "FortschritteDerSexualwissenschaftUndPsychoanalyse": (
+        "Fortschritte der Sexualwissenschaft und Psychoanalyse (1924-1931), et de même le "
+        "Zentralblatt für Psychoanalyse et la Psychotherapeutische Praxis — revues DIRIGÉES par "
+        "Stekel, écartées pour la même raison de STRUCTURE que le symposium des Kriegsneurosen : "
+        "une publication à plusieurs voix n'a pas d'auteur de volume, et le lexique suit l'auteur "
+        "du volume. Le tome IV (1931) dépasse en outre le seuil de datation appliqué à Freud."),
 }
 
 # MOTIFS DE CHAPITRE, DÉCLARÉS ŒUVRE PAR ŒUVRE.
@@ -220,6 +235,33 @@ MOTIFS_CHAPITRE = {
     # bausteine_2 : 36 sections (contre 0) — dont 1 titre(s) nommant un autre auteur :
     #   Zur Kritik der Rankschen „Technik der   Psychoanalyse”
     'bausteine_2': '^(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){2,}(?P<t>[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])[A-ZÄÖÜÉ„/][A-Za-zÄÖÜäöüß](?:[^\\n]{0,98}?(?:[^\\s.,;:!?)\\]\\d—–][“”»’]?[!*¹]?|-)|[^\\n]{0,90}\\([^\\n]{1,40}[A-Za-zÄÖÜäöü]\\))[ \\t]*\\.?[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){0,6}(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?(?![^\\n]*[a-zäöüß][“”’»\\"]?[.!?][ \\t“”’\\"»]*[^\\s“”’»])[A-Za-zÄÖÜäöü„][A-Za-zÄÖÜäöüß](?:[^\\n]{0,98}?(?:[^\\s.,;:!?)\\]\\d—–][“”»’]?[!*¹]?|-)|[^\\n]{0,90}\\([^\\n]{1,40}[A-Za-zÄÖÜäöü]\\))[ \\t]*\\.?[ \\t]*\\n(?:[ \\t]*(?:[|\\\\/¦][ \\t]*){0,2}\\n){0,6}){0,3})(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\((?P<s>[^()\\n]{3,140})\\)[ \\t]*\\n(?:[ \\t]*\\n)*)?(?:[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\((?P<n>[^()\\n]{3,140})\\)[ \\t]*\\.?[ \\t]*\\n|(?=[ \\t]*(?:[|\\\\/¦][ \\t]*)?(?:[iı][ \\t]+)?\\(?(?:Vortrag|Festvortrag|Vorgetragen|Nach einem|Gehalten|Diese Zeilen|Mit diesem|Aus Anla|Antwort auf|Erschienen)[^\\n]{0,130}[^.\\s][ \\t]*\\n))',
+    # bausteine_3 : 51 sections (contre 0) — dont 2 titre(s) nommant un autre auteur :
+    #   Die Bedeutung Freuds für die Mental Hygiene-Bewegung Aus Anlass de la Vollendung… (1926)
+    #   Freuds Einfluss auf die Medizin (1933)
+    #
+    # LE VOLUME LE PLUS GROS ET LE PLUS MAL SCANNÉ (3 627 atomes, aucun chapitre jusqu'ici). Deux
+    # terminaisons, toutes deux RELEVÉES dans le volume, parce que sa mise en page change en route :
+    #   • les pièces anciennes portent leur année seule sur une ligne, sous le titre — « (1908) »,
+    #     « (etwa 1909) ». C'est la table des matières du volume qui donne la vérité de terrain
+    #     (« Originalarbeiten aus den Jahren 1908—1933 ») ;
+    #   • les pièces tardives (1926-1933) n'ont plus d'année mais la mention de la séance où elles
+    #     furent lues. Le mot commun à TOUTES ces mentions est « gehalten » (ou « Vorgetragen am »).
+    #     Le seul mot « Vortrag » ne suffisait pas : il revient au fil des phrases (« meines
+    #     Vortrages den Eindruck… »), et faisait entrer deux amorces de corps de texte comme titres.
+    #
+    # Ce qui écarte les TÊTES COURANTES sans avoir à les nommer : aucune n'est suivie d'une ligne
+    # d'année ni d'une mention de séance. Le signal de mise en page seul (lignes vides + ligne
+    # courte) en ramassait vingt-six, dont « Die Bedeutung Freuds… 303 » trois fois — et un motif
+    # déclaré contourne le filtre de ponctuation de `comparaison._INTITULE_COMPLET`, donc chaque
+    # tête courante retenue aurait fabriqué une fausse lecture déclarée.
+    'bausteine_3': '(?:^[ \\t]*\\n){2,}(?:[ \\t]*[^\\n]{1,8}[ \\t]*\\n(?:[ \\t]*\\n)+)?[ \\t]*(?P<t>(?=[^\\n]*[A-Za-zÄÖÜäöüß]{3})(?![^\\n]*\\bS\\.[ \\t]*\\d)[A-ZÄÖÜ„][^\\n]{2,58}?(?:[ \\t]*\\n[ \\t]*(?=[^\\n]*[A-Za-zÄÖÜäöüß]{2})[^\\n\\d\\s][^\\n]{1,58}?){0,3}(?:(?:[ \\t]*\\n){2,3}[ \\t]*(?=[^\\n]*[A-Za-zÄÖÜäöüß]{2})[^\\n\\d\\s][^\\n]{1,58}?)?)[ \\t]*\\n(?:[ \\t]*\\n)*(?:[ \\t]*[^\\n]{1,8}[ \\t]*\\n(?:[ \\t]*\\n)+)?[ \\t]*(?:\\((?P<n>(?:etwa[ \\t]*)?1[89]\\d\\d(?:[ \\t]*[—–-]+[ \\t]*\\d{2,4})?)\\)[^\\n]{0,12}|(?:[^\\n]*\\bgehalten|Vorgetragen[ \\t]+am)[^\\n]*)[ \\t]*$',
+    # charakterbildung : 3 sections (contre 0) — les trois études du volume, aucune de plus.
+    # La branche `\\A` est là pour la PREMIÈRE étude : son chiffre romain occupe une ligne d'un seul
+    # signe, que le retrait des blocs illisibles du fac-similé emporte avec le bruit de scan. Sans
+    # elle, une étude sur trois restait sans titre — c'est le défaut qui avait fait écarter ce motif
+    # au premier passage, et il ne venait pas du motif mais de la borne `debut_corps`, qui tombait
+    # APRÈS le titre de la première étude (voir son commentaire dans le registre).
+    'charakterbildung': '(?:(?:^[ \\t]*\\n){2,}[ \\t]*(?P<n>[IVX]{1,3})[ \\t]*\\n(?:[ \\t]*\\n)*|\\A)[ \\t]*(?P<t>(?=[^\\n]*[A-Za-zÄÖÜäöüß]{3})[A-ZÄÖÜ„][^\\n]{4,64}?(?:[ \\t]*\\n[ \\t]*(?=[^\\n]*[A-Za-zÄÖÜäöüß]{3})[^\\n\\d\\s][^\\n]{2,64}?)?)[\'’!*]{0,2}[ \\t]*\\n(?:[ \\t]*\\n){2,}',
     # der_kuenstler : 2 sections (contre 0)
     'der_kuenstler': '\\n[ \\t]*\\n[ \\t]*([A-ZÄÖÜ][A-Za-zÄÖÜäöüß]{2,20}(?:[ \\t]+[A-Za-zÄÖÜäöüß]{2,20}){1,4})\\.[ \\t]*\\n[ \\t]*\\n',
     # entwicklungsgeschichte_libido : 5 sections (contre 0)
@@ -773,7 +815,14 @@ OEUVRES = {
         "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
         "source": "Internet Archive — fac-similé OCRisé, NON relu",
         "url": "https://archive.org/details/PsychoanalytischeStudienZurCharakterbildung_524",
-        "debut_corps": "Das weite Gebiet, welches heute der psychoanalytischen",
+        # LA BORNE TOMBAIT APRÈS LE TITRE DE LA PREMIÈRE ÉTUDE. Elle visait la première phrase du
+        # corps (« Das weite Gebiet, welches heute der psychoanalytischen ») et laissait donc dehors
+        # « I / Ergänzungen zur Lehre vom Analcharakter » — une étude sur trois entrait au corpus
+        # sans titre, et le chapitrage de ce volume avait été écarté pour cette raison, qui ne
+        # venait pas de son motif. La borne porte maintenant le titre lui-même. Elle inclut le
+        # chiffre romain et l'appel de note (« Analcharakter' ») pour rester UNIQUE : le titre nu
+        # revient seize fois dans le volume, en tête courante de page.
+        "debut_corps": "I \nErgänzungen zur Lehre vom Analcharakter'",
     },
     # ---------------------------------------------------------------- SECOND AUTEUR : GUSTAVE LE BON
     # Premier texte NON allemand du corpus — et pas un choix de circonstance : Freud consacre un

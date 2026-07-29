@@ -11,12 +11,13 @@ tests leur répondent nommément : un même texte imprimé DEUX FOIS (tirés à 
 et un texte d'un AUTRE AUTEUR imprimé au milieu d'un volume.
 """
 import os
+import re
 import sys
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from core import atomisation, collation, lexique, lexiques, ocr, sources   # noqa: E402
+from core import atomisation, collation, comparaison, lexique, lexiques, ocr, sources  # noqa: E402
 from core.corpus import Corpus                                             # noqa: E402
 
 FERENCZI = "Sándor Ferenczi"
@@ -140,6 +141,65 @@ class TestSourcesFerenczi(unittest.TestCase):
         # Contre-épreuve : la Genitaltheorie est un inédit, sa datation est exacte.
         g = self.charges["genitaltheorie"]["meta"]
         self.assertEqual(g["annee_oeuvre"], g["annee_edition"])
+
+    def test_le_plus_gros_volume_n_est_plus_muet(self):
+        """LE DERNIER VOLUME SANS AUCUN CHAPITRE, et le plus lourd du corpus — 3 627 atomes.
+
+        Son motif a dû composer avec une mise en page qui CHANGE en cours de volume : les pièces
+        anciennes portent leur année seule sur une ligne sous le titre (« (1908) », « (etwa 1909) »),
+        les pièces de 1926-1933 ne portent plus l'année mais la mention de la séance où elles furent
+        lues. Les deux terminaisons sont relevées dans le texte, et la table des matières du volume
+        (« Originalarbeiten aus den Jahren 1908—1933 ») sert de vérité de terrain.
+        """
+        r = atomisation.chapitres(self.charges["bausteine_3"]["texte"], "de",
+                                  sources.MOTIFS_CHAPITRE["bausteine_3"])
+        self.assertGreaterEqual(len(r), 45, "le chapitrage des Bausteine III a reculé")
+
+    def test_aucune_tete_courante_n_est_prise_pour_un_titre(self):
+        """CE QUI A FAIT ÉCARTER LE SIGNAL DE MISE EN PAGE SEUL, mesuré : il retenait vingt-six
+        têtes courantes, dont « S. Ferenczi » douze fois et « Die Bedeutung Freuds … 303 » trois fois.
+
+        L'enjeu n'est pas cosmétique. Un motif DÉCLARÉ contourne le filtre de ponctuation de
+        `comparaison._INTITULE_COMPLET` — c'est voulu, les vrais titres de Ferenczi n'ont pas de
+        point final — donc chaque tête courante retenue fabriquerait une FAUSSE lecture déclarée,
+        répétée autant de fois que la page.
+
+        Le discriminant n'est PAS le numéro de page. Une première version de ce test refusait tout
+        titre finissant par un chiffre, et elle a échoué sur un vrai titre abîmé par le scan
+        (« Liöbesult über die Rolle des er 5 ») : elle mesurait la cicatrice d'OCR au lieu du défaut.
+        Ce qui caractérise une tête courante, c'est qu'elle SE RÉPÈTE — une par page — et qu'elle
+        porte souvent le seul nom de l'auteur du volume. Ce sont ces deux propriétés qui sont
+        vérifiées, et ce sont elles qui rendraient une fausse lecture déclarée possible.
+        """
+        for cle in ("bausteine_1", "bausteine_2", "bausteine_3"):
+            titres = [t for _, _, t in atomisation.chapitres(
+                self.charges[cle]["texte"], "de", sources.MOTIFS_CHAPITRE[cle])]
+            vus = {}
+            for titre in titres:
+                nu = re.sub(r"[^a-zäöüß]", "", titre.lower())
+                self.assertNotIn(nu, ("sferenczi", "ferenczi", "sferenezi"),
+                                 "%s : le nom de l'auteur pris pour un titre — %r" % (cle, titre))
+                # Une tête courante reprend le titre de l'article page après page : deux repères
+                # qui commencent pareil ET nomment un auteur du corpus sont le cas dangereux.
+                if any(re.search(j, comparaison.aplatir(titre))
+                       for jetons in comparaison.NOMS.values() for j in jetons):
+                    tete = nu[:18]
+                    self.assertNotIn(tete, vus,
+                                     "%s : deux titres nommant un auteur commencent pareil, "
+                                     "signe d'une tête courante — %r et %r"
+                                     % (cle, vus.get(tete), titre))
+                    vus[tete] = titre
+
+    def test_ferenczi_lit_freud_dans_le_volume_posthume(self):
+        """CE QUE LE CHANTIER CHERCHAIT. Deux pièces des Bausteine III annoncent Freud dans leur
+        titre — « Die Bedeutung Freuds für die Mental Hygiene-Bewegung » (1926) et « Freuds Einfluss
+        auf die Medizin » (1933). Elles étaient dans le corpus depuis l'entrée de Ferenczi ; aucun
+        détecteur ne pouvait les voir."""
+        titres = [t for _, _, t in atomisation.chapitres(
+            self.charges["bausteine_3"]["texte"], "de", sources.MOTIFS_CHAPITRE["bausteine_3"])]
+        nommant_freud = [t for t in titres if "Freud" in t]
+        self.assertGreaterEqual(len(nommant_freud), 2,
+                                "les titres nommant Freud ont disparu : %r" % titres)
 
 
 class TestTetesCourantes(unittest.TestCase):

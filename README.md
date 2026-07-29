@@ -433,6 +433,12 @@ est qu'ils s'y regroupent déjà. Détail dans
    pour une. Le défaut a été décelé par des passages parlant de « *der Freudschen Auffassung* »
    à la troisième personne.
 
+**Si vous venez de la recherche : [`documentation/POUR_LES_CHERCHEURS.md`](documentation/POUR_LES_CHERCHEURS.md)**
+— ce que ce corpus fait que PEP-Web ne fait pas, ce qu'il n'est pas, comment vérifier une de ses
+affirmations en dix minutes, et **les trois obstacles qui l'empêchent aujourd'hui d'être citable**
+(pas de licence, pas de DOI, aucun spécialiste du domaine ne l'a relu). Métadonnées de citation :
+[`CITATION.cff`](CITATION.cff).
+
 **Résultats en clair : [`documentation/SYNTHESE_FREUD.md`](documentation/SYNTHESE_FREUD.md)** —
 ce que le corpus dit de Freud, sans jargon technique.
 **Dossiers de référence par grappe : [`documentation/COURANTS_FREUD.md`](documentation/COURANTS_FREUD.md)**
@@ -533,10 +539,26 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
 
 Restent à faire :
 
-1. **Achever le corpus freudien**, si un meilleur fac-similé ou une transcription Wikisource
+1. **Rendre le projet citable.** Trois obstacles, aucun technique, détaillés dans
+   [`documentation/POUR_LES_CHERCHEURS.md`](documentation/POUR_LES_CHERCHEURS.md) : le dépôt ne porte
+   **aucune licence** (donc rien n'est légalement réutilisable), il n'a **pas de DOI** (donc pas de
+   cible de citation stable), et **aucun spécialiste du domaine n'a relu les lexiques** — la limite
+   la plus sérieuse pour un usage savant, et celle qui ne se lève pas par du code.
+2. **Wilhelm Stekel**, quatrième figure de l'entourage. L'inventaire est fait et mesuré :
+   [`documentation/STEKEL_INVENTAIRE.md`](documentation/STEKEL_INVENTAIRE.md). Le corpus actuel
+   compte déjà **54 atomes qui le nomment** — 16 dans la seule *Traumdeutung* — sans pouvoir afficher
+   l'autre côté. Six volumes utilisables sont repérés ; leur qualité OCR reste à mesurer, et
+   l'autobiographie de 1950 comme les revues qu'il dirigeait sont écartées, déclarées dans
+   `FAC_SIMILES_ECARTES`.
+3. **Achever le corpus freudien**, si un meilleur fac-similé ou une transcription Wikisource
    apparaît un jour pour l'un des treize textes documentés en §5 de `SYNTHESE_FREUD.md` — sinon,
    la limite est structurelle et documentée, pas une tâche en attente.
-2. **Comparer les auteurs** : l'ontologie est conçue pour accueillir Jung, Klein, Lacan, afin de
-   voir comment les courants se recomposent à partir des mêmes atomes fondateurs. L'agent
-   `courants` est l'instrument de cette question — construit et validé sur Freud seul, prêt à
-   recevoir un second auteur. C'est la prochaine étape la plus porteuse.
+4. **Élargir la couverture de la comparaison.** Les actes de citation ne touchent que 0,5 % des
+   phrases, et 22 œuvres sur 40 n'y apparaissent dans aucun acte. Une part s'explique (langue,
+   phrases trop courtes, OCR) ; le reste pose une question ouverte — est-ce la méthode qu'il faut
+   élargir, ou le corpus qui manque d'auteurs ?
+5. **Comparer les auteurs plus avant** : l'ontologie est conçue pour accueillir de nouvelles plumes
+   et voir comment les courants se recomposent. Attention à ce qui est légalement accessible : Jung
+   (mort en 1961) et Klein (1960) ne sont pas dans le domaine public avant 2032 et 2031, et Lacan
+   (1981) est écarté pour cette raison. Le domaine public est la contrainte première, pas l'intérêt
+   théorique.

@@ -188,10 +188,10 @@ class TestSurLeCorpus(unittest.TestCase):
         que Freud consacrerait à Breuer.
 
         La parade était d'exiger une ponctuation finale. Elle valait pour ce détecteur-là, mais
-        seize œuvres déclarent désormais leur propre motif (`sources.MOTIFS_CHAPITRE`), et leurs
+        dix-huit œuvres déclarent désormais leur propre motif (`sources.MOTIFS_CHAPITRE`), et leurs
         titres sont de vrais intitulés qui ne se terminent souvent par rien — « Zur Kritik der
         Rankschen ›Technik der Psychoanalyse‹ » de Ferenczi, sa rupture avec Rank, était écartée
-        par ce filtre. Le corpus ne comptait qu'UNE lecture déclarée là où il en porte sept.
+        par ce filtre. Le corpus ne comptait qu'UNE lecture déclarée là où il en porte neuf.
 
         Ce que ce test protège désormais : un intitulé venu du détecteur COMMUN doit toujours être
         complet ; un intitulé venu d'un motif déclaré ne doit pas être une phrase tronquée en
@@ -199,7 +199,7 @@ class TestSurLeCorpus(unittest.TestCase):
         """
         declarees = set(sources.MOTIFS_CHAPITRE)
         r = agents.AGENTS["lectures"].executer(self.corpus)
-        self.assertGreaterEqual(len(r["chapitres_declares"]), 5,
+        self.assertGreaterEqual(len(r["chapitres_declares"]), 9,
                                 "les lectures déclarées ont disparu")
         for c in r["chapitres_declares"]:
             titre = c["chapitre"].strip()
