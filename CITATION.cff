@@ -2,7 +2,7 @@
 # GitHub les lit et affiche un bouton « Cite this repository » ; Zenodo les reprend telles quelles
 # lors d'un archivage.
 #
-# DEUX CHAMPS MANQUENT ENCORE, et ils ne peuvent pas être remplis sans décision de l'auteur :
+# DEUX CHAMPS MANQUENT ENCORE, et ils ne peuvent pas être remplis sans une démarche de l'auteur :
 #   • `orcid` — un identifiant ORCID (gratuit, https://orcid.org/register) rend l'attribution
 #     stable même en cas d'homonymie ; sans lui, une citation reste attachée à une chaîne de
 #     caractères ;
@@ -10,6 +10,10 @@
 #     figée. Sans DOI, un article qui s'appuie sur ce corpus ne peut pointer que vers une branche
 #     susceptible de changer sous lui.
 # Voir documentation/POUR_LES_CHERCHEURS.md, section « Ce qui manque pour être citable ».
+#
+# LA LICENCE, elle, est posée depuis le 2026-07-30 : MIT pour le code, CC-BY-4.0 pour les données
+# dérivées. Les textes sources sont du domaine public et ne sont concédés par personne — voir
+# LICENSE et LICENSE-DONNEES.md.
 cff-version: 1.2.0
 message: >-
   Si vous utilisez ce corpus ou ce code dans un travail de recherche, merci de le citer comme suit.
@@ -34,6 +38,11 @@ authors:
     # orcid: "https://orcid.org/0000-0000-0000-0000"   # à créer, puis décommenter
 repository-code: "https://github.com/Gabuz22/psychologie"
 url: "https://psychologie.guzan99.workers.dev"
+# Deux régimes, parce que le dépôt porte deux matières. Le code est réutilisable sans condition
+# autre que l'attribution ; les données dérivées demandent la même attribution et rien de plus.
+license:
+  - MIT
+  - CC-BY-4.0
 keywords:
   - psychanalyse
   - histoire des idées

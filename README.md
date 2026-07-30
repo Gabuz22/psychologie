@@ -539,11 +539,14 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
 
 Restent à faire :
 
-1. **Rendre le projet citable.** Trois obstacles, aucun technique, détaillés dans
-   [`documentation/POUR_LES_CHERCHEURS.md`](documentation/POUR_LES_CHERCHEURS.md) : le dépôt ne porte
-   **aucune licence** (donc rien n'est légalement réutilisable), il n'a **pas de DOI** (donc pas de
-   cible de citation stable), et **aucun spécialiste du domaine n'a relu les lexiques** — la limite
-   la plus sérieuse pour un usage savant, et celle qui ne se lève pas par du code.
+1. **Rendre le projet citable.** La **licence est posée** — MIT pour le code, CC-BY-4.0 pour les
+   données dérivées, domaine public pour les textes sources
+   ([`LICENSE`](LICENSE), [`LICENSE-DONNEES.md`](LICENSE-DONNEES.md)). Restent deux obstacles, aucun
+   technique, détaillés dans
+   [`documentation/POUR_LES_CHERCHEURS.md`](documentation/POUR_LES_CHERCHEURS.md) : pas de **DOI**
+   (donc pas de cible de citation stable — un archivage Zenodo le donnerait), et **aucun spécialiste
+   du domaine n'a relu les lexiques** — la limite la plus sérieuse pour un usage savant, et celle
+   qui ne se lève pas par du code.
 2. **Wilhelm Stekel**, quatrième figure de l'entourage. L'inventaire est fait et mesuré :
    [`documentation/STEKEL_INVENTAIRE.md`](documentation/STEKEL_INVENTAIRE.md). Le corpus actuel
    compte déjà **54 atomes qui le nomment** — 16 dans la seule *Traumdeutung* — sans pouvoir afficher

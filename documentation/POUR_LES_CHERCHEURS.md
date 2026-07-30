@@ -153,22 +153,28 @@ comparables.
 
 ## 5. Ce qui manque pour que ce corpus soit vraiment citable
 
-Trois obstacles, par ordre de gravité. Aucun n'est technique.
+Il y avait trois obstacles, aucun technique. **Le premier est levé**, les deux autres demandent une
+démarche que le dépôt ne peut pas faire à la place de son auteur.
 
-### a) Il n'y a pas de licence — c'est bloquant
+### a) La licence — posée le 2026-07-30 ✅
 
-Le dépôt ne porte **aucun fichier `LICENSE`**. En droit d'auteur, l'absence de licence ne signifie
-pas « libre » mais « tous droits réservés » : personne ne peut légalement réutiliser le code, ni
-redistribuer les données dérivées, ni les inclure dans un article avec ses figures. C'est le
-premier obstacle à lever, et c'est une décision qui appartient à l'auteur du dépôt, pas au code.
+Le dépôt ne portait **aucun fichier `LICENSE`**, et en droit d'auteur l'absence de licence ne
+signifie pas « libre » mais « tous droits réservés » : personne ne pouvait légalement réutiliser le
+code, redistribuer les données, ni les inclure dans un article avec ses figures.
 
-Deux régimes sont d'usage dans ce genre de projet, et ils se combinent :
+Trois matières, trois régimes, parce que les confondre serait une erreur juridique :
 
-| quoi | licence usuelle | effet |
+| quoi | licence | effet |
 |---|---|---|
-| le code (`core/`, `bin/`, `web/`) | MIT, ou AGPL-3.0 si l'on veut que les dérivés restent ouverts | réutilisable, avec attribution |
-| les données dérivées (`derive/`) | CC-BY-4.0 | citables et redistribuables, avec attribution |
-| les textes sources (`sources/`) | domaine public — rien à concéder | déjà libres, la provenance est déclarée œuvre par œuvre |
+| le code — `core/`, `bin/`, `web/`, les tests | **MIT** ([`LICENSE`](../LICENSE)) | réutilisable partout, y compris dans un logiciel fermé, avec attribution |
+| les données dérivées — `derive/`, `verification/` | **CC-BY-4.0** ([`LICENSE-DONNEES.md`](../LICENSE-DONNEES.md)) | citables, redistribuables et adaptables, avec attribution ; vos propres travaux dérivés restent libres de leur licence |
+| les textes sources — `sources/` | **domaine public** | rien à concéder ; la provenance est déclarée œuvre par œuvre dans `core/sources.py` |
+
+Deux demandes accompagnent la licence des données sans avoir force de condition : **citer la
+version** avec le chiffre (le dépôt bouge, et ses mesures avec lui — la couverture de la carte est
+passée de 0,52 % à 0,454 % le 2026-07-30, parce qu'elle comptait des côtés d'acte pour des atomes),
+et **reprendre la réserve avec la mesure**. Les séparer ferait dire aux chiffres ce que le corpus
+refuse de dire.
 
 ### b) Il n'y a pas de DOI, donc pas de cible de citation stable
 
