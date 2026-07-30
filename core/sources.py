@@ -112,6 +112,16 @@ PARATEXTE_FINAL = {
     "klinische_beitraege": "Inhaltsübersicht.",
     "entwicklungsgeschichte_libido": "Inhaltsverzeichnis",
     "charakterbildung": "INTERNATIONALER PSYCHOANALYTISCHER",
+    # Sigmund Freud — les trois recueils dont le DERNIER article est déjà au corpus. Le couper ici
+    # revient à ne pas compter deux fois les mêmes phrases : c'est la mesure qui avait écarté trois
+    # volumes de Ferenczi, appliquée cette fois sans perdre le reste du volume.
+    #   • « Der Dichter und das Phantasieren » clôt la Zweite Folge — recouvrement mesuré 72,1 %
+    #     avec l'œuvre déjà présente. L'intitulé est relevé TEL QUE L'OCR LE LIT : « Diehter ».
+    "sammlung_2": "Der Diehter und das Phantasieren",
+    #   • la Dritte Folge n'a pas de doublon : sa borne ne coupe que la réclame de l'éditeur.
+    "sammlung_3": "VERLAG VON FRANZ DEUTICKE",
+    #   • « Das Unheimliche » clôt la Fünfte Folge — recouvrement mesuré 66,3 %.
+    "sammlung_5": "DAS UNHEIMLICHE",
     # Sándor Ferenczi — tables des matières de fin, bibliographies et index dressés par l'éditeur.
     "populaere_vortraege": "Inhaltsverzeichnis",
     # La borne est relevée sur le texte APRÈS recollage des césures : le fac-similé imprime
@@ -132,6 +142,43 @@ PARATEXTE_FINAL = {
 # Le format est (début, fin, motif). Les deux bornes sont relevées dans le texte ; leur absence
 # fait ÉCHOUER le chargement, pour qu'une région qu'on croit écartée ne reste jamais en place.
 REGIONS_ECARTEES = {
+    # SIGMUND FREUD, Vierte Folge (1918) — SIX TEXTES DÉJÀ AU CORPUS, retirés en UN SEUL bloc.
+    #
+    # Ce n'est pas une région d'un autre auteur, c'est un DOUBLON : ce volume réimprime cinq
+    # textes que le corpus tient déjà de Project Gutenberg, en transcription relue. Mesuré en
+    # suites de huit mots, avec la méthode qui avait écarté trois volumes de Ferenczi :
+    #     kindheitserinnerung_dichtung_wahrheit  77,3 %      charaktertypen           69,8 %
+    #     schwierigkeit_psychoanalyse            74,3 %      zeitgemaesses_krieg_tod  64,4 %
+    #     kaestchenwahl                          62,4 %
+    # (Les taux ne montent pas à 100 % parce qu'on compare un fac-similé océrisé à une
+    # transcription relue : ce sont les mêmes textes, pas les mêmes graphies.)
+    #
+    # Les cinq se suivent SANS INTERRUPTION dans le volume, des chapitres XXVI à XXX : une seule
+    # région les emporte, ce qui évite cinq paires de bornes et cinq occasions de se tromper. Elle
+    # s'arrête au chapitre XXXI, l'Homme aux loups, qui lui n'est pas au corpus et doit rester.
+    #
+    # Les accepter aurait compté deux fois les mêmes phrases et faussé TOUTES les densités du
+    # corpus — y compris celles des autres auteurs, qui se mesurent par comparaison.
+    "sammlung_4": [(
+        "DAS MOTIV DER KÄSTCHENWAHL",
+        "AUS DER GESCHICHTE EINER INFANTILEN NEUROSE",
+        "Cinq textes des chapitres XXVI à XXX sont DÉJÀ au corpus, en transcription relue de "
+        "Project Gutenberg : Das Motiv der Kästchenwahl, Zeitgemäßes über Krieg und Tod, Einige "
+        "Charaktertypen, Eine Schwierigkeit der Psychoanalyse, Eine Kindheitserinnerung aus "
+        "„Dichtung und Wahrheit“. Recouvrement mesuré de 62,4 % à 77,3 % en suites de huit mots. "
+        "La région s'arrête au chapitre XXXI (l'Homme aux loups), absent du corpus et conservé.")],
+    # SIGMUND FREUD, Fünfte Folge (1922) — l'Homme aux loups, réimprimé depuis la Vierte Folge.
+    # Le volume le dit LUI-MÊME en note de sommaire : ce texte fermait la « Vierte Folge » de 1918
+    # et en a été retiré à la 2e édition « mit Rücksicht auf die Handlichkeit des Bandes », puis
+    # repris ici. Comme le corpus lit la 1re édition de 1918, il l'a déjà — c'est le seul doublon
+    # du corpus attesté par une déclaration d'éditeur plutôt que par la seule mesure.
+    "sammlung_5": [(
+        "Der Krankheitsfall, über welchen ich hier",
+        "ZUR VORGESCHICHTE DER ANALYTISCHEN TECHNIK",
+        "« Aus der Geschichte einer infantilen Neurose » (1918), l'Homme aux loups, occupe la "
+        "première moitié de ce volume et se trouve DÉJÀ au corpus par la Vierte Folge de 1918, "
+        "que le projet lit en première édition. Le volume déclare lui-même ce déplacement en note "
+        "de son sommaire.")],
     "bausteine_3": [(
         "Entwicklungsziele der Psychoanalyse",
         "von Sexualgewohnheiten",
@@ -442,6 +489,201 @@ OEUVRES = {
         "url": "https://de.wikisource.org/wiki/Neue_Folge_der_Vorlesungen_zur_Einführung_in_die_Psychoanalyse",
         "fac_simile": "https://archive.org/details/Freud_1933_Neue_Folge_k",
     },
+
+    # ------------------------------------------------------- ONZE ŒUVRES ENTRÉES LE 2026-07-30
+    # UNE CONCLUSION PÉRIMÉE, RENVERSÉE PAR LA MESURE. Le § 5 de documentation/SYNTHESE_FREUD.md
+    # déclarait treize œuvres majeures « hors d'atteinte en qualité citable, vérifié par recherche
+    # systématique ». La recherche était bonne, mais elle ne portait que sur gutenberg.org et
+    # Wikisource DE — à une époque où le projet n'acceptait aucun fac-similé océrisé. Il en accepte
+    # seize depuis (tout Rank, tout Abraham, tout Ferenczi), avec un seuil de qualité mesuré. La
+    # conclusion tenait donc à une contrainte qui n'existait plus, et personne ne l'avait rejouée.
+    #
+    # CE QUE LE CORPUS RÉCLAMAIT LUI-MÊME, mesuré : 27 atomes des œuvres muettes citent nommément
+    # un titre freudien ABSENT, contre 63 citant un titre présent — le corpus était incomplet aux
+    # deux tiers sur ce que ses propres auteurs citent (voir documentation/COUVERTURE_MESUREE.md).
+    #
+    # Qualité mesurée par ocr.corruption(), seuil à 2,0 % de phrases atteintes : ces onze sont
+    # entre 0,0 et 0,1 %, c'est-à-dire au niveau des transcriptions relues. Une douzième candidate
+    # a été écartée par ce seuil — voir « Die Zukunft einer Illusion » dans FAC_SIMILES_ECARTES.
+    "vorlesungen_1": {
+        "fichier": "1916_vorlesungen_1.ia.txt",
+        "provenance": "archive",
+        "titre": "Vorlesungen zur Einführung in die Psychoanalyse. Erster Teil: Die Fehlleistungen",
+        "titre_fr": "Conférences d'introduction à la psychanalyse. Première partie : les actes manqués",
+        "annee_oeuvre": 1916,
+        "annee_edition": 1916,     # 1re édition, datation EXACTE
+        "edition": "1. Auflage, Erster Teil (Vorlesung I–IV)",
+        "editeur": "Hugo Heller & Cie., Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/freud-1916-vorlesungen_a",
+        # LA 1re ÉDITION PARUT EN TROIS VOLUMES, en 1916, 1916 et 1917 : on les prend tels quels
+        # plutôt que la refonte en un volume de 1918, pourtant elle aussi disponible et propre.
+        # La raison est la DATATION — trois volumes datés séparément donnent trois fenêtres
+        # exactes là où le volume unique n'en donnerait qu'une, plus large d'un à deux ans. C'est
+        # la règle que le projet applique déjà partout : l'édition la plus ancienne l'emporte.
+        "debut_corps": "Ich weiß nicht, wieviel die einzelnen von Ihnen",
+    },
+    "vorlesungen_2": {
+        "fichier": "1916_vorlesungen_2.ia.txt",
+        "provenance": "archive",
+        "titre": "Vorlesungen zur Einführung in die Psychoanalyse. Zweiter Teil: Der Traum",
+        "titre_fr": "Conférences d'introduction à la psychanalyse. Deuxième partie : le rêve",
+        "annee_oeuvre": 1916,
+        "annee_edition": 1916,
+        "edition": "1. Auflage, Zweiter Teil (Vorlesung V–XV)",
+        "editeur": "Hugo Heller & Cie., Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/freud1916vorlesungen_traum",
+        "debut_corps": "Eines Tages machte man die Entdeckung",
+    },
+    "vorlesungen_3": {
+        "fichier": "1917_vorlesungen_3.ia.txt",
+        "provenance": "archive",
+        "titre": "Vorlesungen zur Einführung in die Psychoanalyse. Dritter Teil: Allgemeine Neurosenlehre",
+        "titre_fr": "Conférences d'introduction à la psychanalyse. Troisième partie : théorie générale des névroses",
+        "annee_oeuvre": 1917,
+        "annee_edition": 1917,
+        "edition": "1. Auflage, Dritter Teil (Vorlesung XVI–XXVIII)",
+        "editeur": "Hugo Heller & Cie., Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/freud-1917-vorlesungen-c-neurosen",
+        # Ce tome porte la préface de Freud à l'ensemble des trois : elle est GARDÉE, c'est du texte
+        # d'auteur, et elle date elle-même les deux semestres de cours (1915/6 et 1916/7).
+        "debut_corps": "Was ich hier als „Einführung in die Psychoanalyse“",
+    },
+    "ich_und_es": {
+        "fichier": "1923_ich_und_es.ia.txt",
+        "provenance": "archive",
+        "titre": "Das Ich und das Es",
+        "titre_fr": "Le Moi et le Ça",
+        "annee_oeuvre": 1923,
+        "annee_edition": 1923,
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/Freud_1923_Das_Ich_und_das_Es_k",
+        # L'ABSENCE QUI PESAIT LE PLUS. La chronologie des concepts du corpus (voir § 3 de
+        # SYNTHESE_FREUD.md) mesurait l'apparition de la seconde topique sans disposer du texte
+        # qui la pose.
+        "debut_corps": "Die Unterscheidung des Psychischen in Bewußtes und Unbewußtes",
+    },
+    "hemmung_symptom_angst": {
+        "fichier": "1926_hemmung_symptom_angst.ia.txt",
+        "provenance": "archive",
+        "titre": "Hemmung, Symptom und Angst",
+        "titre_fr": "Inhibition, symptôme et angoisse",
+        "annee_oeuvre": 1926,
+        "annee_edition": 1926,
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/Freud_1926_Hemmung_Symptom_und_Angst_k",
+        "debut_corps": "Unser Sprachgebrauch läßt uns in der Beschreibung pathologischer",
+    },
+    "unbehagen_kultur": {
+        "fichier": "1930_unbehagen_kultur.ia.txt",
+        "provenance": "archive",
+        "titre": "Das Unbehagen in der Kultur",
+        "titre_fr": "Le Malaise dans la civilisation",
+        "annee_oeuvre": 1930,
+        "annee_edition": 1930,
+        "edition": "1. Auflage (1.–12. Tausend)",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/DasUnbehagenInDerKultur",
+        # L'ŒUVRE LA PLUS TARDIVE DU CORPUS, et elle passe de justesse : le projet applique à
+        # Freud le seuil américain de 1931 (voir LICENCE). Une réimpression de 1931 aurait été
+        # écartée pour cette seule raison, à texte identique.
+        "debut_corps": "Man kann sich des Eindrucks nicht erwehren",
+    },
+    "sammlung_1": {
+        "fichier": "1906_sammlung_1.ia.txt",
+        "provenance": "archive",
+        "titre": "Sammlung kleiner Schriften zur Neurosenlehre aus den Jahren 1893–1906",
+        "titre_fr": "Recueil de petits écrits sur la théorie des névroses, 1893-1906",
+        "annee_oeuvre": 1893,      # le volume déclare sa fenêtre dans son propre titre
+        "annee_edition": 1906,
+        "edition": "1. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/sksn1",
+        "debut_corps": "Mit J. M. Charcot, den nach einem glücklichen",
+    },
+    "sammlung_2": {
+        "fichier": "1909_sammlung_2.ia.txt",
+        "provenance": "archive",
+        "titre": "Sammlung kleiner Schriften zur Neurosenlehre. Zweite Folge",
+        "titre_fr": "Recueil de petits écrits sur la théorie des névroses, deuxième série",
+        "annee_oeuvre": 1905,
+        "annee_edition": 1909,
+        "edition": "1. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/sksn2",
+        # Il ouvre sur le cas Dora, dont c'est ici la première reprise en volume.
+        "debut_corps": "Es war sicherlich mißlich, daß ich Forschungsergebnisse",
+    },
+    "sammlung_3": {
+        "fichier": "1913_sammlung_3.ia.txt",
+        "provenance": "archive",
+        "titre": "Sammlung kleiner Schriften zur Neurosenlehre. Dritte Folge",
+        "titre_fr": "Recueil de petits écrits sur la théorie des névroses, troisième série",
+        "annee_oeuvre": 1909,
+        "annee_edition": 1913,
+        "edition": "1. Auflage",
+        "editeur": "Franz Deuticke, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/sksn3",
+        # LE VOLUME LE PLUS RENTABLE DE LA SÉRIE, et le seul qui n'ait AUCUN recouvrement avec le
+        # corpus : il porte trois des cinq grands cas cliniques — le petit Hans, l'Homme aux rats
+        # et Schreber. Les deux premiers sont cités nommément par des œuvres muettes du corpus.
+        "debut_corps": "Die auf den folgenden Blättern darzustellende",
+    },
+    "sammlung_4": {
+        "fichier": "1918_sammlung_4.ia.txt",
+        "provenance": "archive",
+        "titre": "Sammlung kleiner Schriften zur Neurosenlehre. Vierte Folge",
+        "titre_fr": "Recueil de petits écrits sur la théorie des névroses, quatrième série",
+        "annee_oeuvre": 1913,
+        "annee_edition": 1918,
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/sksn4",
+        # LE VOLUME QUE LE CORPUS RÉCLAMAIT LE PLUS FORT : il porte « Zur Einführung des
+        # Narzissmus » (1914) et « Trauer und Melancholie » (1917), tous deux cités nommément et
+        # absents — Abraham écrit « Als im Jahre 1916 Freuds oft zitierter Aufsatz über „Trauer
+        # und Melancholie“ erschien… » —, plus les trois écrits métapsychologiques de 1915 et
+        # l'Homme aux loups. Il réimprime aussi CINQ textes déjà au corpus, retirés en région
+        # écartée (voir REGIONS_ECARTEES) : les compter deux fois fausserait toutes les densités.
+        "debut_corps": "Wenn ich im Nachstehenden Beiträge zur Geschichte",
+    },
+    "sammlung_5": {
+        "fichier": "1922_sammlung_5.ia.txt",
+        "provenance": "archive",
+        "titre": "Sammlung kleiner Schriften zur Neurosenlehre. Fünfte Folge",
+        "titre_fr": "Recueil de petits écrits sur la théorie des névroses, cinquième série",
+        "annee_oeuvre": 1918,
+        "annee_edition": 1922,
+        "edition": "1. Auflage",
+        "editeur": "Internationaler Psychoanalytischer Verlag, Leipzig/Wien/Zürich",
+        "source": "Internet Archive — fac-similé OCRisé, NON relu",
+        "url": "https://archive.org/details/sksn5",
+        # DEUX RÉGIONS ÉCARTÉES, et la première l'est sur la foi du volume LUI-MÊME : sa note de
+        # sommaire explique que l'Homme aux loups, qui fermait la « Vierte Folge » de 1918, en a
+        # été retiré à la 2e édition « mit Rücksicht auf die Handlichkeit des Bandes » et repris
+        # ici. Comme le corpus lit la 1re édition de 1918, ce texte y est déjà. La seconde région
+        # est « Das Unheimliche », que le corpus tient de Gutenberg, relu.
+        #
+        # « Das Unheimliche » FERME le volume : la borne de paratexte final suffit pour lui.
+        # L'Homme aux loups, lui, occupe la PREMIÈRE MOITIÉ — et c'est le garde-fou qui l'a dit :
+        # une borne de début posée à 51 % du volume est refusée d'office (le seuil est à 30 %),
+        # parce qu'une borne aussi tardive est presque toujours une erreur de relevé. Ici elle ne
+        # l'était pas, mais la règle a raison de ne pas en juger : ce doublon-là est une RÉGION,
+        # et il est déclaré comme tel dans REGIONS_ECARTEES.
+        "debut_corps": "Der Krankheitsfall, über welchen ich hier",
+    },
+
     "jenseits": {
         "fichier": "1920_jenseits_lustprinzips.pg.txt",
         "titre": "Jenseits des Lustprinzips",
@@ -1068,6 +1310,26 @@ def _vocabulaire_relu():
 _VOCABULAIRE_RELU = None
 
 
+def _trouver_souple(texte, borne):
+    """Position d'une borne, EN IGNORANT la largeur des blancs. -1 si absente.
+
+    Une borne est un repère de TEXTE ; elle ne doit pas échouer sur la mise en page d'un scan.
+    Or les fac-similés justifiés sortent « Ich  weiß  nicht,  wieviel  die \\neinzelnen  von  Ihnen »
+    — doubles espaces et retour à la ligne au milieu de la phrase. Six bornes sur onze ont été
+    déclarées introuvables pour cette seule raison, alors que leur texte était bien là.
+
+    On cherche donc mot à mot, chaque intervalle valant n'importe quelle suite de blancs. La
+    recherche exacte reste possible par construction : un seul espace correspond aussi à `\\s+`.
+    """
+    if not borne:
+        return -1
+    i = texte.find(borne)
+    if i >= 0:
+        return i
+    m = re.search(r"\s+".join(re.escape(mot) for mot in borne.split()), texte)
+    return m.start() if m else -1
+
+
 def _extraire_corps_archive(brut, meta):
     """Corps utile d'un FAC-SIMILÉ OCRisé → (texte, rapport chiffré).
 
@@ -1084,7 +1346,7 @@ def _extraire_corps_archive(brut, meta):
     faits = []
     borne = meta.get("debut_corps")
     if borne:
-        i = brut.find(borne)
+        i = _trouver_souple(brut, borne)
         if i < 0:
             faits.append("borne de début « %s » INTROUVABLE — texte pris entier, À VÉRIFIER"
                          % borne[:30])
