@@ -40,11 +40,12 @@ EN_TETE = """# Les courants internes du corpus freudien — dossiers de référe
 > modification du lexique.
 >
 > **Ce que ce document est.** Le dossier de chacune des grappes que l'agent `courants` découpe
-> dans le graphe de cooccurrence des concepts (modularité {modularite} sur {relies} concepts
-> reliés — le seuil de structure réelle est généralement fixé à 0,30). Chaque dossier donne :
-> les concepts membres, le profil chronologique par œuvre, la part **datée avec certitude**
-> quand la collation le permet, une citation choisie par l'agent lui-même, et la réserve qui
-> limite l'interprétation.
+> dans le graphe de cooccurrence des concepts. Chaque dossier
+> donne : les concepts membres, le profil chronologique par œuvre, la part **datée avec
+> certitude** quand la collation le permet, une citation choisie par l'agent lui-même, et la
+> réserve qui limite l'interprétation.
+>
+> **{verdict_modularite}**
 >
 > **Ce que ce document n'est pas.** Une classification que Freud revendiquerait. Une grappe est
 > un fait de cooccurrence — jamais opposable seul.
@@ -128,8 +129,28 @@ def main():
     r = agents.AGENTS["courants"].executer(corpus)
     editorial = nommer_grappes(r["grappes"])      # échoue si la partition a glissé
 
-    parts = [EN_TETE.format(modularite=("%.3f" % r["modularite"]).replace(".", ","),
-                            relies=r["concepts_relies"])]
+    # LA MODULARITÉ EST DITE AVEC SON VERDICT, jamais laissée au lecteur. Elle a chuté de 0,373 à
+    # 0,288 quand le corpus freudien est passé de 23 à 34 œuvres — c'est-à-dire SOUS le seuil de
+    # 0,30 en dessous duquel un découpage n'est plus tenu pour la marque d'une structure réelle.
+    # La phrase précédente donnait le chiffre et le seuil côte à côte, sans les comparer : on
+    # pouvait lire un document entier de huit dossiers sans s'apercevoir qu'il était passé du bon
+    # côté au mauvais. Un chiffre qu'il faut interpréter soi-même pour voir qu'il est mauvais est
+    # un chiffre à moitié publié.
+    m = r["modularite"]
+    verdict = (
+        "Modularité %s sur %d concepts reliés — AU-DESSUS du seuil de 0,30 en deçà duquel un "
+        "découpage n'est plus tenu pour la marque d'une structure réelle."
+        % (("%.3f" % m).replace(".", ","), r["concepts_relies"])
+        if m >= 0.30 else
+        "RÉSERVE À LIRE AVANT LES DOSSIERS. Modularité %s sur %d concepts reliés : c'est SOUS le "
+        "seuil de 0,30 en deçà duquel un découpage n'est plus tenu pour la marque d'une structure "
+        "réelle. Le découpage ci-dessous reste le meilleur que la méthode trouve, et il reste "
+        "déterministe — mais il n'est plus adossé à une structure nette du graphe, et l'on doit "
+        "s'en servir comme d'une indication de voisinage, non comme d'un partage des courants de "
+        "Freud. Ce chiffre a baissé en même temps que le corpus grandissait : un graphe plus "
+        "dense se découpe moins bien, ce qui est un fait sur la MESURE et non sur l'auteur."
+        % (("%.3f" % m).replace(".", ","), r["concepts_relies"]))
+    parts = [EN_TETE.format(verdict_modularite=verdict)]
     for rang, g in enumerate(r["grappes"], 1):
         parts.append(dossier_grappe(rang, g, editorial[rang], corpus))
     parts.append(PIED)
