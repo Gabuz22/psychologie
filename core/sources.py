@@ -89,6 +89,25 @@ PARATEXTE_FINAL = {
     "gradiva": "Anzeige.",
     "totem": "INTERNATIONALER PSYCHOANALYTISCHER VERLAG",
     "jenseits": "Werke von Prof. Sigm. Freud",
+    # DEUX OUBLIS, TROUVÉS PAR LA LECTURE DES REPRISES (2026-08-01) ET NON PAR UN CONTRÔLE.
+    # Un lecteur a rejeté quatre liens en s'apercevant que les « atomes » appariés n'étaient pas
+    # du texte de Freud mais le CATALOGUE DE L'ÉDITEUR relié en fin de volume — et il a noté que
+    # ces atomes « polluent probablement d'autres lots ». Vérifié : ils le faisaient.
+    #
+    #   ich_und_es      115 atomes sur 559, soit 21 % DU VOLUME. Le livre s'achève réellement sur
+    #                   « … doch dabei die Rolle des Eros zu unterschätzen. » ; suit le catalogue
+    #                   « WERKE VON PROF SIGM. FREUD » (l'OCR a perdu le point après PROF), puis
+    #                   toute la Psychoanalytische Bibliothek — Róheim, Hitschmann, Pfister, Kolnai,
+    #                   Abraham, Jones, Ferenczi, avec leurs sommaires et leurs prix.
+    #   vorlesungen_2   34 atomes sur 2045, dont une annonce d'abonnement à « IMAGO » avec son
+    #                   tarif (« M 15.— = K 18.— pro Jahrgang »).
+    #
+    # Le motif de l'oubli mérite d'être écrit : ces deux volumes n'avaient AUCUNE borne déclarée,
+    # et rien ne le signalait — `_retirer_paratexte_final` répond « pas de paratexte final déclaré »
+    # sans distinguer « ce volume n'en a pas » de « personne n'a regardé ». Vingt-deux œuvres en
+    # déclarent une ; l'absence n'était pas une décision, c'était un trou.
+    "ich_und_es": "WERKE VON PROF",
+    "vorlesungen_2": "Verlag Hugo Heller",
     # L'édition de 1895 clôt le volume par sa table analytique (libellés + numéros de page) :
     # du paratexte de navigation, pas du texte de Le Bon.
     "psychologie_des_foules": "TABLE DES MATIÈRES",

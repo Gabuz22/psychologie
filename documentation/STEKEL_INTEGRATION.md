@@ -224,9 +224,71 @@ Ce qui manque est nommé :
    La série *Störungen des Trieb- und Affektlebens* est numérisée et libre de droits.
 4. **Les motifs de chapitre**, non encore relevés pour ces six volumes — d'autant plus utile que
    l'audit vient de montrer combien de têtes courantes subsistent dans ces scans.
-5. **`angsthysterie`**, trouvé par la machine au second passage : **43 % de paratexte, 88 % dans un
-   seul volume**. C'est le piège de la tête courante pour la **quatrième** fois, et dans un groupe
-   qui avait *déjà* passé l'audit. Non traité — hors du périmètre des deux groupes instruits.
+5. ~~**`angsthysterie`**~~ — **INSTRUIT le 2026-08-01**, voir § 8. Gardé : les 43 % de paratexte
+   sont réels, mais 106 usages réels subsistent et le rapport corrigé reste à ×5,7.
+6. **`angstneurose` dans le même volume** : 46 atomes ouvrent par `die angstneurose.` — la tête
+   courante de la partie I, exactement le même mécanisme, jamais mesuré. **Signalé, non traité.**
+7. **Rien ne retire les têtes courantes page à page.** `PARATEXTE_FINAL` et `REGIONS_ECARTEES`
+   coupent aux extrémités ; le milieu du volume n'a aucun traitement. C'est le défaut de fond
+   derrière les points 5 et 6, et il ne se corrigera pas sous-concept par sous-concept.
+
+---
+
+## 8. `angsthysterie` — l'alerte de la machine, instruite
+
+Le détecteur de concentration ajouté au § 7.5 a signalé, dans un groupe **déjà audité**, ce qui
+ressemblait au piège pour la quatrième fois : `angsthysterie`, **43 % de paratexte, 88 % dans un
+seul volume**. Les 184 atomes ont été lus un par un.
+
+**Les 43 % sont RÉELS.** *Nervöse Angstzustände* est en deux parties, et la partie II a pour tête
+courante verso **« ZWEITER TEIL: DIE ANGSTHYSTERIE. »**, dont l'OCR ne garde souvent que la queue,
+soudée en tête d'atome : **61 atomes ouvrent littéralement par `die angsthysterie.`** suivi d'un
+fragment qui ne redémarre pas — `'die angsthysterie. ursachte.'` (28 signes en tout). Les têtes
+courantes recto atterrissent, elles, en plein milieu de phrase avec leur folio : `'…die frau
+analyse einer angsthysterie mit obsession. 141 gestorben.'`
+
+| | brut | corrigé du paratexte |
+|---|---|---|
+| atomes | 184 | **106** |
+| propres | 62 | **21** |
+| rapport | ×9,79 | **≈ ×5,7** |
+| un seul volume | 88 % | **78 %** |
+
+**Verdict : GARDE.** Ce n'est pas `keller`. La concentration est **légitime** — c'est le livre de
+Stekel sur l'angoisse —, 23 atomes réels vivent hors de ce volume, et le rapport corrigé reste très
+au-dessus de 1. Aucun motif de remplacement n'est possible, et c'est mesuré : la tête courante *est*
+le mot lui-même. Le seul motif propre à 100 % (`angsthysterien|angsthysterik|angsthysterisch`)
+tombe à 27 atomes et perd **75 % des usages réels**. Le remède serait pire que le mal.
+
+Détail qui tranche : **la tête courante ne dit jamais que le singulier.** Les 22 `angsthysterien`,
+4 `angsthysteriker` et 1 `angsthysterische` sont à 100 % de l'usage réel.
+
+Note historique, vérifiée au passage : la déclaration de Freud — « nur die Bezeichnung
+„Angsthysterie" geht auf meinen Vorschlag zurück » — est dans la préface, correctement attribuée à
+**Freud** par l'atomiseur. Elle ne pèse donc pas dans les 184 atomes de Stekel et survit intacte à
+toute décision prise ici.
+
+### Le détecteur passe sa première épreuve en solo
+
+C'est le premier cas qu'il signale **seul**, sans qu'un lecteur l'ait vu d'abord. Mesuré contre la
+lecture des 184 atomes :
+
+| | |
+|---|---|
+| précision | **95 %** (76 justes sur 80 signalés) |
+| rappel | **97 %** (76 sur 78 vrais paratextes) |
+| annoncé 43 % / réel 42 % | l'écart « plancher » se vérifie, et il est minuscule ici |
+
+**Et il ne faut pas durcir le seuil**, contrairement à ce qu'on pouvait craindre. Les 4 faux
+positifs viennent bien de la règle du nombre nu appliquée à un livre clinique plein de nombres
+légitimes (« eine 32 Jahre alte … Patientin »). Mais cette même règle attrape **15 vrais paratextes
+qu'elle seule peut voir** — les têtes courantes recto, qui atterrissent en plein milieu de phrase et
+qu'aucune règle d'ouverture ne détecte. La durcir sacrifierait 15 prises justes pour éviter 3
+fausses.
+
+Les deux améliorations utiles sont ailleurs, et elles sont notées plutôt que faites : tolérer la
+déformation OCR dans les ouvertures répétées (distance d'édition sur les deux premiers mots), et
+accepter le chiffre romain comme folio.
 
 ---
 

@@ -10,6 +10,22 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "0e88e7401682bc6e|94316681f85e1758": {
+   "desancre_le": "2026-08-01",
+   "desancre_motif": "Le CATALOGUE DE L'ÉDITEUR relié en fin de volume a été retiré du corpus (115 atomes dans « Das Ich und das Es », 34 dans les « Vorlesungen II ») : voir sources.PARATEXTE_FINAL. Ce verdict jugeait un couple dont l'un des deux côtés ÉTAIT ce catalogue — une annonce de librairie, pas une phrase d'auteur. Le jugement reste vrai et il est conservé : c'est lui qui a fait découvrir le défaut, un lecteur ayant rejeté le lien en reconnaissant la réclame. Mais son ancre a disparu avec la cause du défaut, ce qui est le bon résultat — le lien n'existe plus parce qu'il n'aurait jamais dû exister.",
+   "id_a": "ich_und_es:a495",
+   "id_b": "traeume_der_dichter:a5756",
+   "motif": "Aucun des deux « atomes » n'est une phrase. Côté Freud, c'est le catalogue de l'Internationaler Psychoanalytischer Verlag relié à Das Ich und das Es (« Vierte Folge. 2. Auflage 1922. — Inhalt: Zur Geschichte der psychoanalytischen Bewegung. — … »). Côté Stekel, c'est un sommaire de revue aggloméré (« Pattner: Eine psychoanalytische Studie an einem Stotterer. — Ferenczi: Über passagere Symptombildungen… — Havelock Ellis: … »). Les suites communes ne sont que des titres d'articles alignés : « Die Handhabung der Traumdeutung in der Psychoanalyse. — Zur Dynamik der Übertragung ».",
+   "verdict": "rejete"
+  },
+  "16e73c7590d23e42|50211505e2e80c81": {
+   "desancre_le": "2026-08-01",
+   "desancre_motif": "Le CATALOGUE DE L'ÉDITEUR relié en fin de volume a été retiré du corpus (115 atomes dans « Das Ich und das Es », 34 dans les « Vorlesungen II ») : voir sources.PARATEXTE_FINAL. Ce verdict jugeait un couple dont l'un des deux côtés ÉTAIT ce catalogue — une annonce de librairie, pas une phrase d'auteur. Le jugement reste vrai et il est conservé : c'est lui qui a fait découvrir le défaut, un lecteur ayant rejeté le lien en reconnaissant la réclame. Mais son ancre a disparu avec la cause du défaut, ce qui est le bon résultat — le lien n'existe plus parce qu'il n'aurait jamais dû exister.",
+   "id_a": "klinische_beitraege:a3251",
+   "id_b": "ich_und_es:a544",
+   "motif": "Faux positif double. Les mots partagés sont un TITRE d'article, « Die Stellung der Verwandtenehe in der Psychologie der Neurosen ». Côté Abraham, l'« atome » n'est pas une phrase mais un débris de notes de bas de page aggloméré par l'OCR (« Jahrgang 1914, 6. Heft. 2 „Die Stellung…“ Vgl. S, 45 dieses Buches, 15* … 228 belegen möchte »), avec le numéro de page 228 soudé au milieu. Côté Freud, il ne s'agit pas de Das Ich und das Es mais du catalogue de l'éditeur relié en fin de volume, qui égrène le sommaire du volume X d'Abraham (« Inhalt: Über die Bedeutung sexueller Jugendträume… »). Aucune phrase n'est reprise.",
+   "verdict": "rejete"
+  },
   "2c5d93d802ab18cd|cb7d063830d58f6f": {
    "desancre_le": "2026-07-31",
    "desancre_motif": "Le retrait du BANDEAU DE NUMÉRISATION (« Digitized by Google », déposé au bas de chaque page par le scan et inséré au MILIEU des phrases coupées par le saut de page) a modifié le texte de ces phrases, donc leur empreinte : 60 bandeaux dans « Der Künstler » seul. Le couple exact que ce verdict jugeait n'existe plus tel quel dans le calcul. Le jugement n'est PAS invalidé — l'acte de citation qu'il décrit reste établi, et le nettoyage a rendu ces phrases PLUS lisibles, non moins. Ce qui est perdu est l'ancrage, pas la lecture. On le conserve ici plutôt que de le supprimer : un travail de lecture effacé en silence se refait.",
@@ -29,6 +45,22 @@
    "motif": "Reprise littérale de drei_abhandlungen:a804 : « Eine der Quellen der Kunstbetätigung ist hier zu finden und, je nachdem solche Sublimierung eine vollständige oder unvollständige ist, wird die Charakteranalyse hochbegabter, insbesondere künstlerisch veranlagter Personen jedes Mengungsverhältnis zwischen Leistungsfähigkeit, Perversion und Neurose ergeben. » Rank écrit la même phrase à un mot près (« je nachdem eine solche Sublimierung vollständig oder unvollständig ist »). Le contexte confirme la filiation : l'atome précédent (a87) recopie déjà la définition freudienne de la sublimation (« bei dem den überstarken Erregungen aus einzelnen Sexualitätsquellen Abfluß und Verwendung auf andere Gebiete eröffnet wird », = drei_abhandlungen:a803), et l'atome a84 attribue explicitement : « Freud schließt seine Ausführungen mit der Besprechung der Veränderungen… ». La contenance de 0,30 s'explique par le contenu parasite de l'atome de Rank, qui agrège à la phrase reprise un « Digitized by VjOOQIC » et l'épigraphe d'une Upanishad (« Diese Welt war am Anfang der Atman einzig und allein »).",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
+  },
+  "5914a279da61d92a|9d5ffe243d7fbd63": {
+   "desancre_le": "2026-08-01",
+   "desancre_motif": "Le CATALOGUE DE L'ÉDITEUR relié en fin de volume a été retiré du corpus (115 atomes dans « Das Ich und das Es », 34 dans les « Vorlesungen II ») : voir sources.PARATEXTE_FINAL. Ce verdict jugeait un couple dont l'un des deux côtés ÉTAIT ce catalogue — une annonce de librairie, pas une phrase d'auteur. Le jugement reste vrai et il est conservé : c'est lui qui a fait découvrir le défaut, un lecteur ayant rejeté le lien en reconnaissant la réclame. Mais son ancre a disparu avec la cause du défaut, ce qui est le bon résultat — le lien n'existe plus parce qu'il n'aurait jamais dû exister.",
+   "id_a": "klinische_beitraege:a3249",
+   "id_b": "vorlesungen_2:a2031",
+   "motif": "Les mots partagés sont le sous-titre d'une revue, « Imago, Zeitschrift für Anwendung der Psychoanalyse auf die Geisteswissenschaften ». Côté Freud, l'atome n'est pas un texte des Vorlesungen mais une page de réclame de l'éditeur Hugo Heller reliée au volume (« Verlag H[u]go Heller & Cie., Leipzig u. Wien, I. Bauernmarkt 3 … Herausgegeben von Prof. Dr. Sigm. Freud … erscheint sechsmal jährlich … M 15.— = K 18.— pro Jahrgang »). Côté Abraham, c'est l'appel de note « 1 Aus „Imago“… ». Aucune phrase d'auteur des deux côtés.",
+   "verdict": "rejete"
+  },
+  "5914a279da61d92a|b3447a8ded703c23": {
+   "desancre_le": "2026-08-01",
+   "desancre_motif": "Le CATALOGUE DE L'ÉDITEUR relié en fin de volume a été retiré du corpus (115 atomes dans « Das Ich und das Es », 34 dans les « Vorlesungen II ») : voir sources.PARATEXTE_FINAL. Ce verdict jugeait un couple dont l'un des deux côtés ÉTAIT ce catalogue — une annonce de librairie, pas une phrase d'auteur. Le jugement reste vrai et il est conservé : c'est lui qui a fait découvrir le défaut, un lecteur ayant rejeté le lien en reconnaissant la réclame. Mais son ancre a disparu avec la cause du défaut, ce qui est le bon résultat — le lien n'existe plus parce qu'il n'aurait jamais dû exister.",
+   "id_a": "vorlesungen_2:a2031",
+   "id_b": "populaere_vortraege:a1065",
+   "motif": "Même sous-titre de revue, même page publicitaire côté Freud (annonce d'abonnement à « Imago », prix, Bauernmarkt 3). Côté Ferenczi, c'est une note bibliographique renvoyant à un article d'un autre auteur : « Robitsek „Symbolisches Denken in der chemischen Forschung“, „Imago“ (Zeitschrift für Anwendung der Psychoanalyse auf die Geisteswissenschaften), I. Jahrgang, Heft 1. » Deux mentions du même périodique, pas une reprise.",
+   "verdict": "rejete"
   },
   "5e73d3d7554ed71c|9c335d094dfcc418": {
    "desancre_le": "2026-07-29",
@@ -67,6 +99,7 @@
   "couverture": "38 des 63 liens. Trois lots sur six ont échoué sur erreur réseau ; les 25 liens restants sont NON LUS, pas rejetés — ils gardent a_verifier=1.",
   "lecture_2026_07_29": "Deuxième passage de lecture : les liens « à vérifier » restés non lus au premier passage, plus ceux qu'a fait apparaître l'entrée de Sándor Ferenczi. Les liens ORIENTÉS ont été repassés à un contrôle adversarial chargé de réfuter le sens ; 0 orientations ont été retirées.",
   "lecture_2026_07_31": "150 événements de reprise lus en contexte (lots 1 à 5, bande de plus forte contenance) : 129 confirmés, 21 reclassés, 0 rejeté. L'absence de rejet n'est pas de l'indulgence — ces 150 événements sont les plus fortes contenances du corpus, presque tous des citations littérales avec guillemets et pagination. Les faux positifs, s'il y en a, sont dans les bandes basses, non lues. Une dizaine de sens ont été INVERSÉS par rapport au calcul, tous par le même artefact : l'essai de Freud « Über einen besonderen Typus der Objektwahl beim Manne » (Jahrbuch II, 1910) est lu dans la Sammlung IV de 1918, ce qui faisait de Rank (1911) la source de Freud. Rank écrit lui-même en note : « Die folgenden Ausführungen sind fast wörtlich der grundlegenden Arbeit Freuds (Jb., II, S. 394 ff.) entnommen. »",
+  "lecture_complete_2026_08_01": "INSTRUCTION COMPLÈTE : les 358 événements de reprise du corpus ont été lus en contexte. 232 confirmés, 56 reclassés, 9 rejetés (les 61 premiers l'avaient été en juillet). LE TAUX DE REJET N'EST PAS UNIFORME, ET C'EST LE RÉSULTAT LE PLUS UTILE DE LA CAMPAGNE : les lots sont triés par contenance décroissante, et 8 des 9 rejets tombent dans le DERNIER lot. Les 250 premiers événements ne contiennent aucun faux positif mécanique. Un taux de rejet global ne veut donc rien dire ici : il faut le lire par bande. LA NATURE DES LIENS CHANGE AVEC LA CONTENANCE. En haut, ce sont des citations internes signées (guillemets, pagination). En bas, un tiers deviennent des citations d'un TIERS commun extérieur au corpus — et la liste s'est allongée de treize noms : Rosegger, Gottfried Keller, Hebbel, Lichtenberg, Goethe, Jones, Kleinpaul, Popper-Lynkeus, Grillparzer, Scherner (via Volkelt), Silberer, Karl Abel, Jean Paul, Lenau, Artemidoros von Daldis, Tolstoï, Stendhal, Paul Heyse. Sans lecture, chacun aurait été publié comme un emprunt entre auteurs. SENS : une dizaine d'inversions corrigées, toutes par le même artefact — l'essai de Freud « Über einen besonderen Typus der Objektwahl beim Manne » (Jahrbuch II, 1910) est lu dans la Sammlung IV de 1918, ce qui faisait de Rank (1911) la source de Freud. Rank écrit pourtant en note : « Die folgenden Ausführungen sind fast wörtlich der grundlegenden Arbeit Freuds (Jb., II, S. 394 ff.) entnommen. » Deux orientations ont même été établies SANS LES DATES, par des leçons d'édition antérieures : Stekel cite les Drei Abhandlungen dans un état du texte que la 4e édition de 1920 ne porte plus.",
   "methode": "Chaque lien « à vérifier » (contenance entre 0,30 et 0,70) a été relu avec ses atomes voisins des deux côtés, pour retrouver l'attribution que la phrase seule ne porte pas. Le motif cite le texte qui fonde le verdict.",
   "reancrage_2026_07_29": "3 liens réancrés après le retrait des têtes courantes, par appariement vérifié des atomes avant/après.",
   "verifie_par": "Claude (Sonnet 5), lecture en contexte de chaque couple dans la base D1"
@@ -96,6 +129,14 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "00f9bd0654c78ac4|03e69d5137adbe2e": {
+   "empreinte_a": "00f9bd0654c78ac4",
+   "id_a": "der_kuenstler:a70",
+   "id_b": "witz:a2024",
+   "motif": "Rank résume puis démarque Freud : « Den Humor… faßt Freud als die am höchsten stehende aller seelischen Abwehrleistungen auf. Denn der Humor verschmäht es, den mit dem peinlichen Affekt verknüpften Vorstellungsinhalt… zu entziehen ». Les seules divergences sont des retouches de liaison (Freud « Abwehrautomatismus » / Rank « Abwehrmechanismus », Freud « dies » / Rank « das »). Rank (1907) reprend le Witz (1905), non l'édition 1912 lue.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "012955230d2671ab|55856dcc9a9d61dd": {
    "empreinte_a": "012955230d2671ab",
    "id_a": "traumdeutung:a5034",
@@ -103,6 +144,21 @@
    "motif": "Le bloc est une note de bas de page de Stekel : son atome ouvre la citation en plein milieu d'une phrase à lui (« Als ob unser alter Kaiser die alte Geliebte und Kaiser Wilhelm die Tochter ') „Der Zweifel an der richtigen Wiedergabe des Traumes... ») — l'appel de note ') et le guillemet ouvrant marquent l'emprunt à la Traumdeutung, dont le texte suit sans coupure sur quatre atomes.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
+  },
+  "017dc96b822a3f6b|543a29a04ed967ca": {
+   "empreinte_a": "543a29a04ed967ca",
+   "id_a": "inzest_motiv:a297",
+   "id_b": "sammlung_3:a863",
+   "motif": "Rank ouvre le guillemet en plein milieu de sa propre phrase — « Auch beim kleinen Hans nun „entstund dieser Wunsch im Sommeraufenthalte, als die Abwechslungen von Anwesenheit und Abwesenheit des Vaters… » — et appelle en note « Jahrbuch für psychoanalytische und psychopathologische Forschungen, Bd. I (1909) » ; son amont enchaîne déjà des citations paginées de la Traumdeutung. Freud (analyse du petit Hans, 1909) est la source.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "01a1a0f01a7c0fc3|d81a69fecbc2080e": {
+   "id_a": "lohengrinsage:a223",
+   "id_b": "sprache_des_traumes:a4385",
+   "motif": "Aucun des deux n'écrit ce texte : tous deux citent Scherner. Rank le dit en note : « Auch Scherner (Das Leben des Traumes, Berlin 1861) ... sieht in den Wasserträumen Beziehungen zur Geburt (S. 200 f.): »Die Geschlechtsregung symbolisiert sich durch Vorbildungen kleiner Kinder ... « ». Stekel ouvre sa propre note de la même manière, l'OCR ayant écrasé le nom : « ') ächeraereagt: „Die Geschlechteregving aymboliaiert sich durch VorbildunKen kleiner Kinder ... » — soit « Scherner sagt: ». Rank et Stekel paraissent tous deux en 1911 et citent la même page de la même édition de 1861.",
+   "verdict": "reclasse",
+   "vers": "Karl Albert Scherner (Das Leben des Traumes, Berlin 1861)"
   },
   "023f741bb2fb580b|f51818409670d37f": {
    "empreinte_a": "023f741bb2fb580b",
@@ -142,6 +198,21 @@
    "motif": "Même bloc que l'événement 18 (analyse des « doppelte Umkehrung » du même rêve d'accouchement), même conclusion : rapport réel, sens indécidable. La mention « (Übersetzt von O. Rank.) » suit immédiatement ce passage chez Freud, ce qui établit que la formulation allemande est de Rank, mais n'établit pas lequel des deux livres l'imprime le premier (Lohengrinsage 1911 ; Traumdeutung 4e éd. lue ici, fenêtre [1900,1914]). Aucune attribution croisée dans les contextes : sens_lu laissé à null.",
    "verdict": "confirme"
   },
+  "036aa2b4b9089848|239a9491e5e7c988": {
+   "empreinte_a": "036aa2b4b9089848",
+   "id_a": "klinische_beitraege:a1626",
+   "id_b": "sammlung_3:a2328",
+   "motif": "Abraham cite la troisième formule de Freud sur la paranoïa entre guillemets — « Die dritte Formel lautet nun: „Ich liebe ihn ja nicht — ich hasse ihn ja — weil er mich verfolgt.“ » — après avoir écrit en amont « Freud sieht… den Kern des Konfliktes in der homosexuellen Wunschphantasie » et cité les deux formules précédentes. Freud (Schreber, 1911) vers Abraham.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "037bf1157892eeb6|722e47ffbafeaf91": {
+   "id_a": "inzest_motiv:a128",
+   "id_b": "traeume_der_dichter:a1205",
+   "motif": "Ni Rank ni Stekel n'écrivent ce texte : tous deux citent Paul Heyse, et chacun donne sa propre référence. Rank : « So sagt beispielsweise Heyse in seinen „Jugenderinnerungen\" (S. 346): ,,Nun vollzieht sich freilich der beste Teil aller künstlerischen Erfindung ... ». Stekel : « Die betreffenden Stellen in den „Jugenderinnerungen und Bekenntnissen\" (Berlin, Wilhelm Hertz, 1909) lauten: «Nun vollzieht sich freilich ... ». Les deux ouvrages paraissent en 1912 et les leçons divergent (« Erfindung » / « Erfindungen », « im Licht » / « am Licht »), ce qui exclut la copie de l'un sur l'autre.",
+   "verdict": "reclasse",
+   "vers": "Paul Heyse (Jugenderinnerungen und Bekenntnisse, Berlin 1909)"
+  },
   "03b3eeada483711f|56123c1816f01f47": {
    "empreinte_a": "03b3eeada483711f",
    "id_a": "sammlung_1:a502",
@@ -150,11 +221,26 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "03cf109d2e59a264|21efc0fa54d6c0dd": {
+   "id_a": "traumdeutung:a4653",
+   "id_b": "traeume_der_dichter:a34",
+   "motif": "Même cas : la longue phrase partagée (« Wahrlich, mancher Kopf würde uns mehr mit seinen Träumen als mit seinem Denken belehren ... eine Prophetenschule für den Weltweisen sein kann ») est de Jean Paul, et les deux la citent avec leur propre amorce — Rank : « Und der Dichter _Jean Paul_, der seinen Träumen besondere Aufmerksamkeit und ein sorgfältiges Studium widmete, sagt: » ; Stekel, dès l'ouverture de son livre : « Ich halte es mit Jean Paul, der der Meinung ist: ». Aucun des deux n'a besoin de l'autre pour disposer de ce texte.",
+   "verdict": "reclasse",
+   "vers": "Jean Paul"
+  },
   "03f6abe4bcf6f2c8|a9c9fcf517425e43": {
    "empreinte_a": "a9c9fcf517425e43",
    "id_a": "inzest_motiv:a613",
    "id_b": "traumdeutung:a2492",
    "motif": "Les mots partagés sont bien le vers de Sophocle (traduction Donner), mais la lecture interdit d'y voir deux emprunts parallèles au tiers : le guillemet est ouvert trois atomes plus haut sur Freud lui-même — a610 « Freud beruft sich auch bei seiner Deutung der Ödipus-Fabel (a. a. O. S. 182) auf diese Tatsache: ,, » — et ne se referme qu'après « trägt die Last des Lebens leicht.\" ». L'atome intermédiaire a612 est le décalque littéral de traumdeutung:a2492 (« Jokaste tröstet den noch nicht aufgeklärten… »). Rank transcrit la page de Freud, vers inclus ; il ne va pas à Sophocle.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "044e23ebc19a29d0|6ff4fd949c126009": {
+   "empreinte_a": "6ff4fd949c126009",
+   "id_a": "trauma_der_geburt:a1141",
+   "id_b": "sammlung_4:a4711",
+   "motif": "Rank cite Freud entre guillemets avec renvoi paginé — « man könne „die Auffassung schwer von sich weisen, daß eine Art von schwer bestimmbarem Wissen… mitwirkt… zur Verfügung“ (l. c. 716) » — et date lui-même la source en amont (« IV. Folge. 1918 », « Die Arbeit selbst ist im Winter 1914/15 niedergeschrieben »). Freud (1918) vers Rank (1924).",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
@@ -165,6 +251,13 @@
    "motif": "Rank cite Freud entre guillemets avec renvoi de page : l'amont porte « kommt zu dem Schluß, man könne „die Auffassung schwer von sich weisen, daß eine Art von schwer bestimmbarem Wissen… mitwirkt », le texte partagé continue « …wir haben nur die eine ausgezeichnete Analogie mit dem weitgehenden instinktiven Wissen der Tiere zur Verfügung\" (l. c. » et l'aval donne la page « 716). ». Le passage est celui de « Aus der Geschichte einer infantilen Neurose » ; Rank (1924) reprend Freud.",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
+  },
+  "04a667e900a1fc02|d487b6beab21c56c": {
+   "id_a": "traumdeutung:a4768",
+   "id_b": "traeume_der_dichter:a4177",
+   "motif": "Bloc de deux paires contigues, toutes deux du meme tiers : Rank nomme l'auteur avant de citer (« Aehnlich heisst es bei Jean Paul: »Die Phantasie kann im Traume am schoensten ihren haengenden Garten aufspannen und ueberbluemen... Der Traum ist unwillkuerliche Dichtkunst und zeigt, dass der Dichter mit dem koerperlichen Gehirn mehr arbeitet als ein anderer Mensch...« »), et Stekel imprime le meme passage de Jean Paul, prolonge chez lui par des phrases (le Shakespeare des «Scenes detachees») que Rank n'a pas. Le »Shakespeare« qui apparait des deux cotes est nomme a l'interieur des citations, pas par les deux psychanalystes.",
+   "verdict": "reclasse",
+   "vers": "Jean Paul"
   },
   "054421e8d5a0de3b|c4aba2c948501349": {
    "empreinte_a": "054421e8d5a0de3b",
@@ -196,11 +289,42 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "0687ebbc046078da|b8da604f26447007": {
+   "empreinte_a": "0687ebbc046078da",
+   "id_a": "sammlung_3:a2518",
+   "id_b": "populaere_vortraege:a1059",
+   "motif": "Ferenczi encadre le passage de guillemets et le rattache explicitement à Freud : l'amont annonce « die Freudsche Formel über die Prinzipien des psychischen Geschehens** », et l'appel de note est résolu dans l'atome même — « ** Jahrbuch für psychoanalytische und psychopathologische Forschungen, I[I]I. Band, S. 1 », soit les « Formulierungen über die zwei Prinzipien » (1911). Le texte cité est celui de Freud à l'imparfait converti au présent (« trat die unparteiische Urteilsfällung » → « tritt … welche entscheiden soll »), marque d'un citateur qui adapte. La date d'édition de la Sammlung III (1913) et celle du recueil de Ferenczi (1922) sont toutes deux postérieures et ne décident de rien.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "070e36059047213b|b09024fc65f09b78": {
+   "id_a": "traumdeutung:a3205",
+   "id_b": "sprache_des_traumes:a13779",
+   "motif": "Le texte partage est le recit autobiographique de Herbert Silberer, que Freud declare reproduire : « Ich gebe hier einige Beispiele aus der Arbeit von Silberer wieder ... Beispiel Nr. 5 ... Es faellt mir bei Tisch hie und da das Zerschneiden und Vorlegen einer Torte zu ». Stekel imprime le meme exemple autosymbolique introduit par sa propre phrase (« Die Erklaerung des Symbolgrundes ist hier die folgende »), et poursuit avec le »Beispiel Nr. 8« que Freud ne donne pas : les deux puisent au meme memoire de Silberer.",
+   "verdict": "reclasse",
+   "vers": "Herbert Silberer"
+  },
+  "07581ab1d529507d|daa4d12b27dc34d3": {
+   "empreinte_a": "daa4d12b27dc34d3",
+   "id_a": "drei_abhandlungen:a597",
+   "id_b": "onanie_homosexualitaet:a168",
+   "motif": "Stekel donne le passage en note, guillemet ouvrant compris : « *) „Es scheint mir nicht unberechtigt, diesen Unterschied in dem Wesen der Lust durch Erregung erogener Zonen… zu fixieren. » ; l'aval poursuit Vorlust/Endlust mot à mot. La distinction Vorlust/Endlust est de la première édition (1905) des Drei Abhandlungen, antérieure à Stekel 1917.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "079d2b496a8d919a|cccf31469f57243e": {
    "empreinte_a": "cccf31469f57243e",
    "id_a": "klinische_beitraege:a3312",
    "id_b": "drei_abhandlungen:a509",
    "motif": "Amont d'Abraham : « Freud sagt von ihr: „Eine zweite prägenitale Phase ist die der sadistisch-analen Organisation. » ; fermeture deux atomes plus bas : « … Die Organisation und die Unterordnung unter die Fortpflanzungsfunktion stehen noch aus.“ » Le calcul ne pouvait trancher (Abraham lu dans l'édition de 1921, Freud dans la 4e éd. de 1920) ; la lecture donne Freud → Abraham. À signaler pour la publication : la note (56) de Freud renvoie en retour à l'article d'Abraham de 1916 — les deux textes se croisent, mais le bloc partagé ici est le texte de Freud.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "08c98630f5dae7b0|990bd245361addbc": {
+   "empreinte_a": "08c98630f5dae7b0",
+   "id_a": "der_kuenstler:a7",
+   "id_b": "sammlung_1:a326",
+   "motif": "Rank annonce l'emprunt en toutes lettres deux atomes plus haut : « Da ich nun meine Psychologie auf dem Fundament der Lehren Freuds aufbaue ... muß ich für Leser, denen die Schriften Freuds nicht bekannt sind, eine kurz zusammengefaßte Darstellung seiner Lehren vorausschicken », puis résume « Die Abwehr-Neuropsychosen » quasi mot pour mot (« aus der starken Vorstellung eine schwache zu machen, ihr den Affekt, die Erregungssumme ... zu entreißen »). Rank n'aère la phrase que d'un « Es kommt jedoch ungefähr einer Lösung ... gleich » là où Freud a « Es kommt aber einer ungefähren Lösung ... gleich ».",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
@@ -216,6 +340,14 @@
    "id_a": "klinische_beitraege:a2494",
    "id_b": "sammlung_3:a2914",
    "motif": "Fin du bloc de l'événement 11 : Abraham referme le guillemet et nomme sa source avec la page, « ...die nur um diesen Preis ermöglicht war.“ Zur Erklärung einer so weitgehenden Verdrängung der sexuellen Schaulust zieht Freud (l. c. S. 319) als Motiv die Talion ... heran ». Le côté Freud continue au-delà (main hystériquement paralysée, doigts des masturbateurs repentis) : c'est le texte complet, Abraham en découpe un extrait.",
+   "verdict": "confirme"
+  },
+  "09e46de04c63d05a|a90c5bfccee5eda3": {
+   "empreinte_a": "a90c5bfccee5eda3",
+   "id_a": "sammlung_1:a1612",
+   "id_b": "ursachen_nervositaet:a313",
+   "motif": "Bloc de deux atomes contigus entierement entre guillemets chez Stekel : l'amont ouvre sur « „Die sexuelle Beduerftigkeit und Entbehrung ist blos der eine Faktor... » et l'aval referme sur « ...nur selten als guter Rat bezeichnet werden.“ Nun kehren wir nach dieser kleinen, aber notwendigen Abschweifung zu unserem Falle zurueck. » Le passage est de «Ueber Psychotherapie» (1905, Sammlung I 1906), anterieur au livre de Stekel (1907).",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "09ed98c4a5abbd6e|dfe80c482b3c784b": {
@@ -257,6 +389,14 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "0bc5b5b5e2c70356|48eade47d8d3a0c8": {
+   "empreinte_a": "48eade47d8d3a0c8",
+   "id_a": "mythus_geburt_helden:a163",
+   "id_b": "sprache_des_traumes:a7278",
+   "motif": "Stekel nomme sa source dans la phrase même qui précède le partage : « Greifen wir aus der Fülle von Beispielen, die uns Rank analysiert hat, eines heraus, etwa die bekannte Oedipussage ». Ce qui est repris n'est pas la fable de Sophocle mais la prose allemande de Rank, mot pour mot (« das Orakel antwortet, wenn er es wünsche, werde er einen Sohn bekommen »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "0bdc2b3e5c5b133e|d2e992a97fb71f45": {
    "empreinte_a": "d2e992a97fb71f45",
    "id_a": "lohengrinsage:a918",
@@ -270,6 +410,21 @@
    "id_a": "traum_und_mythus:a327",
    "id_b": "lohengrinsage:a242",
    "motif": "L'attribution est portée par l'atome précédent de Rank (lohengrinsage:a239) : « Als unmittelbaren Anlaß des Traumes führt Abraham außer dem Zustand der Gravidität folgendes an: »Am Abend hat sie sich von ihrem Arzte… » ; le guillemet ouvert court sur trois phrases et se ferme précisément sur la phrase en cause, suivie du renvoi de page « vor« (S. 23) ». Chez Abraham (a324-327) le passage est son propre protocole de cas. Citation littérale d'Abraham par Rank. La contenance n'est basse que parce que l'atome d'Abraham agrège la phrase suivante (« Der Kanal, der direkt ins Wasser führt = Geburtsweg »), que Rank rejette dans un atome ultérieur (a244).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "0c83f071de25fb50|dc0a0686daf6324c": {
+   "id_a": "sammlung_3:a2582",
+   "id_b": "sprache_des_traumes:a861",
+   "motif": "Aucun des deux n'ecrit ces lignes : elles sont de Karl Abel, «Ueber den Gegensinn der Urworte» (1889). Stekel le dit en toutes lettres dans l'amont (« ...eine Broschuere von Karl Abel aufmerksam, die sich „Ueber den Gegensinn der Urworte\" betitelt (1889 erschienen). Abel fuehrt daselbst aus: ») et Freud cite par pagination d'Abel (« (Pag. 7): „Angesichts dieser und vieler aehnlicher Faelle... »). Le renvoi « (siehe Anhang) » present chez Freud est absent chez Stekel : deux prelevements sur la meme brochure. Stekel signale seulement que c'est Freud, dans le Jahrbuch, qui lui a fait connaitre Abel.",
+   "verdict": "reclasse",
+   "vers": "Karl Abel"
+  },
+  "0c84424576425caa|57e8097b3c0b3a22": {
+   "empreinte_a": "57e8097b3c0b3a22",
+   "id_a": "traumdeutung:a3577",
+   "id_b": "sprache_des_traumes:a8281",
+   "motif": "Stekel reprend le raisonnement à la première personne de Freud (« Wenn ich bei Patienten die Häufigkeit des ödipustraumes ... betone, so bekomme ich zur Antwort ») et donne la page en aval, après avoir refermé : « ... häufiger sind als die aufrichtigen.\" ... (Freud: Ttanmdeutung S. 198.) ». sens_calcule était null (fenêtre [1900, 1914]) ; l'attribution de 1911 le fixe.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -311,12 +466,28 @@
    "motif": "Suite immédiate du même emprunt (l'amont de Rank porte encore les débris de sa note « A., Heft 7) »). Rank abrège : il supprime l'incise de Freud « — was man etwa dem bewußten Ineinanderfließen der Begriffe gleichstellen kann — » dans la phrase « Bei geringem Bedeutungswandel, wie er im Unbewußten erleichtert ist... ». L'abrègement va du texte plein au texte cité, donc Freud → Rank.",
    "verdict": "confirme"
   },
+  "0e03c12444215d17|36ea9656fad2c17c": {
+   "empreinte_a": "36ea9656fad2c17c",
+   "id_a": "sammlung_1:a575",
+   "id_b": "nervoese_angstzustaende:a401",
+   "motif": "Stekel désigne la source en amont (« Auch in dem Aufsatze von Freud findet sich eine Bemerkung… ») puis cite : « Er sagt daselbst: „Doch kommt [f]ür den Fall der Abstinenz gewiß die absichtliche Verdrängung des sexuellen Vorstellungskreises hinzu…“ », la citation se poursuivant en aval jusqu'à « …die übergroß gewordene Libido empfindet.\" ». L'atome de Stekel est coupé en son milieu par une tête courante et une pagination nues (« st ekel, Nervöse Angstz[u]st[ä]nde und ihre Behandlung. 2 — 18 — Erster Teil. Die Angstneurose. ») soudées par l'OCR : artefact typographique qui n'entame pas la citation, dont les suites partagées sont entièrement hors de cette intrusion.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "0eb52b8491c5a2a0|8460273d1e0358fc": {
    "empreinte_a": "8460273d1e0358fc",
    "id_a": "inzest_motiv:a5674",
    "id_b": "sammlung_2:a1448",
    "motif": "Rank referme la citation puis en tire une conséquence en son nom : « … die eigenen Frevel durch das göttliche Beispiel zu rechtfertigen.\" Danach ist also der allgemein gestattete und im Leben noch nicht verpönte Inzest das Ursprüngliche… ». Le « Danach » (« d'après cela ») marque la reprise d'autrui ; le bloc couvre les deux paires. Source : Freud, « Die kulturelle Sexualmoral und die moderne Nervosität », Sammlung II. La citation biblique « Die Rache ist mein, spricht der Herr » se trouve dans l'amont de Freud seul, hors du bloc partagé : elle ne fait pas de cet événement un rapport à un tiers.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "0eb603d3308da00d|3c15a36a501f9970": {
+   "empreinte_a": "0eb603d3308da00d",
+   "id_a": "drei_abhandlungen:a693",
+   "id_b": "nervoese_angstzustaende:a3119",
+   "motif": "Stekel annonce la citation et sa source : « Ich kann es mir nicht versagen, am Schlusse meiner Ausfuehrungen die trefflichen Worte zu zitieren, die Freud (l. c.) darueber sagt: „Ein Zuviel von elterlicher Zaertlichkeit wird freilich schaedlich werden... » ; il varie legerement (« wenn es die sexuelle Reifung beeinflusst » pour « indem es die sexuelle Reifung beschleunigt »), variation de citateur. Les Drei Abhandlungen sont de 1905, le livre de Stekel de 1908.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "0ed31a68000fc615|70fac4d73e2fb256": {
@@ -343,6 +514,14 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "0fd6537e5d877926|29080d37e043de92": {
+   "empreinte_a": "29080d37e043de92",
+   "id_a": "sammlung_3:a2326",
+   "id_b": "onanie_homosexualitaet:a8847",
+   "motif": "Bloc de trois atomes contigus, ouvert chez Stekel par « Freud sagt darueber: „Ich liebe ihn nicht — ich hasse ihn ja. » et referme par une prise de distance qui prouve encore la citation : « Was aber Freud vollkommen uebersehen hat, sind die Beziehungen der Paranoia zur Kriminalitaet. » Stekel (1917) reprend le schema paranoiaque de l'essai sur Schreber (Sammlung III, 1913).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "10349d4686130547|f3c74f09d9768762": {
    "id_a": "inzest_motiv:a2235",
    "id_b": "traeume_der_dichter:a4025",
@@ -356,6 +535,13 @@
    "motif": "Double attribution, en amont et en aval, chez Stekel : « ein Beispiel aus der Traumdeutung von Freud anführen. Im Traume einer Dame heisst es: (8.) „Ein Stubenmädchen steht auf der Leiter… » puis, après le bloc, la référence de page « (Traumdeutung S. 250.) ». Les déformations OCR de Stekel (« nie zum Fensterputzen », « Gurillakatze », « bei sieb ») confirment la copie d'un original identique à celui de Freud, non une source commune. Verdict unique pour les deux paires contiguës.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
+  },
+  "106d467c18079ecc|cb43f9011e8a70f0": {
+   "id_a": "inzest_motiv:a6510",
+   "id_b": "dichtung_und_neurose:a305",
+   "motif": "Les mots partages sont ceux du journal de Grillparzer, que Rank annonce comme tel : « In seinen aufrichtigen Tagebuchblaettern schreibt er: „Ich bin rachgierig, und zwar so, dass ich ausser mir selbst komme...“ ». Les deux transcriptions divergent la ou une copie ne divergerait pas : Rank « wenn ich diese Leidenschaft in vollem Masse befriedigen kann », Stekel « ...diese Leidenschaft nicht in vollem Masse befriedigen kann » ; de meme « nach einer mir zugefuegten Beleidigung mich Unmoeglichkeit der Rache toeten wuerde » contre « nach mir zugefuegter Beleidigung Unmoeglichkeit der Rache mich toeten wuerde ». Deux lectures independantes du meme tiers.",
+   "verdict": "reclasse",
+   "vers": "Franz Grillparzer"
   },
   "109426ae7fdabf14|bcb494f10bb86c75": {
    "empreinte_a": "109426ae7fdabf14",
@@ -378,6 +564,18 @@
    "motif": "Ni Freud ni Stekel n'est l'auteur de ces lignes : c'est un récit à la première personne d'apprenti tailleur styrien — le maître, l'« Alpelhofer », la « Schneiderwerkstatt », le « Möcht' nur wissen, wo du deine Gedanken hast! » — c'est-à-dire la nouvelle de Peter Rosegger tirée de « Waldheimat » (le rêve du tailleur « fremd gemacht »), que Freud cite dans la Traumdeutung (d'où la fenêtre élargie [1900,1914] : ajout d'édition tardive) et que Stekel reprend dans le chapitre « Die Rundfrage » des « Träume der Dichter ». Les deux transcriptions divergent là où une copie l'un sur l'autre serait identique : « wo ich in die Lehre eingetreten war » (Freud) contre « getreten war » (Stekel), « ganz besonders unzufrieden » contre « besonders unzufrieden », guillemets » « chez Freud contre « » chez Stekel — deux lectures indépendantes du même texte littéraire.",
    "verdict": "reclasse",
    "vers": "Peter Rosegger (Waldheimat, récit du rêve de l'apprenti tailleur)"
+  },
+  "11f223d5bb561cc9|7bd0d17b7c5248a2": {
+   "id_a": "sammlung_1:a1678",
+   "id_b": "nervoese_angstzustaende:a319",
+   "motif": "Le partage se réduit au titre du mémoire de 1895, « Über die Berechtigung, von der Neurasthenie einen bestimmten Symptomenkomplex als „Angstneurose“ abzutrennen ». Chez Freud c'est un appel de note (« !) Über die Berechtigung… », suivi en aval de « Neurol. Centralblatt, 1895 ») ; chez Stekel c'est le titre cité comme titre : « … abzutrennen“ *) heißt die Arbeit von Freud ». Un titre d'article n'est pas une phrase reprise.",
+   "verdict": "rejete"
+  },
+  "11f223d5bb561cc9|d72fc1ffeda83109": {
+   "id_a": "sammlung_1:a681",
+   "id_b": "nervoese_angstzustaende:a319",
+   "motif": "Doublon de titre, comme l'événement 12. Côté Freud, l'atome est un empilement de notes de bas de page où il cite le titre de son propre mémoire (« 2) Über die Berechtigung, von der Neurasthenie einen bestimmten Symptomenkomplex als „Angstneurose“ abzutrennen, von Dr. Sigm. Freud. »), avec en aval « 3) E. Hecker. Über larvierte und abortive Angstzustände… ». Côté Stekel, le même titre est nommé comme titre. Aucune phrase n'est reprise.",
+   "verdict": "rejete"
   },
   "1255ac4fcf4ab910|fd0331335be25a97": {
    "empreinte_a": "1255ac4fcf4ab910",
@@ -411,6 +609,14 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "139baf98277bb170|257610789bdeaf26": {
+   "empreinte_a": "139baf98277bb170",
+   "id_a": "traumdeutung:a4199",
+   "id_b": "sprache_des_traumes:a3435",
+   "motif": "Meme bloc recopie que l'evenement 3, quatre atomes plus loin : Stekel poursuit sans interruption l'extrait de la Traumdeutung annonce par « Ich fuehre hier einen Traum aus der „Traumdeutung\" Freuds an » (ici l'anecdote du negre poursuivi par les chiens et la recette des »Fliegenden Blaettern«).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "13e8486df4e96a50|2378fa2588783454": {
    "empreinte_a": "13e8486df4e96a50",
    "id_a": "traum_und_mythus:a597",
@@ -418,6 +624,13 @@
    "motif": "Deux ouvrages de 1909 (fenêtres identiques, sens calculé nul), mais la lecture tranche : Abraham expose en son nom (« Fälle dieser Art sind jedem Irrenarzt bekannt. Ein Patient behauptet etwa, die Leute, deren Namen er trage... »), tandis que Rank met exactement les mêmes mots entre guillemets et referme sur un appel de note attribué : « ...große Reichtümer zu unterdrücken«!) ... !) Abraham a. a. O. ». Abraham → Rank.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
+  },
+  "1421cf67febf7060|245ea7720677e8e5": {
+   "id_a": "traumdeutung:a4725",
+   "id_b": "traeume_der_dichter:a4064",
+   "motif": "Le partage se réduit à un distique élégiaque en vers, imprimé comme citation des deux côtés : « Das Hochzeitsbette der Göttin / Schwoll von Ähren und reich drückte der Acker die Saat. » Il appartient à un poème tiers sur les mystères d'Éleusis (Déméter s'unissant à Jasion, roi de Crète), dont les deux auteurs reproduisent le même segment plus large — l'amont porte des deux côtés « ... einst, dem rüstigen König der Kreter, / Ihres unsterblichen Leibs holdes Verborgne gegönnt. / Da war Kreta beglückt! » Les emplois divergent complètement (Rank : symbolique typique de la naissance ; Stekel : « Also das symbolische Rätsel der Hausschlange ist durchsichtig », à propos des rêves de Gottfried Keller), et Stekel (1912) précède l'appendice de Rank (4e Auflage, 1914). Réserve explicite : le nom du poète n'est pas déterminable dans la fenêtre fournie — ce qui est établi, c'est qu'aucun des deux n'est l'auteur du texte partagé.",
+   "verdict": "reclasse",
+   "vers": "poème tiers en distiques élégiaques sur les mystères d'Éleusis (Déméter et Jasion) — poète non identifiable dans la fenêtre fournie"
   },
   "148a18194945cc0f|fde0116b133efb2e": {
    "empreinte_a": "fde0116b133efb2e",
@@ -435,6 +648,29 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "15207e17ab1db5a4|c6577a804e2654ca": {
+   "empreinte_a": "c6577a804e2654ca",
+   "id_a": "sammlung_2:a1190",
+   "id_b": "bausteine_1:a0",
+   "motif": "Ferenczi ouvre son livre sur la citation, entre guillemets, et nomme la source deux atomes plus bas : « In diesen Sätzen kündigte Freud eine seiner bedeutsamsten Entdeckungen ... an. („Bruchstück einer Hysterieanalyse\", 1905. Ges. Schriften, Bd. VIII.) » Il déplace même une incise pour rendre la phrase autonome — « Die Produktivität der Neurose ist (während einer psychoanalytischen Kur) durchaus nicht erloschen » — ce que Freud avait dit dans la phrase précédente. Le calcul laissait sens_calcule à null (fenêtres 1905-1909 et 1909-1927 qui se recouvrent) ; la lecture le tranche.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "156e392c504ef95d|89c413bddaeb008a": {
+   "id_a": "lohengrinsage:a534",
+   "id_b": "sprache_des_traumes:a9984",
+   "motif": "Le bloc partage (le Storch, le Brunnen comme Mutterschoss, « Wer nicht auf den Kopf gefallen ist... Der Storch hat sie ins Bein gebissen ») n'est ni de Rank ni de Stekel : Stekel referme la citation par la reference « (Kleinpaul; Die Lebendigen und die Toten S. 113) », et chez Rank le meme paragraphe est une note en petit texte qui se clot sur « Unnoetig ein Mehreres darueber zu verlieren.« ». Deux emprunts au meme tiers.",
+   "verdict": "reclasse",
+   "vers": "Rudolf Kleinpaul"
+  },
+  "156edf37b009fd74|307fa891db813a39": {
+   "empreinte_a": "307fa891db813a39",
+   "id_a": "traumdeutung:a2405",
+   "id_b": "sprache_des_traumes:a6493",
+   "motif": "Stekel imprime entre guillemets le commentaire de Freud a la premiere personne : « „Von der Bedeutung des Traumes hatte sie keine Ahnung; es wird uns nicht schwer fallen, einen Traum vom Tode aller Geschwister ... darin zu erkennen. Ich getraue mich, folgende Analyse unterzuschieben. » ; l'analyse du reve des enfants qui prennent des ailes est celle de la Traumdeutung, dont la patiente et le materiel appartiennent a Freud.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "156edf37b009fd74|a6bb5039cf99eec1": {
    "empreinte_a": "a6bb5039cf99eec1",
    "id_a": "traumdeutung:a2407",
@@ -442,6 +678,13 @@
    "motif": "Même emprunt continu que l'événement 6, deux atomes plus haut (les deux événements sont séparés par un atome non apparié). Stekel recopie le rêve de la « Engelmacherin » avec le commentaire freudien qui l'introduit — « Von der Bedeutung des Traumes hatte sie keine Ahnung; … Ich getraue mich, folgende Analyse unterzuschieben. » — et referme plus bas par « (Traumdeutung S. 179.) ». Le « ich » du texte cité est celui de Freud.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
+  },
+  "16160e9c77f3eb91|9ab51fee1a25c385": {
+   "id_a": "traumdeutung:a3206",
+   "id_b": "sprache_des_traumes:a13780",
+   "motif": "Le texte partage est le recit autobiographique de Herbert Silberer, que Freud declare reproduire : « Ich gebe hier einige Beispiele aus der Arbeit von Silberer wieder ... Beispiel Nr. 5 ... Es faellt mir bei Tisch hie und da das Zerschneiden und Vorlegen einer Torte zu ». Stekel imprime le meme exemple autosymbolique introduit par sa propre phrase (« Die Erklaerung des Symbolgrundes ist hier die folgende »), et poursuit avec le »Beispiel Nr. 8« que Freud ne donne pas : les deux puisent au meme memoire de Silberer.",
+   "verdict": "reclasse",
+   "vers": "Herbert Silberer"
   },
   "16a068cbdbd0fc9a|5acb0b938cc94558": {
    "empreinte_a": "16a068cbdbd0fc9a",
@@ -457,6 +700,14 @@
    "id_b": "sammlung_2:a1782",
    "motif": "Rank cite Freud avec référence de page en aval de l'atome : « …zu einer lustigen Geschichte verarbeitet« (Freud: Kl. Schr., II, S.173) », et son amont annonce la source (« Freud ist diesen überaus mannigfaltigen sekundären Sexualspekulationen nicht weiter nachgegangen und führt nur einzelne solcher Irrtümer an »). Les deux extraits qu'il enchaîne (»So können Mädchen zur Erwartung kommen…« et »Andere Mädchen übersehen die Tragzeit…«) sont bien deux passages voisins mais distincts de la Sammlung 2 — le second est l'atome apparié. Freud → Rank.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "16a82a45cf4abfc8|6aa6b32b7ec6bc2b": {
+   "empreinte_a": "6aa6b32b7ec6bc2b",
+   "id_a": "traumdeutung:a3173",
+   "id_b": "sprache_des_traumes:a317",
+   "motif": "Attribution explicite des deux cotes de l'extrait chez Stekel : l'amont ouvre par « „Es ist im allgemeinen\", sagt Freud, „bei der Deutung eines jeden Traumelementes zweifelhaft... » et l'atome referme par « ...ihren Lesern.\" (Traumdeutung S. 245.) ». Stekel copie la Traumdeutung mot pour mot, jusqu'a la liste a) b) c) d).",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "16b5d63710343b53|438cd4bf8df7efe1": {
@@ -490,11 +741,33 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "16e73c7590d23e42|f3c43f8689c52b94": {
+   "id_a": "klinische_beitraege:a3251",
+   "id_b": "dichtung_und_neurose:a464",
+   "motif": "Même titre, même faux positif. Stekel écrit en note « Vergleiche den beachtenswerten Aufsatz von Dr. Karl Abraham: Die Stellung der Verwandtenehe in der Psychologie der Neurosen. Jahrbuch für psycho[an]alytische Forschungen. 1909. » : c'est une référence bibliographique, pas une reprise de texte, et le seul matériau commun est le titre. Côté Abraham, l'atome est le même fragment d'apparat OCR que dans l'événement 6 (appels de note, « 15* », « 228 »).",
+   "verdict": "rejete"
+  },
   "16e73c7590d23e42|ffb60539190a7b0b": {
    "id_a": "klinische_beitraege:a3251",
    "id_b": "inzest_motiv:a433",
    "motif": "Les quatre suites partagées sont, sans exception, les mots du titre de l'article d'Abraham : « Die Stellung der Verwandtenehe in der Psychologie der Neurosen ». Du côté A, l'atome n'est pas un énoncé mais un fragment d'apparat, agrégé par l'OCR à un numéro de page et à un mot égaré du corps : « Jahrgang 1914, 6. Heft. / 2 „Die Stellung der Verwandtenehe in der Psychologie der Neurosen,“ Vgl. S, 45 dieses Buches, / 15* … 228 / belegen möchte. » — une note d'auto-renvoi d'Abraham à son propre livre. Du côté B, Rank ne fait que nommer l'ouvrage : « Einen Schritt weiter … geht Abraham, der in einer kleinen, sehr beachtenswerten Arbeit „die Stellung der Verwandtenehe in der Psychologie der Neurosen“ präzisiert. » Aucune formulation de pensée ne passe d'un texte à l'autre : apparat bibliographique des deux côtés. La reprise réelle entre les deux auteurs existe bien, mais ailleurs — Rank recopie la phrase d'Abraham à inzest_motiv:a437 (« Es fragt sich vielmehr, ob das Vorkommen von Verwandtenehen in gewissen Familien nicht seinerseits eine spezifische Ursache hat »), déjà appariée à klinische_beitraege:a780. Rejeter ce couple-ci ne fait rien perdre.",
    "verdict": "rejete"
+  },
+  "170d461b853e9c4f|2c696596b5226ca5": {
+   "empreinte_a": "170d461b853e9c4f",
+   "id_a": "traumdeutung:a4201",
+   "id_b": "sprache_des_traumes:a3438",
+   "motif": "Troisieme segment du meme extrait continu de la Traumdeutung chez Stekel (anecdote du fonctionnaire et du »Vordermann war schon oben«), dans la suite directe de l'annonce « Ich fuehre hier einen Traum aus der „Traumdeutung\" Freuds an » ; l'aval de Stekel poursuit encore la citation (« Das ganze ... Material wird verstaendlich, wenn man erfaehrt, dass die Dame am Traumtage... »), coupee seulement par une tete courante imprimee (« Ein Tiertraum als Schmaehung. 131 »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "1710fd82c673b0d8|7130883c86f84dc8": {
+   "empreinte_a": "7130883c86f84dc8",
+   "id_a": "sammlung_2:a1478",
+   "id_b": "bausteine_1:a610",
+   "motif": "Ferenczi met la phrase entre guillemets et appelle une note résolue dans le même atome : « „Am ausgiebigsten erscheinen die Beziehungen, welche sich zwischen den anscheinend so disparaten Komplexen des Geldinteresses und der Defäkation ergeben“.¹ … ¹) Freud, Charakter und Analerotik, 1908. » Il continue de citer juste après (« des Wertlosesten, das der Mensch als Abfall von sich wirft »,²  « ²) Freud l. c. »). Attribution nominale, titre et année.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
   },
   "174da7d6eea31852|56cbd6854d31485a": {
    "empreinte_a": "174da7d6eea31852",
@@ -528,6 +801,14 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "1954218d1b6c6ea2|377e8751387f1b51": {
+   "empreinte_a": "377e8751387f1b51",
+   "id_a": "inzest_motiv:a6801",
+   "id_b": "sammlung_3:a1522",
+   "motif": "Rank annonce lui-même la reprise et la source paginée : « Von großem Interesse ist es, daß Ähnliches Freud von einem Zwangsneurotiker berichtet (Jahrb. I, 1909, S. 890) », puis ouvre les guillemets sur « Mehrere Jahre nach dem Tode des Vaters… ». La fenêtre 1909-1913 de la Sammlung III (édition lue de 1913) ne doit pas inverser le sens : le texte est celui du « Rattenmann », Jahrbuch I, 1909, antérieur à Rank 1912.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "19ca5b96add84402|d51857e07ad02579": {
    "empreinte_a": "19ca5b96add84402",
    "id_a": "inzest_motiv:a801",
@@ -542,6 +823,22 @@
    "id_b": "traumdeutung:a2443",
    "motif": "Rank ouvre la citation dans son amont : « wie es Freud in der ‚Traumdeutung‘ geschildert hat: „Die sexuelle Auswahl macht sich in der Regel bereits bei den Eltern geltend ... » et la referme dans l'atome meme par la pagination « (S. 182) ». La phrase « So folgt es dem eigenen sexuellen Triebe und erneuert gleichzeitig die von den Eltern ausgehende Anregung ... » est donc du Freud recopie ; le cote B en est la source, pas la reprise.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "1acdfd6f52f03a42|f589929099c99839": {
+   "empreinte_a": "f589929099c99839",
+   "id_a": "traumdeutung:a2760",
+   "id_b": "sprache_des_traumes:a4548",
+   "motif": "L'amont de Stekel porte l'attribution incise : « „Am greifbarsten wird die Verdichtungsarbeit des Traumes,“ sagt Freud, „wenn sie Worte und Namen zu ihren Objekten gewählt hat. » ; la citation se poursuit sans coupure jusqu'au rêve du « norekdaler Stil ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "1aeb9e26bf505b14|262ba1ca0677ba99": {
+   "empreinte_a": "1aeb9e26bf505b14",
+   "id_a": "sammlung_3:a2594",
+   "id_b": "sprache_des_traumes:a865",
+   "motif": "Le texte est de Karl Abel, mais Stekel désigne explicitement son intermédiaire en refermant le bloc par « (Aus dem Referate von Freud.) » : il tient la citation du compte rendu freudien « Über den Gegensinn der Urworte » (Jahrbuch II, 1910), non d'Abel directement. Ce n'est donc pas un tiers partagé mais une reprise avérée de Freud vers Stekel — même bloc continu que l'événement 9.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "1b1452a2ffe6785c|826d418ed7d6d8ff": {
@@ -559,6 +856,14 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "1bd0606e7352bc4d|83408e2eb60944fc": {
+   "empreinte_a": "83408e2eb60944fc",
+   "id_a": "traumdeutung:a3594",
+   "id_b": "sprache_des_traumes:a8070",
+   "motif": "Stekel encadre l'extrait de guillemets, le numerote a sa maniere (« (307.) „Er befindet sich in einem tiefen Schacht, in dem ein Fenster ist, wie im Semmeringtunnel... ») et le referme sur la reference exacte « (Traumdeutung S. 198.) », avant de passer a son propre materiel (« Meine Sammlung an Mutterleibstraeumen ist ausserordentlich reichhaltig »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "1c0f9950e9a77338|a4ba67c03bbc64e8": {
    "empreinte_a": "1c0f9950e9a77338",
    "id_a": "traumdeutung:a4376",
@@ -572,6 +877,14 @@
    "id_a": "sammlung_2:a1932",
    "id_b": "nervoese_angstzustaende:a8334",
    "motif": "Le calcul renonce (sens_calcule null, fenêtre Freud [1905,1909] vs Stekel 1908), la lecture tranche : Stekel écrit « Freud*) bemerkt darüber: „Das schlechte Einverständnis zwischen den Eltern reizt dann das Gefühlsleben des Kindes auf… » — appel de note et guillemet ouvert, refermé deux atomes plus loin après « …zur Verursachung der lebenslangen Nervosität bedarf.\" », après quoi Stekel reprend la parole en son nom (« Daß die allzugroße Strenge die gleichen Gefahren… wer wollte das leugnen ? »). Source = « Die \"kulturelle\" Sexualmoral und die moderne Nervosität », que Stekel a pu lire dès sa parution en revue (1908) avant sa reprise dans la Sammlung, Zweite Folge.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "1cf5e7711490feca|b5f52e46809c5cc7": {
+   "empreinte_a": "1cf5e7711490feca",
+   "id_a": "traumdeutung:a3843",
+   "id_b": "sprache_des_traumes:a8991",
+   "motif": "L'attribution est dans la note de Stekel qui ouvre la citation : « ') Freud hat für das Auftreten der Toten eine andere Erklärung: „Die Häufigkeit, mit welcher im Traume tote Personen wie lebend auftreten ... ». Le calcul restait à null parce que la fenêtre de l'atome de Freud est [1900, 1914] (note ajoutée en cours d'éditions) ; la citation de Stekel en 1911 prouve que la note est antérieure et fixe le sens.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -604,6 +917,14 @@
    "id_a": "traumdeutung:a5100",
    "id_b": "sprache_des_traumes:a14584",
    "motif": "Incise attributive à l'intérieur même de la phrase : « „Die Deutung eines Traumes\", sagt Freud, „vollzieht sieh auch nicht immer in einem Zuge… », et référence de page en aval : « Man kann das die „fraktionierte\" Traumdeutung heissen.\" (Traumdeutung S. 322.) ». Stekel encadre la citation de son propre récit de cure (« Wir brechen also die Deutung ab » / « Am dritten Tage kommt er wieder »). Empreinte donnée sur la 1re paire, la 2e ayant deux empreintes identiques (ec59b5ae0abb8624).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "1ef473e295199975|56f1beef6409c352": {
+   "empreinte_a": "1ef473e295199975",
+   "id_a": "drei_abhandlungen:a699",
+   "id_b": "nervoese_angstzustaende:a3123",
+   "motif": "Stekel referme le guillemet exactement à la fin de l'emprunt : « ... in seiner Angst wie ein Kind benehmen.\" » puis reprend la parole en son nom : « Wir werden bei den Analysen der Angsthysterien (Phobien) diese Erfahrungen nur unterstreichen können. » L'amont côté b recopie déjà Freud (« Kinder, die zur Ängstlichkeit neigen, nehmen nur solche Erzählungen auf ... »). J'ai vérifié la tête courante : la page a bien injecté « 8* / 116 / Erster Teil. / Die Angstneurose. » au milieu de la phrase « sowie er sie nicht zur Befriedigung zu bringen vermag », mais aucune suite partagée ne repose sur ce bruit — le partage porte sur la proposition entière de Freud.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -642,6 +963,22 @@
    "id_b": "traumdeutung:a2465",
    "motif": "Citation explicite avec référence de page : « Freud sagt darüber in der Traumdeutung (S. 180) weiter: „Nach meinen bereits Zahlzeichen Erfahrungen spielen die Eltern im Kinderseelenleben aller späteren Psychoneurotiker die Hauptrolle » (inzest_motiv:a286) — « Zahlzeichen » y est une corruption d'OCR de « zahlreichen ». Le contexte amont pose la dette dès l'ouverture du chapitre : « In der „Traumdeutung“ (1900) hat Freud zum erstenmal auf den regelmäßigen sexuellen Einschlag im Verhältnis des Kindes zu seinen Eltern hingewiesen » (inzest_motiv:a284), et l'atome précédent cite déjà la même page — « (Traumdeutung, 2. Aufl., 182) » (inzest_motiv:a285). La citation se poursuit après la note de bas de page et se referme deux atomes plus loin sur « was minder deutlich und weniger intensiv in der Seele der meisten Kinder vorgeht.“ » (inzest_motiv:a288), soit traumdeutung:a2465 à a2467. B est la source : « Nach meinen bereits zahlreichen Erfahrungen spielen die Eltern im Kinderseelenleben aller späteren Psychoneurotiker die Hauptrolle » (traumdeutung:a2465).",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "205ebf38b707abf2|98feee8a35aa14ee": {
+   "empreinte_a": "205ebf38b707abf2",
+   "id_a": "sammlung_1:a1611",
+   "id_b": "ursachen_nervositaet:a312",
+   "motif": "Bloc de deux atomes contigus entierement entre guillemets chez Stekel : l'amont ouvre sur « „Die sexuelle Beduerftigkeit und Entbehrung ist blos der eine Faktor... » et l'aval referme sur « ...nur selten als guter Rat bezeichnet werden.“ Nun kehren wir nach dieser kleinen, aber notwendigen Abschweifung zu unserem Falle zurueck. » Le passage est de «Ueber Psychotherapie» (1905, Sammlung I 1906), anterieur au livre de Stekel (1907).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "205ebf38b707abf2|a7e43f357438ff13": {
+   "empreinte_a": "205ebf38b707abf2",
+   "id_a": "sammlung_1:a1611",
+   "id_b": "nervoese_angstzustaende:a234",
+   "motif": "Bloc de 2 atomes contigus. Le guillemet est ouvert par Stekel avant le passage (« „Die sexuelle Bedürftigkeit und Entbehrung ist bloß der eine Faktor ... ») et refermé après (« ... als guter Rat bezeichnet werden.\" Das halten wir uns vor Augen. »). Le « ich » de la phrase reprise est Freud : « jener psychische Zug, den ich Verdrängung genannt habe » — Stekel ne pouvait pas écrire cela de lui-même en 1908.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "209966ae76f4706d|fb5319cfc60d0b1a": {
@@ -704,12 +1041,34 @@
    "motif": "Faux positif d'apparat bibliographique : les six suites partagées sont, en totalité, le titre d'un article de Freud et sa référence de revue, sans une seule phrase de pensée en commun. Les deux atomes sont des fragments de notes, non du corps du texte. Côté Rank, inzest_motiv:a402 est la queue d'une note où s'empilent des références hétérogènes : « Kleist\", Wiesbaden 1909. •\"•j Beiträge zur Psychologie des Liebeslebens, I. Über einen besonderen Typus der (3bjektwahl beim Manne (Jahrbuch f. psa. Forschungen, Bd. III, 1911). » — l'atome commence même au milieu d'une référence à Kleist qui appartient à la note précédente. Côté Freud, traumdeutung:a3621 est une auto-citation en fin de renvois : « Zentralblatt für Psychoanalyse, Nr. 1, 1910, sowie: Beiträge zur Psychologie des Liebeslebens, I. Über einen besonderen Typus der Objektwahl beim Manne, Jahrbuch f. Ps.-A., Bd. II, 1910(159). » Ni reclassement vers un tiers (l'ouvrage cité est de Freud lui-même, qui est l'auteur du côté b), ni reprise : la vraie reprise de pensée existe bien chez Rank mais elle est ailleurs, dans le corps du texte (inzest_motiv:a400 « hat Freud jüngst als einen „besonderen Typus der männlichen Objektwahl\" zusammengefaßt »), et ce n'est pas ce lien-ci.",
    "verdict": "rejete"
   },
+  "227591bea78d7d7f|c5968768c7fc0e02": {
+   "id_a": "inzest_motiv:a402",
+   "id_b": "sammlung_4:a1533",
+   "motif": "Faux positif : les mots partagés sont un TITRE, et non une phrase — « Beiträge zur Psychologie des Liebeslebens, I. Über einen besonderen Typus der Objektwahl beim Manne ». Côté Freud c'est la page de titre du chapitre (« BEITRÄGE ZUR PSYCHOLOGIE DES LIEBESLEBENS. I. ÜBER EINEN BESONDEREN TYPUS DER OBJEKTWAHL BEIM MANNE.*) ») ; côté Rank c'est un fragment d'appareil bibliographique agrégé par l'OCR, où la référence est soudée à la fin d'une autre note (« Kleist\", Wiesbaden 1909. •\"•j Beiträge zur Psychologie… (Jahrbuch f. psa. Forschungen, Bd. III, 1911) »). Aucun texte n'est repris.",
+   "verdict": "rejete"
+  },
   "22caafc0fb43f39b|f77e80385e2a7ed1": {
    "id_a": "inzest_motiv:a1850",
    "id_b": "witz:a1135",
    "motif": "Les six suites partagées ne sont ni de Rank ni de Freud : ce sont les mots de Fechner, que les deux auteurs citent chacun de son côté. Côté Rank, la note de bas de page nomme le tiers ET le relais par lequel il y est venu — inzest_motiv:a1846 : « Dieses Prinzip der ästhetischen Lustwirkung findet sich, wie ich nachträglich aus der Arbeit D i 1 t h e v s erfuhr, schon von G. Th. F e c h n e r in seiner „Vorschule der Ästhetik\" vorgebildet. », puis inzest_motiv:a1849 : « Dilthey sagt datübcr (dicht. Schaffen 1. c. S. 37ü) … Hieraus hat F e c ii n e r das folgende ästhetische Prinzip ableiten zu dürfen geglaubt … (I, 50). » — le « nachträglich … erfuhr » est décisif : Rank déclare avoir découvert le principe après coup, par Dilthey, et non chez Freud. Côté Freud, witz:a1135 cite Fechner directement et de première main : « G. Th. +Fechner+ hat in seiner Vorschule der Ästhetik (I. Bd., V) das „Prinzip der ästhetischen Hilfe oder Steigerung“ aufgestellt, das er in folgenden Worten ausführt: „+Aus dem widerspruchslosen Zusammentreffen von Lustbedingungen…+“ ». Aucun des deux ne renvoie à l'autre en ce point : ressemblance par tiers commun. Le champ source_tierce était à False, le calcul n'a rien vu, l'attribution ne figurant que dans les atomes voisins. Le sens calculé b_vers_a est donc caduc et sens_lu reste vide.",
    "verdict": "reclasse",
    "vers": "G. Th. Fechner, « Vorschule der Ästhetik » — « Prinzip der ästhetischen Hilfe oder Steigerung » (I. Bd., V ; principe cité I, 50). Auteur hors corpus : pas d'atome propre dans la base ; il est nommé en witz:a1135 et en inzest_motiv:a1846 / a1850. Le relais de Rank n'est pas Freud mais Wilhelm Dilthey, « Das dichterische Schaffen », S. 370 (inzest_motiv:a1847-a1849), lui aussi hors corpus."
+  },
+  "233dd2d2ea3a9208|2a035baad9d473d3": {
+   "empreinte_a": "233dd2d2ea3a9208",
+   "id_a": "sammlung_1:a852",
+   "id_b": "nervoese_angstzustaende:a7411",
+   "motif": "Formule d'attribution explicite immédiatement avant le partage : « Sagt doch Freud selber: Ich habe übrigens in all meinen Fällen von Zwangsneurose einen Untergrund von hysterischen Symptomen gefunden. » (l'OCR donne « Sagt Aoah Freud selber »). Stekel renvoie d'ailleurs plus bas « auf die Originalarbeiten von Freud ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "239a9491e5e7c988|c9fbba9e5c89e689": {
+   "empreinte_a": "239a9491e5e7c988",
+   "id_a": "sammlung_3:a2328",
+   "id_b": "onanie_homosexualitaet:a8849",
+   "motif": "Bloc de trois atomes contigus, ouvert chez Stekel par « Freud sagt darueber: „Ich liebe ihn nicht — ich hasse ihn ja. » et referme par une prise de distance qui prouve encore la citation : « Was aber Freud vollkommen uebersehen hat, sind die Beziehungen der Paranoia zur Kriminalitaet. » Stekel (1917) reprend le schema paranoiaque de l'essai sur Schreber (Sammlung III, 1913).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
   },
   "23a9dd527f0d1fce|f2765162ec24df51": {
    "empreinte_a": "f2765162ec24df51",
@@ -725,6 +1084,12 @@
    "id_b": "sprache_des_traumes:a14594",
    "motif": "Le bloc est une note de bas de page de Stekel : son atome ouvre la citation en plein milieu d'une phrase à lui (« Als ob unser alter Kaiser die alte Geliebte und Kaiser Wilhelm die Tochter ') „Der Zweifel an der richtigen Wiedergabe des Traumes... ») — l'appel de note ') et le guillemet ouvrant marquent l'emprunt à la Traumdeutung, dont le texte suit sans coupure sur quatre atomes.",
    "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "23d89ffb585d9346|61f5a608c5990291": {
+   "id_a": "traumdeutung:a3845",
+   "id_b": "sprache_des_traumes:a8992",
+   "motif": "Le bloc commun est massif et litteral (dix-neuf suites de six mots, jusqu'a « der Grossvater sei wieder am Leben und fordere Rechenschaft von ihm ») : l'un des deux imprime le texte de l'autre, il n'y a pas de coincidence possible. Mais je refuse de donner un sens : l'atome de Freud est en petit texte (note ajoutee apres 1900, sa fenetre de datation est 1900-1914, donc a cheval sur le Stekel de 1911), Stekel l'imprime sans guillemets et sans nom (« Und doch ist die Aufklaerung dieser Traeume eine sehr naheliegende. Wie oft kommen wir in die Lage, uns zu denken: Wenn der Vater noch leben wuerde... »), et aucun des deux contextes ne porte d'attribution ni de pagination. Indecidable en l'etat.",
    "verdict": "confirme"
   },
   "23d9202ad616bc59|badd970ae685eeb3": {
@@ -787,6 +1152,22 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "25e383ee5ca1c957|478a1b712fa70af9": {
+   "empreinte_a": "478a1b712fa70af9",
+   "id_a": "traumdeutung:a1177",
+   "id_b": "sprache_des_traumes:a8678",
+   "motif": "Le texte partagé est une anecdote autobiographique de Freud (l'excursion au Dachstein, la Simony-Hütte, le neveu déçu) : « Ich verstand ihn nun; er hatte erwartet, als ich vom Dachstein sprach ... ». Stekel le reprend en le numérotant comme pièce de son recueil — « (340.) „Heute Nacht habe ich geträumt, dasa wir auf der Simonyhütte gewesen Bind.\" » — et ouvre un guillemet devant « „Ich verstand ihn nun ». Le narrateur du récit est Freud, pas Stekel.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "25e383ee5ca1c957|7b7e7e2756113d70": {
+   "empreinte_a": "7b7e7e2756113d70",
+   "id_a": "traumdeutung:a1176",
+   "id_b": "sprache_des_traumes:a8678",
+   "motif": "Stekel numerote le reve a sa maniere et l'encadre de guillemets : « Am naechsten Morgen kam er aber ganz selig auf mich zu und erzaehlte: (340.) „Heute Nacht habe ich getraeumt, dass wir auf der Simonyhuette gewesen sind.\" „Ich verstand ihn nun; er hatte erwartet, als ich vom Dachstein sprach... » ; le «Ich» du commentaire est celui de Freud, dans le meme chapitre ou Stekel donne « (Traumdeutung S. 94.) ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "25fed2ed74fd763f|ebd934bb92c7397e": {
    "empreinte_a": "25fed2ed74fd763f",
    "id_a": "der_kuenstler:a43",
@@ -795,11 +1176,35 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "268375522a64904a|6b257e40e3eda5af": {
+   "empreinte_a": "6b257e40e3eda5af",
+   "id_a": "sammlung_3:a276",
+   "id_b": "sprache_des_traumes:a8730",
+   "motif": "L'attribution est explicite deux atomes plus haut chez Stekel : « Freud hat uns in der bekannten Analyse des „kleinen Hans“ gezeigt… Ich erinnere hier meine Leser a[n] die Traumbilder des kleinen Hans und verweise sie bezüglich der De[u]tung auf die Analyse des Originals. » Suit, numéroté comme les rêves de son recueil, le rêve des girafes de Herbert Graf mot pour mot, et l'aval reprend la suite (« Dann ha[t] sie aufgehört zu schreien… »). Le sens calculé était nul parce que la Sammlung III est datée de son édition (1913) : la lecture le tranche.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "26cd7ed561114063|f354befdf6f0b011": {
    "empreinte_a": "26cd7ed561114063",
    "id_a": "traumdeutung:a3550",
    "id_b": "sprache_des_traumes:a6510",
    "motif": "Le passage est la doctrine des Fliegeträume de la Traumdeutung, appuyée sur une patiente de Freud (« Eine meiner Patientinnen pflegte sehr häufig zu träumen, daß sie über die Straße in einer gewissen Höhe schwebe ») ; l'aval de Freud poursuit avec l'attribution d'une hypothèse à un tiers en son nom d'éditeur (« Dr. Paul _Federn_ (Wien) hat die bestechende Vermutung ausgesprochen… »), ce qui est la voix de l'auteur du traité, non d'un citateur. Stekel reproduit le bloc à l'identique sur deux atomes, en petit corps (lignes plus longues à l'OCR), signe typographique d'une citation encadrée.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "26d47c39816520f8|cb7d063830d58f6f": {
+   "empreinte_a": "26d47c39816520f8",
+   "id_a": "der_kuenstler:a48",
+   "id_b": "traumdeutung:a2781",
+   "motif": "Rank rend la phrase au discours indirect, Konjunktiv à l'appui (« Der Traum werde witzig, weil ihm der gerade und nächste Weg … gesperrt sei; er werde es notgedrungen »), après avoir nommé sa source : « Freud wehrt diesen Vorwurf mit der Bemerkung ab, daß… ». Freud écrit à l'indicatif et à la première personne (« er wird es notgedrungen »). Le Künstler (1907) est donc postérieur au texte de la Traumdeutung qu'il paraphrase, malgré la fenêtre 1900-1914 de la 4e édition lue.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "26d4cbe99dd8e819|4684025c160832f5": {
+   "empreinte_a": "26d4cbe99dd8e819",
+   "id_a": "sammlung_1:a486",
+   "id_b": "nervoese_angstzustaende:a370",
+   "motif": "Stekel nomme sa source et transpose la personne : « Freud (1. c.) behandelt die Bedingungen für Männer und Frauen gesondert. Nach seinen Erfahrungen kommt die Angstneurose bei Frauen in folgenden Fällen vor: „a) Als virginale Angst ... Eine Anzahl von unzweideutigen Beobachtungen hat ihm gezeigt ... » — « hat ihm gezeigt » pour le « hat mir gezeigt » de Freud. Il ajoute par-dessus sa propre note critique (« *) Eigentlich ist es nicht das erste Zusammentreffen. »), ce qui distingue nettement les deux mains.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -835,12 +1240,27 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "287b6f6383bf25e7|4faf745e24a59599": {
+   "id_a": "traumdeutung:a4689",
+   "id_b": "traeume_der_dichter:a4370",
+   "motif": "Ce sont les mots de Hebbel, dates par les deux auteurs de la meme annee de journal : Rank cite « (»Tagebuch« 1842): »Wahnsinnige, verrueckte Traeume, die uns selbst im Traume doch vernuenftig vorkommen: die Seele setzt mit einem Alphabet, das sie noch nicht versteht, unsinnige Figuren zusammen...« », Stekel « Hebbel weiss es und bemerkt: Wahnsinnige, verrueckte Traeume... » suivi de « 1842. ». Chacun puise dans le Tagebuch, dans un chapitre entierement consacre a Hebbel chez Stekel.",
+   "verdict": "reclasse",
+   "vers": "Friedrich Hebbel"
+  },
   "2890953cd5481630|7e2df5f7ac489ffc": {
    "empreinte_a": "2890953cd5481630",
    "id_a": "klinische_beitraege:a2490",
    "id_b": "sammlung_3:a2910",
    "motif": "Le sens calculé était indécidable (fenêtre Abraham [1907,1921], édition de 1921) ; la lecture tranche : Abraham introduit le bloc par « Es heißt darüber in der erwähnten Schrift weiter (Kl. Schriften, Bd. III, S. 318/319): „Wenn der sexuelle Partialtrieb, der sich des Schauens bedient... » — la référence renvoie exactement au côté B, « Die psychogene Sehstörung in psychoanalytischer Auffassung » (Sammlung, Dritte Folge), et la pagination 318/319 correspond au « 319 » resté dans le texte de Freud.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "28eac071c240dd09|a2788db6555aeae4": {
+   "empreinte_a": "a2788db6555aeae4",
+   "id_a": "mythus_geburt_helden:a166",
+   "id_b": "sprache_des_traumes:a7281",
+   "motif": "Bloc recopié sur deux atomes contigus : le récit d'Œdipe de Stekel suit Rank phrase à phrase depuis l'amont (« Aus Furcht vor der Erfüllung des Orakelspruches bleibt La[i]os dem ehelichen Umgang fern… ») jusqu'à l'aval (Periböa, Polybos, le Findling, l'oracle de Delphes). Ce n'est pas Sophocle qui est repris : la phrase partagée contient le jugement philologique propre à Rank, « Nach der Darstellung des Sophokles, die aber nicht die älteste ist », qui n'appartient à aucune source antique. Rank 1909 (fenêtre fermée) précède Stekel 1911 (fenêtre fermée).",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "29167270976e878c|33a7eaa108033b26": {
@@ -873,6 +1293,14 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "2a512afd832a254d|fa01f08484ff6957": {
+   "empreinte_a": "2a512afd832a254d",
+   "id_a": "traumdeutung:a3841",
+   "id_b": "sprache_des_traumes:a8989",
+   "motif": "Stekel ouvre lui-même le guillemet et nomme sa source : « Freud hat für das Auftret[en] der T[o]t[en] eine andere Erklärung: „Die Häufigkeit, mit welcher im Traume tote Personen wie [le]bend auftreten, handeln und mit uns verkehren…“ ». La citation se poursuit mot pour mot dans l'aval des deux côtés (« Und doch ist die Aufklärung dieser Träume eine sehr naheliegende », « Wie oft kommen wir in die Lage uns zu denken: Wenn der Vater noch leben würde… »). C'est la note 165 de la Traumdeutung reprise en note de bas de page par Stekel.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "2adb424cf5e48f0f|8c098d95e41544ae": {
    "empreinte_a": "8c098d95e41544ae",
    "id_a": "der_kuenstler:a232",
@@ -893,6 +1321,14 @@
    "id_a": "studien_ueber_hysterie:a246",
    "id_b": "ueber_psychoanalyse:a54",
    "motif": "Suite immediate du bloc de l'evenement 7 (Anna O.). Ici la citation se referme chez Freud noir sur blanc : « Die Stoerung war damit fuer immer verschwunden.«[4] » avec la note « [4] Studien ueber Hysterie, 2. Aufl., p. 26. » Freud (B) cite Breuer (A) dans sa premiere lecon de 1910 ; le sens calcule est confirme par le texte, non par les dates seules.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "2c2f8a6b58fbb4be|d9613d2377b3746f": {
+   "empreinte_a": "2c2f8a6b58fbb4be",
+   "id_a": "traumdeutung:a4483",
+   "id_b": "sprache_des_traumes:a4961",
+   "motif": "Citation refermée et paginée par Stekel lui-même : après « …welche s[ich] auf den Traum hin erhebt. Es ist eine Äusserung des esprit d'escalier von [Sei]ten der psychischen Zensur.\" » vient « (Freud, Traumdeutung S. 302.) ». L'amont de Stekel citait déjà « weil's doch nur ein Traum ist » et « die niemals ganz schlafende Zensur ». Reprise signée, page indiquée.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -920,11 +1356,35 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "2d82a40beb54328f|e0790e8192132f14": {
+   "empreinte_a": "2d82a40beb54328f",
+   "id_a": "traumdeutung:a1736",
+   "id_b": "sprache_des_traumes:a10714",
+   "motif": "Attribution paginée en aval côté Stekel : après le second atome repris (le « rapprochement forcé » des sources du rêve) vient « (Traumdeutung S. 126.) ». Le rêve rapporté est celui de Freud lui-même (« mein junger Freund, für den ich die Protektion erbeten hatte »), et Stekel conserve jusqu'à la parenthèse d'aveu « (Ich gestehe offen, dass ich mit dieser Dame nicht in guten Beziehungen gestanden hatte.) ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "2dd6195b9b743532|75b47588f97ec0ea": {
    "empreinte_a": "75b47588f97ec0ea",
    "id_a": "traum_und_mythus:a1044",
    "id_b": "dichtung_und_neurose:a43",
    "motif": "Stekel cite entre guillemets et signe dans la ligne même : « „Der Mythus ist ein erhalten gebliebenes Stück aus dem infantilen Seelenleben des Volkes und der Traum der Mythus des Individuums“ (Abraham'). » Les deux œuvres portent la même année (1909) : seule l'attribution tranche, et elle est explicite.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "2dfd24648d0ff766|ea065ca6dedbd60c": {
+   "empreinte_a": "2dfd24648d0ff766",
+   "id_a": "sammlung_3:a2590",
+   "id_b": "sprache_des_traumes:a862",
+   "motif": "Suite immédiate de l'événement 6 : les atomes a2590/a2591 de Freud et a862/a863 de Stekel forment un seul bloc continu de la citation d'Abel, que Stekel referme deux atomes plus loin par « (Aus dem Referate von Freud.) ». La source déclarée par Stekel est le référat de Freud, non Abel : reprise, non tiers partagé.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "2e43ad44fd15e090|3680988a7e5c1493": {
+   "empreinte_a": "3680988a7e5c1493",
+   "id_a": "sammlung_2:a1484",
+   "id_b": "bausteine_1:a608",
+   "motif": "Ferenczi annonce l'emprunt (« Jedem Psychoanalytiker ist die von Freud entdeckte symbolische Bedeutung des Geldes geläufig. »), met la phrase entre guillemets, et donne la note en aval : « ı) Freud, Charakter und Analerotik, 1908. » Il transforme même la construction pour l'autonomiser : « ... wird das Geld in innigste Beziehungen zum Drecke gebracht.\" » là où Freud écrit « ist ... das Geld in innigste Beziehungen zum Drecke gebracht ». sens_calcule était null (fenêtre Ferenczi 1909-1927) ; la note tranche.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -948,6 +1408,14 @@
    "id_a": "drei_abhandlungen:a437",
    "id_b": "onanie_homosexualitaet:a197",
    "motif": "Stekel cite entre guillemets fermés puis rouverts (« … leisten wird.“ „Die Säuglingsonanie scheint mit dem Einsetzen der Latenzperiode zu schwinden… »). Preuve de sens indépendante des dates : sa leçon « mit dem Einsetzen der Latenzperiode » diffère de l'atome Freud lu dans la 4e éd. de 1920, qui porte « scheint nach kurzer Zeit zu schwinden ». Stekel copie donc une impression antérieure des Drei Abhandlungen — l'antériorité de son édition (1917) sur l'édition lue de Freud (1920) est un artefact d'édition, pas un rapport.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "2f1aebdf0f9c717b|d7e9115181debd57": {
+   "empreinte_a": "d7e9115181debd57",
+   "id_a": "drei_abhandlungen:a436",
+   "id_b": "onanie_homosexualitaet:a197",
+   "motif": "Stekel referme un guillemet après « …der Bemächtigungstrieb einst leisten wird.“ » puis en rouvre un aussitôt pour la suite : il cite en bloc les Drei Abhandlungen. Le sens est ancré par les variantes d'édition, non par les dates : Stekel (1917) lit « Die Säuglin[g]sonanie scheint mit dem Einsetzen der Latenzperiode zu schwinden » et « Letztere Vornahme scheint die ursprünglichere zu sein und ist die beim Mädchen weitaus häufigere », leçons d'une Auflage antérieure que la 4e édition (1920) collationnée ici a modifiées (« nach kurzer Zeit zu schwinden » ; incise supprimée). Un texte de Freud déjà imprimé est donc la source.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -1038,6 +1506,13 @@
    "verdict": "reclasse",
    "vers": "Friedrich Hebbel (Tagebücher, entrée du 6 août 1838)"
   },
+  "33e43f5845d346c2|a2b0523e5f2ff7ff": {
+   "id_a": "traumdeutung:a4685",
+   "id_b": "traeume_der_dichter:a4173",
+   "motif": "Les mots partagés sont ceux de Jean Paul, non ceux de Rank ni de Stekel. Rank (appendice « Traum und Dichtung », 4e Auflage 1914) introduit : « Und _Jean Paul_ sucht diese Traumregel ... zu begründen: ... »Der Traum setzt uns nach _Herders_ schöner Bemerkung immer in Jugendstunden zurück« ». Stekel (1912) cite le même morceau en le prolongeant de son contexte propre chez Jean Paul (« Wahrlich, in einem Schlafgemach wollt ich Raffaels seines machen. »), qui est absent chez Rank, et conserve un « und überhaupt » que Rank n'a pas. Chacun puise à Jean Paul, qui lui-même renvoie à Herder.",
+   "verdict": "reclasse",
+   "vers": "Jean Paul"
+  },
   "33ec9f6765a44f64|340461951c6d0902": {
    "empreinte_a": "340461951c6d0902",
    "id_a": "sammlung_1:a498",
@@ -1060,6 +1535,22 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "343518c9146315db|e5432f8c3749d8b8": {
+   "empreinte_a": "343518c9146315db",
+   "id_a": "drei_abhandlungen:a599",
+   "id_b": "onanie_homosexualitaet:a170",
+   "motif": "La reprise est portée par une note de bas de page de Stekel, ouverte en amont (« *) „Es scheint mir nicht unberechtigt, diesen Unterschied in dem Wesen der Lust … zu fixieren. ») et refermée en aval (« …die Herbeiführung der größeren Befriedigungslust zu ermöglichen.“ ») : citation littérale des Drei Abhandlungen dans Onanie und Homosexualität (1917).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "3436cb70899a13f4|ec8a10e3b4d72553": {
+   "empreinte_a": "3436cb70899a13f4",
+   "id_a": "entwicklungsgeschichte_libido:a920",
+   "id_b": "sammlung_4:a4572",
+   "motif": "Abraham (1924) ferme le guillemet exactement à la fin du partage — « an der Analzone ausgebildet wird.“ » — puis commente à la troisième personne : « Der Autor spricht dann auch von biologischen Parallelvorgängen, ohne solche genauer anzugeben », ce qui résume la suite de Freud (« Biologische Parallelen oder die Auffassung der prägenitalen menschlichen Organisationen… »). L'appel de note voisin renvoie aux « Kleine Schriften zur Neurosenlehre, Band IV ». C'est Abraham qui cite Freud.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "34a476e0957bd116|3529d8a602b99176": {
    "id_a": "lohengrinsage:a525",
    "id_b": "sprache_des_traumes:a9982",
@@ -1075,6 +1566,13 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "36171940aa90ca4f|d85c6087e99ab20f": {
+   "id_a": "traumdeutung:a4350",
+   "id_b": "traeume_der_dichter:a2412",
+   "motif": "Le texte partagé n'appartient à aucun des deux : c'est le récit de rêve du poète, que Freud désigne lui-même juste après la citation — « In dieser Traumreihe des Dichters, der in seinen jungen Jahren Schneidergeselle gewesen war » — et qui est le morceau « Fremd gemacht » de Peter Rosegger (le mot « fremd gemacht » est mis entre guillemets comme titre des deux côtés). Stekel le range dans son chapitre « Die Rundfrage », le referme (« ... hereingeworfen hat.» ») et le commente pour son compte (« Sollte dieser wunderbare Traum sich nicht auf einfache Weise erklären lassen? »). La leçon diverge à l'endroit décisif — Freud « Mit jener Nacht, da mich der Meister »fremd gemacht« hatte », Stekel « seit jener Nacht » — de sorte que la suite « mit jener nacht » ne figure pas parmi les partages : Stekel ne recopie pas la leçon de Freud mais remonte au poète.",
+   "verdict": "reclasse",
+   "vers": "Peter Rosegger"
+  },
   "361d08f8e91b3ab8|361d08f8e91b3ab8": {
    "id_a": "lohengrinsage:a919",
    "id_b": "sammlung_4:a1624",
@@ -1089,11 +1587,33 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "3657a2130833e871|593f6d4402ab4d28": {
+   "id_a": "traumdeutung:a3204",
+   "id_b": "sprache_des_traumes:a13776",
+   "motif": "Les deux impriment l'« exemple n° 5 » de Silberer, que Freud annonce en amont (« Ich gebe hier einige Beispiele aus der Arbeit von _Silberer_ wieder »). Stekel ne recopie pas l'abrégé de Freud : il a la phrase complète que Freud supprime (« Zum näheren Verständnis des anscheinend albernen Symbols ist eine etwas ausführlichere Erklärung des Symbolgrundes… notwendig ») et écrit « Die Erklärung des Symbolgrundes ist HIER die folgende » là où Freud écrit « ist die folgende » ; l'ordre des mots diverge aussi (Freud « Dieser Zweck besteht darin, so denke ich mir, daß », Stekel « …denke ich mir, darin, dass »). Deux copies indépendantes du même tiers.",
+   "verdict": "reclasse",
+   "vers": "Herbert Silberer"
+  },
   "367944401dfb72fa|367944401dfb72fa": {
    "id_a": "lohengrinsage:a900",
    "id_b": "sammlung_4:a1592",
    "motif": "Rank cite Freud en toutes lettres et le dit : l'atome A porte l'appel de note « *) Die folgenden Ausführungen sind fast wörtlich der grundlegenden Arbeit Freuds (Jb., II, S. 394 ff.) entnommen », et le passage est enfermé dans des guillemets (»Brutale Mitteilungen... ausüben«e. — »Wenn er dann den Zweifel ... nicht mehr festhalten kann«). Le sens calculé (Rank 1911 → Freud) est INVERSÉ par la datation : la fenêtre [1913,1918] du côté Freud est celle du recueil « Sammlung kleiner Schriften, Vierte Folge », réimpression de l'essai « Über einen besonderen Typus der Objektwahl beim Manne » paru au Jahrbuch II (1910) — c'est précisément l'article que Rank désigne par « Jb., II, S. 394 ff. ».",
    "verdict": "confirme"
+  },
+  "36b4979e2c58ef6f|8529a5acabf043ee": {
+   "empreinte_a": "36b4979e2c58ef6f",
+   "id_a": "sammlung_1:a1337",
+   "id_b": "onanie_homosexualitaet:a976",
+   "motif": "Stekel donne la référence bibliographique complète en amont (« Sammlung kleiner Schriften zur Neurosenlehre. Erster Band. (Franz Deuticke, 1906, Leipzig und Wien.) ») puis annonce la citation littérale et la pagination : « Dort heißt es wörtlich: „Die Neurasthenie läßt sich jedesmal auf einen Zustand des Nervensystems zurückführen, wie er durch exzessive Masturbation erworben wird.“ (S. 187.) » — la page 187 figure effectivement dans l'atome de Freud. Stekel cite pour contester (« Jetzt möchte Freud diese Behauptung abschwächen »), ce qui exclut toute inversion.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "36bcc91b159a7ce8|e01b6d8ccb33d369": {
+   "id_a": "lohengrinsage:a228",
+   "id_b": "sprache_des_traumes:a4388",
+   "motif": "Stekel referme le bloc par sa référence : « (Das Leben des Traumes S. 200—201) », c'est-à-dire Scherner ; Rank ferme le sien par un guillemet (« …wie sehr diese bedeutsam ist.« ») sans se réclamer de Stekel. Les leçons divergent (Rank « was die Phantasie deutlich als noch nicht geborenes », Stekel « deutlichst ») : deux transcriptions du même texte de 1861, dans deux livres de la même année 1911.",
+   "verdict": "reclasse",
+   "vers": "Karl Albert Scherner, Das Leben des Traums"
   },
   "3726d73df90a78d8|82db0a992f58e454": {
    "empreinte_a": "82db0a992f58e454",
@@ -1119,11 +1639,27 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "377e8751387f1b51|89d0e4e5c2ee8b30": {
+   "empreinte_a": "377e8751387f1b51",
+   "id_a": "inzest_motiv:a6801",
+   "id_b": "sammlung_3:a1196",
+   "motif": "Rank cite Freud avec référence précise : « Von großem Interesse ist es, daß Ähnliches Freud von einem Zwangsneurotiker berichtet (Jahrb. I, 1909, S. 890 [lire 390]) ... Der gleiche Patient hatte als Kind die Zwangsbefürchtung gehabt: Wenn ich den Wunsch habe, eine Frau nackt zu sehen, muß mein Vater sterben. » C'est la formule du Rattenmann, que Freud établit dans le passage repris (« Die Zwangsbefürchtung lautete also, ihrem Sinne nach wiederhergestellt: ... »). sens_calcule était null (fenêtre Sammlung 3 = 1909-1913, Rank 1912) ; la référence « Jahrb. I, 1909 » lève l'ambiguïté et donne Freud pour source.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "37cc518afa214a37|acd2af8367427b0e": {
    "empreinte_a": "acd2af8367427b0e",
    "id_a": "sammlung_1:a487",
    "id_b": "nervoese_angstzustaende:a373",
    "motif": "C'est l'enumeration etiologique de l'Angstneurose de Freud (« c) als Angst der Frauen, deren Maenner Ejaculatio praecox oder sehr herabgesetzte Potenz zeigen; und d) deren Maenner den Coitus interruptus oder reservatus ueben »), que Stekel recopie avec la suite immediate. La preuve de la citation est dans le meme fil de texte, quelques atomes plus loin (evenement 23, Stekel a386-a390) : « Endlich — bemerkt Freud — muss ich noch zwei Faelle anschliessen » et « Freud betont hier ... », avec guillemet fermant. L'OCR a mange l'ouverture des guillemets ici, pas la relation.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "3904ac02931e632e|4ba28dbb22659e0f": {
+   "empreinte_a": "3904ac02931e632e",
+   "id_a": "traumdeutung:a1735",
+   "id_b": "sprache_des_traumes:a10677",
+   "motif": "Stekel reproduit le récit de Freud sur plusieurs atomes (amont : « Der Kollege erwiderte, er sei von der Tüchtigkeit des jungen Mannes überzeugt, aber sein unscheinbares Wesen… »). L'atome de Stekel est tronqué en pleine phrase par une tête courante soudée par l'OCR — « der Mutter einer meiner Patientinnen — (iby / Der Wegweiaer, 379 / Alle diese Anregungen… » — mais la portion partagée est du texte suivi de la Traumdeutung, pas la tête courante : le faux positif n'atteint que la queue de l'atome, pas la reprise.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -1151,11 +1687,49 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "3a87865ce7b31a33|b26cdf735e1552ce": {
+   "empreinte_a": "3a87865ce7b31a33",
+   "id_a": "klinische_beitraege:a1322",
+   "id_b": "sammlung_2:a1578",
+   "motif": "Abraham annonce la reprise à la lettre : « Aus seinen Ausführungen, auf die ich schon früher zu verweisen hatte, zitiere ich einige Stellen wörtlich: » ; suivent, entre guillemets, les phrases de « Allgemeines über den hysterischen Anfall », dont le partage (« Der Bewußtseinsverlust, die Absence des hysterischen Anfalles geht aus jenem flüchtigen… »), puis « „Der Mechanismus dieser Absencen ist ein relativ einfacher. » Freud (1909) vers Abraham.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "3adf298e54bf8a4d|5a74393201e90f1e": {
+   "id_a": "inzest_motiv:a366",
+   "id_b": "nervoese_angstzustaende:a4901",
+   "motif": "Le passage commun n'appartient à aucun des deux : c'est une traduction allemande du récit d'enfance de Stendhal (Vie de Henry Brulard) — mère perdue « als ich kaum sieben Jahre alt war », morte « in der Blüte und Schönheit ihrer Jugend », et le décompte « So habe ich vor 45 Jahren das verloren, was ich am meisten auf Erden geliebt habe » ; le tour « Man geruhe sich zu vergegenwärtigen » calque « Qu'on daigne se rappeler ». Rank l'insère dans une série d'aveux d'écrivains, puisqu'il enchaîne « Ähnlich schreibt Baudelaire (Briefe von 1841—1866…) » ; Stekel l'utilise pour commenter le souvenir-écran d'un patient (« Mit der Lösung dieser Deckerinnerung … ist die schwerste Verdrängung beseitigt »). Cadres incompatibles, aucune attribution réciproque : le sens de transmission reste indécidable et le rapport est une citation d'un même tiers.",
+   "verdict": "reclasse",
+   "vers": "Stendhal (Henri Beyle), Vie de Henry Brulard"
+  },
   "3b1c7f58316ba6bc|3b1c7f58316ba6bc": {
    "id_a": "lohengrinsage:a906",
    "id_b": "sammlung_4:a1608",
    "motif": "Même longue citation de « Über einen besonderen Typus der Objektwahl » : Rank ouvre par un guillemet et un « nämlich » de raccord (»Wenn nämlich das Kind hört...«) là où Freud écrit « Wenn das Kind hört », et il glisse dans le passage sa propre parenthèse d'auto-renvoi « (Beispiele siehe bei Rank: Zbl. f. Ps. A., Heft 7) », absente du texte de Freud. Une interpolation bibliographique de ce type ne peut venir que du citateur. Fenêtre [1913,1918] = édition lue, non date de l'essai (1910).",
    "verdict": "confirme"
+  },
+  "3b544adad7a1f3a1|86fcb6b15a2b8ef5": {
+   "empreinte_a": "3b544adad7a1f3a1",
+   "id_a": "inzest_motiv:a311",
+   "id_b": "sammlung_2:a526",
+   "motif": "Rank cite Freud avec référence paginée : son amont porte « 2. Folge, 1909. S. 48 f. », et l'atome de Freud repris se trouve précisément à la charnière des pages 48/49 (le folio « 49 » apparaît dans l'amont côté b). L'emprunt est encadré de guillemets côté Rank, refermés en aval après « ... sei es spontaner oder durch Verführung und Masturbation hervorgerufener.'\" ».",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "3b9ea0a8aa2449ff|f139df3f49dda15d": {
+   "empreinte_a": "f139df3f49dda15d",
+   "id_a": "sammlung_2:a1396",
+   "id_b": "nervoese_angstzustaende:a2216",
+   "motif": "L'amont de Stekel ouvre les guillemets sur le cas b) de Freud (« „Eine von ihrem Manne getrennt lebende Frau folgte beim Essen dem Zwange, das Beste stehen zu lassen… ») et l'atome les referme (« …aufs Beste verzichtet hatte.“ ») avant que Stekel ne passe à son propre matériel (« Ich habe einen einzigen Fall von Angstneurose gesehen »). Le texte est celui de « Zwangshandlungen und Religionsübungen » (1907), antérieur à Stekel 1908.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "3bb1025aa2acbbb3|6703b866e1af0f60": {
+   "id_a": "traumdeutung:a4694",
+   "id_b": "traeume_der_dichter:a325",
+   "motif": "Le passage partagé est un propos de Goethe rapporté par Eckermann, et les deux le sourcent séparément : Rank « Wenn Goethe einmal (12. März 1828) zu Eckermann sagt », Stekel « Aus Eckermann: „Gespräche mit Goethe.“ (Mittwoch den 12. März 1828) ». L'encadrement est entièrement différent — Stekel donne tout le dialogue amont (« Ihr Traum ist sehr artig, sagte Goethe »), Rank enchaîne sur Gottfried Keller et Lenau — ce qui exclut la copie de l'un sur l'autre.",
+   "verdict": "reclasse",
+   "vers": "Johann Peter Eckermann, Gespräche mit Goethe"
   },
   "3c63c5e9724b04d3|c9f3b0ecdea0caf7": {
    "empreinte_a": "3c63c5e9724b04d3",
@@ -1173,12 +1747,28 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "3d29c6f812aa4232|cb16d3d5a88ef5b3": {
+   "empreinte_a": "3d29c6f812aa4232",
+   "id_a": "traumdeutung:a5040",
+   "id_b": "sprache_des_traumes:a14600",
+   "motif": "Attribution paginée en aval côté Stekel, après la comparaison des pensées de rêve refoulées aux familles déchues d'une république antique : « An der Stelle des Miastrauens im Beispiel steht ... Zweifel.\" (Freud, Traumdeutung S. 318.) »",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "3ddc8dc1f68c2cf4|440119ca9beca0b1": {
    "empreinte_a": "3ddc8dc1f68c2cf4",
    "id_a": "traumdeutung:a3882",
    "id_b": "sprache_des_traumes:a14832",
    "motif": "Stekel attribue deux fois : « Nach Freud liegt in dieser Kritik ein zum Traummaterial gehöriger Affekt. „Der Traum wird also dann absurd gemacht... » puis referme plus bas par « (Traumdeutung S. 265.) ». Il coupe d'ailleurs la phrase personnelle de Freud sur son propre rêve (« daß ich mit dem Kutscher schon vorher gefahren »), qui n'aurait aucun sens sous sa plume.",
    "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "3df83168f96a77e9|ca91e7f56d5572ef": {
+   "empreinte_a": "3df83168f96a77e9",
+   "id_a": "lohengrinsage:a897",
+   "id_b": "sammlung_4:a1580",
+   "motif": "Cas d'inversion documenté, et la preuve est dans l'aval même de Rank : « *) Die folgenden Ausführungen sind fast wörtlich der grundlegenden Arbeit Freuds (Jb., II, S. 394 ff.) entnommen. » Rank guillemète d'ailleurs le partage et le pagine (« …in den infantilen Zusammenhang ein«, … (l. c., S. 393) »). L'essai de Freud est de 1910 (Jahrbuch II) : c'est l'édition Sammlung IV de 1918 qui fait mentir le calcul, pas la chronologie.",
+   "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
   "3f603beaaa38e712|aa4550b82d582b81": {
@@ -1203,6 +1793,14 @@
    "id_b": "sammlung_2:a1449",
    "motif": "Rank referme la citation puis en tire une conséquence en son nom : « … die eigenen Frevel durch das göttliche Beispiel zu rechtfertigen.\" Danach ist also der allgemein gestattete und im Leben noch nicht verpönte Inzest das Ursprüngliche… ». Le « Danach » (« d'après cela ») marque la reprise d'autrui ; le bloc couvre les deux paires. Source : Freud, « Die kulturelle Sexualmoral und die moderne Nervosität », Sammlung II. La citation biblique « Die Rache ist mein, spricht der Herr » se trouve dans l'amont de Freud seul, hors du bloc partagé : elle ne fait pas de cet événement un rapport à un tiers.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "40b9a62558644aa9|76eb70cd85e529aa": {
+   "empreinte_a": "40b9a62558644aa9",
+   "id_a": "sammlung_1:a338",
+   "id_b": "nervoese_angstzustaende:a3568",
+   "motif": "Référence bibliographique complète en amont côté Stekel, juste avant l'ouverture de la citation : « (Die Abwehr-Psvchoneurosen, Neurolog. Zentralblatt, 1894, Nr. 10, 11.) » ; le guillemet se referme après le second atome (« ... zu Zwangsvorstellungen werden.\" So entstehen die Obsessionen ... »). L'atome a338 côté Freud est en partie un agrégat OCR (notes Strümpell et Janet, folio « sl » = 51, phrase tronquée « stellung darf den Anspruch erheben ») — je l'ai vérifié : aucune suite partagée ne s'appuie sur cet apparat, elles portent toutes sur la phrase intacte « Wenn bei einer disponierten Person ... dann muß dieser Affekt auf psychischem Gebiet verbleiben ».",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "40b9a62558644aa9|899abd86400c22d2": {
@@ -1252,6 +1850,21 @@
    "verdict": "reclasse",
    "vers": "Peter Rosegger (« Fremd gemacht », Waldheimat)"
   },
+  "43f553643910ebee|ea5e4a56949021eb": {
+   "empreinte_a": "ea5e4a56949021eb",
+   "id_a": "traumdeutung:a2992",
+   "id_b": "sprache_des_traumes:a1557",
+   "motif": "Attribution explicite immédiatement avant la reprise : « Freud bemerkt sehr treffend: „Es ist eine Erfahrung, von der ich keine Ausnahme gefunden habe, dass jeder Traum die eigene Person behandelt. »",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "44a1c2319033ca20|7be1c62fd14b187d": {
+   "id_a": "inzest_motiv:a6513",
+   "id_b": "dichtung_und_neurose:a308",
+   "motif": "Même autoportrait de Grillparzer que l'événement 2, et l'amont trahit deux transcriptions indépendantes : Rank « Ich glaube, daß nach einer mir zugefügten Beleidigung mich Unmöglichkeit der Rache töten würde », Stekel « Ich glaube, dass nach mir zugefügter Beleidigung Unmöglichkeit der Rache mich töten würde » ; de même « wenn die Eifersucht ins Spiel kommt » (Rank) contre « wenn Eifersucht ins Spiel kommt » (Stekel). Aucun ne recopie l'autre.",
+   "verdict": "reclasse",
+   "vers": "Franz Grillparzer (Selbstbiographie / Tagebücher)"
+  },
   "44bf46b3bcb04def|44bf46b3bcb04def": {
    "id_a": "mythus_geburt_helden:a51",
    "id_b": "traumdeutung:a2484",
@@ -1266,11 +1879,26 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "45e52d08b6ff2a9a|f4bf16275a14a07f": {
+   "id_a": "traumdeutung:a810",
+   "id_b": "sprache_des_traumes:a14911",
+   "motif": "Les deux citent nommement Artemidore dans la meme traduction allemande : Freud « Artemidoros erzaehlt (p. 255): »Es scheint mir aber auch Aristandros dem Alexandros von Makedonien eine gar glueckliche Auslegung gegeben zu haben...« », Stekel « Und doch erzaehlt schon Artemidoros ein klassisches Beispiel, das vor Jahrtausenden beruehmt war, „Es scheint mir\", sagt er, ... ». Les lecons divergent (Freud « das Gefuehl hatte » et « die Syrier bekriegte », Stekel « das Gesicht hatte » et « die Tyrier bekriegte ») : deux prelevements sur le meme tiers, et non un decalque.",
+   "verdict": "reclasse",
+   "vers": "Artemidoros von Daldis"
+  },
   "464feca6b0e4bd11|fa5b332789d18eaa": {
    "empreinte_a": "464feca6b0e4bd11",
    "id_a": "traum_und_mythus:a325",
    "id_b": "lohengrinsage:a249",
    "motif": "Rank reprend l'analyse du rêve de grossesse publiée par Abraham dans « Traum und Mythus » (Heft IV, 1909), deux ans avant la Lohengrinsage (Heft XIII, 1911) de la même collection. Le texte de Rank est une version abrégée signalée par des points de suspension typiques de la citation : « Sie nennt ihn noch jetzt gern den »Kleinen« ..,.. » et, en aval, « So tritt der Bruder der Träumerin an die Stelle des Kindes, obgleich er längst erwachsen ist..., so vertritt er das erwartete Kind. » — chez Abraham ces phrases sont pleines et non coupées. Corroboration externe présente dans ce même lot : Freud, en aval de traumdeutung:a3611, attribue précisément ce rêve à Abraham (« Einen weiteren Geburtstraum erzählt Abraham von einer jungen, ihrer ersten Entbindung entgegensehenden Frau »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "467e6b3e46298214|b1e797858a228dae": {
+   "empreinte_a": "b1e797858a228dae",
+   "id_a": "traumdeutung:a1731",
+   "id_b": "sprache_des_traumes:a10674",
+   "motif": "Chez Stekel le passage est une note de bas de page ouverte par l'attribution : « ') Freud sagt: „Folgende Erfahrungen koennen uns hier auf den Weg zur Aufklaerung leiten: Wenn uns ein Tag zwei oder mehrere Erlebnisse gebracht hat... Ich stieg eines Nachmittags im Sommer in ein Eisenbahncoupe ein... » ; l'atome partage (« Ich machte die beiden Herren miteinander bekannt... ») est la suite immediate de cette citation.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -1290,12 +1918,27 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "49250f1ea7ba000c|ab6b78d9c44ddcaa": {
+   "empreinte_a": "ab6b78d9c44ddcaa",
+   "id_a": "sammlung_3:a2660",
+   "id_b": "populaere_vortraege:a1331",
+   "motif": "Note de Ferenczi entièrement guillemetée et référencée : « „Bei männlichen Patienten scheinen die bedeutsamsten Kurwiderstände vom Vaterkomplex auszugehen und sich in Furcht vor dem Vater, Trotz und Unglauben gegen den Vater aufzulösen!“ (Freud „Die zukünftigen Chancen der psychoanalytischen Therapie“, Zentralblatt für Psychoanalyse, I. 1.) » Le renvoi au Zentralblatt I (1910) court-circuite la date de l'édition lue de la Sammlung III (1913), qui rendait le sens indécidable au calcul.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "4997afeaa976b3e0|6ebf65713b28d9e9": {
    "id_a": "traumdeutung:a4669",
    "id_b": "traeume_der_dichter:a4328",
    "motif": "Les deux atomes partagent une entree du journal de Friedrich Hebbel, et chacun la donne comme telle : cote A (section « Traum und Dichtung » ajoutee a la 4e edition de la Traumdeutung, attribuee a Rank) « Ganz psychoanalytisch im Detail der Anweisung klingt endlich eine Eintragung aus Hebbels »Tagebuechern« » ; cote B, Stekel intitule son chapitre « Die Traeume von Friedrich Hebbel » et date la note « (1838) ». Aucun des deux ne nomme l'autre. La variante « an seinen Traeumen » (A) contre « an den Traeumen » (B) suggere deux prelevements distincts sur les Tagebuecher. Le rapport est reel mais c'est une source tierce commune, pas un emprunt.",
    "verdict": "reclasse",
    "vers": "Friedrich Hebbel (« Tagebuecher », 1838)"
+  },
+  "4997afeaa976b3e0|d4a2b3b32ca0cb05": {
+   "id_a": "traumdeutung:a4669",
+   "id_b": "sprache_des_traumes:a295",
+   "motif": "Bloc de deux atomes contigus : les deux citent la même entrée des « Tagebücher » de Hebbel, nommé des deux côtés (Rank : « eine Eintragung aus _Hebbels_ »Tagebüchern« » ; Stekel : « Hebbel macht in seinen Tagebüchern die Bemerkung: »). Les variantes divergent (Rank « aus seinem Leben und seiner Lektüre an seinen Träumen » / Stekel « aus seinem Leben oder seiner Lektüre an den Träumen » ; Rank « zur eigenen Beherzigung » / Stekel « aus eigener Beherzigung »), ce qui exclut la copie de l'un sur l'autre.",
+   "verdict": "reclasse",
+   "vers": "Friedrich Hebbel"
   },
   "49d76b9a33b9cf38|5312431a78bcd5f2": {
    "id_a": "studien_ueber_hysterie:a2107",
@@ -1310,6 +1953,13 @@
    "verdict": "reclasse",
    "vers": "Peter Rosegger (Waldheimat, récit du rêve de l'apprenti tailleur)"
   },
+  "4a831a6ba08056ca|96632799bfa0a0bf": {
+   "id_a": "lohengrinsage:a385",
+   "id_b": "sprache_des_traumes:a10525",
+   "motif": "Les deux citent Kleinpaul, et la même page. Rank ferme sa citation par « ... um zu den Pyramiden und zu den Königsgräbern zu gelangen« (Kleinpaul, S. 158) » et renvoie déjà en note à « Nach Kleinpaul (S. 160) ». Stekel ferme la sienne exactement au même endroit par le titre de l'ouvrage : « ... zu gelangen.\" (Die Lebendigen und die Toten S. 158.) » — Rudolf Kleinpaul, « Die Lebendigen und die Toten in Volksglauben, Religion und Sage ». Les deux livres paraissent en 1911 ; aucun ne lit l'autre, ils dépouillent la même page du même tiers.",
+   "verdict": "reclasse",
+   "vers": "Rudolf Kleinpaul (Die Lebendigen und die Toten in Volksglauben, Religion und Sage)"
+  },
   "4aeb8933b3e7f726|d31bd39912408123": {
    "empreinte_a": "d31bd39912408123",
    "id_a": "lohengrinsage:a905",
@@ -1318,12 +1968,28 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "4b516fbcea1ebd86|b5c70321c523a8a9": {
+   "empreinte_a": "4b516fbcea1ebd86",
+   "id_a": "drei_abhandlungen:a434",
+   "id_b": "onanie_homosexualitaet:a195",
+   "motif": "Bloc de 3 atomes contigus. Stekel ouvre le guillemet au premier (« „Durch die anatomische Lage, die Überströmung mit Sekreten ... ») et le referme trois atomes plus bas (« ... der Bemächtigungstrieb einst leisten wird.\" »). Les divergences ne sont pas des retouches de Stekel mais l'écart entre deux états du texte de Freud : Stekel (1917) suit une rédaction ancienne (« ist dafür gesorgt, daß », « so kann man schwerlich die Absicht der Natur verkennen »), là où l'exemplaire dépouillé est la 4e Auflage de 1920 (« wird es unvermeidlich, daß », « so wird man sich kaum der Auffassung entziehen können »). Le sens de l'emprunt en est renforcé, non affaibli.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "4beb7efa71b5d3ca|57b46d90a1b1b43c": {
    "empreinte_a": "4beb7efa71b5d3ca",
    "id_a": "drei_abhandlungen:a431",
    "id_b": "onanie_homosexualitaet:a191",
    "motif": "Attribution explicite : « Freud äußert sich über die Latenzperiode nach der Säuglingsonanie mit einer gewissen Reserve und gibt zu, daß Abweichungen vorhanden sind: „Unter den erogenen Zonen des kindlichen Körpers befindet sich eine… ». Les trois paires sont un seul bloc cité. Comme à l'événement 5, la leçon de Stekel est celle d'une édition antérieure (« wahrscheinlich damit es ihr an Reizungen … nicht fehle » contre « so daß es ihr an Reizungen … nicht fehlen kann » dans la 4e éd. de 1920).",
    "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "4bfbafea0a13f268|e832cb660d337b8d": {
+   "empreinte_a": "e832cb660d337b8d",
+   "id_a": "inzest_motiv:a3301",
+   "id_b": "sammlung_2:a1708",
+   "motif": "Rank cite entre guillemets avec renvoi paginé : « wie Freud nachgewiesen hat… „allen Menschen, auch den weiblichen Personen, einen Penis zuzusprechen, wie ihn der Knabe vom eigenen Körper kennt\" (inf. Sex. Th. S. 165) » — et la page 165 figure effectivement dans l'amont de l'atome Freud. Rank (1912) emprunte à Freud (1908/1909), à rebours de rien mais confirmant le sens calculé.",
+   "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
   "4c8e718b08c7741d|e0b8264a9e1b8e16": {
@@ -1429,6 +2095,29 @@
    "verdict": "reclasse",
    "vers": "Breuer & Freud, « Über den psychischen Mechanismus hysterischer Phänomene (Vorläufige Mittheilung) », 1893, réimprimée en tête du volume — studien_ueber_hysterie:a31"
   },
+  "53d9086c0e402fe0|c0ef3facf318b9ca": {
+   "empreinte_a": "c0ef3facf318b9ca",
+   "id_a": "mythus_geburt_helden:a167",
+   "id_b": "sprache_des_traumes:a7282",
+   "motif": "Bloc recopié sur deux atomes contigus : le récit d'Œdipe de Stekel suit Rank phrase à phrase depuis l'amont (« Aus Furcht vor der Erfüllung des Orakelspruches bleibt La[i]os dem ehelichen Umgang fern… ») jusqu'à l'aval (Periböa, Polybos, le Findling, l'oracle de Delphes). Ce n'est pas Sophocle qui est repris : la phrase partagée contient le jugement philologique propre à Rank, « Nach der Darstellung des Sophokles, die aber nicht die älteste ist », qui n'appartient à aucune source antique. Rank 1909 (fenêtre fermée) précède Stekel 1911 (fenêtre fermée).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "53d9086c0e402fe0|eb12c1df4392db5a": {
+   "id_a": "inzest_motiv:a3189",
+   "id_b": "sprache_des_traumes:a7282",
+   "motif": "Le calcul propose Stekel (1911) → Rank (1912) ; la lecture montre que ni l'un ni l'autre. L'atome de Stekel est celui-là même que l'événement 5 établit comme copié verbatim du Mythus von der Geburt des Helden de Rank (1909) — il en garde tout l'entourage (Polybos, Periböa, le Findling). Rank, en 1912, ne fait que redire sa propre formule de 1909, en la rattachant cette fois à sa source philologique (« Nach der ältesten Fassung (vgl. Bethe: thebanische Heldenlieder) … (Schol. Eur. Phoen.) »). Le tiers commun aux deux passages est donc le texte de Rank de 1909, et publier « Stekel → Rank » serait une inversion.",
+   "verdict": "reclasse",
+   "vers": "Otto Rank, Der Mythus von der Geburt des Helden (1909)"
+  },
+  "53e5c52fe504bb83|79d99f2c4a44afd6": {
+   "empreinte_a": "79d99f2c4a44afd6",
+   "id_a": "sammlung_3:a2327",
+   "id_b": "onanie_homosexualitaet:a8848",
+   "motif": "Bloc de trois atomes contigus, ouvert chez Stekel par « Freud sagt darueber: „Ich liebe ihn nicht — ich hasse ihn ja. » et referme par une prise de distance qui prouve encore la citation : « Was aber Freud vollkommen uebersehen hat, sind die Beziehungen der Paranoia zur Kriminalitaet. » Stekel (1917) reprend le schema paranoiaque de l'essai sur Schreber (Sammlung III, 1913).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "5440cd55f2a563cf|ec92b02cef6914e4": {
    "empreinte_a": "ec92b02cef6914e4",
    "id_a": "der_kuenstler:a34",
@@ -1437,12 +2126,28 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "5466f3aa3bf4a571|94756b425b0a5e2d": {
+   "empreinte_a": "5466f3aa3bf4a571",
+   "id_a": "traumdeutung:a1729",
+   "id_b": "sprache_des_traumes:a10672",
+   "motif": "Note de bas de page de Stekel introduite par « Freud sagt: „[F]olgende Erfahrungen kö[nn]en [uns] hier auf den We[g] zur Aufklärung leiten: Wenn un[s] ei[n] Tag zwei oder mehrere Erlebni[ss]e gebracht hat…“ » ; la citation continue sur les deux atomes d'aval avec l'anecdote du compartiment de chemin de fer (le collègue influent, le patient de bonne famille). Citation littérale signée.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "555cf844f4e858f7|da6721fd9e507bae": {
    "empreinte_a": "555cf844f4e858f7",
    "id_a": "traumdeutung:a4375",
    "id_b": "sprache_des_traumes:a3190",
    "motif": "Bloc de quatre atomes refermé par une référence paginée chez Stekel : « …in der schwierigen Wanderung ans Ziel zu kommen.\" (Traumdeutung S. 294.) », suivi du commentaire de Stekel qui désigne l'auteur du rêve : « Auch die Affektlosigkeit in diesem Traume des Begründers der modernen Traumdeutungslehre soll eine Wunscherfüllung sein. Freud wollte sich über „die abhaltenden Empfindungen\" hinaussetzen. » Le rêve (Brücke, préparer son propre bassin) est le rêve autobiographique de Freud.",
    "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "557e18c3f1bedb47|76a090e8479fb58e": {
+   "empreinte_a": "557e18c3f1bedb47",
+   "id_a": "der_kuenstler:a9",
+   "id_b": "sammlung_1:a339",
+   "motif": "Rank (1907) résume les Abwehr-Neuropsychosen de Freud presque mot pour mot : « …bleibt die von ihrem Affekt losgelöste Vorstellung abseits von aller Assoziation im Bewußtsein übrig, ihre frei gewordene Erregungssumme aber hängt sich an andere, an sich nicht unverträgliche Vorstellungen, die durch diese falsche Verknüpfung zu Zwangsvorstellungen im weitern Sinne werden », contre Freud « Die nun geschwächte Vorstellung bleibt abseits von aller Assoziation im Bewußtsein übrig, ihr frei gewordener Affekt aber hängt sich an andere… zu Zwangsvorstellungen werden ». C'est Rank qui glosei : il substitue « Erregungssumme » à « Affekt », ajoute « im weitern Sinne » et porte en manchette le mot-repère « Ko[n]v[e]r[si]on ». Le mémoire de Freud date de 1894 (Sammlung, 1906), Der Künstler de 1907.",
+   "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
   "55de9bda9e0212ca|5ffcfb9c6f6029b8": {
@@ -1475,12 +2180,52 @@
    "verdict": "reclasse",
    "vers": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)"
   },
+  "59b903d3b4a1fd8e|d48831d8547f19f5": {
+   "empreinte_a": "59b903d3b4a1fd8e",
+   "id_a": "drei_abhandlungen:a692",
+   "id_b": "nervoese_angstzustaende:a3118",
+   "motif": "Stekel annonce la citation et sa source : « Ich kann es mir nicht versagen, am Schlusse meiner Ausfuehrungen die trefflichen Worte zu zitieren, die Freud (l. c.) darueber sagt: „Ein Zuviel von elterlicher Zaertlichkeit wird freilich schaedlich werden... » ; il varie legerement (« wenn es die sexuelle Reifung beeinflusst » pour « indem es die sexuelle Reifung beschleunigt »), variation de citateur. Les Drei Abhandlungen sont de 1905, le livre de Stekel de 1908.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "5a90eb959db5a3e3|c5657f400cf19942": {
    "empreinte_a": "c5657f400cf19942",
    "id_a": "lohengrinsage:a912",
    "id_b": "sammlung_4:a1612",
    "motif": "Suite immédiate du même emprunt (l'amont de Rank porte encore les débris de sa note « A., Heft 7) »). Rank abrège : il supprime l'incise de Freud « — was man etwa dem bewußten Ineinanderfließen der Begriffe gleichstellen kann — » dans la phrase « Bei geringem Bedeutungswandel, wie er im Unbewußten erleichtert ist... ». L'abrègement va du texte plein au texte cité, donc Freud → Rank.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "5b74b156b2438f15|78ec43284d84e8d8": {
+   "empreinte_a": "5b74b156b2438f15",
+   "id_a": "mythus_geburt_helden:a703",
+   "id_b": "sprache_des_traumes:a7276",
+   "motif": "Stekel enchaîne immédiatement après le bloc partagé : « Greifen wir aus der Fülle von Beispielen, die uns Rank analysiert hat, eines heraus, etwa die bekannte Oedipussage ». Le schéma de la « Durchschnittssage » (mise à mort ou exposition sur l'ordre du père, le coffret confié à l'eau) est celui du Mythus von der Geburt des Helden, 1909.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "5b953ea84ffd2734|897e77d682a7b711": {
+   "empreinte_a": "5b953ea84ffd2734",
+   "id_a": "traumdeutung:a1211",
+   "id_b": "sprache_des_traumes:a8666",
+   "motif": "Suite immédiate du rêve d'Anna Freud, recopiée mot à mot et refermée par la référence : « nahm sie also im Traume ihre Revanche.\" (Traumdeutimg S. 94.) » ; Stekel enchaîne « Einen anderen Kindertraum seines Knaben teilt Freud mit folgender Analyse mit ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "5c70ca487f9672c2|90acaa6f8e4e52fa": {
+   "empreinte_a": "5c70ca487f9672c2",
+   "id_a": "sammlung_1:a1643",
+   "id_b": "nervoese_angstzustaende:a7832",
+   "motif": "Attribution nommée en tête : « Freud sagt: „Der Hypnose ist vorzuwerfen, daß sie den Widerstand verdeckt und dem Arzt den Einblick in das Spiel der psychischen Kräfte wehrt. » Stekel abrège au passage (« verwehrt hat » devient « wehrt », « unvollständige Auskünfte und nur vorübergehende Erfolge » devient « nur vorübergehende Auskunft und vorübergehende Erfolge ») et referme le guillemet avant de nommer Muthmann, Frank, Bezzola et Ricklin.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "5c9c75997e4f9359|c9f9fc807945890b": {
+   "empreinte_a": "5c9c75997e4f9359",
+   "id_a": "traumdeutung:a1814",
+   "id_b": "sprache_des_traumes:a5315",
+   "motif": "Bloc de deux atomes contigus recopiés ; l'aval de Stekel referme la citation avec la pagination : « Wenigstens nichts Arges diesmal.\" (Traumdeutung S. 132.) », avant qu'il n'applique la remarque à sa propre rêveuse.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "5cb3081303c03951|a3e393e951686288": {
@@ -1490,6 +2235,13 @@
    "motif": "Bloc de deux atomes contigus recopie par Stekel, qui referme le guillemet et donne la source : « ... und so sind alle Traumloewen, vor denen man sich nicht fuerchtet.“ (Die Traumdeutung, II. Aufl., S. 286 l. c.) », avant de passer a son propre exemple numerote (113.). Le « Loewe im Sommernachtstraume » (Shakespeare) est une comparaison interne a Freud, pas la cause du partage.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
+  },
+  "5f5499734388ae4d|f51d1f30cc6deeec": {
+   "id_a": "traumdeutung:a4328",
+   "id_b": "traeume_der_dichter:a2393",
+   "motif": "Le texte partagé est de Rosegger, que Freud source précisément (« Rosegger in »Waldheimat« II. Band erzählt in der Geschichte »Fremd gemacht« (p. 303) ») en indiquant qu'il le doit à la communication de Frau Dr. M. Hilferding devant la Wiener psychoanalytische Vereinigung. Stekel imprime le même récit avec des leçons divergentes — « ohne meiner los werden zu können » contre « ohne seiner » chez Freud, « der flottgewordene Bursche » contre « der flotte Bursche » — signe de deux prises indépendantes sur Rosegger.",
+   "verdict": "reclasse",
+   "vers": "Peter Rosegger, Waldheimat (« Fremd gemacht »)"
   },
   "5f7648768eb96ce1|c3b1dee86390caf5": {
    "empreinte_a": "5f7648768eb96ce1",
@@ -1506,6 +2258,21 @@
    "motif": "Abraham cite Freud avec référence de page explicite, à l'intérieur d'une note de bas de page de sa polémique contre Jung : « 1 Ich zitiere wörtlich (Drei Abhandlungen zur Sexualtheorie, Seite 37): „Es ist ferner deutlich, daß die Handlung des lutschenden Kindes durch das Suchen nach einer — bereits erlebten und nun erinnerten Lust bestimmt wird... . » (klinische_beitraege:a2202). La citation se poursuit sur les atomes suivants, toujours mot pour mot (klinische_beitraege:a2203-a2205 contre drei_abhandlungen:a375-a376). Le contexte amont confirme l'usage : Abraham oppose à Jung ce que Freud a réellement écrit — « Was Jung zitiert, deckt sich mit Freuds Ansicht von der Bedeutung des Lutschens des Kindes » (klinische_beitraege:a2199). Côté Freud, le passage est son texte propre, dans le développement sur l'autoérotisme (drei_abhandlungen:a373). Freud est la source déclarée, Abraham la reprend : sens lu b_vers_a, conforme au calcul.",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
+  },
+  "5fba81a96fa31abd|b8532d298566a876": {
+   "empreinte_a": "b8532d298566a876",
+   "id_a": "traumdeutung:a3600",
+   "id_b": "sprache_des_traumes:a7833",
+   "motif": "Stekel referme le bloc par « (Traumdeutung S. 198.) » avant de reprendre en son nom (« Doch nicht allein das Wasser und die engen Treppen lassen sich als Geburtsträume deuten ») ; l'amont reprend déjà littéralement la question de Freud « Was soll es nun heißen, dass die Patientin sich wünscht, in ihrem Sommeraufenthalt „geboren zu werden“? ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "5fef904d695e94fa|786e8616ae211b00": {
+   "id_a": "traumdeutung:a689",
+   "id_b": "sprache_des_traumes:a191",
+   "motif": "Chacun source le passage de son côté et différemment : Freud le referme par « (Volkelt p. 39) », Stekel l'introduit par « Scherner bemerkt zum Thema der Sexualsymbolik ». Surtout, Freud comprime le texte (« Der männliche Geschlechtsreiztraum läßt den Träumer den oberen Teil einer Klarinette … auf der Straße finden ») alors que Stekel garde la forme ample de l'original (« Z. B. man findet auf der Strasse des Ortes, wo man gerade geht … die annähernde Form der vordringenden männlichen Gliedmasse ») : Stekel ne peut pas l'avoir tiré de la version abrégée de Freud.",
+   "verdict": "reclasse",
+   "vers": "Karl Albert Scherner (Das Leben des Traums), rapporté par Johannes Volkelt"
   },
   "60d64fa7a4077fc9|6e9f3afee36174e6": {
    "empreinte_a": "6e9f3afee36174e6",
@@ -1554,6 +2321,14 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "6458e6003077e2a4|7e3413607f0b2812": {
+   "empreinte_a": "7e3413607f0b2812",
+   "id_a": "traumdeutung:a3544",
+   "id_b": "sprache_des_traumes:a6445",
+   "motif": "Attribution paginée immédiatement après la reprise : « Wie aber jede Mutter weiss, ist auch das Hetzen der Kinder in der Wirklichkeit häufig genug in Zwist und Weinen ausgegangen.\" (Traumdeutung S. 19. 5.) » — soit S. 195, le guillemet étant refermé avant que Stekel ne reprenne la parole (« Ich kann aus meinen Psychoanalysen diese Erfahrungen nur bestätigen. »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "645e16dcaf6ed4d4|eae9bdc817cb17cf": {
    "empreinte_a": "645e16dcaf6ed4d4",
    "id_a": "lohengrinsage:a921",
@@ -1594,6 +2369,30 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "654f06e5ca67d7bf|cef2d84e6bc1282d": {
+   "empreinte_a": "cef2d84e6bc1282d",
+   "id_a": "sammlung_1:a485",
+   "id_b": "nervoese_angstzustaende:a369",
+   "motif": "Stekel nomme sa source et transpose la personne : « Freud (1. c.) behandelt die Bedingungen für Männer und Frauen gesondert. Nach seinen Erfahrungen kommt die Angstneurose bei Frauen in folgenden Fällen vor: „a) Als virginale Angst ... Eine Anzahl von unzweideutigen Beobachtungen hat ihm gezeigt ... » — « hat ihm gezeigt » pour le « hat mir gezeigt » de Freud. Il ajoute par-dessus sa propre note critique (« *) Eigentlich ist es nicht das erste Zusammentreffen. »), ce qui distingue nettement les deux mains.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "65db71a93ba06c1c|76a090e8479fb58e": {
+   "empreinte_a": "76a090e8479fb58e",
+   "id_a": "sammlung_1:a339",
+   "id_b": "nervoese_angstzustaende:a3569",
+   "motif": "Référence bibliographique complète en amont côté Stekel, juste avant l'ouverture de la citation : « (Die Abwehr-Psvchoneurosen, Neurolog. Zentralblatt, 1894, Nr. 10, 11.) » ; le guillemet se referme après le second atome (« ... zu Zwangsvorstellungen werden.\" So entstehen die Obsessionen ... »). L'atome a338 côté Freud est en partie un agrégat OCR (notes Strümpell et Janet, folio « sl » = 51, phrase tronquée « stellung darf den Anspruch erheben ») — je l'ai vérifié : aucune suite partagée ne s'appuie sur cet apparat, elles portent toutes sur la phrase intacte « Wenn bei einer disponierten Person ... dann muß dieser Affekt auf psychischem Gebiet verbleiben ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "66cd7fa4f2fc796c|ee3fa3fe86b74720": {
+   "empreinte_a": "ee3fa3fe86b74720",
+   "id_a": "sammlung_1:a328",
+   "id_b": "nervoese_angstzustaende:a3137",
+   "motif": "L'atome de Stekel est doublement bruité par l'OCR — il commence par la queue d'une référence bibliographique (« Deuticke, Wien und Leipzig 1906) ») et finit sur une tête courante (« 118 / Zweiter Teil. ») — mais la portion partagée est une citation entre guillemets de la définition freudienne de la conversion (« „erfolgt die Unschädlichmachung der unverträglichen Vorstellung dadurch, daß deren Erregungssumme ins Körperliche umgesetzt wird, wofür ich den Namen der Konversion vorschlagen möchte.“ »), l'amont nommant la « Sammlung kleiner Schriften zur Neurosenlehre » de Freud et l'aval commentant « Freud erkennt demnach das für die Hysterie charakteristische Moment … in der Fähigkeit zur Konversion ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "66d4e65508c94b84|a280f9a643243d00": {
    "id_a": "traumdeutung:a4655",
    "id_b": "traeume_der_dichter:a4202",
@@ -1607,6 +2406,13 @@
    "motif": "Ni Rank ni Stekel n'a écrit ces phrases, et aucun des deux ne lit l'autre : les deux ouvrages paraissent la même année (1911) et puisent au même livre de folklore. Stekel ouvre des guillemets dès la première phrase du bloc (« 373 „Das ist nämlich eine alte Regel, dass die Toten auf Inseln zu liegen kommen. ») et referme cette série d'emprunts, quelques pages plus loin, sur la référence « (Kleinpaul; Die Lebendigen und die Toten S. 113 l. c.) » ; Rank, lui, accroche au même passage sa propre note « *) Nach Kleinpaul (S. 160) sind die Ausdrücke Diesseits und Jenseits von dieser Vorstellung ausgegangen. ». Deux lectures indépendantes de Kleinpaul, pas un emprunt d'analyste à analyste.",
    "verdict": "reclasse",
    "vers": "Rudolf Kleinpaul (Die Lebendigen und die Toten in Volksglaube, Religion und Sage)"
+  },
+  "69003f4d2f07e924|a41fc9ee2bd1be97": {
+   "id_a": "inzest_motiv:a6516",
+   "id_b": "dichtung_und_neurose:a315",
+   "motif": "Les deux impriment le même aveu autobiographique de Grillparzer (« Ich bebte und zitterte wie einer, den das Fieber schüttelt »), mais leurs excerptions divergent aussitôt : Rank enchaîne « Und im Tagebuch heißt es (1827) über sein Gemütsleiden », Stekel poursuit le même document par « Ich bin überzeugt, dass ich eine Untreue der Geliebten blutig … rächen würde », phrase absente chez Rank. Chacun taille dans la source, aucun ne copie l'autre.",
+   "verdict": "reclasse",
+   "vers": "Franz Grillparzer (Selbstbiographie / Tagebücher)"
   },
   "69088fb8bd4f0331|79409ed57f1de12f": {
    "empreinte_a": "79409ed57f1de12f",
@@ -1630,12 +2436,56 @@
    "verdict": "reclasse",
    "vers": "Sigmund Freud, Die Traumdeutung (résumé de la légende d'Œdipe) — traumdeutung:a2470"
   },
+  "699494a8a4380e3b|bdd456b333a5f2d1": {
+   "id_a": "traumdeutung:a4667",
+   "id_b": "traeume_der_dichter:a867",
+   "motif": "Le passage est de Tolstoï : Rank l'introduit et le source (« Ähnlich wertet auch Tolstoi den Traum: »Wenn ich wache…« (Nachl. Bd. III.) »), tandis que Stekel l'imprime enchâssé dans un fragment de journal beaucoup plus long (« Zwei und siebzig Jahre zähle ich nun und bin noch immer in den Banden des Fleisches », puis « Ich träumte ferner … dass mir jemand hierher in Moos verpackte Leckereien brachte ») que Rank ne connaît pas.",
+   "verdict": "reclasse",
+   "vers": "Léon Tolstoï (journal / Nachlass)"
+  },
+  "6aa6b32b7ec6bc2b|9a6775aab956635d": {
+   "empreinte_a": "6aa6b32b7ec6bc2b",
+   "id_a": "traumdeutung:a3173",
+   "id_b": "sprache_des_traumes:a316",
+   "motif": "Stekel encadre la liste a)-d) d'une attribution incise et d'une pagination : « „Es ist im allgemeinen“, sagt Freud, „bei der Deutung eines jeden Traumelementes zweifelhaft, ob es: … » … « (Traumdeutung S. 245.) ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "6af8a0f619ed36e6|8d498fcf67f25496": {
+   "empreinte_a": "8d498fcf67f25496",
+   "id_a": "sammlung_1:a1597",
+   "id_b": "nervoese_angstzustaende:a175",
+   "motif": "Stekel transpose la deuxième personne de Freud (« gelingt es Ihnen … so haben Sie ein Stück Erziehungsarbeit an ihm geleistet ») en tournure impersonnelle (« muß der Arzt nun eingreifen. Gelingt es ihm … so hat der Arzt ein Stück Erziehungsarbeit am Kranken geleistet.“ ») mais laisse le guillemet fermant : citation adaptée, non rencontre fortuite. L'amont reprend déjà mot à mot « dieser Unlust wird es von ihm immer wieder zurückgewiesen ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "6b0e43cdd32146dd|a87928bcf49e6ea2": {
+   "id_a": "traumdeutung:a4668",
+   "id_b": "sprache_des_traumes:a294",
+   "motif": "Bloc de deux atomes contigus : les deux citent la même entrée des « Tagebücher » de Hebbel, nommé des deux côtés (Rank : « eine Eintragung aus _Hebbels_ »Tagebüchern« » ; Stekel : « Hebbel macht in seinen Tagebüchern die Bemerkung: »). Les variantes divergent (Rank « aus seinem Leben und seiner Lektüre an seinen Träumen » / Stekel « aus seinem Leben oder seiner Lektüre an den Träumen » ; Rank « zur eigenen Beherzigung » / Stekel « aus eigener Beherzigung »), ce qui exclut la copie de l'un sur l'autre.",
+   "verdict": "reclasse",
+   "vers": "Friedrich Hebbel"
+  },
   "6b0e43cdd32146dd|c8773468cf7bb5a3": {
    "id_a": "traumdeutung:a4668",
    "id_b": "traeume_der_dichter:a4327",
    "motif": "Les deux atomes partagent une entree du journal de Friedrich Hebbel, et chacun la donne comme telle : cote A (section « Traum und Dichtung » ajoutee a la 4e edition de la Traumdeutung, attribuee a Rank) « Ganz psychoanalytisch im Detail der Anweisung klingt endlich eine Eintragung aus Hebbels »Tagebuechern« » ; cote B, Stekel intitule son chapitre « Die Traeume von Friedrich Hebbel » et date la note « (1838) ». Aucun des deux ne nomme l'autre. La variante « an seinen Traeumen » (A) contre « an den Traeumen » (B) suggere deux prelevements distincts sur les Tagebuecher. Le rapport est reel mais c'est une source tierce commune, pas un emprunt.",
    "verdict": "reclasse",
    "vers": "Friedrich Hebbel (« Tagebuecher », 1838)"
+  },
+  "6b40ba462f3a41ef|ce2f077dfeea39bc": {
+   "id_a": "traumdeutung:a3208",
+   "id_b": "sprache_des_traumes:a13782",
+   "motif": "La série numérotée « Beispiel Nr. … / Symbol: … » est celle des phénomènes autosymboliques de Silberer, et la sélection prouve l'indépendance : Freud ne reprend que le n° 9 (« Ich verliere in einem Gedankengang den Faden. … Symbol: Ein Stück Schriftsatz, dessen letzte Zeilen herausgefallen sind.« », guillemet fermant), tandis que Stekel imprime, juste après la même Dobos-Torte, les n° 8 (« Symbol: Es steht alsbald ein grosser livrierter Lakai vor mir ») et n° 10 (« Ich klettere mitten in Bergen herum ») que Freud ne donne pas. Stekel puise donc directement chez Silberer, non dans l'extrait de Freud.",
+   "verdict": "reclasse",
+   "vers": "Herbert Silberer (phénomènes autosymboliques, Jahrbuch I, 1909)"
+  },
+  "6baa26532552b92a|8a33bd179c48c803": {
+   "id_a": "traumdeutung:a811",
+   "id_b": "sprache_des_traumes:a14912",
+   "motif": "Les deux citent nommement Artemidore dans la meme traduction allemande : Freud « Artemidoros erzaehlt (p. 255): »Es scheint mir aber auch Aristandros dem Alexandros von Makedonien eine gar glueckliche Auslegung gegeben zu haben...« », Stekel « Und doch erzaehlt schon Artemidoros ein klassisches Beispiel, das vor Jahrtausenden beruehmt war, „Es scheint mir\", sagt er, ... ». Les lecons divergent (Freud « das Gefuehl hatte » et « die Syrier bekriegte », Stekel « das Gesicht hatte » et « die Tyrier bekriegte ») : deux prelevements sur le meme tiers, et non un decalque.",
+   "verdict": "reclasse",
+   "vers": "Artemidoros von Daldis"
   },
   "6babb6257345ff8e|94bac40f3695a356": {
    "empreinte_a": "6babb6257345ff8e",
@@ -1659,6 +2509,14 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "6c757f915b550856|9c8ce522dd34e019": {
+   "empreinte_a": "6c757f915b550856",
+   "id_a": "drei_abhandlungen:a433",
+   "id_b": "onanie_homosexualitaet:a194",
+   "motif": "Bloc de 3 atomes contigus. Stekel ouvre le guillemet au premier (« „Durch die anatomische Lage, die Überströmung mit Sekreten ... ») et le referme trois atomes plus bas (« ... der Bemächtigungstrieb einst leisten wird.\" »). Les divergences ne sont pas des retouches de Stekel mais l'écart entre deux états du texte de Freud : Stekel (1917) suit une rédaction ancienne (« ist dafür gesorgt, daß », « so kann man schwerlich die Absicht der Natur verkennen »), là où l'exemplaire dépouillé est la 4e Auflage de 1920 (« wird es unvermeidlich, daß », « so wird man sich kaum der Auffassung entziehen können »). Le sens de l'emprunt en est renforcé, non affaibli.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "6c8880424def0aee|8c96f35603cfe4a3": {
    "empreinte_a": "8c96f35603cfe4a3",
    "id_a": "lohengrinsage:a917",
@@ -1666,6 +2524,21 @@
    "motif": "Suite du bloc emprunté par Rank à l'article de Freud sur la Rettungsphantasie. Le signe décisif est chez Rank : « …aus der man durch die Anstrengung der Mutter gerettet wurde.« In diesem Sinne »kann das »Retten« seine Bedeutung variieren… » — chevron fermant puis rouvert, montage de deux extraits d'un même texte-source, tandis que chez Freud la phrase se poursuit sans rupture (« Die Geburt ist ebenso die allererste Lebensgefahr… »). Freud (Jahrbuch II, 1910) → Rank (1911), contre le sens_calcule tiré de la fenêtre [1913,1918].",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
+  },
+  "6cfa964c49ba3be8|bf469b41ef466fc4": {
+   "empreinte_a": "6cfa964c49ba3be8",
+   "id_a": "der_kuenstler:a227",
+   "id_b": "dichtung_und_neurose:a107",
+   "motif": "Stekel cite nommément : « Rank!) meint: „Die konstant fortgeführte Unterdrückung gewisser Triebe… » et referme après « …davon zu befreien », puis conclut en son nom « Wir haben gesehen, dass auch Rank auf diesem Standpunkt steht ». Bloc du Künstler (1907) repris dans Dichtung und Neurose (1909).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "6d0b43780dab53f5|f7ead8fd19f265fd": {
+   "id_a": "lohengrinsage:a535",
+   "id_b": "sprache_des_traumes:a9985",
+   "motif": "Le bloc partage (le Storch, le Brunnen comme Mutterschoss, « Wer nicht auf den Kopf gefallen ist... Der Storch hat sie ins Bein gebissen ») n'est ni de Rank ni de Stekel : Stekel referme la citation par la reference « (Kleinpaul; Die Lebendigen und die Toten S. 113) », et chez Rank le meme paragraphe est une note en petit texte qui se clot sur « Unnoetig ein Mehreres darueber zu verlieren.« ». Deux emprunts au meme tiers.",
+   "verdict": "reclasse",
+   "vers": "Rudolf Kleinpaul"
   },
   "6e81c60dba32bc32|efa45fefd48bb46b": {
    "empreinte_a": "6e81c60dba32bc32",
@@ -1837,6 +2710,14 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "7a0aadb4ee4e2fc2|7a8ad904c55febf9": {
+   "empreinte_a": "7a8ad904c55febf9",
+   "id_a": "traumdeutung:a1813",
+   "id_b": "sprache_des_traumes:a5314",
+   "motif": "Bloc de deux atomes contigus recopiés ; l'aval de Stekel referme la citation avec la pagination : « Wenigstens nichts Arges diesmal.\" (Traumdeutung S. 132.) », avant qu'il n'applique la remarque à sa propre rêveuse.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "7a8f98b02bef6ae4|c05549b3a1fa7570": {
    "empreinte_a": "7a8f98b02bef6ae4",
    "id_a": "traum_und_mythus:a296",
@@ -1851,6 +2732,14 @@
    "motif": "Rank et Stekel citent tous deux, la même année (1912), une entrée du Journal de Hebbel : « Ich träumte mich neulich ganz und gar in meine ängstliche Kindheit zurück, es war nichts zu essen da, und ich zitterte vor meinem Vater wie einst. » Chacun l'introduit à sa façon (Rank : « Zu Ende des Jahres 1834 trägt er ein » ; Stekel : « So notiert er in seinem Tagebuche folgende sehr beachtenswerte Stelle »), et surtout chacun la date différemment — 1834 chez Rank, « 1837. » chez Stekel : deux dépouillements indépendants du Tagebuch, pas une lecture de l'un par l'autre.",
    "verdict": "reclasse",
    "vers": "Friedrich Hebbel (Tagebücher)"
+  },
+  "7d91ff4b221e3c40|a479804debe9f113": {
+   "empreinte_a": "7d91ff4b221e3c40",
+   "id_a": "sammlung_3:a2507",
+   "id_b": "bausteine_1:a333",
+   "motif": "Ferenczi ouvre la citation dans l'atome meme (« „Erst das Ausbleiben der erwarteten Befriedigung, die Enttaeuschung, hatte zur Folge... ») et la referme deux atomes plus loin (« ...auch wenn es unangenehm sein sollte.“ »), avec attribution en amont (« Wie uns Freud zeigte... ») et en aval (« Die bedeutsame Arbeit, in der Freud diese Grundtatsache der Psychogenese vor uns enthuellt »). Il s'agit des «Formulierungen ueber die zwei Prinzipien» (1911), reprises dans «Entwicklungsstufen des Wirklichkeitssinnes» (1913).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
   },
   "7ee042c980823abf|806b94baf6c2ee5d": {
    "id_a": "traum_und_mythus:a134",
@@ -1913,6 +2802,14 @@
    "motif": "Stekel annonce sa source avec référence bibliographique : « Freud bemerkt darüber in seinen „Abhandlungen zur Sexualtheorie\" (Deuticke, 1906). „Das Wiegen wird bekanntlich zum Einschläfern unruhiger Kinder regelmäßig angewendet. » — puis recopie sans coupure le passage sur la Wagenfahrt/Eisenbahnfahrt et les Kondukteure und Kutscher. Le contexte amont de Stekel (« Interessant sind in dieser Hinsicht die Fälle von Eisenbahnangst ») montre qu'il mobilise Freud pour son propre argument. Empreinte donnée sur la 2e paire, les deux empreintes de la 1re paire étant identiques (819427e0ee58734e) et donc non discriminantes.",
    "verdict": "confirme"
   },
+  "81db753cb7471b09|9953ab6bbfe7679a": {
+   "empreinte_a": "81db753cb7471b09",
+   "id_a": "sammlung_3:a268",
+   "id_b": "bausteine_1:a207",
+   "motif": "Ferenczi place la phrase entre guillemets et signe la citation a la fin : « „Man kann solche nachtraegliche Wirkungen von Geboten und Drohungen in der Kindheit bei Erkrankungsfaellen beobachten, wo das Intervall ebensoviel (1½) Dezennien und mehr umfasst“, sagt Freud. » ; l'aval reprend le terme freudien (« Er nennt diese Erscheinung „nachtraeglichen Gehorsam\" »). L'insertion du chiffre entre parentheses est une glose de citateur.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "82c97a41d0a61dc4|ae903301213ebb27": {
    "empreinte_a": "82c97a41d0a61dc4",
    "id_a": "traumdeutung:a3543",
@@ -1934,6 +2831,14 @@
    "motif": "Fin du même récit de Rosegger (« im stilvollen Bücherschrank harrte meiner der ewige Homer, der gigantische Dante… », puis « Und wie merkwürdig ist mir das: … da mich der Meister »fremd gemacht« hatte »). Freud referme la citation par le guillemet et commente ensuite en son nom (« In dieser Traumreihe des Dichters, der in seinen jungen Jahren Schneidergeselle gewesen war… ») ; Stekel referme de même (« …hereingeworfen hat.» ») avant son propre commentaire. Les deux commentaires diffèrent : seul le texte de Rosegger est commun.",
    "verdict": "reclasse",
    "vers": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)"
+  },
+  "83709db8f6153cab|ce26df2a62805803": {
+   "empreinte_a": "ce26df2a62805803",
+   "id_a": "dichter_phantasieren:a7",
+   "id_b": "dichtung_und_neurose:a21",
+   "motif": "Attribution nommée à l'intérieur même de la phrase de Stekel : « „Es wäre dann unrecht zu meinen\" — führt Freud!) aus — „es nähme diese Welt nicht ernst, im Gegenteile, es nimmt sein Spiel sehr ernst ... ». Stekel encadre l'emprunt de sa propre formule (« Das Kind lebt wie jeder andere Künstler in einer von ihm erschaffenen „zweiten\" Welt ») et ajoute un « sehr » absent chez Freud.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
   },
   "83fdd3776bfc4da0|fc1eb52322b5d3d8": {
    "empreinte_a": "83fdd3776bfc4da0",
@@ -1972,6 +2877,14 @@
    "motif": "Rank (Das Trauma der Geburt, 1924) re-cite la note de bas de page de Ferenczi en la localisant : « Man vgl. dazu die „unbewußte Geburtsphantasie“, die Ferenczi aus der Tagebuch-Beschreibung des Angstanfalles eines Patienten wiedergibt („Introjektion und Übertragung“, Jahrb. I, 1909, S. 450/51, Fußnote): „Die Hypochondrie umspinnt meine Seele... ». Les lignes sont d'un patient, mais le rapport entre les deux auteurs du corpus est bien établi et orienté : Rank lit Ferenczi et le nomme. La fenêtre [1909,1927] du côté Ferenczi est un artefact d'édition — les « Bausteine » de 1927 réimpriment l'article du Jahrbuch de 1909 que Rank cite.",
    "verdict": "confirme"
   },
+  "8579345fee1a2710|f0eed6809c266aa4": {
+   "empreinte_a": "f0eed6809c266aa4",
+   "id_a": "mythus_geburt_helden:a168",
+   "id_b": "sprache_des_traumes:a7284",
+   "motif": "Le partage ne porte pas sur la fable d'Œdipe en général mais sur la formulation allemande propre à Rank (résumé sec, « Als Ödipus durch Zufall erfährt, daß er ein Findling ist, befragt er das delphische Orakel um seine leiblichen Eltern »), et Stekel nomme sa source deux phrases plus bas : « Das Bedeutsame an der Kanksohen Schrift ist eben der Nachweis, dass die Mythen des Volkes dem Mythus des Individuums vollkommen entsprechen. » — « der Rankschen Schrift ». La reprise court sur plusieurs phrases consécutives, jusqu'à « ein beliebter Gegenstand der Darstellung ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "862e177b52e762f1|c09089bf6d507045": {
    "empreinte_a": "862e177b52e762f1",
    "id_a": "sammlung_4:a2145",
@@ -1980,11 +2893,66 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "86e3659fb97855bc|d8e5223daa352809": {
+   "empreinte_a": "d8e5223daa352809",
+   "id_a": "psychopathologie:a157",
+   "id_b": "nervoese_angstzustaende:a4881",
+   "motif": "Stekel reproduit le passage sur les Deckerinnerungen en gardant la première personne de Freud, et le guillemet n'est refermé que plus loin (cf. atome nervoese_angstzustaende:a4885 : « …begründeten Anspruch.\" »). La formule « mit welchem ich sie ausgezeichnet habe » ne peut être de Stekel : le terme est la trouvaille de Freud.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "8712f4290443a906|f95866f3845e39e0": {
+   "empreinte_a": "f95866f3845e39e0",
+   "id_a": "traumdeutung:a4195",
+   "id_b": "sprache_des_traumes:a3431",
+   "motif": "L'amont de Stekel annonce la reprise nommement : « Ich fuehre hier einen Traum aus der „Traumdeutung\" Freuds an, der auch deshalb interessant ist, weil er das Fehlen eines Angstaffektes in sehr schoener Weise erklaert. Aus Freuds Traumdeutung: (111.) »Sie sieht in einer Wueste drei Loewen...» ». Le reve des trois lions et son analyse sont recopies avec les guillemets ouverts.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "888745027591d050|d407d452cd1dc8b7": {
+   "id_a": "traumdeutung:a4659",
+   "id_b": "traeume_der_dichter:a4206",
+   "motif": "L'aphorisme est de Lichtenberg — l'amont commun le porte déjà (« Der Traum ist ein Leben, das… das wird, was wir menschliches Leben nennen »), et Rank nomme Lichtenberg quelques lignes plus haut dans le même chapitre. Les leçons divergent (Rank « mit dem unserigen zusammengesetzt », Stekel « mit unserm übrigen zusammengesetzt »), et Stekel poursuit avec d'autres pensées de Lichtenberg absentes de Rank (« Dass wir uns im Traume selbst sehen, kommt daher, dass wir uns oft im Spiegel sehen »). Aucun ne lit l'autre.",
+   "verdict": "reclasse",
+   "vers": "Lichtenberg"
+  },
+  "894c39ed2f9943d9|8e96e81355aafd06": {
+   "empreinte_a": "8e96e81355aafd06",
+   "id_a": "sammlung_3:a2509",
+   "id_b": "bausteine_1:a335",
+   "motif": "Ferenczi referme la citation (« …auch wenn es unangenehm sein sollte.“ ») et appelle la note « Freud, „Formulierungen über die zwei Prinzipien des psychischen Geschehens“, 1911 », puis commente : « Die bedeutsame Arbeit, in der Freud diese Grundtatsache der Psychogenese vor uns enthüllt ». L'édition 1927 des Bausteine ne renverse pas l'antériorité de Freud.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "897e77d682a7b711|9aed622ab9c1efae": {
+   "empreinte_a": "9aed622ab9c1efae",
+   "id_a": "traumdeutung:a1210",
+   "id_b": "sprache_des_traumes:a8666",
+   "motif": "Stekel ouvre le passage par « Freud erzählt: „Wenn man mir zugibt, dass das Sprechen aus dem Schlafe der Kinder gleichfalls dem Kreise des Träumens angehört… » et referme le bloc par « (Traumdeutimg S. 94.) » : le rêve d'Anna Freud (« Anna F.eud, Er(d)beer, Hochbeer ») est recopié de la Traumdeutung, guillemets et pagination à l'appui.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "897e77d682a7b711|f58c15e556a12ab0": {
+   "empreinte_a": "f58c15e556a12ab0",
+   "id_a": "traumdeutung:a1166",
+   "id_b": "sprache_des_traumes:a8666",
+   "motif": "Attribution nominale immediatement en amont chez Stekel : « Einen anderen Kindertraum seines Knaben teilt Freud mit folgender Analyse mit: „Einem Ausfluge nach dem schoenen Hallstatt im Sommer 1896 von Aussee aus verdanke ich zwei Traeume... », et l'atome precedent se referme sur « (Traumdeutung S. 94.) ».",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "8a65c6a2f07a767d|a69632483340c0e9": {
    "empreinte_a": "8a65c6a2f07a767d",
    "id_a": "traum_und_mythus:a311",
    "id_b": "lohengrinsage:a236",
    "motif": "Le reve (le frere emmene, le canal souterrain) est un cas rapporte par Abraham en 1909 ; Rank le reproduit et le declare dans la foulee : « ... — In diesem Augenblick erwache ich.« Als unmittelbaren Anlass des Traumes fuehrt Abraham ausser dem Zustand der Gravidiaet folgendes an: »Am Abend hat sie sich von ihrem Arzte Verschiedenes ueber Entwicklung und Physiologie des Foetus erklaeren lassen. » Abraham -> Rank, conforme au calcul et prouve par le texte.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "8aa42b7e7ec54b7e|9cdc267af7a2f054": {
+   "empreinte_a": "8aa42b7e7ec54b7e",
+   "id_a": "traumdeutung:a4599",
+   "id_b": "sprache_des_traumes:a9405",
+   "motif": "Bloc de 2 atomes contigus recopiés mot pour mot. Stekel referme le guillemet ouvert plus haut, juste après le dernier mot repris : « ... zu Worten unserer Mattersprache zusammensetzen.\" » et enchaîne aussitôt sur son propre commentaire « Liebermann heisst hier „ein — lieber — Mann\". » Le passage cité est l'exemple de l'inscription latine de la « sekundäre Bearbeitung », argument propre à la Traumdeutung (1900) ; Stekel (1911) l'importe dans son chapitre « Todessymbolik » pour éclairer un tout autre rêve. La tête courante « liebeimuin und Eckensteher. ^5 » soudée par l'OCR au milieu du texte b ne touche aucune des suites partagées.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -2028,6 +2996,30 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "8ec4bd160f2e0bc5|e48972912de2fdde": {
+   "empreinte_a": "e48972912de2fdde",
+   "id_a": "sammlung_3:a2591",
+   "id_b": "sprache_des_traumes:a863",
+   "motif": "Suite immédiate de l'événement 6 : les atomes a2590/a2591 de Freud et a862/a863 de Stekel forment un seul bloc continu de la citation d'Abel, que Stekel referme deux atomes plus loin par « (Aus dem Referate von Freud.) ». La source déclarée par Stekel est le référat de Freud, non Abel : reprise, non tiers partagé.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "8ec4bd160f2e0bc5|ee574525c8d410b7": {
+   "empreinte_a": "ee574525c8d410b7",
+   "id_a": "sammlung_3:a2592",
+   "id_b": "sprache_des_traumes:a863",
+   "motif": "Stekel recopie plusieurs pages du compte rendu de Freud sur Karl Abel et le dit en refermant : « (Aus dem Referate von Freud.) » en aval, avant d'enchaîner « In den Träumen spielt dieser Gegensinn eine grosse Rolle. » Le texte est à l'origine celui d'Abel (« Über den Gegensinn der Urworte »), mais ce n'est pas un cas de tiers commun : Stekel ne lit pas Abel, il lit le Referat de Freud et l'écrit. L'atome de Freud est lui-même entre guillemets, ce qui explique la chaîne Abel → Freud → Stekel.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "8ee808901c72e1c4|d4689bf20086ad89": {
+   "empreinte_a": "d4689bf20086ad89",
+   "id_a": "sammlung_2:a1532",
+   "id_b": "bausteine_1:a267",
+   "motif": "L'atome de Ferenczi est un agglomerat OCR (note de bas de page soudee au texte courant, avec des scories « 4* ... ee ur reg a Sr m 2 ET er | »), mais l'emprunt lui-meme est parfaitement date et pagine : « S. Freud, „Hysterische Phantasien und ihre Beziehung zur Bisexualitaet\" 1908. (Ges. Schr., Bd. V, S. 251.) „Das hysterische Symptom dient der sexuellen Befriedigung und stellt einen Teil des Sexuallebens der Person dar.“ » ; c'est la these 5 de la liste numerotee de Freud, reprise entre guillemets.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "8fddebbfa647a65b|e014e37e462487b0": {
    "empreinte_a": "8fddebbfa647a65b",
    "id_a": "populaere_vortraege:a476",
@@ -2042,6 +3034,22 @@
    "id_b": "sammlung_4:a1614",
    "motif": "Le sens calculé (a_vers_b, Rank→Freud) est un artefact de l'édition lue : le texte de Freud est daté [1913, 1918] parce qu'il est lu dans la « Sammlung… Vierte Folge » de 1918, alors qu'il s'agit de « Über einen besonderen Typus der Objektwahl beim Manne » (1910) — l'atome porte d'ailleurs les titres courants du recueil en plein milieu de la phrase (« das mit dem eigenen / XII. BEITRÄGE ZUR PSYCHOLOGIE DES LIEBESLEBENS. I. 211 / Selbst die größte Ähnlichkeit hat »), preuve d'une réimpression. La doctrine du fantasme de sauvetage (« Die Mutter hat einem ein Leben geschenkt, das eigene, und man schenkt ihr dafür ein anderes Leben… sein eigener Vater zu sein ») est celle de Freud, et la version de Rank est un abrégé : il supprime l'incise freudienne « — was man etwa dem bewußten Ineinanderfließen der Begriffe gleichstellen kann — ». C'est Rank (Lohengrinsage, 1911) qui reprend Freud, à rebours du calcul.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "91109f7b662817f9|dd1002452610a059": {
+   "empreinte_a": "91109f7b662817f9",
+   "id_a": "traumdeutung:a1178",
+   "id_b": "sprache_des_traumes:a8679",
+   "motif": "Le texte partagé est une anecdote autobiographique de Freud (l'excursion au Dachstein, la Simony-Hütte, le neveu déçu) : « Ich verstand ihn nun; er hatte erwartet, als ich vom Dachstein sprach ... ». Stekel le reprend en le numérotant comme pièce de son recueil — « (340.) „Heute Nacht habe ich geträumt, dasa wir auf der Simonyhütte gewesen Bind.\" » — et ouvre un guillemet devant « „Ich verstand ihn nun ». Le narrateur du récit est Freud, pas Stekel.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "91bda1bacf32cd10|9d7216b873f93f2c": {
+   "empreinte_a": "91bda1bacf32cd10",
+   "id_a": "traumdeutung:a1737",
+   "id_b": "sprache_des_traumes:a10715",
+   "motif": "Attribution paginée en aval côté Stekel : après le second atome repris (le « rapprochement forcé » des sources du rêve) vient « (Traumdeutung S. 126.) ». Le rêve rapporté est celui de Freud lui-même (« mein junger Freund, für den ich die Protektion erbeten hatte »), et Stekel conserve jusqu'à la parenthèse d'aveu « (Ich gestehe offen, dass ich mit dieser Dame nicht in guten Beziehungen gestanden hatte.) ».",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "92ab4522ee795b11|92ab4522ee795b11": {
@@ -2082,6 +3090,28 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "9668d331b61b71b5|9c46c54fae8a7bfc": {
+   "id_a": "sammlung_3:a2578",
+   "id_b": "sprache_des_traumes:a860",
+   "motif": "Le texte partagé n'est d'aucun des deux : c'est la brochure de Karl Abel. Stekel le dit lui-même en amont — « Freud macht… auf eine Broschüre von Karl Abel aufmerksam, die sich „Über den Gegensinn der Urworte\" betitelt (1889 erschienen). Abel führt daselbst aus: » — et sa citation d'Abel continue bien au-delà de l'extrait de Freud (le passage sur le « semitische Lexikon »). Reprise réelle, mais d'un tiers imprimé par les deux.",
+   "verdict": "reclasse",
+   "vers": "Karl Abel"
+  },
+  "96ae002bea36969c|bbccc2e19485db04": {
+   "empreinte_a": "bbccc2e19485db04",
+   "id_a": "sammlung_1:a445",
+   "id_b": "nervoese_angstzustaende:a1696",
+   "motif": "Bloc de deux atomes : Stekel recopie en bloc l'article de Freud sur l'Angstneurose, guillemet fermant à la fin — « nebenher einen Vertigo a stomacho laeso an zuerkennen.\" » — puis reprise de sa propre voix (« Diese Schwindelgefühle stehen oft im Mittelpunkte des Krankheitsbildes »). Il conserve la première personne de Freud (« nach meinen Beobachtungen »). Les têtes courantes soudées par l'OCR des deux côtés (« Klinik der Angstneurose… 65 » chez Stekel, « Freud, Neurosenlehre. 66 » chez Freud) coupent la phrase mais ne sont pas ce qui est partagé.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "96e2961eae3d16d4|c28caf31818247b3": {
+   "id_a": "traumdeutung:a4767",
+   "id_b": "traeume_der_dichter:a4176",
+   "motif": "Bloc de deux paires contigues, toutes deux du meme tiers : Rank nomme l'auteur avant de citer (« Aehnlich heisst es bei Jean Paul: »Die Phantasie kann im Traume am schoensten ihren haengenden Garten aufspannen und ueberbluemen... Der Traum ist unwillkuerliche Dichtkunst und zeigt, dass der Dichter mit dem koerperlichen Gehirn mehr arbeitet als ein anderer Mensch...« »), et Stekel imprime le meme passage de Jean Paul, prolonge chez lui par des phrases (le Shakespeare des «Scenes detachees») que Rank n'a pas. Le »Shakespeare« qui apparait des deux cotes est nomme a l'interieur des citations, pas par les deux psychanalystes.",
+   "verdict": "reclasse",
+   "vers": "Jean Paul"
+  },
   "9719ea3ebc6179b0|b1d67b4e7a260432": {
    "empreinte_a": "b1d67b4e7a260432",
    "id_a": "traum_und_mythus:a127",
@@ -2090,11 +3120,33 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "97e7d790a801c871|ad469c038b9ae78d": {
+   "id_a": "traumdeutung:a4752",
+   "id_b": "traeume_der_dichter:a3851",
+   "motif": "La phrase est de Gottfried Keller et Rank donne sa référence d'archive : « (Tagebuch bei Baechtold I, 308.) », en précisant qu'il montre comment Keller reporte sur le « Grüner Heinrich » une observation de journal. Stekel imprime le même fragment précédé d'un autre passage du même journal (« Sah auch eine herrliche Landschaft, wo die Ströme leuchteten wie Edelsteine ») absent chez Rank : prises distinctes sur la même source.",
+   "verdict": "reclasse",
+   "vers": "Gottfried Keller (Tagebuch, éd. Baechtold)"
+  },
   "99558e61282d2a59|99c9aeb6743c7de9": {
    "id_a": "populaere_vortraege:a470",
    "id_b": "sprache_des_traumes:a3334",
    "motif": "Même bloc que l'événement 6, en amont : quatre atomes contigus identiques, de « Sie war höchlichst verwundert, daß sie, die „nicht einmal einer Fliege etwas zuleide tun könne\" » jusqu'à la scène avec la belle-sœur. La reprise est massive et littérale, y compris les détails de la torsion du cou des pigeons et l'évocation du bourreau — ce n'est pas une convergence de thème. Mais aucune formule d'attribution n'est visible dans les deux atomes d'amont de part et d'autre, et la fenêtre [1907, 1922] de l'édition lue de Ferenczi rend le calcul inutilisable : le sens est laissé vide plutôt que deviné.",
    "verdict": "confirme"
+  },
+  "9a44c64ce5180e7a|a0df8c9199e2e145": {
+   "empreinte_a": "a0df8c9199e2e145",
+   "id_a": "traumdeutung:a4596",
+   "id_b": "sprache_des_traumes:a9402",
+   "motif": "Stekel annonce la reprise et l'attribue : « Man kann hier die Bemerkung Freuds anwenden: „Soll ich für die definitive Gestaltung des Traumes… ». Les deux paires contiguës (a4595/a4596 chez Freud, a9401/a9402 chez Stekel) forment un seul bloc recopié, jusqu'aux « Fliegende Blätter » et à l'inscription latine.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "9a5eae991943ef02|a03a02ce017c2089": {
+   "id_a": "traumdeutung:a4344",
+   "id_b": "traeume_der_dichter:a2405",
+   "motif": "Le passage partage n'est d'aucun des deux : c'est le reve du tailleur de Peter Rosegger (« Du hast ja doch keinen Schick zur Schneiderei, du kannst gehen, du bist fremd gemacht »), que Freud imprime entre guillemets dans sa serie sur le »fremd gemacht« et que Stekel reprend dans son chapitre d'enquete aupres des ecrivains. Les lecons different (Freud « der vor neunzehn Jahren bei uns gearbeitet hatte », Stekel « welcher einst vor Jahren bei uns gearbeitet hatte ») : deux transcriptions du meme recit de Rosegger.",
+   "verdict": "reclasse",
+   "vers": "Peter Rosegger"
   },
   "9acaf2f5f79d0765|ce4e0e3714ab98a1": {
    "empreinte_a": "ce4e0e3714ab98a1",
@@ -2118,6 +3170,22 @@
    "id_b": "traumdeutung:a2518",
    "motif": "Citation annoncée et référencée des deux bouts. Rank écrit en a3176 « findet Freud in zwei Momenten », ouvre en a3177 par « Vom Todestraum des Vaters sagt er: Erstens gibt es keinen Wunsch, von dem wir uns ferner glauben … », et referme en a3178 sur « (Traumdeutung 2. Aufl. S. 188) ». Le texte est littéral, y compris la comparaison « ähnlich wie etwa die Gesetzgebung Solons keine Strafe für den Vatermord aufzustellen wußte ». La contenance reste sous 0,70 parce que la phrase de Rank commence par son propre incise et que l'atome absorbe le début de la phrase suivante de Freud.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "9e70affc12a30b27|ccb24d6588a93335": {
+   "empreinte_a": "9e70affc12a30b27",
+   "id_a": "traumdeutung:a2994",
+   "id_b": "sprache_des_traumes:a1559",
+   "motif": "Attribution explicite deux atomes plus haut : « Freud bemerkt sehr treffend: „Es ist eine Erfahrung, von der ich keine Ausnahme gefunden habe, dass jeder Traum die eigene Person behandelt. » ; le partage est la suite immédiate de cette citation.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "a03ef505b649f594|f1901169ace96af6": {
+   "empreinte_a": "a03ef505b649f594",
+   "id_a": "traumdeutung:a4598",
+   "id_b": "sprache_des_traumes:a9404",
+   "motif": "Bloc de 2 atomes contigus recopiés mot pour mot. Stekel referme le guillemet ouvert plus haut, juste après le dernier mot repris : « ... zu Worten unserer Mattersprache zusammensetzen.\" » et enchaîne aussitôt sur son propre commentaire « Liebermann heisst hier „ein — lieber — Mann\". » Le passage cité est l'exemple de l'inscription latine de la « sekundäre Bearbeitung », argument propre à la Traumdeutung (1900) ; Stekel (1911) l'importe dans son chapitre « Todessymbolik » pour éclairer un tout autre rêve. La tête courante « liebeimuin und Eckensteher. ^5 » soudée par l'OCR au milieu du texte b ne touche aucune des suites partagées.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "a101aa9ac39ec239|d785d722fee7a03a": {
@@ -2149,11 +3217,42 @@
    "motif": "Même bloc que l'événement 6, en amont : quatre atomes contigus identiques, de « Sie war höchlichst verwundert, daß sie, die „nicht einmal einer Fliege etwas zuleide tun könne\" » jusqu'à la scène avec la belle-sœur. La reprise est massive et littérale, y compris les détails de la torsion du cou des pigeons et l'évocation du bourreau — ce n'est pas une convergence de thème. Mais aucune formule d'attribution n'est visible dans les deux atomes d'amont de part et d'autre, et la fenêtre [1907, 1922] de l'édition lue de Ferenczi rend le calcul inutilisable : le sens est laissé vide plutôt que deviné.",
    "verdict": "confirme"
   },
+  "a28b6463a2c16d6e|d96d4057099b91b4": {
+   "empreinte_a": "a28b6463a2c16d6e",
+   "id_a": "sammlung_2:a291",
+   "id_b": "nervoese_angstzustaende:a7907",
+   "motif": "Stekel attribue en clair dans la phrase partagée elle-même : « So tauchen lange, einwandfreie Gedankenreihen auf, um andere zu verdecken, die sich der Kritik und dem Bewußtsein entziehen wollen (Freud). » ; il enchaîne aussitôt sur une seconde phrase de Dora mise entre guillemets (« Eine Reihe von Vorwürfen gegen andere Personen… »). Emprunt condensé mais signé.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "a28e23426828ebf9|d13a832a43169ec5": {
+   "id_a": "traumdeutung:a4681",
+   "id_b": "traeume_der_dichter:a25",
+   "motif": "Le partage porte exclusivement sur les vers de Lenau (« Traegt aber uns der Schlaf mit weicher Hand / Ins Zauberboot... »), que Rank introduit comme citation (« Am schoensten hat Lenau diese Rueckkehr des Traeumers ins Jugendland als troestende und wunscherfuellende Traummacht gepriesen ») et que Stekel cite depuis un vers anterieur que Rank n'a pas (« Schlaflose Nacht, du bist allein die Zeit / Der ungestoerten Einsamkeit! »), en le rendant lui aussi a son auteur (« Lenau drueckt dies in wundervollen Versen aus »). Aucun des deux ne lit l'autre ici.",
+   "verdict": "reclasse",
+   "vers": "Nikolaus Lenau"
+  },
+  "a2c1d095148b08d8|cb7f86406a3536d9": {
+   "empreinte_a": "a2c1d095148b08d8",
+   "id_a": "psychopathologie:a158",
+   "id_b": "nervoese_angstzustaende:a4885",
+   "motif": "Suite du bloc des Deckerinnerungen : c'est ici que Stekel referme la citation — « mit welchem ich sie ausgezeichnet habe, begründeten Anspruch.\" » — avant de l'appliquer à son cas (« So verschweigt auch unsere Deckerinnerung das wichtigste »). La tête courante « Eine Berufsneurose. 181 » soudée en amont ne fait pas partie du partage.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "a3a186957588c2c2|a8aef3af16544480": {
    "empreinte_a": "a8aef3af16544480",
    "id_a": "drei_abhandlungen:a432",
    "id_b": "onanie_homosexualitaet:a192",
    "motif": "Attribution explicite : « Freud äußert sich über die Latenzperiode nach der Säuglingsonanie mit einer gewissen Reserve und gibt zu, daß Abweichungen vorhanden sind: „Unter den erogenen Zonen des kindlichen Körpers befindet sich eine… ». Les trois paires sont un seul bloc cité. Comme à l'événement 5, la leçon de Stekel est celle d'une édition antérieure (« wahrscheinlich damit es ihr an Reizungen … nicht fehle » contre « so daß es ihr an Reizungen … nicht fehlen kann » dans la 4e éd. de 1920).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "a3dc696f81eed9cd|b03b01c5bd32b4c3": {
+   "empreinte_a": "b03b01c5bd32b4c3",
+   "id_a": "sammlung_1:a436",
+   "id_b": "nervoese_angstzustaende:a353",
+   "motif": "Stekel annonce l'emprunt : « Freud nennt folgende Äquivalente des Angstanfalls: a) Störungen der Herztätigkeit… » et recopie la liste alphabétique entière de Freud (a à i), y compris l'exclamation « Pseudoangina pectoris (ein diagnostisch heikles Gebiet!) ». Il marque ensuite sa propre part : « Ich möchte dieser Liste einige eigene und fremde Beobachtungen hinzufügen… m) Plötzliches tiefes Aufseufzen. » — la démarcation même prouve que les items a) à i) ne sont pas de lui.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -2173,6 +3272,22 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "a517a9b7aa48f3a7|e60310f76218e676": {
+   "empreinte_a": "a517a9b7aa48f3a7",
+   "id_a": "ich_und_es:a241",
+   "id_b": "bausteine_3:a1547",
+   "motif": "Ferenczi cite Freud avec ouvrage et page dans la phrase même : « „Die Erlebnisse des Ichs“ — sagt Freud in seinem „Das Ich und das Es“ (S. 46) — „scheinen zunächst für die Erbschaft verloren zu gehen… ». La fenêtre de datation 1908–1939 des Bausteine rendait le sens indécidable au calcul ; la lecture le fixe.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "a6bca7e3a42a55ca|cd3773698319aef6": {
+   "empreinte_a": "a6bca7e3a42a55ca",
+   "id_a": "traumdeutung:a1916",
+   "id_b": "sprache_des_traumes:a2782",
+   "motif": "L'atome Stekel est une note de bas de page ouverte par un guillemet — «*) „Bei einer meiner Patientinnen lialwn alle Träume denCbarakt«r dM-„Geh«tzt«u\"» — et refermée deux atomes plus loin par la référence explicite « (Freud, Traumdeutung S. 140.) ». Reprise littérale signée.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "a6dd1b2349be1c1b|ec37cb7361ece3b1": {
    "empreinte_a": "ec37cb7361ece3b1",
    "id_a": "traumdeutung:a2934",
@@ -2189,12 +3304,36 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "a77ebf2cef709c94|e88cba8687e47b6e": {
+   "empreinte_a": "a77ebf2cef709c94",
+   "id_a": "traumdeutung:a4595",
+   "id_b": "sprache_des_traumes:a9401",
+   "motif": "Stekel annonce la reprise et l'attribue : « Man kann hier die Bemerkung Freuds anwenden: „Soll ich für die definitive Gestaltung des Traumes… ». Les deux paires contiguës (a4595/a4596 chez Freud, a9401/a9402 chez Stekel) forment un seul bloc recopié, jusqu'aux « Fliegende Blätter » et à l'inscription latine.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "a8456094474dabd9|b0e2139b143dab37": {
    "empreinte_a": "a8456094474dabd9",
    "id_a": "inzest_motiv:a290",
    "id_b": "sammlung_3:a861",
    "motif": "Incise attributive à l'intérieur même de la phrase de Rank : « „In seinem Verhältnis zu Vater und Mutter,\" sagt Freud, „bestätigt Hans aufs grellste und greifbarste alles, was ich in der „Traumdeutung\" und in der „Sexualtheorie\" über die Sexualbeziehungen der Kinder zu den Eltern behauptet habe. » ; fermeture sur « (a. a. O. S. 84) ». Le « was ich » du passage partagé est de Freud, pas de Rank. Le calcul était muet (Freud lu dans la Sammlung 3 de 1913, Rank 1912).",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "a8aef3af16544480|ee356eb3c1d6476a": {
+   "empreinte_a": "a8aef3af16544480",
+   "id_a": "drei_abhandlungen:a432",
+   "id_b": "onanie_homosexualitaet:a193",
+   "motif": "Bloc de 3 atomes contigus. Stekel ouvre le guillemet au premier (« „Durch die anatomische Lage, die Überströmung mit Sekreten ... ») et le referme trois atomes plus bas (« ... der Bemächtigungstrieb einst leisten wird.\" »). Les divergences ne sont pas des retouches de Stekel mais l'écart entre deux états du texte de Freud : Stekel (1917) suit une rédaction ancienne (« ist dafür gesorgt, daß », « so kann man schwerlich die Absicht der Natur verkennen »), là où l'exemplaire dépouillé est la 4e Auflage de 1920 (« wird es unvermeidlich, daß », « so wird man sich kaum der Auffassung entziehen können »). Le sens de l'emprunt en est renforcé, non affaibli.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "a90c5bfccee5eda3|f64e2e032e8103c8": {
+   "empreinte_a": "a90c5bfccee5eda3",
+   "id_a": "sammlung_1:a1612",
+   "id_b": "nervoese_angstzustaende:a235",
+   "motif": "Bloc de 2 atomes contigus. Le guillemet est ouvert par Stekel avant le passage (« „Die sexuelle Bedürftigkeit und Entbehrung ist bloß der eine Faktor ... ») et refermé après (« ... als guter Rat bezeichnet werden.\" Das halten wir uns vor Augen. »). Le « ich » de la phrase reprise est Freud : « jener psychische Zug, den ich Verdrängung genannt habe » — Stekel ne pouvait pas écrire cela de lui-même en 1908.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "a934fd432a282a94|cf5704663a678b82": {
@@ -2204,12 +3343,36 @@
    "verdict": "reclasse",
    "vers": "Sigmund Freud, Die Traumdeutung (1900), résumé de la fable d'Œdipe — atome traumdeutung:a2473"
   },
+  "a93d32f1feb16df5|c8a19504dcb73e6c": {
+   "empreinte_a": "c8a19504dcb73e6c",
+   "id_a": "traumdeutung:a4479",
+   "id_b": "sprache_des_traumes:a4958",
+   "motif": "Chez Stekel le passage est une note ouverte par guillemet — « ') „Der Gedanke: „Das ist ja nur ein Traum\" während des Traumea beabsiolitigt aber dasselbe… » — dont l'aval poursuit Freud mot à mot puis reprend la parole en propre (« Ich stelle mir vor, dass die verächtliche Kritik… »). Emprunt littéral de la Traumdeutung.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "a95efd252a30748c|f245d9c03caac51c": {
    "empreinte_a": "a95efd252a30748c",
    "id_a": "traum_und_mythus:a339",
    "id_b": "lohengrinsage:a262",
    "motif": "Fin du même bloc : « Der Bruder schläft sogleich ein, wie das Kind bald nach der Geburt. Nun folgt eine Szene, in der der Bruder sich in lebhafter Angst befindet, in einer Situation, aus der es kein Entweichen gibt. » Rank reproduit la phrase d'Abraham en y insérant un tiret de soudure (« nach der Geburt, — Nun folgt »), signe qu'il recolle deux morceaux d'un texte qu'il abrège. L'analyse (Fötus, canal, Entbindung) est celle qu'Abraham développe depuis plusieurs atomes ; Rank en hérite.",
    "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "aa14fedd420bc829|fde0116b133efb2e": {
+   "empreinte_a": "fde0116b133efb2e",
+   "id_a": "lohengrinsage:a904",
+   "id_b": "sammlung_4:a1603",
+   "motif": "Rank imprime le passage entre guillemets et referme la citation deux fois dans le meme atome (« ... also ist es begreiflich, dass der Liebende sich bemueht, sie vor diesen Gefahren zu behueten. » puis « dass hier eine vortrefflich gelungene \"Rationalisierung\" eines unbewussten Motivs vorliegt »), apres avoir nomme sa source dans la meme page (« Was Freud im »Mythus von der Geburt des Helden« (S. 64 bis 68) als »Familienroman« geschildert hat »). Le texte de Freud, lui, est de la prose suivie sans guillemets. C'est le cas connu de datation par l'edition : l'essai «Ueber einen besonderen Typus der Objektwahl beim Manne» parait au Jahrbuch II (1910) et n'est lu ici que dans la Sammlung IV de 1918, d'ou le sens_calcule inverse.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "abaf6d0040a1de6a|cf866eb2500db195": {
+   "empreinte_a": "abaf6d0040a1de6a",
+   "id_a": "der_kuenstler:a88",
+   "id_b": "drei_abhandlungen:a804",
+   "motif": "Reprise quasi littérale du paragraphe sur la sublimation des Drei Abhandlungen (1905) par Der Künstler (1907) : « Eine der Quellen der Kunstbetätigung ist hier zu finden, und je nachdem eine solche Sublimierung vollständig oder unvollständig ist, wird die Charakteranalyse hochbegabter, insbesondere künstlerisch veranlagter Personen jedes Mengungsverhältnis zwischen Leistungsfähigkeit, Perversion und Neurose ergeben. » Que Rank rapporte et n'invente pas se lit à son subjonctif de discours indirect juste avant : « Die Objektwahl aber werde geleitet durch die infantilen … Andeutungen », et à l'enchaînement « Damit habe ich den Anschluß an mein Thema erreicht ».",
+   "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
   "acb3d06a3bef35de|bca43c39eccc9827": {
@@ -2219,6 +3382,12 @@
    "motif": "Citation nominative en note, avec guillemets ouvrants et fermants : traumdeutung:a5513 « (240) Über andere Beobachtungen von Lenkung der Träume sagt _Ferenczi_: »Der Traum bearbeitet den das Seelenleben gerade beschäftigenden Gedanken von allen Seiten her, läßt das eine Traumbild bei drohender Gefahr des Mißlingens der Wunscherfüllung fallen, versucht es mit einer neuen Art der Lösung, bis es ihm endlich gelingt, eine die beiden Instanzen des Seelenlebens kompromissuell befriedigende Wunscherfüllung zu schaffen.« ». Le contexte amont montre que Freud est exactement sur le sujet de Ferenczi (traumdeutung:a5508 « denen also eine bewußte Fähigkeit, das Traumleben zu lenken, eigen scheint »). Côté Ferenczi, la phrase est la conclusion de son propre article, dont le titre figure quelques atomes plus haut — bausteine_2:a767 « Über lenkbare Träume (1911) » — et qui repose sur son matériel clinique personnel, bausteine_2:a769 : « Einer dieser Patienten berichtet mir nun häufig von einer eigentümlichen Art des Bewußtwerdens des Traumzustandes im Schlafe. » Ferenczi est donc la source, Freud le citateur : sens lu b_vers_a, là où le calcul répondait INDÉCIDABLE (fenêtres de datation chevauchantes, la Traumdeutung étant rééditée). La contenance de 0,487 vient d'une variante d'un seul mot (« Traumgedanken » chez Ferenczi, « Gedanken » sous la plume de Freud) et de l'agrégation, dans l'atome Freud, de la phrase de corps et des titres de section qui suivent.",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
+  },
+  "ae89d4b75febcaf3|d69e63c2d9fe8668": {
+   "id_a": "mythus_geburt_helden:a94",
+   "id_b": "sammlung_2:a1489",
+   "motif": "Les mots partagés sont le titre d'un ouvrage de référence cité en note des deux côtés : « A. Jeremias: Das Alte Testament im Lichte des alten Orients, 2. Aufl., 1906 » chez Rank, « Jeremias, Das Alte Testament im Lichte des alten Orients, 2. Aufl., 1906, p. 216 » chez Freud. Les deux atomes sont des notes bibliographiques (Rank y renvoie aussi à Hommel, Freud y ajoute « Babylonisches im Neuen Testament »), avec des paginations différentes : aucune phrase n'est commune, seule une entrée de bibliographie.",
+   "verdict": "rejete"
   },
   "aee93bfa4c52c39b|b3dc445c067d84ce": {
    "id_a": "traumdeutung:a4346",
@@ -2250,12 +3419,27 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "b2653d264e3aa545|d81a69fecbc2080e": {
+   "id_a": "lohengrinsage:a223",
+   "id_b": "sprache_des_traumes:a4384",
+   "motif": "Les deux citent Scherner, nommé de part et d'autre : Rank en note — « Auch Scherner (Das Leben des Traumes, Berlin 1861)… sieht in den Wasserträumen Beziehungen zur Geburt (S. 200 f.): »Die Geschlechtsregung symbolisiert sich durch Vorbildungen kleiner Kinder…« » — et Stekel en note également, l'OCR « ächeraereagt » rendant « Scherner sagt ». Tiers non encore rencontré dans le corpus.",
+   "verdict": "reclasse",
+   "vers": "Karl Albert Scherner"
+  },
   "b2d6372a4a2e293b|d61e8cfe760f2759": {
    "empreinte_a": "b2d6372a4a2e293b",
    "id_a": "der_kuenstler:a86",
    "id_b": "drei_abhandlungen:a778",
    "motif": "Le chapitre de Rank est un compte rendu déclaré des « Drei Abhandlungen », et l'atome jugé en est la paraphrase du résumé final de Freud. L'ouvrage est nommé quinze atomes plus haut, avec lieu et date : « so ist auch der Keim seines jüngsten Werkes, der drei Abhandlungen zur Sexualtheorie (Leipzig und Wien, 1905), bereits in der Traumdeutung enthalten » (der_kuenstler:a71). L'attribution est ensuite reprise juste avant le passage : « Freud schließt seine Ausführungen mit der Besprechung der Veränderungen, die durch den Eintritt der Pubertät gesetzt werden » (der_kuenstler:a84), phrase qui décalque drei_abhandlungen:a774. Le discours indirect au Konjunktiv signe le rapport et explique à lui seul la contenance basse : Freud écrit « Die Objektwahl endlich fanden wir geleitet » (drei_abhandlungen:a778), Rank transpose en « Die Objektwahl aber werde geleitet » (der_kuenstler:a86). Ce n'est pas un faux positif de score mais une reprise avouée. Sens lu : Freud source, Rank rapporteur.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "b2e5825356832be5|e89eb6e3b9feddfe": {
+   "empreinte_a": "b2e5825356832be5",
+   "id_a": "drei_abhandlungen:a388",
+   "id_b": "nervoese_angstzustaende:a2028",
+   "motif": "Stekel referme le guillemet à la fin du passage (« …energische Ludlerin[n]en gewesen.\" ») et enchaîne sur « Ich möchte dem hinzufügen: … » : il cite. Preuve du sens par la variante : Stekel (1908) lit « Alle meine Patientinnen mit Eßstörungen », leçon de la 1re édition des Drei Abhandlungen (1905), là où l'édition de Freud collationnée ici (4. Auflage, 1920) porte le prudent « Viele meiner Patientinnen ». Freud a atténué après coup ; Stekel ne peut pas être la source.",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "b2fc0514814fa3bd|bbc2eaa226b35ca1": {
@@ -2271,6 +3455,22 @@
    "id_a": "lohengrinsage:a890",
    "id_b": "sammlung_4:a1547",
    "motif": "CORRECTION DE SENS. Le calcul annonce a_vers_b (Rank → Freud) parce que le texte de Freud est lu dans la Sammlung IV de 1918, postérieure au Rank de 1911. La lecture renverse : Rank écrit « Solche Männer zeigen nach Freuds Feststellung (l. c.) außer der Rettungstendenz zunächst eine andere geradezu spezifische Liebesbedingung, die des »Geschädigten Dritten« », met le passage entre guillemets et le référence deux fois à sa parution d'origine — « (Freud, Jb., II, S. 392, 4) » et « (Freud, l. c., S. 390, 1) » —, c'est-à-dire au Jahrbuch II de 1910 où parut « Über einen besonderen Typus der Objektwahl beim Manne ». Freud → Rank.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "b44323dc2e773fcc|fe612a26157fd583": {
+   "empreinte_a": "fe612a26157fd583",
+   "id_a": "sammlung_1:a500",
+   "id_b": "nervoese_angstzustaende:a384",
+   "motif": "Stekel (1908) reproduit la typologie lettree de l'article de Freud sur l'Angstneurose, jusqu'aux lettres de section (« c) Angst der Maenner, die Coitus interruptus ueben », puis « d) Angst der Maenner im Senium ») et jusqu'au renvoi interne « Wie schon bemerkt, schaedigt der Coitus interruptus die Frau... », dont l'antecedent se trouve dans le texte de Freud et non dans le sien : c'est la marque du copiste. Freud publie ce texte en 1895 (Sammlung I, 1906), Stekel en 1908.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "b6440dff8d3efdc0|bfed678e7aa4391d": {
+   "empreinte_a": "b6440dff8d3efdc0",
+   "id_a": "der_kuenstler:a272",
+   "id_b": "psychopathologie:a937",
+   "motif": "Rank enchâsse la phrase de Freud dans la sienne, guillemets et appel de note compris : « denn „in der Paranoia drängt sich eben so vielerlei zum Bewußtsein durch, was wir bei Normalen und Neurotikem erst durch die Psychoanalyse als im Bewußtsein vorhanden nachweisen\" ... *) ». Il reprend dans la même page la suite du passage (« sieht schärfer als das normale Denkvermögen », « die Verschiebung des so erkannten Sachverhaltes auf andere ... macht »), qui se trouve chez Freud dans l'atome aval. La bévue de Rank — « als im Bewußtsein vorhanden » pour « als im Unbewussten vorhanden » — est une faute de copiste, elle marque le sens de la reprise.",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
@@ -2322,6 +3522,21 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "bdf512d8403a4165|fe982e6c6e258bae": {
+   "id_a": "traumdeutung:a4701",
+   "id_b": "traeume_der_dichter:a4187",
+   "motif": "Le passage est de Jean Paul : Rank l'annonce (« Ähnliche Gedanken haben _Jean Paul_ und _Hebbel_ geäußert… Jener an einer Stelle, die speziell die asozialen… Regungen betrifft »), et Stekel l'entoure de contexte jean-paulien (les « Palingenesien », « Viktors Träumen », « Dr. Faust's philosophischem Mantel »). Les leçons divergent (Rank « in den uns gebauten… ledig herumstreifen… in Ketten hielt » ; Stekel « in den in uns gebauten… ledig umherstreifen… an Ketten hielt »), donc copies indépendantes.",
+   "verdict": "reclasse",
+   "vers": "Jean Paul"
+  },
+  "c06afb2daeb0c929|f48e1c07b0baa783": {
+   "empreinte_a": "c06afb2daeb0c929",
+   "id_a": "entwicklungsgeschichte_libido:a396",
+   "id_b": "sammlung_4:a2803",
+   "motif": "Abraham nomme sa source avant et apres : « Freud hingegen hat sie erkannt. Wie er von den Patienten aussagt, sind sie „weit davon entfernt, gegen ihre Umgebung die Demut und Unterwuerfigkeit zu bezeugen...“ », avec la note de bas de page « „Trauer und Melancholie“, Zeitschrift Jahrg. IV, S. 293 ». Le sens calcule (b_vers_a) est ici confirme par la lecture : Freud (1917, repris dans la Sammlung IV) vers Abraham (1924).",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "c0c62058cb7fdf18|e1f71dbfb5e5a2d5": {
    "id_a": "witz:a247",
    "id_b": "populaere_vortraege:a743",
@@ -2334,6 +3549,14 @@
    "id_a": "inzest_motiv:a3158",
    "id_b": "traumdeutung:a2519",
    "motif": "Rank (1912) cite la Traumdeutung en donnant l'édition et la page : « Vom Todestraum des Vaters sagt er: „Erstens gibt es keinen Wunsch, von dem wir uns ferner glauben... » ... « der Wunsch aber kann sich mit der am Tage rege gewordenen Sorge maskieren\" (Traumdeutung 2. Aufl. S. 188) ». Le passage de Freud commence par « Ich finde die Begünstigung für diese Träume in folgenden zwei Momenten: Erstens... » : Rank transforme le « ich » de Freud en discours rapporté (« findet Freud in zwei Momenten »), preuve du sens.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "c19af500d0c48437|f6ae45fb2e406ecb": {
+   "empreinte_a": "c19af500d0c48437",
+   "id_a": "klinische_beitraege:a2514",
+   "id_b": "sammlung_3:a2483",
+   "motif": "Abraham introduit la phrase par le nom et le verbe de citation : « ...gelangte Freud zu der Annahme: „Wenn Schreber sich ruehmt, dass er ungestraft und ungeblendet in die Sonne schauen kann, hat er den mythologischen Ausdruck fuer seine Kindesbeziehung zur Sonne wiedergefunden...“ ». La citation est meme legerement resserree (Abraham : « als Vater auffassen » la ou Freud ecrit « als ein Symbol des Vaters auffassen »), signature d'un citateur, pas d'un original.",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
@@ -2351,6 +3574,14 @@
    "motif": "Ni Rank ni Stekel ne lit l'autre : tous deux transcrivent, la même année (1912), le rêve de serpent consigné par Gottfried Keller dans son journal. Rank donne la source d'édition (« ein Traum, den Gottfried Keller am 15. September 1847 in sein „Traumbuch\" (Bächthold I, Stuttgart, Cotta) einträgt »), Stekel écrit « Zur Tiersymbolik bringt uns der letzte der Keller-Träume zurück ». Les variantes de transcription prouvent l'indépendance des deux relevés : « Taburett » (Rank) contre « Tabouret » (Stekel), « wie unsere rote Katze » contre « wie früher unsere rote Katze ». Le tiers doit être nommé, sinon le lien serait publié comme un emprunt inexistant.",
    "verdict": "reclasse",
    "vers": "Gottfried Keller (Traumbuch / Tagebuch, 15 septembre 1847)"
+  },
+  "c4673561e588fb31|e9721f3604331cbc": {
+   "empreinte_a": "e9721f3604331cbc",
+   "id_a": "sammlung_1:a446",
+   "id_b": "nervoese_angstzustaende:a1697",
+   "motif": "Bloc de deux atomes : Stekel recopie en bloc l'article de Freud sur l'Angstneurose, guillemet fermant à la fin — « nebenher einen Vertigo a stomacho laeso an zuerkennen.\" » — puis reprise de sa propre voix (« Diese Schwindelgefühle stehen oft im Mittelpunkte des Krankheitsbildes »). Il conserve la première personne de Freud (« nach meinen Beobachtungen »). Les têtes courantes soudées par l'OCR des deux côtés (« Klinik der Angstneurose… 65 » chez Stekel, « Freud, Neurosenlehre. 66 » chez Freud) coupent la phrase mais ne sont pas ce qui est partagé.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
   },
   "c59ba937a7f476dd|fb065f4e23474687": {
    "empreinte_a": "c59ba937a7f476dd",
@@ -2373,6 +3604,14 @@
    "id_a": "traumdeutung:a3629",
    "id_b": "sprache_des_traumes:a129",
    "motif": "Double attribution, en amont et en aval, chez Stekel : « ein Beispiel aus der Traumdeutung von Freud anführen. Im Traume einer Dame heisst es: (8.) „Ein Stubenmädchen steht auf der Leiter… » puis, après le bloc, la référence de page « (Traumdeutung S. 250.) ». Les déformations OCR de Stekel (« nie zum Fensterputzen », « Gurillakatze », « bei sieb ») confirment la copie d'un original identique à celui de Freud, non une source commune. Verdict unique pour les deux paires contiguës.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "c9237884e17a2650|dc6c9e690dfcf99a": {
+   "empreinte_a": "dc6c9e690dfcf99a",
+   "id_a": "sammlung_4:a823",
+   "id_b": "bausteine_1:a1381",
+   "motif": "Ferenczi désigne sa source avant d'ouvrir les guillemets — « auf feinere Vorgänge der Ichpsychologie, auf die uns Freud aufmerksam machte, Rücksicht nehmen. „Die Entwicklung des Ich besteht in einer Entfernung vom primären Narzißmus… » — et referme après « …die Erfüllung dieses Ideals.“ ». Le texte est celui de « Zur Einführung des Narzißmus » (1914), antérieur à l'essai sur le tic.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -2415,12 +3654,27 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "ce9dec40901f3802|d4affa7dea3bb052": {
+   "id_a": "traumdeutung:a4700",
+   "id_b": "traeume_der_dichter:a4184",
+   "motif": "Même tiers que l'événement 18, autre fragment : « das weite Geisterreich der Triebe und Neigungen steigt in der zwölften Stunde des Träumens herauf und spielt dicht verkörpert vor uns » est cité par Rank comme étant de « Jener » (Jean Paul, opposé à « dieser » = Hebbel) et figure chez Stekel dans un développement jean-paulien coiffé de la tête courante « Der mitgebrachte Religionsfond. 189 ». Aucun des deux ne lit l'autre.",
+   "verdict": "reclasse",
+   "vers": "Jean Paul"
+  },
   "cef5a5f5b646732a|ef95eb115999d007": {
    "id_a": "traumdeutung:a4334",
    "id_b": "traeume_der_dichter:a2397",
    "motif": "Ni Freud ni Stekel n'est l'auteur de ces phrases : c'est le récit de rêve de Peter Rosegger, que Freud nomme explicitement quelques atomes plus haut dans la même série (cf. événement 11) : « _Rosegger_ in »Waldheimat« II. Band erzählt in der Geschichte »Fremd gemacht« (p. 303) ». Freud le tient de la discussion de Frau Dr. Hilferding à la Wiener psychoanalytische Vereinigung ; Stekel l'imprime dans son chapitre « Die Rundfrage » sous le titre courant « Der Dichter als Schneidergeselle ». Publier ici un emprunt Freud↔Stekel serait faux : les deux impriment Rosegger.",
    "verdict": "reclasse",
    "vers": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)"
+  },
+  "cefce75478e22368|f85e748d4c87e9e4": {
+   "empreinte_a": "cefce75478e22368",
+   "id_a": "der_kuenstler:a236",
+   "id_b": "traumdeutung:a1431",
+   "motif": "Rank encadre la phrase de guillemets — « ebenso wie es Hysteriker vermögen, „die Erlebnisse einer großen Reihe von Personen… darzustellen\". *) » — et l'appel de note renvoie à « *) TrAomdeatang. », OCR de « Traumdeutung ». Rank (1907) cite Freud (1900), donc l'inverse du sens qu'induirait l'édition 1914 lue.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
   },
   "d1412cdd52c4fec8|d9b5b6deaff8c88b": {
    "empreinte_a": "d9b5b6deaff8c88b",
@@ -2446,11 +3700,35 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "d33dba9649b4b346|dea1852e8d79d604": {
+   "empreinte_a": "d33dba9649b4b346",
+   "id_a": "sammlung_3:a754",
+   "id_b": "bausteine_1:a603",
+   "motif": "Ferenczi cite en note, avec reference d'oeuvre : « ...findet sich in der von Freud publizierten „Analyse der Phobie eines fuenfjaehrigen Knaben\" (Ges. Schr., Bd. VIII), wo der kleine Hans sich zum Manne seiner Mutter ... ernennt, wozu Freud bemerkt: „Es geht alles gut aus. ... er ernennt ihn zum Grossvater und verheiratet auch ihn mit der eigenen Mutter.“ ». Guillemet fermant apres la phrase partagee.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "d41c621c53dc205f|f9c75b192f33f241": {
+   "empreinte_a": "f9c75b192f33f241",
+   "id_a": "klinische_beitraege:a2484",
+   "id_b": "sammlung_3:a2906",
+   "motif": "Abraham nomme l'œuvre puis annonce la citation littérale : « Eine kleine Publikation Freuds über die „psychogene Sehstörung“ … Freud nimmt in dieser Arbeit Bezug auf seine Lehre von den erogenen Zonen … und äußert sich … wie folgt: „Die Augen nehmen nicht nur die für die Lebenserhaltung wichtigen Veränderungen der Außenwelt wahr… ». L'édition de 1921 des Klinische Beiträge ne renverse pas le sens.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "d44af7e9160f9380|d9b5b6deaff8c88b": {
    "empreinte_a": "d9b5b6deaff8c88b",
    "id_a": "studien_ueber_hysterie:a285",
    "id_b": "ueber_psychoanalyse:a71",
    "motif": "Freud recopie la vignette d'Anna O. de Breuer, et l'attribution est six atomes en amont : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten » (ueber_psychoanalyse:a65). Le guillemet ouvrant s'ouvre à ueber_psychoanalyse:a67 (« Einmal wachte sie nachts in großer Angst um den hochfiebernden Kranken ») et ne se referme qu'à ueber_psychoanalyse:a72, immédiatement suivi des deux appels de note « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. ». Côté Breuer, la même scène est la narration première, non citée : « Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken » (studien_ueber_hysterie:a281). Les écarts (Arm/Hand, « Association »/« Assoziation », « Hallucination »/« Halluzination ») sont la modernisation orthographique de 1910, pas un autre texte. Reprise établie, sens donné par la note de bas de page : Breuer source, Freud reprend.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "d53144fdf2cd9a3f|dce682068fd17638": {
+   "empreinte_a": "dce682068fd17638",
+   "id_a": "traumdeutung:a1208",
+   "id_b": "sprache_des_traumes:a8664",
+   "motif": "Stekel introduit le passage par « Freud erzählt: „Wenn man mir zugibt, dass das Sprechen aus dem Schlafe der Kinder gleichfalls dem Kreise des Träumens angehört… » et referme le guillemet en aval sur « (Traumdeutimg S. 94.) ». Attribution et pagination présentes.",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -2499,6 +3777,14 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "d8005ae3062323ad|fe567a0f697fab98": {
+   "empreinte_a": "fe567a0f697fab98",
+   "id_a": "drei_abhandlungen:a536",
+   "id_b": "nervoese_angstzustaende:a5195",
+   "motif": "Stekel referme la citation (« …vor der Wiederholung der peinlichen Erfahrung schützen.“ ») avant de reprendre la parole en son nom (« So läßt sich jeder Fall von Eisenbahnangst psychologisch erklären »). La 4e édition de 1920 des Drei Abhandlungen est l'édition lue, mais la fenêtre de datation du passage reste 1905, antérieure à Stekel 1908.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "d9c3423874140242|f2184c31f2e06777": {
    "empreinte_a": "f2184c31f2e06777",
    "id_a": "traumdeutung:a3538",
@@ -2507,10 +3793,26 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "e100837fc0d8df56|ec864a023528d2c8": {
+   "empreinte_a": "e100837fc0d8df56",
+   "id_a": "traumdeutung:a3593",
+   "id_b": "sprache_des_traumes:a8069",
+   "motif": "Stekel encadre l'extrait de guillemets, le numerote a sa maniere (« (307.) „Er befindet sich in einem tiefen Schacht, in dem ein Fenster ist, wie im Semmeringtunnel... ») et le referme sur la reference exacte « (Traumdeutung S. 198.) », avant de passer a son propre materiel (« Meine Sammlung an Mutterleibstraeumen ist ausserordentlich reichhaltig »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "e65f692bf72ab58e|e65f692bf72ab58e": {
    "id_a": "lohengrinsage:a902",
    "id_b": "sammlung_4:a1594",
    "motif": "Rank cite Freud en toutes lettres et le dit : l'atome A porte l'appel de note « *) Die folgenden Ausführungen sind fast wörtlich der grundlegenden Arbeit Freuds (Jb., II, S. 394 ff.) entnommen », et le passage est enfermé dans des guillemets (»Brutale Mitteilungen... ausüben«e. — »Wenn er dann den Zweifel ... nicht mehr festhalten kann«). Le sens calculé (Rank 1911 → Freud) est INVERSÉ par la datation : la fenêtre [1913,1918] du côté Freud est celle du recueil « Sammlung kleiner Schriften, Vierte Folge », réimpression de l'essai « Über einen besonderen Typus der Objektwahl beim Manne » paru au Jahrbuch II (1910) — c'est précisément l'article que Rank désigne par « Jb., II, S. 394 ff. ».",
+   "verdict": "confirme"
+  },
+  "ea492d160e8d96ff|fde0116b133efb2e": {
+   "empreinte_a": "fde0116b133efb2e",
+   "id_a": "lohengrinsage:a904",
+   "id_b": "sammlung_4:a1599",
+   "motif": "SENS INVERSÉ PAR RAPPORT AU CALCUL. sens_calcule = a_vers_b parce que le recueil de Freud est daté par son édition (Sammlung IV, 1918) alors que Rank paraît en 1911 ; mais l'essai « Über einen besonderen Typus der Objektwahl beim Manne » est de 1910, et c'est Rank qui cite Freud, en le disant : « Was Freud im »Mythus von der Geburt des Helden« (S. 64 bis 68) als »Familienroman« geschildert hat, »umfaßt die vielfältigen Ausbildungen dieser Phantasietätigkeit und deren Verwebung mit verschiedenen egoistischen Interessen dieser Lebenszeit«. » Toute la page de Rank est un montage de citations entre guillemets français (« Die Geliebte bringt sich durch ihre Neigung zur Unbeständigkeit und Untreue in Gefahren ... », « daß hier eine vortrefflich gelungene „Rationalisierung\" eines unbewußten Motivs vorliegt »), et il remplace le « Ich habe an anderer Stelle geschildert » de Freud par « Was Freud ... geschildert hat ». La lecture donne donc b_vers_a.",
+   "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
   "eb18318c89a54637|fb30f66271599ce6": {
@@ -2540,6 +3842,13 @@
    "id_b": "traeume_der_dichter:a4026",
    "motif": "Le partage est réel et long (tout le rêve du serpent domestique : « Wirklich entwickelte sich die Schlange sehr gemütlich, gähnte und reckte sich nach allen Seiten... », « ...rings an der Stubendecke umher, als ob sie Raum suche », « Dann folgte sie der Mutter in die Küche und auf den Estrich »), donc pas un faux positif. Mais le SENS ne peut pas être publié : ce n'est la prose d'aucun des deux — c'est un récit de rêve à la première personne d'écrivain (« meine Mutter », l'helvétisme « Estrich »), imprimé la même année (1912) par Rank dans un chapitre d'analyse littéraire et par Stekel dans un chapitre intitulé « Aus verschiedenen Quellen », c'est-à-dire un florilège de sources. Les deux fenêtres sont identiques [1912,1912] et aucune attribution n'apparaît dans le contexte fourni : l'hypothèse la plus probable est une source littéraire tierce commune, que je me refuse à nommer faute de preuve dans le texte. À ne pas afficher comme un emprunt d'un auteur à l'autre.",
    "verdict": "confirme"
+  },
+  "f4dfc32c2e73e73e|f8198cd7f7840a5e": {
+   "id_a": "lohengrinsage:a368",
+   "id_b": "sprache_des_traumes:a7975",
+   "motif": "Aucun des deux ne lit l'autre : tous deux recopient la même page de Kleinpaul. Rank l'écrit en amont — « der interessante Hinweis von Kleinpaul (S. 196) » puis ouvre le guillemet sur « In den Augen der Seeleute ist das Schiff ein Weib… » ; Stekel écrit de son côté « Kleinpaul sagt sehr treffend: „In den Äugen der Seeleute…“ » et referme en aval par la référence « (Die Lebendigen und die Toten S. 196 l. c.) ». Même page 196 citée des deux côtés, deux ouvrages parus la même année (1911).",
+   "verdict": "reclasse",
+   "vers": "Rudolf Kleinpaul, Die Lebendigen und die Toten (S. 196)"
   },
   "f777d47f63a83978|f810a225f8031227": {
    "empreinte_a": "f777d47f63a83978",

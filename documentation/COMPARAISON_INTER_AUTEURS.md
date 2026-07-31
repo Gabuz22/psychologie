@@ -229,11 +229,10 @@ occurrences chez lui, **une** dans tout le reste du corpus.
 
 ## 5. Ce qui reste ouvert
 
-- **147 événements de reprise sur 358 n'ont pas été lus.** Ils gardent `a_verifier = 1` : non lus,
-  pas rejetés. (Le chiffre annoncé ici auparavant — « 25 sur 63 » — datait d'un corpus à cinq
-  auteurs ; l'entrée de Stekel et les onze œuvres de Freud l'ont porté à 358 événements.)
-
-  **211 ont été lus le 2026-07-31** : voir § 6.
+- ~~Des événements de reprise n'ont pas été lus.~~ **INSTRUCTION COMPLÈTE le 2026-08-01 : les
+  354 événements du corpus ont été lus en contexte.** Voir § 6. (Le chiffre annoncé ici auparavant
+  — « 25 sur 63 » — datait d'un corpus à cinq auteurs ; l'entrée de Stekel et les onze œuvres de
+  Freud l'avaient porté à 358, dont 4 ont disparu avec le catalogue d'éditeur retiré du corpus.)
 - Les empreintes de contenu résistent aux **déplacements** d'atomes, pas aux changements de
   **segmentation**. Une resegmentation désancre les verdicts ; un test
   (`test_les_verdicts_lus_portent_bien_sur_des_couples_du_corpus`) le signale au lieu de laisser
@@ -263,19 +262,43 @@ occurrences chez lui, **une** dans tout le reste du corpus.
 
 ---
 
-## 6. La lecture des reprises — 2026-07-31
+## 6. La lecture des reprises — instruction complète, 2026-08-01
 
-**150 événements lus, 129 confirmés, 21 reclassés, 0 rejeté.** Avec les 61 déjà lus, le registre
-compte **211 événements instruits sur 358**.
+**Les 354 événements de reprise du corpus ont été lus en contexte : 232 confirmés, 56 reclassés,
+9 rejetés.**
 
-### Zéro rejet, et ce n'est pas de l'indulgence
+### Le taux de rejet n'est pas uniforme — et c'est le résultat le plus utile
 
-Les lots sont triés par **contenance décroissante** : ces 150 événements sont les plus fortes
-reprises du corpus, et presque toutes sont des citations littérales *signées* — guillemet ouvert
-dans l'atome amont, pagination dans l'aval (« (Traumdeutung S. 179.) », « (Freud: Kl. Schr., II,
-S. 173) », « (a. a. O. S. 84) »). Les rejeter pour atteindre un quota aurait été l'erreur
-symétrique de celle que ce registre combat. **Les faux positifs, s'il y en a, sont dans les bandes
-basses — non lues.** C'est pourquoi le taux de rejet de cette campagne ne doit pas être extrapolé.
+Les lots sont triés par **contenance décroissante**, et lus dans cet ordre. Le résultat par bande :
+
+| lots | contenance | confirmés | reclassés | **rejetés** |
+|---|---|---|---|---|
+| 1–5 (les plus fortes) | 1,00 → 0,60 | 129 | 21 | **0** |
+| 6–9 | 0,60 → 0,45 | 87 | 32 | **1** |
+| 10 (la queue) | 0,45 → 0,30 | 16 | 3 | **8** |
+
+**Huit des neuf rejets tombent dans le dernier lot.** Les 250 premiers événements ne contiennent
+aucun faux positif mécanique — non par indulgence, mais parce que ce sont des citations littérales
+*signées* : guillemet ouvert dans l'atome amont, pagination dans l'aval (« (Traumdeutung S. 179.) »,
+« (Freud: Kl. Schr., II, S. 173) »). **Un taux de rejet global ne veut donc rien dire ici ; il faut
+le lire par bande**, et c'est un argument pour le seuil de publication de 0,30 plutôt que contre lui.
+
+### La NATURE des liens change avec la contenance
+
+C'est la découverte de structure de cette campagne, et elle n'était pas prévue. En haut de la
+distribution, les liens sont des citations **internes** au corpus : un analyste en cite un autre.
+En bas, **un tiers deviennent des citations d'un TIERS extérieur** — poètes, sources antiques,
+psychologues d'avant la psychanalyse — que deux auteurs recopient sans se lire.
+
+La liste des tiers s'est allongée de treize noms : **Grillparzer, Scherner** (parfois via Volkelt),
+**Silberer, Karl Abel, Jean Paul, Lenau, Artemidoros von Daldis, Tolstoï, Stendhal, Paul Heyse**,
+aux côtés de Rosegger, Gottfried Keller, Hebbel, Lichtenberg, Goethe, Jones, Kleinpaul et
+Popper-Lynkeus. Sans lecture, chacun aurait été publié comme un emprunt **entre auteurs du corpus**.
+
+La preuve est presque toujours une **divergence de leçon**, qui interdit la copie de l'un sur
+l'autre : Freud lit « das Gefühl hatte » et « die Syrier » là où Stekel lit « das Gesicht hatte »
+et « die Tyrier » (Artémidore) ; Rank a « diese Leidenschaft in vollem Maße », Stekel « diese
+Leidenschaft **nicht** in vollem Maße » (Grillparzer).
 
 ### Une dizaine de sens publiés à l'envers, tous par le même artefact
 
@@ -315,3 +338,35 @@ Abhandlungen* avec des **leçons d'édition antérieures** à celle que le corpu
 « scheint **mit dem Einsetzen der Latenzperiode** zu schwinden » là où l'édition lue porte « scheint
 nach kurzer Zeit zu schwinden ». La variante prouve qu'il copie une impression plus ancienne —
 l'apparente antériorité de Stekel sur « son » Freud est un pur artefact d'édition.
+
+### Un défaut du CORPUS, trouvé par la lecture et non par un contrôle
+
+Quatre rejets du dernier lot avaient la même cause, et elle n'était pas dans la couche des
+reprises : **les « atomes » appariés n'étaient pas du texte d'auteur mais le catalogue de
+l'éditeur relié en fin de volume.** Le lecteur l'a reconnu à son contenu — des titres avec leurs
+prix, une annonce d'abonnement à *Imago* (« M 15.— = K 18.— pro Jahrgang ») — et a noté qu'ils
+« polluent probablement d'autres lots ». Vérifié : ils le faisaient.
+
+*Das Ich und das Es* portait **115 atomes de catalogue sur 559, soit 21 % du volume** ; les
+*Vorlesungen II*, 34. Ces deux œuvres étaient les seules, avec quelques autres, à ne déclarer
+**aucune** borne dans `sources.PARATEXTE_FINAL` — et rien ne le signalait : la fonction répond
+« pas de paratexte final déclaré » sans distinguer *ce volume n'en a pas* de *personne n'a
+regardé*. Vingt-deux œuvres en déclarent une ; l'absence n'était pas une décision, c'était un trou.
+
+Les bornes sont posées, 148 atomes de réclame quittent le corpus, et les deux volumes s'achèvent
+maintenant sur leur vraie dernière phrase — pour *Das Ich und das Es*, « … doch dabei die Rolle
+des Eros zu unterschätzen. »
+
+Les quatre verdicts correspondants perdent leur ancre. Ils sont **conservés dans `desancres`**
+avec leur motif, comme les six précédents : un travail de lecture effacé en silence se refait. Ici
+la désancrage est même le bon résultat — *le lien n'existe plus parce qu'il n'aurait jamais dû
+exister*.
+
+### Deux preuves d'antériorité qui ne doivent rien aux dates
+
+Le cas le plus solide de la campagne ne s'appuie sur aucune datation. Stekel (1917) cite les *Drei
+Abhandlungen* avec des **leçons d'édition antérieures** à celle que le corpus lit (4ᵉ éd., 1920) :
+« scheint **mit dem Einsetzen der Latenzperiode** zu schwinden » là où l'édition lue porte « scheint
+nach kurzer Zeit zu schwinden » ; et « *Alle* meine Patientinnen » contre « *Viele* meiner ». La
+variante prouve qu'il copie une impression plus ancienne — l'apparente antériorité de Stekel sur
+« son » Freud est un pur artefact d'édition, et **Freud a atténué après coup**.
