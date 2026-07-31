@@ -66,6 +66,11 @@ Deux réserves qui ne s'effacent jamais :
 
 ## 3. Ce que la lecture ajoute au calcul
 
+> **Les chiffres de cette section décrivent la campagne de juillet, sur un corpus à cinq auteurs
+> (132 liens).** L'entrée de Stekel et des onze œuvres de Freud a porté le corpus à **511 liens /
+> 358 événements**, et une seconde campagne a eu lieu le 2026-07-31 : voir **§ 6**. Les
+> enseignements de méthode ci-dessous restent valables ; les comptes, non.
+
 132 liens de reprise sont calculés. 63 tombaient entre 0,30 et 0,70 de contenance — assez pour
 être publiés, pas assez pour être évidents. **38 ont été relus en contexte**, chacun avec les
 atomes qui l'entourent des deux côtés.
@@ -224,8 +229,11 @@ occurrences chez lui, **une** dans tout le reste du corpus.
 
 ## 5. Ce qui reste ouvert
 
-- **25 liens sur 63 n'ont pas été relus** (échec réseau). Ils gardent `a_verifier = 1` : non lus,
-  pas rejetés.
+- **147 événements de reprise sur 358 n'ont pas été lus.** Ils gardent `a_verifier = 1` : non lus,
+  pas rejetés. (Le chiffre annoncé ici auparavant — « 25 sur 63 » — datait d'un corpus à cinq
+  auteurs ; l'entrée de Stekel et les onze œuvres de Freud l'ont porté à 358 événements.)
+
+  **211 ont été lus le 2026-07-31** : voir § 6.
 - Les empreintes de contenu résistent aux **déplacements** d'atomes, pas aux changements de
   **segmentation**. Une resegmentation désancre les verdicts ; un test
   (`test_les_verdicts_lus_portent_bien_sur_des_couples_du_corpus`) le signale au lieu de laisser
@@ -239,5 +247,71 @@ occurrences chez lui, **une** dans tout le reste du corpus.
   Autrement dit : un renversement doctrinal aussi net que celui-là ne laisse presque **aucune
   trace lexicale de première personne**. Un auteur qui change d'avis ne l'écrit pas ; il écrit
   autre chose. C'est une limite du repérage par marqueur, mesurée plutôt que supposée.
-- Le rapprochement de concepts **par similarité de voisinage** reste la piste la plus prometteuse
-  et n'est toujours pas fondable : aucun témoin positif valide n'existe dans la base.
+- Le rapprochement de concepts **par similarité de voisinage** a été construit, mesuré, puis
+  écarté — voir [APPARIEMENT_ECARTE.md](APPARIEMENT_ECARTE.md), et les quatre conditions qu'il
+  faudrait remplir pour rouvrir le chantier.
+
+  **Cette ligne a porté une affirmation fausse pendant deux jours**, et le cas mérite d'être gardé
+  parce qu'il a réellement trompé un lecteur. Elle disait : « n'est toujours pas fondable : aucun
+  témoin positif valide n'existe dans la base ». C'était vrai le 28 juillet ; le verrou a été levé
+  le lendemain — la couche « usage des mots » donne un témoin inter-auteurs qui fonctionne
+  (AUC 0,893). Le commit qui l'a levé a écrit `APPARIEMENT_ECARTE.md` et l'en-tête de
+  `core/comparaison.py`, tous deux exacts, **sans toucher à cette phrase-ci**. Un document tenu à
+  la main ne se met pas à jour parce qu'un autre document le contredit : la règle déjà écrite pour
+  `COURANTS_FREUD.md` (un texte qui décrit des données calculées doit être généré) vaut aussi pour
+  une section « ce qui reste ouvert », qui est la première chose que lit celui qui reprend.
+
+---
+
+## 6. La lecture des reprises — 2026-07-31
+
+**150 événements lus, 129 confirmés, 21 reclassés, 0 rejeté.** Avec les 61 déjà lus, le registre
+compte **211 événements instruits sur 358**.
+
+### Zéro rejet, et ce n'est pas de l'indulgence
+
+Les lots sont triés par **contenance décroissante** : ces 150 événements sont les plus fortes
+reprises du corpus, et presque toutes sont des citations littérales *signées* — guillemet ouvert
+dans l'atome amont, pagination dans l'aval (« (Traumdeutung S. 179.) », « (Freud: Kl. Schr., II,
+S. 173) », « (a. a. O. S. 84) »). Les rejeter pour atteindre un quota aurait été l'erreur
+symétrique de celle que ce registre combat. **Les faux positifs, s'il y en a, sont dans les bandes
+basses — non lues.** C'est pourquoi le taux de rejet de cette campagne ne doit pas être extrapolé.
+
+### Une dizaine de sens publiés à l'envers, tous par le même artefact
+
+L'essai de Freud *Über einen besonderen Typus der Objektwahl beim Manne* paraît au *Jahrbuch* II en
+**1910**, mais il est lu dans la *Sammlung kleiner Schriften, Vierte Folge* de **1918** : sa fenêtre
+de datation est donc [1913, 1918], et le calcul en déduisait que Rank (*Lohengrinsage*, 1911) était
+**la source de Freud**. Rank écrit lui-même, en note de bas de page, ce que le calcul ne pouvait pas
+voir :
+
+> « Die folgenden Ausführungen sind fast wörtlich der grundlegenden Arbeit Freuds
+> (Jb., II, S. 394 ff.) entnommen. »
+
+et référence ailleurs « (Freud, Jb., II, S. 392, 4) ». C'est le même piège que les seize emprunts
+retournés de juillet, sous une autre forme : là c'était un identifiant positionnel qui dérivait,
+ici c'est une **date d'édition qui n'est pas une date d'écriture**. La parade est la même — la
+lecture prime sur le calcul, et l'ancrage se fait sur l'empreinte du texte.
+
+### 21 reclassements : des tiers que le corpus ne contient pas
+
+| tiers | événements | ce qui le prouve |
+|---|---|---|
+| **Peter Rosegger**, *Waldheimat* | 5 | le récit du *Schneidergeselle*, que Freud et Stekel impriment tous deux ; la *Traumdeutung* crédite Frau Dr. M. Hilferding de l'avoir apporté à la discussion |
+| **Gottfried Keller**, *Traumbuch* | 2 | Rank et Stekel transcrivent le même rêve de serpent la même année 1912 ; variantes « Taburett »/« Tabouret », « Wir lachten auf »/« Wir lachten auch » — deux dépouillements indépendants |
+| **Friedrich Hebbel**, *Tagebücher* | 2 | Rank date l'entrée de 1834, Stekel de 1837 |
+| **Rudolf Kleinpaul** | 2 | Rank et Stekel, tous deux en 1911, donnent des pages différentes (112 f. / 113) |
+| **Ernest Jones** | 1 | « entnehme ich … einer Arbeit von E. Jones » / « das Jones (S. 296 f.) … mitteilt » |
+| Lichtenberg, Goethe, Popper-Lynkeus, Abraham, Rank lui-même | 9 | attributions nominales explicites |
+
+Sans la lecture, chacun de ces liens aurait été publié comme un emprunt **entre deux auteurs du
+corpus**. C'est précisément ce que la contrainte fondatrice interdit : un lien qui ne se déroule pas
+jusqu'à deux passages lus côte à côte n'existe pas.
+
+### Deux preuves d'antériorité qui ne doivent rien aux dates
+
+Le cas le plus solide de la campagne ne s'appuie sur aucune datation. Stekel (1917) cite les *Drei
+Abhandlungen* avec des **leçons d'édition antérieures** à celle que le corpus lit (4ᵉ éd., 1920) :
+« scheint **mit dem Einsetzen der Latenzperiode** zu schwinden » là où l'édition lue porte « scheint
+nach kurzer Zeit zu schwinden ». La variante prouve qu'il copie une impression plus ancienne —
+l'apparente antériorité de Stekel sur « son » Freud est un pur artefact d'édition.

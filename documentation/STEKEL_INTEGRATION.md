@@ -219,11 +219,132 @@ qu'elles ne le paraissent.
 Ce qui manque est nommé :
 
 1. ~~**Un audit adversarial du lexique**~~ — **FAIT le 2026-07-31**, voir § 5.
-2. **Deux groupes n'ont pas reçu de verdict** : `traumbilder` et `neurose`, dont les deux
-   contradicteurs se sont interrompus. J'en ai mesuré les défauts les plus gros moi-même (`see`,
-   `weg`), mais les dix autres sous-concepts de ces groupes n'ont **pas** été lus en contexte.
-   C'est le trou connu de cet audit, et il porte sur 12 sous-concepts sur 49.
+2. ~~**Deux groupes n'ont pas reçu de verdict**~~ — **FAIT le 2026-07-31 (second passage)**, voir § 7.
 3. **Les volumes d'après 1920**, qui porteraient `parapathie` et la doctrine d'après la rupture.
    La série *Störungen des Trieb- und Affektlebens* est numérisée et libre de droits.
 4. **Les motifs de chapitre**, non encore relevés pour ces six volumes — d'autant plus utile que
    l'audit vient de montrer combien de têtes courantes subsistent dans ces scans.
+5. **`angsthysterie`**, trouvé par la machine au second passage : **43 % de paratexte, 88 % dans un
+   seul volume**. C'est le piège de la tête courante pour la **quatrième** fois, et dans un groupe
+   qui avait *déjà* passé l'audit. Non traité — hors du périmètre des deux groupes instruits.
+
+---
+
+## 7. Le second passage — les deux groupes manquants, 2026-07-31
+
+Sept contradicteurs sur les douze sous-concepts de `traumbilder` et `neurose`. **Aucun groupe n'est
+tombé ; le lexique passe de 49 à 50 sous-concepts et de 125 à 155 motifs.** Mais ce passage a
+rapporté davantage en méthode qu'en verdicts, et sur trois points il a corrigé le premier audit.
+
+### 7.1 Ce que les motifs ramenaient vraiment
+
+| sous-concept | verdict | le chiffre |
+|---|---|---|
+| `raum` | corrige, **−390 atomes** | `dachboden` = **0 occurrence** ; `keller` = 55 % dans *Die Träume der Dichter*, 18 atomes nommant **Gottfried ou Paul Keller, les écrivains** ; `haus` = 175 « nach/zu Hause » adverbiaux sur 344 ; `tur` = 69 occurrences de *Turm*, *Turner*, *Türke* sur 227 |
+| `koerperbild` | corrige, −289 | `genital` ×0,43 (vocabulaire du champ) ; `brust` à la ligne de base, dont `Brüstung` = le parapet et ~40 % d'idiome « in der Brust », siège du sentiment |
+| `tier` | corrige, −36 | `hund` attrape **`hundert`**, le nombre (25 occ.) ; `katze` attrape *Katzenjammer* et *Katzensteg* (12 sur 45) |
+| `tod_bild` | corrige, **+17** | `grab` attrape **Grabbe le poète**, **der Graben la rue de Vienne** et le proverbe « wer andern eine Grube gräbt » ; à l'inverse `begrabnis` ratait `begraben` — 46 occurrences contre 9 |
+| `sterben` | corrige, **+284** | **deux motifs sur cinq à zéro atome** : `todes` ⊂ `tod`, `sterben` ⊂ `sterbe` — 33 % du compte affiché était fictif |
+| `symptom` | corrige, +23 | le bordage à gauche ratait 27 composés (*krankheitssymptome*, *angstsymptome*, *hauptsymptom*…) |
+| `selbstmord` | garde | `freitod` = 0 occurrence, mot **postérieur au corpus** |
+| `wasser`, `weg`, `neurose`, `hysterie`, `verdraengung` | **gardés** | voir 7.3 |
+
+Le rapport de `raum` **monte** en perdant un quart de ses atomes (×3,18 → ×3,23) et celui de
+`koerperbild` passe de ×1,65 à **×4,30** : ce qui part est du bruit, et c'est la meilleure preuve
+qu'on puisse en donner.
+
+**Qualification : 54,0 % → 53,7 %.** Plate. Retraits et vocabulaire récupéré se compensent.
+
+### 7.2 Deux hypothèses de départ RÉFUTÉES par la lecture
+
+Elles avaient été fournies aux contradicteurs comme des pistes ; les mesurer était le travail.
+
+- **`fluss` attraperait « flüssig »** — faux. Sur les 26 occurrences de la famille, **21 sont le
+  liquide lu comme symbole onirique** : « diese Gleichung nimmt alle Flüssigkeiten auf: Milch, Öl,
+  Petroleum, Tränen », « eine weisse, seifenartige Flüssigkeit … als phallisches Symbol ». Dans un
+  dictionnaire où l'eau EST l'urine et le sperme, ce n'est pas du bruit, c'est le concept. Une
+  garde aurait coûté 19 atomes légitimes pour en retirer 6.
+- **`penis`/`vagina` seraient de la clinique mal rangée** — faux. 73 % et 83 % sont dans *Die
+  Sprache des Traumes* (base : 37 %), contre 23 % pour le témoin clinique `koitus` ; et Stekel les
+  déclare lui-même symboles **41 fois**.
+
+Une réserve mesurée mais **non appliquée** est écrite dans le lexique : sur les tournures de
+symbolisation, `koerperbild` est 12 fois du côté de l'IMAGE contre 52 du côté du SENS, quand les
+images vraies du groupe sont 15 contre 1 — « Die Stiege symbolisiert die Vagina ». Ce sous-concept
+relèverait de `traumsprache`. Déplacer recompose les grappes : mesuré ici, à décider ailleurs.
+
+### 7.3 Le premier audit s'était trompé de règle, et deux retraits sont infondés
+
+Quatre des six sous-concepts de `neurose` affichaient un rapport < 1 — le critère qui avait servi à
+retirer cinq sous-concepts. **Aucun des quatre n'est tombé.** Appliqué mécaniquement, ce critère
+retirerait `neurose` et `hysterie` du lexique de l'homme qui sous-titre un livre *Die homosexuelle
+Neurose*. Les huit cas ont été repris (voir la note « LE RAPPORT < 1 » dans `core/lexiques/stekel.py`) :
+
+- **`phobie` a été retiré à tort** : le ×0,70 mesurait un **motif incomplet**, pas le concept. Ses
+  phobies propres — `nosophob` 12 contre **0** au témoin, `platzangst` ×12,3 — étaient hors
+  d'atteinte du bordage. Motif complété : **×1,42**. Rétabli.
+- **`wunsch` a été retiré sur le seul rapport**, sans terme rival : infondé par la règle même.
+- **`hysterie` ×0,30 mesure la bibliothèque de Freud** : 62 % de ses occurrences sont dans deux
+  monographies de l'hystérie ; sans elles, ×0,54. En médiane par œuvre, Stekel est 3ᵉ sur 5,
+  **au-dessus de Freud**.
+- **Le piège du volume unique joue aussi sur le DÉNOMINATEUR** : 13 % des `neuros` de Freud sont
+  *Neurosenlehre*, tête courante de trois de ses volumes.
+
+**Règle retenue** : un rapport < 1 ne condamne que si (1) le motif couvre déjà la famille attestée,
+**et** (2) il existe un rival *intra-corpus* dominant. Sans les deux, il se publie comme une mesure,
+jamais comme un verdict.
+
+### 7.4 La rupture de 1912 : la belle histoire est refusée
+
+`verdraengung` ×0,54 et `symptom` ×0,39 semblaient dire que Stekel s'écarte de l'appareil freudien.
+**C'est d'abord un artefact de composition** : 48,4 % de son corpus allemand sont ses deux livres de
+rêve, où *tout* le registre clinique s'effondre ensemble (`verdrang` ×0,15, `symptom` ×0,11,
+`hysteri` ×0,08) pendant que `traum` monte à ×3,03 — et le même effet se lit chez Freud, dont la
+*Traumdeutung* est à 56,5 `verdrang`/Mc contre 212,6 dans ses *Sammlungen*. **Corrigé du genre**, sur
+ses seuls volumes cliniques : `verdraengung` ×0,90, `symptom` ×0,65.
+
+**Et il n'y a pas de cassure en 1912** : la courbe décroît de façon monotone dès 1907 (417 → 212 →
+132 par million de signes), soit −68 % **cinq ans avant** la rupture.
+
+Reste un fait qui n'est pas du bruit : de clinique à clinique (1908 → 1917), `verdrang` −57 %,
+`symptom` −85 %, **et le nom « Freud » lui-même −57 %**, pendant que `sexual` tient (+8 %) et que
+son vocabulaire propre apparaît (`bipolar` 0 → ×62,2). La direction est compatible avec une
+divergence doctrinale — mais **le corpus ne contient qu'un seul volume post-rupture, sur un seul
+sujet** : sujet et date sont inséparables. On ne conclut pas.
+
+### 7.5 Trois défauts du BANC, trouvés par les contradicteurs
+
+Le banc (`bin/eprouver_sous_concept.py`) a été écrit pour cet audit ; il en est ressorti corrigé
+trois fois, ce qui vaut d'être écrit puisque ses chiffres ont servi à juger.
+
+1. **La colonne « propres » ne mesurait pas ce qu'elle annonçait.** Elle lisait une clé
+   `sous_concepts` **qui n'existe pas** sur un atome (les vraies clés sont `groupe` et `concept`) ;
+   le `.get()` rendait sa valeur par défaut et la colonne comptait « atomes sans fonction ».
+   Surestimation **×2,3** (`neurose` : 747 affichés, 307 réels). Cela vaut rétroactivement pour le
+   premier audit, qui condamnait `madchen` en citant « 606 atomes, **597 propres** ».
+2. **Les occurrences étaient comptées par MOTIF, non par mot.** Quand deux motifs d'un même
+   sous-concept se recouvrent, le même mot comptait double — et le doublon se lisait dans la
+   colonne « formes » sans qu'on le voie, tous les chiffres y étant exactement le double du réel.
+3. **Le détecteur de paratexte est un plancher, jamais un plafond.** Il exige trois ouvertures
+   identiques ; or l'OCR massacre les têtes courantes — « Todessymbolik » apparaît en **43
+   orthographes distinctes**. Le banc en signale 2 sur ~23.
+
+Un quatrième point n'est pas un défaut mais un ajout : après le cas `keller`, le banc mesure la
+**répartition par volume**. C'est la forme *générale* du piège qui a pris le projet trois fois
+(`genitaltheorie`, `rundfrage`/`berufsneurose`, `keller`) — un compte porté par un seul livre, et
+d'autant plus convaincant qu'il est nul chez les autres, puisque personne d'autre n'a écrit ce
+livre-là. `keller` n'était pas du paratexte : c'était un nom propre en pleine prose, invisible au
+détecteur de tête courante. C'est cette mesure qui a ensuite trouvé `angsthysterie`.
+
+### 7.6 L'angle mort du moteur, jamais généralisé
+
+L'allemand met la tête du composé à la **fin** ; le moteur borde chaque motif au **début**. Un
+mot-concept qui vit surtout en second élément est donc **invisible à son propre concept**. Trois
+manifestations indépendantes dans ce seul audit : `phobie` (topophobie, erythrophobie, nosophobie),
+`symptom` (27 composés), et les phobies composées `brustangst`/`eisenbahnangst`/`strassenangst`,
+que le groupe `angst` ne pouvait pas voir.
+
+La leçon avait été apprise **une fois**, pour `onani` → `[a-z]*onani`, et jamais étendue : c'était
+le seul motif ouvert à gauche des cinq lexiques du dépôt. Elle ne peut pas l'être en aveugle —
+`[a-z]*tier` attrape *konstatieren*, `[a-z]*angst` attrape **`längst`** (50 occurrences). L'ouverture
+se justifie motif par motif, sur les composés attestés.

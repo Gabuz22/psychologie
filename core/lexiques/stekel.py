@@ -110,6 +110,31 @@ CONCEPTS = {
             # Souhaiter la mort d'un autre n'est pas la craindre pour soi.
             "todesangst": ["todesangst", "todesfurcht"],
             "herzangst": ["herzangst", "herzneuros", "herzklopfen"],
+            # RÉTABLI — L'AUDIT PRÉCÉDENT L'AVAIT RETIRÉ À TORT, ET LE RETRAIT ÉTAIT MESURABLEMENT
+            # FAUX. Le motif d'alors, `phobie` nu, donnait ×0,70-0,92 et on en a conclu « il en
+            # parle moins que les autres, ce n'est pas son mot ». Le chiffre ne mesurait pas le
+            # concept : IL MESURAIT UN MOTIF INCOMPLET. La note de retrait le disait elle-même sans
+            # en tirer la conséquence — « le motif manquait ses vraies phobies à lui : topophobie
+            # (10), erythrophobie (6), nosophobie (12), tandis que klaustrophob faisait 0 ».
+            #
+            # LA CAUSE EST STRUCTURELLE, et elle vaut pour tout le dépôt : l'allemand met la tête
+            # du composé à la FIN, le moteur borde chaque motif au DÉBUT. Un mot-concept qui vit
+            # surtout en second élément est donc invisible à son propre concept. C'est la même
+            # cause qui faisait rater kinderonanie à `onani`, et 27 composés à `symptom`. La leçon
+            # avait été apprise une fois, pour `onani`, et jamais étendue.
+            # Motif complété : ×0,70 → ×1,17, 85 → 149 occurrences. La correction était le motif,
+            # pas le retrait.
+            #
+            # DEUX GARDES, mesurées et non supposées :
+            #   • `(?!os)` écarte PHOBOS et DEIPHOBOS — le fils de Priam, dans les pages de mythe.
+            #   • les phobies allemandes sont ÉNUMÉRÉES et non captées par `[a-z]*angst`, qui
+            #     attraperait « längst » (« depuis longtemps ») 50 fois : le repli supprime le
+            #     tréma, et l'ouverture à gauche ne se décide jamais en aveugle.
+            "phobie": [
+                r"[a-z]*phob(?!os)",
+                "platzangst", "prufungsangst", "eisenbahnangst", "brustangst", "bergangst",
+                "strassenangst", "sexualangst", "prakordialangst", "bruckenangst",
+            ],
         },
     },
     # ============================================================ SON CONCEPT THÉORIQUE : LA BIPOLARITÉ
@@ -198,28 +223,204 @@ CONCEPTS = {
             # seelischen (58), seelische (38), seelenleben (35), seelenarzt (22) — contre
             # 19 vrais lacs. Dans un corpus de psychologie, un motif qui attrape « Seele » ne
             # mesure pas ce qu'il prétend, il mesure le sujet du livre.
+            # `fluss` A ÉTÉ ACCUSÉ D'ATTRAPER « flüssig » (le repli confond Fluß et flüssig), ET
+            # L'ACCUSATION NE TIENT PAS À LA LECTURE : sur les 26 occurrences de la famille
+            # « flüssig », 21 sont le liquide lu COMME symbole onirique — « diese Gleichung nimmt
+            # alle Flüssigkeiten auf: Milch, Öl, Petroleum, Tränen », « eine weisse, seifenartige
+            # Flüssigkeit… als phallisches Symbol ». Dans un dictionnaire où l'eau EST l'urine et
+            # le sperme, ce n'est pas du bruit, c'est le concept. Une garde `fluss(?!ig)` coûterait
+            # 19 atomes légitimes pour en retirer 6. Erreurs dures réelles : 7 sur 70 (10 %), dont
+            # « überflüssig » et « unbeeinflusst » coupés à la ligne par l'OCR.
             "wasser": ["wasser", "meer", "fluss", "schwimm", "ertrink"],
-            "raum": ["zimmer", "haus", "wohnung", "tur", "fenster", "keller", "dachboden"],
+            # QUATRE DÉFAUTS MESURÉS, dont un motif entièrement mort. Le sous-concept perd un quart
+            # de ses atomes et son rapport MONTE (×3,17 → ×3,25) : ce qui part est du bruit.
+            #
+            #   dachboden  0 OCCURRENCE sur 5,1 millions de signes. Ce n'est pas la faute du tréma
+            #              (le mot n'en a pas) : le référent est absent du corpus. Témoins relevés
+            #              — dachkammer 2, mansarde 2, dachstube 0, dachzimmer 0.
+            #   keller     LE PIÈGE DU VOLUME UNIQUE, POUR LA TROISIÈME FOIS. 29 de ses 53 atomes
+            #              sont dans « Die Träume der Dichter » et 18 nomment GOTTFRIED ou PAUL
+            #              KELLER, les écrivains. C'est la mécanique de `rundfrage` et de
+            #              `genitaltheorie` — un compte porté par un seul livre, et d'autant plus
+            #              convaincant qu'il est nul chez les autres, puisque personne d'autre n'a
+            #              écrit ce livre-là. Mais ce n'est PAS du paratexte : c'est un nom propre
+            #              en pleine prose, que le détecteur de tête courante ne voit pas (5 %).
+            #              L'ancre locative garde les vraies caves, 18 en tout.
+            #   haus       175 des 344 « hause » sont l'ADVERBE (« nach Hause », « zu Hause »), et
+            #              8 % seulement portent un mot du rêve : c'est de la prose clinique, « der
+            #              Patient kam nach Hause ». S'y ajoute le vocabulaire domestique
+            #              (hausarzt, hausfrau, haushalt) — des rôles, pas l'image d'une maison.
+            #   tur        69 des 227 occurrences (30 %) sont la TOUR (turm 19, turme 7, turmen 4),
+            #              le GYMNASTE (turner 7, turnen 3, turnte 3) et le TURC (turkische 3).
+            #              La première correction essayée était `tur(?!m|n|k)` — la garde par lettre
+            #              suivante, interdite — et elle tuait « Türklinke », une vraie poignée de
+            #              porte. Remplacée par la famille morphologique positive.
+            #
+            # `turm` reste un VRAI symbole de Stekel (« der Turm wird häufig für den Penis
+            # gebraucht ») : il ne disparaît pas du lexique, il n'appartient pas à ce groupe-ci.
+            "raum": [
+                r"zimmer(?!mann|maim|gesell|temperatur)",
+                r"(?<!nach )(?<!zu )haus(?:e|es|er|ern|chen|erl)?\b",
+                "haustor", "haustur", "hausture", "hausflur", "haussymbol",
+                "wohnung",
+                r"tur(?:e|en|chen)?\b",
+                "turklinke", "turschnalle", "turoffnung", "turhaken", "tursymbo",
+                "fenster",
+                r"(?:im|in de[nmr]|in eine[nm]|aus dem|de[sm]|eine[nm]|tiefe[nr]?|lange[nr]?)\s+keller",
+                "kellerstiege", "kellergewolbe", "kellerloch", "kellertraum", "kellermeister",
+            ],
             # « weg » RETIRÉ, pour une raison plus profonde qu'un faux positif : il attrapait
             # « wegen » (240 fois, « à cause de »), mais surtout le repli SUPPRIME LES MAJUSCULES,
             # et l'allemand ne distingue le substantif « Weg » (le chemin, un symbole du rêve) de
             # l'adverbe « weg » (parti, au loin) que par elle. Le motif était donc indécidable par
             # construction, non seulement imprécis. Les composés sans ambiguïté sont gardés.
             "weg": ["strasse", "treppe", "stiege", "bruck", "reise", "eisenbahn"],
-            "koerperbild": ["vagina", "penis", "membrum", "busen", "brust", "genital"],
-            "tier": ["tier", "schlange", "pferd", "hund", "vogel", "katze"],
-            "tod_bild": ["friedhof", "grab", "leiche", "sarg", "begrabnis"],
+            # DEUX RETRAITS, ET UNE RÉSERVE DE GROUPE ÉCRITE MAIS NON APPLIQUÉE.
+            #
+            # L'accusation portée d'abord était que `penis`/`vagina`/`genital` seraient du
+            # vocabulaire CLINIQUE mal rangé. La mesure la RÉFUTE : 73 % des `penis` et 83 % des
+            # `vagina` sont dans « Die Sprache des Traumes » (base : 37 %), contre 23 % pour le
+            # témoin clinique `koitus` et 31 % pour `impotenz` ; et Stekel les déclare lui-même
+            # symboles — 41 énoncés « X ist ein Symbol des Penis », 10 pour vagina, 0 pour brust.
+            #
+            #   genital  RETIRÉ. 162 occurrences chez lui contre 1 208 au témoin → ×0,43. C'est le
+            #            vocabulaire commun du champ analytique, pas le sien, et aucune sous-forme
+            #            n'est récupérable (genitale ×0,63, genitalsymbol ×0,40). Même faute que
+            #            `ambivalenz` : prêter à un auteur le mot de ses contemporains.
+            #   brust    RETIRÉ. Seul motif du sous-concept À LA LIGNE DE BASE du corpus — 37 %
+            #            dans le dictionnaire des rêves contre 37 % pour un atome quelconque. Du
+            #            `brust` nu (96), 23 % seulement sont le sein ; ~40 % sont l'idiome « in
+            #            der Brust », siège du sentiment (« zwei Seelen wohnen ach in meiner
+            #            Brust »). S'y ajoutent `brustung` (5) = le PARAPET, et l'anatomie
+            #            descriptive (brustkorb, brustgegend, brustseite). Le sens « sein » est
+            #            porté par `busen` (×13,23), qui est le mot de son dictionnaire et dont il
+            #            liste les symboles : balcon, terrasse, corniche, laiterie.
+            #
+            # RÉSERVE DE GROUPE, MESURÉE ET NON TRANCHÉE ICI. Dans un dictionnaire de symboles, un
+            # mot est soit l'IMAGE, soit le SENS. Comptés sur les tournures de symbolisation, les
+            # motifs de `koerperbild` sont 12 fois du côté image contre 52 du côté sens, quand les
+            # images vraies du groupe (strasse, wasser, zimmer, pferd, vogel) sont 15 contre 1 :
+            # « Die Stiege symbolisiert die Vagina » — l'escalier est l'image, le vagin est le
+            # sens. Ce sous-concept relèverait donc de `traumsprache`, non de `traumbilder`.
+            # Déplacer un sous-concept de groupe recompose les grappes et invalide l'éditorial qui
+            # les décrit : la mesure est écrite ici, la décision revient à une passe qui la traite
+            # avec ses conséquences.
+            "koerperbild": ["vagina", "penis", "membrum", "busen"],
+            # DEUX GARDES, chacune sur une famille morphologique ÉNUMÉRÉE — jamais sur la lettre
+            # d'après. Contrôlé : aucune forme de chien ni de chat n'est perdue.
+            #
+            #   hund   attrape LE NOMBRE « cent » : hundert 9, hunderte 8, hunderten 2, hundertmal
+            #          2, hunderttausende 2, hundertfache 1, hundertsten 1 — 25 occurrences sur
+            #          196, et 18 atomes de Stekel étaient classés « image d'animal dans le rêve »
+            #          pour la seule raison que la phrase disait « cent ». L'OCR recolle en outre
+            #          des « jahr- hundert » coupés à la ligne.
+            #   katze  attrape `Katzenjammer` (la gueule de bois, 7) et `Katzensteg` (5) — qui est
+            #          le roman de Sudermann et, chez Stekel, une PASSERELLE analysée comme telle
+            #          (« der Katzensteg ist die Vagina ») : un pont, donc, pas un animal.
+            #          12 occurrences sur 45.
+            #
+            # Le sous-concept est par ailleurs le MIEUX FONDÉ de son groupe : enrichissement en
+            # marqueurs oniriques ×2,44 contre ×1,63 pour `wasser` et ×1,65 pour `zimmer`, et le
+            # chapitre XV de « Die Sprache des Traumes » s'intitule « Was die Tiere im Traume
+            # bedeuten ». Sa tête courante, elle, est détruite par l'OCR (« tiero ini tniuino ») et
+            # ne déclenche donc presque pas — 7 % de paratexte, sans commune mesure avec les 87 %
+            # de `rundfrage`.
+            "tier": ["tier", "schlange", "pferd", r"hund(?!ert)", "vogel",
+                     r"katze(?!njammer|nsteg|nst\b)"],
+            # UN MOTIF TROP LARGE ET UN TROP ÉTROIT — les deux mesurés, les deux corrigés.
+            #
+            #   grab       17 occurrences fautives sur 125. Trois choses qui ne sont pas des
+            #              tombes : GRABBE (2), le poète Christian Dietrich Grabbe, cité dans
+            #              « Dichtung und Neurose » parmi « Gogol, Raimund, Grabbe und Lenau » ;
+            #              DER GRABEN (9), la rue de Vienne (« am Graben gehen die Dirnen
+            #              spazieren ») ; et le proverbe « wer andern eine Grube gräbt » (grabt 4).
+            #              Plus `grabtiere`, OCR de « Raubtiere ». La famille est donc ÉNUMÉRÉE.
+            #              Contrôlé : les 28 « grabe » et 7 « graber » sont tous le substantif —
+            #              zéro « ich grabe ».
+            #   begrabnis  DÉFAUT INVERSE, et personne ne l'avait vu : le motif s'arrête au
+            #              substantif et rate le VERBE de son propre mot. `begrab` capte 46
+            #              occurrences (begraben 29, begrabnis 7, begrabnisses 2, begrabt 2…)
+            #              contre 9 — toutes des inhumations. Détail révélateur : 3 des 9 actuelles
+            #              ne se déclenchent que parce que l'OCR coupe « be- grabnis » à la ligne.
+            #              Le motif marchait en partie par accident.
+            "tod_bild": [
+                "friedhof", "leiche", "sarg", "begrab",
+                r"grab\b", r"grabe\b", "grabes", "grabern", r"graber\b", "grabstein",
+                "grabkreuz", "grabgewolbe", "grabphantasie", "grabhugel",
+            ],
         },
     },
     # ================================================================ LA NÉVROSE ET LA MORT
+    # CE GROUPE EST CELUI QUI A LE PLUS APPRIS À LA MÉTHODE, et pas du tout comme on l'attendait.
+    # Quatre de ses six sous-concepts affichaient un rapport < 1 — le critère qui avait servi à
+    # retirer cinq sous-concepts à l'audit précédent. Aucun des quatre n'est tombé, et c'est le
+    # critère qui a dû être précisé. Voir la note « LE RAPPORT < 1 » en fin de fichier.
     "neurose": {
         "label": "La névrose, le symptôme et la mort",
         "termes": {
+            # GARDÉ malgré ×0,92, et le composite masque une INVERSION : `neurotik` mesure ×1,79
+            # quand `neuros` fait ×0,81. Au niveau de la forme, « Neurose » au singulier vaut
+            # ×1,38 contre ×0,38 au pluriel. Freud parle DES névroses, la classe ; Stekel parle DU
+            # NÉVROSÉ — « Neurotiker » 288 fois, ×2,11. On ne peut pas séparer les deux sans
+            # couper un mot de sa flexion. En médiane par œuvre, Stekel est 3e sur 5, AU-DESSUS de
+            # Freud (215,5 contre 111,6 par million de signes).
+            # Et le dénominateur était pollué par le piège du volume unique, CÔTÉ TÉMOIN : 13 % des
+            # `neuros` de Freud sont « Neurosenlehre », tête courante de trois de ses volumes.
             "neurose": ["neuros", "neurotik", "neurotisch"],
-            "symptom": ["symptom"],
+            # OUVERT À GAUCHE, comme `onani` et pour la même raison — l'allemand met la tête du
+            # composé à la FIN, le moteur borde au DÉBUT. Le motif nu ratait 27 occurrences de son
+            # propre vocabulaire : krankheitssymptome (5), angstsymptome (3+1), hauptsymptom (2+1),
+            # abwehrsymptome (2), kardinalsymptom (1+1), begleitsymptome, fettherzsymptome…
+            # +23 atomes, rapport inchangé. Sans risque : en allemand, tout mot finissant par
+            # « …symptom » EST un composé de Symptom.
+            "symptom": ["[a-z]*symptom"],
+            # GARDÉ, motif inchangé. L'emploi ORDINAIRE de « verdrängen » (chasser, évincer) a été
+            # cherché de deux façons — filtre à haut rappel sur 470 occurrences, puis lecture d'un
+            # échantillon de 120 formes verbales : ≤ 3,3 %, borne haute. Les deux seuls cas nets
+            # sont « das elektrische Licht verdrängte das Petroleum » et un concurrent évincé.
+            # Restreindre au nominal coûterait 249 atomes (−56 %) pour éviter au plus 16
+            # occurrences : refusé, chiffre à l'appui.
             "verdraengung": ["verdrang"],
-            "sterben": ["sterben", "sterbe", "gestorben", "tod", "todes"],
-            "selbstmord": ["selbstmord", "suizid", "freitod"],
+            # LE SOUS-CONCEPT LE PLUS MAL CONSTRUIT DU LEXIQUE, et le seul dont le défaut se lisait
+            # DANS LE BANC sans qu'on le voie : deux de ses cinq motifs étaient entièrement
+            # absorbés par un autre.
+            #   `todes`  ⊂ `tod`    → 0 atome propre, 405 occurrences comptées deux fois
+            #   `sterben` ⊂ `sterbe` → 0 atome propre, 380 occurrences comptées deux fois
+            # 33 % du compte affiché était fictif. C'est le cas `bisexualitat`/`bisexual` déjà
+            # corrigé plus haut, en huit fois plus gros — et il a fallu qu'un contradicteur le
+            # trouve pour qu'on répare aussi le banc, qui comptait par MOTIF au lieu de par mot.
+            #
+            # Trois trous mesurés, comblés : `stirb` (61 occurrences de « stirbt », absent alors
+            # que le lexique de Freud l'a), `sterb` qui rend en plus sterblich/sterblichkeit et
+            # mesure ×4,70 — le motif le plus stekelien du sous-concept —, et la famille `toten`
+            # (×2,11), 402 atomes de « die Toten » qui étaient hors champ.
+            # ÉCARTÉ SUR MESURE, PAS SUR INTUITION : `tot(?!al)` entier rendrait +392 atomes mais
+            # ferait tomber le sous-concept à ×1,95 (`tote` ×1,06, `totet/totung` ×0,30 — du
+            # vocabulaire commun). On garde `toten`, on laisse le reste.
+            #
+            # RÉSERVE ÉCRITE, NON APPLIQUÉE : le nominal (`tod`, 1 017 atomes, ×2,28) NOIE le
+            # verbal (`sterb`/`stirb`/`gestorben`, 560 atomes, ×3,61) — la même figure que le
+            # renversement schuldgefuhl/schuldbewusstsein instruit plus bas. Le lexique de Freud
+            # sépare déjà `tod` et `sterben` en deux sous-concepts. Scinder changerait la maille du
+            # groupe : mesuré ici, à décider ailleurs.
+            "sterben": ["sterb", "stirb", "gestorben", "tod", "toten"],
+            # `freitod` RETIRÉ : 0 occurrence sur 5 222 046 signes. Le mot est POSTÉRIEUR au corpus.
+            # Même faute de catégorie que `angstgefühl` et `nervosität` — un motif écrit d'intention
+            # et jamais vérifié. Delta : 0 atome, 0 occurrence.
+            # Le sous-concept, lui, résiste au piège du paratexte : les 122 atomes ont été lus, 3
+            # sont une réclame de l'éditeur Bergmann et 3 des renvois de Stekel à SA PROPRE
+            # contribution — 5 % en tout, contre 87 % pour `rundfrage`. Et « chronischer
+            # Selbstmord » est son expression.
+            "selbstmord": ["selbstmord", "suizid"],
+            # GARDÉ malgré ×0,30 — LE CHIFFRE MESURE LA BIBLIOTHÈQUE DE FREUD, PAS LE SILENCE DE
+            # STEKEL. 62 % des occurrences du témoin sont dans deux monographies de l'hystérie
+            # (« Studien über Hysterie » et « Sammlung 1 ») ; sans elles, le rapport passe à ×0,54.
+            # En médiane par œuvre, Stekel est 3e sur 5, au-dessus de Freud. Et son taux dans son
+            # volume clinique de 1908 (135,6 par million) est dans la bande d'Abraham et de
+            # Ferenczi : ce sont ses deux livres de rêve, presque la moitié de son corpus, qui
+            # écrasent sa moyenne. Le retrait coûterait 118 atomes que RIEN d'autre ne rattache à
+            # la névrose. Contrôlé aussi : `hysteri` ne peut pas mordre dans « angsthysterie », le
+            # bordage l'en empêche — aucun double compte.
             "hysterie": ["hysteri"],
         },
     },
@@ -444,3 +645,56 @@ NOMS_AUTEURS = ["freud", "adler", "jung", "abraham", "rank", "ferenczi", "jones"
 # Ces deux derniers valent d'être lus ensemble. Ils étaient les deux sous-concepts que l'en-tête
 # de ce fichier citait comme les plus propres à Stekel, précisément parce que leur compte était
 # élevé chez lui et nul ailleurs. C'est la signature d'une tête courante, pas d'un concept.
+
+
+# --------------------------------------------------------------------------------------------
+# LE RAPPORT < 1 : CE QU'IL CONDAMNE, ET CE QU'IL NE CONDAMNE PAS.
+#
+# Le second audit (2026-07-31) a éprouvé les deux groupes que le premier n'avait pas instruits, et
+# il en est ressorti une correction de MÉTHODE plus importante qu'aucun de ses verdicts.
+#
+# Le premier audit avait retiré cinq sous-concepts sur le seul rapport de fréquence, au nom d'une
+# règle juste — « le lexique d'un auteur ne doit pas lui prêter le vocabulaire de ses
+# contemporains ». Appliquée mécaniquement, cette règle retirerait `neurose` (×0,92) et `hysterie`
+# (×0,30) du lexique de l'homme qui sous-titre un livre « Die homosexuelle Neurose » et dont la
+# thèse est « Das Schuldbewußtsein ist die hauptsächlichste Ursache aller Neurosen und Psychosen ».
+#
+# Les huit cas ont été repris, et trois configurations distinctes apparaissent :
+#
+#   1. RIVAL INTRA-CORPUS DOMINANT → le retrait est FONDÉ. Le lexique prête à l'auteur le mot d'un
+#      autre À LA PLACE du sien.
+#        masturbation ×0,50 — il écrit « onani* » 1 566 fois contre « masturbat » 31 (50:1)
+#        schuldgefuehl ×0,26 — « Schuldbewusstsein » est son terme (×1,94), et les additionner
+#                              faisait échouer les deux
+#
+#   2. PAS DE RIVAL → le rapport dit seulement que le mot est COMMUN AU CHAMP. Ce n'est pas un
+#      motif de retrait : un lexique qui retire tout le vocabulaire commun ne décrit plus un
+#      auteur, il décrit son écart au champ.
+#        neurose ×0,92, hysterie ×0,30 — gardés
+#        wunsch ×0,91 — RETIRÉ À TORT au premier audit, aucun rival mesuré
+#
+#   3. MOTIF INCOMPLET → le rapport ne mesure pas le concept mais la couverture du motif. Il faut
+#      avoir vérifié que le motif couvre la famille attestée AVANT d'invoquer un rapport.
+#        phobie ×0,70 → ×1,17 une fois les composés atteints. RÉTABLI, voir le groupe `angst`.
+#
+#   Et un cas qui ne rentre dans aucune des trois, qu'il faut nommer pour ne pas le confondre
+#   avec le premier : RIVAL HORS CORPUS. `parapathie`, le néologisme par lequel Stekel rebaptise
+#   la névrose, compte 4 occurrences — il l'annonce en 1917 (« den NEUEN Ausdrücken Paraphilie,
+#   Parapathie, Paralogie ») et ne l'impose qu'après 1920, quand le corpus s'arrête. Un rival que
+#   l'auteur n'a pas encore forgé ne peut condamner aucun mot.
+#
+# RÈGLE RETENUE : un rapport < 1 ne condamne que si (1) le motif couvre déjà la famille
+# morphologique attestée chez l'auteur, ET (2) il existe un terme rival INTRA-CORPUS désignant la
+# même chose, de rapport > 1, dont le compte chez l'auteur DOMINE celui du sous-concept accusé.
+# Sans les deux, le rapport se publie comme une mesure, jamais comme un verdict.
+#
+# TROIS AUTRES CHOSES QUE CE RAPPORT NE MESURE PAS, toutes rencontrées ici :
+#   • la BIBLIOTHÈQUE DU TÉMOIN — 62 % des « hysteri » de Freud sont dans ses deux monographies de
+#     l'hystérie ; sans elles le rapport de Stekel passe de ×0,30 à ×0,54 ;
+#   • le PARATEXTE DU TÉMOIN — 13 % des « neuros » de Freud sont « Neurosenlehre », tête courante
+#     de trois de ses volumes : le piège du volume unique joue aussi sur le DÉNOMINATEUR ;
+#   • la COMPOSITION DU CORPUS — 48 % du corpus allemand de Stekel sont ses deux livres de rêve,
+#     où TOUT le registre clinique s'effondre ensemble (verdrang ×0,15, symptom ×0,11, hysteri
+#     ×0,08, sexual ×0,20) pendant que `traum` monte à ×3,03. Corrigé du genre, sur ses seuls
+#     volumes cliniques, `verdraengung` remonte de ×0,54 à ×0,90 et `symptom` de ×0,39 à ×0,65.
+#     C'est le genre du livre, pas la doctrine de l'auteur.
