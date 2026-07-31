@@ -13,3 +13,8 @@ Thumbs.db
 web/.wrangler/
 .wrangler/
 node_modules/
+
+# Résidus de scripts d’audit lancés depuis la racine. Les agents ont consigne de n’écrire
+# que dans leur bac à sable ; ceux-ci ont échappé à la règle et ont été commités une fois.
+_*.txt
+_*.json
