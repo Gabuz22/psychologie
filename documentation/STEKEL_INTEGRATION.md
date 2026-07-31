@@ -120,7 +120,86 @@ plus fréquent après les outils grammaticaux (2 098 occurrences).
 
 ---
 
-## 5. Ce qui reste à faire, et qu'il faut dire
+## 5. L'audit contradictoire — fait le 2026-07-31
+
+Onze contradicteurs ont éprouvé les 62 sous-concepts, avec pour consigne de les **casser** : les
+recompter, lire vingt contextes chacun, chercher le mot allemand qui commence pareil et n'a rien à
+voir. Le bilan, comparé à celui de Ferenczi :
+
+| | Stekel | Ferenczi |
+|---|---|---|
+| gardés | 30 (48 %) | 88 (69 %) |
+| corrigés | 19 (31 %) | 30 (24 %) |
+| **retirés** | **13 (21 %)** | 9 (7 %) |
+
+**Le taux de retrait est trois fois celui de Ferenczi.** Ce n'est pas une mesure sur Stekel, c'est
+une mesure sur la façon dont ce lexique a été écrit : d'un jet, sans audit préalable. Le chiffre
+est publié tel quel. Le lexique passe de 62 sous-concepts et 177 motifs à **49 et 125**.
+
+### Les deux retraits qui valent pour toute la méthode
+
+Les deux sous-concepts que l'en-tête du lexique citait comme **les plus propres à Stekel** sont
+ceux que l'audit a tués — et pour la même raison :
+
+- **`rundfrage`** : 56 de ses 64 occurrences (87,5 %) sont la **tête courante** de *Die Träume der
+  Dichter*, imprimée en haut de chaque page. Huit usages réels.
+- **`berufsneurose`** : 24 de ses 30 atomes (80 %) sont du paratexte — 18 têtes courantes,
+  3 titres, 3 lignes de sommaire. **Six** usages réels.
+
+Ils paraissaient convaincants pour une raison précise : leur compte était élevé chez lui et **nul
+chez les autres**. C'est exactement la signature d'une tête courante — personne d'autre n'imprime
+ce titre de chapitre en haut de ses pages. Le projet s'était déjà fait prendre à l'identique avec
+`genitaltheorie` chez Ferenczi, dont 50 des 83 occurrences étaient une tête courante.
+
+### Deux concepts qui n'étaient pas de lui
+
+- **`ambivalenz` : 0 occurrence sur 5 222 046 signes**, contre 269 chez les autres. C'est le mot de
+  **Bleuler**, que Stekel cite quinze fois sans jamais reprendre son concept.
+- **`schuldgefuehl`** : renversement mesuré. « Schuldgefühl » est le mot de Rank et de Freud
+  (Stekel ×0,28, 4ᵉ sur 5) ; « Schuldbewusstsein » est le sien (×2,23, **1ᵉʳ sur 5**) — et c'est
+  bien le terme de sa thèse : *« Das Schuldbewußtsein ist die hauptsächlichste Ursache aller
+  Neurosen und Psychosen. »* Additionnés, les deux donnaient ×0,67 et faisaient échouer le
+  sous-concept ; séparés, l'un le porte et l'autre le noyait.
+
+### Trois fautes de ma main, du même type
+
+- **Trois motifs morts** — `angstgefühl`, `nervosität`, `schuldgefühl` : ils portent un tréma, et
+  le lexique s'applique après un repli qui **supprime les diacritiques**. Zéro déclenchement
+  possible, sur 21,8 millions de signes. La même faute écrite trois fois.
+- **Une garde trop large** : `traum(?!a)` écartait bien `Trauma`, mais aussi 74 mots du **rêve** —
+  *Traumanalyse*, *Traumarbeit*, *Traumanlaß*. En évitant un faux positif connu, on perdait le
+  vocabulaire technique de l'auteur du *Langage du rêve*. La garde nomme maintenant ce qu'elle
+  exclut : +51 atomes.
+- **Un motif ouvert du mauvais côté** : `onani` manquait *kinderonanie*, *säuglingsonanie*,
+  *notonanie*, parce que le moteur borde chaque motif à gauche.
+
+### Deux motifs indécidables par construction
+
+Trouvés hors audit, en mesurant moi-même les deux groupes dont les contradicteurs n'ont pas rendu :
+
+- **`see`** (lac) coûtait 609 atomes, **dont 590 sont l'âme** : *Seele* (255), *seelisch\** (130),
+  *Seelenleben* (35), *Seelenarzt* (22) — contre 19 vrais lacs. Dans un corpus de psychologie, un
+  motif qui attrape « Seele » ne mesure pas ce qu'il prétend, il mesure le sujet du livre.
+- **`weg`** attrapait *wegen* 240 fois. Mais le vrai problème est plus profond : le repli
+  **supprime les majuscules**, et l'allemand ne distingue le substantif *Weg* (le chemin, symbole
+  onirique) de l'adverbe *weg* (parti) que par elle. Le motif était indécidable, pas seulement
+  imprécis.
+
+### Ce que l'audit a fait au taux de qualification — et pourquoi c'est une bonne nouvelle
+
+**Il l'a fait BAISSER** : de 52 % à 46 % sur *Ursachen der Nervosität*, de 61 % à 57 % sur
+*Dichtung und Neurose*. C'est le résultat correct, et il faut le lire à l'endroit : les atomes
+perdus étaient qualifiés **à tort** — par « Mädchen » désignant une femme adulte, par « Seele »
+comptée comme un lac, par une tête courante répétée en haut de chaque page.
+
+**Le taux de qualification n'est donc pas un objectif à maximiser.** Un lexique large et fautif le
+fait monter ; un lexique juste peut le faire descendre. C'est la première fois que le projet le
+mesure dans ce sens, et cela vaut rétroactivement pour les autres auteurs : leurs 81-84 % n'ont de
+valeur que parce qu'ils ont passé le même genre d'audit.
+
+---
+
+## 6. Ce qui reste à faire, et qu'il faut dire
 
 **Le taux de qualification est de 52 à 61 % selon le volume, contre 81 à 84 % pour les cinq autres
 auteurs du corpus.** Le lexique de Stekel est jeune : 8 groupes, 41 sous-concepts et 5 fonctions au
@@ -137,13 +216,14 @@ sur ce corpus-là, une part plus grande des phrases n'est rattachée à aucun co
 fonction. Les mesures de densité sur Stekel sont donc moins comparables à celles des autres auteurs
 qu'elles ne le paraissent.
 
-Ce qui manque est nommé, et c'est un chantier à part entière — le même que ceux qui ont suivi
-l'entrée de Rank (« audit du lexique, comme les sept audits de Freud ») et celle d'Abraham :
+Ce qui manque est nommé :
 
-1. **Un audit adversarial du lexique**, sur le modèle de celui de Ferenczi : proposer les
-   sous-concepts, puis les faire casser — recompter, afficher quinze contextes, chercher le mot
-   allemand qui commence pareil et n'a rien à voir. Pour Ferenczi : 127 proposés, 88 gardés,
-   30 corrigés, 9 retirés.
-2. **Les volumes d'après 1920**, qui porteraient `parapathie` et la doctrine d'après la rupture.
+1. ~~**Un audit adversarial du lexique**~~ — **FAIT le 2026-07-31**, voir § 5.
+2. **Deux groupes n'ont pas reçu de verdict** : `traumbilder` et `neurose`, dont les deux
+   contradicteurs se sont interrompus. J'en ai mesuré les défauts les plus gros moi-même (`see`,
+   `weg`), mais les dix autres sous-concepts de ces groupes n'ont **pas** été lus en contexte.
+   C'est le trou connu de cet audit, et il porte sur 12 sous-concepts sur 49.
+3. **Les volumes d'après 1920**, qui porteraient `parapathie` et la doctrine d'après la rupture.
    La série *Störungen des Trieb- und Affektlebens* est numérisée et libre de droits.
-3. **Les motifs de chapitre**, non encore relevés pour ces six volumes.
+4. **Les motifs de chapitre**, non encore relevés pour ces six volumes — d'autant plus utile que
+   l'audit vient de montrer combien de têtes courantes subsistent dans ces scans.
