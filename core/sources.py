@@ -172,6 +172,37 @@ REGIONS_ECARTEES = {
     # et en a été retiré à la 2e édition « mit Rücksicht auf die Handlichkeit des Bandes », puis
     # repris ici. Comme le corpus lit la 1re édition de 1918, il l'a déjà — c'est le seul doublon
     # du corpus attesté par une déclaration d'éditeur plutôt que par la seule mesure.
+    # WILHELM STEKEL, « Die Sprache des Traumes » (1911) — sa table des matières, qui tombe APRÈS
+    # le Vorwort et non avant. La borne de début ne peut donc pas l'écarter sans emporter aussi la
+    # préface, qui est du texte d'auteur. C'est un garde-fou existant du projet qui l'a signalée
+    # (`test_liminaires_editeur_retires`), et non une relecture : quarante-huit lignes de titres
+    # océrisés seraient entrées comme des phrases de Stekel — « XXIL Zahnträume 221 ».
+    "sprache_des_traumes": [(
+        "Inhaltsverzeichnis.",
+        "Die Bedentang der Symbolik.",
+        "Table des matières du volume, insérée entre le Vorwort de l'auteur et le premier "
+        "chapitre. Quarante-huit intitulés océrisés suivis de leur numéro de page ; la borne de "
+        "fin est le titre du chapitre I tel que le scan le lit (« Die Bedentang der Symbolik »), "
+        "relevé et non corrigé, sans quoi il serait introuvable.")],
+    # WILHELM STEKEL, « Onanie und Homosexualität » (1917) — même cas, et pire : sa table des
+    # matières n'est pas une liste de titres mais un SOMMAIRE ANALYTIQUE de huit mille signes,
+    # qui résume chaque paragraphe en une phrase suivie de sa page (« Alle Menschen onanieren
+    # -15-. Die Neurose eine Folge der Abstinenz, nicht der Onanie -16- »). Atomisé, il aurait
+    # produit des centaines de phrases assertives ressemblant à s'y méprendre à des thèses de
+    # l'auteur — et il aurait faussé toutes les densités de concepts du volume, puisqu'il en
+    # reprend le vocabulaire au complet.
+    "onanie_homosexualitaet": [(
+        "Inhaltsangabe.",
+        # Borne de fin : la citation de Nietzsche qui ouvre le premier tome, prise plutôt que le
+        # faux-titre « ERSTER TEIL » — celui-ci est coupé par des sauts de ligne dans le scan et
+        # la recherche exacte échouait. Le garde-fou l'a dit plutôt que de laisser la région
+        # ouverte, ce qui est exactement son office.
+        "Unsere höchsten Weisheiten",
+        "Sommaire analytique de huit mille signes, placé entre le Vorwort et le corps. Il résume "
+        "chaque paragraphe du livre en une phrase suivie de sa pagination, et emploie donc tout "
+        "le vocabulaire de l'ouvrage : atomisé, il aurait doublé artificiellement la densité de "
+        "chaque concept du volume. La borne de fin est le faux-titre du premier tome, en "
+        "capitales, qui suit immédiatement la dernière pagination du sommaire.")],
     "sammlung_5": [(
         "Der Krankheitsfall, über welchen ich hier",
         "ZUR VORGESCHICHTE DER ANALYTISCHEN TECHNIK",
@@ -1088,6 +1119,7 @@ OEUVRES = {
         "licence": ("Domaine public — Gustave Le Bon (1841-1931), œuvre libre de droits depuis "
                     "2002 (vie + 70 ans). Édition de 1895. Texte français original."),
     },
+    # (Les licences propres aux autres auteurs sont posées plus bas, à `charger` : voir LICENCES.)
     # ------------------------------------------------------------------ SÁNDOR FERENCZI
     # Quatrième auteur traité pour lui-même (2026-07). Le plus proche de Freud pendant vingt
     # ans, et celui dont la divergence finale porte sur la TECHNIQUE, non sur la doctrine : là
@@ -1221,6 +1253,169 @@ OEUVRES = {
             "Holl\u00f3s, dont les \u00e9diteurs d\u00e9clarent n'avoir repris que la part de Ferenczi. "
             "Quelques notes de bas de page sont des \u00e9diteurs, non de l'auteur.",
     },
+
+    # ------------------------------------------------------------------ WILHELM STEKEL
+    # CINQUI\u00c8ME AUTEUR trait\u00e9 pour lui-m\u00eame (2026-07-31), et la QUATRI\u00c8ME forme du rapport au
+    # ma\u00eetre \u2014 celle qui manquait. Rank d\u00e9place une th\u00e8se et rompt ; Abraham prolonge et ne rompt
+    # jamais ; Ferenczi reste vingt ans le plus proche et diverge sur la technique. Stekel, lui,
+    # rompt LE PREMIER et sur la doctrine : cofondateur avec Freud de la Soci\u00e9t\u00e9 psychologique du
+    # mercredi en 1902, il quitte la Soci\u00e9t\u00e9 en 1912 sur les n\u00e9vroses actuelles et l'onanisme.
+    #
+    # CE QUI L'A FAIT ENTRER N'EST PAS UNE INTUITION D'HISTOIRE MAIS UNE MESURE : 54 atomes du
+    # corpus le nommaient d\u00e9j\u00e0 \u2014 22 de Freud dont 16 dans la seule Traumdeutung, 15 de Rank, 10
+    # d'Abraham, 7 de Ferenczi \u2014 sans qu'on puisse montrer l'autre c\u00f4t\u00e9. L'inventaire complet est
+    # dans documentation/STEKEL_INVENTAIRE.md.
+    #
+    # D'O\u00d9 L'ORDRE D'ACQUISITION, QUI N'EST PAS CHRONOLOGIQUE : \u00ab Die Sprache des Traumes \u00bb vient
+    # en t\u00eate parce que c'est le volume que le corpus nomme le plus. Freud y salue \u00ab la plus riche
+    # collection de r\u00e9solutions symboliques \u00bb tout en refusant sa g\u00e9n\u00e9ralisation ; le corpus ne
+    # tenait qu'un c\u00f4t\u00e9 de cette controverse.
+    #
+    # Qualit\u00e9 mesur\u00e9e par ocr.corruption(), seuil \u00e0 2,0 % de phrases atteintes : les six volumes
+    # sont entre 0,0 et 0,2 %. Aucune transcription relue n'existe pour Stekel \u2014 ni Wikisource, ni
+    # Gutenberg allemand, ni le Deutsches Textarchiv : c'est fac-simil\u00e9 oc\u00e9ris\u00e9 ou rien, comme
+    # pour Rank, Abraham et Ferenczi.
+    "ursachen_nervositaet": {
+        "fichier": "1907_ursachen_nervositaet.ia.txt",
+        "dossier": ("stekel", "de"),
+        "provenance": "archive",
+        "auteur": "Wilhelm Stekel",
+        "titre": "Die Ursachen der Nervosit\u00e4t. Neue Ansichten \u00fcber deren Entstehung und Verh\u00fctung",
+        "titre_fr": "Les causes de la nervosit\u00e9",
+        "annee_oeuvre": 1907,
+        "annee_edition": 1907,     # 1re \u00e9dition \u2014 datation exacte
+        "edition": "1. Auflage (Hygienische Zeitfragen, Heft 1)",
+        "editeur": "Paul Knepler, Wien",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/stekel-1907-ursachen",
+        # SON PREMIER LIVRE, et il ouvre sur une d\u00e9claration d'all\u00e9geance qui date la relation
+        # avant la rupture : \u00ab Und derjenige, der mir diesen Weg gezeigt hat \u2026 ist der gro\u00dfe
+        # Seelenkenner Professor Sigmund Freud. Ich bekenne mich stolz als seinen Sch\u00fcler, womit
+        # ich nicht sagen will, da\u00df Alles, was ich ausf\u00fchre, seinen Anschauungen entspricht. \u00bb
+        # La r\u00e9serve est d\u00e9j\u00e0 l\u00e0, cinq ans avant la rupture \u2014 c'est le genre de fait que ce
+        # corpus existe pour rendre localisable.
+        "debut_corps": "Es wird heutzutage so viel \u00fcber",
+    },
+    "nervoese_angstzustaende": {
+        "fichier": "1908_nervoese_angstzustaende.ia.txt",
+        "dossier": ("stekel", "de"),
+        "provenance": "archive",
+        "auteur": "Wilhelm Stekel",
+        "titre": "Nerv\u00f6se Angstzust\u00e4nde und ihre Behandlung",
+        "titre_fr": "Les \u00e9tats d'angoisse nerveux et leur traitement",
+        "annee_oeuvre": 1908,
+        "annee_edition": 1908,
+        "edition": "1. Auflage",
+        "editeur": "Urban & Schwarzenberg, Berlin/Wien",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/b21941774",
+        # CE VOLUME PORTE UNE PR\u00c9FACE DE FREUD, sign\u00e9e \u00ab Wien, im M\u00e4rz 1908. Prof. Freud. \u00bb et
+        # retir\u00e9e \u00e0 la 3e \u00e9dition de 1921. C'est un texte de Freud ABSENT du corpus freudien, et
+        # il entre ici par la porte de Stekel \u2014 d\u00e9clar\u00e9 en `contributions`, donc attribu\u00e9 \u00e0 son
+        # auteur r\u00e9el. Sans cette d\u00e9claration, le corpus aurait pr\u00eat\u00e9 \u00e0 Stekel une page o\u00f9 Freud
+        # \u00e9crit \u00ab Herr Dr. W. Stekel, einer der ersten Kollegen, die ich in die Kenntnis der
+        # Psychoanalyse einf\u00fchren konnte \u00bb \u2014 c'est-\u00e0-dire o\u00f9 il parle de lui \u00e0 la troisi\u00e8me
+        # personne. C'est exactement le d\u00e9faut qui avait \u00e9t\u00e9 d\u00e9cel\u00e9 dans la Traumdeutung, o\u00f9
+        # l'appendice de Rank parlait de \u00ab der Freudschen Auffassung \u00bb.
+        #
+        # La page vaut d'\u00eatre lue pour elle-m\u00eame : Freud y prend ses distances autant qu'il
+        # patronne \u2014 \u00ab mein direkter Einflu\u00df auf das vorliegende Buch \u2026 sei ein sehr geringer
+        # gewesen \u00bb, \u00ab nur die Bezeichnung \u201eAngsthysterie" geht auf meinen Vorschlag zur\u00fcck \u00bb.
+        # Quatre ans avant la rupture, la r\u00e9serve est d\u00e9j\u00e0 \u00e9crite, des deux c\u00f4t\u00e9s (voir aussi
+        # \u00ab ursachen_nervositaet \u00bb, o\u00f9 Stekel \u00e9crit la sienne).
+        "debut_corps": "Meine seit dem Jahre 1893 fortgesetzten Untersuchungen",
+        "contributions": [{
+            "auteur": "Sigmund Freud",
+            "debut": "Meine seit dem Jahre 1893 fortgesetzten Untersuchungen",
+            # Borne de fin relev\u00e9e TELLE QUE L'OCR LA LIT \u2014 \u00ab Inhaltsverzeichnis \u00bb y devient
+            # \u00ab IiilialtsYerzeichnis \u00bb. La corriger la rendrait introuvable.
+            "fin": "IiilialtsYerzeichnis",
+        }],
+    },
+    "dichtung_und_neurose": {
+        "fichier": "1909_dichtung_und_neurose.ia.txt",
+        "dossier": ("stekel", "de"),
+        "provenance": "archive",
+        "auteur": "Wilhelm Stekel",
+        "titre": "Dichtung und Neurose. Bausteine zur Psychologie des K\u00fcnstlers und des Kunstwerkes",
+        "titre_fr": "Po\u00e9sie et n\u00e9vrose",
+        "annee_oeuvre": 1909,
+        "annee_edition": 1909,
+        "edition": "1. Auflage (Grenzfragen des Nerven- und Seelenlebens, Heft 68)",
+        "editeur": "J. F. Bergmann, Wiesbaden",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu",
+        "url": "https://archive.org/details/DichtungUndNeurose.BausteineZurPsychologieDesKnstlersUndDes",
+        # Le volume s'ouvre sur quatre pages de R\u00c9CLAME D'\u00c9DITEUR \u2014 recensions d'autres titres de
+        # la collection, sign\u00e9es d'autres auteurs. La borne les laisse dehors : atomis\u00e9es, elles
+        # auraient pr\u00eat\u00e9 \u00e0 Stekel des phrases de Kreuser et de K\u00f6tscher.
+        "debut_corps": "Die nachfolgenden, stellenweise aphoristischen Ausf\u00fchrungen",
+    },
+    "sprache_des_traumes": {
+        "fichier": "1911_sprache_des_traumes.ia.txt",
+        "dossier": ("stekel", "de"),
+        "provenance": "archive",
+        "auteur": "Wilhelm Stekel",
+        "titre": "Die Sprache des Traumes",
+        "titre_fr": "Le langage du r\u00eave",
+        "annee_oeuvre": 1911,
+        "annee_edition": 1911,
+        "edition": "1. Auflage",
+        "editeur": "J. F. Bergmann, Wiesbaden",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu (scan Google)",
+        "url": "https://archive.org/details/diesprachedestr00stekgoog",
+        # LE VOLUME QUE LE CORPUS R\u00c9CLAMAIT LE PLUS FORT : seize atomes de la seule \u00ab Traumdeutung \u00bb
+        # le discutent. Freud y salue \u00ab die reichste Sammlung von Symbolaufl\u00f6sungen \u00bb et refuse
+        # dans le m\u00eame mouvement d'en g\u00e9n\u00e9raliser le principe \u2014 \u00ab der allgemeine Satz Stekels vor
+        # der Anerkennung einer gr\u00f6\u00dferen Mannigfaltigkeit zur\u00fcckzutreten hat \u00bb. Le corpus tenait
+        # la critique sans la th\u00e8se critiqu\u00e9e.
+        #
+        # Le scan porte en t\u00eate plusieurs pages d'avertissement Google EN ANGLAIS : la borne les
+        # laisse dehors, sans quoi le corpus attribuerait \u00e0 Stekel de la prose juridique anglaise.
+        "debut_corps": "Alles seelische Geschehen wird von dem Gesetze",
+    },
+    "traeume_der_dichter": {
+        "fichier": "1912_traeume_der_dichter.ia.txt",
+        "dossier": ("stekel", "de"),
+        "provenance": "archive",
+        "auteur": "Wilhelm Stekel",
+        "titre": "Die Tr\u00e4ume der Dichter",
+        "titre_fr": "Les r\u00eaves des po\u00e8tes",
+        "annee_oeuvre": 1912,
+        "annee_edition": 1912,
+        "edition": "1. Auflage",
+        "editeur": "J. F. Bergmann, Wiesbaden",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu (scan Google)",
+        "url": "https://archive.org/details/bub_gb_4xM1AQAAMAAJ",
+        # L'ANN\u00c9E DE LA RUPTURE. Le volume est en outre une pi\u00e8ce singuli\u00e8re du corpus : une
+        # ENQU\u00caTE, o\u00f9 Stekel interroge une quarantaine d'\u00e9crivains vivants sur leurs r\u00eaves
+        # (Hauptmann, Strindberg, Rosegger, Karl May\u2026). Une part du texte est donc de leur main,
+        # cit\u00e9e par lui \u2014 la table des mati\u00e8res le dit. Le lexique suit l'auteur du volume, et
+        # cette part-l\u00e0 n'est pas s\u00e9par\u00e9e : r\u00e9serve port\u00e9e dans les m\u00e9tadonn\u00e9es ci-dessous.
+        "debut_corps": "In N\u00fcrnberg auf der alten Burg wird ein tiefer Brunnen",
+        "reserve_attribution":
+            "Ce volume est une ENQU\u00caTE : Stekel y reproduit les r\u00e9ponses d'une quarantaine "
+            "d'\u00e9crivains vivants sur leurs propres r\u00eaves. Ces passages sont de leur main, cit\u00e9s "
+            "par lui, et ne sont PAS s\u00e9par\u00e9s dans l'atomisation \u2014 le lexique suit l'auteur du "
+            "volume. Toute mesure de vocabulaire sur ce volume en h\u00e9rite.",
+    },
+    "onanie_homosexualitaet": {
+        "fichier": "1917_onanie_homosexualitaet.ia.txt",
+        "dossier": ("stekel", "de"),
+        "provenance": "archive",
+        "auteur": "Wilhelm Stekel",
+        "titre": "Onanie und Homosexualit\u00e4t (Die homosexuelle Neurose)",
+        "titre_fr": "Onanisme et homosexualit\u00e9 (la n\u00e9vrose homosexuelle)",
+        "annee_oeuvre": 1917,
+        "annee_edition": 1917,
+        "edition": "1. Auflage (St\u00f6rungen des Trieb- und Affektlebens, II)",
+        "editeur": "Urban & Schwarzenberg, Berlin/Wien",
+        "source": "Internet Archive \u2014 fac-simil\u00e9 OCRis\u00e9, NON relu (scan Google)",
+        "url": "https://archive.org/details/bub_gb_lQ4_AQAAMAAJ",
+        # APR\u00c8S LA RUPTURE, et sur le sujet m\u00eame qui l'a caus\u00e9e : l'onanisme est l'un des deux
+        # points de d\u00e9saccord de 1912. C'est le seul volume du corpus qui prenne cette question
+        # pour objet principal.
+        "debut_corps": "Schon vor dem Ausbruch des Weltkrieges war die Fortsetzung",
+    },
 }
 
 # ŒUVRES ÉCARTÉES APRÈS VÉRIFICATION — à ne pas réintroduire par inadvertance.
@@ -1245,6 +1440,26 @@ DOUBLONS_ECARTES = {
 # de traduction.
 LICENCE = ("Domaine public — Sigmund Freud (1856-1939), œuvre libre de droits depuis 2010 "
            "(vie + 70 ans). Éditions utilisées antérieures à 1931. Texte allemand original.")
+
+# Licence par AUTEUR, pour ceux dont la date de mort diffère de celle de Freud. Le calcul est le
+# même partout — vie + 70 ans en Allemagne/Autriche, et parution avant 1931 pour la règle
+# américaine — mais l'année d'entrée dans le domaine public change, et la dire est le minimum
+# qu'on doive à qui voudra réutiliser ce corpus.
+LICENCES = {
+    "Otto Rank": ("Domaine public — Otto Rank (1884-1939), œuvre libre de droits depuis 2010 "
+                  "(vie + 70 ans). Éditions utilisées antérieures à 1931. Texte allemand original."),
+    "Karl Abraham": ("Domaine public — Karl Abraham (1877-1925), œuvre libre de droits depuis 1996 "
+                     "(vie + 70 ans). Texte allemand original."),
+    "Sándor Ferenczi": ("Domaine public — Sándor Ferenczi (1873-1933), œuvre libre de droits "
+                        "depuis 2004 (vie + 70 ans). Texte allemand original."),
+    "Josef Breuer": ("Domaine public — Josef Breuer (1842-1925), œuvre libre de droits depuis 1996 "
+                     "(vie + 70 ans). Texte allemand original."),
+    "Wilhelm Stekel": ("Domaine public — Wilhelm Stekel (1868-1940), œuvre libre de droits depuis "
+                       "2011 (vie + 70 ans). Éditions utilisées de 1907 à 1917, antérieures à 1931. "
+                       "Texte allemand original. ÉCARTÉS et déclarés : son autobiographie de 1950, "
+                       "œuvre américaine dont la couche éditoriale est protégée, et les revues "
+                       "qu'il dirigeait, qui sont des publications à plusieurs voix."),
+}
 
 
 def charger(cle):
@@ -1283,7 +1498,12 @@ def charger(cle):
         "caracteres_oeuvre": len(texte),
         "bornage_gutenberg": bornage,
         # La licence par défaut est celle de Freud ; une œuvre d'un autre auteur porte la sienne.
-        "licence": meta.get("licence", LICENCE),
+        # La licence déclarée sur l'œuvre l'emporte ; sinon celle de son AUTEUR ; sinon celle de
+        # Freud, qui est le cas par défaut et le plus fréquent. Avant cette table, tout le corpus
+        # non freudien portait la licence de Freud — des dates fausses sur des auteurs morts en
+        # 1925, 1933 et 1940.
+        "licence": meta.get("licence",
+                            LICENCES.get(meta.get("auteur", "Sigmund Freud"), LICENCE)),
         "datation": datation(meta),
     })
     return {"texte": texte, "meta": meta}
@@ -1371,6 +1591,10 @@ def _extraire_corps_archive(brut, meta):
     corps, r_tetes = ocr.retirer_tetes_courantes(corps)
     faits.append("têtes courantes retirées : %d (%d formes)"
                  % (r_tetes["tetes_retirees"], len(r_tetes["formes"])))
+    # Le bandeau de numérisation vient APRÈS les têtes courantes : il n'occupe pas une ligne à lui
+    # mais s'insère au milieu des phrases coupées par le saut de page, et le retirer les recolle.
+    corps, r_bandeau = ocr.retirer_bandeau_scan(corps)
+    faits.append("bandeaux de numérisation retirés : %d" % r_bandeau["bandeaux_retires"])
     # Certains scans sortent le texte en colonnes justifiées, d'où des suites d'espaces au milieu
     # des phrases (« Die  nachstehende  Arbeit  lag »). Aucun mot n'est touché — seule la largeur
     # des blancs change —, mais sans cela chaque citation de l'Inzest-Motiv sortirait ainsi.

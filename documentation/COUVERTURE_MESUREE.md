@@ -206,13 +206,84 @@ Trois mesures fondent la conclusion, et aucune n'est une opinion :
 
 ## 5. Ce qui reste ouvert
 
-- **Un audit de `sens` contre `sens_lu`.** Sur les 46 actes où les deux sont remplis, **16 se
-  contredisent** — la datation dit un sens, l'attribution écrite dans le texte dit l'autre. Vérifié
-  au niveau du lien aussi (16 sur 48) : ce n'est donc pas un artefact d'agrégation. Cela peut être
-  informatif — une contradiction entre les dates et ce que le texte déclare est un fait — ou révéler
-  une erreur dans l'un des deux calculs. **Aucune conclusion n'est tirée avant lecture.**
-- **`SOURCES_TIERCES` ne contient ni Grimm ni Ibsen**, alors que le corpus porte des liens qui les
-  citent des deux côtés. À compléter, avec la mesure de ce que cela déplace.
+- **~~Un audit de `sens` contre `sens_lu`~~ — FAIT le 2026-07-31, et c'était un défaut, pas un
+  désaccord de méthode.** Les 16 contradictions n'opposaient pas deux mesures : elles publiaient
+  **seize emprunts à l'envers**. Le détail est au § 6 ci-dessous, parce qu'il mérite mieux qu'une
+  ligne — c'est le seul risque que le registre des reprises se donne explicitement pour mission
+  d'écarter, et il s'était réalisé.
+- **`SOURCES_TIERCES` ne contient ni Grimm ni Ibsen — CORRECTION, vérifiée le 2026-07-31.** Cette
+  note affirmait que « le corpus porte des liens qui les citent des deux côtés ». C'était une
+  confusion avec la piste `auto_citation`, rejetée : son bruit dominant était Rank RE-CITANT Grimm
+  d'une œuvre à l'autre — un fait INTRA-auteur, jamais stocké dans `liens_reprise`, qui ne contient
+  que des paires inter-auteurs (vérifié : `auteur_a != auteur_b` sur les 230 lignes de la table).
+  Mesuré directement sur la base : **zéro** ligne de `liens_reprise` ne nomme Grimm ou Ibsen, des
+  deux côtés ou d'un seul. Les deux sont pourtant bien cités dans le corpus (Grimm : 5 atomes de
+  Freud, 103 de Rank, 2 de Ferenczi ; Ibsen : 2, 35, 6) — mais aucune de ces citations ne partage
+  une suite de six mots avec une citation d'un AUTRE auteur, au seuil actuel. Ajouter les deux jetons
+  à `SOURCES_TIERCES` aujourd'hui n'aurait donc AUCUN effet observable : ce serait une entrée sans
+  cas d'usage, contraire à la règle du projet de ne rien ajouter sans nécessité mesurée. Le besoin
+  ne redeviendrait réel que si le chantier du seuil de mots (ci-dessous) était mené à bien et faisait
+  apparaître un lien inter-auteurs nommant l'un des deux des deux côtés — à revérifier à ce moment-là,
+  pas avant.
 - **Le chantier du seuil de mots** (§ 3), avec ses 48 liens à lire et son filtre à déclarer.
-- **Six ou sept œuvres allemandes du domaine public que ce corpus cite et ne contient pas** : c'est
-  l'ajout au meilleur rendement mesuré, et de loin.
+- **~~Six ou sept œuvres allemandes du domaine public que ce corpus cite et ne contient pas~~ —
+  FAIT le 2026-07-31 : onze sont entrées** (voir l'en-tête de `core/sources.py`). C'était bien
+  l'ajout au meilleur rendement : les actes de citation sont passés de 107 à 175.
+
+---
+
+## 6. Seize emprunts publiés à l'envers — le défaut, et comment il a tenu
+
+Ce paragraphe est le plus important du document, parce que le défaut portait exactement sur ce que
+le projet met le plus en avant : **qui cite qui**.
+
+### Ce qui était publié
+
+Un acte de citation porte deux orientations, et le site les distingue : `sens`, établi par les
+**dates** quand les fenêtres de datation sont disjointes, et `sens_lu`, ce que le **texte déclare**
+lui-même (« Ich zitiere den folgenden Passus wörtlich nach Freud »). Sur 46 actes où les deux
+étaient remplis, **16 se contredisaient**. On pouvait croire à une divergence intéressante entre
+deux méthodes. C'était un bug, et `sens` avait raison partout.
+
+Le cas le plus net : **Abraham citant Freud** en toutes lettres — *Traum und Mythus* (1909) reprend
+mot à mot un passage de la *Traumdeutung* (1900), en l'annonçant et en donnant la page. Le corpus
+publiait **Freud citant Abraham**, neuf ans avant que le texte d'Abraham existe.
+
+### Pourquoi
+
+La clé d'un verdict de lecture est faite des deux empreintes **triées**, pour que le même couple lu
+dans un sens ou dans l'autre retrouve son jugement. Ce tri fait perdre l'ordre (a, b) sur lequel
+« a_vers_b » a été rendu. L'export le retrouvait en comparant l'identifiant stocké `id_a` à
+l'identifiant courant du côté a.
+
+Or ces identifiants sont **positionnels** (`traumdeutung:a2476`) et dérivent dès qu'on retire du
+paratexte en amont. C'est la raison même pour laquelle ce registre est clé par empreinte — et le
+commentaire du code le disait, deux lignes au-dessus de la ligne fautive :
+
+> `# Le verdict est retrouvé par EMPREINTES, jamais par identifiants d'atome :`
+> `# ceux-ci se décalent à la moindre correction de paratexte en amont.`
+
+Puis, juste en dessous : `if sens_lu and j.get("id_a") != lien["a"]["id"]`. Le code énonçait la
+règle et l'enfreignait dans le même souffle.
+
+Les corrections de chapitrage et l'entrée des onze œuvres ont fait dériver les numéros. Mesuré :
+sur 56 liens portant un sens lu, **40 avaient l'identifiant intact et 16 avaient dérivé** — et ces
+16 déclenchaient un retournement qui n'avait aucune raison d'être. Aucun ne relevait d'un vrai
+changement d'ordre : le retournement, dans l'état actuel du corpus, n'était **jamais** nécessaire.
+
+### Ce qui a été fait, et une fausse correction écartée
+
+Le registre porte maintenant **`empreinte_a`**, le hachage du texte du côté a. Il ne dérive pas, et
+il tranche sans rien déduire. Les 56 verdicts existants ont été ancrés en une passe, aucun cas
+ambigu. `valider_reprises` refuse désormais un sens sans ancrage, et l'export s'arrête plutôt que
+de publier une orientation qu'il ne saurait pas justifier.
+
+**Une première correction avait été écrite, puis écartée par son propre test.** Elle comparait les
+**œuvres** plutôt que les identifiants complets — l'œuvre ne dérivant pas — en supposant que les
+deux côtés d'une reprise appartiennent toujours à des œuvres différentes, puisqu'ils appartiennent
+à des auteurs différents. Le test écrit pour la protéger a mesuré le contraire : **trois reprises
+du corpus mettent en regard deux atomes du même volume**, les *Studien über Hysterie* de 1895, dont
+Breuer et Freud sont co-auteurs. La supposition était fausse, et c'est le test qui l'a dit avant que
+le correctif ne parte. Le fait est conservé comme garde-fou dans `test_verification.py`.
+
+Après correction : **0 contradiction** sur 48 liens et 45 actes.

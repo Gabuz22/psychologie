@@ -3,6 +3,7 @@
   "cle": "empreinte du texte de l'atome (sha1 tronqué). Les identifiants positionnels « oeuvre:aN » se décalent quand le volume change ; un jugement doit rester attaché à la PHRASE jugée.",
   "lecture_ferenczi_2026_07_29": "74 signaux relus en contexte à l'arrivée de Sándor Ferenczi (69 de lui, 5 de Rank et d'Abraham désancrés par la resegmentation). Chaque verdict cite le texte qui le fonde, atomes voisins compris. Les révisions CONFIRMÉES ont ensuite été repassées à un contrôle adversarial chargé de les réfuter : 0 ont été renversées.",
   "lecture_freud_2026_07_31": "180 signaux relus en contexte à l'entrée des onze œuvres freudiennes (Vorlesungen 1916-17, Das Ich und das Es, Hemmung Symptom und Angst, Das Unbehagen in der Kultur, les cinq volumes de la Sammlung kleiner Schriften). Chaque motif cite le fragment allemand qui tranche. Les 16 derniers ont ete lus separement, un lecteur ayant ete interrompu.",
+  "lecture_stekel_2026_07_31": "31 signaux relus en contexte a l entree de Wilhelm Stekel (21 revisions, 10 objections).",
   "objet": "Verdicts humains/LLM sur les signaux que le lexique ne peut que SIGNALER (révision, objection, auto-citation). Un marqueur lexical dit où regarder ; seule une lecture en contexte tranche.",
   "portee": "signal « revision » : les 15 candidats lus intégralement. Signaux « objection » et « auto_citation » : instruits après retrait du marqueur « freilich » (concessif, sans valeur d'objection). Lecture en contexte, verdicts argumentés un par un. Extension du corpus (2026-07-26) : 9 nouveaux candidats sur les 8 œuvres ajoutées (Leonardo, Moses, Dichter und Phantasieren, Zeitgemäßes über Krieg und Tod absent de candidats, Traum und Telepathie, Kindheitserinnerung aus Dichtung und Wahrheit) — lus et jugés un par un, même protocole. Normalisation des blancs (2026-07-26) : 22 signaux supplémentaires devenus visibles (leurs marqueurs étaient coupés par des retours à la ligne) — lus et jugés un par un : 7 confirmés (dont DEUX révisions doctrinales majeures, Traumdeutung sur le « Nein » du rêve et Zeitgemäßes sur l'Urmensch), 15 rejetés. Entrée au corpus de « Das Motiv der Kästchenwahl » (1913) et « Einige Charaktertypen aus der psychoanalytischen Arbeit » (1916) : 4 candidats supplémentaires, lus et jugés — 3 confirmés (la chaîne d'objections que Freud s'adresse sur son analyse de Rebekka West dans « Rosmersholm »), 1 rejeté (une objection prononcée par Kroll, personnage d'Ibsen). Entrée au corpus de « Studien über Hysterie » (1895, avec Josef Breuer) : 15 candidats supplémentaires lus et jugés — 3 confirmés, 12 rejetés. Deux portaient sur des passages de BREUER : un verdict s'applique à qui a écrit la phrase, pas au signataire du volume. Entrée au corpus de « Psychologie des foules » (Le Bon, 1895, PREMIER TEXTE FRANÇAIS) : 17 candidats « auto_citation » détectés par les marqueurs français, lus et jugés un par un — 15 confirmés (Le Bon récapitule constamment ses thèses, et renvoie deux fois nommément à un autre de ses ouvrages), 2 rejetés (« nous avons vu » d'événements contemporains : la légende napoléonienne, l'alliance russe — le « nous » y est la société, pas l'auteur). Le protocole vaut pour l'AUTEUR DE LA PHRASE, quel qu'il soit : ici Le Bon, comme il valait pour Breuer. Entree au corpus d'OTTO RANK (2026-07-28, 5 oeuvres, 14 564 atomes, PREMIER AUTEUR DOTE DE SON PROPRE LEXIQUE) : 28 candidats lus et juges un par un. Objections : 13 confirmees, 5 rejetees — dont deux cas d'ecole ou Rank s'objecte a lui-meme (« hat sogleich bei mir selbst einige Einwendungen wachgerufen ») et anticipe celles de son propre camp (« ein Einwand von psychoanalytischer Seite selbst »), passages ou s'annonce la rupture de 1924. Revisions : 0 confirmee sur 5 — les cinq candidats corrigent quelqu'un d'AUTRE (Goethe, Jung, une personne observee) ou une lecon de texte, jamais une position anterieure de Rank ; c'est un resultat sur son style, non un echec du marqueur. Signal « ecart_freud », propre a ce lexique : 0 confirme sur 5, les cinq RECLASSES en renvois d'accord — Rank cite Freud pour s'appuyer sur lui, y compris dans le livre de la rupture. Sa divergence est dans la THESE, non dans une formule de desaveu : aucun marqueur lexical ne l'attrapera, et il faut le dire plutot que de faire dire au corpus ce qu'il ne montre pas. Un faux positif corrige a la source : « dorische EINWANDERUNG » (la migration dorienne) etait compte comme objection — meme homonymie que « einwandern » chez Freud, dont l'exclusion ne couvrait que le verbe. Entree au corpus de KARL ABRAHAM (2026-07-28, 5 oeuvres 1909-1925, 7 675 atomes) : 33 candidats lus et juges. Objections 25 confirmees / 4 rejetees — densite sans equivalent dans le corpus, parce que « Traum und Mythus » (1909) est un livre de DEFENSE : Abraham y expose Freud devant un public hostile et tient le decompte de ses objections (« Wir konnten zwei Einwände leicht entkräften, während wir einen dritten vorläufig unerledigt ließen »). Les pages contre Jung (1914) documentent la rupture avec Zurich. Revisions : 1 confirmee sur 4, et c'est LE cas d'ecole du corpus — « Nachwort (1920). Der vorstehende Aufsatz, der im Jahre 1907 geschrieben wurde, enthält mancherlei Irrtümliches » : Abraham reedite un article de 1907 en signalant en post-scriptum ce qu'il y tient desormais pour faux. C'est precisement ce que Freud a CESSE de faire des la 3e edition des « Drei Abhandlungen », d'ou l'incertitude de datation qui pese sur tout son corpus. Le signal « appui_freud », d'abord cree en `a_confirmer` sur le modele d'« ecart_freud » chez Rank, a ete REQUALIFIE en fonction ETABLIE « renvoi_freud » : la lecon de Rank (0 confirme sur 5) est qu'un motif ne peut pas decider de la NATURE d'une mention. On nomme donc la fonction pour ce que le marqueur prouve — la phrase invoque Freud —, sans pretendre dire si c'est un appui, un prolongement ou une reserve. Note de methode (2026-07-28) : l'empreinte d'un atome est stable face a un changement de POSITION (retrait de paratexte en amont), ce pour quoi elle a ete concue — mais pas face a un changement de SEGMENTATION. L'ajout des abreviations bibliographiques a fusionne des atomes et deplace deux verdicts sur 323 ; ils ont ete reposes a l'identique, la phrase ayant seulement ete elargie. Le garde-fou `test_instruction_complete` les a signales aussitot.",
   "protocole": "Chaque candidat est lu avec son contexte immédiat. Verdict « confirme » seulement si l'énoncé est une prise de position de FREUD sur SON PROPRE travail antérieur — ni un personnage de fiction, ni un patient, ni un autre auteur, ni une correction d'imprimerie.",
@@ -75,6 +76,12 @@
    "motif": "L'erreur est explicitement la sienne, marquée par « auch ich » : « In einzelnen Fällen irrte offenbar auch ich in der Abschätzung des Zeitpunktes oder der Tragweite der Provozierungsmaßnahmen, mit der Folge, daß ich den Patienten nur durch volles Einbekennen meines Irrtums […] behalten konnte. » Le contexte confirme qu'il revient sur SA propre technique active : a554 « Die Aufrichtigkeit gebietet mir aber einzugestehen, daß in Fragen der Aktivität auch Erfahrung nicht ganz vor Irrtum schützt » ; a557 « ich mußte mich aber fragen, ob es unbedingt notwendig war und nicht lieber hätte vermieden werden sollen » ; a558 « Auch sah ich im Anschlusse an diese Fälle ein, daß die Forderung einer größeren Aktivität des Patienten ein pium desiderium ist » ; a561 « Ich bin schließlich überhaupt davon abgekommen, meinen Patienten Dinge anzubefehlen oder zu verbieten ». Correction de soi, non d'un autre auteur.",
    "signal": "revision",
    "verdict": "confirme"
+  },
+  "01f9693bd85571b9": {
+   "ancien_id": "dichtung_und_neurose:a682",
+   "motif": "« (Tim Sigaloff hält die Anfälle Dostojewskys irrtümlicher Weise für Epilepsie.) » suivi du titre et de l'éditeur : note bibliographique où Stekel corrige un AUTRE auteur (Segaloff, « Die Krankheit Dostojewskys », München 1902). Le piège annoncé du corpus, exactement.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "0436e7152d0338d7": {
    "ancien_id": "charaktertypen:a184",
@@ -711,6 +718,12 @@
    "signal": "auto_citation",
    "verdict": "rejete"
   },
+  "367c61e93c40ee90": {
+   "ancien_id": "onanie_homosexualitaet:a2050",
+   "motif": "Prolepse en règle : après avoir soutenu « dass sie den Tod des Geliebten wünscht », Stekel formule lui-même la lecture qui ruinerait sa thèse — « Sie zittert, wenn sie die Verlustlisten liest. Man könnte sagen aus Liebe und Angst um den Geliebten » — puis la traite d'une phrase : « Das ist ja die Komödie, die sie sich vorspielt. » L'objection est soulevée par l'auteur contre sa propre interprétation et réglée sur place.",
+   "signal": "objection",
+   "verdict": "confirme"
+  },
   "3712a5a7d90b0feb": {
    "ancien_id": "sammlung_3:a1088",
    "motif": "« muß ich dem lange aufgesparten Einwande begegnen, der uns mahnt, daß Hans ein Neurotiker, Hereditarier, Degeneré ist, kein normales Kind, von dem aus auf andere Kinder übertragen werden darf » : objection contre sa propre généralisation du cas Hans, longtemps différée et qu'il entreprend explicitement de traiter.",
@@ -819,6 +832,12 @@
   "3c06e86ac787959a": {
    "ancien_id": "inzest_motiv:a232",
    "motif": "« Derartige Einwendungen durch Polemik erledigen zu wollen, waere ebenso abgeschmackt als unwirksam » : Rank prend position sur la maniere de traiter les objections faites a son travail.",
+   "signal": "objection",
+   "verdict": "confirme"
+  },
+  "3c425deb312866a3": {
+   "ancien_id": "sprache_des_traumes:a15023",
+   "motif": "L'objection vise sa propre pratique interprétative et il la liquide sur place : « Der Einwand, man lege etwas in die Träume hinein, was nicht drinnen wäre, erledigt sich durch solche Tatsachen. Die Träumer akzeptieren die falschen Deutungen nicht. » Le traitement se déploie ensuite (« Ist eine Deutung falsch, so kommt ein nächster Traum, der uns eines Besseren belehrt »), concession comprise : « Doch auch da gibt es Ausnahmen. »",
    "signal": "objection",
    "verdict": "confirme"
   },
@@ -980,6 +999,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "475cd93790997c0c": {
+   "ancien_id": "onanie_homosexualitaet:a9524",
+   "motif": "La rectification est factuelle et faite par un tiers en séance : « Zufällig war in der Sitzung Kollega Dr. W. anwesend, der die Tatsache kannte, daß die vermeintliche Analyse nur eine Woche gedauert hatte. Er konnte die Angelegenheit gleich berichtigen. » Anecdote de polémique sur la valeur de la psychanalyse ; aucune thèse de Stekel n'est reprise ni nuancée.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "478b368f16cdadc1": {
    "motif": "Seconde des deux objections annoncées, développée contre sa propre lecture : « Die zweite Einwendung wird sagen, es sei nicht berechtigt auf den Ausdruck, des Teufels leibeigener Sohn zu sein, besonderes Gewicht zu legen. »",
    "signal": "objection",
@@ -1043,6 +1068,12 @@
    "ancien_id": "psychopathologie:a1030",
    "motif": "« Einwendungen » désigne ici un contenu psychique du sujet, non une objection adressée à Freud : « Andere Male scheinen es höchst harmlose Einwendungen und Rücksichten zu sein, aus denen die störenden Gedanken entspringen ».",
    "signal": "objection",
+   "verdict": "rejete"
+  },
+  "4ebeebcf151af30b": {
+   "ancien_id": "nervoese_angstzustaende:a3551",
+   "motif": "« die irrtümlicherweise für Ohnmächten infolge Herzschwäche gehalten wurden » : passif sans sujet, dans le bilan d'un cas (« Überblicken wir die ganze Krankengeschichte! ») — l'erreur est celle des médecins qui ont vu là une syncope cardiaque, jamais une position que Stekel aurait tenue puis corrigée. Manque l'état antérieur de sa propre pensée.",
+   "signal": "revision",
    "verdict": "rejete"
   },
   "4f041a5a544edcb2": {
@@ -1295,6 +1326,12 @@
    "signal": "objection",
    "verdict": "confirme"
   },
+  "60fe663ee7eb49b1": {
+   "ancien_id": "onanie_homosexualitaet:a9774",
+   "motif": "« Er müsse jedoch berichtigen, daß er nie Phantasien mit Frauen gehabt habe » : le Konjunktiv I (« müsse ») marque le discours indirect — c'est le patient qui rectifie son propre récit en séance, à propos de sa cousine. Matériau clinique, non correction d'une position de l'auteur.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "61f9a93294ba99d0": {
    "ancien_id": "vorlesungen_2:a1493",
    "motif": "Ouverture de la XIIIe leçon, tout entière rétrospective : « Lassen Sie uns wieder an unser Resultat anknüpfen […] Wir haben gesagt, daß sie auf Zustände unserer intellektuellen Entwicklung zurückgreift […] Wir nannten die Ausdrucksweise der Traumarbeit darum eine archäische oder regressive. » Rappel explicite et traçable d'une thèse posée dans les leçons antérieures du cycle (travail du rêve, symbolique), non un savoir analytique vague.",
@@ -1478,6 +1515,12 @@
    "signal": "objection",
    "verdict": "confirme"
   },
+  "6f6263c82130881a": {
+   "ancien_id": "onanie_homosexualitaet:a3870",
+   "motif": "« Eine mir bekannte Schriftstellerin … machte mir als Einwand gegen diese Auffassung den Umstand geltend, sie wäre geradezu männersüchtig » : l'objection vise bien sa thèse, mais elle est formulée par une tierce personne et seulement rapportée pour être écartée (la suite, vérifiée en source : « Hinter dieser Unersättlichkeit verbirgt sich, wie ich schon ausgeführt habe, die Homosexualität als unbefriedigter Trieb »). Le geste constitutif manque : Stekel ne s'objecte rien lui-même — piège déjà mesuré dans ce corpus.",
+   "signal": "objection",
+   "verdict": "rejete"
+  },
   "6f87d86c460141f9": {
    "ancien_id": "sammlung_4:a2277",
    "motif": "« Wir stoßen dann auf den Einwand, daß diese latenten Erinnerungen nicht mehr als psychisch zu bezeichnen seien, sondern den Resten von somatischen Vorgängen entsprechen » : objection dressée contre sa propre thèse de l'inconscient psychique, puis traitée sur place — « Es liegt nahe zu erwidern […] Wichtiger ist es aber, sich klarzumachen, daß der Einwand auf der nicht ausgesprochenen […] Gleichstellung des Bewußten mit dem Seelischen ruht ».",
@@ -1507,6 +1550,12 @@
    "motif": "Freud amende sa propre thèse pour tenir compte des objections : « wenn Sie den letzten Einwänden Rechnung tragen wollen, so sagen Sie immerhin, der Traum ist der Versuch einer Wunscherfüllung ».",
    "signal": "objection",
    "verdict": "confirme"
+  },
+  "71507b88cc4aed51": {
+   "ancien_id": "onanie_homosexualitaet:a7327",
+   "motif": "« Es dürfte demnach auch der Einwand, der in medizinischen Kreisen sonst sehr oft erhoben wird, nicht stichhältig sein » se lit à l'intérieur d'une lettre reproduite : « Dieser Herr schreibt mir: Sehr geehrter Herr Doktor! … Ich habe sie an 800 Personen gestellt ». L'objection est parée par le correspondant pour défendre SON enquête — laquelle soutient d'ailleurs la thèse innéiste opposée à celle de Stekel.",
+   "signal": "objection",
+   "verdict": "rejete"
   },
   "71dc67299a88c3dc": {
    "ancien_id": "vorlesungen_1:a775",
@@ -1550,6 +1599,12 @@
    "signal": "auto_citation",
    "verdict": "confirme"
   },
+  "74dc41367b4ec8e5": {
+   "ancien_id": "onanie_homosexualitaet:a8980",
+   "motif": "« Beaussart (La jalousie. Annales psychiques, Bd. 71, 1915), der irrtümlicherweise behauptet, die pathologische Eifersucht komme bei Männern häufiger vor als bei Frauen » : correction nommée d'un TIERS, prolongée par « Diese Motivierung ist fadenscheinig ». Stekel corrige beaucoup les autres — ce n'est pas le signal.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "75f56f85a6ea586a": {
    "ancien_id": "totem:a1073",
    "motif": "Objections d'auteurs tiers contre un autre tiers : « die von _Durkheim_ und _Lang_ vorgebrachten Einwendungen » visent la théorie de Frazer, non une thèse de Freud.",
@@ -1571,6 +1626,12 @@
   "76897e0206222fa8": {
    "ancien_id": "totem:a1048",
    "motif": "Objections adressées à une théorie tierce du totémisme (l'explication nutritionnelle) : « Die Einwendungen gegen diese rationalste aller Totemtheorien besagen ... » — pure recension doxographique.",
+   "signal": "objection",
+   "verdict": "rejete"
+  },
+  "76ce3ec6454cc1cf": {
+   "ancien_id": "sprache_des_traumes:a14877",
+   "motif": "Le passage est une citation en bloc de Freud, introduite par « Nach Freud liegt in dieser Kritik… » et refermée par « (Traumdeutung S. 265.) » puis « (Traumdeutung S. 272.) ». Le « muss ich die Einwendungen … erledigen / Meine Erwiderung lautet » est une auto-objection de FREUD dans son propre livre, transportée telle quelle chez Stekel : elle n'engage pas la thèse de Stekel.",
    "signal": "objection",
    "verdict": "rejete"
   },
@@ -1598,6 +1659,12 @@
    "signal": "objection",
    "verdict": "reclasse",
    "vers": "objection d'un tiers (Jones) rapportée en discussion de congrès et réponse à celle-ci — levée d'un malentendu, non objection anticipée"
+  },
+  "7ad12dd61fdfb20f": {
+   "ancien_id": "onanie_homosexualitaet:a10790",
+   "motif": "Les deux termes y sont, à cinq ans de la rupture de 1912 : l'état antérieur — « Wie fest war ich von allen Freudschen Mechanismen überzeugt, so lange die verführerische Nähe des großen Entdeckers meinen klaren Blick verwirrte! » — et sa modification revendiquée — « Wie viel mußte ich umlernen, korrigieren, … mit anderen Augen ansehen, um zu erkennen, daß … wir unsere Wahrheiten nur als Sprungbretter benützen dürfen ». Révision doctrinale de sa propre adhésion, à la première personne, dans le « Rückblick und Ausblick » de 1917.",
+   "signal": "revision",
+   "verdict": "confirme"
   },
   "7adf36b2b1ac7162": {
    "ancien_id": "klinische_beitraege:a2320",
@@ -1732,6 +1799,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "7ef84f3020c4fd94": {
+   "ancien_id": "dichtung_und_neurose:a292",
+   "motif": "La phrase n'est pas de Stekel : « Doch lassen wir dem jungen Grillparzer das Wort » introduit une citation littérale du journal du poète (« Tagebücher, S. 3, Nr. 6 »), et « Ich gebe oft Armen Geld, man könnte sagen: also bist du wohltätig! Aber das bin ich nicht » est l'auto-examen de Grillparzer à dix-sept ans — matériau analysé, non thèse de l'auteur. Un verdict s'applique à qui a écrit la phrase.",
+   "signal": "objection",
+   "verdict": "rejete"
+  },
   "7f5d9c1b26ba3bca": {
    "ancien_id": "studien_ueber_hysterie:a2707",
    "motif": "« In der bisherigen Darstellung … ich habe gezeigt » — renvoi à ce qui précède DANS ce texte-ci.",
@@ -1774,6 +1847,12 @@
    "signal": "objection",
    "verdict": "confirme"
   },
+  "84394875aab6071f": {
+   "ancien_id": "sprache_des_traumes:a307",
+   "motif": "Stekel vient de poser sa thèse — « denn Träume und Mythen, Märchen und Sagen, sie sind die gleichen psychischen Gebilde » — puis dresse aussitôt contre elle l'objection : « Man kann einwenden, die Heldensagen seien von Dichtern erfunden, die Märchen habe der dichtende Genius des Volkes geschaffen. » Et il la traite : « Auf diesen Einwand kann ich mit einem treffenden Worte Hebbels antworten: In den Dichtern träumt die Menschheit. » Les deux termes y sont, et la thèse visée est bien la sienne.",
+   "signal": "objection",
+   "verdict": "confirme"
+  },
   "861043b27c2dfbd6": {
    "ancien_id": "massenpsychologie:a232",
    "motif": "« Gegen diese Auffassung der libidinösen Struktur einer Armee wird man mit Recht einwenden, daß die Ideen des Vaterlandes … hier keine Stelle gefunden haben » : objection reconnue fondée contre sa construction, suivie de « Die Antwort darauf lautet… ».",
@@ -1785,6 +1864,12 @@
    "motif": "« Hier verdient die Einwendung Lope de Vegas widerlegt zu werden » : objection d'un tiers (Lope de Vega sur l'Oedipe de Sophocle), mais REPRISE et refutee par Rank — c'est bien une contre-objection mise en scene.",
    "signal": "objection",
    "verdict": "confirme"
+  },
+  "8752a158626be705": {
+   "ancien_id": "sprache_des_traumes:a2813",
+   "motif": "« was ja eine ganze Reihe von deutschen Psychiatern zu der irrtümlichen Ansicht geführt hat, das Kriterium der Zwangsvorgänge sei die Abwesenheit des Affektes » : l'erreur corrigée est celle des psychiatres allemands. Stekel y maintient au contraire sa propre thèse (« so lege ich gerade auf die sorgfältige Analyse der Affektträume grossen Wert ») — correction adressée à autrui, non à soi.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "87d33b6869f4e9e6": {
    "ancien_id": "traumdeutung:a5754",
@@ -1875,6 +1960,12 @@
    "motif": "« Einem weiteren Einwand begegne ich durch die Bemerkung, daß ich auf anderen Reisen ... fast niemals den Harndrang nach frühzeitigem Erwachen verspürt habe » : réponse à une objection visant sa propre interprétation.",
    "signal": "objection",
    "verdict": "confirme"
+  },
+  "8bd755f1898d5be5": {
+   "ancien_id": "onanie_homosexualitaet:a2246",
+   "motif": "« Man glaubt ganz irrtümlich, die katholische Kirche habe das Schuldbewußtsein geschaffen, weil sie den Sexualverkehr zur Sünde machte. Man verwechselt hier Ursache und Wirkung. » L'erreur redressée est celle de l'opinion commune (« man »), dans une note générale sur la culpabilité ; Stekel ne rapporte aucune position qu'il aurait lui-même tenue puis modifiée.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "8c4414d0b3685781": {
    "ancien_id": "trauma_der_geburt:a18",
@@ -2143,6 +2234,12 @@
    "signal": "auto_citation",
    "verdict": "rejete"
   },
+  "9c567bba4ca40777": {
+   "ancien_id": "nervoese_angstzustaende:a7956",
+   "motif": "« Ich bitte, mir zu gestatten, einen Zwischenruf … richtigstellen zu dürfen … daß der Zwischenruf … mir einfach irrtümlich aus dem Munde entschlüpfte » : c'est la déclaration du député Barabas devant la Chambre, citée par Stekel comme matériau d'acte manqué, et qu'il démonte aussitôt (« In Wahrheit ist diese Entschuldigung nur eine Bestätigung der privaten Ansicht Barabas' »). Rétractation d'un tiers, objet d'étude ; aucune position de l'auteur n'est en cause.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "9c871e0bd9d7d1b0": {
    "ancien_id": "psychopathologie:a874",
    "motif": "Énoncé général des critères de l'acte manqué (« si nous sommes corrigés par autrui… »). C'est la théorie qui parle de correction, ce n'est pas Freud qui se corrige.",
@@ -2294,6 +2391,12 @@
    "signal": "objection",
    "verdict": "confirme"
   },
+  "a5556db095b94389": {
+   "ancien_id": "nervoese_angstzustaende:a8247",
+   "motif": "Le marqueur « man könnte sagen » ne sert ici qu'à surenchérir sur un reproche adressé aux parents : « von skrupelloser Leichtfertigkeit, man könnte sagen Gewissenlosigkeit » — on pourrait aller jusqu'à dire « inconscience ». Gradation lexicale, pas une objection opposée à sa propre thèse.",
+   "signal": "objection",
+   "verdict": "rejete"
+  },
   "a5dfe720a84b98af": {
    "ancien_id": "traumdeutung:a5867",
    "motif": "Objection méthodologique contre son propre matériel — « Der Einwand, daß meine Träume und die meiner neurotischen Patienten nicht auf die Träume gesunder Menschen schließen lassen » — traitée aussitôt.",
@@ -2305,6 +2408,12 @@
    "motif": "« Sie hatte nicht übel Lust, aus dieser Traumerscheinung einen Einwand gegen die Wunscherfüllungstheorie zu machen » : objection réelle visant la théorie de Freud, dissoute par l'analyse du détail de la « Schachtel ».",
    "signal": "objection",
    "verdict": "confirme"
+  },
+  "a60003b8acfee679": {
+   "ancien_id": "nervoese_angstzustaende:a6576",
+   "motif": "« Wollenberg (Die Hypochondrie, Wien, 1904) kommt nach eifrigem Durchforschen der ganzen Literatur zum Schlusse, daß die Hypochondrie als eigene Krankheit nicht aufrechterhalten werden kann » : c'est la conclusion d'un TIERS sur une catégorie nosologique, rapportée dans la revue de littérature qui ouvre le chapitre XXVIII (« Bekanntlich gibt es viele Forscher, welche das Bestehen eines gesonderten Krankheitsbildes „Hypochondrie“ vollständig bestreiten »). Ni état antérieur de la pensée de Stekel, ni correction de soi.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "a606802d9b976257": {
    "ancien_id": "totem:a706",
@@ -2396,11 +2505,23 @@
    "signal": "objection",
    "verdict": "confirme"
   },
+  "abcbe1669f1d126e": {
+   "ancien_id": "sprache_des_traumes:a5668",
+   "motif": "Homonymie : le marqueur « irrte » est ici le verbe irren = errer, non se tromper — « ich irrte wie gejagt in unbekannten Strassen umher », à l'intérieur d'un rêve rapporté entre guillemets par une patiente (rêve n° 205). Ni Stekel, ni une erreur.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "abe5f607225b057e": {
    "ancien_id": "neue_folge:a257",
    "motif": "Seconde des deux difficultés annoncées contre la théorie du rêve comme accomplissement de désir : « sie bedeutet auch keinen so gewichtigen Einwand wie die andere » — l'objection (scènes sexuelles infantiles pénibles) est développée et discutée.",
    "signal": "objection",
    "verdict": "confirme"
+  },
+  "ac1c8c40924e17ce": {
+   "ancien_id": "sprache_des_traumes:a6613",
+   "motif": "L'atome n'est fait que de notes de bas de page, et l'erreur y est celle du RÊVEUR : « Der Träumer sagte irrtümlich statt Warchalowski Wallachowski. Wir erkennen, dass dieses Versprechen von grosser Bedeutung ist », avec renvoi à « Freud: „Zur Psychopathologie des Alltagslebens“ ». Un lapsus pris comme objet d'étude ; Stekel ne revient sur rien de sien.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "ad43e5a6860918bf": {
    "ancien_id": "bausteine_3:a2168",
@@ -2628,6 +2749,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "bd0598f90912c2fe": {
+   "ancien_id": "traeume_der_dichter:a2731",
+   "motif": "« Sehr schwach sind die Einwände gegen die Wunschtheorie Freuds » : Stekel relève les objections que Burckhard oppose à la théorie du désir qu'il défend dans ce livre, et les liquide sur pièces — « Natürlich ist die Verhaftung durch einen Detektiv keine Wunscherfüllung. Die Wunscherfüllung ist eben der Mord » — avant de concéder partiellement sur SA thèse : « In diesem Sinne gebe ich Burckhard recht, dass ich … in diesem Buche wiederholt bewiesen habe, dass viele Träume die Funktion eines Warners haben ». Objection contre la position tenue, énoncée puis traitée : la structure déjà confirmée chez Abraham.",
+   "signal": "objection",
+   "verdict": "confirme"
+  },
   "bd9ab662bc4aa05f": {
    "ancien_id": "neue_folge:a1007",
    "motif": "Freud pèse l'objection qu'il s'est adressée à lui-même (avoir traduit en langage de la pensée normale un processus énergétique inconscient), après l'interpellation mise en scène de l'auditoire (« Halt! werden Sie mir zurufen ») : « Aber das ist kein starker Einwand ».",
@@ -2656,6 +2783,12 @@
    "ancien_id": "traumdeutung:a415",
    "motif": "Objection empruntée à la littérature sur la fidélité du souvenir du rêve, attribuée ensuite à un tiers : « Solche Zweifel ... spricht auch _Strümpell_ » ; ce n'est pas une objection contre la thèse de Freud.",
    "signal": "objection",
+   "verdict": "rejete"
+  },
+  "bf7d38bf495f6796": {
+   "ancien_id": "dichtung_und_neurose:a559",
+   "motif": "Le marqueur ne mord que sur un vers de Heine cité en bloc — « Und immer irrte ich nach Liebe, immer » : « irrte » y signifie errer, non se tromper, et le « ich » est celui du poème. Faux positif lexical intégral : ni état antérieur de la pensée de Stekel, ni modification.",
+   "signal": "revision",
    "verdict": "rejete"
   },
   "bfb455c516bd7197": {
@@ -2870,6 +3003,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "ce59b4b39945badc": {
+   "ancien_id": "traeume_der_dichter:a5204",
+   "motif": "« Wir ersehen aus ihr klar, dass die Depressionen erst den Träumen folgen und nicht, wie manche Autoren irrtümlich glauben, die Träume beeinflussen » : Stekel établit sa thèse CONTRE l'erreur d'autres auteurs. Correction dirigée vers le dehors ; il manque l'état antérieur de sa propre pensée qu'il retirerait.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "cec3dda38f828f56": {
    "ancien_id": "drei_abhandlungen:a252",
    "motif": "« Die Symptome sind, wie ich es an anderer Stelle ausgedrückt habe, die Sexualbetätigung der Kranken » : première personne, renvoi rétrospectif à une formulation antérieure de Freud, redoublé dans la phrase suivante.",
@@ -3050,6 +3189,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "d96b852a49fd6974": {
+   "ancien_id": "sprache_des_traumes:a10939",
+   "motif": "« die Ursache der hysterischen Absenzen geworden, die irrtümlicherweise für epileptische gehalten wurden » : l'erreur est un diagnostic porté par d'autres médecins sur le rêveur. Notation clinique au fil de l'analyse d'un rêve ; rien de ce que Stekel a soutenu n'est repris ni nuancé.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "d9de927cba931c39": {
    "ancien_id": "trauma_der_geburt:a1282",
    "motif": "Le marqueur ne mord que sur une NOTE DE BAS DE PAGE, pur renvoi de concordance : « Siehe dazu Ferenczis Zitat der Freudschen Auffassung eines autoplastischen Stadiums. » — « voir à ce sujet », donc un appui, pas une rupture. La phrase-hôte ne parle pas de Freud du tout : « Die Analyse ist jetzt in der Lage, sich in weitgehendem Maße von der Forschungsarbeit zu befreien […] nachdem […] auch das vorläufig letzte Element, das Urtrauma, von vornherein bekannt sind. » L'entourage confirme le sens d'accord et non d'écart : quatre atomes plus haut, Rank écrit « Wir kommen hier auf den frühen Satz Freuds zurück » (a1278) — il REVIENT à Freud. Rien ici ne marque une position différente ; ce qui se passe est un adossement explicite à Freud, d'où le reclassement.",
@@ -3118,6 +3263,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "e092c8337512ab04": {
+   "ancien_id": "sprache_des_traumes:a14330",
+   "motif": "Même homonymie et même statut : « Ich irrte durch die Strassen und sah dann aus einem Hause zwei Männer kommen » est le rêve n° 579 d'une professeure de langues, cité entre guillemets comme matériel. Errance en rêve, pas révision d'auteur.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "e0b162ce71db4273": {
    "ancien_id": "hemmung_symptom_angst:a707",
    "motif": "Le marqueur « berichtigen » est nié : « An dem Widerstand des Ichs ist also nichts zu bezweifeln oder zu berichtigen. » Freud maintient son acquis ; la suite (« Dagegen fragt es sich, ob er allein den Sachverhalt deckt ») ajoute d'autres résistances au tableau, elle n'en retire aucune.",
@@ -3135,6 +3286,12 @@
    "motif": "« ich habe schon erwähnt, daß ich auch die normale infantile Amnesie mit dieser infantilen Sexualbetätigung in Zusammenhang bringen möchte » : rappel explicite et rétrospectif d'un développement antérieur du même livre.",
    "signal": "auto_citation",
    "verdict": "confirme"
+  },
+  "e0d3a41a3b962aa9": {
+   "ancien_id": "sprache_des_traumes:a14582",
+   "motif": "« Ich korrigierte früher verschiedene Drucksachen und wandte mich an ihn. » : la phrase est entre guillemets et suivie de la réplique « P. F.: „Aber noch etwas stimmt…“ » — c'est le rêveur qui parle, et « korrigieren » y a son sens typographique (relire des épreuves d'imprimerie). Ni auteur, ni thèse.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "e1589294eede65f2": {
    "ancien_id": "traumdeutung:a2224",
@@ -3158,6 +3315,12 @@
    "ancien_id": "sammlung_4:a3274",
    "motif": "Piège documenté : les « kritischen Einwendungen » sont celles que l'ANALYSÉ oppose à ses propres idées incidentes, dans l'énoncé de la règle fondamentale qui lui est adressée — « Sie werden beobachten, daß IHNEN während IHRER Erzählung verschiedene Gedanken kommen … Geben Sie dieser Kritik niemals nach und sagen Sie es trotzdem ». Objet de technique, non objection d'auteur ; identique à sammlung_4:a3109, déjà écarté.",
    "signal": "objection",
+   "verdict": "rejete"
+  },
+  "e325d5ae461b17ea": {
+   "ancien_id": "onanie_homosexualitaet:a5054",
+   "motif": "« Er führt diese Erscheinung irrtümlicherweise auf die Exzesse zurück, während nur die mangelnde heterosexuelle Libido die Ursache war » : c'est le PATIENT qui se trompe sur la cause de son impuissance, et l'analyste qui rectifie (« Denn er klagt über vehemente Erektionen bei Berührung von Knaben »). Erreur d'un cas clinique, non état antérieur de la pensée de l'auteur.",
+   "signal": "revision",
    "verdict": "rejete"
   },
   "e4698c3aa5b4aef7": {
@@ -3225,6 +3388,12 @@
    "motif": "« Wir können diesem Einwand vorläufig mit der Vermutung begegnen… » : reponse provisoire a une objection, avec la tâche qu'elle laisse ouverte.",
    "signal": "objection",
    "verdict": "confirme"
+  },
+  "e7f0f9b23b935f46": {
+   "ancien_id": "onanie_homosexualitaet:a4167",
+   "motif": "« Zwangsneurosen …, die irrtümlicherweise auf Aufregungen, Überanstrengungen und andere nebensächliche Momente zurückgeführt werden » : présent passif et généralisant, l'erreur étiologique courante de la médecine. Aucune trace d'un « früher nahm ich an » — rien de sa propre pensée antérieure.",
+   "signal": "revision",
+   "verdict": "rejete"
   },
   "e83554a65d10660a": {
    "ancien_id": "jenseits:a441",
@@ -3316,6 +3485,13 @@
    "signal": "objection",
    "verdict": "confirme"
   },
+  "f0891965af808dae": {
+   "ancien_id": "traeume_der_dichter:a4054",
+   "motif": "Rien n'est corrigé ici : l'atome porte une note qui renvoie nommément à son propre livre, page et titre de chapitre — « 1) Vergl. die Spr. des Traumes. Seite 314 und 315: „Die Träume der Kinder“ ». Le volume l'érige même en règle dès son ouverture : « Stekel: Die Sprache des Traumes … Alle Hinweise in diesem Werke beziehen sich, wenn sich keine andere Angabe befindet, auf dieses Buch. » Renvoi à un travail antérieur de l'auteur, donc auto-citation.",
+   "signal": "revision",
+   "verdict": "reclasse",
+   "vers": "auto_citation"
+  },
   "f0bfa4ba312a64c4": {
    "ancien_id": "sammlung_4:a3719",
    "motif": "« Ich habe diesen Traum wegen seines Gehalts an Märchenstoffen bereits an anderer Stelle publiziert*) und werde zunächst das dort Mitgeteilte wiederholen » : « ich habe … publiziert », appuyé d'un appel de note — renvoi explicite à sa propre publication antérieure.",
@@ -3328,6 +3504,12 @@
    "signal": "objection",
    "verdict": "rejete"
   },
+  "f1359c2dfdd6f1c3": {
+   "ancien_id": "traeume_der_dichter:a939",
+   "motif": "« nach näherem Nachdenken muss ich mich aber mindestens in einem Punkte berichtigen » : la phrase appartient à la seconde lettre d'un écrivain interrogé par Stekel (« Diesem ersten Briefe, der die kriminellen Einschläge leugnet, folgt am nächsten Tage ein zweiter »), qui rectifie sa propre réponse sur ses rêves. Autocorrection d'un correspondant, matériau de l'enquête — un verdict s'applique à qui a écrit la phrase.",
+   "signal": "revision",
+   "verdict": "rejete"
+  },
   "f17b2f84d834e969": {
    "ancien_id": "sammlung_1:a1694",
    "motif": "« Dieselbe Aufklärung, die ja den bedeutsamsten meiner anfänglichen Irrtümer korrigierte, mußte auch die Auffassung von Mechanismus der hysterischen Symptome verändern. » L'état antérieur est nommément le sien (« Ich überschätzte die Häufigkeit dieser … Vorkommnisse », « während ich seitdem gelernt habe ») et la modification est dite : les symptômes « erschienen nun nicht mehr als direkte Abkömmlinge der verdrängten Erinnerungen ».",
@@ -3338,6 +3520,12 @@
    "ancien_id": "inzest_motiv:a6726",
    "motif": "Meme citation de Goethe qu'en a240, reprise plus loin dans le volume. Meme verdict.",
    "signal": "revision",
+   "verdict": "rejete"
+  },
+  "f23d5588bcca9368": {
+   "ancien_id": "sprache_des_traumes:a14518",
+   "motif": "« Man wird mir zugeben, dass die Rätsel des Traumes noch nicht erhellt sind. Nicht einmal der letzte Abschnitt vom älteren und jüngeren Weibe » : aveu d'une analyse encore inachevée, lâché au milieu du dépouillement du rêve de Herr P. F. Aucune objection n'est formulée ni réfutée — le « Doch wir bemerken, dass wir auf eine wunde Stelle im Innern des Herrn P. F. gestossen sind » ne répond à rien, il poursuit le travail. Manquent la thèse attaquée et le traitement.",
+   "signal": "objection",
    "verdict": "rejete"
   },
   "f453368725b905cd": {

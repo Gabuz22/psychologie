@@ -356,6 +356,39 @@ def _cle_tete(s):
     return re.sub(r"[^a-z]+", " ", s).strip()
 
 
+# BANDEAU DE NUMÉRISATION, déposé en pied de page par les scans Google. Il s'insère AU MILIEU des
+# phrases coupées par le saut de page — le retirer les recolle, ce qui est le comportement voulu.
+#
+# LE CRITÈRE EST UN ANACHRONISME, ce qui le rend décidable sans jamais lire le contexte : aucun
+# texte allemand de 1907-1917 ne contient le mot « Google ». On peut donc retirer TOUTES ses
+# occurrences sans risque d'emporter du texte d'auteur — c'est un des rares nettoyages du projet
+# qui ne demande aucun arbitrage.
+#
+# Les formes sont relevées, non supposées : l'OCR massacre le bandeau de vingt-huit façons —
+# « Digitized by Google » (217 fois) mais aussi « (iby Google » (346), « dhyGoogle », « chyGoogle »,
+# « DigilizeilbyGoOgle », « DiriitizedhyGoOgle ». Le seul invariant est la suite « go?ogle », à
+# une capitale près au milieu. On emporte donc le mot ET les caractères accolés, qui sont le
+# reliquat de « Digitized by » écrasé par la reconnaissance.
+_BANDEAU_SCAN = re.compile(r"\S*[Gg][Oo]{1,2}[Gg][Ll][Ee]\S*|Digiti[sz]ed\s+by", re.I)
+
+
+def retirer_bandeau_scan(texte):
+    """Retire le bandeau de numérisation des scans Google. Rend (texte, rapport).
+
+    Mesuré à l'entrée de Wilhelm Stekel, dont deux volumes viennent de Google : 2,2 % et 3,2 %
+    des phrases en portaient un — soit 616 phrases publiées avec « Digitized by Google » au
+    milieu. Le mot « google » y était le TROISIÈME plus caractéristique de l'auteur, mesuré
+    contre tout le reste du corpus allemand : un lexique construit sans ce nettoyage aurait
+    donné à Stekel un vocabulaire signature de bibliothécaire numérique.
+    """
+    n = len(_BANDEAU_SCAN.findall(texte))
+    if not n:
+        return texte, {"bandeaux_retires": 0}
+    net = _BANDEAU_SCAN.sub(" ", texte)
+    net = re.sub(r"[ \t]{2,}", " ", net)
+    return net, {"bandeaux_retires": n}
+
+
 def retirer_tetes_courantes(texte):
     """Retire les lignes de tête courante répétée. Rend (texte, rapport)."""
     groupes = {}

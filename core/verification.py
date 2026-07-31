@@ -156,4 +156,13 @@ def valider_reprises(table=None):
         # Sans les identifiants d'origine, on ne saurait plus à qui « a » renvoie.
         if j.get("sens_lu") and not (j.get("id_a") and j.get("id_b")):
             erreurs.append("sens donné sans id_a/id_b pour %s — le sens deviendrait ambigu" % k)
+        # ET SURTOUT : sans `empreinte_a`, l'ordre est INDEVINABLE. Les identifiants ci-dessus
+        # sont positionnels et dérivent au moindre changement de paratexte ; s'y fier a fait
+        # publier seize emprunts à l'envers avant que la mesure ne le montre. L'empreinte est le
+        # hachage du texte du côté a : elle ne dérive pas, et elle tranche sans rien déduire.
+        if j.get("sens_lu") and not j.get("empreinte_a"):
+            erreurs.append("sens donné sans empreinte_a pour %s — l'ordre (a, b) serait retrouvé "
+                           "par des identifiants positionnels, qui dérivent" % k)
+        if j.get("empreinte_a") and j["empreinte_a"] not in k.split("|"):
+            erreurs.append("empreinte_a de %s n'est pas l'un des deux côtés du couple" % k)
     return {"ok": not erreurs, "erreurs": erreurs, "juges": len(t["verdicts"])}

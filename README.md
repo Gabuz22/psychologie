@@ -4,18 +4,22 @@ Transformer l'œuvre des fondateurs de la psychologie en **données exploitables
 autrement ce qu'ils ont écrit : suivre un concept d'un bout à l'autre d'un livre, distinguer ce
 qui est affirmé de ce qui est supposé, repérer où un auteur se corrige, comparer des œuvres.
 
-Premier chantier : **Freud**, dans le **texte allemand original** (23 œuvres). Puis **Gustave
+Premier chantier : **Freud**, dans le **texte allemand original** (34 œuvres). Puis **Gustave
 Le Bon**, *Psychologie des foules* (1895), en français — le livre que Freud discute pendant tout
-un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis juillet 2026, trois figures de
+un chapitre de *Massenpsychologie und Ich-Analyse*. Depuis juillet 2026, quatre figures de
 l'entourage, traitées **pour elles-mêmes** avec leurs propres catégories, et choisies parce
-qu'elles donnent trois formes distinctes du rapport au maître :
+qu'elles donnent quatre formes distinctes du rapport au maître :
 
 - **Otto Rank** (6 œuvres, 1907-1928) — celui qui **déplace une thèse** et rompt ;
 - **Karl Abraham** (5 œuvres, 1909-1925) — celui qui **prolonge** et ne rompt jamais ;
 - **Sándor Ferenczi** (5 volumes, 1922-1939) — le plus proche de Freud pendant vingt ans, et
-  celui dont la divergence porte sur la **technique**, non sur la doctrine.
+  celui dont la divergence porte sur la **technique**, non sur la doctrine ;
+- **Wilhelm Stekel** (6 œuvres, 1907-1917) — celui qui **rompt le premier**, en 1912, et sur la
+  doctrine. Le corpus tient l'avant et l'après, et la réserve est écrite **des deux côtés avant
+  la rupture** : Stekel en 1907 (« Ich bekenne mich stolz als seinen Schüler … Im Gegenteil! ») et
+  Freud en 1908, préfaçant son livre (« mein direkter Einfluß … sei ein sehr geringer gewesen »).
 
-Ces trois formes ne sont pas un ornement biographique : c'est la condition pour qu'un jour
+Ces quatre formes ne sont pas un ornement biographique : c'est la condition pour qu'un jour
 « socle partagé » et « écart » cessent d'être des mots et deviennent des mesures.
 
 ---
@@ -547,12 +551,11 @@ Restent à faire :
    (donc pas de cible de citation stable — un archivage Zenodo le donnerait), et **aucun spécialiste
    du domaine n'a relu les lexiques** — la limite la plus sérieuse pour un usage savant, et celle
    qui ne se lève pas par du code.
-2. **Wilhelm Stekel**, quatrième figure de l'entourage. L'inventaire est fait et mesuré :
-   [`documentation/STEKEL_INVENTAIRE.md`](documentation/STEKEL_INVENTAIRE.md). Le corpus actuel
-   compte déjà **54 atomes qui le nomment** — 16 dans la seule *Traumdeutung* — sans pouvoir afficher
-   l'autre côté. Six volumes utilisables sont repérés ; leur qualité OCR reste à mesurer, et
-   l'autobiographie de 1950 comme les revues qu'il dirigeait sont écartées, déclarées dans
-   `FAC_SIMILES_ECARTES`.
+2. **~~Wilhelm Stekel~~ — ENTRÉ le 2026-07-31**, avec ses six volumes de 1907 à 1917 et son lexique
+   propre : [`documentation/STEKEL_INTEGRATION.md`](documentation/STEKEL_INTEGRATION.md). Il apporte
+   42 453 atomes, le deuxième corpus du projet après Freud, et fait passer les actes de citation de
+   175 à 358. **Une limite est publiée avec lui** : son taux de qualification est de 57 %, contre
+   81 à 84 % pour les cinq autres auteurs — son lexique est jeune et son audit reste à faire.
 3. **Achever le corpus freudien**, si un meilleur fac-similé ou une transcription Wikisource
    apparaît un jour pour l'un des treize textes documentés en §5 de `SYNTHESE_FREUD.md` — sinon,
    la limite est structurelle et documentée, pas une tâche en attente.

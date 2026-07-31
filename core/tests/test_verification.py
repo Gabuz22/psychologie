@@ -161,3 +161,60 @@ class TestRegistreDesReprises(unittest.TestCase):
                         vus.add(verification.cle_reprise(l["a"]["empreinte"], l["b"]["empreinte"]))
         orphelins = set(verification.charger_reprises()["verdicts"]) - vus
         self.assertFalse(orphelins, "verdicts de lecture désancrés : %s" % sorted(orphelins))
+
+    def test_le_sens_lu_ne_se_retourne_pas_sur_une_derive_de_numero(self):
+        """DÉFAUT MESURÉ, ET IL PUBLIAIT DES EMPRUNTS À L'ENVERS — le seul risque que le registre
+        des reprises se donne explicitement pour mission d'écarter.
+
+        La clé d'un verdict est faite des deux empreintes TRIÉES : elle perd l'ordre (a, b) sur
+        lequel « a_vers_b » a été rendu. L'export doit donc retourner le sens quand le calcul
+        présente le couple dans l'autre ordre. Il décidait ce retournement en comparant
+        `id_a` à l'identifiant courant du côté a — deux identifiants POSITIONNELS. Or ceux-ci
+        dérivent dès qu'on retire du paratexte en amont : c'est la raison même pour laquelle ce
+        registre est clé par empreinte, et le commentaire du code le disait deux lignes plus haut.
+
+        Mesuré au moment de la correction : sur 56 liens portant un sens lu, 16 avaient dérivé
+        dans leur propre œuvre — et le retournement se déclenchait pour rien, publiant l'inverse
+        de ce qui avait été lu. Aucun ne relevait d'un vrai changement d'ordre. Le cas le plus net
+        est Abraham citant Freud en toutes lettres (« Ich zitiere den folgenden Passus wörtlich
+        nach Freud », 1909) publié comme Freud citant Abraham — neuf ans avant que le texte
+        d'Abraham existe.
+
+        Le discriminant correct est l'ŒUVRE, qui ne dérive pas, et qui suffit parce que les deux
+        côtés d'une reprise appartiennent toujours à des auteurs — donc à des œuvres — différents.
+        """
+        table = verification.charger_reprises()
+        avec_sens = [j for j in table["verdicts"].values() if j.get("sens_lu")]
+        self.assertGreater(len(avec_sens), 0)
+        for j in avec_sens:
+            self.assertTrue(j.get("empreinte_a"),
+                            "verdict portant un sens sans empreinte_a : %r" % j.get("id_a"))
+
+        # Le validateur doit REFUSER un sens qu'on ne saurait pas orienter.
+        sans_ancre = {"verdicts": {"x|y": {"verdict": "confirme", "motif": "m",
+                                           "sens_lu": "a_vers_b",
+                                           "id_a": "o:a1", "id_b": "p:a2"}}}
+        self.assertFalse(verification.valider_reprises(sans_ancre)["ok"])
+
+        # Et une ancre qui ne désigne aucun des deux côtés est une erreur, pas un détail.
+        hors_couple = {"verdicts": {"x|y": {"verdict": "confirme", "motif": "m",
+                                            "sens_lu": "a_vers_b", "id_a": "o:a1",
+                                            "id_b": "p:a2", "empreinte_a": "zzz"}}}
+        self.assertFalse(verification.valider_reprises(hors_couple)["ok"])
+
+        # LE FAIT QUI A INVALIDÉ LA PREMIÈRE CORRECTION, gardé pour qu'on ne la refasse pas :
+        # on avait d'abord voulu trancher sur l'ŒUVRE, en supposant que les deux côtés d'une
+        # reprise appartiennent toujours à des œuvres différentes. C'est faux — les volumes
+        # CO-ÉCRITS existent, et « Studien über Hysterie » porte à la fois du Breuer et du Freud.
+        import sqlite3
+        racine = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        base = os.path.join(racine, "derive", "d1", "corpus.sqlite")
+        if os.path.exists(base):
+            with sqlite3.connect(base) as db:
+                memes = db.execute(
+                    "SELECT COUNT(*) FROM liens_reprise l"
+                    " JOIN atomes a ON a.id = l.atome_a JOIN atomes b ON b.id = l.atome_b"
+                    " WHERE a.oeuvre_id = b.oeuvre_id").fetchone()[0]
+            self.assertGreater(memes, 0,
+                               "plus aucune reprise intra-œuvre : si c'est durable, la note "
+                               "ci-dessus sur les volumes co-écrits est à revoir")

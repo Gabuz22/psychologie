@@ -59,6 +59,12 @@ AUTEURS = {
     # déplace une thèse et Abraham qui prolonge, le corpus tient trois formes du rapport au
     # maître — condition pour que « socle » et « écart » cessent d'être des mots.
     "S\u00e1ndor Ferenczi": {"naissance": 1873, "mort": 1933, "courant": "psychanalyse"},
+    # Cinqui\u00e8me auteur trait\u00e9 pour lui-m\u00eame, et la QUATRI\u00c8ME forme du rapport au ma\u00eetre : il rompt
+    # LE PREMIER (1912) et sur la doctrine, l\u00e0 o\u00f9 Rank d\u00e9place une th\u00e8se, Abraham prolonge et
+    # Ferenczi diverge sur la technique. Son courant est d\u00e9clar\u00e9 \u00e0 part : apr\u00e8s la rupture il
+    # fonde sa propre \u00e9cole, l'\u00ab analyse active \u00bb, qui n'est pas la psychanalyse freudienne \u2014 le
+    # compter comme telle m\u00e9langerait deux doctrines dans les mesures par courant.
+    "Wilhelm Stekel": {"naissance": 1868, "mort": 1940, "courant": "analyse active"},
 }
 
 # Éditorial des grappes (résumé de documentation/COURANTS_FREUD.md). L'agent `courants` ne
@@ -615,8 +621,37 @@ def construire(chemin_sqlite):
                 # Le verdict a été rendu sur un couple ORDONNÉ (id_a, id_b) que la clé triée a
                 # perdu. Si le calcul présente le couple dans l'autre ordre, le sens lu doit être
                 # retourné — sans quoi on publierait l'emprunt à l'envers.
-                if sens_lu and j.get("id_a") != lien["a"]["id"]:
-                    sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
+                #
+                # LE RETOURNEMENT SE DÉCIDE SUR L'EMPREINTE, JAMAIS SUR UN IDENTIFIANT POSITIONNEL.
+                #
+                # La version précédente comparait `id_a` à `lien["a"]["id"]` — et le commentaire
+                # deux lignes plus haut dit lui-même pourquoi c'est faux : « ceux-ci se décalent à
+                # la moindre correction de paratexte en amont ». Ils se sont décalés. Le test
+                # devenait vrai sans qu'aucun ordre n'ait changé, et retournait le sens d'un lien
+                # parfaitement correct. Mesuré à la correction : sur 56 liens portant un sens lu,
+                # 40 avaient l'identifiant intact et 16 avaient DÉRIVÉ — ces 16 étaient publiés
+                # À L'ENVERS, et aucun ne relevait d'un vrai changement d'ordre. Le cas le plus
+                # net : Abraham citant Freud en toutes lettres (« Ich zitiere den folgenden Passus
+                # wörtlich nach Freud », Traum und Mythus 1909 contre Traumdeutung 1900) était
+                # publié comme Freud citant Abraham — neuf ans avant que le texte d'Abraham existe.
+                #
+                # Le registre porte maintenant `empreinte_a`, le hachage du TEXTE du côté a. Il ne
+                # dérive pas, et il tranche sans rien déduire. On a préféré cela à une comparaison
+                # par ŒUVRE, qui aurait marché pour 53 couples sur 56 mais serait restée ambiguë
+                # sur les volumes CO-ÉCRITS : trois reprises du corpus mettent en regard deux
+                # atomes des mêmes « Studien über Hysterie », l'un de Breuer, l'autre de Freud.
+                if sens_lu:
+                    ancre = j.get("empreinte_a")
+                    if not ancre:
+                        raise SystemExit(
+                            "SENS LU SANS ANCRAGE — le verdict %s porte un sens mais pas "
+                            "d'`empreinte_a`. Sans elle, l'ordre (a, b) sur lequel le sens a été "
+                            "rendu est indevinable, et publier l'emprunt à l'envers est le seul "
+                            "risque que ce registre a pour mission d'écarter."
+                            % verification.cle_reprise(lien["a"]["empreinte"],
+                                                       lien["b"]["empreinte"]))
+                    if ancre != lien["a"]["empreinte"]:
+                        sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
                 lien["verdict"] = j.get("verdict")
                 lien["sens_lu"] = sens_lu
                 lien["reclasse_vers"] = j.get("vers")

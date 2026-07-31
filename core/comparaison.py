@@ -145,6 +145,15 @@ NOMS = {
                         # L'OCR des Bausteine lit régulièrement « Ferenezi » (n pour n, c pour c) :
                         # relevé dans le texte, non supposé.
                         r" ferenezi ", r" ferenezis "],
+    # ENTRÉ AVEC SON AUTEUR, le 2026-07-31 — et l'ordre compte. L'inventaire préalable avait
+    # mesuré que 54 atomes du corpus nommaient déjà Stekel (22 de Freud dont 16 dans la seule
+    # Traumdeutung, 15 de Rank, 10 d'Abraham, 7 de Ferenczi) sans qu'aucun de ces renvois puisse
+    # être enregistré, faute de jeton. C'est exactement l'oubli commis pour Ferenczi, prévu cette
+    # fois plutôt que découvert après coup — et `test_tous_les_auteurs_du_corpus_ont_un_jeton`
+    # existe depuis pour qu'il ne puisse plus passer en silence.
+    "Wilhelm Stekel": [r" stekel ", r" stekels ", r" stekelsch\w* ",
+                       # Variantes relevées dans les scans, non supposées.
+                       r" stekei ", r" steke1 "],
 }
 
 # HOMOGRAPHES CONNUS — un nom d'auteur qui est aussi autre chose. Ils ne sont PAS filtrés
