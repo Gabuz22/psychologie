@@ -14,10 +14,11 @@ import { z } from "zod";
 import * as donnees from "./donnees.js";
 
 export const INSTRUCTIONS =
-  "Corpus déterministe de psychologie (45 000+ atomes = phrases), chaque œuvre dans sa langue " +
-  "ORIGINALE : Sigmund Freud 1895-1933 en allemand (23 œuvres, avec les contributions de Breuer " +
-  "et Rank), Otto Rank 1907-1928 (6 œuvres), Karl Abraham 1909-1925 (5 œuvres), tous deux en " +
-  "allemand, et Gustave Le Bon 1895 en français. " +
+  "Corpus déterministe de psychologie (116 500+ atomes = phrases, 57 œuvres, 7 auteurs), chaque " +
+  "œuvre dans sa langue ORIGINALE : Sigmund Freud 1895-1933 en allemand (avec les contributions " +
+  "de Josef Breuer et Otto Rank dans certains volumes), Otto Rank 1907-1928, Karl Abraham " +
+  "1909-1925, Sándor Ferenczi 1907-1933, Wilhelm Stekel 1907-1917 — ces quatre-là en allemand — " +
+  "et Gustave Le Bon 1895 en français. " +
   "AUCUN modèle de langage n'intervient dans le calcul : segmentation, catégorisation et " +
   "datation sont produites par un pipeline Python testé, pas par une IA.\n" +
   "RÈGLE IMPÉRATIVE : ne jamais répondre sur ces auteurs à partir de connaissances générales " +
@@ -29,12 +30,16 @@ export const INSTRUCTIONS =
   "directement les compteurs de deux auteurs sans le dire explicitement à l'utilisateur : les " +
   "grilles ne sont pas les mêmes, et un écart de chiffres peut ne mesurer que cela. " +
   "Appeler `referentiel` EN PREMIER pour voir, par auteur, les concepts réellement disponibles.\n" +
-  "DEUX RÉSERVES À TRANSMETTRE quand elles s'appliquent : (1) un atome n'est jamais daté de " +
+  "TROIS RÉSERVES À TRANSMETTRE quand elles s'appliquent : (1) un atome n'est jamais daté de " +
   "l'année de l'œuvre — Freud a cessé de signaler ses ajouts dès la 3e édition, voir `datation` ; " +
-  "(2) les œuvres d'Otto Rank et de Karl Abraham viennent de FAC-SIMILÉS OCRISÉS NON RELUS " +
-  "(aucune transcription relue n'existe pour eux) : le champ `qualite_source` vaut alors « ocr », et un atome dont " +
-  "`ocr_suspect` vaut 1 porte une trace de corruption repérée — le signaler à l'utilisateur, qui " +
-  "doit vérifier la citation sur le scan avant de la publier.";
+  "(2) plusieurs œuvres (Otto Rank, Karl Abraham, Sándor Ferenczi, Wilhelm Stekel) viennent de " +
+  "FAC-SIMILÉS OCRISÉS NON RELUS (aucune transcription relue n'existe pour eux) : le champ " +
+  "`qualite_source` vaut alors « ocr », et un atome dont `ocr_suspect` vaut 1 porte une trace de " +
+  "corruption repérée — le signaler à l'utilisateur, qui doit vérifier la citation sur le scan " +
+  "avant de la publier ; (3) dans l'outil `comparaison`, un lien de reprise n'est opposable QUE " +
+  "si son `verdict` vaut « confirme » — un lien encore NULL (non lu) ou « rejete »/« reclasse » " +
+  "ne doit jamais être présenté comme un emprunt entre les deux auteurs, voir la description de " +
+  "cet outil.";
 
 export const OUTILS = [
   {
@@ -118,8 +123,19 @@ export const OUTILS = [
       + "rapport. Reprendre une formulation n'est pas partager une thèse ; nommer n'est ni "
       + "suivre, ni approuver, ni contredire. Aucun chiffre ici ne mesure un accord ni un "
       + "désaccord, et il n'existe aucun champ « socle », « emprunt » ou « contradiction ». "
-      + "Le champ `sens` n'est rempli que si les dates le permettent — NULL veut dire "
-      + "INDÉCIDABLE, jamais « aucun lien ». Rapporter le champ `reserve` avec tout chiffre.",
+      + "Le champ `sens` (calculé) n'est rempli que si les dates le permettent — NULL veut dire "
+      + "INDÉCIDABLE, jamais « aucun lien ».\n"
+      + "CHAQUE LIEN DE `liens` PORTE UN ÉTAT DE LECTURE, À VÉRIFIER AVANT DE LE CITER : "
+      + "`verdict` vaut « confirme » (une lecture humaine en contexte tient le lien pour réel — "
+      + "seul cas où il est correct de le présenter comme un emprunt entre les deux auteurs), "
+      + "« rejete » (faux positif identifié à la lecture — titre, apparat bibliographique, tête "
+      + "de page recollée par l'OCR : NE JAMAIS le publier comme un emprunt), « reclasse » (les "
+      + "deux auteurs citent le MÊME TIERS, nommé dans `reclasse_vers` — aucun des deux ne lit "
+      + "l'autre ici), ou NULL (pas encore lu : seuls `sens`/`a_verifier` informent, avec la même "
+      + "prudence qu'avant). `sens_lu` est le sens établi par cette lecture et prévaut sur `sens` "
+      + "quand il est renseigné. `motif_lecture` cite le texte qui fonde le verdict — à rapporter "
+      + "avec lui, jamais le verdict seul, sans quoi l'affirmation redevient invérifiable pour "
+      + "l'utilisateur. Rapporter le champ `reserve` avec tout chiffre.",
     schema: {
       auteur: z.string().optional().describe("restreindre aux liens impliquant cet auteur"),
       autre: z.string().optional().describe("second auteur, pour n'avoir qu'un couple"),

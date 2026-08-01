@@ -470,7 +470,7 @@ export async function comparaison(env, { auteur, autre, limite } = {}) {
 
   const liens = await env.DB.prepare(
     `SELECT l.contenance, l.force, l.sens, l.source_tierce, l.a_verifier, l.partages,
-            l.evenement,
+            l.evenement, l.verdict, l.sens_lu, l.reclasse_vers, l.motif_lecture,
             a.nom AS auteur_a, b.nom AS auteur_b,
             xa.atome_id AS id_a, xa.texte AS texte_a, oa.titre AS oeuvre_a,
             oa.annee_oeuvre AS annee_a, oa.qualite_source AS source_a, xa.ocr_suspect AS suspect_a,
@@ -508,13 +508,22 @@ export async function comparaison(env, { auteur, autre, limite } = {}) {
     lectures_declarees: lectures.results,
     nominations: noms.results,
     reserve:
-      "Un lien établit qu'un TEXTE est partagé, jamais qu'une THÈSE l'est. Le sens n'est donné "
-      + "que si les fenêtres de datation des deux passages sont disjointes — sinon il est "
-      + "INDÉCIDABLE, ce qui est une information sur ce que le corpus permet, pas une absence. "
+      "Un lien établit qu'un TEXTE est partagé, jamais qu'une THÈSE l'est. `sens` est ce que le "
+      + "CALCUL établit à partir des seules fenêtres de datation — INDÉCIDABLE (NULL) si elles se "
+      + "chevauchent, ce qui est une information sur ce que le corpus permet, pas une absence. "
       + "Quand les deux passages nomment une source tierce (Sophocle, Shakespeare), aucun sens "
       + "n'est donné : les deux auteurs peuvent tenir leur formulation d'elle plutôt que l'un de "
-      + "l'autre. Enfin, une PAIRE est deux phrases ; un ÉVÉNEMENT est une citation continue — "
-      + "c'est lui qui dit combien de fois un auteur en cite un autre.",
+      + "l'autre. `verdict`/`sens_lu`/`reclasse_vers`/`motif_lecture` viennent d'une LECTURE "
+      + "humaine en contexte (354 événements du corpus instruits ainsi) et PRÉVALENT sur `sens` "
+      + "et `a_verifier` quand ils sont renseignés — `verdict` vaut « confirme » (le lien tient), "
+      + "« rejete » (faux positif : titre, apparat, tête de page — ne pas le publier comme un "
+      + "emprunt), ou « reclasse » (les deux auteurs citent le même TIERS nommé dans "
+      + "`reclasse_vers`, aucun ne lit l'autre). `motif_lecture` cite le texte qui fonde le "
+      + "jugement — à rapporter avec lui, jamais le verdict seul. `verdict` NULL veut dire non "
+      + "encore lu : `sens`/`a_verifier` restent alors la seule information disponible. Enfin, "
+      + "une PAIRE est deux phrases ; un ÉVÉNEMENT est une citation continue — c'est lui qui dit "
+      + "combien de fois un auteur en cite un autre, et un même verdict de lecture couvre toutes "
+      + "les paires de l'événement.",
     ne_pas_conclure:
       "Nommer n'est ni suivre, ni approuver, ni contredire — et reprendre une formulation n'est "
       + "pas partager une thèse. Aucun chiffre de cette page ne mesure un accord ni un désaccord.",
