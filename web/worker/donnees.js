@@ -240,15 +240,40 @@ export async function grappeDetail(env, { rang } = {}) {
 /** Chronologie d'UN concept — miroir exact d'AgentChronologie (core/agents.py) : densité sur
  *  TOUS les atomes de l'œuvre (Otto Rank compris, comme l'agent), plus la densité « d'origine »
  *  quand l'œuvre a été collationnée. Jamais un pour-cent sans le rappel de sa réserve d'édition. */
-export async function chronologieConcept(env, { concept } = {}) {
-  const existe = await env.DB.prepare("SELECT 1 FROM concepts WHERE nom = ?")
-    .bind(concept || "").first();
-  if (!existe) throw new ErreurAPI("concept inconnu : " + concept, 404);
+export async function chronologieConcept(env, { concept, auteur } = {}) {
+  // GARDE UNIQUE, DONT TOUT LE RESTE DÉPEND. Quand `auteur` est fourni, l'existence est vérifiée
+  // POUR CE COUPLE (nom, auteur), jamais pour le nom seul.
+  //
+  // DÉFAUT RÉEL TROUVÉ PAR REVUE ADVERSARIALE, ET IL ÉTAIT BLOQUANT. La première version ne
+  // vérifiait que le nom : Josef Breuer, qui ne possède AUCUN concept propre, passait quand même
+  // ce test dès qu'un nom existait chez N'IMPORTE QUEL auteur — et ses actes de citation (table
+  // `carte_actes`, où il apparaît bien, catégorisé avec le lexique EMPRUNTÉ de Freud) n'étaient
+  // filtrés par aucune vérification d'appartenance. Vérifié empiriquement sur le corpus réel :
+  // `dossierExterne("angst", "Josef Breuer")` rendait deux actes CONFIRMÉS avant ce correctif,
+  // alors que Breuer est explicitement exclu de ce chantier (voir core/accueil.py). Cette garde
+  // ferme le trou à sa source : ni `etapes` ni `dossierExterne` ne sont atteints pour un couple
+  // (concept, auteur) qui n'existe pas réellement dans `concepts`.
+  const existe = auteur
+    ? await env.DB.prepare(
+        `SELECT 1 FROM concepts c JOIN auteurs a ON a.id = c.auteur_id
+         WHERE c.nom = ? AND a.nom = ?`).bind(concept || "", auteur).first()
+    : await env.DB.prepare("SELECT 1 FROM concepts WHERE nom = ?").bind(concept || "").first();
+  if (!existe) {
+    throw new ErreurAPI(
+      "concept inconnu" + (auteur ? " pour " + auteur : "") + " : " + concept, 404);
+  }
 
-  const { results } = await env.DB.prepare(`
+  // La chronologie elle-même est scopée par auteur QUAND IL EST DONNÉ — sans quoi fournir
+  // `auteur` désambiguïserait le dossier mais laisserait le graphique principal continuer de
+  // mélanger plusieurs motifs distincts sous un même nom (même défaut de collision que celui que
+  // `dossierExterne` corrige, trouvé par la même revue). Sans auteur, comportement HISTORIQUE
+  // inchangé : tous les porteurs du nom, tous auteurs confondus.
+  const joinAuteur = auteur ? " JOIN auteurs au2 ON au2.id = c.auteur_id" : "";
+  const filtreAuteur = auteur ? " AND au2.nom = ?2" : "";
+  const requeteEtapes = `
     WITH concept_atomes AS (
       SELECT ac.atome_id FROM atome_concepts ac
-      JOIN concepts c ON c.id = ac.concept_id WHERE c.nom = ?
+      JOIN concepts c ON c.id = ac.concept_id${joinAuteur} WHERE c.nom = ?1${filtreAuteur}
     )
     SELECT o.cle, o.titre, o.titre_fr, o.langue, au.nom AS auteur,
       o.annee_oeuvre, o.annee_edition, o.edition,
@@ -262,7 +287,9 @@ export async function chronologieConcept(env, { concept } = {}) {
     JOIN oeuvres o ON o.id = a.oeuvre_id
     JOIN auteurs au ON au.id = o.auteur_id
     LEFT JOIN concept_atomes ca ON ca.atome_id = a.id
-    GROUP BY o.id ORDER BY o.annee_oeuvre`).bind(concept).all();
+    GROUP BY o.id ORDER BY o.annee_oeuvre`;
+  const stmt = env.DB.prepare(requeteEtapes);
+  const { results } = await (auteur ? stmt.bind(concept, auteur) : stmt.bind(concept)).all();
 
   const etapes = results.map((l) => ({
     oeuvre: l.cle, titre: l.titre, titre_fr: l.titre_fr, langue: l.langue, auteur: l.auteur,
@@ -276,12 +303,146 @@ export async function chronologieConcept(env, { concept } = {}) {
   }));
 
   return {
-    concept, etapes,
+    concept, auteur: auteur || null,
+    etapes,
+    dossier: auteur ? await dossierExterne(env, concept, auteur) : null,
+    dossier_reserve: auteur ? RESERVE_DOSSIER : null,
     reserve: "Pour les œuvres COLLATIONNÉES, « pour_mille_origine » ne compte que les "
       + "passages retrouvés dans la première édition. Pour les autres, l'œuvre est lue dans "
       + "une édition postérieure dont Freud n'a pas signalé les ajouts : une variation peut y "
       + "refléter un ajout tardif plutôt qu'un mouvement de la pensée.",
   };
+}
+
+const RESERVE_DOSSIER =
+  "Le dossier montre trois signaux VÉRIFIÉS séparément, jamais fusionnés en un chiffre : "
+  + "`actes` (reprise textuelle, avec sa `contenance` propre), `densite_comparee` (le motif QUE "
+  + "CET AUTEUR a défini pour ce concept, mesuré chez les autres — jamais le nom seul, qui "
+  + "collisionne entre lexiques), `mentions` (cet auteur nommant un autre EN PARLANT de ce "
+  + "concept précis, jamais toutes les fois où on parle de lui). "
+  + "`actes` ET `mentions` PORTENT TOUS LES ÉTATS DE LECTURE, PAS SEULEMENT LES CONFIRMÉS : "
+  + "`verdict` vaut « confirme », « rejete » ou « reclasse », ou NULL si non encore lu. SEUL "
+  + "« confirme » autorise à présenter le fait comme un emprunt ou un renvoi réel — un « rejete » "
+  + "était un faux positif (titre, apparat, homographe), et NULL veut dire non encore lu, pas "
+  + "confirmé par défaut. "
+  + "AUCUN de ces trois signaux, même confirmé, ne dit si le rapport est un accord ou un "
+  + "désaccord — une reprise à forte contenance peut être une citation contestée comme une "
+  + "adhésion, seule la lecture du `motif_lecture` ou de la citation tranche. Ne jamais "
+  + "additionner ni moyenner ces trois signaux en un score de « force du lien » : leurs unités "
+  + "ne sont pas comparables, et ce serait inventer une mesure que le corpus ne fournit pas. "
+  + "`silence` non nul veut dire qu'aucun des trois n'a rien trouvé — une information, pas une "
+  + "absence de mesure.";
+
+/** DOSSIER EXTERNE D'UN CONCEPT — ce qui, ailleurs dans le corpus, touche VÉRIFIABLEMENT ce
+ *  concept précis d'un auteur précis. Trois signaux, jamais fusionnés en un chiffre unique :
+ *  chacun garde sa propre force (contenance d'une reprise, densité en ‰, verdict d'une mention),
+ *  et aucun champ ne nomme la nature du rapport — même doctrine que `comparaison.qualifier` et
+ *  `core/socle.py` : nommer n'est ni suivre, ni approuver, ni contredire.
+ *
+ *  POURQUOI UN AUTEUR EST OBLIGATOIRE, ET PAS SEULEMENT LE NOM DU CONCEPT. Les noms de concepts
+ *  COLLISIONNENT entre auteurs — « angst » est défini indépendamment par quatre lexiques
+ *  différents, avec des motifs regex DISTINCTS (mesuré : 80 sous-concepts du corpus sont dans ce
+ *  cas). Joindre `usages` par le seul nom mélangerait quatre mesures différentes sous une même
+ *  étiquette. La jointure sur `usages.lexique = (auteur du concept)` isole le motif que CET
+ *  auteur a réellement écrit — même discipline que `haut_est_le_lexicographe` dans le socle.
+ *
+ *  JOSEF BREUER N'A JAMAIS DE DOSSIER — mais PAS « automatiquement » comme l'affirmait une
+ *  première version de ce commentaire, qui était fausse et l'a été jusqu'à ce qu'une revue
+ *  adversariale la prenne en défaut. Il ne possède aucun concept propre, mais il apparaît bien
+ *  comme auteur dans `carte_actes` (catégorisé avec le lexique EMPRUNTÉ de Freud) : sans la garde
+ *  ci-dessous, un acte confirmé touchant un concept DE FREUD portant un nom que Breuer ne possède
+ *  pas aurait pu remonter dans SON dossier. C'est désormais `chronologieConcept` qui ferme le
+ *  trou, EN AMONT de cette fonction : `existe` vérifie le couple (nom, auteur), jamais le nom
+ *  seul, et cette fonction n'est appelée qu'après que ce couple a été confirmé réel.
+ */
+async function dossierExterne(env, concept, auteur) {
+  const cetAuteur = await env.DB.prepare("SELECT id FROM auteurs WHERE nom = ?")
+    .bind(auteur).first("id");
+  if (!cetAuteur) return { actes: [], densite_comparee: [], mentions: [], silence: null };
+
+  // ACTES DE CITATION touchant ce concept — TOUS LES VERDICTS, pas seulement « confirme » (voir
+  // RESERVE_DOSSIER : rejete/reclasse/NULL remontent aussi, avec leur verdict intact, jamais
+  // filtrés ici). `concepts_communs` est une liste de NOMS séparés par ", " — construite par
+  // intersection des concepts portés par les atomes de CHAQUE côté de l'acte (voir
+  // carte.evenements_de_carte). Un nom qui y figure désigne donc forcément le concept DE CET
+  // AUTEUR sur son propre côté : contrairement à `usages`, il n'y a pas ici de risque de collision
+  // ENTRE LEXIQUES, l'appartenance à un auteur est déjà tranchée par construction. Le filtre exact
+  // se fait en JS (découpage de la liste), plus sûr qu'un LIKE sur une sous-chaîne.
+  const actesBruts = await env.DB.prepare(`
+    SELECT k.contenance_max, k.force, k.sens, k.sens_lu, k.verdict, k.reclasse_vers,
+           k.concepts_communs, k.citation_a, k.citation_b,
+           a.nom AS auteur_a, b.nom AS auteur_b,
+           oa.titre AS oeuvre_a, oa.annee_oeuvre AS annee_a,
+           ob.titre AS oeuvre_b, ob.annee_oeuvre AS annee_b
+    FROM carte_actes k
+    JOIN auteurs a ON a.id = k.auteur_a
+    JOIN auteurs b ON b.id = k.auteur_b
+    JOIN oeuvres oa ON oa.id = k.oeuvre_a
+    JOIN oeuvres ob ON ob.id = k.oeuvre_b
+    WHERE a.nom = ?1 OR b.nom = ?1
+    ORDER BY k.contenance_max DESC`).bind(auteur).all();
+
+  const actes = actesBruts.results
+    .filter((k) => (k.concepts_communs || "").split(", ").includes(concept))
+    .map((k) => ({
+      autre_auteur: k.auteur_a === auteur ? k.auteur_b : k.auteur_a,
+      contenance: k.contenance_max, force: k.force, sens: k.sens, sens_lu: k.sens_lu,
+      verdict: k.verdict, reclasse_vers: k.reclasse_vers,
+      oeuvre: k.auteur_a === auteur ? k.oeuvre_a : k.oeuvre_b,
+      annee: k.auteur_a === auteur ? k.annee_a : k.annee_b,
+      citation: k.auteur_a === auteur ? k.citation_a : k.citation_b,
+      citation_autre: k.auteur_a === auteur ? k.citation_b : k.citation_a,
+    }));
+
+  // DENSITÉ COMPARÉE — le motif QUE CET AUTEUR a défini pour ce concept (lexique = son id),
+  // mesuré chez tous les auteurs de la même langue. Jamais le nom seul (voir garde ci-dessus).
+  const densiteBrute = await env.DB.prepare(`
+    SELECT x.nom AS auteur, u.pour_mille, u.atomes, u.porteurs
+    FROM usages u JOIN auteurs x ON x.id = u.auteur_id
+    WHERE u.sous_concept = ?1 AND u.lexique = ?2 AND u.pour_mille IS NOT NULL
+    ORDER BY u.pour_mille DESC`).bind(concept, cetAuteur).all();
+  const densite_comparee = densiteBrute.results.filter((d) => d.auteur !== auteur);
+
+  // MENTIONS dans le contexte de ce concept — les atomes où CET AUTEUR nomme un autre, ET qui
+  // portent aussi son propre concept `concept`. Ce n'est pas « toutes les fois où on parle de
+  // lui » : c'est « les fois où LUI, en parlant de CE concept, nomme quelqu'un d'autre ».
+  const mentionsBrutes = await env.DB.prepare(`
+    SELECT y.nom AS auteur_nomme, x.atome_id AS id, x.texte, o.titre AS oeuvre,
+           o.annee_oeuvre, m.verdict, m.reclasse_vers, m.motif_lecture
+    FROM mentions m
+    JOIN atomes x ON x.id = m.atome_id
+    JOIN atome_concepts ac ON ac.atome_id = m.atome_id
+    JOIN concepts c ON c.id = ac.concept_id
+    JOIN oeuvres o ON o.id = x.oeuvre_id
+    JOIN auteurs y ON y.id = m.auteur_nomme_id
+    WHERE m.auteur_id = ?1 AND c.nom = ?2 AND c.auteur_id = ?1
+    ORDER BY o.annee_oeuvre`).bind(cetAuteur, concept).all();
+
+  let silence = null;
+  if (!actes.length && !densite_comparee.length && !mentionsBrutes.results.length) {
+    // RÉUTILISE `carte_couples`, PLUTÔT QUE DE RÉPÉTER TOUJOURS LA MÊME PHRASE — trouvé par
+    // revue adversariale : pour un auteur isolé dans sa langue (Gustave Le Bon, seul francophone
+    // du corpus), les trois signaux sont vides à 100 % pour SES 46 concepts, structurellement,
+    // et `carte_couples.silence` le sait déjà pour chacun de ses couples (`"langues"`). Cette
+    // information existait ailleurs dans la base ; ne pas la lire ici aurait répété la même
+    // phrase générique sur 46 pages sans jamais dire pourquoi.
+    const couples = await env.DB.prepare(
+      `SELECT c.silence FROM carte_couples c
+       JOIN auteurs a ON a.id = c.auteur_a JOIN auteurs b ON b.id = c.auteur_b
+       WHERE a.nom = ?1 OR b.nom = ?1`).bind(auteur).all();
+    const isole = couples.results.length > 0
+      && couples.results.every((c) => c.silence === "langues");
+    silence = isole
+      ? "aucune connexion externe vérifiée pour ce concept — et structurellement, pas "
+        + "seulement pour lui : " + auteur + " est isolé dans sa langue, les corpus d'autres "
+        + "langues du projet ne partagent quasiment aucune suite de mots avec le sien. Un "
+        + "dossier vide chez cet auteur n'est donc pas un fait négatif, c'est la limite connue "
+        + "de la reprise textuelle et de la densité comparée entre langues."
+      : "aucune connexion externe vérifiée pour ce concept — silence qui décrit ce que le "
+        + "corpus permet d'affirmer aujourd'hui, pas l'absence de tout rapport";
+  }
+
+  return { actes, densite_comparee, mentions: mentionsBrutes.results, silence };
 }
 
 /** « Ce que Freud dit de lui-même » — les signaux CONFIRMÉS (objection, révision, auto-citation)

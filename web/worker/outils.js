@@ -97,10 +97,31 @@ export const OUTILS = [
     nom: "chronologie",
     description:
       "Densité d'UN concept œuvre par œuvre (en ‰), dans l'ordre chronologique — pour voir "
-      + "QUAND un concept apparaît ou s'intensifie chez Freud. Quand l'œuvre a été collationnée "
-      + "avec sa première édition, donne aussi la densité « d'origine » (passages authentifiés "
-      + "de la première édition, la seule mesure comparable sans réserve).",
-    schema: { concept: z.string().describe("nom exact du concept, voir `referentiel`") },
+      + "QUAND un concept apparaît ou s'intensifie. Fonctionne pour tout auteur, pas seulement "
+      + "Freud. Quand l'œuvre a été collationnée avec sa première édition, donne aussi la "
+      + "densité « d'origine » (passages authentifiés de la première édition, la seule mesure "
+      + "comparable sans réserve).\n"
+      + "`auteur` EST FORTEMENT RECOMMANDÉ, PAS SEULEMENT UTILE : les noms de concepts "
+      + "collisionnent entre lexiques (« angst » désigne quatre motifs distincts selon qui l'a "
+      + "défini), et SANS `auteur`, la courbe elle-même mélange les porteurs de TOUS les "
+      + "lexiques qui ont choisi ce nom, sans distinction. Avec `auteur`, la courbe est scopée à "
+      + "SON concept précis, et la réponse porte aussi `dossier` : ce qui, ailleurs dans le "
+      + "corpus, touche VÉRIFIABLEMENT ce concept précis de cet auteur — actes de citation, "
+      + "comparaison de densité avec les autres auteurs, mentions où cet auteur nomme un autre "
+      + "en parlant de ce concept. CHAQUE ACTE ET CHAQUE MENTION PORTE SON PROPRE `verdict` "
+      + "(confirme/rejete/reclasse/NULL) — rien n'est présélectionné aux seuls confirmés, lire "
+      + "`dossier_reserve` avant de citer quoi que ce soit : seul « confirme » autorise à "
+      + "présenter un fait comme réel, les trois signaux ne se fusionnent jamais en un score, "
+      + "et aucun ne dit si le rapport est un accord ou un désaccord. Un `dossier` aux trois "
+      + "signaux vides n'est pas forcément un fait négatif : un auteur isolé dans sa langue "
+      + "(Gustave Le Bon, seul francophone du corpus) aura structurellement peu ou rien à "
+      + "montrer — `dossier.silence` le précise quand c'est le cas.",
+    schema: {
+      concept: z.string().describe("nom exact du concept, voir `referentiel`"),
+      auteur: z.string().optional().describe(
+        "auteur propriétaire de ce concept — désambiguïse les noms partagés entre lexiques "
+        + "et déclenche le calcul du `dossier`"),
+    },
     fn: (env, p) => donnees.chronologieConcept(env, p),
   },
   {

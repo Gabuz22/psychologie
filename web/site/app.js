@@ -116,7 +116,12 @@ function remplirSelect(sel, valeurs, rendu) {
   }
 }
 
-function remplirConcepts(cible, groupe) {
+/** `avecAuteur` : porte l'auteur propriétaire sur `data-auteur` de chaque <option>, ET le
+ *  montre dans le libellé. Nécessaire dès qu'un appelant a besoin de désambiguïser — les noms
+ *  de concepts COLLISIONNENT entre lexiques (« angst » est défini indépendamment quatre fois) ;
+ *  le filtre de recherche (#f-concept) n'en a pas besoin, lui, puisqu'il croise déjà avec un
+ *  sélecteur d'auteur séparé (#f-auteur). Ne change donc PAS le comportement par défaut. */
+function remplirConcepts(cible, groupe, avecAuteur = false) {
   cible.length = 1;
   const groupes = groupe ? { [groupe]: referentiel.groupes[groupe] || [] } : referentiel.groupes;
   for (const [g, concepts] of Object.entries(groupes)) {
@@ -125,7 +130,9 @@ function remplirConcepts(cible, groupe) {
     for (const c of concepts) {
       const o = document.createElement("option");
       o.value = c.nom;
-      o.textContent = `${c.nom} (${c.n_atomes})`;
+      o.textContent = avecAuteur
+        ? `${c.nom} (${c.n_atomes}) — ${c.auteur}` : `${c.nom} (${c.n_atomes})`;
+      if (avecAuteur) o.dataset.auteur = c.auteur;
       og.appendChild(o);
     }
     cible.appendChild(og);
@@ -204,12 +211,14 @@ async function afficherGrappe(rang) {
 /* ------------------------------------------------------------------------- chronologie */
 
 async function afficherChronologie() {
-  const concept = $("#chrono-concept").value;
+  const select = $("#chrono-concept");
+  const concept = select.value;
+  const auteur = select.selectedOptions[0]?.dataset.auteur || "";
   const zone = $("#chrono-resultat");
   if (!concept) { zone.textContent = ""; return; }
   zone.textContent = "chargement…";
   try {
-    const r = await api("/api/chronologie", { concept });
+    const r = await api("/api/chronologie", { concept, auteur });
     zone.textContent = "";
     const graphique = document.createElement("div");
     graphique.className = "graphique";
@@ -234,9 +243,108 @@ async function afficherChronologie() {
     reserve.className = "reserve";
     reserve.textContent = "Réserve — " + r.reserve;
     zone.appendChild(reserve);
+    if (r.dossier) zone.appendChild(rendreDossier(r.dossier, r.dossier_reserve, auteur));
   } catch (e) {
     zone.innerHTML = `<span class="erreur">erreur : ${e.message}</span>`;
   }
+}
+
+/* LE DOSSIER EXTERNE — trois signaux affichés dans TROIS SECTIONS SÉPARÉES, jamais mélangés
+ * en une seule liste ni résumés par un chiffre unique : ce serait inventer une force que le
+ * corpus ne mesure pas (voir la réserve, rendue avec le dossier, jamais séparée de lui). */
+const LIBELLE_VERDICT = {
+  confirme: "confirmé", rejete: "rejeté — faux positif", reclasse: "reclassé vers un tiers",
+};
+
+function etiquetteVerdict(verdict) {
+  const span = document.createElement("span");
+  span.className = "etiquette" + (verdict === "confirme" ? ""
+    : verdict ? " etiquette-attention" : " etiquette-attente");
+  span.textContent = verdict ? (LIBELLE_VERDICT[verdict] || verdict) : "non encore lu";
+  return span;
+}
+
+function rendreDossier(dossier, reserve, auteur) {
+  const bloc = document.createElement("div");
+  bloc.className = "dossier-externe";
+  const titre = document.createElement("h3");
+  titre.textContent = "Dossier externe" + (auteur ? ` — ${auteur}` : "");
+  bloc.appendChild(titre);
+
+  if (dossier.silence) {
+    const note = document.createElement("p");
+    note.className = "note carte-silence";
+    note.textContent = dossier.silence;
+    bloc.appendChild(note);
+  } else {
+    if (dossier.actes.length) {
+      const section = document.createElement("div");
+      section.className = "dossier-section";
+      section.innerHTML = `<h4>Actes de citation touchant ce concept (${dossier.actes.length})</h4>`;
+      for (const a of dossier.actes) {
+        const j = document.createElement("div");
+        j.className = "jugement";
+        j.appendChild(etiquetteVerdict(a.verdict));
+        const detail = document.createElement("p");
+        detail.className = "motif";
+        detail.textContent = `avec ${a.autre_auteur} — ${a.oeuvre} (${a.annee}), `
+          + `contenance ${a.contenance} (${a.force})`
+          + (a.reclasse_vers ? ` · reclassé vers ${a.reclasse_vers}` : "");
+        j.appendChild(detail);
+        if (a.citation) {
+          const cit = document.createElement("p");
+          cit.className = "motif";
+          cit.textContent = `« ${texteCourt(a.citation, 240)} »`;
+          j.appendChild(cit);
+        }
+        section.appendChild(j);
+      }
+      bloc.appendChild(section);
+    }
+
+    if (dossier.densite_comparee.length) {
+      const section = document.createElement("div");
+      section.className = "dossier-section";
+      section.innerHTML = "<h4>Densité comparée de ce motif chez les autres auteurs</h4>";
+      const graphique = document.createElement("div");
+      graphique.className = "graphique";
+      for (const d of dossier.densite_comparee) {
+        graphique.appendChild(ligneBarre(d.auteur, d.pour_mille, null));
+      }
+      section.appendChild(graphique);
+      bloc.appendChild(section);
+    }
+
+    if (dossier.mentions.length) {
+      const section = document.createElement("div");
+      section.className = "dossier-section";
+      section.innerHTML = `<h4>Mentions en parlant de ce concept (${dossier.mentions.length})</h4>`;
+      for (const m of dossier.mentions) {
+        const j = document.createElement("div");
+        j.className = "jugement";
+        j.appendChild(etiquetteVerdict(m.verdict));
+        const detail = document.createElement("p");
+        detail.className = "motif";
+        detail.textContent = `nomme ${m.auteur_nomme} — ${m.oeuvre} (${m.annee_oeuvre})`
+          + (m.reclasse_vers ? ` · reclassé vers ${m.reclasse_vers}` : "");
+        j.appendChild(detail);
+        if (m.motif_lecture) {
+          const mot = document.createElement("p");
+          mot.className = "motif";
+          mot.textContent = m.motif_lecture;
+          j.appendChild(mot);
+        }
+        section.appendChild(j);
+      }
+      bloc.appendChild(section);
+    }
+  }
+
+  const res = document.createElement("p");
+  res.className = "reserve";
+  res.textContent = "Réserve du dossier — " + reserve;
+  bloc.appendChild(res);
+  return bloc;
 }
 
 /* ------------------------------------------------------- Freud sur lui-même (signaux) */
@@ -552,7 +660,7 @@ async function demarrer() {
         o.auteur && o.auteur !== "Sigmund Freud" ? ", " + o.auteur : ""})`]);
     remplirSelect($("#f-auteur"), referentiel.auteurs, (a) => [a.nom, a.nom]);
 
-    remplirConcepts($("#chrono-concept"), "");
+    remplirConcepts($("#chrono-concept"), "", true);
     remplirSelect($("#lecture-oeuvre"), referentiel.oeuvres,
       (o) => [o.cle, `${o.titre} (${o.annee_oeuvre}${
         o.auteur && o.auteur !== "Sigmund Freud" ? ", " + o.auteur : ""})`]);

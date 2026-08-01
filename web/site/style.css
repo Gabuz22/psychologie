@@ -196,6 +196,13 @@ button.exemple { font-size: .85rem; padding: .35rem .7rem; }
   padding: .3rem 0 .3rem .8rem; margin-top: 1rem; max-width: 46rem;
 }
 
+/* dossier externe d'un concept — trois signaux qui ne se mélangent jamais visuellement non plus */
+.dossier-section { margin-top: 1.4rem; }
+.dossier-section h4 { font-family: var(--serif); font-size: 1rem; margin: 0 0 .5rem; }
+.etiquette-attente { background: none; border-color: var(--filet); color: var(--gris); }
+.etiquette-attention { background: none; border-color: var(--accent); color: var(--gris);
+                        text-decoration: line-through; }
+
 /* graphique de densité (barres horizontales, sans dépendance) */
 .graphique { margin-top: .6rem; }
 .ligne-barre { display: grid; grid-template-columns: 11rem 1fr 3.5rem; align-items: center;
