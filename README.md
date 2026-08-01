@@ -475,6 +475,15 @@ calcul que la base du site :
   déclarer, ce qui arrive quand on en oublie un (c'est arrivé), et ce que le contrat ne promet
   pas — l'accueil, jamais la comparabilité.
 
+**Le dossier externe d'un concept** n'est pas un document généré — c'est une fonctionnalité du
+site (page « Chronologie », et l'outil MCP `chronologie` avec `auteur`) : pour un concept d'un
+auteur précis, trois faits déjà vérifiés ailleurs dans le corpus — actes de citation, densité
+comparée, mentions — rendus séparément, sans jamais un score qui les fusionnerait. Sa couverture réelle, mesurée le 2026-08-01 : 91,8 % des 588 concepts des six auteurs concernés,
+100 % pour cinq d'entre eux, structurellement nulle pour Gustave Le Bon, seul francophone du
+corpus. **Ce chiffre est un instantané, pas une donnée maintenue** — il dérivera au premier
+concept ajouté ; la valeur courante vit à `/api/couverture-dossier` et sur la page « Méthode »
+du site, qui l'affiche en direct plutôt que de la recopier.
+
 ---
 
 ## Utilisation

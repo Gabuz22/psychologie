@@ -193,4 +193,19 @@ export const OUTILS = [
     },
     fn: (env, p) => donnees.signaux(env, p),
   },
+  {
+    nom: "couverture_dossier",
+    description:
+      "CE QUE LE DOSSIER EXTERNE (voir `chronologie`) COUVRE RÉELLEMENT, sur l'ensemble des "
+      + "concepts des six auteurs concernés — à appeler AVANT de conclure quoi que ce soit d'un "
+      + "dossier vide. Un dossier vide n'est pas nécessairement un fait négatif : `part_remplie` "
+      + "donne la part réelle de concepts ayant au moins un signal vérifié, et distingue le "
+      + "« silence_structurel » (auteur isolé dans sa langue, aujourd'hui Gustave Le Bon — sa "
+      + "vacuité est une limite de méthode, pas un fait sur lui) du « silence_non_explique » "
+      + "(aucune barrière connue, simplement rien trouvé pour l'instant). `detail` liste, par "
+      + "concept, quels signaux exacts sont non vides — utile pour savoir OÙ chercher avant "
+      + "d'appeler `chronologie` concept par concept.",
+    schema: {},
+    fn: (env) => donnees.dossierCouverture(env),
+  },
 ];

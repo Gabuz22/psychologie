@@ -13,7 +13,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { carte, chronologieConcept, comparaison } from "./donnees.js";
+import { carte, chronologieConcept, comparaison, dossierCouverture } from "./donnees.js";
 
 const LIEN_LU = {
   contenance: 1.0, force: "manifeste", sens: "a_vers_b", source_tierce: 0, a_verifier: 0,
@@ -378,4 +378,90 @@ test("la réserve du dossier interdit explicitement le score fusionné et l'inf�
   // la réserve doit donc redire, ici aussi, que seul « confirme » autorise à citer le fait.
   assert.match(rep.dossier_reserve, /rejete/);
   assert.match(rep.dossier_reserve, /confirme/);
+});
+
+/* LA COUVERTURE DU DOSSIER EXTERNE — ce que la fonctionnalité voit sur l'ENSEMBLE des concepts,
+ * pas un concept à la fois. Même principe que `carte.couverture()` en Python : une fonctionnalité
+ * qui ne dit jamais ce qu'elle couvre laisse croire par défaut qu'elle couvre tout. Le stub route
+ * par table interrogée, comme les autres, mais route AUSSI par la présence de `JOIN` distinctifs
+ * pour distinguer les deux requêtes sur `concepts` (colonnes différentes) qui, sinon,
+ * matcheraient le même `s.includes("FROM concepts")`.
+ */
+function stubCouvertureDB({
+  concepts = [{ nom: "geburt", auteur: "Otto Rank" }, { nom: "credulite", auteur: "Gustave Le Bon" },
+              { nom: "mutter", auteur: "Sigmund Freud" }],
+  actes = [{ a: 1, b: 2, auteur_a: "Otto Rank", auteur_b: "Sigmund Freud",
+            concepts_communs: "geburt, mutter" }],
+  usages = [{ sous_concept: "mutter", lexique: "Sigmund Freud", n: 3 }],
+  mentions = [{ nom: "mutter", auteur: "Sigmund Freud" }],
+  couples = [{ auteur_a: "Gustave Le Bon", auteur_b: "Sigmund Freud", silence: "langues" },
+             { auteur_a: "Gustave Le Bon", auteur_b: "Otto Rank", silence: "langues" },
+             { auteur_a: "Otto Rank", auteur_b: "Sigmund Freud", silence: null }],
+} = {}) {
+  return {
+    prepare(sql) {
+      const s = sql.trim();
+      const resoudre = async () => {
+        if (s.includes("FROM concepts")) return { results: concepts };
+        if (s.includes("FROM carte_actes")) return { results: actes };
+        if (s.includes("FROM usages")) return { results: usages };
+        if (s.includes("FROM mentions")) return { results: mentions };
+        if (s.includes("FROM carte_couples")) return { results: couples };
+        throw new Error("requête non anticipée par le stub : " + s.slice(0, 70));
+      };
+      return { all: resoudre, bind: () => ({ all: resoudre }) };
+    },
+  };
+}
+
+test("dossierCouverture() classe chaque concept : rempli, silence structurel, ou non expliqué", async () => {
+  const rep = await dossierCouverture({ DB: stubCouvertureDB() });
+  assert.equal(rep.total_concepts, 3);
+  // "mutter" (Freud) : touché par acte ET densité ET mention -> rempli.
+  // "geburt" (Rank) : touché par l'acte seul -> rempli.
+  assert.equal(rep.dossiers_remplis, 2);
+  // "credulite" (Le Bon) : aucun signal, mais Le Bon est isolé (toutes ses lignes carte_couples
+  // valent "langues") -> silence STRUCTUREL, pas un manque non expliqué.
+  assert.equal(rep.silence_structurel, 1);
+  assert.equal(rep.silence_non_explique, 0);
+});
+
+test("l'isolement linguistique exige que TOUS les couples de l'auteur soient bloqués, pas un seul", async () => {
+  // Si Le Bon avait ne serait-ce qu'UN couple non bloqué par la langue, son silence sur un
+  // concept vide ne serait plus structurel — ce serait un manque réel à ne pas maquiller.
+  const rep = await dossierCouverture({ DB: stubCouvertureDB({
+    couples: [{ auteur_a: "Gustave Le Bon", auteur_b: "Sigmund Freud", silence: "langues" },
+              { auteur_a: "Gustave Le Bon", auteur_b: "Otto Rank", silence: null }],
+  }) });
+  assert.equal(rep.silence_structurel, 0);
+  assert.equal(rep.silence_non_explique, 1);
+});
+
+test("par_auteur résume chaque auteur séparément, sans les mélanger", async () => {
+  const rep = await dossierCouverture({ DB: stubCouvertureDB() });
+  const rank = rep.par_auteur.find((a) => a.auteur === "Otto Rank");
+  const lebon = rep.par_auteur.find((a) => a.auteur === "Gustave Le Bon");
+  assert.equal(rank.total, 1);
+  assert.equal(rank.remplis, 1);
+  assert.equal(lebon.total, 1);
+  assert.equal(lebon.remplis, 0);
+});
+
+test("le detail par concept dit QUELS signaux précisément sont non vides", async () => {
+  const rep = await dossierCouverture({ DB: stubCouvertureDB() });
+  const mutter = rep.detail.find((d) => d.concept === "mutter");
+  assert.equal(mutter.actes, true);
+  assert.equal(mutter.densite_comparee, true);
+  assert.equal(mutter.mentions, true);
+  const geburt = rep.detail.find((d) => d.concept === "geburt");
+  assert.equal(geburt.actes, true);
+  assert.equal(geburt.densite_comparee, false);
+  assert.equal(geburt.mentions, false);
+});
+
+test("la réserve de couverture distingue explicitement silence structurel et non expliqué", async () => {
+  const rep = await dossierCouverture({ DB: stubCouvertureDB() });
+  assert.match(rep.reserve, /silence_structurel/);
+  assert.match(rep.reserve, /silence_non_explique/);
+  assert.match(rep.reserve, /limite de méthode/);
 });

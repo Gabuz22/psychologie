@@ -682,9 +682,28 @@ async function demarrer() {
     poserExemples();
     verifierAssistant();
     gererHash();
+    afficherCouvertureDossier();
   } catch (e) {
     $("#stats").innerHTML =
       `<span class="erreur">API indisponible (${e.message}) — le site est-il déployé avec sa base D1 ?</span>`;
+  }
+}
+
+/* Le chiffre de couverture du dossier externe — chargé en direct, JAMAIS écrit en dur dans la
+ * page : ce projet a déjà publié un README qui contredisait le document généré pendant des
+ * jours (modularité 0,373 contre 0,288 réel) parce qu'un chiffre calculé avait été recopié à la
+ * main. Une panne de CE chargement ne doit pas casser le reste du site : elle est isolée dans son
+ * propre bloc, séparé de celui qui gère les autres échecs de demarrer(). */
+async function afficherCouvertureDossier() {
+  const zone = $("#couverture-dossier-chiffre");
+  if (!zone) return;
+  try {
+    const c = await api("/api/couverture-dossier");
+    zone.textContent = `${c.part_remplie} % des ${c.total_concepts} concepts ont au moins un `
+      + `signal vérifié (${c.dossiers_remplis} remplis, ${c.silence_structurel} silencieux par `
+      + `barrière de langue, ${c.silence_non_explique} sans connexion trouvée pour l'instant).`;
+  } catch {
+    zone.textContent = "indisponible pour l'instant.";
   }
 }
 

@@ -445,6 +445,116 @@ async function dossierExterne(env, concept, auteur) {
   return { actes, densite_comparee, mentions: mentionsBrutes.results, silence };
 }
 
+/** COUVERTURE DU DOSSIER EXTERNE — ce que la fonctionnalité voit, et ce qu'elle ne voit pas,
+ *  sur l'ENSEMBLE des concepts des six auteurs concernés (Breuer exclu par construction, voir
+ *  `dossierExterne`). Même esprit que `carte.couverture()` en Python (0,8 % du corpus touché,
+ *  22 œuvres jamais atteintes) : une fonctionnalité qui ne dit jamais ce qu'elle couvre laisse
+ *  croire par défaut qu'elle couvre tout.
+ *
+ *  CALCULÉ EN QUELQUES REQUÊTES AGRÉGÉES, jamais en rejouant dossierExterne() une fois par
+ *  concept (588 fois × 3 requêtes aurait été lent et aurait dupliqué la logique). Les trois
+ *  signaux sont comptés par leur propre agrégation SQL, puis confrontés à la liste complète des
+ *  concepts — un concept absent des trois comptes est un dossier vide, silencieux ou non. */
+export async function dossierCouverture(env) {
+  const concepts = await env.DB.prepare(
+    `SELECT c.nom, au.nom AS auteur FROM concepts c
+     JOIN auteurs au ON au.id = c.auteur_id WHERE c.n_atomes > 0`).all();
+
+  // ACTES : comme dans dossierExterne, `concepts_communs` est une liste de noms — comptée ici en
+  // JS pour les mêmes raisons (pas de LIKE fragile sur une sous-chaîne).
+  const actesBruts = await env.DB.prepare(
+    `SELECT k.auteur_a AS a, k.auteur_b AS b, a.nom AS auteur_a, b.nom AS auteur_b,
+            k.concepts_communs
+     FROM carte_actes k
+     JOIN auteurs a ON a.id = k.auteur_a JOIN auteurs b ON b.id = k.auteur_b`).all();
+  const avecActe = new Set();
+  for (const k of actesBruts.results) {
+    for (const nom of (k.concepts_communs || "").split(", ")) {
+      if (!nom) continue;
+      avecActe.add(k.auteur_a + "|" + nom);
+      avecActe.add(k.auteur_b + "|" + nom);
+    }
+  }
+
+  // DENSITÉ : non vide dès qu'au moins un AUTRE auteur (donc ≥ 2 en tout) est mesuré sur le
+  // motif que CE lexique a défini — même condition que le filtre self dans dossierExterne.
+  const densiteBrute = await env.DB.prepare(
+    `SELECT u.sous_concept, x.nom AS lexique, COUNT(DISTINCT u.auteur_id) AS n
+     FROM usages u JOIN auteurs x ON x.id = u.lexique
+     WHERE u.pour_mille IS NOT NULL GROUP BY u.sous_concept, u.lexique`).all();
+  const avecDensite = new Set(
+    densiteBrute.results.filter((d) => d.n >= 2).map((d) => d.lexique + "|" + d.sous_concept));
+
+  // MENTIONS : même jointure que dossierExterne, agrégée sur tous les concepts d'un coup.
+  const mentionsBrutes = await env.DB.prepare(
+    `SELECT c.nom, au.nom AS auteur FROM mentions m
+     JOIN atome_concepts ac ON ac.atome_id = m.atome_id
+     JOIN concepts c ON c.id = ac.concept_id
+     JOIN auteurs au ON au.id = m.auteur_id
+     WHERE m.auteur_id = c.auteur_id`).all();
+  const avecMention = new Set(
+    mentionsBrutes.results.map((m) => m.auteur + "|" + m.nom));
+
+  // ISOLEMENT LINGUISTIQUE — même lecture de `carte_couples` que dans dossierExterne, mais une
+  // fois par auteur plutôt qu'une fois par concept.
+  const couplesBruts = await env.DB.prepare(
+    `SELECT a.nom AS auteur_a, b.nom AS auteur_b, c.silence
+     FROM carte_couples c JOIN auteurs a ON a.id = c.auteur_a JOIN auteurs b ON b.id = c.auteur_b`)
+    .all();
+  const isoles = new Set();
+  const parAuteur = {};
+  for (const c of couplesBruts.results) {
+    (parAuteur[c.auteur_a] ??= []).push(c.silence);
+    (parAuteur[c.auteur_b] ??= []).push(c.silence);
+  }
+  for (const [aut, silences] of Object.entries(parAuteur)) {
+    if (silences.length && silences.every((s) => s === "langues")) isoles.add(aut);
+  }
+
+  const parConceptDetail = [];
+  let remplis = 0, silenceStructurel = 0, silenceNonExplique = 0;
+  for (const c of concepts.results) {
+    const cle = c.auteur + "|" + c.nom;
+    const signaux = {
+      actes: avecActe.has(cle), densite_comparee: avecDensite.has(cle),
+      mentions: avecMention.has(cle),
+    };
+    const rempli = signaux.actes || signaux.densite_comparee || signaux.mentions;
+    if (rempli) remplis++;
+    else if (isoles.has(c.auteur)) silenceStructurel++;
+    else silenceNonExplique++;
+    parConceptDetail.push({ concept: c.nom, auteur: c.auteur, ...signaux, rempli });
+  }
+
+  const parAuteurResume = {};
+  for (const d of parConceptDetail) {
+    const r = (parAuteurResume[d.auteur] ??= { total: 0, remplis: 0 });
+    r.total++;
+    if (d.rempli) r.remplis++;
+  }
+
+  return {
+    total_concepts: concepts.results.length,
+    dossiers_remplis: remplis,
+    part_remplie: Math.round((1000 * remplis) / concepts.results.length) / 10,
+    silence_structurel: silenceStructurel,
+    silence_non_explique: silenceNonExplique,
+    par_auteur: Object.entries(parAuteurResume)
+      .map(([auteur, r]) => ({ auteur, ...r, part: Math.round((1000 * r.remplis) / r.total) / 10 }))
+      .sort((x, y) => y.part - x.part),
+    detail: parConceptDetail,
+    reserve:
+      "Cette couverture compte des FAITS DÉJÀ VÉRIFIÉS, jamais un score de connexion : un "
+      + "concept « rempli » a au moins un des trois signaux non vide, sans indication de combien "
+      + "ni de leur force respective — voir `/api/chronologie?auteur=…` pour le détail par "
+      + "concept. « silence_structurel » compte les concepts d'un auteur isolé dans sa langue "
+      + "(Gustave Le Bon aujourd'hui) : leur silence est une limite de méthode, pas un fait "
+      + "négatif sur le corpus. « silence_non_explique » est le nombre réel de concepts qui, "
+      + "sans barrière de langue connue, n'ont simplement aucune connexion vérifiée dans le "
+      + "corpus actuel — ce qui n'exclut pas qu'une lecture future en trouve une.",
+  };
+}
+
 /** « Ce que Freud dit de lui-même » — les signaux CONFIRMÉS (objection, révision, auto-citation)
  *  lus en contexte et jugés un par un (verification/signaux_verifies.json), jamais les simples
  *  candidats détectés par le lexique : un marqueur ne prouve rien, seule la lecture tranche.
