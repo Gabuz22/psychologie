@@ -44,6 +44,22 @@ PAR_AUTEUR = {
 }
 
 
+# CE QUE `PAR_AUTEUR` NE DIT PAS, ET QUI A FAILLI ÊTRE PUBLIÉ COMME UN FAIT. Freud n'y figure pas
+# — ses tables sont restées dans `core/lexique.py` — mais il a bien SON lexique, écrit pour lui et
+# documenté par sept audits. Le contrôle d'accueil (`core/accueil.py`) a d'abord conclu que DEUX
+# auteurs du corpus étaient décrits avec le lexique d'un autre : Breuer, ce qui est vrai, et Freud,
+# ce qui est absurde. Un registre qui ne dit pas la vérité sur lui-même fait mentir tout ce qui
+# l'interroge, et `connu()` répondait faux depuis toujours sans que personne l'appelle.
+#
+# La liste est écrite ici plutôt que déduite : c'est un REGISTRE, donc l'endroit où une déclaration
+# en dur est légitime — et le seul.
+AUTEURS_AVEC_LEXIQUE_PROPRE = frozenset(PAR_AUTEUR) | {"Sigmund Freud"}
+
+
 def connu(auteur):
-    """Cet auteur a-t-il son propre lexique ? Sinon celui de Freud s'applique (voir lexique.py)."""
-    return auteur in PAR_AUTEUR
+    """Cet auteur a-t-il SON PROPRE lexique ? Sinon celui de Freud s'applique par défaut.
+
+    Répond vrai pour Freud, dont les tables vivent dans `core/lexique.py` et non dans `PAR_AUTEUR`.
+    Ne pas confondre avec « a un module dans ce paquet » : pour cela, lire `PAR_AUTEUR`.
+    """
+    return auteur in AUTEURS_AVEC_LEXIQUE_PROPRE

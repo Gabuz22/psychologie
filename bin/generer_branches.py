@@ -87,6 +87,16 @@ def section_negatif(r):
     L.append("Et le second contrôle les emporte toutes : Josef Breuer pèse **885 atomes dans une "
              "seule œuvre**. C'est exactement le double artefact — petit corpus, livre unique — "
              "qui avait déjà fait confirmer sept fausses divergences en juillet.\n")
+    L.append("**Mais la raison est pire que cela, et elle a été trouvée après coup.** Ces quatre "
+             "signatures n'ont pas *survécu* au premier contrôle : elles ne l'ont jamais "
+             "rencontré. Breuer est le seul auteur du corpus **sans lexique propre** — ses pages "
+             "sont décrites avec celui de Freud, parce qu'elles sont imprimées dans un volume de "
+             "Freud. Un auteur qui ne possède aucun motif ne peut jamais dominer sur le sien : le "
+             "contrôle par provenance du lexique est **vide pour lui, structurellement**. Que les "
+             "quatre survivantes soient toutes de Breuer n'était pas une coïncidence, c'était la "
+             "seule chose qui pouvait arriver. Le résultat ne change pas — zéro — mais il repose "
+             "désormais sur le bon motif, et le contrat d'accueil le déclare pour tout auteur "
+             "futur dans ce cas (voir [ACCUEIL_D_UN_AUTEUR.md](ACCUEIL_D_UN_AUTEUR.md)).\n")
     L.append("**C'est le troisième résultat négatif du même ordre dans ce corpus**, et les trois "
              "se répondent : le signal `ecart_freud` n'a rien confirmé sur cinq candidats, "
              "l'appariement de concepts par voisinage une divergence sur seize, la signature "

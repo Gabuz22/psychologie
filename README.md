@@ -470,6 +470,10 @@ calcul que la base du site :
 - [`documentation/TRADUCTION.md`](documentation/TRADUCTION.md) — ce qu'un mot français unique doit
   porter quand l'allemand compose, et ce qu'une recherche par radical ramasse en trop
   (`Verlust` pour *Lust*, `längst` pour *Angst*, `Trauma` pour *Traum*).
+- [`documentation/ACCUEIL_D_UN_AUTEUR.md`](documentation/ACCUEIL_D_UN_AUTEUR.md) — le contrat
+  d'entrée d'un huitième auteur, **vérifié sur le corpus** plutôt qu'affirmé : les cinq points à
+  déclarer, ce qui arrive quand on en oublie un (c'est arrivé), et ce que le contrat ne promet
+  pas — l'accueil, jamais la comparabilité.
 
 ---
 

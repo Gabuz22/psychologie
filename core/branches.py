@@ -15,6 +15,17 @@ ne tient pas — après les deux contrôles que ce projet sait nécessaires, il 
     avait déjà fait confirmer sept fausses divergences en juillet.
   • Breuer retiré : ZÉRO.
 
+ET LA RAISON EST PIRE QUE CE QU'ON CROYAIT — trouvé en écrivant `core/accueil.py`, après coup.
+Ces quatre signatures n'ont pas SURVÉCU au premier contrôle : elles ne l'ont jamais rencontré.
+Josef Breuer ne possède AUCUN motif — il est le seul auteur du corpus sans lexique propre, ses
+pages étant décrites avec celui de Freud parce qu'elles sont imprimées dans un volume de Freud.
+Un auteur sans motif ne peut jamais dominer sur le sien, donc le contrôle par provenance du
+lexique est VIDE pour lui, structurellement. Que les quatre survivantes soient toutes de Breuer
+n'était pas une coïncidence : c'était la seule chose qui pouvait arriver.
+La conclusion publiée ne change pas — zéro après les deux contrôles — mais elle repose désormais
+sur le bon motif, et `accueil.mesures_non_applicables` le déclare pour tout auteur futur dans ce
+cas : le contrôle par provenance ne protège que les auteurs qui ont un lexique.
+
 C'est le troisième résultat négatif du même ordre dans ce corpus, et les trois se répondent : le
 signal `ecart_freud` n'a rien confirmé sur cinq candidats, l'appariement de concepts par voisinage
 une divergence sur seize, la signature lexicale zéro sur trente-cinq. LA FRÉQUENCE D'UN MOT
