@@ -228,6 +228,15 @@
    "verdict": "reclasse",
    "vers": "Jean Paul"
   },
+  "03f6abe4bcf6f2c8|11505400b2799b11": {
+   "empreinte_a": "11505400b2799b11",
+   "id_a": "inzest_motiv:a610",
+   "id_b": "traumdeutung:a2492",
+   "motif": "L'attribution est coupée par l'atomisation : la phrase jugée commence au milieu d'une référence, dont la tête est dans l'atome précédent — « Freud beruft sich auch bei seiner Deutung der 0 d i p u s-Fabel (a. a. » (inzest_motiv:a608), l'atome jugé enchaînant sur « 0. S. 182) auf diese Tatsache: ,,Daß die Sage von Ödipus einem uralten Traumstoff entsprossen ist » (inzest_motiv:a609). Le guillemet ouvrant allemand ,, et la page 182 désignent la Traumdeutung, où la phrase se lit à l'identique (traumdeutung:a2491). Rank poursuit la citation sur les atomes suivants, jusqu'aux vers de Jokaste (a610-a611) qui sont ceux mêmes cités par Freud en traumdeutung:a2492. Piège de tiers écarté : Sophocle est nommé des deux côtés, mais les six suites partagées sont la prose allemande de Freud (« jene peinliche Störung des Verhältnisses zu den Eltern durch die ersten Regungen der Sexualität »), non les vers du tragique. Sens lu : Rank cite Freud, page à l'appui. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "94de5966b3f872c2|f7545890797b4816",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "03f6abe4bcf6f2c8|a9c9fcf517425e43": {
    "empreinte_a": "a9c9fcf517425e43",
    "id_a": "inzest_motiv:a613",
@@ -452,6 +461,15 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "0d61c0178f94f4cd|c75dd11d90b55b18": {
+   "empreinte_a": "c75dd11d90b55b18",
+   "id_a": "inzest_motiv:a474",
+   "id_b": "traumdeutung:a2497",
+   "motif": "Le guillemet ouvrant est à l'atome précédent de Rank (« In der veränderten Behandlung des nämlichen Stoffes offenbart sich der ganze Unterschied im Seelenleben der beiden weit auseinander liegenden Kulturperioden », a476, qui reprend Freud a2497) et l'atome partagé se referme explicitement sur « (Freud a. a. O.) ». Le passage est littéral : « Im Ödipus wird die zu Grunde liegende Wunschphantasie des Kindes wie im Traum ans Licht gezogen und realisiert ; im Hamlet bleibt sie verdrängt … ». Les seules divergences (« Wuuschphantasie », « ausgeheuden ») sont de l'OCR. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "190d86ab620cd17b|d35aadbe4937ed51",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "0d79cb6c57306750|fe6a607f500751bb": {
    "empreinte_a": "0d79cb6c57306750",
    "id_a": "traumdeutung:a3999",
@@ -495,6 +513,15 @@
    "id_a": "witz:a545",
    "id_b": "populaere_vortraege:a781",
    "motif": "Ferenczi déclare l'emprunt et nomme sa source dans la phrase même : « Ich zitiere nach Freud folgenden „Serenissimuswitz“ » (populaere_vortraege:a781). Le mot d'esprit n'est pas un bien commun de l'époque relayé par les deux : chez Freud il figure sans aucune attribution, à la différence de celui qui le précède immédiatement dans le même atome, marqué « (Nach +Überhorst+, Das Komische, II, 1900.) » (witz:a545) — Freud sait renvoyer à un tiers quand il y en a un, et ici il n'en donne pas. La chute est reprise mot pour mot : « Hat seine Mutter wohl einmal in der Residenz gedient?“ -- „Nein, Durchlaucht,“ lautet die Antwort, „aber mein Vater“ » (witz:a546), repris en populaere_vortraege:a782. Le seul écart est typographique et lexical minime — « auffällig ähnlich sieht » (witz:a545) contre « auffallend ähnlich sieht » (populaere_vortraege:a781). A est la source, B la reprend.",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "0f1879ceacb90a1f|c47fe8c2c4d750ae": {
+   "empreinte_a": "c47fe8c2c4d750ae",
+   "id_a": "studien_ueber_hysterie:a281",
+   "id_b": "ueber_psychoanalyse:a67",
+   "motif": "Freud recopie la vignette d'Anna O. de Breuer, et l'attribution est six atomes en amont : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten » (ueber_psychoanalyse:a65). Le guillemet ouvrant s'ouvre à ueber_psychoanalyse:a67 (« Einmal wachte sie nachts in großer Angst um den hochfiebernden Kranken ») et ne se referme qu'à ueber_psychoanalyse:a72, immédiatement suivi des deux appels de note « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. ». Côté Breuer, la même scène est la narration première, non citée : « Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken » (studien_ueber_hysterie:a281). Les écarts (Arm/Hand, « Association »/« Assoziation », « Hallucination »/« Halluzination ») sont la modernisation orthographique de 1910, pas un autre texte. Reprise établie, sens donné par la note de bas de page : Breuer source, Freud reprend. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "d44af7e9160f9380|d9b5b6deaff8c88b",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -1395,6 +1422,15 @@
    "verdict": "reclasse",
    "vers": "Sigmund Freud, Die Traumdeutung (1900), atome traumdeutung:a2484"
   },
+  "2e913277e55ec459|44bf46b3bcb04def": {
+   "empreinte_a": "2e913277e55ec459",
+   "id_a": "inzest_motiv:a468",
+   "id_b": "traumdeutung:a2484",
+   "motif": "L'attribution est incluse dans la phrase même, en incise : « Sein Schicksal, heißt es in der Traumdeutung weiter, ergreift uns nur darum, weil es auch das unserige hätte werden können … ». La citation se poursuit sur les atomes a470-a472 (littéraux : « Uns allen vielleicht war es beschieden, die erste sexuelle Regung auf die Mutter… ») et se ferme sur la référence « (l. c., S. 182) ». Reprise citée, abrégée par points de suspension. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "4fc1d3d1aa034c51|adebf5c1593421ac",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "2ef3c7d10638809f|ffdf282cbb87c876": {
    "empreinte_a": "ffdf282cbb87c876",
    "id_a": "inzest_motiv:a1000",
@@ -1488,6 +1524,15 @@
    "id_a": "witz:a190",
    "id_b": "populaere_vortraege:a743",
    "motif": "Le mot d'esprit est de David Spitzer, mais le tiers ne casse pas le lien : Ferenczi dit d'ou il le tire — « Nur noch ein Beispiel will ich aus Freuds Witzbuch anfuehren, in dem sowohl die mehrfache Verwendung derselben Worte als auch der Doppelsinn eine Rolle spielt » — et reprend ensuite l'analyse de Freud (« viel verdient, etwas zurueckgelegt, — etwas zurueckgelegt, viel verdient »). La transmission passe donc bien par Der Witz (A) vers Ferenczi (B).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "333809f8d52c0632|d37c0f4fed13ea82": {
+   "empreinte_a": "333809f8d52c0632",
+   "id_a": "studien_ueber_hysterie:a282",
+   "id_b": "ueber_psychoanalyse:a68",
+   "motif": "Freud recopie la vignette d'Anna O. de Breuer, et l'attribution est six atomes en amont : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten » (ueber_psychoanalyse:a65). Le guillemet ouvrant s'ouvre à ueber_psychoanalyse:a67 (« Einmal wachte sie nachts in großer Angst um den hochfiebernden Kranken ») et ne se referme qu'à ueber_psychoanalyse:a72, immédiatement suivi des deux appels de note « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. ». Côté Breuer, la même scène est la narration première, non citée : « Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken » (studien_ueber_hysterie:a281). Les écarts (Arm/Hand, « Association »/« Assoziation », « Hallucination »/« Halluzination ») sont la modernisation orthographique de 1910, pas un autre texte. Reprise établie, sens donné par la note de bas de page : Breuer source, Freud reprend. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "d44af7e9160f9380|d9b5b6deaff8c88b",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -1724,6 +1769,15 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "3ba0bfce69b80fca|9870851570ce653d": {
+   "empreinte_a": "9870851570ce653d",
+   "id_a": "klinische_beitraege:a2205",
+   "id_b": "drei_abhandlungen:a377",
+   "motif": "L'annonce est dans l'atome précédent d'Abraham : « Ich zitiere wörtlich (Drei Abhandlungen zur Sexualtheorie, Seite 37) », suivi de la citation qui court sur a2203-a2207 et recouvre exactement Freud a373-a380. La phrase partagée est identique, à une abréviation près : Abraham remplace la parenthèse de Freud « (oder an ihren Surrogaten) » par des points de suspension. Cette élision marquée est un signe de citation, non un écart de pensée ; c'est elle qui coupe cinq n-grammes et retient le score à 0,69. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "091f0e774df95a6f|6734c76c678f0f71",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "3bb1025aa2acbbb3|6703b866e1af0f60": {
    "id_a": "traumdeutung:a4694",
    "id_b": "traeume_der_dichter:a325",
@@ -1832,6 +1886,15 @@
    "id_a": "inzest_motiv:a470",
    "id_b": "traumdeutung:a2487",
    "motif": "Rank referme la citation par un renvoi : « …welche diese Wünsche in unserem Innern seither erlitten haben\" (l. c., S. 182) », et le contexte immédiat cite déjà Freud sur Œdipe puis renvoie de nouveau à lui : « Auch den Schlüssel zur einzig richtigen Deutung dieses vielkommentierten Werkes hat Freud in der Traumdeutung (S. 183, Anmerkung) gegeben ». Emprunt de Freud vers Rank, sans ambiguïté.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "42c068455a1a53cd|9cee64c6b016dc4e": {
+   "empreinte_a": "42c068455a1a53cd",
+   "id_a": "der_kuenstler:a44",
+   "id_b": "psychopathologie:a962",
+   "motif": "L'attribution est portée par l'atome précédent (der_kuenstler:a44) : « Aber noch weiter dehnt Freud den Begriff der unbewußten psychischen Projektion aus: „Ich glaube in der Tat, daß ein großes Stück der mythologischen Weltauffassung… » ; le guillemet ouvrant n'est refermé qu'à l'atome a46 (« …die Metaphysik in Metapsychologie umzusetzen.“ »). L'atome litigieux est donc à l'intérieur des guillemets et reproduit littéralement psychopathologie:a963 : « Die dunkle Erkenntnis psychischer Faktoren und Verhältnisse spiegelt sich in der Konstruktion einer übersinnlichen Realität, die von der Wissenschaft in Psychologie des Unbewußten zurückverwandelt werden soll. » La contenance basse tient au seul fait que Rank coupe l'incise de Freud (« — es ist schwer, es anders zu sagen, die Analogie mit der Paranoia muß hier zur Hilfe genommen werden — ») : citation abrégée, non rapprochement fortuit. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "3647bbdbbd6572a4|95ac09cd91def03a",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
@@ -1998,6 +2061,15 @@
    "id_b": "onanie_homosexualitaet:a201",
    "motif": "Bloc de trois atomes recopie par Stekel, qui ferme la citation et donne la source page en page : « ... der vom unbewussten psychischen Material ausgeht.“ „Drei Abhandlungen zur Sexualtheorie“, S. 42—43. », avant d'enchainer sur sa propre these « Es gibt also kein asexuelles Kind! ». Freud -> Stekel.",
    "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "4d3d51b5e7483b2e|dec1d670ded73b2f": {
+   "empreinte_a": "dec1d670ded73b2f",
+   "id_a": "klinische_beitraege:a3309",
+   "id_b": "drei_abhandlungen:a506",
+   "motif": "Citation mot pour mot avec attribution explicite portée par l'atome lui-même : klinische_beitraege:a3310 « Freud fügt eine für das Verständnis des Lutschens wichtige Bemerkung hinzu: „Als Rest dieser fiktiven, uns durch die Pathologie aufgenötigten Organisationsphase kann das Lutschen angesehen werden, indem die Sexualtätigkeit, von der Ernährungstätigkeit abgelöst, das fremde Objekt gegen eines am eigenen Körper aufgegeben hat.“ ». L'atome précédent donne déjà la page de l'ouvrage cité, klinische_beitraege:a3309 : « „Das Objekt der einen Tätigkeit ist auch das der anderen, das Sexualziel besteht in der Einverleibung des Objektes.“ (S. 60). », et le contexte amont enchaîne les renvois nominatifs (a3304 « hat Freud nun neuerdings mit dem eingangs erwähnten Namen als „prägenitale“ bezeichnet », a3307 « man könnte sie — fügt Freud hinzu — auch die kannibalische nennen »). Côté Freud, drei_abhandlungen:a507 est bien le texte source, dans la section « Prägenitale Organisationen ». Freud y renvoie d'ailleurs à Abraham en note (56) « Vgl. über Reste dieser Phase bei erwachsenen Neurotikern die Arbeit von _Abraham_ », ce qui atteste la circulation dans les deux sens mais n'inverse pas la source de CETTE phrase. La contenance basse (0,412) est un artefact d'atomisation : l'atome Freud agrège la phrase citée, la note (56) et la phrase suivante « Eine zweite prägenitale Phase ist die der _sadistisch-analen_ Organisation. » ; ne pas rejeter sur le score. Sens lu : Freud (b) source, Abraham (a) reprend. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "d18ca4beeb62ede8|da464007c3d787af",
+   "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
   "4fc1d3d1aa034c51|adebf5c1593421ac": {
@@ -2313,6 +2385,15 @@
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
+  "630d3e84d6c730c6|f1548f45be189805": {
+   "empreinte_a": "f1548f45be189805",
+   "id_a": "studien_ueber_hysterie:a240",
+   "id_b": "ueber_psychoanalyse:a48",
+   "motif": "Freud cite Breuer en toutes lettres dans les conférences de 1910 : le bloc s'ouvre en a48 sur un guillemet (« Es war im Sommer eine Zeit intensiver Hitze gewesen … ») et se referme en a55 sur l'appel de note « Studien über Hysterie, 2. Aufl., p. 26 » ; Breuer est nommé alentour (a23, a37, a58). La reprise couvre huit atomes consécutifs. Le seul écart est orthographique : Breuer écrit « aber so wie es die Lippen berührte », Freud « aber sowie ». Cette soudure d'un mot suffit à détruire six des dix-sept suites de six mots et explique à elle seule un score de 0,647 pour une citation pourtant mot pour mot. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "220f779988a652cf|9c3a37cdf87fb594",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
   "637bb6fc23ff1232|9319eea2ed00459c": {
    "empreinte_a": "9319eea2ed00459c",
    "id_a": "traumdeutung:a2917",
@@ -2601,6 +2682,15 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "70f56db6a73a5240|de3b8cc4863e3f97": {
+   "empreinte_a": "de3b8cc4863e3f97",
+   "id_a": "inzest_motiv:a315",
+   "id_b": "traumdeutung:a2441",
+   "motif": "Reprise déclarée, dans la phrase même : Rank nomme l'auteur, l'ouvrage, et ouvre le guillemet — « wie es Freud in der „Traumdeutung“ geschildert hat: „Die sexuelle Auswahl macht sich in der Regel bereits bei den Eltern geltend » (inzest_motiv:a314). La citation court sur trois atomes et se referme sur la pagination : « wenn es seine Wahl zwischen den Eltern im gleichen Sinne wie diese trifft“ (S. 182) » (inzest_motiv:a316), ce qui recouvre exactement traumdeutung:a2440 puis a2441 et a2443. B est bien la phrase source : « Die sexuelle Auswahl macht sich in der Regel bereits bei den Eltern geltend; ein natürlicher Zug sorgt dafür, daß der Mann die kleinen Töchter verzärtelt, die Frau den Söhnen die Stange hält » (traumdeutung:a2440). Le texte établit donc que B est la source et A la reprise — b_vers_a, conforme au sens calculé. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "9637d26d801586e1|b92b5e5f8bc1e960",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "71e0a59f179173c2|9dabac978230f4cb": {
    "empreinte_a": "9dabac978230f4cb",
    "id_a": "traumdeutung:a5038",
@@ -2668,6 +2758,24 @@
    "id_a": "sammlung_1:a339",
    "id_b": "nervoese_angstzustaende:a7374",
    "motif": "Stekel attribue avec appel de note avant d'ouvrir le guillemet : « Bei allen Psychoneurosen gestattet uns das psychologische Verständnis der Abwehr (Freud*) die Diagnose. „Wenn bei einer disponierten Person die Eignung zur Konversion nicht vorhanden ist… ». La citation se referme un atome plus bas sur « …zu Zwangsvorstellungen werden.\" ». C'est le passage des « Abwehr-Neuropsychosen » de Freud, repris mot à mot (avec une bévue de copie révélatrice : Stekel écrit « nicht unerträgliche Vorstellungen » là où Freud a « nicht unverträgliche »).",
+   "sens_lu": "a_vers_b",
+   "verdict": "confirme"
+  },
+  "7763c3d984c9b9be|c77e748df432b071": {
+   "empreinte_a": "7763c3d984c9b9be",
+   "id_a": "inzest_motiv:a472",
+   "id_b": "traumdeutung:a2508",
+   "motif": "Attribution nominale et paginée à l'intérieur même de l'atome : « Auch den Schlüssel zur einzig richtigen Deutung dieses vielkommentierten Werkes hat Freud in der Traumdeutung (S. 183, Anmerkung) gegeben: „Hamlet kann alles … nur nicht die Rache an dem Mann vollziehen, der seinen Vater beseitigt und bei seiner Mutter dessen Stelle eingenommen hat\" ». Rank insère entre crochets un résumé de l'atome antérieur de Freud (a2504, « in rasch auffahrender Leidenschaft den Lauscher hinter der Tapete nieder »), et poursuit la citation en a474-475 jusqu'au guillemet fermant. Reprise littérale. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "3c63c5e9724b04d3|c9f3b0ecdea0caf7",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "77d955d99be4485c|9d0b4daaa7a5dcf2": {
+   "empreinte_a": "77d955d99be4485c",
+   "id_a": "studien_ueber_hysterie:a283",
+   "id_b": "ueber_psychoanalyse:a69",
+   "motif": "Freud recopie la vignette d'Anna O. de Breuer, et l'attribution est six atomes en amont : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten » (ueber_psychoanalyse:a65). Le guillemet ouvrant s'ouvre à ueber_psychoanalyse:a67 (« Einmal wachte sie nachts in großer Angst um den hochfiebernden Kranken ») et ne se referme qu'à ueber_psychoanalyse:a72, immédiatement suivi des deux appels de note « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. ». Côté Breuer, la même scène est la narration première, non citée : « Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken » (studien_ueber_hysterie:a281). Les écarts (Arm/Hand, « Association »/« Assoziation », « Hallucination »/« Halluzination ») sont la modernisation orthographique de 1910, pas un autre texte. Reprise établie, sens donné par la note de bas de page : Breuer source, Freud reprend. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "d44af7e9160f9380|d9b5b6deaff8c88b",
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
@@ -2940,6 +3048,15 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "8a1c4d815b816c77|97068b0976748680": {
+   "empreinte_a": "8a1c4d815b816c77",
+   "id_a": "klinische_beitraege:a208",
+   "id_b": "psychopathologie:a749",
+   "motif": "Abraham annonce dans l'atome même : « Ich verweise ferner auf die vortreffliche kleine Geschichte aus Don Quijote, welche Freud (Psychopathologie des Alltagslebens, I. Aufl. S. 87) mitteilt », puis recopie sur quatre atomes (a207-a210) le texte de Freud (a748-a751), jusqu'à la réplique de Sancho. Le détecteur a marqué source_tierce=1 à cause de « Quijote » et « Sancho », mais les mots partagés ne sont pas ceux de Cervantès : c'est le résumé allemand de Freud, que Freud lui-même introduit par « der geistreiche Richterspruch des Sancho Pansa … (Don Quijote II. T. Kap. XLV.) ». La reprise est bien de Freud à Abraham. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "322bb5956c36c385|af60f5c0d6eac0cb",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "8a65c6a2f07a767d|a69632483340c0e9": {
    "empreinte_a": "8a65c6a2f07a767d",
    "id_a": "traum_und_mythus:a311",
@@ -3194,6 +3311,15 @@
    "id_b": "traumdeutung:a2311",
    "motif": "Abraham cite Freud nommément, à l'appui de sa lecture du récit biblique amorcée à l'atome précédent (« Betrachten wir die biblische Schilderung des Paradieses! », traum_und_mythus:a540) : « Freud hat sie mit treffenden Worten charakterisiert: »Das Paradies ist nichts anderes als die Massenphantasie von der Kindheit des einzelnen«. » (traum_und_mythus:a541). La phrase source est bien dans l'atome apparié, à sa toute fin : « Diese der Scham entbehrende Kindheit erscheint unserer Rückschau später als ein Paradies, und das Paradies selbst ist nichts anderes als die Massenphantasie von der Kindheit des einzelnen. » (traumdeutung:a2311), que la suite confirme (« Darum sind auch im Paradies die Menschen nackt und schämen sich nicht voreinander », traumdeutung:a2312). La contenance basse (0,40) ne tient qu'à l'apparat agrégé dans l'atome de Freud (note « (85) » et intertitre « Der Nacktheitstraum als Exhibitionstraum aufzuklären. ») et à la chute de « selbst », non à la citation. Freud source, Abraham reprend.",
    "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "a1634d5ba62ff1bf|e935bc73cccd4394": {
+   "empreinte_a": "a1634d5ba62ff1bf",
+   "id_a": "studien_ueber_hysterie:a284",
+   "id_b": "ueber_psychoanalyse:a70",
+   "motif": "Freud recopie la vignette d'Anna O. de Breuer, et l'attribution est six atomes en amont : « So erzählt _Breuer_, daß ihre Sehstörungen sich auf Anlässe zurückführten » (ueber_psychoanalyse:a65). Le guillemet ouvrant s'ouvre à ueber_psychoanalyse:a67 (« Einmal wachte sie nachts in großer Angst um den hochfiebernden Kranken ») et ne se referme qu'à ueber_psychoanalyse:a72, immédiatement suivi des deux appels de note « [5] Studien über Hysterie, 2. Aufl., p. 31. » et « [6] l. c. p. 30. ». Côté Breuer, la même scène est la narration première, non citée : « Einmal wachte sie Nachts in grosser Angst um den hochfiebernden Kranken » (studien_ueber_hysterie:a281). Les écarts (Arm/Hand, « Association »/« Assoziation », « Hallucination »/« Halluzination ») sont la modernisation orthographique de 1910, pas un autre texte. Reprise établie, sens donné par la note de bas de page : Breuer source, Freud reprend. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "d44af7e9160f9380|d9b5b6deaff8c88b",
+   "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
   "a2216c52c3640fb3|f7294fa23c73c7fa": {
@@ -3529,6 +3655,15 @@
    "verdict": "reclasse",
    "vers": "Jean Paul"
   },
+  "bffa18da57284313|cb78d7a4e0e6713b": {
+   "empreinte_a": "bffa18da57284313",
+   "id_a": "klinische_beitraege:a209",
+   "id_b": "psychopathologie:a750",
+   "motif": "Abraham annonce dans l'atome même : « Ich verweise ferner auf die vortreffliche kleine Geschichte aus Don Quijote, welche Freud (Psychopathologie des Alltagslebens, I. Aufl. S. 87) mitteilt », puis recopie sur quatre atomes (a207-a210) le texte de Freud (a748-a751), jusqu'à la réplique de Sancho. Le détecteur a marqué source_tierce=1 à cause de « Quijote » et « Sancho », mais les mots partagés ne sont pas ceux de Cervantès : c'est le résumé allemand de Freud, que Freud lui-même introduit par « der geistreiche Richterspruch des Sancho Pansa … (Don Quijote II. T. Kap. XLV.) ». La reprise est bien de Freud à Abraham. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "322bb5956c36c385|af60f5c0d6eac0cb",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
   "c06afb2daeb0c929|f48e1c07b0baa783": {
    "empreinte_a": "c06afb2daeb0c929",
    "id_a": "entwicklungsgeschichte_libido:a396",
@@ -3627,6 +3762,15 @@
    "id_a": "inzest_motiv:a300",
    "id_b": "sammlung_3:a865",
    "motif": "Rank recopie le passage du petit Hans et referme sur la référence : son atome s'achève sur « (a. a. » et l'aval donne « 0., S. 84) » — renvoi paginé à l'« Analyse der Phobie eines fünfjährigen Knaben ». L'amont des deux côtés est déjà le même texte (« Er begnügte sich damals mit der Fassung, der Vater solle ,wegfahren' »), donc le bloc emprunté déborde l'atome. Le calcul restait muet parce que le Freud est lu dans la réimpression Sammlung 3 de 1913, postérieure au Rank de 1912 ; la lecture tranche : Freud est la source.",
+   "sens_lu": "b_vers_a",
+   "verdict": "confirme"
+  },
+  "ca9071769be5e857|e68c31454f05e77a": {
+   "empreinte_a": "e68c31454f05e77a",
+   "id_a": "traum_und_mythus:a130",
+   "id_b": "traumdeutung:a2475",
+   "motif": "Abraham annonce la citation cinq atomes plus haut, avec appel de note : « Ich zitiere den folgenden Passus wörtlich nach Freud » et, en note, « Traumdeutung, Seite 180 f. » (traum_und_mythus:a129-a130). Le récit d'Œdipe est recopié phrase à phrase (Abraham a129-a134 face à Freud a2470-a2476) et le guillemet fermant apparaît dans l'atome même, après « der Sohn des Ermordeten und der Jokaste ist. ». La contenance n'est que de 0,66 parce que l'atome d'Abraham enchaîne aussitôt sur sa propre phrase (« Die Ödipustragödie vermag uns heutzutage ebenso tief zu erschüttern … ») et parce que Freud insère avant la sienne les deux vers de Sophocle traduits par Donner. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "806b94baf6c2ee5d|e0173e22e1ab7164",
    "sens_lu": "b_vers_a",
    "verdict": "confirme"
   },
@@ -3793,6 +3937,13 @@
    "sens_lu": "a_vers_b",
    "verdict": "confirme"
   },
+  "e07a0340d538f1e5|e07a0340d538f1e5": {
+   "id_a": "klinische_beitraege:a779",
+   "id_b": "inzest_motiv:a434",
+   "motif": "L'attribution est quatre atomes plus haut chez Rank : « Einen Schritt weiter zu einer neuen fruchtbaren Auffassung des Problems geht Abraham, der in einer kleinen, sehr beachtenswerten Arbeit die Stellung der Verwandtenehe in der Psychologie der Neurosen präzisiert » (inzest_motiv:a433). Les guillemets ouvrent en a435 (« Daß in vielen Familien Inzucht und nervöse oder psychische Störungen zusammentreffen ») et se referment juste après la phrase partagée, avant que Rank ne reprenne la parole : « Und auf Grund gesicherter Ergebnisse aus der Neurosenpsychologie nimmt Abraham … an ». Le texte d'Abraham 1907 est recopié mot pour mot ; « sieh » et « neuropatliischen » sont des altérations d'OCR, non des variantes d'auteur. La contenance ne reste à 0,69 que parce que l'atome de Rank avale la suite du texte et la note « Vgl. Westermarck, Gattenwahl, Inzucht und Mitgift ». [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "0f30c1bba73b470c|fce1696fbe38d10c",
+   "verdict": "confirme"
+  },
   "e100837fc0d8df56|ec864a023528d2c8": {
    "empreinte_a": "e100837fc0d8df56",
    "id_a": "traumdeutung:a3593",
@@ -3841,6 +3992,13 @@
    "id_a": "inzest_motiv:a2236",
    "id_b": "traeume_der_dichter:a4026",
    "motif": "Le partage est réel et long (tout le rêve du serpent domestique : « Wirklich entwickelte sich die Schlange sehr gemütlich, gähnte und reckte sich nach allen Seiten... », « ...rings an der Stubendecke umher, als ob sie Raum suche », « Dann folgte sie der Mutter in die Küche und auf den Estrich »), donc pas un faux positif. Mais le SENS ne peut pas être publié : ce n'est la prose d'aucun des deux — c'est un récit de rêve à la première personne d'écrivain (« meine Mutter », l'helvétisme « Estrich »), imprimé la même année (1912) par Rank dans un chapitre d'analyse littéraire et par Stekel dans un chapitre intitulé « Aus verschiedenen Quellen », c'est-à-dire un florilège de sources. Les deux fenêtres sont identiques [1912,1912] et aucune attribution n'apparaît dans le contexte fourni : l'hypothèse la plus probable est une source littéraire tierce commune, que je me refuse à nommer faute de preuve dans le texte. À ne pas afficher comme un emprunt d'un auteur à l'autre.",
+   "verdict": "confirme"
+  },
+  "f3f30bd125b72589|f3f30bd125b72589": {
+   "id_a": "klinische_beitraege:a2203",
+   "id_b": "drei_abhandlungen:a375",
+   "motif": "L'annonce est dans l'atome précédent d'Abraham : « Ich zitiere wörtlich (Drei Abhandlungen zur Sexualtheorie, Seite 37) », suivi de la citation qui court sur a2203-a2207 et recouvre exactement Freud a373-a380. La phrase partagée est identique, à une abréviation près : Abraham remplace la parenthèse de Freud « (oder an ihren Surrogaten) » par des points de suspension. Cette élision marquée est un signe de citation, non un écart de pensée ; c'est elle qui coupe cinq n-grammes et retient le score à 0,69. [Verdict rendu sur l'ÉVÉNEMENT — cet acte de citation couvre plusieurs phrases contiguës — et propagé à cette paire sœur, qui appartient au même bloc recopié.]",
+   "propage_de": "091f0e774df95a6f|6734c76c678f0f71",
    "verdict": "confirme"
   },
   "f4dfc32c2e73e73e|f8198cd7f7840a5e": {

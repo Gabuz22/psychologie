@@ -434,7 +434,12 @@ CONCEPTS = {
             "lustprinzip": ["lustprinzip", r"lust(?!ig)"],
             # Le PRINCIPE de réalité figurait au lexique, mais pas la réalité elle-même :
             # 159 « Realität » et 649 « wirklich » passaient au travers.
-            "realitaet": ["realitat", "real\b", "reale", "wirklichkeit", "wirklich"],
+            # MOTIF MORT CORRIGÉ (2026-08-01) — `"real\b"` était écrit en chaîne NON BRUTE, donc
+            # Python y lisait « real » + un caractère BACKSPACE (0x08), pas une frontière de mot.
+            # Aucun texte allemand ne contient ce caractère : le motif ne pouvait rien capter, et
+            # « real » employé seul — 49 atomes — passait au travers. La faute est invisible à la
+            # lecture du fichier, la chaîne paraissant correcte. Voir `bin/verifier_motifs.py`.
+            "realitaet": ["realitat", r"real\b", "reale", "wirklichkeit", "wirklich"],
             "realitaetsprinzip": ["realitatsprinzip"],
             "todestrieb": ["todestrieb"],
             "wiederholungszwang": ["wiederholungszwang"],
@@ -647,7 +652,16 @@ CONCEPTS = {
             # AUDIT 8 — 508 occurrences. Le lexique portait « männlich »/« weiblich » (l'attribut)
             # mais pas l'enfant SEXUÉ, alors que toute la théorie du développement repose sur la
             # différence des trajets du garçon et de la fille.
-            "knabe_maedchen": ["knabe", "knaben", "madchen", "bube\b", "junge\b"],
+            # DEUX MOTIFS MORTS CORRIGÉS (2026-08-01), ET C'EST LE SOUS-CONCEPT QUI POUVAIT LE MOINS
+            # SE LE PERMETTRE : il porte la différence des sexes, ajoutée à l'audit 8 comme « le plus
+            # gros manque du corpus ». « bube\b » et « junge\b » étaient écrits en chaîne NON BRUTE :
+            # Python y lisait « bube » et « junge » suivis d'un caractère BACKSPACE (0x08), jamais
+            # d'une frontière de mot. Les deux mots allemands courants pour « garçon », après Knabe,
+            # ne pouvaient donc rien capter — 116 atomes de « Junge » perdus.
+            # `bube` est RETIRÉ, mais après mesure et non par principe : une fois le motif réparé,
+            # il rend ZÉRO atome — le mot est absent du corpus allemand de Freud. Le fait est écrit
+            # ici pour qu'on ne le repropose pas.
+            "knabe_maedchen": ["knabe", "knaben", "madchen", r"junge\b"],
             "kastration": ["kastration", "penisneid", "phallisch", "phallus"],
         },
     },
@@ -798,8 +812,14 @@ CONCEPTS = {
             # Vergreifen ». Ambiguïté connue et acceptée, signalée ici plutôt que masquée.
             "versprechen": ["versprechen", "verlesen", "verschreiben"],
             "vergreifen": ["vergreifen", "vergriff"],
-            "namenvergessen": ["namenvergessen", "namensvergessen"],
-            "aberglaube": ["aberglaube", "abergläubisch", "aberglaubisch"],
+            # `namensvergessen` (avec le -s- de liaison) fait 0 atome : Freud écrit
+            # « Namenvergessen ». Retiré après mesure, comme `bube` plus haut.
+            "namenvergessen": ["namenvergessen"],
+            # LE TRÉMA, ENCORE. `abergläubisch` ne peut PAS se déclencher : le lexique s'applique
+            # après un repli qui SUPPRIME les diacritiques. La faute est documentée trois fois dans
+            # le lexique de Stekel (angstgefühl, nervosität, schuldgefühl) et elle était ici aussi,
+            # à côté de la forme repliée correcte qui la rendait inoffensive — d'où sa survie.
+            "aberglaube": ["aberglaube", "aberglaubisch"],
         },
     },
     "cure": {

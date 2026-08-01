@@ -410,3 +410,53 @@ La leçon avait été apprise **une fois**, pour `onani` → `[a-z]*onani`, et j
 le seul motif ouvert à gauche des cinq lexiques du dépôt. Elle ne peut pas l'être en aveugle —
 `[a-z]*tier` attrape *konstatieren*, `[a-z]*angst` attrape **`längst`** (50 occurrences). L'ouverture
 se justifie motif par motif, sur les composés attestés.
+
+---
+
+## 9. `angstneurose` — le jumeau, instruit lui aussi (2026-08-01)
+
+Le contradicteur d'`angsthysterie` avait laissé une piste : « dans le même volume, `die
+angstneurose.` ouvre 46 atomes — la tête courante de la PARTIE I, qui gonfle `angstneurose`
+exactement de la même façon, et que personne n'a encore mesurée ». Les 388 atomes ont été lus.
+
+**Verdict : GARDE.** Le volume porte bien **deux** têtes courantes contenant le mot — le titre de
+partie au verso (« ERSTER TEIL. DIE ANGSTNEUROSE. ») et le titre de chapitre au recto (« KLINIK DER
+ANGSTNEUROSE: … »). Mais le paratexte n'y pèse que **27 %**, contre 87 % pour `rundfrage` et 80 %
+pour `berufsneurose`.
+
+| | brut | corrigé du paratexte |
+|---|---|---|
+| atomes | 388 | **282** |
+| occurrences | 434 | **303** |
+| propres | 124 | **78** |
+| rapport | ×5,72 | **×3,99** |
+
+**Inversion par rapport à son jumeau** : ici le pluriel n'est PAS épargné, le titre de chapitre
+portant lui-même « ANGSTNEUROSEN MIT ERSCHEINUNGEN DES HERZENS ». Le motif de repli perdrait **95 %**
+des usages réels, contre 75 % pour `angsthysterie`. Encore moins praticable.
+
+### Une TROISIÈME forme de l'angle mort du moteur
+
+`angstneurotik` a été ajouté (+23 atomes, tous relus comme prose). La cause est parente des deux
+précédentes mais distincte, et c'est la seule qui ne soit pas une affaire de composition :
+
+| forme | exemple | remède |
+|---|---|---|
+| le mot est en **second élément** d'un composé | `onani` rate *kinderonanie* | ouvrir à gauche : `[a-z]*onani` |
+| la **tête du composé est à la fin** | `phobie` rate *topophobie* ; `symptom` rate *krankheitssymptome* | ouvrir à gauche, ou énumérer |
+| le **suffixe dérivationnel change le radical** | `angstneuros` rate *Angstneuro**t**iker* | **écrire la branche** — aucune ouverture ne la trouve |
+
+Les deux premières se corrigent en élargissant un motif. La troisième, non : `angstneurose` et
+`angstneurotiker` ne partagent pas de préfixe commun au-delà de `angstneuro`, et s'arrêter là
+capterait n'importe quoi. Il faut connaître la branche et l'écrire. Le sous-concept `neurose` du
+groupe voisin avait déjà ses trois branches (`neuros`, `neurotik`, `neurotisch`) ; c'est ici
+qu'elles manquaient.
+
+### Une limite posée clairement
+
+Les 27 % de paratexte sont **irréductibles par le lexique**. Le moteur ne voit que `\bangstneuros`,
+et « DIE ANGSTNEUROSE. » du haut de page est orthographiquement identique au « die Angstneurose. »
+d'une phrase. Ils ne peuvent être retirés qu'**en amont, à l'atomisation**.
+
+C'est ce qui a fait écrire `bin/mesurer_tetes_courantes.py` plutôt qu'une correction locale de plus :
+le problème ne se règle pas sous-concept par sous-concept.

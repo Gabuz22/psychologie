@@ -31,6 +31,7 @@ sys.path.insert(0, os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "bin"))
 
 import eprouver_sous_concept as banc                    # noqa: E402
+import mesurer_tetes_courantes as mesure                # noqa: E402
 from core import lexique                                # noqa: E402
 from core.segmentation import replier                   # noqa: E402
 
@@ -129,6 +130,96 @@ class TestDetecteurDeParatexte(unittest.TestCase):
         self.assertFalse(doublons,
                          "si des atomes identiques existent, le raccourci naïf redevient tentant")
         self.assertGreaterEqual(self.part_paratexte("berufsneurose"), PLANCHER_POSITIF)
+
+
+class TestMotifsEcritsCorrectement(unittest.TestCase):
+    """DEUX FAUTES D'ÉCRITURE QUI RENDENT UN MOTIF DÉFINITIVEMENT MUET, et qui sont INVISIBLES.
+
+    Ni l'une ni l'autre ne lève d'erreur, ni ne se voit à la relecture du fichier — le motif a
+    l'air juste. Seule une mesure les trouve, et elles ont vécu des mois dans le dépôt.
+
+    1. `\\b` DANS UNE CHAÎNE NON BRUTE. Python lit alors un caractère BACKSPACE (0x08), pas une
+       frontière de mot. Trois motifs de Freud en portaient un — `"real\\b"`, `"bube\\b"`,
+       `"junge\\b"` — et aucun texte allemand ne contient ce caractère : 116 atomes de « Junge »
+       et 49 de « real » passaient au travers, dans le sous-concept qui porte la différence des
+       sexes. Il faut écrire `r"junge\\b"`.
+
+    2. UN DIACRITIQUE. Le lexique s'applique après `segmentation.replier`, qui les SUPPRIME. Un
+       motif portant « ä », « ö », « ü » ou « ß » ne peut jamais se déclencher. La faute est
+       documentée trois fois dans le lexique de Stekel et une fois chez Freud (`abergläubisch`).
+    """
+
+    def _tous_les_motifs(self):
+        from core import lexiques
+        tables = [("Freud", lexique.CONCEPTS)]
+        tables += [(nom, mod.CONCEPTS) for nom, mod in lexiques.PAR_AUTEUR.items()]
+        for nom, concepts in tables:
+            for groupe, meta in concepts.items():
+                for sous, motifs in meta["termes"].items():
+                    for m in motifs:
+                        yield nom, groupe, sous, m
+
+    def test_aucun_motif_ne_contient_de_caractere_de_controle(self):
+        """Un `\\b` oublié en chaîne brute devient un backspace, et le motif meurt en silence."""
+        fautifs = [(n, g, s, repr(m)) for n, g, s, m in self._tous_les_motifs()
+                   if any(ord(c) < 32 for c in m)]
+        self.assertFalse(fautifs, "motifs portant un caractère de contrôle : %s" % fautifs)
+
+    def test_aucun_motif_ne_porte_de_diacritique(self):
+        """Le lexique s'applique APRÈS le repli : « ä » ne peut jamais être rencontré."""
+        fautifs = [(n, g, s, m) for n, g, s, m in self._tous_les_motifs()
+                   if any(c in m for c in "äöüßÄÖÜàéèêç")]
+        self.assertFalse(fautifs, "motifs portant un diacritique, donc muets : %s" % fautifs)
+
+
+class TestMesureDesTetesCourantes(unittest.TestCase):
+    """ÉTALONNAGE CONTRE DEUX COMPTES ÉTABLIS À LA MAIN.
+
+    `bin/mesurer_tetes_courantes.py` a mesuré autre chose que ce qu'il croyait à sa première
+    version : il prenait pour tête courante tout atome dont les deux premiers mots se répètent, et
+    trouvait donc « ich habe » (91), « es ist » (91), « er war » (70) — les ouvertures de phrase
+    ordinaires de la langue allemande. Il annonçait 30,9 % du corpus « touché ». C'était la
+    deuxième erreur du même genre : le premier détecteur du banc, lui, ne trouvait RIEN.
+
+    Ce qui rend la version actuelle croyable n'est pas sa plausibilité, c'est qu'elle retrouve
+    EXACTEMENT deux comptes obtenus par des contradicteurs qui ont lu les atomes un par un :
+    dans « Nervöse Angstzustände », les deux parties du volume s'intitulent « Die Angstneurose » et
+    « Die Angsthysterie », et leurs titres sont imprimés en haut de chaque page.
+    """
+
+    ATTENDU = {"die angsthysterie.": 61, "die angstneurose.": 46}
+
+    @classmethod
+    def setUpClass(cls):
+        from core import atomisation
+        cls.atomes = atomisation.atomiser("nervoese_angstzustaende")["atomes"]
+        cls.tetes = mesure.tetes_courantes(cls.atomes)
+
+    def test_retrouve_les_deux_comptes_lus_a_la_main(self):
+        for tete, n in self.ATTENDU.items():
+            self.assertEqual(self.tetes.get(tete), n,
+                             "« %s » a été compté %s fois à la main dans ce volume" % (tete, n))
+
+    def test_ne_prend_pas_une_ouverture_de_phrase_pour_un_titre(self):
+        """LE DÉFAUT DE LA PREMIÈRE VERSION, gardé comme test.
+
+        « ich habe », « es ist », « er war » ouvrent des centaines de phrases allemandes. Un
+        détecteur qui les compte ne mesure pas le paratexte, il mesure la langue.
+        """
+        for phrase in ["ich habe", "es ist", "er war", "in der", "es war", "sie war"]:
+            self.assertNotIn(phrase, self.tetes)
+            self.assertNotIn(phrase + ".", self.tetes)
+
+    def test_ecarte_la_numerotation_des_listes(self):
+        """Stekel numérote ses cas : « 3. » est court et suivi d'un point, mais ce n'est pas un titre."""
+        for faux in ["3.", "12.", "dr.", "s.", "vgl.", "ii."]:
+            self.assertNotIn(faux, self.tetes)
+
+    def test_une_tete_courante_est_bien_un_intitule(self):
+        """Tout ce qui est retenu doit ressembler à un titre : court, terminé par un point."""
+        for tete in self.tetes:
+            self.assertTrue(tete.endswith("."), tete)
+            self.assertLessEqual(len(tete), mesure.TETE_SIGNES + 1, tete)
 
 
 class TestFichesDuBanc(unittest.TestCase):

@@ -96,8 +96,39 @@ CONCEPTS = {
     "angst": {
         "label": "L'angoisse, ses états et ses crises",
         "termes": {
+            # GARDÉ APRÈS LECTURE DES 184 ATOMES, malgré 43 % de paratexte réel. La partie II du
+            # volume s'intitule « ZWEITER TEIL: DIE ANGSTHYSTERIE. » et l'OCR en soude la queue en
+            # tête d'atome : 61 atomes ouvrent littéralement par « die angsthysterie. » suivie d'un
+            # fragment qui ne redémarre pas (« die angsthysterie. ursachte. », 28 signes en tout).
+            # Restent 106 usages réels, rapport corrigé ≈ ×5,7, et 23 atomes hors de ce volume.
+            # Ce n'est pas `keller` : la concentration est légitime, c'est SON livre sur l'angoisse.
+            # AUCUN motif de repli n'est possible et c'est mesuré : la tête courante EST le mot.
+            # Le motif restreint aux formes propres (angsthysterien/-ik/-isch, épargnées à 100 %
+            # par la tête courante) tombe à 27 atomes et perd 75 % des usages réels.
             "angsthysterie": ["angsthysteri"],
-            "angstneurose": ["angstneuros"],
+            # MÊME CAS, MÊME VOLUME, MÊME VERDICT — la partie I s'intitule « ERSTER TEIL. DIE
+            # ANGSTNEUROSE. » et le chapitre courant « KLINIK DER ANGSTNEUROSE: … ». 27 % de
+            # paratexte (contre 87 % pour `rundfrage` et 80 % pour `berufsneurose`), 303
+            # occurrences réelles dans 282 atomes, rapport corrigé ×3,99, 78 atomes propres.
+            # INVERSION PAR RAPPORT À SON JUMEAU : ici le PLURIEL n'est pas épargné, le titre de
+            # chapitre portant lui-même « ANGSTNEUROSEN MIT ERSCHEINUNGEN DES HERZENS ». Le motif
+            # de repli perdrait 95 % des usages réels, contre 75 % pour `angsthysterie`.
+            #
+            # `angstneurotik` AJOUTÉ — TROISIÈME FORME DE L'ANGLE MORT DU MOTEUR, et la seule qui
+            # ne soit pas une affaire de composition. `\bangstneuros` ne peut pas atteindre
+            # « Angstneurotiker » (le malade) parce que le SUFFIXE DÉRIVATIONNEL change le radical :
+            # angstneuro-S-e mais angstneuro-T-iker. Ce n'est ni la tête du composé rejetée à la fin
+            # (cas de `phobie`, `symptom`), ni un composé à gauche (cas de `onani`) : c'est une
+            # branche morphologique du même mot, qu'un préfixe ne rattrape pas. +23 atomes, tous
+            # vérifiés comme prose (« jeder angstneurotiker tragt seine angst in seinen beruf
+            # hinein »). Le sous-concept `neurose` du groupe voisin, lui, avait déjà les trois
+            # branches — c'est ici qu'elles manquaient.
+            #
+            # RÉSERVE ÉCRITE : les 27 % de paratexte sont IRRÉDUCTIBLES PAR LE LEXIQUE. Le moteur ne
+            # voit que `\bangstneuros`, et « DIE ANGSTNEUROSE. » du haut de page est orthographiquement
+            # identique au « die Angstneurose. » de la phrase. Ils ne peuvent être retirés qu'EN
+            # AMONT, à l'atomisation — voir `bin/mesurer_tetes_courantes.py`.
+            "angstneurose": ["angstneuros", "angstneurotik"],
             # « angstanfalle » est déjà pris par « angstanfall » : 82 occurrences, 0 atome gagné.
             "angstanfall": ["angstanfall", "angstattack"],
             # MOTIF MORT RETIRÉ. « angstgefühl » avec tréma ne peut JAMAIS se déclencher : le
