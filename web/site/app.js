@@ -990,7 +990,8 @@ function rendreActe(k) {
 }
 
 // Les MENTIONS, rendues sous les couples et au-dessus des actes : elles pèsent presque tout le
-// volume de la carte (2 216 phrases contre 248) et les taire la ferait mentir par omission.
+// volume de la carte (2 899 mentions sur 2 796 phrases, contre 938 phrases touchées par un lien
+// de reprise) et les taire la ferait mentir par omission.
 // Elles restent une couche à part — un nom écrit n'est pas un texte partagé.
 function rendreMentions(r) {
   const zone = $("#carte-mentions");

@@ -168,8 +168,9 @@ texte avec lui que dans neuf. La carte des seuls actes le montrait comme un sate
 
 Elles ne sont **jamais additionnées** aux actes — un nom écrit n'est pas un texte partagé — et
 tous les passages sont stockés, pas un échantillon : un compte qu'on ne peut pas aller lire ne
-vaut rien. 104 des 2 216 mentions portent l'avertissement d'homographe (« Abraham » désigne aussi
-le patriarche biblique, que Rank et Freud citent abondamment dans leurs travaux sur le mythe).
+vaut rien. 145 des 2 899 mentions portent l'avertissement d'homographe (« Abraham » désigne aussi
+le patriarche biblique, que Rank et Freud citent abondamment dans leurs travaux sur le mythe) —
+et **la lecture a montré que l'avertissement était fondé : 57 de ces 145 ont été rejetées, 39 %**.
 
 Un oubli réel a été trouvé au passage : `comparaison.NOMS` n'avait **aucun jeton pour Sándor
 Ferenczi**, entré dans le corpus sans que son nom entre dans la table des mentions. Il pèse 16,8 %

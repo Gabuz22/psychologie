@@ -39,7 +39,9 @@ export const INSTRUCTIONS =
   "avant de la publier ; (3) dans l'outil `comparaison`, un lien de reprise n'est opposable QUE " +
   "si son `verdict` vaut « confirme » — un lien encore NULL (non lu) ou « rejete »/« reclasse » " +
   "ne doit jamais être présenté comme un emprunt entre les deux auteurs, voir la description de " +
-  "cet outil.";
+  "cet outil. La même règle vaut pour les MENTIONS (`nominations`) : citer `confirmees`, jamais " +
+  "le compte brut `atomes`, qui contient 180 faux positifs sur 2 899 — dont 57 « Abraham » qui " +
+  "sont le patriarche biblique et non le collègue.";
 
 export const OUTILS = [
   {
@@ -135,7 +137,16 @@ export const OUTILS = [
       + "prudence qu'avant). `sens_lu` est le sens établi par cette lecture et prévaut sur `sens` "
       + "quand il est renseigné. `motif_lecture` cite le texte qui fonde le verdict — à rapporter "
       + "avec lui, jamais le verdict seul, sans quoi l'affirmation redevient invérifiable pour "
-      + "l'utilisateur. Rapporter le champ `reserve` avec tout chiffre.",
+      + "l'utilisateur.\n"
+      + "`nominations` (QUI NOMME QUI) OBÉIT À LA MÊME RÈGLE, et l'oublier est le piège le plus "
+      + "facile de cet outil : `atomes` est le compte BRUT des mentions du nom, et les 2 899 "
+      + "mentions du corpus ont été lues en contexte le 2026-08-01. Citer `confirmees`, jamais "
+      + "`atomes` seul. Le compte brut contient 180 faux positifs : « Abraham » qui est le "
+      + "patriarche biblique (57 cas, soit 39 % des mentions de ce nom), Anna Freud prise pour "
+      + "Sigmund, « freud'ger » qui est l'adjectif « freudig » élidé, « Frau Dr. Rank » qui est "
+      + "l'épouse, « Abraham a Santa Clara » qui est un prédicateur baroque. `reclassees` compte "
+      + "les cas où le nom est écrit par un TIERS que l'auteur recopie, non par l'auteur lui-même. "
+      + "Rapporter le champ `reserve` avec tout chiffre.",
     schema: {
       auteur: z.string().optional().describe("restreindre aux liens impliquant cet auteur"),
       autre: z.string().optional().describe("second auteur, pour n'avoir qu'un couple"),

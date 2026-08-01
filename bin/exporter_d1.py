@@ -339,9 +339,9 @@ CREATE TABLE nominations (
   PRIMARY KEY (auteur_id, auteur_nomme_id)
 );
 -- MENTIONS NOMINALES — la SECONDE couche de la carte, et elle en est presque tout le volume :
--- 2 216 mentions sur 2 135 phrases, contre 248 phrases d'acte de citation, et 11 couples
--- d'auteurs contre 6. Le recouvrement entre les deux est quasi nul (1,7 %) : ce ne sont pas deux
--- mesures du même fait, mais deux faits différents.
+-- 2 899 mentions sur 2 796 phrases, contre 938 phrases touchées par un lien de reprise, et 27
+-- couples orientés contre 10. Le recouvrement entre les deux est quasi nul (3,8 % des mentions) :
+-- ce ne sont pas deux mesures du même fait, mais deux faits différents.
 --
 -- ELLES NE SONT JAMAIS FUSIONNÉES AVEC LES ACTES. Un acte est un TEXTE partagé ; une mention est
 -- un NOM écrit. Les additionner ferait exactement l'erreur que la carte a été bâtie pour éviter.
@@ -358,9 +358,22 @@ CREATE TABLE mentions (
   auteur_id INTEGER NOT NULL REFERENCES auteurs(id),         -- celui qui écrit
   auteur_nomme_id INTEGER NOT NULL REFERENCES auteurs(id),   -- celui qui est nommé
   -- Avertissement porté par la mention elle-même : « Abraham » désigne aussi le patriarche
-  -- biblique, que Rank et Freud citent abondamment dans leurs travaux sur le mythe. 104 des
-  -- 2 216 mentions sont dans ce cas et ne doivent pas être lues comme des renvois à Karl Abraham.
-  homographe TEXT
+  -- biblique, que Rank et Freud citent abondamment dans leurs travaux sur le mythe. Il est
+  -- DÉCLARÉ comme un risque, jamais appliqué comme un filtre — c'est la lecture qui tranche.
+  homographe TEXT,
+  -- LE VERDICT DE LECTURE. Les 2 899 mentions du corpus ont été lues en contexte le 2026-08-01 :
+  -- 2 701 confirmées, 180 rejetées, 18 reclassées. Sans ces trois colonnes, une IA interrogeant
+  -- le corpus verrait la version NON LUE — et présenterait comme un renvoi d'un auteur à un autre
+  -- ce que la lecture a identifié comme un homographe (Anna Freud pour Sigmund, « freud'ger »
+  -- forme élidée de « freudig », « Frau Dr. Rank » l'épouse, « Abraham a Santa Clara » le
+  -- prédicateur baroque) ou comme la citation d'un tiers.
+  --   « confirme » — le nom désigne bien le collègue, et c'est l'auteur de l'atome qui le nomme ;
+  --   « rejete »   — faux positif, à ne jamais publier comme un renvoi ;
+  --   « reclasse » — le nom est là, mais porté par un texte TIERS que l'auteur recopie :
+  --                  `reclasse_vers` dit lequel, et sans lui l'énoncé serait vide.
+  verdict TEXT,
+  reclasse_vers TEXT,
+  motif_lecture TEXT
 );
 -- CARTE DES ACTES DE CITATION. L'unité est l'ACTE — des paires de phrases contiguës des deux
 -- côtés forment un seul acte de citation — et non le couple de concepts. Ce choix n'est pas de
@@ -591,103 +604,42 @@ def construire(chemin_sqlite):
     # quarante liens par couple, ce qui convient à une réponse d'API mais tronquerait la base —
     # 104 liens enregistrés au lieu de 132 lors du premier essai. Une troncature silencieuse est
     # exactement ce que ce projet refuse : la base doit contenir tout ce que le calcul a produit.
-    lus = verification.charger_reprises()
     par_auteur_atomes = {}
     for a in corpus.atomes:
         par_auteur_atomes.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
-    index_ng = [comparaison._n_grammes_utiles(v, None) for v in par_auteur_atomes.values()]
-    df_ng = comparaison.frequences_documentaires(index_ng)
 
-    noms_auteurs = sorted(par_auteur_atomes)
-    liens_carte = {}
-    for i, x in enumerate(noms_auteurs):
-        for y in noms_auteurs[i + 1:]:
-            bruts = comparaison.reprises(par_auteur_atomes[x], par_auteur_atomes[y], df_ng)
-            retenus = [comparaison.qualifier(l) for l in bruts
-                       if l["contenance"] >= comparaison.SEUIL_PUBLICATION]
-            if not retenus:
-                continue
-            # Les paires contiguës des deux côtés forment un seul ACTE de citation : c'est lui
-            # qu'on compte, sans quoi celui qui cite par longs blocs paraîtrait le plus lié.
-            # Chaque lien reçoit son verdict de lecture AVANT tout usage : la table des liens et
-            # la carte doivent voir exactement la même chose, sans quoi le site montrerait deux
-            # comptes différents du même travail.
-            for lien in retenus:
-                # Le verdict est retrouvé par EMPREINTES, jamais par identifiants d'atome :
-                # ceux-ci se décalent à la moindre correction de paratexte en amont.
-                j = verification.verdict_reprise(
-                    lien["a"]["empreinte"], lien["b"]["empreinte"], lus) or {}
-                sens_lu = j.get("sens_lu")
-                # Le verdict a été rendu sur un couple ORDONNÉ (id_a, id_b) que la clé triée a
-                # perdu. Si le calcul présente le couple dans l'autre ordre, le sens lu doit être
-                # retourné — sans quoi on publierait l'emprunt à l'envers.
-                #
-                # LE RETOURNEMENT SE DÉCIDE SUR L'EMPREINTE, JAMAIS SUR UN IDENTIFIANT POSITIONNEL.
-                #
-                # La version précédente comparait `id_a` à `lien["a"]["id"]` — et le commentaire
-                # deux lignes plus haut dit lui-même pourquoi c'est faux : « ceux-ci se décalent à
-                # la moindre correction de paratexte en amont ». Ils se sont décalés. Le test
-                # devenait vrai sans qu'aucun ordre n'ait changé, et retournait le sens d'un lien
-                # parfaitement correct. Mesuré à la correction : sur 56 liens portant un sens lu,
-                # 40 avaient l'identifiant intact et 16 avaient DÉRIVÉ — ces 16 étaient publiés
-                # À L'ENVERS, et aucun ne relevait d'un vrai changement d'ordre. Le cas le plus
-                # net : Abraham citant Freud en toutes lettres (« Ich zitiere den folgenden Passus
-                # wörtlich nach Freud », Traum und Mythus 1909 contre Traumdeutung 1900) était
-                # publié comme Freud citant Abraham — neuf ans avant que le texte d'Abraham existe.
-                #
-                # Le registre porte maintenant `empreinte_a`, le hachage du TEXTE du côté a. Il ne
-                # dérive pas, et il tranche sans rien déduire. On a préféré cela à une comparaison
-                # par ŒUVRE, qui aurait marché pour 53 couples sur 56 mais serait restée ambiguë
-                # sur les volumes CO-ÉCRITS : trois reprises du corpus mettent en regard deux
-                # atomes des mêmes « Studien über Hysterie », l'un de Breuer, l'autre de Freud.
-                if sens_lu:
-                    ancre = j.get("empreinte_a")
-                    if not ancre:
-                        raise SystemExit(
-                            "SENS LU SANS ANCRAGE — le verdict %s porte un sens mais pas "
-                            "d'`empreinte_a`. Sans elle, l'ordre (a, b) sur lequel le sens a été "
-                            "rendu est indevinable, et publier l'emprunt à l'envers est le seul "
-                            "risque que ce registre a pour mission d'écarter."
-                            % verification.cle_reprise(lien["a"]["empreinte"],
-                                                       lien["b"]["empreinte"]))
-                    if ancre != lien["a"]["empreinte"]:
-                        sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
-                lien["verdict"] = j.get("verdict")
-                lien["sens_lu"] = sens_lu
-                lien["reclasse_vers"] = j.get("vers")
-                lien["motif_lecture"] = j.get("motif")
-                lien["_juge"] = bool(j)
-            liens_carte[(x, y)] = retenus
+    # Le calcul vit dans `carte.liens_juges` — reprises publiables, qualifiées, chacune portant son
+    # verdict de lecture et son sens réorienté sur l'empreinte. Il est partagé avec le document
+    # généré du socle commun : deux copies de ce travail finiraient par se contredire, et ce dépôt
+    # a déjà eu un README annonçant sept grappes quand le document généré en comptait huit.
+    liens_carte = carte.liens_juges(corpus)
 
-            for rang, evt in enumerate(comparaison.evenements(retenus), 1):
-                for lien in evt["paires"]:
-                    ida = ids_atome.get(lien["a"]["id"])
-                    idb = ids_atome.get(lien["b"]["id"])
-                    if ida is None or idb is None:
-                        continue
-                    sens_lu = lien["sens_lu"]
-                    db.execute(
-                        "INSERT INTO liens_reprise (atome_a, atome_b, auteur_a, auteur_b,"
-                        " contenance, force, sens, source_tierce, a_verifier, evenement, partages,"
-                        " verdict, sens_lu, reclasse_vers, motif_lecture)"
-                        " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                        (ida, idb, ids_auteur[x], ids_auteur[y], lien["contenance"],
-                         lien["force"], lien["sens"], int(lien["source_tierce"]),
-                         int(lien["a_verifier"] and not lien["_juge"]), rang,
-                         " | ".join(lien["partages"][:6]),
-                         lien["verdict"], sens_lu, lien["reclasse_vers"],
-                         lien["motif_lecture"]))
+    for (x, y), retenus in sorted(liens_carte.items()):
+        # Les paires contiguës des deux côtés forment un seul ACTE de citation : c'est lui qu'on
+        # compte, sans quoi celui qui cite par longs blocs paraîtrait le plus lié.
+        for rang, evt in enumerate(comparaison.evenements(retenus), 1):
+            for lien in evt["paires"]:
+                ida = ids_atome.get(lien["a"]["id"])
+                idb = ids_atome.get(lien["b"]["id"])
+                if ida is None or idb is None:
+                    continue
+                db.execute(
+                    "INSERT INTO liens_reprise (atome_a, atome_b, auteur_a, auteur_b,"
+                    " contenance, force, sens, source_tierce, a_verifier, evenement, partages,"
+                    " verdict, sens_lu, reclasse_vers, motif_lecture)"
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    (ida, idb, ids_auteur[x], ids_auteur[y], lien["contenance"],
+                     lien["force"], lien["sens"], int(lien["source_tierce"]),
+                     int(lien["a_verifier"] and not lien["_juge"]), rang,
+                     " | ".join(lien["partages"][:6]),
+                     lien["verdict"], lien["sens_lu"], lien["reclasse_vers"],
+                     lien["motif_lecture"]))
 
     # ---- carte des actes de citation
     # Elle ne recalcule RIEN : elle regroupe les mêmes liens en actes, et y ajoute ce que la
     # table des liens ne peut pas porter — le passage recollé, sa forme imprimée des deux côtés,
     # les concepts communs, et surtout les couples SANS acte avec la raison de leur silence.
-    concepts_par_atome = {}
-    for a in corpus.atomes:
-        cs = {(x["groupe"], x["concept"]) for x in a.get("concepts", [])}
-        if cs:
-            concepts_par_atome[a["id"]] = cs
-    actes = carte.evenements_de_carte(liens_carte, concepts_par_atome)
+    actes = carte.evenements_de_carte(liens_carte, carte.concepts_par_atome(corpus))
     for e in actes:
         db.execute(
             "INSERT INTO carte_actes (auteur_a, auteur_b, oeuvre_a, oeuvre_b, poids,"
@@ -745,16 +697,39 @@ def construire(chemin_sqlite):
                    (ids_auteur[n["auteur"]], ids_auteur[n["auteur_nomme"]],
                     n["atomes"], n["homographe"]))
 
-    # Les PASSAGES des mentions, un par un. La table `nominations` ci-dessus ne porte que des
-    # comptes ; sans les passages, un lecteur ne peut pas vérifier une seule de ces 2 216
-    # affirmations — et la doctrine du projet est qu'un chiffre non vérifiable ne vaut rien.
+    # Les PASSAGES des mentions, un par un, AVEC LEUR VERDICT DE LECTURE. La table `nominations`
+    # ci-dessus ne porte que des comptes ; sans les passages, un lecteur ne peut pas vérifier une
+    # seule de ces 2 899 affirmations — et la doctrine du projet est qu'un chiffre non vérifiable
+    # ne vaut rien. Sans le verdict, il les vérifierait toutes contre la version non lue.
+    lus_mentions = verification.charger_mentions()
+    n_mentions = n_jugees = 0
     for auteur, atomes in sorted(par_auteur_atomes.items()):
         for m in comparaison.mentions(atomes, auteur):
             aid = ids_atome.get(m["atome"]["id"])
             if aid is None:
                 continue
-            db.execute("INSERT INTO mentions VALUES (?,?,?,?)",
-                       (aid, ids_auteur[auteur], ids_auteur[m["auteur_nomme"]], m["homographe"]))
+            j = verification.verdict_mention(
+                verification.cle_mention(m["atome"]["empreinte"], m["auteur_nomme"],
+                                         m["atome"]["oeuvre"]),
+                lus_mentions) or {}
+            n_mentions += 1
+            n_jugees += 1 if j.get("verdict") else 0
+            db.execute("INSERT INTO mentions VALUES (?,?,?,?,?,?,?)",
+                       (aid, ids_auteur[auteur], ids_auteur[m["auteur_nomme"]], m["homographe"],
+                        j.get("verdict"), j.get("vers"), j.get("motif")))
+
+    # GARDE-FOU, sur le modèle de celui du `sens_lu` ci-dessus. La clé d'une mention est faite de
+    # l'empreinte du texte, de l'œuvre et du nom cité : si l'une des trois change de forme, les
+    # verdicts cessent silencieusement de s'accrocher et l'export publie la version NON LUE — soit
+    # 180 faux positifs présentés comme des renvois d'un auteur à l'autre. Un registre peuplé qui
+    # n'accroche presque rien est une panne, pas un état.
+    if lus_mentions["verdicts"] and n_jugees < 0.9 * n_mentions:
+        raise SystemExit(
+            "VERDICTS DE MENTION DÉSANCRÉS — %d mentions calculées, %d seulement portent un "
+            "verdict alors que le registre en compte %d. La clé (empreinte|œuvre|nom) ne "
+            "correspond plus : vérifier `verification.cle_mention` et une éventuelle "
+            "resegmentation du corpus avant de publier."
+            % (n_mentions, n_jugees, len(lus_mentions["verdicts"])))
 
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
     # Elles sont calculées sur les atomes de SIGMUND FREUD seul, et le resteront tant que la

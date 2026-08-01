@@ -32,6 +32,81 @@ import collections
 CARTE_VERSION = "1.0.0"
 
 
+def liens_juges(corpus, lus=None):
+    """TOUS les liens de reprise publiables du corpus, qualifiés ET porteurs de leur verdict.
+
+    → {(auteur_a, auteur_b): [lien, …]}, prêt pour `evenements_de_carte`.
+
+    POURQUOI CETTE FONCTION EXISTE ICI PLUTÔT QUE CHEZ SON PREMIER APPELANT. Ce calcul était écrit
+    dans `bin/exporter_d1.py`, et un second consommateur est apparu — le document généré du socle
+    commun. Le recopier aurait mis deux versions du même travail dans le dépôt, et ce projet a déjà
+    payé cette faute : `README.md` a décrit pendant des jours une partition de sept grappes que le
+    document généré comptait à huit, sans que rien ne le signale. Le site et le document doivent
+    voir EXACTEMENT les mêmes actes, ou l'un des deux ment.
+    """
+    from . import comparaison, verification
+    lus = lus if lus is not None else verification.charger_reprises()
+
+    par_auteur = {}
+    for a in corpus.atomes:
+        par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+    index = [comparaison._n_grammes_utiles(v, None) for v in par_auteur.values()]
+    df = comparaison.frequences_documentaires(index)
+
+    noms = sorted(par_auteur)
+    out = {}
+    for i, x in enumerate(noms):
+        for y in noms[i + 1:]:
+            bruts = comparaison.reprises(par_auteur[x], par_auteur[y], df)
+            retenus = [comparaison.qualifier(l) for l in bruts
+                       if l["contenance"] >= comparaison.SEUIL_PUBLICATION]
+            if not retenus:
+                continue
+            for lien in retenus:
+                # Le verdict est retrouvé par EMPREINTES, jamais par identifiants d'atome : ceux-ci
+                # se décalent à la moindre correction de paratexte en amont.
+                j = verification.verdict_reprise(
+                    lien["a"]["empreinte"], lien["b"]["empreinte"], lus) or {}
+                sens_lu = j.get("sens_lu")
+                # Le verdict a été rendu sur un couple ORDONNÉ (id_a, id_b) que la clé triée a
+                # perdu. Si le calcul présente le couple dans l'autre ordre, le sens lu doit être
+                # retourné — sans quoi on publierait l'emprunt à l'envers. LE RETOURNEMENT SE DÉCIDE
+                # SUR L'EMPREINTE, JAMAIS SUR UN IDENTIFIANT POSITIONNEL : une version précédente
+                # comparait `id_a` à l'identifiant courant, et sur 56 liens portant un sens lu, 16
+                # avaient dérivé et étaient publiés À L'ENVERS — dont Abraham citant Freud en
+                # toutes lettres, publié comme Freud citant Abraham neuf ans avant que le texte
+                # d'Abraham existe.
+                if sens_lu:
+                    ancre = j.get("empreinte_a")
+                    if not ancre:
+                        raise SystemExit(
+                            "SENS LU SANS ANCRAGE — le verdict %s porte un sens mais pas "
+                            "d'`empreinte_a`. Sans elle, l'ordre (a, b) sur lequel le sens a été "
+                            "rendu est indevinable, et publier l'emprunt à l'envers est le seul "
+                            "risque que ce registre a pour mission d'écarter."
+                            % verification.cle_reprise(lien["a"]["empreinte"],
+                                                       lien["b"]["empreinte"]))
+                    if ancre != lien["a"]["empreinte"]:
+                        sens_lu = "b_vers_a" if sens_lu == "a_vers_b" else "a_vers_b"
+                lien["verdict"] = j.get("verdict")
+                lien["sens_lu"] = sens_lu
+                lien["reclasse_vers"] = j.get("vers")
+                lien["motif_lecture"] = j.get("motif")
+                lien["_juge"] = bool(j)
+            out[(x, y)] = retenus
+    return out
+
+
+def concepts_par_atome(corpus):
+    """{id_atome: {(groupe, concept), …}} — le CONTEXTE des actes, jamais leurs arêtes."""
+    out = {}
+    for a in corpus.atomes:
+        cs = {(x["groupe"], x["concept"]) for x in a.get("concepts", [])}
+        if cs:
+            out[a["id"]] = cs
+    return out
+
+
 def evenements_de_carte(liens_par_couple, concepts_par_atome):
     """Agrège des liens de reprise DÉJÀ QUALIFIÉS en actes de citation, prêts à cartographier.
 

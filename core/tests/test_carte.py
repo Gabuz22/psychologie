@@ -242,13 +242,13 @@ if __name__ == "__main__":
 class TestMentions(unittest.TestCase):
     """LA SECONDE COUCHE, et elle pèse presque tout le volume de la carte.
 
-    Mesuré : 2 216 mentions sur 2 135 phrases, contre 248 phrases d'acte de citation ; onze
-    couples d'auteurs contre six ; recouvrement entre les deux quasi nul (1,7 %). Ce ne sont pas
-    deux mesures du même fait, ce sont deux faits.
+    Mesuré : 2 899 mentions sur 2 796 phrases, contre 938 phrases touchées par un lien de
+    reprise ; vingt-sept couples orientés contre dix ; recouvrement entre les deux quasi nul
+    (3,8 % des mentions). Ce ne sont pas deux mesures du même fait, ce sont deux faits.
 
     Sans elle, la carte ment par omission : Ferenczi nomme Freud dans 960 de ses phrases et ne
-    partage un texte avec lui que dans neuf. Une carte des seuls actes le montrerait comme un
-    satellite lointain de Freud.
+    partage un texte avec lui que dans vingt-trois actes. Une carte des seuls actes le montrerait
+    comme un satellite lointain de Freud.
     """
 
     def test_un_auteur_ne_se_nomme_pas_lui_meme(self):
@@ -282,8 +282,10 @@ class TestMentions(unittest.TestCase):
 
     def test_l_homographe_est_porte_par_la_mention(self):
         """« Abraham » désigne aussi le patriarche biblique, que Rank et Freud citent abondamment
-        dans leurs travaux sur le mythe : 104 mentions sur 2 216 sont dans ce cas. L'avertissement
-        voyage avec la mention, il n'est pas relégué dans une note."""
+        dans leurs travaux sur le mythe. L'avertissement voyage avec la mention, il n'est pas
+        relégué dans une note — et la lecture des 2 899 mentions a montré qu'il était FONDÉ :
+        sur les 145 mentions portant ce nom, 57 ont été rejetées, soit 39 %. Aucun autre nom du
+        corpus n'approche ce taux."""
         from core import comparaison
         atomes = [{"id": "x:1", "texte": "Der Traum Abrahams von der Opferung des Sohnes Isaak.",
                    "oeuvre": "x"}]

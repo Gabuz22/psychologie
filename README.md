@@ -395,15 +395,22 @@ qui s'intitule précisément *Massenpsychologie und **Ich-Analyse***.
 
 L'agent `courants` va plus loin : il partitionne tout le graphe de concepts par maximisation
 gloutonne de la modularité (Newman, 2004), déterministe — aucune grappe n'est choisie à l'avance.
-Sur 151 concepts reliés, la partition atteint **0,373 de modularité** (le seuil de structure
-réelle est généralement fixé à 0,30) et fait ressortir sept grappes — dont « la famille, la
-différence des sexes et la mort », la plus freudienne du lot, et « la clinique », qui s'est
+Sur 167 concepts reliés, la partition atteint **0,288 de modularité** — **SOUS** le seuil de 0,30
+généralement retenu pour une structure réelle — et fait ressortir huit grappes, dont « la famille,
+la différence des sexes et la mort », la plus freudienne du lot, et « la clinique », qui s'est
 détachée en grappe propre à l'audit 4 du lexique. Chaque grappe a été **validée en lisant**
 des atomes-croisements ; les artefacts sont dits (le *Teufel* rejoint la peinture parce que
 l'unique cas sur le diable porte sur un peintre). Le dossier complet de chacune est
 [`documentation/COURANTS_FREUD.md`](documentation/COURANTS_FREUD.md), **régénéré** par
 `bin/generer_courants.py` — un document qui décrit des données calculées ne peut pas rester
-juste s'il est tenu à la main. Partitionné séparément, le corpus
+juste s'il est tenu à la main.
+
+> **Et ce paragraphe-ci le prouvait.** Il a annoncé « 151 concepts, 0,373 de modularité, sept
+> grappes, au-dessus du seuil » pendant que le document généré comptait 167 concepts, 0,288 et
+> huit grappes — c'est-à-dire pendant qu'il disait le contraire du vrai sur le seul chiffre qui
+> décide si cette partition vaut quelque chose. Le paragraphe qui énonce la règle est celui qui
+> l'a enfreinte. Les chiffres ci-dessus sont désormais ceux de la dernière régénération ; en cas
+> de doute, c'est `COURANTS_FREUD.md` qui fait foi, pas ce README. Partitionné séparément, le corpus
 1900-1913 contre 1914-1933 montre **trois recompositions datables** — la mort quitte la famille
 pour la pulsion, le rêve cesse d'absorber la métapsychologie, la seconde topique naît comme
 grappe accolée aux figures parentales. **C'est cet agent qui porte l'objectif long terme** : si
@@ -448,6 +455,21 @@ ce que le corpus dit de Freud, sans jargon technique.
 **Dossiers de référence par grappe : [`documentation/COURANTS_FREUD.md`](documentation/COURANTS_FREUD.md)**
 — chronologie, citations validées et réserves pour chacun des huit courants internes.
 Détail méthodologique : [`documentation/INVENTAIRE_ATOMES.md`](documentation/INVENTAIRE_ATOMES.md).
+
+**Ce que ces auteurs partagent, et ce qui les sépare** — trois documents générés, issus du même
+calcul que la base du site :
+
+- [`documentation/SOCLE_COMMUN.md`](documentation/SOCLE_COMMUN.md) — le socle n'a pas la forme
+  d'un noyau. **91,4 % des actes de citation confirmés touchent Freud**, aucune phrase du corpus
+  n'est partagée par trois auteurs, et les mots que les six auteurs allemands emploient au même
+  taux sont surtout de la langue courante. C'est une étoile, pas une doctrine commune.
+- [`documentation/BRANCHES_ET_DERIVATIONS.md`](documentation/BRANCHES_ET_DERIVATIONS.md) — la
+  comparaison de fréquence ENTRE auteurs ne donne rien après contrôles (**zéro signature sur 35**),
+  et le document le publie. Ce qui montre quelque chose est la chronologie interne de chaque
+  œuvre : `Es` et `Über-Ich` apparaissent en 1923, `hypnoid` disparaît après 1895.
+- [`documentation/TRADUCTION.md`](documentation/TRADUCTION.md) — ce qu'un mot français unique doit
+  porter quand l'allemand compose, et ce qu'une recherche par radical ramasse en trop
+  (`Verlust` pour *Lust*, `längst` pour *Angst*, `Trauma` pour *Traum*).
 
 ---
 

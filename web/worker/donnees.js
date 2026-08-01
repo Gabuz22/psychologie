@@ -495,8 +495,17 @@ export async function comparaison(env, { auteur, autre, limite } = {}) {
      JOIN oeuvres o ON o.id = l.oeuvre_id
      ORDER BY l.portee_atomes DESC`).all();
 
+  // `nominations` ne porte que des COMPTES, et un compte brut de mentions est faux depuis que la
+  // lecture est faite : 180 des 2 899 mentions sont des faux positifs. Les verdicts sont donc
+  // agrégés ici depuis `mentions`, qui les porte au passage près.
   const noms = await env.DB.prepare(
-    `SELECT a.nom AS auteur, b.nom AS auteur_nomme, n.atomes, n.homographe
+    `SELECT a.nom AS auteur, b.nom AS auteur_nomme, n.atomes, n.homographe,
+            (SELECT COUNT(*) FROM mentions m WHERE m.auteur_id = n.auteur_id
+               AND m.auteur_nomme_id = n.auteur_nomme_id AND m.verdict = 'confirme') AS confirmees,
+            (SELECT COUNT(*) FROM mentions m WHERE m.auteur_id = n.auteur_id
+               AND m.auteur_nomme_id = n.auteur_nomme_id AND m.verdict = 'rejete') AS rejetees,
+            (SELECT COUNT(*) FROM mentions m WHERE m.auteur_id = n.auteur_id
+               AND m.auteur_nomme_id = n.auteur_nomme_id AND m.verdict = 'reclasse') AS reclassees
      FROM nominations n
      JOIN auteurs a ON a.id = n.auteur_id
      JOIN auteurs b ON b.id = n.auteur_nomme_id
@@ -523,7 +532,12 @@ export async function comparaison(env, { auteur, autre, limite } = {}) {
       + "encore lu : `sens`/`a_verifier` restent alors la seule information disponible. Enfin, "
       + "une PAIRE est deux phrases ; un ÉVÉNEMENT est une citation continue — c'est lui qui dit "
       + "combien de fois un auteur en cite un autre, et un même verdict de lecture couvre toutes "
-      + "les paires de l'événement.",
+      + "les paires de l'événement. "
+      + "`nominations` obéit à la même règle : `atomes` est le compte BRUT des mentions, et "
+      + "`confirmees`/`rejetees`/`reclassees` viennent de la lecture des 2 899 mentions du corpus "
+      + "(2026-08-01). C'est `confirmees` qu'il faut citer, jamais `atomes` seul — le compte brut "
+      + "inclut 180 faux positifs, dont 57 « Abraham » qui sont le patriarche biblique et non le "
+      + "collègue, soit 39 % des mentions de ce nom.",
     ne_pas_conclure:
       "Nommer n'est ni suivre, ni approuver, ni contredire — et reprendre une formulation n'est "
       + "pas partager une thèse. Aucun chiffre de cette page ne mesure un accord ni un désaccord.",
@@ -636,21 +650,30 @@ export async function carte(env, { auteur, autre, limite } = {}) {
   // LES MENTIONS — seconde couche, jamais fusionnée avec les actes. Un acte est un TEXTE
   // partagé ; une mention est un NOM écrit. Les additionner referait l'erreur que cette carte
   // a été bâtie pour éviter. Mais les taire ferait mentir la carte par omission : Ferenczi
-  // nomme Freud dans 960 phrases et ne partage un texte avec lui que dans 9.
+  // nomme Freud dans 960 phrases et ne partage un texte avec lui que dans 23 actes.
+  //
+  // LE COMPTE EST RENDU AVEC SON VERDICT DE LECTURE, jamais seul. Les 2 899 mentions ont été
+  // lues en contexte : 180 sont des faux positifs. Servir « Rank nomme Abraham 62 fois » sans
+  // dire que la lecture en a rejeté une partie, c'est publier un chiffre que le corpus sait faux.
   const mentions = await env.DB.prepare(
     `SELECT a.nom AS auteur, b.nom AS auteur_nomme, COUNT(*) AS n,
-            SUM(CASE WHEN m.homographe IS NOT NULL THEN 1 ELSE 0 END) AS homographes
+            SUM(CASE WHEN m.homographe IS NOT NULL THEN 1 ELSE 0 END) AS homographes,
+            SUM(CASE WHEN m.verdict = 'confirme' THEN 1 ELSE 0 END) AS confirmees,
+            SUM(CASE WHEN m.verdict = 'rejete' THEN 1 ELSE 0 END) AS rejetees,
+            SUM(CASE WHEN m.verdict = 'reclasse' THEN 1 ELSE 0 END) AS reclassees,
+            SUM(CASE WHEN m.verdict IS NULL THEN 1 ELSE 0 END) AS non_lues
      FROM mentions m
      JOIN auteurs a ON a.id = m.auteur_id
      JOIN auteurs b ON b.id = m.auteur_nomme_id
      GROUP BY 1, 2 ORDER BY n DESC`).all();
 
   // Les PASSAGES, quand un couple est demandé : un compte qu'on ne peut pas aller lire ne vaut
-  // rien. Sans filtre on ne les charge pas — 2 216 passages sur une page d'accueil noieraient
+  // rien. Sans filtre on ne les charge pas — 2 899 passages sur une page d'accueil noieraient
   // les actes, qui sont le sujet de la page.
   const passages = (auteur || autre) ? await env.DB.prepare(
     `SELECT x.atome_id, x.texte, o.titre AS oeuvre, o.annee_oeuvre,
-            a.nom AS auteur, b.nom AS auteur_nomme, m.homographe
+            a.nom AS auteur, b.nom AS auteur_nomme, m.homographe,
+            m.verdict, m.reclasse_vers, m.motif_lecture
      FROM mentions m
      JOIN atomes x ON x.id = m.atome_id
      JOIN oeuvres o ON o.id = x.oeuvre_id
@@ -692,9 +715,18 @@ export async function carte(env, { auteur, autre, limite } = {}) {
       + "additionnées. Nommer n'est d'ailleurs ni suivre, ni approuver, ni contredire : le corpus "
       + "a éprouvé ce piège, un marqueur construit pour repérer les écarts d'un disciple avec "
       + "Freud n'a rien confirmé sur cinq candidats, les cinq passages étant des renvois "
-      + "d'accord. Le passage est donné en entier pour qu'on aille lire. Attention enfin aux "
-      + "homographes : « Abraham » désigne aussi le patriarche biblique, que Rank et Freud citent "
-      + "abondamment dans leurs travaux sur le mythe — 104 mentions sur 2 216 sont dans ce cas.",
+      + "d'accord. Le passage est donné en entier pour qu'on aille lire. "
+      + "LE VERDICT DE LECTURE PRIME SUR LE COMPTE : les 2 899 mentions ont été lues en contexte "
+      + "le 2026-08-01 — 2 701 confirmées, 180 rejetées, 18 reclassées. Une mention « rejete » ne "
+      + "doit JAMAIS être présentée comme un renvoi d'un auteur à l'autre, et une mention "
+      + "« reclasse » signale que le nom est porté par un texte tiers que l'auteur recopie "
+      + "(`reclasse_vers` le nomme). Le champ `motif_lecture` porte la raison, et doit accompagner "
+      + "tout verdict cité. "
+      + "L'homographe est le piège principal, et la lecture l'a chiffré : « Abraham » désigne "
+      + "aussi le patriarche biblique, et sur les 145 mentions portant ce nom, 57 ont été "
+      + "rejetées — 39 %. La lecture en a trouvé d'autres, non déclarés : Anna Freud prise pour "
+      + "Sigmund, « freud'ger » forme élidée de « freudig », « Frau Dr. Rank » l'épouse, "
+      + "« Abraham a Santa Clara » le prédicateur baroque.",
     ne_pas_conclure:
       "Ce que la carte ne montre pas ne veut PAS dire que rien n'a eu lieu. Elle touche moins "
       + "d'un demi pour cent du corpus, plus de la moitié des œuvres n'y apparaissent jamais, et "
