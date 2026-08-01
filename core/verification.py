@@ -166,3 +166,66 @@ def valider_reprises(table=None):
         if j.get("empreinte_a") and j["empreinte_a"] not in k.split("|"):
             erreurs.append("empreinte_a de %s n'est pas l'un des deux côtés du couple" % k)
     return {"ok": not erreurs, "erreurs": erreurs, "juges": len(t["verdicts"])}
+
+
+# ------------------------------------------------------------------------------------------
+# REGISTRE DES MENTIONS LUES — même doctrine, troisième unité.
+#
+# Une mention est PLUS SIMPLE qu'une reprise dans sa forme (un seul atome, pas un couple) mais le
+# jugement qu'elle demande est tout aussi réel : ce que `comparaison.mentions` détecte est un NOM
+# écrit, jamais le fait qu'il désigne la bonne personne. Deux pièges mesurés dans le corpus :
+#   • L'HOMOGRAPHE — « Abraham » est aussi le patriarche biblique (145 mentions le portent,
+#     déclarées dans `comparaison.HOMOGRAPHES` comme un RISQUE, jamais comme un verdict).
+#   • LA CITATION D'UN TIERS — l'auteur de l'atome ne nomme pas lui-même : il recopie un passage
+#     qui, lui, nomme le collègue. Ce n'est alors pas un renvoi de l'auteur de l'atome.
+#
+# La clé est le couple (empreinte de l'atome, auteur nommé) : UN atome peut nommer plusieurs
+# auteurs dans la même phrase (« Freud, Rank und Abraham meinten… »), et chaque nom porte son
+# propre verdict — confirmer l'un ne dit rien des deux autres.
+FICHIER_MENTIONS = os.path.join(RACINE, "verification", "mentions_lues.json")
+
+
+def charger_mentions():
+    if not os.path.exists(FICHIER_MENTIONS):
+        return {"meta": {}, "verdicts": {}}
+    with open(FICHIER_MENTIONS, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def cle_mention(empreinte_atome, auteur_nomme, oeuvre=None):
+    """Clé d'une mention : (empreinte, auteur nommé) — plus l'ŒUVRE si on la connaît.
+
+    L'empreinte seule ne suffit pas : une phrase peut être reprise verbatim d'une œuvre à
+    l'autre (un auteur se cite lui-même, ou un extrait de presse republié en quatrième de
+    couverture) — deux ATOMES différents partagent alors la même empreinte, et sans l'œuvre
+    leurs verdicts s'écrasent silencieusement (mesuré : 2 collisions sur 2 899 mentions lues
+    le 2026-08-01). L'œuvre est un slug stable — contrairement à un identifiant positionnel,
+    il ne dérive pas quand du paratexte est retiré en amont dans le même texte.
+
+    `oeuvre` reste optionnel pour ne pas invalider un code appelant qui ne l'a pas encore : sans
+    lui, la clé retombe sur l'ancien format (empreinte, auteur) et le risque de collision
+    redevient ce qu'il était.
+    """
+    if oeuvre:
+        return "%s|%s|%s" % (empreinte_atome, oeuvre, auteur_nomme)
+    return "%s|%s" % (empreinte_atome, auteur_nomme)
+
+
+def verdict_mention(cle, table=None):
+    return (table or charger_mentions())["verdicts"].get(cle)
+
+
+def valider_mentions(table=None):
+    t = table or charger_mentions()
+    erreurs = []
+    for k, j in t["verdicts"].items():
+        if j.get("verdict") not in VERDICTS:
+            erreurs.append("verdict inconnu pour %s : %r" % (k, j.get("verdict")))
+        if not j.get("motif"):
+            erreurs.append("verdict sans motif pour %s — un jugement doit être argumenté" % k)
+        if j.get("verdict") == "reclasse" and not j.get("vers"):
+            erreurs.append("reclassement sans cible pour %s — la mention est portée par la "
+                           "citation d'un tiers, il faut le nommer" % k)
+        if "|" not in k:
+            erreurs.append("clé de mention malformée (attendu empreinte|auteur_nomme) : %r" % k)
+    return {"ok": not erreurs, "erreurs": erreurs, "juges": len(t["verdicts"])}

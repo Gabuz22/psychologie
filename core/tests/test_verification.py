@@ -218,3 +218,52 @@ class TestRegistreDesReprises(unittest.TestCase):
             self.assertGreater(memes, 0,
                                "plus aucune reprise intra-œuvre : si c'est durable, la note "
                                "ci-dessus sur les volumes co-écrits est à revoir")
+
+
+class TestRegistreDesMentions(unittest.TestCase):
+    """Le registre des mentions LUES — jugements portés sur un NOM écrit dans un atome."""
+
+    def test_le_registre_est_valide(self):
+        r = verification.valider_mentions()
+        self.assertTrue(r["ok"], r["erreurs"])
+        self.assertGreater(r["juges"], 0)
+
+    def test_un_verdict_sans_motif_est_refuse(self):
+        faux = {"verdicts": {"x|o|y": {"verdict": "confirme"}}}
+        self.assertFalse(verification.valider_mentions(faux)["ok"])
+
+    def test_un_reclassement_sans_cible_est_refuse(self):
+        """« Reclassé » veut dire : ce n'est pas l'auteur de l'atome qui nomme, mais un TIERS
+        qu'il recopie. Sans nommer ce tiers, la mention resterait affichée comme si l'auteur
+        de l'atome nommait lui-même le collègue."""
+        faux = {"verdicts": {"x|o|y": {"verdict": "reclasse", "motif": "m"}}}
+        self.assertFalse(verification.valider_mentions(faux)["ok"])
+
+    def test_la_cle_distingue_deux_atomes_de_meme_texte(self):
+        """DÉFAUT MESURÉ : une phrase reprise verbatim d'une œuvre à l'autre (auto-citation,
+        extrait de presse republié en quatrième de couverture) donne la MÊME empreinte à deux
+        atomes distincts. Sans l'œuvre dans la clé, le second verdict écrase le premier en
+        silence — mesuré sur 2 couples réels avant correction (heureusement identiques ici,
+        mais rien ne le garantissait). L'œuvre est un slug stable : elle ne dérive pas comme un
+        identifiant positionnel, contrairement à un rang d'atome."""
+        meme_empreinte = "abc0123456789def"
+        cle_1 = verification.cle_mention(meme_empreinte, "Sigmund Freud", "ursachen_nervositaet")
+        cle_2 = verification.cle_mention(meme_empreinte, "Sigmund Freud", "nervoese_angstzustaende")
+        self.assertNotEqual(cle_1, cle_2)
+
+    def test_les_verdicts_lus_portent_bien_sur_des_mentions_du_corpus(self):
+        """Un verdict désancré (aucune mention calculée ne porte plus sa clé) serait du travail
+        de lecture perdu à la moindre évolution de la segmentation — comme pour les reprises."""
+        from core import comparaison
+        from core.corpus import Corpus
+        corpus = Corpus()
+        par_auteur = {}
+        for a in corpus.atomes:
+            par_auteur.setdefault(a.get("auteur", "Sigmund Freud"), []).append(a)
+        vus = set()
+        for auteur, atomes in par_auteur.items():
+            for m in comparaison.mentions(atomes, auteur):
+                vus.add(verification.cle_mention(m["atome"]["empreinte"], m["auteur_nomme"],
+                                                  m["atome"]["oeuvre"]))
+        orphelins = set(verification.charger_mentions()["verdicts"]) - vus
+        self.assertFalse(orphelins, "verdicts de lecture désancrés : %s" % sorted(orphelins)[:5])
