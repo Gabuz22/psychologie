@@ -213,6 +213,39 @@
     commun » plus bas n'invente pas non plus un score</strong> : il affiche deux comptes déjà
     présentés plus haut sur cette page, réglables par seuil, jamais additionnés ni moyennés.</p>
 
+  <h3>Le buisson — tous les auteurs à la fois</h3>
+  <p class="note">Deux graphes, jamais un seul : un nœud par auteur, une arête par paire. Le
+    premier graphe compte les <strong>liens vérifiés</strong> (actes confirmés) entre chaque paire,
+    le second la <strong>densité comparée</strong> — <strong>jamais les deux réunis dans une seule
+    arête</strong>, pour la même raison que plus bas : leurs unités ne sont pas comparables. Une
+    paire en trait pointillé gris est en silence — langues différentes, la comparaison y est
+    aveugle par construction, ce n'est pas un « rien trouvé ». Cliquez une arête pour ouvrir le
+    détail de la paire.</p>
+  <div class="socle-seuils">
+    <label for="buisson-seuil-actes">Liens vérifiés — au moins
+      <output id="buisson-seuil-actes-valeur">1</output></label>
+    <input type="range" id="buisson-seuil-actes" min="0" max="20" value="1" step="1">
+    <label for="buisson-seuil-densite">Densité comparée — au moins
+      <output id="buisson-seuil-densite-valeur">1,0</output> ‰</label>
+    <input type="range" id="buisson-seuil-densite" min="0" max="30" value="1" step="0.5">
+  </div>
+  <div class="buisson-graphes">
+    <figure>
+      <figcaption>Axe 1 — liens vérifiés</figcaption>
+      <svg id="buisson-svg-liens" viewBox="0 0 360 360" role="img"
+           aria-label="Graphe des liens vérifiés entre auteurs"></svg>
+    </figure>
+    <figure>
+      <figcaption>Axe 2 — densité comparée</figcaption>
+      <svg id="buisson-svg-densite" viewBox="0 0 360 360" role="img"
+           aria-label="Graphe de la densité comparée entre auteurs"></svg>
+    </figure>
+  </div>
+  <p class="reserve">Un graphe dense ne prouve ni noyau ni doctrine partagée : le corpus mesuré est
+    une <strong>étoile</strong> centrée sur Freud — 91,5&nbsp;% des actes de citation confirmés le
+    touchent, et aucun passage n'est partagé par trois auteurs à la fois (voir « Méthode »).
+    Beaucoup d'arêtes ne veut donc pas dire beaucoup de dialogue entre disciples.</p>
+
   <div id="comp-matrice" class="cartes"></div>
 
   <h3>Les chapitres où un auteur en lit un autre</h3>

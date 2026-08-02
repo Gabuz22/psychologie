@@ -671,6 +671,7 @@ async function demarrer() {
     // « le corpus n'a rien trouvé », alors qu'il s'agit du résultat le plus argumenté du projet.
     afficherSignaux(false);
     afficherComparaison();
+    afficherBuisson();
     afficherUsages();
     afficherCarte();
     remplirSelect($("#arbre-auteur"),
@@ -925,6 +926,100 @@ async function afficherComparaison() {
 }
 
 // --------------------------------------------------------------------------------------------
+// LE BUISSON — deux graphes SVG (nœuds = auteurs, arêtes = paires), DEUX AXES JAMAIS FUSIONNÉS
+// EN UNE SEULE ARÊTE : chaque graphe montre exactement une mesure. Disposition circulaire
+// déterministe (pas de simulation physique) — cohérent avec le reste du site, « déterministe,
+// sans dépendance ». Aucune bibliothèque de graphe : SVG construit à la main.
+const buissonEtat = { seuilActes: 1, seuilDensite: 1.0 };
+let buissonDebounce = null;
+
+function positionsCirculaires(noms, rayon = 150, cx = 180, cy = 180) {
+  return new Map(noms.map((nom, i) => {
+    const angle = (2 * Math.PI * i) / noms.length - Math.PI / 2;   // premier nœud en haut
+    return [nom, { x: cx + rayon * Math.cos(angle), y: cy + rayon * Math.sin(angle) }];
+  }));
+}
+
+const NS_SVG = "http://www.w3.org/2000/svg";
+
+function dessinerGraphe(selecteur, paires, positions, champ, maxCompte) {
+  const svg = $(selecteur);
+  if (!svg) return;
+  svg.innerHTML = "";
+  // Les arêtes d'abord, sous les nœuds — un lecteur doit voir les noms sans qu'un trait les coupe.
+  for (const p of paires) {
+    const posA = positions.get(p.auteur_a), posB = positions.get(p.auteur_b);
+    if (!posA || !posB) continue;             // auteur du référentiel absent de cette mesure
+    const n = p[champ];
+    const ligne = document.createElementNS(NS_SVG, "line");
+    ligne.setAttribute("x1", posA.x); ligne.setAttribute("y1", posA.y);
+    ligne.setAttribute("x2", posB.x); ligne.setAttribute("y2", posB.y);
+    const titre = document.createElementNS(NS_SVG, "title");
+    if (p.silence === "langues") {
+      // JAMAIS OMISE : un aveuglement de méthode (langues différentes) ne doit pas se lire comme
+      // « rien à voir » — même principe que `.carte-silence` et `carte.couples()`.
+      ligne.setAttribute("class", "buisson-arete-silence");
+      titre.textContent = `${p.auteur_a} ↔ ${p.auteur_b} : langues différentes, comparaison `
+        + "aveugle par construction — pas un « rien trouvé ».";
+    } else if (!n) {
+      ligne.setAttribute("class", "buisson-arete-vide");
+      titre.textContent = `${p.auteur_a} ↔ ${p.auteur_b} : aucun concept candidat à ce seuil.`;
+    } else {
+      ligne.setAttribute("class", "buisson-arete");
+      ligne.setAttribute("stroke-width", String(1 + 5 * Math.min(1, n / maxCompte)));
+      titre.textContent = `${p.auteur_a} ↔ ${p.auteur_b} : ${n} concept${n > 1 ? "s" : ""} — `
+        + "cliquer pour le détail.";
+      ligne.addEventListener("click", () => {
+        comparaison.auteur = p.auteur_a; comparaison.autre = p.auteur_b;
+        afficherComparaison();
+        $("#comp-matrice")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    }
+    ligne.appendChild(titre);
+    svg.appendChild(ligne);
+  }
+  for (const [nom, pos] of positions) {
+    const g = document.createElementNS(NS_SVG, "g");
+    g.setAttribute("class", "buisson-noeud");
+    const cercle = document.createElementNS(NS_SVG, "circle");
+    cercle.setAttribute("cx", pos.x); cercle.setAttribute("cy", pos.y); cercle.setAttribute("r", 5);
+    const texte = document.createElementNS(NS_SVG, "text");
+    texte.setAttribute("x", pos.x); texte.setAttribute("y", pos.y - 9);
+    texte.setAttribute("text-anchor", "middle");
+    texte.textContent = nom.split(" ").pop();   // nom de famille seul : la place manque au prénom
+    const titreNoeud = document.createElementNS(NS_SVG, "title");
+    titreNoeud.textContent = nom;
+    g.append(cercle, texte, titreNoeud);
+    svg.appendChild(g);
+  }
+}
+
+async function afficherBuisson() {
+  if (!$("#buisson-svg-liens")) return;
+  try {
+    const r = await api("/api/socle", {
+      seuil_actes: String(buissonEtat.seuilActes),
+      seuil_densite: String(buissonEtat.seuilDensite),
+    });
+    const noms = (referentiel?.auteurs || []).map((a) => a.nom).sort();
+    const positions = positionsCirculaires(noms);
+    const maxLiens = Math.max(1, ...r.paires.map((p) => p.concepts_avec_lien));
+    const maxDensite = Math.max(1, ...r.paires.map((p) => p.concepts_avec_densite));
+    dessinerGraphe("#buisson-svg-liens", r.paires, positions, "concepts_avec_lien", maxLiens);
+    dessinerGraphe("#buisson-svg-densite", r.paires, positions, "concepts_avec_densite", maxDensite);
+  } catch (e) {
+    // Le buisson est un complément de #comparaison, pas son cœur : une panne ici ne doit pas
+    // empêcher le reste de la section de s'afficher.
+    console.error("buisson indisponible :", e.message);
+  }
+}
+
+function planifierBuisson() {
+  clearTimeout(buissonDebounce);
+  buissonDebounce = setTimeout(afficherBuisson, 250);
+}
+
+// --------------------------------------------------------------------------------------------
 // SEUILS DU SOCLE COMMUN — deux curseurs indépendants, JAMAIS un score composite. `seuilActes` et
 // `seuilDensite` restent deux réglages séparés d'un bout à l'autre : la chaîne complète (JS → API
 // → core/socle_par_couple) ne les combine à aucun moment en un seul chiffre.
@@ -1051,6 +1146,17 @@ document.addEventListener("click", (e) => {
 });
 
 $("#usage-mot").addEventListener("change", afficherUsages);
+
+$("#buisson-seuil-actes")?.addEventListener("input", (e) => {
+  buissonEtat.seuilActes = Number(e.target.value);
+  $("#buisson-seuil-actes-valeur").textContent = e.target.value;
+  planifierBuisson();
+});
+$("#buisson-seuil-densite")?.addEventListener("input", (e) => {
+  buissonEtat.seuilDensite = Number(e.target.value);
+  $("#buisson-seuil-densite-valeur").textContent = Number(e.target.value).toFixed(1).replace(".", ",");
+  planifierBuisson();
+});
 
 $("#socle-seuil-actes")?.addEventListener("input", (e) => {
   socleEtat.seuilActes = Number(e.target.value);

@@ -478,32 +478,54 @@ const LIEN_TRAUMA = { concept: "trauma", actes_confirmes: 0, mentions_confirmees
 const DENSITE_ANGST = { concept: "angst", motif: "\\b(angst)", lexique: "Sigmund Freud",
                         pour_mille_a: 12.0, pour_mille_b: 8.0, lexicographe: "a" };
 
+// Le « buisson » : toutes les paires connues du corpus, dont une en silence linguistique et une
+// sans aucun concept candidat — les deux doivent rester VISIBLES, jamais tues.
+const TOUTES_PAIRES = [
+  { auteur_a: "Otto Rank", auteur_b: "Sigmund Freud", silence: null },
+  { auteur_a: "Gustave Le Bon", auteur_b: "Sigmund Freud", silence: "langues" },
+  { auteur_a: "Otto Rank", auteur_b: "Sándor Ferenczi", silence: null },   // 0 concept, même langue
+];
+// Deux jeux de comptes agrégés, selon le seuil lié — pour tester la monotonie de l'agrégat
+// « toutes paires » sans dépendre du filtrage réel d'un moteur SQL (hors de portée d'un stub).
+const AGREGAT_LIENS_SEUIL_BAS = [{ auteur_a: "Otto Rank", auteur_b: "Sigmund Freud", n: 8 }];
+const AGREGAT_LIENS_SEUIL_HAUT = [{ auteur_a: "Otto Rank", auteur_b: "Sigmund Freud", n: 3 }];
+const AGREGAT_DENSITES_SEUIL_BAS = [{ auteur_a: "Otto Rank", auteur_b: "Sigmund Freud", n: 15 }];
+
 function stubSocleDB({ liens = [LIEN_ANGST, LIEN_TRAUMA], densites = [DENSITE_ANGST],
-                       silence = null } = {}) {
+                       silence = null, toutesPaires = TOUTES_PAIRES,
+                       agregatLiensBas = AGREGAT_LIENS_SEUIL_BAS,
+                       agregatLiensHaut = AGREGAT_LIENS_SEUIL_HAUT,
+                       agregatDensitesBas = AGREGAT_DENSITES_SEUIL_BAS,
+                       seuilBas = 1 } = {}) {
   return {
     prepare(sql) {
       const s = sql.trim();
+      const resoudreAvec = (args) => async () => {
+        const seuil = args[args.length - 1];
+        if (s.includes("FROM socle_liens") && s.includes("GROUP BY")) {
+          return { results: seuil <= seuilBas ? agregatLiensBas : agregatLiensHaut };
+        }
+        if (s.includes("FROM socle_liens")) {
+          return { results: liens.filter((l) => l.actes_confirmes >= seuil) };
+        }
+        if (s.includes("FROM socle_densites") && s.includes("GROUP BY")) {
+          return { results: seuil <= seuilBas ? agregatDensitesBas : [] };
+        }
+        if (s.includes("FROM socle_densites")) {
+          return { results: densites.filter((d) =>
+            (d.pour_mille_a ?? -1) >= seuil && (d.pour_mille_b ?? -1) >= seuil) };
+        }
+        if (s.includes("FROM carte_couples") && !s.includes("WHERE")) {
+          return { results: toutesPaires };            // agrégat « toutes paires », sans bind
+        }
+        if (s.includes("FROM carte_couples")) return silence ? { silence } : null;
+        throw new Error("requête non anticipée par le stub socle : " + s.slice(0, 70));
+      };
+      const resoudreSansBind = resoudreAvec([]);
       return {
-        bind(...args) {
-          const resoudre = async () => {
-            const seuil = args[args.length - 1];
-            if (s.includes("FROM socle_liens") && s.includes("GROUP BY")) {
-              return { results: [{ auteur_a: "Sigmund Freud", auteur_b: "Otto Rank",
-                                   concepts_avec_lien: liens.filter((l) =>
-                                     l.actes_confirmes >= seuil).length }] };
-            }
-            if (s.includes("FROM socle_liens")) {
-              return { results: liens.filter((l) => l.actes_confirmes >= seuil) };
-            }
-            if (s.includes("FROM socle_densites")) {
-              return { results: densites.filter((d) =>
-                (d.pour_mille_a ?? -1) >= seuil && (d.pour_mille_b ?? -1) >= seuil) };
-            }
-            if (s.includes("FROM carte_couples")) return silence ? { silence } : null;
-            throw new Error("requête non anticipée par le stub socle : " + s.slice(0, 70));
-          };
-          return { all: resoudre, first: resoudre };
-        },
+        bind(...args) { const r = resoudreAvec(args); return { all: r, first: r }; },
+        all: resoudreSansBind,
+        first: resoudreSansBind,
       };
     },
   };
@@ -512,8 +534,40 @@ function stubSocleDB({ liens = [LIEN_ANGST, LIEN_TRAUMA], densites = [DENSITE_AN
 test("socle() sans paire précisée rend un résumé par couple, pas une liste de concepts", async () => {
   const rep = await socle({ DB: stubSocleDB() }, {});
   assert.ok(Array.isArray(rep.paires));
-  assert.equal(rep.paires[0].concepts_avec_lien, 1);   // "trauma" (0 acte) exclu au seuil défaut 1
   assert.equal(rep.candidats, undefined, "pas de liste de concepts sans paire précisée");
+});
+
+test("le buisson rend TOUTES les paires, y compris silence et zéro concept — jamais tues",
+async () => {
+  const rep = await socle({ DB: stubSocleDB() }, {});
+  assert.equal(rep.paires.length, 3);
+  const leBon = rep.paires.find((p) => p.auteur_a === "Gustave Le Bon");
+  assert.equal(leBon.silence, "langues");
+  assert.equal(leBon.concepts_avec_lien, 0);
+  const ferenczi = rep.paires.find((p) => p.auteur_b === "Sándor Ferenczi");
+  assert.equal(ferenczi.silence, null);
+  assert.equal(ferenczi.concepts_avec_lien, 0, "même langue, silence nul, mais zéro concept réel");
+});
+
+test("le buisson garde concepts_avec_lien et concepts_avec_densite comme deux champs séparés",
+async () => {
+  const rep = await socle({ DB: stubSocleDB() }, {});
+  const rankFreud = rep.paires.find((p) => p.auteur_b === "Sigmund Freud" && p.auteur_a === "Otto Rank");
+  assert.equal(rankFreud.concepts_avec_lien, 8);
+  assert.equal(rankFreud.concepts_avec_densite, 15);
+  const interdits = ["force", "score", "solidite", "socle"];
+  for (const p of rep.paires) {
+    for (const cle of Object.keys(p)) assert.ok(!interdits.includes(cle), `champ combiné : ${cle}`);
+  }
+});
+
+test("baisser le seuil du buisson élargit les comptes, jamais ne les réduit", async () => {
+  const strict = await socle({ DB: stubSocleDB() }, { seuil_actes: 10 });
+  const large = await socle({ DB: stubSocleDB() }, { seuil_actes: 1 });
+  const paire = (rep) => rep.paires.find((p) => p.auteur_b === "Sigmund Freud" && p.auteur_a === "Otto Rank");
+  assert.equal(paire(strict).concepts_avec_lien, 3);
+  assert.equal(paire(large).concepts_avec_lien, 8);
+  assert.ok(paire(large).concepts_avec_lien >= paire(strict).concepts_avec_lien);
 });
 
 test("un concept sans acte confirmé reste absent au seuil par défaut mais réapparaît à seuil 0",

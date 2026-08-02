@@ -306,3 +306,22 @@ input[type="range"]:focus::-moz-range-thumb { outline: 2px solid var(--accent);
   margin: .5rem 0; }
 .socle-axe { font-size: .85rem; color: var(--gris); margin: .25rem 0; }
 .socle-axe strong { color: var(--encre); }
+
+/* Le buisson — deux graphes SVG, dessinés à la main (pas de lib), disposition circulaire
+   déterministe calculée en JS. Le viewBox fixe (360x360) rend le graphe redimensionnable sans
+   recalcul JS : le SVG met à l'échelle, les coordonnées internes ne bougent pas. */
+.buisson-graphes { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem; margin: .8rem 0; }
+.buisson-graphes figure { margin: 0; }
+.buisson-graphes figcaption { font-size: .85rem; font-weight: 600; color: var(--gris);
+  margin-bottom: .3rem; }
+.buisson-graphes svg { width: 100%; height: auto; background: var(--carte);
+  border: 1px solid var(--filet); border-radius: 8px; }
+.buisson-noeud circle { fill: var(--accent-doux); stroke: var(--accent); stroke-width: 1.5; }
+.buisson-noeud text { fill: var(--encre); font-size: 10px; font-family: var(--sans); }
+.buisson-arete { stroke: var(--accent); cursor: pointer; }
+.buisson-arete:hover { stroke-width: 4; }
+/* Une paire en silence reste TRACÉE, jamais omise — même principe que `.carte-silence` : un
+   aveuglement de méthode (langues différentes) ne doit pas se lire comme « rien à voir ». */
+.buisson-arete-silence { stroke: var(--gris); stroke-dasharray: 3 3; opacity: .5; cursor: default; }
+.buisson-arete-vide { stroke: var(--filet); opacity: .35; }

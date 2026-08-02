@@ -900,14 +900,55 @@ export async function socle(env, { auteur, autre, seuil_actes, seuil_densite } =
   const sDensite = Math.min(Math.max(_seuilOuDefaut(seuil_densite, 1.0), 0), 100);
 
   if (!auteur || !autre) {
-    const paires = await env.DB.prepare(`
-      SELECT a.nom AS auteur_a, b.nom AS auteur_b, COUNT(*) AS concepts_avec_lien
+    // TOUTES LES PAIRES, y compris celles sans candidat ou en silence (langues différentes) —
+    // même discipline que `carte.couples()` : un couple qu'on tait présente un aveuglement de
+    // méthode comme un fait de corpus. `carte_couples` porte déjà une ligne par paire, silence
+    // compris (mirror exact du pattern de `carte()` ci-dessous, lignes 995-998) ; on y ajoute les
+    // deux agrégats par une fusion en JS plutôt qu'un self-join sur `auteurs` — l'ordre
+    // auteur_a/auteur_b dans `socle_liens`/`socle_densites` suit l'ordre alphabétique du NOM
+    // (voir core/socle_par_couple.py), pas l'id, donc un JOIN par id se tromperait de paire.
+    const toutesPaires = await env.DB.prepare(`
+      SELECT a.nom AS auteur_a, b.nom AS auteur_b, c.silence
+      FROM carte_couples c
+      JOIN auteurs a ON a.id = c.auteur_a
+      JOIN auteurs b ON b.id = c.auteur_b
+      ORDER BY a.nom, b.nom`).all();
+
+    const liensParPaire = await env.DB.prepare(`
+      SELECT a.nom AS auteur_a, b.nom AS auteur_b, COUNT(*) AS n
       FROM socle_liens s
       JOIN auteurs a ON a.id = s.auteur_a
       JOIN auteurs b ON b.id = s.auteur_b
       WHERE s.actes_confirmes >= ?
-      GROUP BY 1, 2 ORDER BY concepts_avec_lien DESC`).bind(sActes).all();
-    return { paires: paires.results, reserve: RESERVE_SOCLE };
+      GROUP BY 1, 2`).bind(sActes).all();
+
+    // COUNT DISTINCT concept : un concept peut porter plusieurs lignes (une par variante de
+    // motif, cf. `densites_du_concept`) — le compter par ligne gonflerait l'arête sans rapport
+    // avec le nombre réel de concepts partagés.
+    const densitesParPaire = await env.DB.prepare(`
+      SELECT a.nom AS auteur_a, b.nom AS auteur_b, COUNT(DISTINCT d.concept) AS n
+      FROM socle_densites d
+      JOIN auteurs a ON a.id = d.auteur_a
+      JOIN auteurs b ON b.id = d.auteur_b
+      WHERE d.pour_mille_a >= ? AND d.pour_mille_b >= ?
+      GROUP BY 1, 2`).bind(sDensite, sDensite).all();
+
+    const clePaire = (a, b) => [a, b].sort().join("|");
+    const mapLiens = new Map(liensParPaire.results.map((r) => [clePaire(r.auteur_a, r.auteur_b), r.n]));
+    const mapDensites = new Map(
+      densitesParPaire.results.map((r) => [clePaire(r.auteur_a, r.auteur_b), r.n]));
+
+    // DEUX CHAMPS, JAMAIS UN SEUL : `concepts_avec_lien` et `concepts_avec_densite` restent des
+    // comptes indépendants côte à côte, exactement comme `actes_confirmes`/`mentions_confirmees`
+    // plus bas — le buisson (site) en fera deux graphes séparés, jamais un poids d'arête composite.
+    const paires = toutesPaires.results.map((p) => ({
+      auteur_a: p.auteur_a, auteur_b: p.auteur_b,
+      concepts_avec_lien: mapLiens.get(clePaire(p.auteur_a, p.auteur_b)) ?? 0,
+      concepts_avec_densite: mapDensites.get(clePaire(p.auteur_a, p.auteur_b)) ?? 0,
+      silence: p.silence,
+    })).sort((a, b) => b.concepts_avec_lien - a.concepts_avec_lien || a.auteur_a.localeCompare(b.auteur_a));
+
+    return { paires, seuil_actes: sActes, seuil_densite: sDensite, reserve: RESERVE_SOCLE };
   }
 
   const liens = await env.DB.prepare(`
