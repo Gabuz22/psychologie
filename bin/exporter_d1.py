@@ -30,7 +30,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from core import agents, carte, comparaison, lexique, ocr, sources, verification  # noqa: E402
+from core import (agents, carte, comparaison, lexique, ocr, socle_par_couple, sources,  # noqa: E402
+                  verification)
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -191,6 +192,8 @@ def nommer_grappes(grappes):
     return par_rang
 
 SCHEMA = """
+DROP TABLE IF EXISTS socle_densites;
+DROP TABLE IF EXISTS socle_liens;
 DROP TABLE IF EXISTS mentions;
 DROP TABLE IF EXISTS carte_couverture;
 DROP TABLE IF EXISTS carte_couples;
@@ -466,6 +469,37 @@ CREATE TABLE signaux (
   verdict TEXT,
   motif TEXT
 );
+-- SOCLE PAR COUPLE — le partage entre DEUX auteurs quelconques, à seuil réglable côté site
+-- (`/api/socle`), sur core.socle_par_couple. DEUX AXES QUI NE SE FUSIONNENT JAMAIS, ni entre eux
+-- ni en leur sein :
+--   AXE 1 (`socle_liens`) — `actes_confirmes` (texte partagé, relu) et `mentions_confirmees` (nom
+--   écrit, relu) restent deux colonnes séparées, JAMAIS ADDITIONNÉES : voir le commentaire de la
+--   table `mentions` ci-dessus — un acte et une mention ne sont pas la même sorte de fait.
+--   AXE 2 (`socle_densites`) — le pour-mille d'usage du concept chez chaque auteur du couple, une
+--   ligne par variante de motif (deux lexiques peuvent définir le même concept différemment,
+--   jamais moyennés entre eux), avec `lexicographe` pour neutraliser le biais déjà connu de
+--   `usages.lexique` : la ligne d'un auteur sur son propre motif est haute par construction.
+-- `socle_densites` est restreinte aux concepts qui ont AU MOINS un candidat côté `socle_liens` —
+-- balayer tous les motifs pour tous les couples sans ce filtre coûterait cher pour peu de gain,
+-- voir bin/generer_candidats_divergences.py pour un cas où ce coût a été mesuré et corrigé.
+CREATE TABLE socle_liens (
+  auteur_a INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_b INTEGER NOT NULL REFERENCES auteurs(id),
+  concept TEXT NOT NULL,
+  actes_confirmes INTEGER NOT NULL DEFAULT 0,
+  mentions_confirmees INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (auteur_a, auteur_b, concept)
+);
+CREATE TABLE socle_densites (
+  auteur_a INTEGER NOT NULL REFERENCES auteurs(id),
+  auteur_b INTEGER NOT NULL REFERENCES auteurs(id),
+  concept TEXT NOT NULL,
+  lexique INTEGER NOT NULL REFERENCES auteurs(id),
+  motif TEXT NOT NULL,
+  pour_mille_a REAL,
+  pour_mille_b REAL,
+  lexicographe TEXT
+);
 CREATE TABLE grappes (
   id INTEGER PRIMARY KEY,
   rang INTEGER NOT NULL,
@@ -495,6 +529,8 @@ CREATE INDEX idx_signaux_s ON signaux(signal);
 CREATE INDEX idx_usages_sc ON usages(sous_concept);
 CREATE INDEX idx_carte_poids ON carte_actes(poids DESC);
 CREATE INDEX idx_mentions_couple ON mentions(auteur_id, auteur_nomme_id);
+CREATE INDEX idx_socle_liens_couple ON socle_liens(auteur_a, auteur_b);
+CREATE INDEX idx_socle_densites_couple ON socle_densites(auteur_a, auteur_b, concept);
 """
 
 
@@ -639,7 +675,10 @@ def construire(chemin_sqlite):
     # Elle ne recalcule RIEN : elle regroupe les mêmes liens en actes, et y ajoute ce que la
     # table des liens ne peut pas porter — le passage recollé, sa forme imprimée des deux côtés,
     # les concepts communs, et surtout les couples SANS acte avec la raison de leur silence.
-    actes = carte.evenements_de_carte(liens_carte, carte.concepts_par_atome(corpus))
+    # Nommée : réutilisée plus bas par le socle par couple, qui a besoin des mêmes concepts par
+    # atome pour rattacher une mention confirmée au concept qu'elle touche.
+    concepts_par_atome = carte.concepts_par_atome(corpus)
+    actes = carte.evenements_de_carte(liens_carte, concepts_par_atome)
     for e in actes:
         db.execute(
             "INSERT INTO carte_actes (auteur_a, auteur_b, oeuvre_a, oeuvre_b, poids,"
@@ -679,7 +718,10 @@ def construire(chemin_sqlite):
     # Déduite des ATOMES : une table bâtie sur les œuvres ignorerait Josef Breuer, qui est
     # auteur de passages sans être auteur d'un volume — et le mesurerait en français.
     langues_auteur = comparaison.langues_par_auteur(corpus.atomes, corpus.oeuvres)
-    for u in comparaison.table_des_usages(par_auteur_atomes, langues_auteur):
+    # Nommée : réutilisée plus bas par le socle par couple (axe 2), pour ne pas rappeler une
+    # fonction qui reparcourt tout le corpus motif par motif.
+    usages = comparaison.table_des_usages(par_auteur_atomes, langues_auteur)
+    for u in usages:
         db.execute("INSERT INTO usages VALUES (?,?,?,?,?,?,?,?,?,?)",
                    (u["sous_concept"], u["groupe"], u["libelle"], ids_auteur[u["lexique"]],
                     u["langue"], u["motif"], ids_auteur[u["auteur"]], u["atomes"],
@@ -703,6 +745,10 @@ def construire(chemin_sqlite):
     # ne vaut rien. Sans le verdict, il les vérifierait toutes contre la version non lue.
     lus_mentions = verification.charger_mentions()
     n_mentions = n_jugees = 0
+    # Les mentions CONFIRMÉES, gardées à part (clé = id d'atome du CORPUS, celle que
+    # `concepts_par_atome` utilise — pas l'id D1 `aid`) : le socle par couple (axe 1) en a besoin
+    # plus bas, et les recalculer depuis la base reviendrait à rejouer cette même boucle.
+    mentions_confirmees = []
     for auteur, atomes in sorted(par_auteur_atomes.items()):
         for m in comparaison.mentions(atomes, auteur):
             aid = ids_atome.get(m["atome"]["id"])
@@ -714,6 +760,10 @@ def construire(chemin_sqlite):
                 lus_mentions) or {}
             n_mentions += 1
             n_jugees += 1 if j.get("verdict") else 0
+            if j.get("verdict") == "confirme":
+                mentions_confirmees.append(
+                    {"auteur": auteur, "auteur_nomme": m["auteur_nomme"],
+                     "atome_id": m["atome"]["id"]})
             db.execute("INSERT INTO mentions VALUES (?,?,?,?,?,?,?)",
                        (aid, ids_auteur[auteur], ids_auteur[m["auteur_nomme"]], m["homographe"],
                         j.get("verdict"), j.get("vers"), j.get("motif")))
@@ -730,6 +780,27 @@ def construire(chemin_sqlite):
             "correspond plus : vérifier `verification.cle_mention` et une éventuelle "
             "resegmentation du corpus avant de publier."
             % (n_mentions, n_jugees, len(lus_mentions["verdicts"])))
+
+    # ---- socle par couple : agrégation (auteur_a, auteur_b, concept), axe 1 (liens vérifiés)
+    # et axe 2 (densité comparée) — voir core.socle_par_couple, JAMAIS fusionnés entre eux ni en
+    # leur sein. Ne recalcule rien : réutilise `actes`, `mentions_confirmees`, `concepts_par_atome`
+    # et `usages`, tous déjà nécessaires plus haut pour peupler d'autres tables.
+    axe1_actes = socle_par_couple.actes_confirmes_par_concept(actes)
+    axe1_mentions = socle_par_couple.mentions_confirmees_par_concept(
+        mentions_confirmees, concepts_par_atome)
+    for cle in sorted(set(axe1_actes) | set(axe1_mentions)):
+        concepts_touches = sorted(set(axe1_actes.get(cle, {})) | set(axe1_mentions.get(cle, {})))
+        for concept in concepts_touches:
+            db.execute(
+                "INSERT INTO socle_liens VALUES (?,?,?,?,?)",
+                (ids_auteur[cle[0]], ids_auteur[cle[1]], concept,
+                 axe1_actes.get(cle, {}).get(concept, 0),
+                 axe1_mentions.get(cle, {}).get(concept, 0)))
+            for d in socle_par_couple.densites_du_concept(usages, concept, cle[0], cle[1]):
+                db.execute(
+                    "INSERT INTO socle_densites VALUES (?,?,?,?,?,?,?,?)",
+                    (ids_auteur[cle[0]], ids_auteur[cle[1]], concept, ids_auteur[d["lexique"]],
+                     d["motif"], d["pour_mille_a"], d["pour_mille_b"], d["lexicographe"]))
 
     # ---- grappes (agent courants — déterministe, recalculé ici pour être fidèle au lexique)
     # Elles sont calculées sur les atomes de SIGMUND FREUD seul, et le resteront tant que la
@@ -813,7 +884,7 @@ def dumper_sql(db, dossier, taille_tranche=3_500_000):
               "atome_sous_concepts", "fonctions", "signaux", "grappes", "grappe_concepts",
               "liens_reprise", "lectures_declarees", "nominations", "usages",
               "mentions", "carte_actes", "carte_couples", "carte_couverture",
-              "meta"]
+              "socle_liens", "socle_densites", "meta"]
     reelles = {r[0] for r in db.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
     oubliees = reelles - set(tables)

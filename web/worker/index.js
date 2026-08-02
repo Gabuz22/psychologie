@@ -68,6 +68,7 @@ export default {
       case "/api/usages":      return route(() => donnees.usages(env, p));
       case "/api/carte":       return route(() => donnees.carte(env, p));
       case "/api/couverture-dossier": return route(() => donnees.dossierCouverture(env));
+      case "/api/socle": return route(() => donnees.socle(env, p));
       case "/api/chat":
         if (requete.method !== "POST")
           return json({ erreur: "POST requis" }, 405, false);

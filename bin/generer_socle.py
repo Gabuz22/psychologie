@@ -92,6 +92,14 @@ EN_TETE = """# Le socle commun, mesuré — et la forme qu'il a réellement
 > « liens » là où il y a {actes_total} actes réels, chaque phrase portant 3,5 concepts en moyenne.
 > Une reprise établit que deux auteurs partagent CE PASSAGE ; elle n'établit rien sur le concept
 > que le passage mentionne au passage.
+>
+> **Une vue complémentaire existe sur le site** (section « Seuils du socle commun », `/api/socle`) :
+> un seuil réglable par le lecteur, entre DEUX auteurs quelconques — pas seulement centrée sur
+> Freud comme ce document. Elle repose sur la MÊME doctrine que ci-dessus : deux axes (liens
+> vérifiés, densité comparée) qui ne se fusionnent jamais entre eux ni en leur sein — voir
+> `core/socle_par_couple.py`. Ce document-ci n'en donne pas le détail par paire : des dizaines de
+> couples croisés à des dizaines de concepts feraient un tableau illisible ; la vue vivante, qu'on
+> peut filtrer, est le bon support pour une donnée de cette taille.
 
 ---
 """

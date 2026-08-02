@@ -1,4 +1,4 @@
-/* OUTILS — définition CANONIQUE des six requêtes possibles sur le corpus.
+/* OUTILS — définition CANONIQUE des requêtes possibles sur le corpus.
  *
  * Une seule source de vérité (nom, description, schéma Zod, fonction) consommée par les DEUX
  * façades IA : worker/mcp.js (protocole MCP, pour un assistant externe) et worker/chat.js
@@ -145,7 +145,9 @@ export const OUTILS = [
       + "CE QUE CET OUTIL N'ÉTABLIT PAS, et qu'il ne faut jamais lui faire dire : la NATURE du "
       + "rapport. Reprendre une formulation n'est pas partager une thèse ; nommer n'est ni "
       + "suivre, ni approuver, ni contredire. Aucun chiffre ici ne mesure un accord ni un "
-      + "désaccord, et il n'existe aucun champ « socle », « emprunt » ou « contradiction ». "
+      + "désaccord, et il n'existe aucun champ « socle », « emprunt » ou « contradiction » DANS "
+      + "CET OUTIL-CI — voir l'outil séparé `socle` pour une vue à seuils réglables entre deux "
+      + "auteurs, qui n'invente pas davantage un score unique : ses deux axes restent séparés. "
       + "Le champ `sens` (calculé) n'est rempli que si les dates le permettent — NULL veut dire "
       + "INDÉCIDABLE, jamais « aucun lien ».\n"
       + "CHAQUE LIEN DE `liens` PORTE UN ÉTAT DE LECTURE, À VÉRIFIER AVANT DE LE CITER : "
@@ -174,6 +176,30 @@ export const OUTILS = [
       limite: z.number().int().min(1).max(100).optional().describe("défaut 30"),
     },
     fn: (env, p) => donnees.comparaison(env, p),
+  },
+  {
+    nom: "socle",
+    description:
+      "CONCEPTS CANDIDATS ENTRE DEUX AUTEURS QUELCONQUES, à seuil réglable, sur DEUX AXES QUI NE "
+      + "SE FUSIONNENT JAMAIS EN UN SCORE : `actes_confirmes` (texte partagé, relu) et "
+      + "`mentions_confirmees` (nom écrit, relu) — jamais additionnés, ce sont deux sortes de "
+      + "faits différentes, un acte et une mention. `densites` (pour-mille d'usage comparé entre "
+      + "les deux auteurs, une ligne par variante de motif quand leurs lexiques diffèrent) ne se "
+      + "combine avec aucun des deux comptes ci-dessus. Baisser un seuil élargit seulement la "
+      + "liste renvoyée ; les chiffres d'un concept déjà visible ne bougent jamais. AUCUN champ "
+      + "ne nomme la nature du rapport (pas de « socle », « emprunt » ni « accord ») : un concept "
+      + "qui passe les deux seuils est un endroit où deux mesures indépendantes sont hautes, pas "
+      + "une thèse partagée. Sans `auteur`/`autre`, rend le nombre de concepts candidats par "
+      + "couple, pour choisir une paire. Rapporter le champ `reserve` avec tout chiffre.",
+    schema: {
+      auteur: z.string().optional().describe("premier auteur de la paire"),
+      autre: z.string().optional().describe("second auteur de la paire"),
+      seuil_actes: z.number().int().min(0).max(50).optional()
+        .describe("nombre minimal d'actes confirmés touchant le concept (axe 1) — défaut 1"),
+      seuil_densite: z.number().min(0).max(100).optional()
+        .describe("pour-mille minimal chez CHAQUE auteur de la paire (axe 2) — défaut 1.0"),
+    },
+    fn: (env, p) => donnees.socle(env, p),
   },
   {
     nom: "signaux",

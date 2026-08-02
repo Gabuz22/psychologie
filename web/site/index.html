@@ -209,7 +209,9 @@
     contredire. Vous ne trouverez ici aucun « socle », « emprunt » ni « contradiction » : ces mots
     nommeraient une nature que la mesure ne prouve pas. Le corpus a déjà éprouvé ce piège — un
     repérage construit pour trouver les écarts d'un disciple avec Freud n'a rien confirmé sur cinq
-    candidats : les cinq passages étaient des renvois d'accord.</p>
+    candidats : les cinq passages étaient des renvois d'accord. <strong>Le bloc « Seuils du socle
+    commun » plus bas n'invente pas non plus un score</strong> : il affiche deux comptes déjà
+    présentés plus haut sur cette page, réglables par seuil, jamais additionnés ni moyennés.</p>
 
   <div id="comp-matrice" class="cartes"></div>
 
@@ -249,6 +251,22 @@
     et Freud citent abondamment dans leurs travaux sur le mythe.</p>
   <div id="comp-nominations"></div>
   <p id="comp-reserve" class="reserve"></p>
+
+  <h3>Seuils du socle commun</h3>
+  <p class="note">Pour la paire choisie ci-dessus (cliquez une carte de couple), les concepts que
+    <strong>deux mesures indépendantes</strong> jugent suffisamment solides — réglez chaque seuil
+    séparément. Les deux chiffres ne sont <strong>jamais combinés</strong> : baisser un seuil
+    élargit la liste, il ne change aucun chiffre déjà affiché.</p>
+  <div class="socle-seuils">
+    <label for="socle-seuil-actes">Liens vérifiés (actes confirmés) — au moins
+      <output id="socle-seuil-actes-valeur">1</output></label>
+    <input type="range" id="socle-seuil-actes" min="0" max="20" value="1" step="1">
+    <label for="socle-seuil-densite">Densité comparée — au moins
+      <output id="socle-seuil-densite-valeur">1,0</output> ‰ chez les deux auteurs</label>
+    <input type="range" id="socle-seuil-densite" min="0" max="30" value="1" step="0.5">
+  </div>
+  <div id="socle-resultat"></div>
+  <p id="socle-reserve" class="reserve"></p>
 </section>
 
 <section id="carte">

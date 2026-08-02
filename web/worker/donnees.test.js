@@ -13,7 +13,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { carte, chronologieConcept, comparaison, dossierCouverture } from "./donnees.js";
+import { carte, chronologieConcept, comparaison, dossierCouverture, socle } from "./donnees.js";
 
 const LIEN_LU = {
   contenance: 1.0, force: "manifeste", sens: "a_vers_b", source_tierce: 0, a_verifier: 0,
@@ -464,4 +464,110 @@ test("la réserve de couverture distingue explicitement silence structurel et no
   assert.match(rep.reserve, /silence_structurel/);
   assert.match(rep.reserve, /silence_non_explique/);
   assert.match(rep.reserve, /limite de méthode/);
+});
+
+// --------------------------------------------------------------------------------------------
+// SOCLE PAR COUPLE — deux axes, jamais fusionnés. Le stub route par sous-chaîne de table, comme
+// les précédents ; il filtre RÉELLEMENT par le seuil lié (dernier paramètre), pour que ces tests
+// protègent le SQL et pas seulement le JS qui l'entoure.
+const LIEN_ANGST = { concept: "angst", actes_confirmes: 3, mentions_confirmees: 960 };
+// Concept SANS acte confirmé mais avec des mentions : doit rester invisible tant que le seuil
+// d'actes est au-dessus de 0, et réapparaître dès qu'on le baisse à 0 — c'est tout le point du
+// bouton « au moins 0 ».
+const LIEN_TRAUMA = { concept: "trauma", actes_confirmes: 0, mentions_confirmees: 2 };
+const DENSITE_ANGST = { concept: "angst", motif: "\\b(angst)", lexique: "Sigmund Freud",
+                        pour_mille_a: 12.0, pour_mille_b: 8.0, lexicographe: "a" };
+
+function stubSocleDB({ liens = [LIEN_ANGST, LIEN_TRAUMA], densites = [DENSITE_ANGST],
+                       silence = null } = {}) {
+  return {
+    prepare(sql) {
+      const s = sql.trim();
+      return {
+        bind(...args) {
+          const resoudre = async () => {
+            const seuil = args[args.length - 1];
+            if (s.includes("FROM socle_liens") && s.includes("GROUP BY")) {
+              return { results: [{ auteur_a: "Sigmund Freud", auteur_b: "Otto Rank",
+                                   concepts_avec_lien: liens.filter((l) =>
+                                     l.actes_confirmes >= seuil).length }] };
+            }
+            if (s.includes("FROM socle_liens")) {
+              return { results: liens.filter((l) => l.actes_confirmes >= seuil) };
+            }
+            if (s.includes("FROM socle_densites")) {
+              return { results: densites.filter((d) =>
+                (d.pour_mille_a ?? -1) >= seuil && (d.pour_mille_b ?? -1) >= seuil) };
+            }
+            if (s.includes("FROM carte_couples")) return silence ? { silence } : null;
+            throw new Error("requête non anticipée par le stub socle : " + s.slice(0, 70));
+          };
+          return { all: resoudre, first: resoudre };
+        },
+      };
+    },
+  };
+}
+
+test("socle() sans paire précisée rend un résumé par couple, pas une liste de concepts", async () => {
+  const rep = await socle({ DB: stubSocleDB() }, {});
+  assert.ok(Array.isArray(rep.paires));
+  assert.equal(rep.paires[0].concepts_avec_lien, 1);   // "trauma" (0 acte) exclu au seuil défaut 1
+  assert.equal(rep.candidats, undefined, "pas de liste de concepts sans paire précisée");
+});
+
+test("un concept sans acte confirmé reste absent au seuil par défaut mais réapparaît à seuil 0",
+async () => {
+  const auteur = "Sigmund Freud", autre = "Otto Rank";
+  const parDefaut = await socle({ DB: stubSocleDB() }, { auteur, autre });
+  assert.deepEqual(parDefaut.candidats.map((c) => c.concept), ["angst"]);
+
+  const seuilNul = await socle({ DB: stubSocleDB() }, { auteur, autre, seuil_actes: 0 });
+  const concepts = seuilNul.candidats.map((c) => c.concept).sort();
+  assert.deepEqual(concepts, ["angst", "trauma"]);
+  const trauma = seuilNul.candidats.find((c) => c.concept === "trauma");
+  assert.equal(trauma.actes_confirmes, 0);
+  assert.equal(trauma.mentions_confirmees, 2);
+});
+
+test("aucun champ de la réponse ne combine les deux axes en un score", async () => {
+  const rep = await socle({ DB: stubSocleDB() },
+    { auteur: "Sigmund Freud", autre: "Otto Rank" });
+  const interdits = ["force", "score", "solidite", "socle"];
+  for (const c of rep.candidats) {
+    for (const cle of Object.keys(c)) {
+      assert.ok(!interdits.includes(cle), `champ combiné trouvé : ${cle}`);
+    }
+  }
+});
+
+test("actes_confirmes et mentions_confirmees restent deux champs distincts, jamais additionnés",
+async () => {
+  const rep = await socle({ DB: stubSocleDB() },
+    { auteur: "Sigmund Freud", autre: "Otto Rank" });
+  const angst = rep.candidats.find((c) => c.concept === "angst");
+  assert.equal(angst.actes_confirmes, 3);
+  assert.equal(angst.mentions_confirmees, 960);
+});
+
+test("une paire de langues différentes rend silence:'langues', jamais une liste vide muette",
+async () => {
+  const rep = await socle({ DB: stubSocleDB({ liens: [], densites: [], silence: "langues" }) },
+    { auteur: "Sigmund Freud", autre: "Gustave Le Bon" });
+  assert.equal(rep.candidats.length, 0);
+  assert.equal(rep.silence, "langues");
+});
+
+test("baisser le seuil de densité élargit la liste sans changer les chiffres déjà affichés",
+async () => {
+  const auteur = "Sigmund Freud", autre = "Otto Rank";
+  const strict = await socle({ DB: stubSocleDB() }, { auteur, autre, seuil_densite: 20 });
+  assert.equal(strict.candidats.find((c) => c.concept === "angst").densites.length, 0);
+
+  const large = await socle({ DB: stubSocleDB() }, { auteur, autre, seuil_densite: 5 });
+  const angst = large.candidats.find((c) => c.concept === "angst");
+  assert.equal(angst.densites.length, 1);
+  assert.equal(angst.densites[0].pour_mille_a, 12.0);
+  // Le compte d'actes confirmés de ce même concept ne bouge pas selon le seuil de densité.
+  assert.equal(angst.actes_confirmes, 3);
 });

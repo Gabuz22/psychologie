@@ -874,6 +874,106 @@ const RESERVE_USAGE =
   + "sans cesse pour la combattre. La colonne « lexique » dit qui a défini le motif : la ligne "
   + "de cet auteur est haute par construction, ce sont les AUTRES lignes qui informent.";
 
+function _seuilOuDefaut(valeur, defaut) {
+  // `Number(x) || defaut` (le raccourci utilisé ailleurs dans ce fichier) traiterait un seuil
+  // explicitement mis à 0 comme absent et le remplacerait par `defaut` — faux ici, où 0 est un
+  // réglage légitime et courant (« tout montrer »), pas une valeur d'erreur.
+  if (valeur === undefined || valeur === null || valeur === "") return defaut;
+  const n = Number(valeur);
+  return Number.isFinite(n) ? n : defaut;
+}
+
+/** SOCLE PAR COUPLE — les concepts candidats entre DEUX auteurs quelconques, à seuil réglable
+ *  par le lecteur (voir `core/socle_par_couple.py` pour le calcul et sa doctrine complète).
+ *
+ *  DEUX AXES, JAMAIS FUSIONNÉS EN UN SEUL CHIFFRE — même discipline que `RESERVE_DOSSIER` :
+ *    axe 1 — `actes_confirmes` / `mentions_confirmees`, deux comptes jamais additionnés ;
+ *    axe 2 — `densites`, un pour-mille par auteur et par variante de motif, jamais moyennées.
+ *  Chaque seuil ne FILTRE que côté serveur : baisser un seuil élargit la liste renvoyée, il ne
+ *  change jamais un chiffre déjà affiché pour un concept déjà visible.
+ *
+ *  Sans `auteur`/`autre` : résumé par couple (nombre de concepts au-dessus du seuil d'actes),
+ *  pour peupler un sélecteur de paire — même rôle que `matrice` dans `comparaison()`.
+ */
+export async function socle(env, { auteur, autre, seuil_actes, seuil_densite } = {}) {
+  const sActes = Math.min(Math.max(_seuilOuDefaut(seuil_actes, 1), 0), 50);
+  const sDensite = Math.min(Math.max(_seuilOuDefaut(seuil_densite, 1.0), 0), 100);
+
+  if (!auteur || !autre) {
+    const paires = await env.DB.prepare(`
+      SELECT a.nom AS auteur_a, b.nom AS auteur_b, COUNT(*) AS concepts_avec_lien
+      FROM socle_liens s
+      JOIN auteurs a ON a.id = s.auteur_a
+      JOIN auteurs b ON b.id = s.auteur_b
+      WHERE s.actes_confirmes >= ?
+      GROUP BY 1, 2 ORDER BY concepts_avec_lien DESC`).bind(sActes).all();
+    return { paires: paires.results, reserve: RESERVE_SOCLE };
+  }
+
+  const liens = await env.DB.prepare(`
+    SELECT s.concept, s.actes_confirmes, s.mentions_confirmees
+    FROM socle_liens s
+    JOIN auteurs a ON a.id = s.auteur_a
+    JOIN auteurs b ON b.id = s.auteur_b
+    WHERE ((a.nom = ?1 AND b.nom = ?2) OR (a.nom = ?2 AND b.nom = ?1)) AND s.actes_confirmes >= ?3
+    ORDER BY s.concept`).bind(auteur, autre, sActes).all();
+
+  const densitesBrutes = await env.DB.prepare(`
+    SELECT d.concept, d.motif, x.nom AS lexique, d.pour_mille_a, d.pour_mille_b, d.lexicographe
+    FROM socle_densites d
+    JOIN auteurs a ON a.id = d.auteur_a
+    JOIN auteurs b ON b.id = d.auteur_b
+    JOIN auteurs x ON x.id = d.lexique
+    WHERE ((a.nom = ?1 AND b.nom = ?2) OR (a.nom = ?2 AND b.nom = ?1))
+      AND d.pour_mille_a >= ?3 AND d.pour_mille_b >= ?3`).bind(auteur, autre, sDensite).all();
+
+  const densitesParConcept = new Map();
+  for (const d of densitesBrutes.results) {
+    if (!densitesParConcept.has(d.concept)) densitesParConcept.set(d.concept, []);
+    densitesParConcept.get(d.concept).push(d);
+  }
+  const liensParConcept = new Map(liens.results.map((l) => [l.concept, l]));
+  // UNION des deux axes, jamais leur intersection : un concept qui passe le seuil de densité mais
+  // n'a encore aucun lien vérifié reste visible — sinon baisser seuil_actes à 0 ne le ferait
+  // jamais apparaître.
+  const concepts = new Set([...liensParConcept.keys(), ...densitesParConcept.keys()]);
+
+  const candidats = [...concepts].map((concept) => ({
+    concept,
+    actes_confirmes: liensParConcept.get(concept)?.actes_confirmes ?? 0,
+    mentions_confirmees: liensParConcept.get(concept)?.mentions_confirmees ?? 0,
+    densites: densitesParConcept.get(concept) || [],
+  })).sort((a, b) => b.actes_confirmes - a.actes_confirmes || a.concept.localeCompare(b.concept));
+
+  let silence = null;
+  if (!candidats.length) {
+    const c = await env.DB.prepare(
+      `SELECT c.silence FROM carte_couples c
+       JOIN auteurs a ON a.id = c.auteur_a JOIN auteurs b ON b.id = c.auteur_b
+       WHERE (a.nom = ?1 AND b.nom = ?2) OR (a.nom = ?2 AND b.nom = ?1)`)
+      .bind(auteur, autre).first();
+    silence = c?.silence === "langues" ? "langues" : "aucun_candidat";
+  }
+
+  return {
+    auteur_a: auteur, auteur_b: autre, seuil_actes: sActes, seuil_densite: sDensite,
+    candidats, silence, reserve: RESERVE_SOCLE,
+  };
+}
+
+const RESERVE_SOCLE =
+  "DEUX AXES, JAMAIS FUSIONNÉS EN UN SEUL CHIFFRE. `actes_confirmes` (texte partagé, relu) et "
+  + "`mentions_confirmees` (nom écrit, relu) ne s'additionnent JAMAIS : un acte et une mention ne "
+  + "sont pas la même sorte de fait, et les additionner ferait passer un satellite lointain pour "
+  + "un proche — Ferenczi nomme Freud dans 960 phrases, ne partage un texte avec lui que dans 9. "
+  + "`densites` (l'usage comparé du mot) ne se combine avec aucun des deux comptes de l'axe 1 : "
+  + "un pour-mille d'usage et un compte de liens vérifiés n'ont pas la même unité, et les combiner "
+  + "inventerait une mesure que le corpus ne fournit pas. Aucun champ ici ne nomme la NATURE du "
+  + "rapport entre deux auteurs : un concept qui passe les deux seuils n'est ni un accord ni une "
+  + "dette, seulement un endroit où deux mesures indépendantes sont assez hautes pour être "
+  + "montrées. Baisser un seuil n'affecte QUE la liste renvoyée, jamais les chiffres affichés "
+  + "pour un concept déjà visible.";
+
 
 /** CARTE DES ACTES DE CITATION — les endroits où un texte passe d'une œuvre à une autre.
  *

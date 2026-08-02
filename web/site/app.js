@@ -921,6 +921,57 @@ async function afficherComparaison() {
   } catch (e) {
     zone.textContent = "erreur : " + e.message;
   }
+  afficherSocle();
+}
+
+// --------------------------------------------------------------------------------------------
+// SEUILS DU SOCLE COMMUN — deux curseurs indépendants, JAMAIS un score composite. `seuilActes` et
+// `seuilDensite` restent deux réglages séparés d'un bout à l'autre : la chaîne complète (JS → API
+// → core/socle_par_couple) ne les combine à aucun moment en un seul chiffre.
+const socleEtat = { seuilActes: 1, seuilDensite: 1.0 };
+let socleDebounce = null;
+
+async function afficherSocle() {
+  const zone = $("#socle-resultat");
+  if (!zone) return;
+  if (!comparaison.auteur || !comparaison.autre) {
+    zone.innerHTML = "<p class='note'>Cliquez une carte de couple ci-dessus pour choisir une paire.</p>";
+    $("#socle-reserve").textContent = "";
+    return;
+  }
+  zone.textContent = "chargement…";
+  try {
+    // `api()` n'envoie pas une valeur FAUSSE au sens JS — et 0 est un réglage légitime ici
+    // (« tout montrer »). Les seuils sont donc passés en CHAÎNES : "0" est une chaîne non vide,
+    // donc envoyée, là où le nombre 0 aurait été tacitement omis.
+    const r = await api("/api/socle", {
+      auteur: comparaison.auteur, autre: comparaison.autre,
+      seuil_actes: String(socleEtat.seuilActes), seuil_densite: String(socleEtat.seuilDensite),
+    });
+    zone.innerHTML = r.candidats.length ? r.candidats.map((c) => `
+      <article class="socle-concept">
+        <strong>${echapper(c.concept)}</strong>
+        <p class="socle-axe">Axe 1 — liens vérifiés : <strong>${c.actes_confirmes}</strong>
+          acte(s) confirmé(s), ${c.mentions_confirmees} mention(s) confirmée(s)
+          <span class="note">(jamais additionnés)</span></p>
+        <p class="socle-axe">Axe 2 — densité comparée : ${c.densites.length
+          ? c.densites.map((d) => `${d.pour_mille_a != null ? d.pour_mille_a.toFixed(1) : "—"} ‰ / `
+            + `${d.pour_mille_b != null ? d.pour_mille_b.toFixed(1) : "—"} ‰ `
+            + `(motif de ${echapper(d.lexique)})`).join(" · ")
+          : "aucune mesure au-dessus du seuil"}</p>
+      </article>`).join("")
+      : `<p class="note">${r.silence === "langues"
+          ? "aucune connexion vérifiée — corpus de langues différentes, la comparaison est aveugle par construction"
+          : "aucun concept ne passe ces deux seuils pour l'instant — essayez de les baisser"}</p>`;
+    $("#socle-reserve").textContent = r.reserve;
+  } catch (e) {
+    zone.innerHTML = `<p class="erreur">Socle indisponible (${e.message}).</p>`;
+  }
+}
+
+function planifierSocle() {
+  clearTimeout(socleDebounce);
+  socleDebounce = setTimeout(afficherSocle, 250);   // debounce : pas un fetch par pixel glissé
 }
 
 // --------------------------------------------------------------------------------------------
@@ -1000,6 +1051,17 @@ document.addEventListener("click", (e) => {
 });
 
 $("#usage-mot").addEventListener("change", afficherUsages);
+
+$("#socle-seuil-actes")?.addEventListener("input", (e) => {
+  socleEtat.seuilActes = Number(e.target.value);
+  $("#socle-seuil-actes-valeur").textContent = e.target.value;
+  planifierSocle();
+});
+$("#socle-seuil-densite")?.addEventListener("input", (e) => {
+  socleEtat.seuilDensite = Number(e.target.value);
+  $("#socle-seuil-densite-valeur").textContent = Number(e.target.value).toFixed(1).replace(".", ",");
+  planifierSocle();
+});
 
 window.addEventListener("hashchange", gererHash);
 
