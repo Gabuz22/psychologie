@@ -33,8 +33,9 @@ N'ÉTABLIT JAMAIS UNE DIVERGENCE DE DOCTRINE DANS CE CORPUS. Trois méthodes dif
 
 L'AXE QUI FONCTIONNE EST LA CHRONOLOGIE INTERNE, et il fallait le négatif ci-dessus pour le voir.
 
-Les quatre oppositions déjà documentées du corpus ne reposaient pas sur un contraste entre auteurs
-mais sur un déplacement DANS l'œuvre d'un seul : le vocabulaire du traumatisme de la naissance
+Les quatre premières oppositions documentées du corpus (§4.1-4.4) ne reposaient pas sur un
+contraste entre auteurs mais sur un déplacement DANS l'œuvre d'un seul : le vocabulaire du
+traumatisme de la naissance
 n'existe que dans le livre de 1924 de Rank, et nulle part avant chez lui. Cette mesure-là se
 défend, parce qu'elle compare un auteur à lui-même — le lexicographe, la taille du corpus et la
 langue sont constants des deux côtés.

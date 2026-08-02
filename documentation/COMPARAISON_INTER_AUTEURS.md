@@ -127,7 +127,7 @@ par l'OCR.
 
 ---
 
-## 4. Trois oppositions connues, passées à la mesure
+## 4. Cinq oppositions connues, passées à la mesure
 
 On ne cherche pas ici à prouver une opposition. On regarde ce que le texte montre — et on note
 aussi ce qu'il ne montre pas, car un désaccord d'idées ne laisse pas forcément de trace lexicale.
@@ -222,6 +222,39 @@ Le reste de sa signature n'a d'équivalent chez personne : `amphimixis`, mot qu'
 41 occurrences chez lui contre 3 dans les 785 000 mots des autres corpus allemands ; `homoerotik`
 77 contre 3 ; `thalass` 12 contre 1. Et un chiffre qui dit sa place : `gegenübertragung`, 15
 occurrences chez lui, **une** dans tout le reste du corpus.
+
+### 4.5 Stekel contre Ferenczi — trouvé par le croisement, pas par la lecture large
+
+Les quatre cas ci-dessus avaient été repérés à la main, par lecture large du corpus, avant que
+`core/divergences.py` (§ 7) ne systématise leur recette commune. Sur les 98 candidats que ce
+croisement a produits, un seul a livré un **désaccord nommé et textuellement confirmé** — le
+premier trouvé par ce mécanisme plutôt que par une lecture préalable.
+
+Dans *Onanie und Homosexualität* (1917), Stekel conteste en son nom propre une thèse de Ferenczi
+sur la nosologie de l'homosexualité masculine, en citant l'article visé :
+
+> « Ich kann die Behauptung von Ferenczi ("Zur Nosologie der männlichen Homosexualität") … nicht
+> bestätigen. » (« Je ne peux pas confirmer l'affirmation de Ferenczi… »)
+
+La phrase renvoie à un cas précis (« der auf S. 283 berichtete Fall Nr. 62 ») : ce n'est pas une
+réserve générale mais une objection clinique argumentée, sur un point de doctrine nommé. Le même
+chapitre attribue par ailleurs à Freud, sans réserve, la thèse du refoulement homosexuel comme
+origine de la paranoïa — Stekel ne conteste donc pas la psychanalyse en bloc, il conteste
+Ferenczi précisément.
+
+Une réserve, mesurée plutôt que passée sous silence : le dossier ne permet pas d'établir avec
+certitude que cette dispute se trouve dans le même ouvrage que le pic lexical de 1917 qui a
+signalé le candidat (l'attribution de Freud, elle, porte un repère de chapitre — « XIX. Hebbels
+Träume » — qui la situe probablement ailleurs, dans un livre distinct sur l'interprétation des
+rêves). Mais le sujet de la dispute (la nosologie de l'homosexualité masculine) colle exactement
+à celui d'*Onanie und Homosexualität*, ce qui rend la co-localisation plausible sans être prouvée
+par ce seul dossier.
+
+Sur 98 candidats croisant un lien vérifié et une trajectoire réelle, **un seul** a donné cette
+sorte de désaccord nommé — un taux de succès comparable à celui du seul autre témoin positif du
+corpus sur ce genre de question (l'appariement de concepts, 1 confirmé sur 16). Ce n'est pas rien,
+et ce n'est pas beaucoup : voir § 7 pour ce que les 84 autres candidats confirmés montrent à la
+place.
 
 ---
 
@@ -370,3 +403,148 @@ Abhandlungen* avec des **leçons d'édition antérieures** à celle que le corpu
 nach kurzer Zeit zu schwinden » ; et « *Alle* meine Patientinnen » contre « *Viele* meiner ». La
 variante prouve qu'il copie une impression plus ancienne — l'apparente antériorité de Stekel sur
 « son » Freud est un pur artefact d'édition, et **Freud a atténué après coup**.
+
+---
+
+## 7. Chercher la divergence elle-même — un mécanisme de candidats, pas un quatrième détecteur
+
+> **Les chiffres et lectures de cette section datent de la campagne du 2026-08-02, sur le corpus à
+> sept auteurs germanophones.** Comme pour § 3, ce sont des comptes figés au moment de la lecture,
+> pas une donnée maintenue : le compte de 98 candidats est rejouable (`python
+> bin/generer_candidats_divergences.py`), mais le détail des deux lectures indépendantes par
+> candidat ne l'est pas — il est conservé hors dépôt (voir plus bas).
+
+Le § 5 gardait un résultat négatif : un renversement doctrinal aussi net que celui de Ferenczi « ne
+laisse presque aucune trace lexicale de première personne ». Trois tentatives avaient déjà buté sur
+la même question sous d'autres formes — un marqueur d'écart (0 confirmé sur 5), l'appariement de
+concepts par voisinage (1 sur 16, [APPARIEMENT_ECARTE.md](APPARIEMENT_ECARTE.md)), une signature
+lexicale inter-auteurs (0 sur 35 après contrôle du lexicographe). Toutes les trois demandaient à un
+CALCUL de trancher la nature d'un rapport. `core/divergences.py` ne le demande plus : il croise deux
+faits déjà mesurés séparément — un vocabulaire qui **apparaît** ou **disparaît** vraiment chez un
+auteur (`core/branches.trajectoire`) et un lien **vérifié** (acte de citation confirmé, mention
+confirmée) qui le rattache à un autre auteur sur ce même concept — et désigne seulement où lire,
+comme un seuil de contenance désigne une reprise à vérifier sans en préjuger le verdict.
+
+Sur le corpus complet, ce croisement produit **98 candidats** (55 apparitions, 43 disparitions,
+répartis sur les cinq auteurs germanophones). Tous ont été lus, par un lecteur puis par un second
+qui n'a vu que les mêmes pièces — jamais le jugement du premier avant d'avoir relu par lui-même :
+
+| étape | nombre |
+|---|---|
+| candidats croisés | 98 |
+| jugés « rien de spécifique au-delà du chiffre » dès la première lecture | 5 |
+| jugés notables en première lecture | 93 |
+| **infirmés** à la relecture indépendante (le lien vérifié ne porte pas sur ce concept, ou les passages sont un artefact — sommaire, récit sans travail conceptuel, thème attendu) | 8 |
+| **confirmés** par les deux lectures | 85 |
+
+Trois lectures se sont perdues en route (une panne d'agent a renvoyé un texte de test au lieu d'une
+lecture) ; dans les trois cas le second lecteur l'a signalé explicitement et a fourni, lui, une
+lecture réelle des mêmes pièces — conservée comme le jugement qui compte, y compris pour le candidat
+`mutterleib` de Ferenczi cité plus bas (§ 4.4). Un travail de lecture ne se corrige pas en silence :
+ceci est la même règle que les verdicts désancrés du § 6, ici appliquée à la campagne elle-même
+plutôt qu'au corpus.
+
+### Ce que les 85 candidats confirmés montrent, une fois lus
+
+**Un seul des 85 montre un désaccord nommé et textuellement confirmé** — le cas Stekel contre
+Ferenczi sur la nosologie de l'homosexualité masculine, ajouté au § 4 comme cinquième opposition
+(§ 4.5), le premier trouvé par ce mécanisme plutôt que par une lecture large. Les **84 autres**
+n'en montrent pas. Ce n'est pas un artefact de méthode : nombre d'entre eux sont des convergences
+solidement établies, citation à l'appui — le croisement n'a donc rien d'un filtre qui n'aurait
+laissé passer que du vide. Il désigne fidèlement des endroits où deux auteurs se lisent vraiment
+sur un concept précis ; le plus souvent, la lecture aboutit à une adoption, une extension, ou
+l'absence de rapport démontrable — mais pas toujours à une opposition, comme le § 4.5 le montre.
+C'est un QUATRIÈME résultat, obtenu par une méthode entièrement différente des trois détecteurs
+déjà écartés, qui converge largement avec eux tout en nuançant leur zéro absolu : sur ce corpus,
+la divergence intellectuelle laisse une trace lexicale de ce genre **rarement** (1 candidat sur
+98, un taux du même ordre que le seul autre témoin positif du corpus, l'appariement à 1 sur 16) —
+mais pas jamais.
+
+**Le patron le plus fréquent** est celui d'un lien réel qui ne porte pas sur le concept mesuré. Le
+« tabu » de Freud (*Totem und Tabu*, 1913) en est l'exemple le plus net : le mot s'y concentre à
+75,6 %, et trois liens vérifiés existent bien — vers Le Bon, Ferenczi, Abraham — mais aucun des
+trois ne porte sur le tabou lui-même ; l'un renvoie à un autre essai du même livre, l'autre à un
+travail de Ferenczi sur le sens de la réalité, le troisième se réduit à un renvoi bibliographique
+vide. C'est un utile négatif de contrôle : le livre qui, cinq ans plus tard, donnera le cas le
+mieux documenté du corpus (§ 4.2, Freud contre Le Bon) ne montre, sur son PROPRE concept-titre,
+aucun dialogue vérifiable — la trace que laisse un vrai désaccord n'est visiblement pas la
+concentration lexicale d'un terme, mais autre chose, comme le mot qui bascule d'une langue à
+l'autre en § 4.2.
+
+**Le second patron, presque aussi fréquent, est la convergence documentée** — et le plus riche
+concentre, sans surprise, autour du § 4.3 déjà écrit (« Abraham, qui ne rompt pas »). Son
+*Entwicklungsgeschichte der Libido* (1924) revient sur sept concepts de ce lot
+(`introjektion`, `melancholie`, `trauer`, `entwicklungsstufe`, `ambivalenz`, `regression`,
+`entwicklung`) et à chaque fois le texte, pas seulement le chiffre, crédite Freud nommément :
+« Er tat den entscheidenden Schritt zur Aufdeckung des melancholischen Mechanismus » pour
+l'introjection dans la mélancolie, un renvoi exprès à l'essai « Trauer und Melancholie », la
+formule « vollauf bestätigt » (pleinement confirmé) pour dire ce que l'observation clinique
+d'Abraham ajoute à la théorie freudienne — jamais une réserve. La même figure se répète sur
+*Charakterbildung* (1921) : « Freuds erste Beschreibung des analen Charakters besagte… eine
+Sparsamkeit », l'étude entière se présentant comme le prolongement d'un article de Freud de 1908
+qu'elle nomme. Sept ans plus tôt, cinq ans plus tard — c'est la même posture, mesurée maintenant
+avec des citations plutôt qu'avec la seule densité de `libido` qu'utilisait déjà le § 4.3.
+
+**Rank, à l'inverse, éclaire son propre § 4.1 — mais un seul des candidats porte vraiment sur
+*Das Trauma der Geburt*.** `libido` (en recul après 1924, 44 % des usages concentrés dans ce
+livre) montre la « Libido » de Rank régresser jusqu'à un « stade intra-utérin » qui n'appartient
+qu'à lui ; le seul rattachement explicite et assumé, sur ce candidat, va non pas vers Freud mais
+vers Ferenczi — Rank rapproche sa propre « Urtendenz der Libido » de la « Regression zur
+Protopsyche » que Ferenczi décrit dans *Hysterie und Pathoneurosen* (1919), « in einem ähnlichen
+Sinne wie hier ». Ce que le § 4.1 avait déjà vu dans les chiffres — une **addition**, pas un
+abandon de l'Œdipe — se confirme ici dans le texte même : sur ce mot précis, Rank construit sa
+thèse de 1924 en dialogue ponctuel avec Ferenczi, sans jamais répondre à Freud.
+
+Les deux autres candidats de Rank retenus sur ce lot (`traum`, `widerstand`) datent en réalité
+d'AVANT 1924 et n'ont pas de rapport avec *Trauma der Geburt* — un rappel utile que la classe
+« disparaît » d'une trajectoire désigne un recul après un pic, pas nécessairement un recul après
+1924. `traum` culmine dans *Das Inzest-Motiv* (1912), sur un rapprochement poète/rêve/folie
+(Dilthey, Heyse, Aristote) sans rapport avec les auteurs liés ; `widerstand` culmine dans *Der
+Künstler* (1907), où les « Widerstände » externes et internes viennent de l'appareil pulsionnel
+personnel de Rank, avec un seul écho explicite à la « psychische Zensur » freudienne — un
+emprunt de vocabulaire assumé, pas une réponse. Les deux confirment, chacun à sa date, le même
+diagnostic que `libido` : un vocabulaire d'abord personnel, jamais construit contre Freud.
+
+**Un troisième candidat resserre le § 4.4** (« deux hommes, deux livres, une même année »). Chez
+Ferenczi, `mutterleib` se concentre à 61–64 % dans sa *Genitaltheorie* (Thalassa, 1924) — et le
+texte porte, en note, une citation explicite et non ambiguë : « Siehe Rank: Der Mythus von der
+Geburt des Helden » (1909), insérée exactement dans le passage sur la symbolique du retour au
+ventre maternel (eau, natation, vol). Le § 4.4 notait que la couche de reprise textuelle ne
+trouvait que deux passages partagés entre les deux hommes ; celui-ci est un troisième point d'appui,
+et il est nommé par Ferenczi lui-même, pas seulement mesuré.
+
+### Douze autres lectures, en bref
+
+| auteur | concept | œuvre dominante | ce que montre la lecture |
+|---|---|---|---|
+| Karl Abraham | `hysterie`, `neurose` | Klinische Beiträge (1907) | citation quasi verbatim de Freud, thèse reprise sans contestation |
+| Karl Abraham | `charakter` | Charakterbildung (1921) | prolongement assumé de « Charakter und Analerotik » (Freud, 1908) |
+| Karl Abraham | `alkohol` | Klinische Beiträge (1907) | pulsions partielles freudiennes appliquées à un objet clinique que Freud n'a pas traité |
+| Sándor Ferenczi | `begattung` | Genitaltheorie (1924) | reprend le constat clinique d'Abraham (ejaculatio praecox) par analogie |
+| Sándor Ferenczi | `erotismen` | Genitaltheorie (1924) | prolongement assumé des « Autoerotismen » freudiens des *Drei Abhandlungen* |
+| Sándor Ferenczi | `regression` | Bausteine 3 | attribue à Freud, verbatim, le « caractère régressif des symptômes névrotiques » |
+| Sándor Ferenczi | `materialisation` | Bausteine 3 | concept élaboré par Ferenczi seul, étendu du symptôme hystérique à l'expression affective normale |
+| Otto Rank | `kastration` (×2) | Das Inzest-Motiv (1912) | chapitre de synthèse créditant nommément Freud, Ferenczi et Stekel — jamais une contestation |
+| Otto Rank | `unterwelt` | Lohengrinsage (1911) | usage mythologique-comparatiste porté par le sujet du livre, pas un enjeu théorique autonome |
+| Wilhelm Stekel | `bisexualitaet` | Onanie und Homosexualität (1917) | crédite Fliess, Hirschfeld, Krafft-Ebing — aucun des trois auteurs du corpus liés n'est en cause ici |
+| Sigmund Freud | `deckerinnerung` | Zur Psychopathologie des Alltagslebens (1901) | histoire autonome du concept ; le lien vérifié à Rank porte sur un point voisin, pas sur ce terme |
+| Sigmund Freud | `trauminhalt` | Traumdeutung | renvoi ciblé et substantiel à des travaux réels de Rank, mise à distance critique de Stekel |
+
+Les 51 autres candidats confirmés (sur les 84 qui ne sont ni le cas Stekel/Ferenczi du § 4.5 ni
+déjà cités ci-dessus) suivent la même distribution — convergence documentée ou lien réel mais
+topiquement étranger au concept mesuré — sans qu'aucun n'ajoute une figure nouvelle à celles
+ci-dessus. Le détail complet (passages, preuves de lien, les deux lectures indépendantes)
+est conservé hors dépôt ; `core/divergences.py` documente la méthode et sa validation, et
+`core/divergences.reserve()` porte, avec toute liste de candidats qu'il produit, le rappel qu'une
+liste de ce genre ne contient aucun verdict.
+
+**Ce que ce chantier change, et ce qu'il ne change pas.** Il ajoute une cinquième opposition
+vérifiée au § 4 (§ 4.5, Stekel contre Ferenczi) — la première trouvée par un mécanisme systématique
+plutôt que par une lecture large du corpus, ce qui répond directement à la question posée en tête
+de cette section. Il confirme aussi, à un niveau de détail que les trois détecteurs écartés
+n'avaient jamais atteint, le résultat du § 5 sur Ferenczi : sur 98 candidats construits
+spécifiquement pour repérer où un dialogue inter-auteurs POURRAIT laisser une trace lexicale, un
+seul en montre une de désaccord. La divergence, dans ce corpus, se lit — le § 4 le prouve, cinq
+fois maintenant — mais elle ne se détecte que rarement par le seul vocabulaire qui bouge, quelle
+que soit la sophistication du croisement qui le mesure ; l'écrasante majorité de ce que ce
+vocabulaire donne à lire, une fois vérifié, est une convergence.
