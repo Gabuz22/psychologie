@@ -334,5 +334,22 @@ input[type="range"]:focus::-moz-range-thumb { outline: 2px solid var(--accent);
   border: 1px solid var(--filet); border-radius: 8px; margin: .8rem 0; }
 #bc-svg .buisson-noeud circle { stroke: var(--carte); stroke-width: 1; }
 #bc-svg .buisson-noeud text { font-size: 8px; pointer-events: none; }
+#bc-svg .buisson-noeud { cursor: pointer; }
+/* Focus sur un concept : un passage de classes sur ce qui est déjà dessiné, jamais un redessin —
+   la disposition ne bouge pas. `--efface` estompe (le mot de Gabriel : « recède »), jamais ne
+   masque complètement, pour ne pas perdre le repère de la forme d'ensemble du buisson. */
+#bc-svg .buisson-noeud--efface { opacity: .15; }
+#bc-svg .buisson-noeud--concentre circle { stroke: var(--accent); stroke-width: 3; }
+#bc-svg .buisson-arete--efface { opacity: .1; }
+#bc-svg .buisson-arete--concentre { opacity: 1; stroke-width: 3 !important; }
 #bc-citations { margin: .8rem 0; }
 #bc-citations .socle-concept { margin: .4rem 0; }
+
+/* La légende EST le filtre — une pastille de la même couleur que les nœuds (`couleurGroupe`,
+   jamais une seconde source de vérité), une case pour montrer/masquer sa catégorie. */
+.bc-legende { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: .6rem 0; }
+.bc-legende-item { display: inline-flex; align-items: center; gap: .3rem; font-size: .85rem;
+  cursor: pointer; }
+.bc-legende-pastille { width: .7rem; height: .7rem; border-radius: 50%; display: inline-block; }
+.bc-recherche-bloc { display: flex; align-items: center; gap: .6rem; margin: .6rem 0;
+  flex-wrap: wrap; }

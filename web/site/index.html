@@ -142,9 +142,12 @@
     une cooccurrence textuelle <strong>mesurée</strong> — deux concepts reviennent souvent dans
     les mêmes phrases — jamais une synonymie ni une proximité de sens. Chaque auteur porte
     <strong>son propre graphe</strong> : deux concepts de même nom chez deux auteurs différents
-    ne sont jamais reliés entre eux. La couleur d'un nœud vient de sa catégorie du lexicographe,
-    un repère secondaire — c'est l'<strong>épaisseur</strong> d'une arête qui porte la mesure.
-    Cliquer une arête ouvre les atomes qui la fondent.</p>
+    ne sont jamais reliés entre eux. La couleur d'un nœud vient de sa catégorie du lexicographe
+    (légende ci-dessous, aussi un filtre) — c'est l'<strong>épaisseur</strong> d'une arête qui
+    porte la mesure. Le graphe démarre en <strong>squelette clairsemé</strong> (les liens les
+    plus forts seulement) : élargir avec le curseur, ou cliquer/chercher un concept pour
+    <strong>centrer</strong> la vue sur son seul voisinage. Cliquer une arête ouvre les atomes
+    qui la fondent.</p>
   <form id="form-buisson-concepts">
     <div class="grille">
       <label>Auteur
@@ -156,6 +159,24 @@
     <label for="bc-seuil">Occurrences minimales — au moins
       <output id="bc-seuil-valeur">8</output></label>
     <input type="range" id="bc-seuil" min="8" max="60" value="8" step="1">
+  </div>
+  <div class="socle-seuils">
+    <label for="bc-limite">Liens affichés (les plus forts d'abord) —
+      <output id="bc-limite-valeur">80</output></label>
+    <input type="range" id="bc-limite" min="10" max="200" value="80" step="1">
+    <p class="note">Seuls les liens de poids le plus fort, jusqu'à ce nombre, sont dessinés — un
+      squelette clairsemé plutôt que le graphe entier. Glisser vers la droite en montre
+      davantage, jusqu'à tout montrer.</p>
+  </div>
+  <div id="bc-legende" class="bc-legende" role="group"
+       aria-label="Catégories de concepts — cocher pour montrer, décocher pour masquer"></div>
+  <div class="bc-recherche-bloc">
+    <label for="bc-recherche">Concentrer sur un concept
+      <input type="text" id="bc-recherche" list="bc-concepts-datalist" autocomplete="off"
+             placeholder="nom du concept…">
+    </label>
+    <datalist id="bc-concepts-datalist"></datalist>
+    <button type="button" id="bc-focus-effacer" class="secondaire" hidden>Focus : — ✕</button>
   </div>
   <svg id="bc-svg" viewBox="0 0 700 700" role="img"
        aria-label="Graphe des concepts reliés par force graduée"></svg>

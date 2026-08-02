@@ -739,13 +739,40 @@ $("#arbre-auteur").addEventListener("change", (e) => {
 
 $("#bc-auteur")?.addEventListener("change", (e) => {
   buissonConceptsEtat.auteur = e.target.value;
-  $("#bc-citations").textContent = "";     // changer d'auteur referme les citations ouvertes
-  afficherBuissonConcepts();
+  afficherBuissonConcepts(true);           // nouvel auteur : squelette clairsemé, filtres remis à zéro
 });
 $("#bc-seuil")?.addEventListener("input", (e) => {
   buissonConceptsEtat.seuilBrut = Number(e.target.value);
   $("#bc-seuil-valeur").textContent = e.target.value;
   planifierBuissonConcepts();
+});
+$("#bc-limite")?.addEventListener("input", (e) => {
+  buissonConceptsEtat.limiteAretes = Number(e.target.value);
+  planifierRedessinBuissonConcepts();
+});
+// Un seul listener délégué, posé une fois : la légende est reconstruite (innerHTML) au fil des
+// changements d'auteur, un listener posé PAR case serait perdu à chaque reconstruction.
+$("#bc-legende")?.addEventListener("change", (e) => {
+  if (!e.target.matches("input[type=checkbox]")) return;
+  const groupe = e.target.dataset.groupe;
+  if (e.target.checked) buissonConceptsEtat.groupesMasques.delete(groupe);
+  else buissonConceptsEtat.groupesMasques.add(groupe);
+  planifierRedessinBuissonConcepts();
+});
+function centrerDepuisRecherche() {
+  const valeur = $("#bc-recherche")?.value.trim();
+  if (!valeur) return;
+  const options = [...($("#bc-concepts-datalist")?.options || [])].map((o) => o.value);
+  if (options.includes(valeur)) definirFocusConcept(valeur);
+}
+$("#bc-recherche")?.addEventListener("change", centrerDepuisRecherche);
+$("#bc-recherche")?.addEventListener("keydown", (e) => { if (e.key === "Enter") centrerDepuisRecherche(); });
+$("#bc-focus-effacer")?.addEventListener("click", () => definirFocusConcept(null));
+$("#bc-svg")?.addEventListener("click", (e) => {
+  if (e.target.id === "bc-svg") definirFocusConcept(null);   // clic sur le fond vide : sort du focus
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && buissonConceptsEtat.concentre) definirFocusConcept(null);
 });
 
 $("#form-lecture").addEventListener("submit", (e) => {
@@ -1047,8 +1074,18 @@ function planifierBuisson() {
 // force graduée (poids CORRIGÉ du biais des atomes denses) se voit dans la raideur du ressort ET
 // dans l'épaisseur du trait — jamais dans une couleur, réservée au groupe du lexicographe, un
 // repère secondaire. `~170 concepts au plus, jamais deux lexiques mélangés dans le même graphe.
-const buissonConceptsEtat = { auteur: null, seuilBrut: 8 };
+const buissonConceptsEtat = {
+  auteur: null, seuilBrut: 8,
+  // Filtres CLIENT, jamais envoyés au serveur : `limiteAretes` (top-N par poids) et
+  // `groupesMasques` s'empilent sur le pool déjà reçu du serveur, sans jamais se réinitialiser
+  // l'un l'autre — seul un changement d'auteur remet les trois à zéro (voir afficherBuissonConcepts).
+  limiteAretes: 80, groupesMasques: new Set(), concentre: null,
+};
+// Dernier pool reçu du serveur pour l'auteur + seuilBrut courants — tout filtrage/tri/troncature
+// ultérieur (légende, top-N) travaille sur ce cache, sans re-fetch.
+let buissonConceptsDonnees = { liens: [] };
 let buissonConceptsDebounce = null;
+let buissonConceptsRedessinDebounce = null;
 
 function couleurGroupe(groupe) {
   let h = 0;
@@ -1056,7 +1093,7 @@ function couleurGroupe(groupe) {
   return `hsl(${h % 360}, 55%, 45%)`;
 }
 
-function positionsForceDirigees(noeuds, aretes,
+function positionsForceDirigees(noeuds, aretes, groupesParConcept,
     { largeur = 700, hauteur = 700, iterations = 200 } = {}) {
   const cx = largeur / 2, cy = hauteur / 2, rayon = Math.min(largeur, hauteur) * 0.4;
   const pos = new Map(noeuds.map((n, i) => {
@@ -1064,6 +1101,11 @@ function positionsForceDirigees(noeuds, aretes,
     return [n, { x: cx + rayon * Math.cos(angle), y: cy + rayon * Math.sin(angle) }];
   }));
   const REPULSION = 6000, RESSORT = 0.02, LONGUEUR_BASE = 60;
+  // Regroupement visuel par catégorie : un ressort supplémentaire, beaucoup plus faible qu'une
+  // arête réelle, entre deux nœuds du MÊME groupe — assez faible pour que la cooccurrence réelle
+  // et la répulsion dominent toujours, assez fort cumulé sur toute une catégorie pour former des
+  // îlots visuels lâches. Jamais une preuve de lien, juste un repère de lecture (couleur = groupe).
+  const RESSORT_GROUPE = 0.004, LONGUEUR_CIBLE_GROUPE = 100;
   for (let iter = 0; iter < iterations; iter++) {
     const deplacement = new Map(noeuds.map((n) => [n, { x: 0, y: 0 }]));
     for (let i = 0; i < noeuds.length; i++) {
@@ -1076,6 +1118,12 @@ function positionsForceDirigees(noeuds, aretes,
         const fx = (dx / d) * f, fy = (dy / d) * f;
         const da = deplacement.get(noeuds[i]), db = deplacement.get(noeuds[j]);
         da.x += fx; da.y += fy; db.x -= fx; db.y -= fy;
+        const gi = groupesParConcept.get(noeuds[i]), gj = groupesParConcept.get(noeuds[j]);
+        if (gi && gi === gj) {
+          const fg = RESSORT_GROUPE * (d - LONGUEUR_CIBLE_GROUPE);
+          const fgx = (dx / d) * fg, fgy = (dy / d) * fg;
+          da.x -= fgx; da.y -= fgy; db.x += fgx; db.y += fgy;
+        }
       }
     }
     for (const ar of aretes) {
@@ -1114,6 +1162,7 @@ function dessinerGrapheConcepts(selecteur, liens, positions, groupesParConcept) 
     ligne.setAttribute("x2", posB.x); ligne.setAttribute("y2", posB.y);
     ligne.setAttribute("class", "buisson-arete");
     ligne.setAttribute("stroke-width", String(0.5 + 4 * (l.poids / maxPoids)));
+    ligne.dataset.a = l.concept_a; ligne.dataset.b = l.concept_b;
     const titre = document.createElementNS(NS_SVG, "title");
     titre.textContent = `${l.concept_a} ↔ ${l.concept_b} — ${l.occurrences_brutes} occurrences `
       + `brutes, poids ${l.poids} — cliquer pour les atomes qui le fondent.`;
@@ -1124,6 +1173,8 @@ function dessinerGrapheConcepts(selecteur, liens, positions, groupesParConcept) 
   for (const [nom, pos] of positions) {
     const g = document.createElementNS(NS_SVG, "g");
     g.setAttribute("class", "buisson-noeud");
+    g.dataset.nom = nom;
+    g.addEventListener("click", () => basculerFocusConcept(nom));
     const cercle = document.createElementNS(NS_SVG, "circle");
     cercle.setAttribute("cx", pos.x); cercle.setAttribute("cy", pos.y); cercle.setAttribute("r", 4);
     cercle.setAttribute("fill", couleurGroupe(groupesParConcept.get(nom) || nom));
@@ -1156,23 +1207,25 @@ async function afficherCitationsBuissonConcepts(conceptA, conceptB) {
   }
 }
 
-async function afficherBuissonConcepts() {
+/** Récupère le pool serveur (auteur + seuilBrut) puis délègue tout filtrage/tri/troncature à
+ *  redessinerBuissonConcepts — seul point qui parle au réseau. `nouvelAuteur` remet à zéro les
+ *  filtres CLIENT (limite, groupes masqués, focus) : un changement d'échelle de corpus justifie
+ *  de repartir d'un squelette clair, plutôt que de garder le réglage du précédent auteur. */
+async function afficherBuissonConcepts(nouvelAuteur = false) {
   if (!$("#bc-svg") || !buissonConceptsEtat.auteur) return;
   try {
     const r = await api("/api/buisson-concepts",
       { auteur: buissonConceptsEtat.auteur, seuil_brut: String(buissonConceptsEtat.seuilBrut) });
-    const groupesParConcept = new Map(), noms = new Set();
-    for (const l of r.liens) {
-      noms.add(l.concept_a); noms.add(l.concept_b);
-      groupesParConcept.set(l.concept_a, l.groupe_a);
-      groupesParConcept.set(l.concept_b, l.groupe_b);
-    }
-    const noeuds = [...noms].sort();
-    const positions = positionsForceDirigees(
-      noeuds, r.liens.map((l) => ({ a: l.concept_a, b: l.concept_b, poids: l.poids })));
-    dessinerGrapheConcepts("#bc-svg", r.liens, positions, groupesParConcept);
+    buissonConceptsDonnees.liens = r.liens;
     $("#bc-reserve").textContent = r.reserve;
     $("#bc-citations").textContent = "";
+    if (nouvelAuteur) {
+      buissonConceptsEtat.limiteAretes = 80;
+      buissonConceptsEtat.groupesMasques.clear();
+      buissonConceptsEtat.concentre = null;
+      if ($("#bc-recherche")) $("#bc-recherche").value = "";
+    }
+    redessinerBuissonConcepts();
   } catch (e) {
     console.error("buisson des concepts indisponible :", e.message);
   }
@@ -1180,7 +1233,156 @@ async function afficherBuissonConcepts() {
 
 function planifierBuissonConcepts() {
   clearTimeout(buissonConceptsDebounce);
-  buissonConceptsDebounce = setTimeout(afficherBuissonConcepts, 250);
+  buissonConceptsDebounce = setTimeout(() => afficherBuissonConcepts(false), 250);
+}
+
+/** Filtre par groupe → trie par force → tronque au « squelette clairsemé » (top-N par poids,
+ *  jamais un seuil brut : un seuil absolu viderait injustement les petits corpus). AUCUN appel
+ *  réseau ici — tout travaille sur `buissonConceptsDonnees.liens`, déjà en cache. Une troncature
+ *  n'est jamais tue : le curseur affiche toujours « N affichés sur TOTAL après filtre ». */
+function redessinerBuissonConcepts() {
+  if (!$("#bc-svg")) return;
+  const tousLesLiens = buissonConceptsDonnees.liens;
+  const visibles = tousLesLiens.filter((l) =>
+    !buissonConceptsEtat.groupesMasques.has(l.groupe_a)
+    && !buissonConceptsEtat.groupesMasques.has(l.groupe_b));
+  visibles.sort((a, b) => b.poids - a.poids);
+  const total = visibles.length;
+  // `slice` au-delà de la fin d'un tableau ne fait rien de spécial en JS : sur un petit corpus
+  // (Le Bon, 221 liens en tout), la limite dégrade automatiquement vers « tout montrer », sans
+  // cas particulier à coder.
+  const affiches = visibles.slice(0, buissonConceptsEtat.limiteAretes);
+
+  const groupesParConcept = new Map(), noms = new Set();
+  for (const l of affiches) {
+    noms.add(l.concept_a); noms.add(l.concept_b);
+    groupesParConcept.set(l.concept_a, l.groupe_a);
+    groupesParConcept.set(l.concept_b, l.groupe_b);
+  }
+
+  // La légende part du pool COMPLET (avant filtre de groupe) : une catégorie décochée doit
+  // rester visible — décochée — dans la légende, pas disparaître avec ses propres nœuds.
+  construireLegendeBuissonConcepts(tousLesLiens);
+
+  const curseur = $("#bc-limite");
+  if (curseur) {
+    curseur.max = String(Math.max(total, 1));
+    curseur.value = String(Math.min(buissonConceptsEtat.limiteAretes, Math.max(total, 1)));
+  }
+  const etiquette = $("#bc-limite-valeur");
+  if (etiquette) etiquette.textContent = `${affiches.length} sur ${total}`;
+
+  // Un concept centré qui sort de la vue (seuil relevé, son groupe décoché) doit effacer le
+  // focus PROPREMENT avant de redessiner — jamais de surbrillance orpheline sur rien.
+  if (buissonConceptsEtat.concentre && !noms.has(buissonConceptsEtat.concentre)) {
+    buissonConceptsEtat.concentre = null;
+    if ($("#bc-recherche")) $("#bc-recherche").value = "";
+  }
+
+  peuplerRechercheBuissonConcepts(noms);
+
+  const noeuds = [...noms].sort();
+  const positions = positionsForceDirigees(
+    noeuds, affiches.map((l) => ({ a: l.concept_a, b: l.concept_b, poids: l.poids })),
+    groupesParConcept);
+  dessinerGrapheConcepts("#bc-svg", affiches, positions, groupesParConcept);
+  appliquerFocusBuissonConcepts();
+  mettreAJourEtiquetteFocus();
+}
+
+function planifierRedessinBuissonConcepts() {
+  clearTimeout(buissonConceptsRedessinDebounce);
+  buissonConceptsRedessinDebounce = setTimeout(redessinerBuissonConcepts, 250);
+}
+
+/** La légende EST le filtre : une pastille + case par groupe, dans la même couleur que les
+ *  nœuds (`couleurGroupe`, jamais une seconde source de vérité). Rebâtie seulement quand
+ *  l'ensemble des groupes change (changement d'auteur) — sinon on ne fait que resynchroniser
+ *  l'état des cases, pour ne pas perdre un focus clavier en cours sur une case à cocher. */
+function construireLegendeBuissonConcepts(liens) {
+  const zone = $("#bc-legende");
+  if (!zone) return;
+  const groupes = new Set();
+  for (const l of liens) { groupes.add(l.groupe_a); groupes.add(l.groupe_b); }
+  const cle = [...groupes].sort().join("|");
+  if (zone.dataset.groupes === cle) {
+    for (const entree of zone.querySelectorAll("input[type=checkbox]")) {
+      entree.checked = !buissonConceptsEtat.groupesMasques.has(entree.dataset.groupe);
+    }
+    return;
+  }
+  zone.dataset.groupes = cle;
+  zone.innerHTML = "";
+  for (const g of [...groupes].sort()) {
+    const label = document.createElement("label");
+    label.className = "bc-legende-item";
+    const case_ = document.createElement("input");
+    case_.type = "checkbox";
+    case_.checked = !buissonConceptsEtat.groupesMasques.has(g);
+    case_.dataset.groupe = g;
+    const pastille = document.createElement("span");
+    pastille.className = "bc-legende-pastille";
+    pastille.style.background = couleurGroupe(g);
+    label.append(case_, pastille, document.createTextNode(g));
+    zone.appendChild(label);
+  }
+}
+
+function peuplerRechercheBuissonConcepts(noms) {
+  const dl = $("#bc-concepts-datalist");
+  if (!dl) return;
+  dl.innerHTML = "";
+  remplirSelect(dl, [...noms].sort(), (n) => [n, n]);
+}
+
+/** Centre le buisson sur UN concept : ses voisins directs restent nets, tout le reste s'estompe.
+ *  Un simple passage de classes CSS sur ce qui est DÉJÀ dessiné — aucun recalcul de position, la
+ *  disposition ne bouge pas. Le filtre de groupe et la limite restent AUTORITAIRES : le focus ne
+ *  travaille que sur ce qui a survécu au filtrage, il ne fait jamais réapparaître un nœud masqué
+ *  par ailleurs. */
+function definirFocusConcept(nom) {
+  buissonConceptsEtat.concentre = nom || null;
+  const recherche = $("#bc-recherche");
+  if (recherche) recherche.value = buissonConceptsEtat.concentre || "";
+  appliquerFocusBuissonConcepts();
+  mettreAJourEtiquetteFocus();
+}
+
+function basculerFocusConcept(nom) {
+  definirFocusConcept(buissonConceptsEtat.concentre === nom ? null : nom);
+}
+
+function appliquerFocusBuissonConcepts() {
+  const svg = $("#bc-svg");
+  if (!svg) return;
+  const concentre = buissonConceptsEtat.concentre;
+  const lignes = [...svg.querySelectorAll(".buisson-arete")];
+  const noeuds = [...svg.querySelectorAll(".buisson-noeud")];
+  if (!concentre) {
+    for (const l of lignes) l.classList.remove("buisson-arete--concentre", "buisson-arete--efface");
+    for (const n of noeuds) n.classList.remove("buisson-noeud--concentre", "buisson-noeud--efface");
+    return;
+  }
+  const voisins = new Set([concentre]);
+  for (const l of lignes) {
+    const touche = l.dataset.a === concentre || l.dataset.b === concentre;
+    l.classList.toggle("buisson-arete--concentre", touche);
+    l.classList.toggle("buisson-arete--efface", !touche);
+    if (touche) { voisins.add(l.dataset.a); voisins.add(l.dataset.b); }
+  }
+  for (const n of noeuds) {
+    const present = voisins.has(n.dataset.nom);
+    n.classList.toggle("buisson-noeud--concentre", n.dataset.nom === concentre);
+    n.classList.toggle("buisson-noeud--efface", !present);
+  }
+}
+
+function mettreAJourEtiquetteFocus() {
+  const bouton = $("#bc-focus-effacer");
+  if (!bouton) return;
+  const nom = buissonConceptsEtat.concentre;
+  bouton.hidden = !nom;
+  if (nom) bouton.textContent = `Focus : ${nom} ✕`;
 }
 
 // --------------------------------------------------------------------------------------------
