@@ -325,3 +325,14 @@ input[type="range"]:focus::-moz-range-thumb { outline: 2px solid var(--accent);
    aveuglement de méthode (langues différentes) ne doit pas se lire comme « rien à voir ». */
 .buisson-arete-silence { stroke: var(--gris); stroke-dasharray: 3 3; opacity: .5; cursor: default; }
 .buisson-arete-vide { stroke: var(--filet); opacity: .35; }
+
+/* Le buisson des concepts — UN SEUL graphe, disposition force-dirigée déterministe (ressorts +
+   répulsion, position de départ sur un cercle, nombre d'itérations fixe — jamais de hasard ni
+   d'horloge). Plus de nœuds que le buisson auteur-à-auteur : un viewBox plus grand, du texte
+   plus petit. La couleur d'un nœud (groupe du lexicographe) est posée en JS sur chaque nœud. */
+#bc-svg { width: 100%; height: auto; max-height: 80vh; background: var(--carte);
+  border: 1px solid var(--filet); border-radius: 8px; margin: .8rem 0; }
+#bc-svg .buisson-noeud circle { stroke: var(--carte); stroke-width: 1; }
+#bc-svg .buisson-noeud text { font-size: 8px; pointer-events: none; }
+#bc-citations { margin: .8rem 0; }
+#bc-citations .socle-concept { margin: .4rem 0; }

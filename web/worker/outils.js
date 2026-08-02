@@ -202,6 +202,39 @@ export const OUTILS = [
     fn: (env, p) => donnees.socle(env, p),
   },
   {
+    nom: "buisson_concepts",
+    description:
+      "FORCE GRADUÉE ENTRE DEUX CONCEPTS D'UN MÊME AUTEUR — un graphe de cooccurrence intra-atome, "
+      + "CORRIGÉ du biais des atomes qui portent beaucoup de concepts à la fois (voir "
+      + "core/agents.py:_paires_ponderees). `poids` est cette cooccurrence corrigée ; "
+      + "`occurrences_brutes` est un compte NON corrigé, un garde-fou de lecture séparé, jamais "
+      + "additionné ni mélangé au poids. `auteur` est OBLIGATOIRE : deux lexiques ne se mélangent "
+      + "jamais, même quand deux concepts portent le même nom chez deux auteurs différents — "
+      + "n'appeler cet outil qu'une fois par auteur, jamais pour comparer deux auteurs entre eux "
+      + "(voir l'outil `socle` pour ça). AUCUN champ ici ne nomme une synonymie ni une proximité "
+      + "de sens : c'est une cooccurrence textuelle mesurée, vérifiable atome par atome via "
+      + "`buisson_concepts_atomes`. Rapporter le champ `reserve` avec tout chiffre.",
+    schema: {
+      auteur: z.string().describe("l'auteur dont on mesure les concepts (obligatoire)"),
+      seuil_brut: z.number().int().min(0).max(1000).optional()
+        .describe("nombre minimal d'occurrences brutes pour retenir une paire — défaut 8"),
+    },
+    fn: (env, p) => donnees.buissonConcepts(env, p),
+  },
+  {
+    nom: "buisson_concepts_atomes",
+    description:
+      "Les atomes qui portent RÉELLEMENT les deux concepts demandés À LA FOIS, chez un même "
+      + "auteur — pour vérifier un poids de `buisson_concepts` en revenant au texte, jamais un "
+      + "chiffre qu'on ne peut pas retrouver dans le corpus.",
+    schema: {
+      auteur: z.string().describe("l'auteur des deux concepts"),
+      concept_a: z.string().describe("premier concept"),
+      concept_b: z.string().describe("second concept"),
+    },
+    fn: (env, p) => donnees.buissonConceptsAtomes(env, p),
+  },
+  {
     nom: "signaux",
     description:
       "Les passages où Freud parle de SON PROPRE travail : objections qu'il dresse contre ses "

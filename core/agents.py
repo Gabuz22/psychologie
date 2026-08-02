@@ -19,7 +19,7 @@ question posée, et chacun ignore l'existence des autres.
 import itertools
 import re
 
-from . import verification
+from . import sources, verification
 from .segmentation import replier
 
 AGENTS_VERSION = "1.0.0"
@@ -237,7 +237,16 @@ class AgentBuissonConcepts(Agent):
     question = "Quelle force graduée relie deux concepts d'un même auteur ?"
 
     def executer(self, corpus, auteur="Sigmund Freud", minimum_brut=8, **kw):
-        atomes = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == auteur]
+        # Un atome n'est retenu que s'il est à la fois ÉCRIT par cet auteur ET tagué avec SON
+        # PROPRE lexique — les deux coïncident pour l'auteur d'un volume, mais pas pour un
+        # contributeur : l'appendice d'Otto Rank dans la Traumdeutung porte auteur == "Otto Rank"
+        # alors que ses concepts viennent du lexique de FREUD, le volume qui le contient (voir
+        # bin/exporter_d1.py, section « concepts »). Sans ce second filtre, un concept du lexique
+        # de Freud (ex. « infantil ») serait cherché sous ("Otto Rank", "infantil") — introuvable,
+        # KeyError — ou pire, silencieusement mélangerait deux lexiques dans un seul graphe.
+        atomes = [a for a in corpus.atomes
+                  if a.get("auteur", "Sigmund Freud") == auteur
+                  and sources.OEUVRES[a["oeuvre"]].get("auteur", "Sigmund Freud") == auteur]
         presence, brut, reparti = _paires_ponderees(atomes)
         liens = []
         for (x, y), n_brut in brut.items():

@@ -1016,6 +1016,63 @@ const RESERVE_SOCLE =
   + "pour un concept déjà visible.";
 
 
+/** BUISSON DES CONCEPTS — force graduée entre deux concepts d'UN SEUL auteur (voir
+ *  core/agents.py:AgentBuissonConcepts pour le calcul, core/agents.py:_paires_ponderees pour la
+ *  correction du biais des atomes denses). `auteur` est REQUIS : deux lexiques ne se mélangent
+ *  jamais, même quand deux concepts portent le même nom chez deux auteurs différents.
+ *  `occurrences_brutes` et `poids` restent deux champs séparés, jamais combinés. */
+export async function buissonConcepts(env, { auteur, seuil_brut } = {}) {
+  if (!auteur) throw new ErreurAPI("paramètre 'auteur' requis", 400);
+  const seuil = Math.min(Math.max(_seuilOuDefaut(seuil_brut, 8), 0), 1000);
+
+  const { results } = await env.DB.prepare(`
+    SELECT ca.nom AS concept_a, ca.groupe AS groupe_a, cb.nom AS concept_b, cb.groupe AS groupe_b,
+           l.occurrences_brutes, l.poids
+    FROM concept_liens l
+    JOIN auteurs au ON au.id = l.auteur_id
+    JOIN concepts ca ON ca.id = l.concept_a
+    JOIN concepts cb ON cb.id = l.concept_b
+    WHERE au.nom = ?1 AND l.occurrences_brutes >= ?2
+    ORDER BY l.poids DESC`).bind(auteur, seuil).all();
+
+  return { auteur, seuil_brut: seuil, liens: results, reserve: RESERVE_BUISSON_CONCEPTS };
+}
+
+/** Drill-down d'une arête : les atomes qui portent RÉELLEMENT les deux concepts à la fois — pour
+ *  vérifier un poids en revenant au texte, jamais un chiffre qu'on ne peut pas retrouver dans le
+ *  corpus. Réutilise le même SELECT de citation que le reste du site. */
+export async function buissonConceptsAtomes(env, { auteur, concept_a, concept_b } = {}) {
+  if (!auteur || !concept_a || !concept_b) {
+    throw new ErreurAPI("paramètres 'auteur', 'concept_a' et 'concept_b' requis", 400);
+  }
+  const { results } = await env.DB.prepare(`
+    SELECT ${CHAMPS_CITATION}
+    ${DE_CITATION}
+    WHERE au.nom = ?1
+      AND a.id IN (SELECT ac.atome_id FROM atome_concepts ac
+                   JOIN concepts c ON c.id = ac.concept_id
+                   WHERE c.nom = ?2 AND c.auteur_id = au.id)
+      AND a.id IN (SELECT ac.atome_id FROM atome_concepts ac
+                   JOIN concepts c ON c.id = ac.concept_id
+                   WHERE c.nom = ?3 AND c.auteur_id = au.id)
+    ORDER BY a.atome_id
+    LIMIT 50`).bind(auteur, concept_a, concept_b).all();
+
+  return { auteur, concept_a, concept_b, atomes: results };
+}
+
+const RESERVE_BUISSON_CONCEPTS =
+  "COOCCURRENCE MESURÉE, JAMAIS UNE SYNONYMIE NI UNE PROXIMITÉ DE SENS. `poids` vient de la "
+  + "cooccurrence intra-atome CORRIGÉE (le vote de chaque atome est réparti entre ses propres "
+  + "paires, jamais crédité à plein à chacune) — un atome qui porte beaucoup de concepts à la "
+  + "fois ne domine plus le graphe comme s'il apportait autant d'attestations indépendantes. "
+  + "`occurrences_brutes` reste un compte NON corrigé, un garde-fou de lecture séparé, jamais "
+  + "mélangé au poids. CHAQUE AUTEUR PORTE SON PROPRE GRAPHE : deux concepts de même nom chez "
+  + "deux auteurs différents ne sont jamais reliés entre eux. Une arête épaisse dit un lien "
+  + "souvent et spécifiquement observé dans le texte, vérifiable atome par atome — jamais un "
+  + "accord théorique ni une thèse de l'auteur.";
+
+
 /** CARTE DES ACTES DE CITATION — les endroits où un texte passe d'une œuvre à une autre.
  *
  * L'unité est l'ACTE (des phrases contiguës des deux côtés = un seul acte), jamais le couple de

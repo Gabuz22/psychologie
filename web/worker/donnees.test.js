@@ -13,7 +13,8 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { carte, chronologieConcept, comparaison, dossierCouverture, socle } from "./donnees.js";
+import { buissonConcepts, buissonConceptsAtomes, carte, chronologieConcept, comparaison,
+        dossierCouverture, socle } from "./donnees.js";
 
 const LIEN_LU = {
   contenance: 1.0, force: "manifeste", sens: "a_vers_b", source_tierce: 0, a_verifier: 0,
@@ -624,4 +625,78 @@ async () => {
   assert.equal(angst.densites[0].pour_mille_a, 12.0);
   // Le compte d'actes confirmés de ce même concept ne bouge pas selon le seuil de densité.
   assert.equal(angst.actes_confirmes, 3);
+});
+
+// --------------------------------------------------------------------------------------------
+// BUISSON DES CONCEPTS — force graduée entre deux concepts d'UN SEUL auteur. Le stub filtre
+// RÉELLEMENT par occurrences_brutes selon le seuil lié, même discipline que stubSocleDB.
+const LIEN_ZWANG = { concept_a: "zwang", groupe_a: "nevrose", concept_b: "zwangsneurose",
+                     groupe_b: "nevrose", occurrences_brutes: 658, poids: 0.1449 };
+const LIEN_RARE = { concept_a: "pakt", groupe_a: "religion", concept_b: "teufel",
+                    groupe_b: "religion", occurrences_brutes: 9, poids: 0.0370 };
+const ATOME_CROISE = {
+  id: "zwangsneurose:a12", texte: "…", chapitre: null, debut: 0, fin: 1, nb_mots: 40,
+  statut: "affirme", couche: null, annee_min: 1909, annee_max: 1909, datation: "certaine",
+  auteur: "Sigmund Freud", oeuvre: "Bemerkungen über einen Fall von Zwangsneurose",
+  oeuvre_fr: null, oeuvre_cle: "rattenmann", langue: "de", edition_lue: null,
+  annee_edition: 1909, annee_oeuvre: 1909, qualite_source: "relu", ocr_suspect: 0,
+};
+
+function stubBuissonConceptsDB({ liens = [LIEN_ZWANG, LIEN_RARE], seuilBas = 8,
+                                 atomes = [ATOME_CROISE] } = {}) {
+  return {
+    prepare(sql) {
+      const s = sql.trim();
+      return {
+        bind: (...args) => ({
+          all: async () => {
+            if (s.includes("FROM concept_liens")) {
+              const seuil = args[args.length - 1];
+              return { results: liens.filter((l) => l.occurrences_brutes >= seuil) };
+            }
+            if (s.includes("FROM atomes")) return { results: atomes };
+            throw new Error("requête non anticipée par le stub buisson_concepts : " + s.slice(0, 70));
+          },
+        }),
+      };
+    },
+  };
+}
+
+test("buissonConcepts() exige un auteur — deux lexiques ne se mélangent jamais", async () => {
+  await assert.rejects(() => buissonConcepts({ DB: stubBuissonConceptsDB() }, {}), /auteur/);
+});
+
+test("buissonConcepts() garde occurrences_brutes et poids comme deux champs séparés", async () => {
+  const rep = await buissonConcepts({ DB: stubBuissonConceptsDB() }, { auteur: "Sigmund Freud" });
+  assert.equal(rep.liens.length, 2);
+  const zwang = rep.liens.find((l) => l.concept_a === "zwang");
+  assert.equal(zwang.occurrences_brutes, 658);
+  assert.equal(zwang.poids, 0.1449);
+  const interdits = ["force", "score", "solidite", "socle", "buisson"];
+  for (const l of rep.liens) {
+    for (const cle of Object.keys(l)) assert.ok(!interdits.includes(cle), `champ combiné : ${cle}`);
+  }
+});
+
+test("baisser seuil_brut du buisson des concepts élargit la liste, jamais ne la réduit", async () => {
+  const strict = await buissonConcepts(
+    { DB: stubBuissonConceptsDB() }, { auteur: "Sigmund Freud", seuil_brut: 100 });
+  const large = await buissonConcepts(
+    { DB: stubBuissonConceptsDB() }, { auteur: "Sigmund Freud", seuil_brut: 5 });
+  assert.equal(strict.liens.length, 1);
+  assert.equal(large.liens.length, 2);
+});
+
+test("buissonConceptsAtomes() exige auteur, concept_a et concept_b", async () => {
+  await assert.rejects(
+    () => buissonConceptsAtomes({ DB: stubBuissonConceptsDB() }, { auteur: "Sigmund Freud" }),
+    /concept_a/);
+});
+
+test("buissonConceptsAtomes() rend les atomes qui portent les deux concepts à la fois", async () => {
+  const rep = await buissonConceptsAtomes({ DB: stubBuissonConceptsDB() },
+    { auteur: "Sigmund Freud", concept_a: "zwang", concept_b: "zwangsneurose" });
+  assert.equal(rep.atomes.length, 1);
+  assert.equal(rep.atomes[0].oeuvre, "Bemerkungen über einen Fall von Zwangsneurose");
 });

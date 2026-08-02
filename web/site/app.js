@@ -674,6 +674,16 @@ async function demarrer() {
     afficherBuisson();
     afficherUsages();
     afficherCarte();
+
+    // Le buisson des concepts n'existe que pour les auteurs à lexique propre — ceux qui ont AU
+    // MOINS un concept en référentiel (Josef Breuer emprunte celui de Freud, il n'y figure pas).
+    const auteursAvecLexique = [...new Set(
+      Object.values(referentiel.groupes).flat().map((c) => c.auteur))].sort();
+    remplirSelect($("#bc-auteur"), auteursAvecLexique, (n) => [n, n]);
+    buissonConceptsEtat.auteur = auteursAvecLexique.includes("Sigmund Freud")
+      ? "Sigmund Freud" : auteursAvecLexique[0];
+    if ($("#bc-auteur")) $("#bc-auteur").value = buissonConceptsEtat.auteur;
+    afficherBuissonConcepts();
     remplirSelect($("#arbre-auteur"),
       (referentiel.auteurs || []).map((a) => a.nom), (n) => [n, n]);
     // Freud d'abord : c'est le corpus le plus riche, donc l'arbre le plus parlant à l'ouverture.
@@ -725,6 +735,17 @@ $("#arbre-auteur").addEventListener("change", (e) => {
   arbre.auteur = e.target.value;
   arbre.ouverte = null;          // changer d'auteur referme le volume ouvert
   afficherArbre();
+});
+
+$("#bc-auteur")?.addEventListener("change", (e) => {
+  buissonConceptsEtat.auteur = e.target.value;
+  $("#bc-citations").textContent = "";     // changer d'auteur referme les citations ouvertes
+  afficherBuissonConcepts();
+});
+$("#bc-seuil")?.addEventListener("input", (e) => {
+  buissonConceptsEtat.seuilBrut = Number(e.target.value);
+  $("#bc-seuil-valeur").textContent = e.target.value;
+  planifierBuissonConcepts();
 });
 
 $("#form-lecture").addEventListener("submit", (e) => {
@@ -1017,6 +1038,149 @@ async function afficherBuisson() {
 function planifierBuisson() {
   clearTimeout(buissonDebounce);
   buissonDebounce = setTimeout(afficherBuisson, 250);
+}
+
+// --------------------------------------------------------------------------------------------
+// LE BUISSON DES CONCEPTS — UN SEUL graphe (nœuds = concepts d'UN AUTEUR), disposition
+// force-dirigée déterministe : ressorts + répulsion, position de départ sur un cercle, nombre
+// d'itérations FIXE — jamais de hasard ni d'horloge, le même graphe se redessine identique. La
+// force graduée (poids CORRIGÉ du biais des atomes denses) se voit dans la raideur du ressort ET
+// dans l'épaisseur du trait — jamais dans une couleur, réservée au groupe du lexicographe, un
+// repère secondaire. `~170 concepts au plus, jamais deux lexiques mélangés dans le même graphe.
+const buissonConceptsEtat = { auteur: null, seuilBrut: 8 };
+let buissonConceptsDebounce = null;
+
+function couleurGroupe(groupe) {
+  let h = 0;
+  for (let i = 0; i < groupe.length; i++) h = (h * 31 + groupe.charCodeAt(i)) >>> 0;
+  return `hsl(${h % 360}, 55%, 45%)`;
+}
+
+function positionsForceDirigees(noeuds, aretes,
+    { largeur = 700, hauteur = 700, iterations = 200 } = {}) {
+  const cx = largeur / 2, cy = hauteur / 2, rayon = Math.min(largeur, hauteur) * 0.4;
+  const pos = new Map(noeuds.map((n, i) => {
+    const angle = (2 * Math.PI * i) / noeuds.length;
+    return [n, { x: cx + rayon * Math.cos(angle), y: cy + rayon * Math.sin(angle) }];
+  }));
+  const REPULSION = 6000, RESSORT = 0.02, LONGUEUR_BASE = 60;
+  for (let iter = 0; iter < iterations; iter++) {
+    const deplacement = new Map(noeuds.map((n) => [n, { x: 0, y: 0 }]));
+    for (let i = 0; i < noeuds.length; i++) {
+      const a = pos.get(noeuds[i]);
+      for (let j = i + 1; j < noeuds.length; j++) {
+        const b = pos.get(noeuds[j]);
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = Math.max(dx * dx + dy * dy, 0.02);
+        const d = Math.sqrt(d2), f = REPULSION / d2;
+        const fx = (dx / d) * f, fy = (dy / d) * f;
+        const da = deplacement.get(noeuds[i]), db = deplacement.get(noeuds[j]);
+        da.x += fx; da.y += fy; db.x -= fx; db.y -= fy;
+      }
+    }
+    for (const ar of aretes) {
+      const a = pos.get(ar.a), b = pos.get(ar.b);
+      if (!a || !b) continue;
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const d = Math.max(Math.sqrt(dx * dx + dy * dy), 0.02);
+      // Une arête FORTE (poids élevé) tire ses deux extrémités plus près — c'est LÀ que la force
+      // graduée du buisson se voit, jamais dans une couleur.
+      const longueurCible = LONGUEUR_BASE / (1 + 15 * ar.poids);
+      const f = RESSORT * (d - longueurCible);
+      const fx = (dx / d) * f, fy = (dy / d) * f;
+      const da = deplacement.get(ar.a), db = deplacement.get(ar.b);
+      da.x += fx; da.y += fy; db.x -= fx; db.y -= fy;
+    }
+    for (const n of noeuds) {
+      const p = pos.get(n), d = deplacement.get(n);
+      const nx = Math.max(15, Math.min(largeur - 15, p.x + d.x + (cx - p.x) * 0.003));
+      const ny = Math.max(15, Math.min(hauteur - 15, p.y + d.y + (cy - p.y) * 0.003));
+      pos.set(n, { x: nx, y: ny });
+    }
+  }
+  return pos;
+}
+
+function dessinerGrapheConcepts(selecteur, liens, positions, groupesParConcept) {
+  const svg = $(selecteur);
+  if (!svg) return;
+  svg.innerHTML = "";
+  const maxPoids = Math.max(0.0001, ...liens.map((l) => l.poids));
+  for (const l of liens) {
+    const posA = positions.get(l.concept_a), posB = positions.get(l.concept_b);
+    if (!posA || !posB) continue;
+    const ligne = document.createElementNS(NS_SVG, "line");
+    ligne.setAttribute("x1", posA.x); ligne.setAttribute("y1", posA.y);
+    ligne.setAttribute("x2", posB.x); ligne.setAttribute("y2", posB.y);
+    ligne.setAttribute("class", "buisson-arete");
+    ligne.setAttribute("stroke-width", String(0.5 + 4 * (l.poids / maxPoids)));
+    const titre = document.createElementNS(NS_SVG, "title");
+    titre.textContent = `${l.concept_a} ↔ ${l.concept_b} — ${l.occurrences_brutes} occurrences `
+      + `brutes, poids ${l.poids} — cliquer pour les atomes qui le fondent.`;
+    ligne.appendChild(titre);
+    ligne.addEventListener("click", () => afficherCitationsBuissonConcepts(l.concept_a, l.concept_b));
+    svg.appendChild(ligne);
+  }
+  for (const [nom, pos] of positions) {
+    const g = document.createElementNS(NS_SVG, "g");
+    g.setAttribute("class", "buisson-noeud");
+    const cercle = document.createElementNS(NS_SVG, "circle");
+    cercle.setAttribute("cx", pos.x); cercle.setAttribute("cy", pos.y); cercle.setAttribute("r", 4);
+    cercle.setAttribute("fill", couleurGroupe(groupesParConcept.get(nom) || nom));
+    const texte = document.createElementNS(NS_SVG, "text");
+    texte.setAttribute("x", pos.x); texte.setAttribute("y", pos.y - 6);
+    texte.setAttribute("text-anchor", "middle");
+    texte.textContent = nom;
+    const titreNoeud = document.createElementNS(NS_SVG, "title");
+    titreNoeud.textContent = `${nom} (${groupesParConcept.get(nom) || "?"})`;
+    g.append(cercle, texte, titreNoeud);
+    svg.appendChild(g);
+  }
+}
+
+async function afficherCitationsBuissonConcepts(conceptA, conceptB) {
+  const zone = $("#bc-citations");
+  if (!zone) return;
+  zone.textContent = "chargement…";
+  try {
+    const r = await api("/api/buisson-concepts-atomes",
+      { auteur: buissonConceptsEtat.auteur, concept_a: conceptA, concept_b: conceptB });
+    zone.textContent = "";
+    const titre = document.createElement("h3");
+    titre.textContent = `${conceptA} ↔ ${conceptB} — ${r.atomes.length} atome(s) qui portent les deux`;
+    zone.appendChild(titre);
+    for (const a of r.atomes) zone.appendChild(rendreCitation(a));
+    zone.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  } catch (e) {
+    zone.textContent = "erreur : " + e.message;
+  }
+}
+
+async function afficherBuissonConcepts() {
+  if (!$("#bc-svg") || !buissonConceptsEtat.auteur) return;
+  try {
+    const r = await api("/api/buisson-concepts",
+      { auteur: buissonConceptsEtat.auteur, seuil_brut: String(buissonConceptsEtat.seuilBrut) });
+    const groupesParConcept = new Map(), noms = new Set();
+    for (const l of r.liens) {
+      noms.add(l.concept_a); noms.add(l.concept_b);
+      groupesParConcept.set(l.concept_a, l.groupe_a);
+      groupesParConcept.set(l.concept_b, l.groupe_b);
+    }
+    const noeuds = [...noms].sort();
+    const positions = positionsForceDirigees(
+      noeuds, r.liens.map((l) => ({ a: l.concept_a, b: l.concept_b, poids: l.poids })));
+    dessinerGrapheConcepts("#bc-svg", r.liens, positions, groupesParConcept);
+    $("#bc-reserve").textContent = r.reserve;
+    $("#bc-citations").textContent = "";
+  } catch (e) {
+    console.error("buisson des concepts indisponible :", e.message);
+  }
+}
+
+function planifierBuissonConcepts() {
+  clearTimeout(buissonConceptsDebounce);
+  buissonConceptsDebounce = setTimeout(afficherBuissonConcepts, 250);
 }
 
 // --------------------------------------------------------------------------------------------

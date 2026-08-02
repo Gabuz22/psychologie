@@ -30,8 +30,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from core import (agents, carte, comparaison, lexique, ocr, socle_par_couple, sources,  # noqa: E402
-                  verification)
+from core import (agents, carte, comparaison, lexique, lexiques, ocr, socle_par_couple,  # noqa: E402
+                  sources, verification)
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -192,6 +192,7 @@ def nommer_grappes(grappes):
     return par_rang
 
 SCHEMA = """
+DROP TABLE IF EXISTS concept_liens;
 DROP TABLE IF EXISTS socle_densites;
 DROP TABLE IF EXISTS socle_liens;
 DROP TABLE IF EXISTS mentions;
@@ -500,6 +501,20 @@ CREATE TABLE socle_densites (
   pour_mille_b REAL,
   lexicographe TEXT
 );
+-- BUISSON DES CONCEPTS — cooccurrence intra-atome, corrigée du biais des atomes denses
+-- (core.agents._paires_ponderees, agent `buisson_concepts`). UN SEUL AUTEUR par ligne : deux
+-- concepts de même nom chez deux auteurs différents ne sont jamais reliés entre eux. `poids` est
+-- la cooccurrence CORRIGÉE (le vote de chaque atome réparti entre ses propres paires) ;
+-- `occurrences_brutes` reste un compte NON corrigé, garde-fou séparé, jamais mélangé au poids —
+-- la même discipline que `socle_liens`/`socle_densites` ci-dessus.
+CREATE TABLE concept_liens (
+  auteur_id INTEGER NOT NULL REFERENCES auteurs(id),
+  concept_a INTEGER NOT NULL REFERENCES concepts(id),
+  concept_b INTEGER NOT NULL REFERENCES concepts(id),
+  occurrences_brutes INTEGER NOT NULL,
+  poids REAL NOT NULL,
+  PRIMARY KEY (concept_a, concept_b)
+);
 CREATE TABLE grappes (
   id INTEGER PRIMARY KEY,
   rang INTEGER NOT NULL,
@@ -531,6 +546,8 @@ CREATE INDEX idx_carte_poids ON carte_actes(poids DESC);
 CREATE INDEX idx_mentions_couple ON mentions(auteur_id, auteur_nomme_id);
 CREATE INDEX idx_socle_liens_couple ON socle_liens(auteur_a, auteur_b);
 CREATE INDEX idx_socle_densites_couple ON socle_densites(auteur_a, auteur_b, concept);
+CREATE INDEX idx_concept_liens_auteur ON concept_liens(auteur_id);
+CREATE INDEX idx_concept_liens_poids ON concept_liens(poids DESC);
 """
 
 
@@ -821,6 +838,22 @@ def construire(chemin_sqlite):
             db.execute("INSERT INTO grappe_concepts VALUES (?,?)",
                        (cur.lastrowid, ids_concept[("Sigmund Freud", nom_c)]))
 
+    # ---- buisson des concepts (agent buisson_concepts) : UN GRAPHE PAR AUTEUR, jamais mélangés.
+    # Seuil de 8 occurrences brutes calibré et vérifié UNIFORME sur les six auteurs à lexique
+    # propre — même Le Bon (1 485 atomes, le plus petit corpus) garde 221 liens sur 43 concepts à
+    # ce seuil, aucun buisson ne s'y vide. Voir bin/echantillonner_buisson_concepts.py pour la
+    # lecture de validation.
+    BUISSON_CONCEPTS_MINIMUM_BRUT = 8
+    for nom_auteur in sorted(lexiques.AUTEURS_AVEC_LEXIQUE_PROPRE):
+        rb = agents.AGENTS["buisson_concepts"].executer(
+            corpus, auteur=nom_auteur, minimum_brut=BUISSON_CONCEPTS_MINIMUM_BRUT)
+        for lien in rb["liens"]:
+            x, y = sorted(lien["concepts"])
+            db.execute(
+                "INSERT INTO concept_liens VALUES (?,?,?,?,?)",
+                (ids_auteur[nom_auteur], ids_concept[(nom_auteur, x)],
+                 ids_concept[(nom_auteur, y)], lien["occurrences_brutes"], lien["poids"]))
+
     # ---- méta
     resume = corpus.resume()
     for cle, valeur in {
@@ -884,7 +917,7 @@ def dumper_sql(db, dossier, taille_tranche=3_500_000):
               "atome_sous_concepts", "fonctions", "signaux", "grappes", "grappe_concepts",
               "liens_reprise", "lectures_declarees", "nominations", "usages",
               "mentions", "carte_actes", "carte_couples", "carte_couverture",
-              "socle_liens", "socle_densites", "meta"]
+              "socle_liens", "socle_densites", "concept_liens", "meta"]
     reelles = {r[0] for r in db.execute(
         "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")}
     oubliees = reelles - set(tables)

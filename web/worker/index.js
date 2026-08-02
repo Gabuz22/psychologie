@@ -69,6 +69,8 @@ export default {
       case "/api/carte":       return route(() => donnees.carte(env, p));
       case "/api/couverture-dossier": return route(() => donnees.dossierCouverture(env));
       case "/api/socle": return route(() => donnees.socle(env, p));
+      case "/api/buisson-concepts": return route(() => donnees.buissonConcepts(env, p));
+      case "/api/buisson-concepts-atomes": return route(() => donnees.buissonConceptsAtomes(env, p));
       case "/api/chat":
         if (requete.method !== "POST")
           return json({ erreur: "POST requis" }, 405, false);

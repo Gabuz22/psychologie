@@ -22,6 +22,7 @@
   <a href="#assistant" data-vue="assistant">Assistant</a>
   <a href="#recherche" data-vue="recherche">Recherche</a>
   <a href="#courants" data-vue="courants">Courants internes</a>
+  <a href="#buisson-concepts" data-vue="buisson-concepts">Buisson des concepts</a>
   <a href="#chronologie" data-vue="chronologie">Chronologie</a>
   <a href="#signaux" data-vue="signaux">Les auteurs sur eux-mêmes</a>
   <a href="#arbre" data-vue="arbre">Arbre d'un auteur</a>
@@ -133,6 +134,33 @@
     édition — la seule comparable sans réserve d'édition.</p>
   <div id="courant-densite" class="graphique"></div>
   <p id="courant-reserve" class="reserve"></p>
+</section>
+
+<section id="buisson-concepts">
+  <h2>Le buisson des concepts</h2>
+  <p class="note">Les concepts eux-mêmes en nœuds, reliés par une <strong>force graduée</strong> :
+    une cooccurrence textuelle <strong>mesurée</strong> — deux concepts reviennent souvent dans
+    les mêmes phrases — jamais une synonymie ni une proximité de sens. Chaque auteur porte
+    <strong>son propre graphe</strong> : deux concepts de même nom chez deux auteurs différents
+    ne sont jamais reliés entre eux. La couleur d'un nœud vient de sa catégorie du lexicographe,
+    un repère secondaire — c'est l'<strong>épaisseur</strong> d'une arête qui porte la mesure.
+    Cliquer une arête ouvre les atomes qui la fondent.</p>
+  <form id="form-buisson-concepts">
+    <div class="grille">
+      <label>Auteur
+        <select id="bc-auteur"></select>
+      </label>
+    </div>
+  </form>
+  <div class="socle-seuils">
+    <label for="bc-seuil">Occurrences minimales — au moins
+      <output id="bc-seuil-valeur">8</output></label>
+    <input type="range" id="bc-seuil" min="8" max="60" value="8" step="1">
+  </div>
+  <svg id="bc-svg" viewBox="0 0 700 700" role="img"
+       aria-label="Graphe des concepts reliés par force graduée"></svg>
+  <div id="bc-citations"></div>
+  <p id="bc-reserve" class="reserve"></p>
 </section>
 
 <section id="chronologie">

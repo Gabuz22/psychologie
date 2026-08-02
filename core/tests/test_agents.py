@@ -10,7 +10,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from core import agents                 # noqa: E402
+from core import agents, lexique        # noqa: E402
 from core.corpus import Corpus          # noqa: E402
 
 
@@ -206,6 +206,21 @@ class TestAgents(unittest.TestCase):
         self.assertIsNotNone(seconde_topique)
         self.assertEqual(seconde_topique, grappe_de("es"))
         self.assertEqual(seconde_topique, grappe_de("ueberich"))
+
+    def test_buisson_concepts_exclut_l_appendice_de_rank_du_lexique_de_rank(self):
+        """DÉFAUT MESURÉ : l'appendice d'Otto Rank dans la Traumdeutung porte auteur == "Otto
+        Rank" sur l'atome, mais ses concepts viennent du lexique de FREUD (le volume qui le
+        contient). Sans le second filtre (lexique de l'atome == auteur demandé), ces atomes
+        entraient dans le buisson de Rank et l'export D1 échouait avec un KeyError sur un concept
+        freudien (« infantil ») cherché sous la clé ("Otto Rank", "infantil").
+        """
+        r = agents.AgentBuissonConcepts().executer(self.c, auteur="Otto Rank")
+        concepts_rank = {nom for meta in lexique.pour_auteur("Otto Rank").CONCEPTS.values()
+                         for nom in meta["termes"]}
+        for lien in r["liens"]:
+            for concept in lien["concepts"]:
+                self.assertIn(concept, concepts_rank,
+                              "concept hors du lexique de Rank : %s" % concept)
 
     def test_buisson_concepts_est_deterministe(self):
         a = agents.AgentBuissonConcepts().executer(self.c)
