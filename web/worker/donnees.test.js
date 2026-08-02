@@ -14,7 +14,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { buissonConcepts, buissonConceptsAtomes, carte, chronologieConcept, comparaison,
-        dossierCouverture, socle } from "./donnees.js";
+        dossierCouverture, obtenirAtome, socle } from "./donnees.js";
 
 const LIEN_LU = {
   contenance: 1.0, force: "manifeste", sens: "a_vers_b", source_tierce: 0, a_verifier: 0,
@@ -699,4 +699,39 @@ test("buissonConceptsAtomes() rend les atomes qui portent les deux concepts à l
     { auteur: "Sigmund Freud", concept_a: "zwang", concept_b: "zwangsneurose" });
   assert.equal(rep.atomes.length, 1);
   assert.equal(rep.atomes[0].oeuvre, "Bemerkungen über einen Fall von Zwangsneurose");
+});
+
+// --------------------------------------------------------------------------------------------
+// TRADUCTION FRANÇAISE — `texte_fr` voyage à travers CHAMPS_CITATION (partagé par la plupart des
+// points de rendu de citation) au même titre que `texte`, présent ou absent selon l'atome.
+function stubAtomeDB(texteFr) {
+  return {
+    prepare(sql) {
+      const s = sql.trim();
+      return {
+        bind: () => ({
+          first: async () => {
+            if (s.includes("FROM atomes")) {
+              return { rowid_interne: 1, id: "traumdeutung:a1", texte: "Der Traum ist…",
+                       texte_fr: texteFr, auteur: "Sigmund Freud", oeuvre: "Die Traumdeutung" };
+            }
+            throw new Error("requête .first() non anticipée : " + s.slice(0, 60));
+          },
+          all: async () => ({ results: [] }),
+        }),
+      };
+    },
+  };
+}
+
+test("obtenirAtome() fait voyager texte_fr aux côtés de texte, sans le remplacer", async () => {
+  const rep = await obtenirAtome({ DB: stubAtomeDB("Le rêve est…") }, { id: "traumdeutung:a1" });
+  assert.equal(rep.texte, "Der Traum ist…");
+  assert.equal(rep.texte_fr, "Le rêve est…");
+});
+
+test("obtenirAtome() rend texte_fr null sans erreur quand l'atome n'est pas traduit", async () => {
+  const rep = await obtenirAtome({ DB: stubAtomeDB(null) }, { id: "traumdeutung:a1" });
+  assert.equal(rep.texte, "Der Traum ist…");
+  assert.equal(rep.texte_fr, null);
 });

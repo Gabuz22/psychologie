@@ -224,11 +224,11 @@ button.exemple { font-size: .85rem; padding: .35rem .7rem; }
   font-family: var(--serif); font-size: 1rem; color: var(--accent); margin: 1.2rem 0 .3rem;
   border-bottom: 1px dashed var(--filet); padding-bottom: .2rem;
 }
-.citation .citer {
+.citation .citer, .citation .bascule-langue {
   background: none; border: none; color: var(--gris); font-size: .78rem; cursor: pointer;
   padding: 0; margin-left: .6rem; text-decoration: underline;
 }
-.citation .citer:hover { color: var(--accent); }
+.citation .citer:hover, .citation .bascule-langue:hover { color: var(--accent); }
 
 /* navigation active */
 nav a.actif { color: var(--accent); }

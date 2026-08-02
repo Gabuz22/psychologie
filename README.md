@@ -59,8 +59,15 @@ Deux raisons, dans cet ordre :
 Le travail d'analyse, lui, se fait en français. Le moteur est **multilingue par construction** :
 segmentation et repérage prennent la langue de l'œuvre en paramètre. Les CONCEPTS, eux,
 appartiennent à chaque auteur (voir ci-dessus) : ceux de Le Bon portent des noms français
-(`foule`, `meneur`, `contagion`), ceux de Freud, de Rank et d'Abraham des noms allemands. Aucune
-phrase n'est jamais traduite.
+(`foule`, `meneur`, `contagion`), ceux de Freud, de Rank et d'Abraham des noms allemands.
+
+**Depuis août 2026, chaque citation peut aussi se lire en français** — une traduction produite
+directement depuis le texte source, jamais copiée d'une édition existante, avec le glossaire déjà
+tranché par ce projet pour les termes sensibles (voir
+[`documentation/TRADUCTION.md`](documentation/TRADUCTION.md) : *Trieb* → pulsion, jamais instinct).
+Ça ne renverse aucune des deux raisons ci-dessus : le français est un **confort de lecture**,
+jamais l'autorité — la phrase originale, toujours accessible en un clic, reste la seule citation
+qui fait foi. Voir [`core/traductions.py`](core/traductions.py) pour le registre et sa doctrine.
 
 ---
 

@@ -97,9 +97,15 @@ de six mots.
 - **Ce n'est pas une bibliothèque.** Quarante œuvres, 1895-1939. Pas de correspondance, pas de
   notes de cas, pas de revues, pas de littérature secondaire. PEP-Web indexe plusieurs ordres de
   grandeur de plus.
-- **Il n'y a aucune traduction.** Allemand et français seulement, par choix — la citation reste
-  vérifiable, et les querelles de traduction (*Trieb* → pulsion ou instinct ?) ne sont pas héritées
-  en amont. Le prix est réel : le corpus est fermé à qui ne lit pas ces deux langues.
+- **La traduction française est un confort de lecture, jamais l'autorité.** Le corpus reste
+  d'abord allemand et français — la citation vérifiable, sans querelle de traduction héritée en
+  amont (*Trieb* → pulsion ou instinct ?). Depuis août 2026, une traduction française est produite
+  directement depuis le texte source pour chaque citation (glossaire imposé, jamais copiée d'une
+  édition existante), affichée par défaut mais toujours doublée de l'original en un clic — c'est
+  la phrase allemande ou française d'origine, jamais son rendu français, qui reste la citation qui
+  fait foi et qu'un lecteur doit vérifier. Voir `core/traductions.py`. Cette traduction ne couvre
+  pas encore tout le corpus (voir `traductions/citations_fr.json:meta.scope` pour l'état exact) ;
+  pour tout auteur hors de cette portée, le corpus reste fermé à qui ne lit pas l'allemand.
 - **Il n'y a pas d'apparat critique.** Ni notes d'éditeur, ni variantes, ni index de noms établi par
   un spécialiste. La collation phrase à phrase ne couvre que quatre œuvres.
 - **La moitié du corpus est un fac-similé océrisé non relu.** Rank, Abraham et Ferenczi n'ont pas

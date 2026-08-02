@@ -31,7 +31,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from core import (agents, carte, comparaison, lexique, lexiques, ocr, socle_par_couple,  # noqa: E402
-                  sources, verification)
+                  sources, traductions, verification)
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -267,7 +267,12 @@ CREATE TABLE atomes (
   -- Cette phrase-ci porte une trace de corruption OCR (« sih » pour « sich », « nidit » pour
   -- « nicht »). Elle reste consultable : le lecteur sait seulement qu'il doit la vérifier sur le
   -- fac-similé avant de la publier. Marquer vaut mieux que retirer, et infiniment mieux que taire.
-  ocr_suspect INTEGER NOT NULL DEFAULT 0
+  ocr_suspect INTEGER NOT NULL DEFAULT 0,
+  -- TRADUCTION FRANÇAISE — un confort de lecture, jamais l'autorité : `texte` (ci-dessus) reste
+  -- LA citation qui fait foi. NULL tant que cet atome n'a pas été traduit (voir
+  -- core/traductions.py, `traductions/citations_fr.json`) — un silence STRUCTUREL et attendu
+  -- pour tout ce qui est hors de la portée déclarée (`meta.scope`), jamais une panne.
+  texte_fr TEXT
 );
 -- UN CONCEPT APPARTIENT À UN AUTEUR. L'unicité porte sur le couple (nom, auteur) et non sur le
 -- nom seul : deux auteurs peuvent employer le même mot pour deux choses différentes, et le
@@ -613,20 +618,22 @@ def construire(chemin_sqlite):
 
     # ---- atomes et jointures
     table_verdicts = verification.charger()["verdicts"]
+    table_traductions = traductions.charger()
     for a in corpus.atomes:
         ch = a["chapitre"]
         amin, amax = fenetre_datation(a)
         cur = db.execute(
             "INSERT INTO atomes (atome_id, empreinte, oeuvre_id, auteur_id, idx, texte,"
             " texte_replie, debut, fin, nb_mots, chapitre, statut, non_qualifie, couche,"
-            " annee_min, annee_max, datation_regle, ocr_suspect)"
-            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            " annee_min, annee_max, datation_regle, ocr_suspect, texte_fr)"
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (a["id"], a["empreinte"], ids_oeuvre[a["oeuvre"]],
              ids_auteur[a.get("auteur", "Sigmund Freud")], a["index"], a["texte"],
              replier(a["texte"]), a["debut"], a["fin"], a["nb_mots"],
              ("%s. %s" % (ch["numero"], ch["titre"])) if ch else None,
              a["statut"], int(a["non_qualifie"]), a["attestation"].get("couche"),
-             amin, amax, a["attestation"]["regle"], int(a.get("ocr_suspect", False))))
+             amin, amax, a["attestation"]["regle"], int(a.get("ocr_suspect", False)),
+             traductions.traduction(a, table_traductions)))
         aid = cur.lastrowid
         # Les concepts d'un atome sont ceux du lexique de l'AUTEUR DU VOLUME — le même que celui
         # avec lequel l'atomisation les a trouvés (voir atomisation._atomiser). Une contribution
@@ -647,6 +654,22 @@ def construire(chemin_sqlite):
 
     db.execute("UPDATE concepts SET n_atomes ="
                " (SELECT COUNT(*) FROM atome_concepts ac WHERE ac.concept_id = concepts.id)")
+
+    # GARDE-FOU DE COUVERTURE — sur le modèle de celui des mentions (voir plus bas) : la
+    # couverture ne se mesure JAMAIS sur le corpus entier, seulement sur les auteurs que le
+    # registre déclare lui-même couverts (`meta.scope`) — un auteur pas encore commencé ne doit
+    # jamais faire échouer l'export. Le seuil est plus haut que celui des mentions (99 % contre
+    # 90 %) : une fois un auteur déclaré dans `scope`, on prétend l'avoir traduit en entier.
+    for nom_auteur in table_traductions.get("meta", {}).get("scope", []):
+        atomes_auteur = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == nom_auteur]
+        c = traductions.couverture(atomes_auteur, table_traductions)
+        if c["part"] is not None and c["part"] < 0.99:
+            raise SystemExit(
+                "TRADUCTION DÉCLARÉE MAIS INCOMPLÈTE — %s figure dans meta.scope du registre de "
+                "traduction, mais seuls %d atomes sur %d y sont traduits (%.1f %%, sous le seuil "
+                "de 99 %%). Terminer la traduction de cet auteur avant de le déclarer couvert, ou "
+                "retirer %s de meta.scope si le travail est encore en cours."
+                % (nom_auteur, c["traduits"], c["total"], 100 * c["part"], nom_auteur))
 
     # ---- couche de comparaison inter-auteurs (agents `reprises` et `lectures`)
     # Recalculée ici comme les grappes : le site ne sert jamais qu'un résultat produit par le

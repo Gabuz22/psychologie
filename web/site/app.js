@@ -68,16 +68,33 @@ function rendreCitation(c) {
   const suspect = c.ocr_suspect
     ? `<span class="badge alerte" title="Une trace de corruption OCR a été repérée dans cette phrase (confusion du digramme « ch »). À vérifier sur le fac-similé.">⚠ OCR douteux</span>`
     : "";
+  // Le français est un confort de lecture, jamais l'autorité : quand une traduction existe, elle
+  // s'affiche par défaut, mais l'original reste accessible en un clic, jamais masqué pour de bon
+  // (voir README.md « Pourquoi la langue originale »).
+  const aUneTraduction = Boolean(c.texte_fr) && c.texte_fr !== c.texte;
   div.innerHTML = `
-    <blockquote lang="${c.langue || "de"}">${texteCourt(c.texte)}</blockquote>
+    <blockquote lang="${aUneTraduction ? "fr" : (c.langue || "de")}">${
+      texteCourt(aUneTraduction ? c.texte_fr : c.texte)}</blockquote>
     <p class="refs"><b>${c.auteur}</b> — <i>${c.oeuvre}</i>${
       c.oeuvre_fr && c.oeuvre_fr !== c.oeuvre ? ` (${c.oeuvre_fr})` : ""}${chapitre}
       · ${STATUTS[c.statut] || c.statut}${couche}${source}${suspect}
       · <span title="position dans le texte source">car. ${c.debut}–${c.fin}</span>
+      ${aUneTraduction ? `<button type="button" class="bascule-langue">voir l'original</button>` : ""}
       <button type="button" class="citer">citer</button></p>
     <span class="datation">${c.datation}</span>`;
   div.querySelector(".citer").addEventListener("click", (e) =>
     copier(referenceCitation(c), e.target));
+  if (aUneTraduction) {
+    const bouton = div.querySelector(".bascule-langue");
+    const bq = div.querySelector("blockquote");
+    let surOriginal = false;
+    bouton.addEventListener("click", () => {
+      surOriginal = !surOriginal;
+      bq.lang = surOriginal ? (c.langue || "de") : "fr";
+      bq.textContent = texteCourt(surOriginal ? c.texte : c.texte_fr);
+      bouton.textContent = surOriginal ? "voir la traduction" : "voir l'original";
+    });
+  }
   return div;
 }
 

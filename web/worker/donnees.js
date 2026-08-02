@@ -31,9 +31,12 @@ export function replier(s) {
     .trim();
 }
 
-/** SELECT de rendu d'une citation — tout ce que corpus.citer() donne, plus la fenêtre. */
+/** SELECT de rendu d'une citation — tout ce que corpus.citer() donne, plus la fenêtre.
+ *  `texte_fr` : confort de lecture, jamais l'autorité — `texte` (l'original) reste LA citation
+ *  qui fait foi. NULL tant que l'atome n'a pas été traduit (voir core/traductions.py) — le site
+ *  doit alors se rabattre sur `texte` sans erreur, jamais un champ manquant traité comme une panne. */
 const CHAMPS_CITATION = `
-  a.atome_id AS id, a.texte, a.chapitre, a.debut, a.fin, a.nb_mots, a.statut,
+  a.atome_id AS id, a.texte, a.texte_fr, a.chapitre, a.debut, a.fin, a.nb_mots, a.statut,
   a.couche, a.annee_min, a.annee_max, a.datation_regle AS datation,
   au.nom AS auteur, o.titre AS oeuvre, o.titre_fr AS oeuvre_fr, o.cle AS oeuvre_cle,
   o.langue AS langue, o.edition AS edition_lue, o.annee_edition, o.annee_oeuvre,
