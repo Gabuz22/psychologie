@@ -106,6 +106,26 @@ class TestCorpus(unittest.TestCase):
             self.assertIn(k, exactes)
 
 
+class TestPairesPonderees(unittest.TestCase):
+    """Données synthétiques : le biais des atomes denses doit disparaître après correction."""
+
+    def test_corrige_le_biais_des_atomes_denses(self):
+        """AgentCooccurrence.executer (non corrigé) créditerait ces deux couples à égalité —
+        même compte brut (8), même Jaccard (1.0) — alors qu'un seul est spécifique.
+        """
+        sobre = [{"concepts": [{"concept": "a"}, {"concept": "b"}]} for _ in range(8)]
+        concepts_denses = ["c%d" % i for i in range(13)]
+        dense = [{"concepts": [{"concept": c} for c in concepts_denses]} for _ in range(8)]
+        presence, brut, reparti = agents._paires_ponderees(sobre + dense)
+
+        cle_sobre = ("a", "b")
+        cle_dense = tuple(sorted(("c0", "c1")))
+        self.assertEqual(brut[cle_sobre], 8)
+        self.assertEqual(brut[cle_dense], 8, "le compte brut, lui, reste identique")
+        self.assertGreater(reparti[cle_sobre], reparti[cle_dense] * 50,
+                            "le vote réparti doit nettement discriminer le couple sobre")
+
+
 class TestAgents(unittest.TestCase):
 
     @classmethod
@@ -155,6 +175,42 @@ class TestAgents(unittest.TestCase):
         couples = {tuple(sorted(l["concepts"])) for l in r["liens"]}
         self.assertIn(("wunsch", "wunscherfuellung"), couples)
         self.assertIn(("masochismus", "sadismus"), couples)
+
+    def test_buisson_concepts_retrouve_les_couples_canoniques(self):
+        """Mêmes couples canoniques que la cooccurrence non corrigée : la correction ne doit pas
+        faire disparaître les liens réels, seulement dégonfler ceux gonflés par des atomes denses.
+        """
+        r = agents.AgentBuissonConcepts().executer(self.c)
+        couples = {tuple(sorted(l["concepts"])) for l in r["liens"]}
+        self.assertIn(("wunsch", "wunscherfuellung"), couples)
+        self.assertIn(("masochismus", "sadismus"), couples)
+
+    def test_buisson_concepts_partition_retrouve_la_seconde_topique(self):
+        """Réutilise l'algorithme de partition d'AgentCourants EN LECTURE SEULE, comme outil de
+        validation du graphe corrigé — jamais comme dépendance de production.
+        """
+        r = agents.AgentBuissonConcepts().executer(self.c)
+        graphe = {}
+        for lien in r["liens"]:
+            x, y = lien["concepts"]
+            graphe.setdefault(x, {})[y] = lien["poids"]
+            graphe.setdefault(y, {})[x] = lien["poids"]
+        communautes, m = agents.AgentCourants._partitionner(graphe)
+        modularite = agents.AgentCourants._modularite(graphe, m, communautes)
+        print("modularité buisson_concepts (corrigé) : %.3f" % modularite)
+
+        def grappe_de(concept):
+            return next((c for c in communautes if concept in c), None)
+
+        seconde_topique = grappe_de("ich")
+        self.assertIsNotNone(seconde_topique)
+        self.assertEqual(seconde_topique, grappe_de("es"))
+        self.assertEqual(seconde_topique, grappe_de("ueberich"))
+
+    def test_buisson_concepts_est_deterministe(self):
+        a = agents.AgentBuissonConcepts().executer(self.c)
+        b = agents.AgentBuissonConcepts().executer(self.c)
+        self.assertEqual(a, b)
 
     def test_courants_retrouve_des_grappes_reconnaissables(self):
         """Validation de fond : les couples déjà connus doivent tomber dans la MÊME grappe.

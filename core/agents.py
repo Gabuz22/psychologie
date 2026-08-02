@@ -194,6 +194,75 @@ class AgentCooccurrence(Agent):
         })
 
 
+def _paires_ponderees(atomes):
+    """Cooccurrence intra-atome CORRIGÉE. AgentCooccurrence.executer et AgentCourants._graphe
+    créditent chaque paire d'un atome à PLEIN (1), via itertools.combinations(concepts, 2) — un
+    atome à 13 concepts crédite ses 78 paires comme 78 attestations indépendantes, alors qu'il ne
+    fournit qu'UN SEUL geste de citation. CORRECTION : le vote d'un atome reste total = 1, réparti
+    entre SES paires (1/C(k,2) chacune). Un atome à 2 concepts (1 paire) garde son poids plein ;
+    un atome à 13 concepts (78 paires) crédite chacune de 1/78 — aucun atome ne pèse plus qu'un
+    autre, seule la RÉPÉTITION à travers plusieurs atomes construit une paire forte.
+
+    Rend (presence: {concept: n_atomes}, brut: {(x,y) triés: n entier, NON corrigé},
+    reparti: {(x,y) triés: somme fractionnaire, corrigée}). `brut` reste un vrai décompte
+    d'atomes, gardé comme garde-fou séparé — seul `reparti` est corrigé.
+    """
+    presence, brut, reparti = {}, {}, {}
+    for a in atomes:
+        concepts = sorted({c["concept"] for c in a["concepts"]})
+        for c in concepts:
+            presence[c] = presence.get(c, 0) + 1
+        paires = list(itertools.combinations(concepts, 2))
+        if not paires:
+            continue
+        part = 1.0 / len(paires)
+        for x, y in paires:
+            brut[(x, y)] = brut.get((x, y), 0) + 1
+            reparti[(x, y)] = reparti.get((x, y), 0.0) + part
+    return presence, brut, reparti
+
+
+# --------------------------------------------------------------------------------------------
+class AgentBuissonConcepts(Agent):
+    """Force graduée entre deux concepts d'UN SEUL auteur — jamais un jugement de sens.
+
+    Réutilise la cooccurrence intra-atome d'AgentCooccurrence, mais CORRIGÉE par
+    _paires_ponderees : un atome dense (beaucoup de concepts à la fois) ne domine plus le
+    graphe. C'est une cooccurrence textuelle MESURÉE (deux concepts reviennent souvent dans les
+    mêmes phrases), jamais une synonymie ni une proximité de sens — vérifiable en revenant aux
+    atomes qui la portent.
+    """
+
+    nom = "buisson_concepts"
+    question = "Quelle force graduée relie deux concepts d'un même auteur ?"
+
+    def executer(self, corpus, auteur="Sigmund Freud", minimum_brut=8, **kw):
+        atomes = [a for a in corpus.atomes if a.get("auteur", "Sigmund Freud") == auteur]
+        presence, brut, reparti = _paires_ponderees(atomes)
+        liens = []
+        for (x, y), n_brut in brut.items():
+            if n_brut < minimum_brut:
+                continue
+            union = presence[x] + presence[y] - n_brut
+            poids = round(reparti[(x, y)] / union, 4) if union else 0.0
+            if poids <= 0:
+                continue
+            liens.append({"concepts": [x, y], "occurrences_brutes": n_brut, "poids": poids})
+        liens.sort(key=lambda l: -l["poids"])
+        return self._fiche({
+            "auteur": auteur,
+            "atomes_mesures": len(atomes),
+            "seuil_minimum_brut": minimum_brut,
+            "concepts_relies": len({c for l in liens for c in l["concepts"]}),
+            "liens": liens,
+            "note": ("poids = cooccurrence CORRIGÉE (vote de chaque atome réparti entre ses "
+                     "propres paires) ; occurrences_brutes = compte NON corrigé, garde-fou "
+                     "séparé, jamais mélangé au poids. Aucun des deux champs ne nomme une "
+                     "synonymie ni une proximité de sens : une cooccurrence mesurée, à vérifier "
+                     "atome par atome."),
+        })
+
+
 # --------------------------------------------------------------------------------------------
 class AgentCourants(Agent):
     """Les concepts que Freud pense ensemble forment-ils déjà des grappes distinctes ?
@@ -663,7 +732,8 @@ class AgentUsage(Agent):
         })
 
 
-AGENTS = {a.nom: a for a in (AgentProfil(), AgentConcept(), AgentCooccurrence(), AgentCourants(),
+AGENTS = {a.nom: a for a in (AgentProfil(), AgentConcept(), AgentCooccurrence(),
+                             AgentBuissonConcepts(), AgentCourants(),
                              AgentChronologie(), AgentTension(), AgentSignaux(),
                              AgentReprises(), AgentLectures(), AgentUsage())}
 
