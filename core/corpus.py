@@ -6,7 +6,7 @@ rien : elle assemble, indexe et permet de filtrer. Toute vue rendue par un agent
 remonter jusqu'à l'atome, et de l'atome jusqu'à la ligne du texte allemand — c'est la condition
 pour qu'un psychanalyste puisse contrôler une affirmation au lieu de la croire.
 """
-from . import atomisation, sources
+from . import accueil, atomisation, sources
 
 
 def fenetre_datation(atome):
@@ -31,7 +31,27 @@ class Corpus:
             r = atomisation.atomiser(cle)
             self.oeuvres[cle] = r["meta"]
             self.atomes.extend(r["atomes"])
+        self._valider_atomes(self.atomes)
         self._par_id = {a["id"]: a for a in self.atomes}
+
+    @staticmethod
+    def _valider_atomes(atomes):
+        """Valide les deux clés qui conditionnent toute relation en aval.
+
+        Un auteur absent ne doit jamais devenir Freud par défaut, et deux atomes portant le
+        même identifiant ne doivent jamais être réduits silencieusement à un seul par l'index.
+        Le contrôle est placé à la frontière du corpus afin que tous les agents et exports
+        officiels échouent avant de calculer une relation fausse.
+        """
+        ids = set()
+        for atome in atomes:
+            accueil.auteur_de(atome)
+            aid = atome.get("id")
+            if not aid:
+                raise ValueError("ATOME SANS IDENTIFIANT : impossible de garantir la provenance")
+            if aid in ids:
+                raise ValueError("IDENTIFIANT D'ATOME DUPLIQUÉ : %s" % aid)
+            ids.add(aid)
 
     # ------------------------------------------------------------------ sélections
     def atome(self, aid):
@@ -78,7 +98,7 @@ class Corpus:
             atomes = [a for a in atomes
                      if any(sous_concept in c.get("sous_concepts", []) for c in a["concepts"])]
         if auteur:
-            atomes = [a for a in atomes if a.get("auteur", "Sigmund Freud") == auteur]
+            atomes = [a for a in atomes if accueil.auteur_de(a) == auteur]
         if statut:
             atomes = [a for a in atomes if a["statut"] == statut]
         if fonction:

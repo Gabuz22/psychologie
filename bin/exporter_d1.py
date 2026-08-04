@@ -884,6 +884,9 @@ def construire(chemin_sqlite):
         "oeuvres": resume["oeuvres"], "atomes": resume["atomes"],
         "qualifies": resume["qualifies"], "signaux": resume["a_confirmer"],
         "modularite_grappes": r["modularite"],
+        "version_comparaison": comparaison.COMPARAISON_VERSION,
+        "version_carte": carte.CARTE_VERSION,
+        "version_socle_par_couple": socle_par_couple.SOCLE_PAR_COUPLE_VERSION,
         "licence": sources.LICENCE,
         "avertissement_datation": (
             "Un atome n'est jamais daté de l'année de l'œuvre : il porte une fenêtre "

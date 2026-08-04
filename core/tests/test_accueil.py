@@ -37,6 +37,29 @@ class TestAuteurDe(unittest.TestCase):
         self.assertEqual(accueil.auteur_de({"id": "x:a1", "auteur": "Otto Rank"}), "Otto Rank")
 
 
+class TestFrontiereDuCorpus(unittest.TestCase):
+    """Le garde-fou doit protéger le pipeline, pas seulement exister comme fonction isolée."""
+
+    def test_le_corpus_refuse_un_atome_sans_auteur_avant_indexation(self):
+        from core.corpus import Corpus
+        with self.assertRaisesRegex(ValueError, "SANS AUTEUR"):
+            Corpus._valider_atomes([{"id": "x:a1", "texte": "…"}])
+
+    def test_le_corpus_refuse_un_identifiant_duplique(self):
+        from core.corpus import Corpus
+        atomes = [
+            {"id": "x:a1", "auteur": "Otto Rank"},
+            {"id": "x:a1", "auteur": "Sigmund Freud"},
+        ]
+        with self.assertRaisesRegex(ValueError, "DUPLIQUÉ"):
+            Corpus._valider_atomes(atomes)
+
+    def test_le_corpus_refuse_un_identifiant_absent(self):
+        from core.corpus import Corpus
+        with self.assertRaisesRegex(ValueError, "SANS IDENTIFIANT"):
+            Corpus._valider_atomes([{"auteur": "Otto Rank"}])
+
+
 class TestContrat(unittest.TestCase):
 
     def _registres(self, **surcharges):
