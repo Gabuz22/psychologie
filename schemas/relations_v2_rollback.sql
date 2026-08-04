@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS v2_unconvertible;
+DROP TABLE IF EXISTS v2_legacy_metrics;
+DROP TABLE IF EXISTS v2_history;
+DROP TABLE IF EXISTS v2_annotations;
+DROP TABLE IF EXISTS v2_dimensions;
+DROP TABLE IF EXISTS v2_evidence;
+DROP INDEX IF EXISTS idx_v2_relation_pair;
+DROP TABLE IF EXISTS v2_relations;
+DROP TABLE IF EXISTS v2_runs;

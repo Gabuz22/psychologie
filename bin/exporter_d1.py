@@ -23,6 +23,7 @@ sans jamais dater un passage de l'année de l'œuvre quand il n'en a pas le droi
 Les fichiers produits vont dans derive/ : ce sont des SORTIES régénérables, jamais versionnées.
 """
 import datetime
+import json
 import os
 import sqlite3
 import sys
@@ -30,8 +31,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from core import (agents, carte, comparaison, lexique, lexiques, ocr, socle_par_couple,  # noqa: E402
-                  sources, traductions, verification)
+from core import (agents, atomisation, carte, collation, comparaison, lexique, lexiques,  # noqa: E402
+                  manifeste_corpus, ocr, socle_par_couple, sources, traductions, verification)
 from core.corpus import Corpus, fenetre_datation            # noqa: E402
 from core.segmentation import replier                       # noqa: E402
 
@@ -400,7 +401,10 @@ CREATE TABLE carte_actes (
   contenance_moyenne REAL NOT NULL,
   id_debut_a TEXT NOT NULL, id_fin_a TEXT NOT NULL,
   id_debut_b TEXT NOT NULL, id_fin_b TEXT NOT NULL,
-  force TEXT, sens TEXT, sens_lu TEXT, verdict TEXT, reclasse_vers TEXT,
+  force TEXT, sens TEXT, sens_lu TEXT, verdict TEXT,
+  etat_validation TEXT NOT NULL,
+  verdicts_elementaires TEXT NOT NULL,
+  reclasse_vers TEXT,
   source_tierce INTEGER NOT NULL DEFAULT 0,
   -- La preuve est portée DEUX FOIS. `partage_replie` est la forme normalisée sur laquelle la
   -- comparaison a travaillé (orthographe d'avant 1901 neutralisée, géminations instables de
@@ -723,14 +727,16 @@ def construire(chemin_sqlite):
         db.execute(
             "INSERT INTO carte_actes (auteur_a, auteur_b, oeuvre_a, oeuvre_b, poids,"
             " contenance_max, contenance_moyenne, id_debut_a, id_fin_a, id_debut_b, id_fin_b,"
-            " force, sens, sens_lu, verdict, reclasse_vers, source_tierce, partage_replie,"
+            " force, sens, sens_lu, verdict, etat_validation, verdicts_elementaires,"
+            " reclasse_vers, source_tierce, partage_replie,"
             " citation_a, citation_b, concepts_communs, concepts_a_seul, concepts_b_seul)"
-            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (ids_auteur[e["auteur_a"]], ids_auteur[e["auteur_b"]],
              ids_oeuvre[e["oeuvre_a"]], ids_oeuvre[e["oeuvre_b"]], e["poids"],
              e["contenance_max"], e["contenance_moyenne"],
              e["id_debut_a"], e["id_fin_a"], e["id_debut_b"], e["id_fin_b"],
-             e["force"], e["sens"], e["sens_lu"], e["verdict"], e["reclasse_vers"],
+             e["force"], e["sens"], e["sens_lu"], e["verdict"], e["etat_validation"],
+             json.dumps(e["verdicts_elementaires"], ensure_ascii=False), e["reclasse_vers"],
              int(e["source_tierce"]), " | ".join(e["partages"][:3]),
              e["citation_a"], e["citation_b"],
              ", ".join(e["concepts_communs"]), ", ".join(e["concepts_a_seul"]),
@@ -884,9 +890,14 @@ def construire(chemin_sqlite):
         "oeuvres": resume["oeuvres"], "atomes": resume["atomes"],
         "qualifies": resume["qualifies"], "signaux": resume["a_confirmer"],
         "modularite_grappes": r["modularite"],
+        "version_schema_export": manifeste_corpus.EXPORT_SCHEMA_VERSION,
+        "version_atomisation": atomisation.ATOMISATION_VERSION,
+        "version_lexique": lexique.LEXIQUE_VERSION,
+        "version_collation": collation.COLLATION_VERSION,
         "version_comparaison": comparaison.COMPARAISON_VERSION,
         "version_carte": carte.CARTE_VERSION,
         "version_socle_par_couple": socle_par_couple.SOCLE_PAR_COUPLE_VERSION,
+        "empreinte_sources": manifeste_corpus.empreinte_sources(),
         "licence": sources.LICENCE,
         "avertissement_datation": (
             "Un atome n'est jamais daté de l'année de l'œuvre : il porte une fenêtre "

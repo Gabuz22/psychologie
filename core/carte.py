@@ -29,6 +29,8 @@ son verdict de lecture et sa réserve.
 """
 import collections
 
+from . import relations_v2
+
 CARTE_VERSION = "1.0.0"
 
 
@@ -125,6 +127,7 @@ def evenements_de_carte(liens_par_couple, concepts_par_atome):
     for (auteur_a, auteur_b), liens in sorted(liens_par_couple.items()):
         for rang, evt in enumerate(comparaison.evenements(liens), 1):
             paires = evt["paires"]
+            verdicts_elementaires = [p.get("verdict") for p in paires]
             ca = set().union(*[concepts_par_atome.get(p["a"]["id"], set()) for p in paires]) \
                 if paires else set()
             cb = set().union(*[concepts_par_atome.get(p["b"]["id"], set()) for p in paires]) \
@@ -165,7 +168,9 @@ def evenements_de_carte(liens_par_couple, concepts_par_atome):
                 "force": _unanime(p["force"] for p in paires),
                 "sens": None if tierce else _unanime(p["sens"] for p in paires),
                 "sens_lu": None if tierce else _unanime(p.get("sens_lu") for p in paires),
-                "verdict": _unanime(p.get("verdict") for p in paires),
+                "verdict": _unanime(verdicts_elementaires),
+                "etat_validation": relations_v2.etat_validation_agrege(verdicts_elementaires),
+                "verdicts_elementaires": verdicts_elementaires,
                 "reclasse_vers": _unanime(p.get("reclasse_vers") for p in paires),
                 "source_tierce": tierce,
                 "concepts_communs": communs,
@@ -398,7 +403,11 @@ def couverture(evenements, atomes, oeuvres):
         "atomes_trop_courts": sum(courts.values()),
         "part_trop_courte": round(sum(courts.values()) / max(total, 1), 3),
         "mots_minimum": comparaison.MOTS_MINIMUM,
-        "actes_non_lus": sum(1 for e in evenements if not e["verdict"]),
+        "actes_non_lus": sum(1 for e in evenements
+                              if e.get("etat_validation", "non_lu" if not e["verdict"] else
+                                       "unanime") == "non_lu"),
+        "actes_discordants": sum(1 for e in evenements
+                                  if e.get("etat_validation") == "discordant"),
         "actes": len(evenements),
     }
 

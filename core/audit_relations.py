@@ -65,9 +65,26 @@ def auditer_connexion(db):
                 "candidats de reprise sans verdict de lecture")
 
     if "carte_actes" in tables:
-        n = _compter(db, "SELECT COUNT(*) FROM carte_actes WHERE verdict IS NULL")
-        ajouter("actes_non_lus", "alerte" if n else "ok", n,
-                "actes sans verdict de lecture")
+        colonnes = {r[1] for r in db.execute("PRAGMA table_info(carte_actes)")}
+        if "etat_validation" in colonnes:
+            non_lus = _compter(db, "SELECT COUNT(*) FROM carte_actes "
+                               "WHERE etat_validation='non_lu'")
+            discordants = _compter(db, "SELECT COUNT(*) FROM carte_actes "
+                                   "WHERE etat_validation='discordant'")
+        else:
+            # Compatibilité avec l'export du 2026-08-03 : l'acte 96 a un verdict NULL mais porte
+            # à la fois `sens_lu` et `reclasse_vers`, traces de deux verdicts élémentaires
+            # contradictoires. Ce n'est pas une absence de lecture.
+            if {"sens_lu", "reclasse_vers"} <= colonnes:
+                discordants = _compter(db, "SELECT COUNT(*) FROM carte_actes WHERE verdict IS NULL "
+                                       "AND sens_lu IS NOT NULL AND reclasse_vers IS NOT NULL")
+            else:
+                discordants = 0
+            non_lus = _compter(db, "SELECT COUNT(*) FROM carte_actes WHERE verdict IS NULL") - discordants
+        ajouter("actes_non_lus", "alerte" if non_lus else "ok", non_lus,
+                "actes réellement sans lecture élémentaire")
+        ajouter("actes_validation_discordante", "alerte" if discordants else "ok", discordants,
+                "actes agrégeant plusieurs verdicts élémentaires incompatibles")
 
     if "concepts" in tables:
         n = _compter(db, "SELECT COUNT(*) FROM (SELECT nom FROM concepts "

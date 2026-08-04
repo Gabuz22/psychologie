@@ -60,6 +60,16 @@ class TestAuditRelations(unittest.TestCase):
         self.assertEqual(codes["concepts_homonymes"]["nombre"], 1)
         self.assertEqual(codes["versions_regles"]["nombre"], 1)
 
+    def test_un_agregat_discordant_n_est_pas_un_acte_non_lu(self):
+        db = base_minimale()
+        db.execute("DROP TABLE carte_actes")
+        db.execute("CREATE TABLE carte_actes (verdict TEXT, sens_lu TEXT, reclasse_vers TEXT)")
+        db.execute("INSERT INTO carte_actes VALUES (NULL, 'b_vers_a', 'source commune')")
+        r = auditer_connexion(db)
+        codes = {c["code"]: c for c in r["constats"]}
+        self.assertEqual(codes["actes_non_lus"]["nombre"], 0)
+        self.assertEqual(codes["actes_validation_discordante"]["nombre"], 1)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

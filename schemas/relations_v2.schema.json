@@ -1,0 +1,301 @@
+{
+  "$defs": {
+    "annotation": {
+      "properties": {
+        "agent_id": {
+          "type": "string"
+        },
+        "agent_kind": {
+          "enum": [
+            "humain",
+            "automatique",
+            "legacy_inconnu"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "independent": {
+          "type": "boolean"
+        },
+        "proposition": {
+          "type": "string"
+        },
+        "validation_state": {
+          "enum": [
+            "candidate_automatique",
+            "contestee",
+            "indecidable",
+            "proposee",
+            "rejetee",
+            "validee_humainement"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "agent_kind",
+        "agent_id",
+        "independent",
+        "proposition",
+        "validation_state"
+      ],
+      "type": "object"
+    },
+    "dimension": {
+      "properties": {
+        "limitations": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rule": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rule_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "state": {
+          "enum": [
+            "annotee",
+            "calculee",
+            "contradictoire",
+            "inconnue",
+            "non_applicable",
+            "non_calculable",
+            "observee",
+            "reconstruite"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {}
+      },
+      "required": [
+        "state",
+        "value"
+      ],
+      "type": "object"
+    },
+    "evidence": {
+      "properties": {
+        "excerpt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "provenance": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/objectRef"
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "source",
+        "provenance"
+      ],
+      "type": "object"
+    },
+    "objectRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "type": "object"
+    },
+    "stateValue": {
+      "properties": {
+        "state": {
+          "enum": [
+            "annotee",
+            "calculee",
+            "contradictoire",
+            "inconnue",
+            "non_applicable",
+            "non_calculable",
+            "observee",
+            "reconstruite"
+          ]
+        },
+        "value": {}
+      },
+      "required": [
+        "state",
+        "value"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://gabuz22.github.io/psychologie/schemas/relations-v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "score"
+        ]
+      },
+      {
+        "required": [
+          "force_globale"
+        ]
+      },
+      {
+        "required": [
+          "influence_score"
+        ]
+      },
+      {
+        "required": [
+          "aggregate_score"
+        ]
+      }
+    ]
+  },
+  "properties": {
+    "annotations": {
+      "items": {
+        "$ref": "#/$defs/annotation"
+      },
+      "type": "array"
+    },
+    "corpus_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "counterevidence": {
+      "items": {
+        "$ref": "#/$defs/evidence"
+      },
+      "type": "array"
+    },
+    "dimensions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/dimension"
+      },
+      "propertyNames": {
+        "enum": [
+          "compatibilite_fonctionnelle",
+          "confiance_annotation",
+          "contenance_textuelle",
+          "contradiction",
+          "couverture_documentaire",
+          "dependance_traduction",
+          "dispersion_oeuvres",
+          "explicitation",
+          "localisation_temporelle",
+          "orientation",
+          "passages_independants",
+          "proximite_lexicale",
+          "qualite_ocr",
+          "qualite_provenance",
+          "recurrence"
+        ]
+      },
+      "type": "object"
+    },
+    "direction": {
+      "$ref": "#/$defs/stateValue"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/evidence"
+      },
+      "type": "array"
+    },
+    "history": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "rule_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/objectRef"
+    },
+    "target": {
+      "$ref": "#/$defs/objectRef"
+    },
+    "type": {
+      "enum": [
+        "analogie_fonctionnelle",
+        "convergence_propositionnelle",
+        "correspondance_exploratoire",
+        "filiation_historique_documentee",
+        "filiation_historique_plausible_non_etablie",
+        "opposition_doctrinale",
+        "proximite_terminologique",
+        "reprise_explicite",
+        "source_tierce_partagee",
+        "transformation_possible"
+      ]
+    },
+    "validation_state": {
+      "enum": [
+        "candidate_automatique",
+        "contestee",
+        "indecidable",
+        "proposee",
+        "rejetee",
+        "validee_humainement"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "source",
+    "target",
+    "direction",
+    "validation_state",
+    "evidence",
+    "counterevidence",
+    "dimensions",
+    "annotations",
+    "history",
+    "corpus_version",
+    "rule_version"
+  ],
+  "title": "Relation analytique multiple v2",
+  "type": "object"
+}

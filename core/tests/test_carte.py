@@ -61,6 +61,18 @@ class TestPoids(unittest.TestCase):
         self.assertEqual(e["concepts_a_seul"], ["traum"])
         self.assertEqual(e["concepts_b_seul"], ["angst"])
 
+    def test_verdicts_discordants_ne_deviennent_pas_un_acte_non_lu(self):
+        paires = [
+            _paire("x:a1", "y:b1", 1, 1, "Phrase partagée assez longue ici.",
+                   "Phrase partagée assez longue ici.", verdict="confirme"),
+            _paire("x:a2", "y:b2", 2, 2, "Deuxième phrase partagée assez longue.",
+                   "Deuxième phrase partagée assez longue.", verdict="reclasse"),
+        ]
+        e = carte.evenements_de_carte({("A", "B"): paires}, {})[0]
+        self.assertIsNone(e["verdict"])
+        self.assertEqual(e["etat_validation"], "discordant")
+        self.assertEqual(e["verdicts_elementaires"], ["confirme", "reclasse"])
+
 
 class TestPreuve(unittest.TestCase):
     """La preuve doit être VÉRIFIABLE DANS LE LIVRE. Deux défauts l'en empêchaient."""
@@ -157,6 +169,13 @@ class TestCouverture(unittest.TestCase):
         cov = carte.couverture(evts, [{"oeuvre": "x", "nb_mots": 40}], {})
         self.assertEqual(cov["actes_non_lus"], 1)
         self.assertEqual(cov["actes"], 2)
+
+    def test_un_acte_discordant_n_est_pas_compte_comme_non_lu(self):
+        evts = [{"oeuvre_a": "x", "oeuvre_b": "y", "poids": 2, "verdict": None,
+                 "etat_validation": "discordant"}]
+        cov = carte.couverture(evts, [{"oeuvre": "x", "nb_mots": 40}], {})
+        self.assertEqual(cov["actes_non_lus"], 0)
+        self.assertEqual(cov["actes_discordants"], 1)
 
     def test_un_atome_cite_deux_fois_ne_compte_qu_une_fois(self):
         """DÉFAUT MESURÉ SUR LA MESURE ELLE-MÊME, et sur le chiffre le plus en vue de la page.
