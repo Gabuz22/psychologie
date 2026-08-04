@@ -73,7 +73,8 @@ qui fait foi. Voir [`core/traductions.py`](core/traductions.py) pour le registre
 
 ## Corpus
 
-**Quarante œuvres, 1895-1939**, cinq auteurs traités pour eux-mêmes, deux langues. Une **★** signale une datation
+**Cinquante-sept volumes, 1895-1939**, six auteurs traités pour eux-mêmes, plus Josef Breuer comme
+coauteur distinct des *Studien*, dans deux langues. Une **★** signale une datation
 certaine : édition d'origine, ou réimpression déclarée inchangée.
 
 **Sigmund Freud** (texte allemand, `sources/freud/de/`) :
@@ -256,18 +257,23 @@ l'affirme), **concepts** (de quoi elle parle). Un atome peut relever de plusieur
 
 ## État actuel
 
-**54 626 atomes** sur quarante œuvres, cinq auteurs et deux langues, **82 % qualifiés**, **tous**
+**116 545 atomes** sur 57 volumes, sept auteurs et deux langues, **71,6 % qualifiés**, **tous**
 localisables dans la source, produits sans aucun modèle de langage : le pipeline est **entièrement
 déterministe** (même texte → mêmes atomes).
 
 | Auteur | Atomes | Qualifiés |
 |---|---|---|
-| Sigmund Freud | 20 617 | 78 % |
-| Otto Rank | 14 938 | 80 % |
-| Sándor Ferenczi | 9 158 | 78 % |
-| Karl Abraham | 7 543 | 82 % |
-| Gustave Le Bon | 1 485 | 81 % |
-| Josef Breuer (dans les *Studien*) | 885 | 80 % |
+| Sigmund Freud | 40 276 | 80,9 % |
+| Wilhelm Stekel | 42 260 | 53,8 % |
+| Otto Rank | 14 938 | 82,8 % |
+| Sándor Ferenczi | 9 158 | 81,3 % |
+| Karl Abraham | 7 543 | 84,3 % |
+| Gustave Le Bon | 1 485 | 83,8 % |
+| Josef Breuer (dans les *Studien*) | 885 | 81,0 % |
+
+Ces chiffres décrivent l'export D1 local généré le 3 août 2026. Les documents historiques qui
+annoncent 40 œuvres ou 54 626 atomes sont des photographies de campagnes antérieures, pas l'état
+du corpus courant.
 
 **Un défaut de tout le corpus, trouvé en intégrant Ferenczi et corrigé pour tout le monde.**
 L'imprimeur répète en haut de chaque page une **tête courante** — titre de l'ouvrage, du chapitre,

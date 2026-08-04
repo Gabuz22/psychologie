@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Atomes — la psychologie en données vérifiables</title>
   <meta name="description"
-        content="40 œuvres de Freud, Otto Rank, Karl Abraham, Sándor Ferenczi et Gustave Le Bon, chacune dans sa langue originale — 54 626 atomes cités, datés et catégorisés par un pipeline déterministe, sans modèle de langage. Chaque auteur a ses propres catégories.">
+        content="57 volumes de Freud, Stekel, Rank, Ferenczi, Abraham, Le Bon et Breuer, dans leur langue originale — 116 545 atomes cités, datés et catégorisés par un pipeline déterministe, sans modèle de langage.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -138,8 +138,8 @@
 
 <section id="buisson-concepts">
   <h2>Le buisson des concepts</h2>
-  <p class="note">Les concepts eux-mêmes en nœuds, reliés par une <strong>force graduée</strong> :
-    une cooccurrence textuelle <strong>mesurée</strong> — deux concepts reviennent souvent dans
+  <p class="note">Les concepts eux-mêmes en nœuds, reliés par un <strong>poids de cooccurrence
+    corrigé</strong> : deux concepts reviennent souvent dans
     les mêmes phrases — jamais une synonymie ni une proximité de sens. Chaque auteur porte
     <strong>son propre graphe</strong> : deux concepts de même nom chez deux auteurs différents
     ne sont jamais reliés entre eux. La couleur d'un nœud vient de sa catégorie du lexicographe
@@ -179,7 +179,7 @@
     <button type="button" id="bc-focus-effacer" class="secondaire" hidden>Focus : — ✕</button>
   </div>
   <svg id="bc-svg" viewBox="0 0 700 700" role="img"
-       aria-label="Graphe des concepts reliés par force graduée"></svg>
+       aria-label="Graphe des concepts reliés par poids de cooccurrence corrigé"></svg>
   <div id="bc-citations"></div>
   <p id="bc-reserve" class="reserve"></p>
 </section>
@@ -291,7 +291,7 @@
     </figure>
   </div>
   <p class="reserve">Un graphe dense ne prouve ni noyau ni doctrine partagée : le corpus mesuré est
-    une <strong>étoile</strong> centrée sur Freud — 91,5&nbsp;% des actes de citation confirmés le
+    une <strong>étoile</strong> centrée sur Freud — 91,4&nbsp;% des actes de citation confirmés le
     touchent, et aucun passage n'est partagé par trois auteurs à la fois (voir « Méthode »).
     Beaucoup d'arêtes ne veut donc pas dire beaucoup de dialogue entre disciples.</p>
 
@@ -311,7 +311,7 @@
   <h3>Qui écrit quel mot</h3>
   <p class="note">Le même motif — la même suite de lettres à chercher — est appliqué à
     <strong>tous</strong> les corpus de sa langue, et on compte les phrases qui le portent. Cette
-    mesure ne dépend d'aucun lexique : seulement du texte. C'est la seule comparaison de
+    mesure compte seulement le texte, mais le motif recherché vient d'un lexique déclaré. C'est la seule comparaison de
     vocabulaire que le corpus autorise, parce qu'elle ne suppose à aucun moment que deux auteurs
     veulent dire la même chose quand ils écrivent le même mot.</p>
   <p class="note">La colonne <em>lexique</em> dit <strong>qui a défini le motif</strong>. La ligne
@@ -335,9 +335,10 @@
   <p id="comp-reserve" class="reserve"></p>
 
   <h3>Seuils du socle commun</h3>
-  <p class="note">Pour la paire choisie ci-dessus (cliquez une carte de couple), les concepts que
-    <strong>deux mesures indépendantes</strong> jugent suffisamment solides — réglez chaque seuil
-    séparément. Les deux chiffres ne sont <strong>jamais combinés</strong> : baisser un seuil
+  <p class="note">Pour la paire choisie ci-dessus (cliquez une carte de couple), les libellés qui
+    passent <strong>deux filtres distincts</strong> — réglez chaque seuil séparément. Une identité de
+    libellé entre deux lexiques ne démontre pas une équivalence conceptuelle. Les deux chiffres ne
+    sont <strong>jamais combinés</strong> : baisser un seuil
     élargit la liste, il ne change aucun chiffre déjà affiché.</p>
   <div class="socle-seuils">
     <label for="socle-seuil-actes">Liens vérifiés (actes confirmés) — au moins

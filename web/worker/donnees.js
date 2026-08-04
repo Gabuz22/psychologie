@@ -1014,12 +1014,12 @@ const RESERVE_SOCLE =
   + "un pour-mille d'usage et un compte de liens vérifiés n'ont pas la même unité, et les combiner "
   + "inventerait une mesure que le corpus ne fournit pas. Aucun champ ici ne nomme la NATURE du "
   + "rapport entre deux auteurs : un concept qui passe les deux seuils n'est ni un accord ni une "
-  + "dette, seulement un endroit où deux mesures indépendantes sont assez hautes pour être "
-  + "montrées. Baisser un seuil n'affecte QUE la liste renvoyée, jamais les chiffres affichés "
+  + "dette ni équivalence conceptuelle, seulement un libellé candidat que deux filtres distincts "
+  + "font apparaître. Baisser un seuil n'affecte QUE la liste renvoyée, jamais les chiffres affichés "
   + "pour un concept déjà visible.";
 
 
-/** BUISSON DES CONCEPTS — force graduée entre deux concepts d'UN SEUL auteur (voir
+/** BUISSON DES CONCEPTS — poids de cooccurrence corrigé entre deux concepts d'UN SEUL auteur (voir
  *  core/agents.py:AgentBuissonConcepts pour le calcul, core/agents.py:_paires_ponderees pour la
  *  correction du biais des atomes denses). `auteur` est REQUIS : deux lexiques ne se mélangent
  *  jamais, même quand deux concepts portent le même nom chez deux auteurs différents.
