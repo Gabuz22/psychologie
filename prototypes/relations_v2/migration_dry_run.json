@@ -1,0 +1,38 @@
+{
+  "idempotence": "refus si la cible existe déjà",
+  "mode": "dry_run",
+  "rollback": "DROP uniquement des tables v2 ; aucune table historique n'est touchée",
+  "schema_version": "0.1.0-prototype",
+  "source": {
+    "actes_retrouves": 20,
+    "actes_selectionnes": 20,
+    "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+    "export": "derive/d1/corpus.sqlite",
+    "export_sha256": "52f0d2372bf2858169fdec56733520be1d906c1384f6a1fa3924ca2ea4a9045d"
+  },
+  "unconvertible": [
+    {
+      "payload": {
+        "citation_a": "erhält, die Heimat zu meiden, weil er der Mörder seines Vaters und der Ehegemahl seiner Mutter werden müßte.",
+        "citation_b": "erhält, die Heimat zu meiden, weil er der Mörder seines Vaters und der Ehegemahl seiner Mutter werden müßte.",
+        "id": 96,
+        "reclasse_vers": "Sigmund Freud, Die Traumdeutung (1900) — traumdeutung:a2470",
+        "sens_lu": "b_vers_a",
+        "verdict": null
+      },
+      "reason": "discordant_agrege : ne pas fabriquer un verdict canonique",
+      "source_id": "96",
+      "source_table": "carte_actes"
+    }
+  ],
+  "would_create": {
+    "annotations": 29,
+    "dimensions": 203,
+    "evidence": 58,
+    "legacy_metrics": 24,
+    "relations": 29,
+    "unconvertible": 1
+  },
+  "would_delete_historical_rows": 0,
+  "would_modify_historical_rows": 0
+}

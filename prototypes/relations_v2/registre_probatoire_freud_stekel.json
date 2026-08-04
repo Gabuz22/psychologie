@@ -1,0 +1,4155 @@
+{
+  "human_annotations": [],
+  "pair": [
+    "Sigmund Freud",
+    "Wilhelm Stekel"
+  ],
+  "relations": [
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:24",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.7778
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 3
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "handelt, liegt das Dichterwort nahe: »Wer ein holdes Weib errungen« -- Aber das Erringen auch des holdesten Weibes gehört nicht zu den Wünschen des Träumers.",
+          "id": "preuve:acte:24:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a3478..traumdeutung:a3480",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "handelt, liegt das Dichterwort nahe: „Wer ein holdes Weib errungen,\" „Aber das Erringen auch des holdesten Weibes gehört nicht zu den Wünschen des Träumers.",
+          "id": "preuve:acte:24:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a6216..sprache_des_traumes:a6218",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:24",
+      "interpretation": null,
+      "legacy": {
+        "force": null,
+        "force_canonical": false,
+        "id": 24,
+        "strate": "confirme:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a3478..traumdeutung:a3480",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a6216..sprache_des_traumes:a6218",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:50",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 1.0
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Nicht nur, daß ein guter Teil der hysterischen Symptomatologie direkt aus den Äußerungen der sexuellen Erregtheit herstammt, nicht nur, daß eine Reihe von erogenen Zonen in der Neurose in Verstärkung infantiler Eigenschaften sich zur Bedeutung von Genitalien erhebt; die kompliziertesten Symptome selbst enthüllen sich als die konvertierten Darstellungen von Phantasien, welche eine sexuelle Situation zum Inhalte haben.",
+          "id": "preuve:acte:50:a",
+          "provenance": "ocr",
+          "source": "sammlung_1",
+          "target": {
+            "id": "sammlung_1:a1721..sammlung_1:a1722",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "„Nicht nur, daß ein guter Teil der hysterischen Symptomatologie direkt aus den Äußerungen der sexuellen Erregtheit herstammt, nicht nur, daß eine Reihe von erogenen Zonen in der Neurose in Verstärkung infantiler Eigenschaften sich zur Bedeutung von Genitalien erhebt; die kompliziertesten Symptome selbst enthüllen sich als die konvertierten Darstellungen von Phantasien, welche eine sexuelle Situation zum Inhalte haben.",
+          "id": "preuve:acte:50:b",
+          "provenance": "ocr",
+          "source": "nervoese_angstzustaende",
+          "target": {
+            "id": "nervoese_angstzustaende:a4600..nervoese_angstzustaende:a4601",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:50",
+      "interpretation": null,
+      "legacy": {
+        "force": "manifeste",
+        "force_canonical": false,
+        "id": 50,
+        "strate": "confirme:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1893,
+          1908
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_1:a1721..sammlung_1:a1722",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "nervoese_angstzustaende:a4600..nervoese_angstzustaende:a4601",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:55",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)",
+          "id": "contrepreuve:acte:55",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "55",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.9375
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Und doch wurmte es mich, daß ich mit der Kündigung meinem Meister nicht zuvorgekommen, sondern von ihm abgedankt worden war.«",
+          "id": "preuve:acte:55:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a4349..traumdeutung:a4350",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Und doch wurmte es mich, dass ich mit der Kündigung meinem Meister nicht zuvorgekommen, sondern von ihm abgedankt worden war.",
+          "id": "preuve:acte:55:b",
+          "provenance": "ocr",
+          "source": "traeume_der_dichter",
+          "target": {
+            "id": "traeume_der_dichter:a2410..traeume_der_dichter:a2411",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:55",
+      "interpretation": null,
+      "legacy": {
+        "force": null,
+        "force_canonical": false,
+        "id": 55,
+        "strate": "reclasse:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4349..traumdeutung:a4350",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2410..traeume_der_dichter:a2411",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:55",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.9375
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)",
+          "id": "contrepreuve:acte:55",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "55",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:55:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": null,
+        "force_canonical": false,
+        "id": 55,
+        "strate": "reclasse:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4349..traumdeutung:a4350",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2410..traeume_der_dichter:a2411",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:65",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Josef Popper-Lynkeus (« Phantasien eines Realisten »)",
+          "id": "contrepreuve:acte:65",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "65",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.8056
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Art, eine gewisse Heimlichkeit in Eurem Wesen, die schwer auszudenken ist; und darum scheint Euer Träumen so oft ohne Sinn, sogar ein Widersinn zu sein.",
+          "id": "preuve:acte:65:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a2873..traumdeutung:a2874",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Art, eine gewisse Heimlichkeit in eurem Wesen, die schwer auszudenken ist; und darum scheint euer Träumen so oft ohne Sinn, sogar ein Widersinn zu sein.",
+          "id": "preuve:acte:65:b",
+          "provenance": "ocr",
+          "source": "traeume_der_dichter",
+          "target": {
+            "id": "traeume_der_dichter:a1800..traeume_der_dichter:a1801",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:65",
+      "interpretation": null,
+      "legacy": {
+        "force": null,
+        "force_canonical": false,
+        "id": 65,
+        "strate": "reclasse:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a2873..traumdeutung:a2874",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a1800..traeume_der_dichter:a1801",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:65",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.8056
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Josef Popper-Lynkeus (« Phantasien eines Realisten »)",
+          "id": "contrepreuve:acte:65",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "65",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:65:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": null,
+        "force_canonical": false,
+        "id": 65,
+        "strate": "reclasse:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a2873..traumdeutung:a2874",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a1800..traeume_der_dichter:a1801",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:83",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Herbert Silberer",
+          "id": "contrepreuve:acte:83",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "83",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6667
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "behutsam _unter_ die betreffenden Stücke _geschoben_ werden (das langsame ›Durcharbeiten‹, um zu den Gründen zu gelangen).",
+          "id": "preuve:acte:83:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a3205..traumdeutung:a3206",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "behutsam unter die betreffenden Stücke geschoben werden (das langsame ;, Durcharbeiten\", um zu den „Gründen\" zu gelangen).",
+          "id": "preuve:acte:83:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a13779..sprache_des_traumes:a13780",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:83",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 83,
+        "strate": "reclasse:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a3205..traumdeutung:a3206",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a13779..sprache_des_traumes:a13780",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:83",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6667
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 2
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Herbert Silberer",
+          "id": "contrepreuve:acte:83",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "83",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:83:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 83,
+        "strate": "reclasse:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a3205..traumdeutung:a3206",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a13779..sprache_des_traumes:a13780",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:135",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)",
+          "id": "contrepreuve:acte:135",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "135",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.95
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Ich dachte, das Vernünftigste wäre, wenn ich jetzt aufstünde, dem Meister bedeutete, daß ich nur aus Gefälligkeit bei ihm sei, und wenn ich dann",
+          "id": "preuve:acte:135:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a4340..traumdeutung:a4340",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Ich dachte, das Vernünftigste wäre, wenn ich jetzt aufstünde, dem Meister bedeutete, dass ich nur aus Gefälligkeit bei ihm sei und wenn ich dann",
+          "id": "preuve:acte:135:b",
+          "provenance": "ocr",
+          "source": "traeume_der_dichter",
+          "target": {
+            "id": "traeume_der_dichter:a2401..traeume_der_dichter:a2401",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:135",
+      "interpretation": null,
+      "legacy": {
+        "force": "manifeste",
+        "force_canonical": false,
+        "id": 135,
+        "strate": "reclasse:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4340..traumdeutung:a4340",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2401..traeume_der_dichter:a2401",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:135",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.95
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Peter Rosegger (Waldheimat, Bd. II, « Fremd gemacht »)",
+          "id": "contrepreuve:acte:135",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "135",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:135:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "manifeste",
+        "force_canonical": false,
+        "id": 135,
+        "strate": "reclasse:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4340..traumdeutung:a4340",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2401..traeume_der_dichter:a2401",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:151",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.8431
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "der Ausdruck dafür, daß sie die geliebte Person vermissen; sie kommen darum jedem Fremden mit Angst entgegen; sie fürchten sich in der Dunkelheit, weil man in dieser die geliebte Person nicht sieht, und lassen sich beruhigen, wenn sie dieselbe in der Dunkelheit bei der Hand fassen können.",
+          "id": "preuve:acte:151:a",
+          "provenance": "relu",
+          "source": "drei_abhandlungen",
+          "target": {
+            "id": "drei_abhandlungen:a696..drei_abhandlungen:a696",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "der Ausdruck dafür, daß sie die geliebte Person vermissen; sie kommen darum jedem Fremden mit Angst entgegen; sie fürchten sich in der Dunkelheit, weil man in dieser die geliebte Person nicht sieht, und lassen sich beruhigen, wenn sie dieselbe in der Dunkelheit bei der Hand fassen können.\"",
+          "id": "preuve:acte:151:b",
+          "provenance": "ocr",
+          "source": "nervoese_angstzustaende",
+          "target": {
+            "id": "nervoese_angstzustaende:a2766..nervoese_angstzustaende:a2766",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:151",
+      "interpretation": null,
+      "legacy": {
+        "force": "manifeste",
+        "force_canonical": false,
+        "id": 151,
+        "strate": "confirme:0.70-1.00",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1905,
+          1908
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "drei_abhandlungen:a696..drei_abhandlungen:a696",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "nervoese_angstzustaende:a2766..nervoese_angstzustaende:a2766",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:191",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Karl Abel",
+          "id": "contrepreuve:acte:191",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "191",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6875
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "kann es keinem Zweifel unterliegen, daß es in einer Sprache wenigstens eine Fülle von Worten gegeben hat, welche ein Ding und das Gegenteil dieses Dinges gleichzeitig bezeichneten.",
+          "id": "preuve:acte:191:a",
+          "provenance": "ocr",
+          "source": "sammlung_3",
+          "target": {
+            "id": "sammlung_3:a2582..sammlung_3:a2582",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "kann es keinem Zweifel unterliegen, dass es in einer Sprache wenigstens eine Fülle von Worten gegeben hat, welche ein Ding und das Gegenteil dieses Dinges gleichzeitig bezeichneten.",
+          "id": "preuve:acte:191:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a861..sprache_des_traumes:a861",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:191",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 191,
+        "strate": "reclasse:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1909,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_3:a2582..sammlung_3:a2582",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a861..sprache_des_traumes:a861",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:191",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6875
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Karl Abel",
+          "id": "contrepreuve:acte:191",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "191",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:191:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 191,
+        "strate": "reclasse:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1909,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_3:a2582..sammlung_3:a2582",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a861..sprache_des_traumes:a861",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:194",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6842
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "er wird aber zur Schädlichkeit für den Mann, wenn dieser, um die Befriedigung der Frau zu erzielen, den",
+          "id": "preuve:acte:194:a",
+          "provenance": "ocr",
+          "source": "sammlung_1",
+          "target": {
+            "id": "sammlung_1:a500..sammlung_1:a500",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Er wird aber zur Schädlichkeit für den Mann, wenn dieser, um die Befriedigung der Frau zu erzielen, den",
+          "id": "preuve:acte:194:b",
+          "provenance": "ocr",
+          "source": "nervoese_angstzustaende",
+          "target": {
+            "id": "nervoese_angstzustaende:a384..nervoese_angstzustaende:a384",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:194",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 194,
+        "strate": "confirme:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1893,
+          1908
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_1:a500..sammlung_1:a500",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "nervoese_angstzustaende:a384..nervoese_angstzustaende:a384",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:211",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Peter Rosegger",
+          "id": "contrepreuve:acte:211",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "211",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6207
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Jahren bei uns gearbeitet hatte und damals auf dem Wege vom Wirtshause in den Bach gefallen war.",
+          "id": "preuve:acte:211:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a4344..traumdeutung:a4344",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Jahren bei uns gearbeitet hatte und damals auf dem Wege vom Wirtshause in den Bach gefallen war.",
+          "id": "preuve:acte:211:b",
+          "provenance": "ocr",
+          "source": "traeume_der_dichter",
+          "target": {
+            "id": "traeume_der_dichter:a2405..traeume_der_dichter:a2405",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:211",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 211,
+        "strate": "reclasse:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4344..traumdeutung:a4344",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2405..traeume_der_dichter:a2405",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:211",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.6207
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Peter Rosegger",
+          "id": "contrepreuve:acte:211",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "211",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:211:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 211,
+        "strate": "reclasse:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4344..traumdeutung:a4344",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2405..traeume_der_dichter:a2405",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:212",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.619
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Am nächsten Morgen kam er aber ganz selig auf mich zu und erzählte: Heute nacht habe ich geträumt,",
+          "id": "preuve:acte:212:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a1176..traumdeutung:a1176",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Am nächsten Morgen kam er aber ganz selig auf mich zu und erzählte: (340.) „Heute Nacht habe ich geträumt,",
+          "id": "preuve:acte:212:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a8678..sprache_des_traumes:a8678",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:212",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 212,
+        "strate": "confirme:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a1176..traumdeutung:a1176",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a8678..sprache_des_traumes:a8678",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:236",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.5455
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Gleich darauf steigt aber die Erinnerung an einen anderen unkenntlichen und indifferenten Traum auf, der",
+          "id": "preuve:acte:236:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a3577..traumdeutung:a3577",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Gleich darauf steigt aber die Erinnerung an einen anderen unkenntlichen und indifferenten Traum auf, der",
+          "id": "preuve:acte:236:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a8281..sprache_des_traumes:a8281",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:236",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 236,
+        "strate": "confirme:0.50-0.69",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a3577..traumdeutung:a3577",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a8281..sprache_des_traumes:a8281",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:272",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Peter Rosegger, Waldheimat (« Fremd gemacht »)",
+          "id": "contrepreuve:acte:272",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "272",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4789
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "los werden zu können.« »Es ist nicht wahr, daß ich mich tagsüber in Gedanken so häufig und lebhaft mit meiner Vergangenheit beschäftigt hätte.",
+          "id": "preuve:acte:272:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a4328..traumdeutung:a4328",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "los werden zu können. Es ist nicht wahr, dass ich mich tagsüber in Gedanken so häufig und lebhaft mit meiner Vergangenheit beschäftigt hätte",
+          "id": "preuve:acte:272:b",
+          "provenance": "ocr",
+          "source": "traeume_der_dichter",
+          "target": {
+            "id": "traeume_der_dichter:a2393..traeume_der_dichter:a2393",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:272",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 272,
+        "strate": "reclasse:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4328..traumdeutung:a4328",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2393..traeume_der_dichter:a2393",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:272",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4789
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Peter Rosegger, Waldheimat (« Fremd gemacht »)",
+          "id": "contrepreuve:acte:272",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "272",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:272:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 272,
+        "strate": "reclasse:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1912
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a4328..traumdeutung:a4328",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "traeume_der_dichter:a2393..traeume_der_dichter:a2393",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:281",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Herbert Silberer (phénomènes autosymboliques, Jahrbuch I, 1909)",
+          "id": "contrepreuve:acte:281",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "281",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4545
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "eine Dobos-Torte, also eine Torte, bei welcher das schneidende Messer durch verschiedene _Schichten_ zu dringen hat (die Schichten des",
+          "id": "preuve:acte:281:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a3208..traumdeutung:a3208",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "eine Dobos-Torte, also eine Torte, bei welcher das schneidende Messer durch verschiedene Schichten zu dringen hat (die Schichten des",
+          "id": "preuve:acte:281:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a13782..sprache_des_traumes:a13782",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:281",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 281,
+        "strate": "reclasse:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a3208..traumdeutung:a3208",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a13782..sprache_des_traumes:a13782",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:281",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4545
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Herbert Silberer (phénomènes autosymboliques, Jahrbuch I, 1909)",
+          "id": "contrepreuve:acte:281",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "281",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:281:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 281,
+        "strate": "reclasse:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a3208..traumdeutung:a3208",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a13782..sprache_des_traumes:a13782",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:285",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4419
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Wenn man mir zugibt, daß das Sprechen aus dem Schlafe der Kinder gleichfalls dem Kreise des",
+          "id": "preuve:acte:285:a",
+          "provenance": "relu",
+          "source": "traumdeutung",
+          "target": {
+            "id": "traumdeutung:a1208..traumdeutung:a1208",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "„Wenn man mir zugibt, dass das Sprechen aus dem Schlafe der Kinder gleichfalls dem Kreise des",
+          "id": "preuve:acte:285:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a8664..sprache_des_traumes:a8664",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:285",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 285,
+        "strate": "confirme:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1900,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "traumdeutung:a1208..traumdeutung:a1208",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a8664..sprache_des_traumes:a8664",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:290",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [
+        {
+          "excerpt": "Karl Abel",
+          "id": "contrepreuve:acte:290",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "290",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4286
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "inconnue",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Bürger das Bier ‚Bier‘ nännte, während ein anderer dasselbe Wort anwendete, wenn er vom Wasser spräche, und man hat die erstaunliche Praxis, welcher sich die alten Ägypter in ihrer Sprache",
+          "id": "preuve:acte:290:a",
+          "provenance": "ocr",
+          "source": "sammlung_3",
+          "target": {
+            "id": "sammlung_3:a2578..sammlung_3:a2578",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Bürger das Bier „Bier\" nannte, während ein anderer dasselbe Wort anwendete, wenn er vom Wasser spräche, und man hat die erstaunliche Praxis, welcher sich die alten Ägypter in ihrer Sprache",
+          "id": "preuve:acte:290:b",
+          "provenance": "ocr",
+          "source": "sprache_des_traumes",
+          "target": {
+            "id": "sprache_des_traumes:a860..sprache_des_traumes:a860",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:290",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 290,
+        "strate": "reclasse:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1909,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_3:a2578..sammlung_3:a2578",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a860..sprache_des_traumes:a860",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:290",
+          "independent": false,
+          "proposition": "reclasse",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4286
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "non_applicable",
+        "value": null
+      },
+      "evidence": [
+        {
+          "excerpt": "Karl Abel",
+          "id": "contrepreuve:acte:290",
+          "provenance": "legacy_inconnu",
+          "source": "verification/reprises_lues.json",
+          "target": {
+            "id": "290",
+            "type": "acte_v1"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:290:source_tierce",
+      "interpretation": "cible du reclassement legacy, provenance d'annotateur inconnue",
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 290,
+        "strate": "reclasse:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1909,
+          1911
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_3:a2578..sammlung_3:a2578",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "sprache_des_traumes:a860..sprache_des_traumes:a860",
+        "type": "plage_atomes"
+      },
+      "type": "source_tierce_partagee",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:293",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.4167
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "relu",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Zonen und der anderen bei Entleerung der Sexualstoffe durch eine Namengebung zu fixieren.",
+          "id": "preuve:acte:293:a",
+          "provenance": "relu",
+          "source": "drei_abhandlungen",
+          "target": {
+            "id": "drei_abhandlungen:a597..drei_abhandlungen:a597",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "Zonen und der anderen bei Entleerung der Sexualstoffe durch eine Namengebung zu fixieren.",
+          "id": "preuve:acte:293:b",
+          "provenance": "ocr",
+          "source": "onanie_homosexualitaet",
+          "target": {
+            "id": "onanie_homosexualitaet:a168..onanie_homosexualitaet:a168",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:293",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 293,
+        "strate": "confirme:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1905,
+          1917
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "drei_abhandlungen:a597..drei_abhandlungen:a597",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "onanie_homosexualitaet:a168..onanie_homosexualitaet:a168",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:322",
+          "independent": false,
+          "proposition": "confirme",
+          "validation_state": "proposee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.3611
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Die Neurasthenie läßt sich jedesmal auf einen Zustand des Nervensystems zurückführen, wie er durch exzessive Masturbation erworben wird",
+          "id": "preuve:acte:322:a",
+          "provenance": "ocr",
+          "source": "sammlung_1",
+          "target": {
+            "id": "sammlung_1:a1337..sammlung_1:a1337",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "„Die Neurasthenie läßt sich jedesmal auf einen Zustand des Nervensystems zurückführen, wie er durch exzessive Masturbation erworben wird.“",
+          "id": "preuve:acte:322:b",
+          "provenance": "ocr",
+          "source": "onanie_homosexualitaet",
+          "target": {
+            "id": "onanie_homosexualitaet:a976..onanie_homosexualitaet:a976",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:322",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 322,
+        "strate": "confirme:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1893,
+          1917
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_1:a1337..sammlung_1:a1337",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "onanie_homosexualitaet:a976..onanie_homosexualitaet:a976",
+        "type": "plage_atomes"
+      },
+      "type": "reprise_explicite",
+      "validation_state": "proposee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:337",
+          "independent": false,
+          "proposition": "rejete",
+          "validation_state": "rejetee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.3333
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Über die Berechtigung, von der Neurasthenie einen bestimmten Symptomenkomplex als „Angstneurose“ abzutrennen.",
+          "id": "preuve:acte:337:a",
+          "provenance": "ocr",
+          "source": "sammlung_1",
+          "target": {
+            "id": "sammlung_1:a1678..sammlung_1:a1678",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "„Über die Berechtigung, von der Neurasthenie einen bestimmten Symptomenkomplex als Angstneurose abzutrennen\"",
+          "id": "preuve:acte:337:b",
+          "provenance": "ocr",
+          "source": "nervoese_angstzustaende",
+          "target": {
+            "id": "nervoese_angstzustaende:a319..nervoese_angstzustaende:a319",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:337",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 337,
+        "strate": "rejete:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1893,
+          1908
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_1:a1678..sammlung_1:a1678",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "nervoese_angstzustaende:a319..nervoese_angstzustaende:a319",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "rejetee"
+    },
+    {
+      "annotations": [
+        {
+          "agent_id": "unknown",
+          "agent_kind": "legacy_inconnu",
+          "confidence_state": "inconnue",
+          "confidence_value": null,
+          "guide_version": null,
+          "id": "annotation:legacy:acte:350",
+          "independent": false,
+          "proposition": "rejete",
+          "validation_state": "rejetee"
+        }
+      ],
+      "corpus_version": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "counterevidence": [],
+      "coverage_limit": "détecteur de reprises sur textes de même langue, seuil 20 mots",
+      "dimensions": {
+        "confiance_annotation": {
+          "limitations": "annotateur et méthode legacy non documentés",
+          "rule": null,
+          "rule_version": null,
+          "state": "inconnue",
+          "unit": null,
+          "value": null
+        },
+        "contenance_textuelle": {
+          "limitations": "maximum de l'acte, pas probabilité",
+          "rule": "intersection n-grammes / côté court",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "proportion",
+          "value": 0.3043
+        },
+        "dependance_traduction": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "booleen",
+          "value": false
+        },
+        "passages_independants": {
+          "limitations": "contiguïté et dépendance non annotées",
+          "rule": null,
+          "rule_version": null,
+          "state": "non_calculable",
+          "unit": null,
+          "value": null
+        },
+        "qualite_ocr": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "qualite_provenance": {
+          "limitations": null,
+          "rule": null,
+          "rule_version": null,
+          "state": "observee",
+          "unit": "classe_source",
+          "value": [
+            "ocr",
+            "ocr"
+          ]
+        },
+        "recurrence": {
+          "limitations": "ne démontre pas des passages indépendants",
+          "rule": "agrégation contiguë carte",
+          "rule_version": "comparaison:1.0.0|carte:1.0.0",
+          "state": "calculee",
+          "unit": "paires_de_phrases",
+          "value": 1
+        }
+      },
+      "direction": {
+        "state": "reconstruite",
+        "value": "a_vers_b"
+      },
+      "evidence": [
+        {
+          "excerpt": "Über die Berechtigung, von der Neurasthenie einen bestimmten Symptomenkomplex als „Angstneurose“ abzutrennen,",
+          "id": "preuve:acte:350:a",
+          "provenance": "ocr",
+          "source": "sammlung_1",
+          "target": {
+            "id": "sammlung_1:a681..sammlung_1:a681",
+            "type": "plage_atomes"
+          }
+        },
+        {
+          "excerpt": "„Über die Berechtigung, von der Neurasthenie einen bestimmten Symptomenkomplex als Angstneurose abzutrennen\"",
+          "id": "preuve:acte:350:b",
+          "provenance": "ocr",
+          "source": "nervoese_angstzustaende",
+          "target": {
+            "id": "nervoese_angstzustaende:a319..nervoese_angstzustaende:a319",
+            "type": "plage_atomes"
+          }
+        }
+      ],
+      "history": [
+        {
+          "action": "importe_prototype",
+          "actor": "bin/generer_registres_v2.py",
+          "ordinal": 1
+        }
+      ],
+      "id": "prototype:acte:350",
+      "interpretation": null,
+      "legacy": {
+        "force": "partielle",
+        "force_canonical": false,
+        "id": 350,
+        "strate": "rejete:0.30-0.49",
+        "table": "carte_actes"
+      },
+      "period": {
+        "state": "reconstruite",
+        "value": [
+          1893,
+          1908
+        ]
+      },
+      "rule_version": "comparaison:1.0.0|carte:1.0.0",
+      "source": {
+        "id": "sammlung_1:a681..sammlung_1:a681",
+        "type": "plage_atomes"
+      },
+      "target": {
+        "id": "nervoese_angstzustaende:a319..nervoese_angstzustaende:a319",
+        "type": "plage_atomes"
+      },
+      "type": "correspondance_exploratoire",
+      "validation_state": "rejetee"
+    }
+  ],
+  "schema_version": "0.1.0-prototype",
+  "status": "prototype_automatique_non_valide_humainement",
+  "tirage": {
+    "graine": "freud-stekel-v1:2026-08-04",
+    "methode": "stratification verdict × bande de contenance ; tri SHA-256 ; n par strate",
+    "par_strate": 3,
+    "population": 135,
+    "selection": 20,
+    "strates_population": {
+      "confirme:0.30-0.49": 29,
+      "confirme:0.50-0.69": 35,
+      "confirme:0.70-1.00": 51,
+      "reclasse:0.30-0.49": 4,
+      "reclasse:0.50-0.69": 6,
+      "reclasse:0.70-1.00": 8,
+      "rejete:0.30-0.49": 2
+    }
+  },
+  "warning": "aucune proposition ou annotation legacy n'est présentée comme validation humaine"
+}
