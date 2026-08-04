@@ -1,5 +1,9 @@
 # Ce que le corpus dit de Freud
 
+> **État documentaire : photographie historique.** Cette synthèse porte sur le sous-corpus Freud
+> disponible lors de sa rédaction. Elle ne déclare ni le total multi-auteur actuel ni une
+> validation humaine des grappes ; consulter la référence canonique pour l'état courant.
+
 > **Ce document n'est pas une interprétation.** Tout ce qui suit est produit par des agents
 > déterministes — aucun modèle de langage n'intervient dans les mesures. On peut refaire chaque
 > calcul (`python bin/analyser.py`) et remonter de n'importe quel chiffre jusqu'à la phrase

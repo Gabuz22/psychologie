@@ -1,0 +1,38 @@
+{
+  "api": {
+    "atomes": 116545,
+    "auteurs": 7,
+    "carte_actes": 354,
+    "carte_atomes_touches": 938,
+    "carte_oeuvres_muettes": 25,
+    "carte_part_touchee": 0.00805,
+    "chat": false,
+    "genere_le": "2026-08-02",
+    "grappes": 8,
+    "oeuvres": 57,
+    "qualifies": 83431,
+    "signaux_juges": 607,
+    "texte_fr_observe_sur_traumdeutung_a0": false,
+    "version_corpus_observee": "comptes-116545-57-7-export-2026-08-02"
+  },
+  "deploiement": {
+    "commit_git": "inconnu",
+    "url": "https://psychologie.guzan99.workers.dev/"
+  },
+  "methode": [
+    "lecture du DOM rendu dans le navigateur",
+    "GET /api/sante",
+    "GET /api/referentiel",
+    "GET /api/carte?limite=1",
+    "GET /api/atome?id=traumdeutung:a0"
+  ],
+  "schema_observation": "1.0.0",
+  "verifie_le": "2026-08-04",
+  "visible_obsolete": [
+    "191 confirmés",
+    "107 actes réels",
+    "quarante œuvres",
+    "Aucune traduction",
+    "moins d'un demi pour cent du corpus"
+  ]
+}

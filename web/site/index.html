@@ -12,9 +12,9 @@
 
 <header>
   <h1>Atomes</h1>
-  <p class="sous-titre">La psychologie en données vérifiables — Freud, Otto Rank, Karl Abraham,
-    Sándor Ferenczi et Gustave Le Bon, chacun dans sa langue et <strong>avec ses propres catégories</strong> ; une phrase
-    = un atome, chaque chiffre re-calculable.</p>
+  <p class="sous-titre">La psychologie en données vérifiables — Freud, Breuer, Rank, Abraham,
+    Ferenczi, Stekel et Le Bon, chacun dans sa langue et <strong>avec ses propres catégories</strong> ;
+    une phrase = un atome, chaque chiffre re-calculable.</p>
   <p id="stats" class="stats"></p>
 </header>
 
@@ -29,6 +29,7 @@
   <a href="#comparaison" data-vue="comparaison">Entre auteurs</a>
   <a href="#carte" data-vue="carte">Carte des citations</a>
   <a href="#lecture" data-vue="lecture">Lire une œuvre</a>
+  <a href="#transparence" data-vue="transparence">État des références</a>
   <a href="#methode" data-vue="methode">Méthode</a>
   <a href="#chercheurs" data-vue="chercheurs">Pour les chercheurs</a>
 </nav>
@@ -111,9 +112,9 @@
 
 <section id="courants">
   <h2>Les courants internes du corpus</h2>
-  <p class="note">Huit grappes de concepts que Freud pense ensemble, découpées par
-    maximisation de modularité (déterministe) et <em>validées par lecture</em>. Une grappe est
-    un candidat de courant — cliquer pour ouvrir son dossier complet.</p>
+  <p class="note">Huit grappes de concepts que le calcul réunit dans le corpus de Freud, découpées
+    par maximisation de modularité déterministe. Elles sont <em>automatiquement observées</em>,
+    sans validation humaine : chaque grappe reste un candidat de lecture, pas un courant établi.</p>
   <div id="grappes" class="cartes"></div>
 </section>
 
@@ -207,8 +208,9 @@
   <h2>Ce que les auteurs disent d'eux-mêmes</h2>
   <p class="note">Un lexique déterministe peut <strong>repérer</strong> un passage où l'auteur
     se corrige, s'objecte à lui-même ou se cite — il ne peut pas <strong>établir</strong> qu'il
-    le fait. Chaque candidat a donc été lu en contexte et jugé un par un (voir le motif sous
-    chaque citation) ; seuls les signaux <strong>confirmés</strong> sont montrés ici. Les
+    le fait. Chaque candidat a donc reçu un verdict legacy argumenté en contexte (voir le motif
+    sous chaque citation) ; seuls les signaux <strong>confirmés dans ce registre legacy</strong>
+    sont montrés ici. Il ne s'agit pas d'une validation humaine indépendante. Les
     rejets — objections adressées à d'autres, personnages de roman qui se corrigent, purs
     homonymes — sont documentés dans le dépôt, pas sur cette page.</p>
   <div class="actions" id="signaux-onglets">
@@ -356,13 +358,14 @@
   <h2>Où un texte passe d'une œuvre à une autre</h2>
   <p class="note">Cette page ne montre qu'une chose, et elle la montre en entier : les endroits
     où <strong>un texte</strong> passe d'une œuvre à une autre. Chaque <em>acte de citation</em>
-    est un passage recopié — repéré par le partage de suites de six mots, puis relu en contexte.
+    est un passage recopié — repéré par le partage de suites de six mots, puis qualifié dans le
+    registre legacy. Cette qualification n'est pas une validation humaine indépendante.
     Les deux versions sont données <strong>telles qu'elles sont imprimées</strong>, avec leur
     orthographe d'époque : c'est ce qui permet d'aller vérifier dans le livre.</p>
   <p class="note"><strong>Le poids d'un acte est un nombre de phrases</strong>, jamais un nombre
-    de concepts. Cette précision est le résultat d'un échec : agréger les concepts de part et
-    d'autre produirait 1 366 « liens » là où il y a 107 actes réels, chaque phrase portant 3,5
-    concepts en moyenne. Un graphe de concepts a été tenté, mesuré, puis
+    de concepts. Une campagne historique a montré le piège : agréger les concepts de part et
+    d'autre produisait 1 366 « liens » pour 107 actes dans cet ancien état. Le D1 gelé courant
+    contient <strong>354 actes</strong>, sans conversion en arêtes conceptuelles. L'appariement a été
     <a href="https://github.com/Gabuz22/psychologie/blob/main/documentation/APPARIEMENT_ECARTE.md"
        rel="noopener">écarté</a>.</p>
 
@@ -420,6 +423,21 @@
   </div>
 </section>
 
+<section id="transparence">
+  <h2>État des références</h2>
+  <p class="preambule">Le projet n'a pas une version unique qui efface toutes les autres. Chaque
+    couche fait foi dans son périmètre : D1 reste l'export historique gelé ; les fondations v2
+    restent expérimentales ; l'état public est observé séparément du code local.</p>
+  <div id="etat-canonique"><p class="note">Chargement de l'état canonique versionné…</p></div>
+  <p class="note">Deux cas sont verrouillés avant même ce chargement : l'acte 96 reste un
+    <strong>agrégat discordant</strong>, sans verdict forcé ; les
+    <strong>96 homonymes translexicaux</strong> sont des identités de libellé documentées, sans
+    équivalence conceptuelle.</p>
+  <p class="reserve">Cette section décrit les artefacts présents dans le dépôt. Elle n'annonce
+    aucune fonctionnalité v2 utilisable sur le site et ne transforme aucune proposition
+    automatique en validation humaine.</p>
+</section>
+
 <section id="methode">
   <h2>Méthode, en sept engagements</h2>
   <ol class="engagements">
@@ -436,16 +454,17 @@
       d'un auteur avec lui-même, si), et un dossier externe par concept qui rassemble ce qui,
       ailleurs dans le corpus, le touche vérifiablement — trois faits jamais fusionnés en un
       score. Voir « Ce qu'un auteur reprend d'un autre » et « Chronologie d'un concept ».</li>
-    <li><strong>La provenance du texte est dite.</strong> Les cinq volumes d'Otto Rank sont des
+    <li><strong>La provenance du texte est dite.</strong> Les six volumes d'Otto Rank sont des
       <em>fac-similés océrisés, non relus</em> : aucune transcription humaine n'existe pour lui.
       La qualité est mesurée œuvre par œuvre, les défauts réparables sont réparés, et les phrases
       encore douteuses portent un avertissement visible.</li>
     <li><strong>Aucun modèle de langage dans le calcul.</strong> Segmentation, lexique (69
       groupes, 588 concepts propres à travers les six auteurs qui en ont un), agents d'analyse :
       tout est déterministe — même texte, mêmes atomes, refaisable par quiconque.</li>
-    <li><strong>Rien n'est durci.</strong> Ce que l'auteur modalise reste modalisé ; les signaux
-      rares (révisions, objections, auto-citations) sont lus en contexte un par un — voir
-      « Les auteurs sur eux-mêmes » pour les 191 confirmés, motif à l'appui.</li>
+    <li><strong>Rien n'est durci.</strong> Ce que l'auteur modalise reste modalisé. Le D1 contient
+      609 signaux, dont 607 portent un verdict legacy argumenté et 290 sont confirmés. Ces verdicts
+      de lecture ne constituent pas une campagne humaine indépendante : voir « Les auteurs sur
+      eux-mêmes » pour les <strong>290 verdicts legacy confirmés</strong>, motif à l'appui.</li>
     <li><strong>La datation est honnête.</strong> Freud a cessé de signaler ses ajouts dès la
       3ᵉ édition : chaque atome porte une <em>fenêtre</em> de datation. Quatre œuvres sont
       collationnées phrase à phrase avec leur première édition.</li>
@@ -492,22 +511,23 @@
   <h3>Ce que presque personne ne publie : les échecs mesurés</h3>
   <p>Un appariement de concepts entre auteurs a été construit, calibré, puis <strong>écarté</strong> :
     6,2 % de précision, incapable de distinguer un mot de son contraire, une seule « divergence »
-    confirmée sur seize après lecture. Et agréger les concepts de part et d'autre des reprises
-    produirait <strong>1 366 « liens »</strong> là où il y a <strong>107 actes réels</strong>. Les
-    chiffres flatteurs ont été mesurés avant d'être refusés, et la méthode qui les produit est
-    documentée. Pour un lecteur méthodologiste, c'est probablement la partie la plus utile.</p>
+    confirmée sur seize après lecture. Une ancienne campagne produisait 1 366 « liens » pour
+    107 actes ; ce résultat historique a été refusé. Le D1 gelé actuel conserve
+    <strong>354 actes</strong> textuels sans les transformer en relations conceptuelles. Pour un
+    lecteur méthodologiste, ce refus documenté est probablement la partie la plus utile.</p>
 
   <h3>Ce que ce corpus n'est pas</h3>
   <ul class="reserves">
-    <li><strong>Ce n'est pas une bibliothèque</strong> — quarante œuvres, 1895-1939 ; ni
+    <li><strong>Ce n'est pas une bibliothèque</strong> — 57 volumes, œuvres de 1893 à 1933 et
+      éditions lues jusqu'en 1939 ; ni
       correspondance, ni notes de cas, ni revues, ni littérature secondaire.</li>
-    <li><strong>Aucune traduction</strong> — allemand et français seulement. Le prix est réel : le
-      corpus est fermé à qui ne lit pas ces deux langues.</li>
+    <li><strong>Traduction pilote seulement</strong> — 11 146 empreintes françaises sont versionnées
+      localement, mais leur portée n'est pas déclarée et l'API publique observée le 4 août 2026 ne
+      les expose pas. L'original allemand ou français reste toujours l'autorité.</li>
     <li><strong>Aucun apparat critique</strong> — ni notes d'éditeur, ni variantes. La collation
       phrase à phrase ne couvre que quatre œuvres.</li>
-    <li><strong>La moitié du corpus est un fac-similé océrisé non relu</strong> — Rank, Abraham et
-      Ferenczi n'ont pas de transcription humaine. La qualité est mesurée et déclarée, mais il reste
-      des mots faux.</li>
+    <li><strong>33 volumes sur 57 sont des fac-similés OCR non relus</strong> — notamment chez Rank,
+      Abraham, Ferenczi et Stekel. La qualité est mesurée et déclarée, mais il reste des mots faux.</li>
     <li><strong>Les lexiques n'ont pas été relus par un psychanalyste.</strong> C'est la limite la
       plus sérieuse pour un usage savant, et elle ne se lève pas par du code.</li>
   </ul>
@@ -524,9 +544,8 @@
     CC BY 4.0, et les <strong>textes sources</strong> sont du domaine public — rien à concéder, la
     provenance de chaque œuvre est déclarée. Réutilisez, adaptez, recoupez : l'attribution est la
     seule condition. Deux demandes qui n'en sont pas : citez la <em>version</em> avec le chiffre — le
-    dépôt bouge, et la couverture de cette carte est passée de 0,52 % à 0,45 % le 30 juillet 2026,
-    parce qu'elle comptait des côtés d'acte pour des phrases — et reprenez la <em>réserve</em> avec
-    la mesure.</p>
+    dépôt bouge. Dans le D1 gelé du 3 août, la carte touche 938 atomes, soit 0,805 % du corpus, et
+    25 volumes n'apparaissent dans aucun acte. Reprenez toujours la <em>réserve</em> avec la mesure.</p>
 
   <p class="note">Le détail — comment citer, ce qui manque encore (un DOI, une relecture par un
     spécialiste du domaine), et la marche à suivre pour vérifier une affirmation en dix minutes :

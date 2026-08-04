@@ -1,0 +1,51 @@
+{
+  "d1": {
+    "acte_96": {
+      "etat_interprete_sans_modifier_d1": "discordant",
+      "present": true,
+      "reclasse_vers": "Sigmund Freud, Die Traumdeutung (1900) — traumdeutung:a2470",
+      "sens_lu": "b_vers_a",
+      "verdict_historique": null
+    },
+    "comptes": {
+      "atomes": 116545,
+      "auteurs": 7,
+      "carte_actes": 354,
+      "concept_liens": 7646,
+      "grappes": 8,
+      "lectures_declarees": 9,
+      "liens_reprise": 507,
+      "mentions": 2899,
+      "oeuvres": 57,
+      "qualifies": 83431,
+      "signaux": 609,
+      "signaux_confirmes": 290,
+      "signaux_juges": 607,
+      "traductions_appliquees": 11198
+    },
+    "genere_le": "2026-08-03",
+    "statut": "canonique historique",
+    "versions_regles_dans_export": "inconnues"
+  },
+  "reserve": "Les fondations v2 sont expérimentales et ne remplacent pas D1. Une proposition automatique n'est pas une validation humaine.",
+  "schema": "etat-canonique-site-1.0.0",
+  "source": "manifests/references_canoniques.json",
+  "tests_presents": {
+    "python": 440,
+    "reserve": "présence vérifiée ; exécution à consigner séparément",
+    "worker": 56
+  },
+  "v2": {
+    "annotations_de_type_humain_dans_relations": 0,
+    "annotations_humaines_experience": 0,
+    "annotations_humaines_prototype": 0,
+    "homonymes_translexicaux": 96,
+    "items_aveugles": 80,
+    "migration_mode": "dry_run",
+    "precision_rappel": "non_calculables_sans_annotations_humaines",
+    "propositions_equivalence": 0,
+    "relations_prototype": 29,
+    "statut": "expérimental"
+  },
+  "verifie_le": "2026-08-04"
+}

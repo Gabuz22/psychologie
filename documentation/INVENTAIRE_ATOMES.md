@@ -1,5 +1,9 @@
 # Inventaire empirique des types d'atomes — Freud, *Die Traumdeutung*
 
+> **État documentaire : photographie historique.** L'inventaire demeure une étude locale de la
+> *Traumdeutung* et de campagnes de collation antérieures ; ses nombres ne sont pas les totaux du
+> D1 multi-auteur courant.
+
 > **Méthode.** Cet inventaire n'a pas été déduit d'une théorie de l'argumentation ni d'un modèle
 > général du discours savant. Il a été établi en **lisant des passages réels** de l'œuvre (chapitres
 > I, II, IV, V et VII, échantillonnés à travers le volume), en relevant ce qu'on y rencontre

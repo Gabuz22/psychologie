@@ -1,5 +1,9 @@
 # Traduire depuis l'allemand — ce qu'un seul mot français doit porter
 
+> **État documentaire : photographie historique.** Les analyses lexicales restent utiles, mais le
+> pilote actuel contient 11 146 empreintes et son `meta.scope` est vide : aucune couverture totale
+> ne doit être déduite de ce document.
+
 > **DOCUMENT GÉNÉRÉ** par `python bin/generer_traduction.py` — ne pas éditer à la main : la charge
 > et la contamination sont recalculées sur le corpus à chaque exécution. Régénérer après tout
 > ajout d'œuvre.

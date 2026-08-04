@@ -1,5 +1,9 @@
 # Pour les chercheurs
 
+> **État documentaire : photographie historique.** Les exemples numériques de 40 œuvres,
+> 107 actes ou 0,5 % documentent un état antérieur. Le registre canonique versionné distingue ces
+> résultats du D1 gelé courant et du prototype v2 expérimental.
+
 Cette page répond à une question précise : **quelqu'un qui a déjà accès à PEP-Web, aux
 *Gesammelte Werke* numérisés et au Deutsches Textarchiv a-t-il une raison d'ouvrir celui-ci ?**
 

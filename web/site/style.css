@@ -264,6 +264,8 @@ footer { border-top: 1px solid var(--filet); margin-top: 2.5rem; padding: 1.2rem
 /* La ligne de l'auteur qui a défini le motif est mise en retrait visuel, pas en avant : elle est
    haute par construction et ne doit pas se lire comme le résultat de la mesure. */
 .tableau-usage .ligne-lexique { color: var(--gris); }
+.tableau-etat { max-width: 64rem; }
+.tableau-etat td { vertical-align: top; }
 
 /* Carte des actes de citation. Les deux passages sont montrés CÔTE À CÔTE : c'est la
    confrontation des deux orthographes — celle de 1895 et celle d'après la réforme de 1901 —

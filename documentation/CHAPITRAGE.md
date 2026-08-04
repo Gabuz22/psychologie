@@ -1,5 +1,9 @@
 # Le chapitrage, et pourquoi il fallait le réparer
 
+> **État documentaire : photographie historique.** Les comptes d'œuvres et d'atomes cités ici
+> décrivent la campagne de chapitrage concernée. La règle reste documentée, mais les totaux
+> courants viennent du manifeste et du registre canonique.
+
 Un chapitre n'est pas un ornement de navigation. C'est ce qui porte la **lecture déclarée** —
 quand un chapitre annonce dans son titre qu'il traite d'un autre auteur, c'est l'édition elle-même
 qui déclare la lecture. `core/comparaison.py` la désigne comme « le lien le plus fort du corpus, et

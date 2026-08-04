@@ -1,5 +1,9 @@
 # La couverture de la comparaison — six pistes mesurées, cinq refusées
 
+> **État documentaire : photographie historique.** Les comptes de 40 œuvres, 107 actes et 0,45 %
+> sont conservés comme résultats de la campagne qui les a produits. Voir la référence canonique
+> pour le D1 gelé courant ; ne pas transposer ces nombres au corpus actuel.
+
 La carte des actes de citation ne touche qu'une fraction du corpus, et 22 œuvres sur 40 n'y
 apparaissent dans aucun acte. Ce document répond à la question qui s'ensuit : **est-ce un défaut de
 la méthode, qu'on peut réparer, ou une propriété du corpus ?**

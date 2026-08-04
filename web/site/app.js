@@ -661,12 +661,15 @@ function gererHash() {
 }
 
 async function demarrer() {
+  // La transparence est un artefact statique versionné : elle reste lisible même si l'API D1
+  // est indisponible. Son échec ne doit jamais masquer les fonctions de consultation.
+  rendreEtatCanonique();
   try {
     referentiel = await api("/api/referentiel");
     const m = referentiel.meta;
     $("#stats").textContent =
       `${Number(m.atomes).toLocaleString("fr")} atomes · ${m.oeuvres} œuvres, ` +
-      `${(referentiel.auteurs || []).length} auteurs (1895-1933) · ` +
+      `${(referentiel.auteurs || []).length} auteurs (œuvres 1893-1933) · ` +
       `${Number(m.qualifies).toLocaleString("fr")} qualifiés · corpus du ${m.genere_le}`;
     $("#pied").textContent = m.licence;
 
@@ -714,6 +717,45 @@ async function demarrer() {
   } catch (e) {
     $("#stats").innerHTML =
       `<span class="erreur">API indisponible (${e.message}) — le site est-il déployé avec sa base D1 ?</span>`;
+  }
+}
+
+async function rendreEtatCanonique() {
+  const zone = $("#etat-canonique");
+  if (!zone) return;
+  try {
+    const r = await fetch(new URL("etat-canonique.json", location.href));
+    if (!r.ok) throw new Error(r.statusText);
+    const etat = await r.json();
+    const d1 = etat.d1;
+    const v2 = etat.v2;
+    const t = etat.tests_presents;
+    zone.innerHTML = `
+      <table class="tableau-usage tableau-etat">
+        <thead><tr><th>Couche</th><th>Statut</th><th>Ce qui fait foi</th><th>Limite</th></tr></thead>
+        <tbody>
+          <tr><td>D1 du ${echapper(d1.genere_le)}</td><td>${echapper(d1.statut)}</td>
+              <td>${Number(d1.comptes.atomes).toLocaleString("fr")} atomes ·
+                  ${d1.comptes.oeuvres} volumes · ${d1.comptes.carte_actes} actes</td>
+              <td>Versions historiques des règles : ${echapper(d1.versions_regles_dans_export)}</td></tr>
+          <tr><td>Acte 96</td><td>indécidable au niveau agrégé</td>
+              <td><strong>agrégat discordant</strong></td>
+              <td>Aucun verdict unique n'est fabriqué.</td></tr>
+          <tr><td>Fondations v2</td><td>${echapper(v2.statut)}</td>
+              <td>${v2.relations_prototype} relations prototype ·
+                  ${v2.homonymes_translexicaux} homonymes translexicaux</td>
+              <td>${v2.annotations_humaines_prototype} annotation humaine ;
+                  ${v2.propositions_equivalence} équivalence proposée.</td></tr>
+          <tr><td>Tests présents</td><td>comptés dans le dépôt</td>
+              <td>${t.python} Python · ${t.worker} Worker</td>
+              <td>${echapper(t.reserve)}</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Source : <code>${echapper(etat.source)}</code>, vérifiée le
+         ${echapper(etat.verifie_le)}. ${echapper(etat.reserve)}</p>`;
+  } catch (e) {
+    zone.innerHTML = `<p class="erreur">État canonique indisponible (${echapper(e.message)}).
+      Les fonctions de consultation D1 restent séparées de ce panneau documentaire.</p>`;
   }
 }
 
@@ -1575,17 +1617,16 @@ async function afficherCarte() {
       { auteur: carteEtat.auteur, autre: carteEtat.autre, limite: 40 });
 
     const cov = r.couverture || {};
-    // `atomes_touches` compte des phrases DISTINCTES : c'était une somme de côtés d'acte, qui
-    // comptait deux fois toute phrase citée par deux actes et annonçait 0,52 % pour 0,45 %.
+    // `atomes_touches` compte des phrases DISTINCTES, jamais une somme de côtés d'acte.
     $("#carte-couverture").innerHTML = `
       <p class="poids-grappe">${Number(cov.atomes_touches || 0).toLocaleString("fr")} phrases
          touchées — soit ${((cov.part_touchee || 0) * 100).toFixed(2)} % du corpus.</p>
       <p class="note"><strong>Le plafond est mesuré, et il est bas.</strong> Même en admettant tout
-         ce que le détecteur peut former, on ne dépasse pas 1,2 % du corpus ni 8 couples d'auteurs
-         sur 15. Ce n'est pas un réglage à changer : dans les œuvres absentes de cette page, les
+         le D1 gelé touche 0,805 % du corpus et 10 couples sur les 21 possibles. Ce n'est pas un
+         réglage à changer : dans les œuvres absentes de cette page, les
          citations sont annoncées mais le texte cité n'est pas au corpus — 4 % seulement partagent
          réellement des mots avec l'auteur qu'elles nomment. Ces auteurs citent par référence, pas
-         par transcription : le corpus porte 248 phrases de reprise textuelle contre environ
+         par transcription : le corpus porte 938 phrases touchées par une reprise contre environ
          2 900 de renvoi bibliographique.</p>
       <p class="note">${(cov.muettes || []).length} œuvres n'apparaissent
          <strong>jamais</strong> dans cette page — mais la plupart sont visibles ailleurs : sept
@@ -1643,7 +1684,9 @@ function rendreActe(k) {
       k.sens_lu ? " (déclaré dans le texte)" : " (par les dates)"}</span></span>` : "",
     k.verdict === "confirme" ? `<span class="etiquette">relu et confirmé</span>` : "",
     k.verdict === "reclasse" ? `<span class="etiquette">les deux citent un tiers</span>` : "",
-    !k.verdict ? `<span class="etiquette compte">pas encore relu</span>` : "",
+    !k.verdict && k.id === 96
+      ? `<span class="etiquette compte">agrégat discordant — verdicts élémentaires incompatibles</span>`
+      : (!k.verdict ? `<span class="etiquette compte">pas encore relu</span>` : ""),
     k.source_tierce ? `<span class="etiquette">source tierce possible</span>` : "",
   ].filter(Boolean).join(" ");
 

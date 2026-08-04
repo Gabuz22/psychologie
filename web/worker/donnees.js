@@ -1079,9 +1079,10 @@ const RESERVE_BUISSON_CONCEPTS =
 /** CARTE DES ACTES DE CITATION — les endroits où un texte passe d'une œuvre à une autre.
  *
  * L'unité est l'ACTE (des phrases contiguës des deux côtés = un seul acte), jamais le couple de
- * concepts : agréger les concepts de part et d'autre donnerait 1 366 « arêtes » là où il y a 107
- * actes réels. Les concepts sont rendus comme CONTEXTE, et seuls ceux que les deux passages
- * portent ensemble sont présentés comme informatifs.
+ * concepts : une expérience historique donnait 1 366 « arêtes » pour 107 actes. Le D1 gelé
+ * courant en contient 354 ; l'API sert ces actes textuels, pas ce faux graphe conceptuel. Les
+ * concepts sont rendus comme CONTEXTE, et seuls ceux que les deux passages portent ensemble sont
+ * présentés comme informatifs.
  *
  * Les couples SANS acte sont rendus eux aussi, avec la raison de leur silence — un silence de
  * méthode (langues différentes, détection impossible) n'est pas un silence de corpus.
@@ -1200,9 +1201,9 @@ export async function carte(env, { auteur, autre, limite } = {}) {
       + "Sigmund, « freud'ger » forme élidée de « freudig », « Frau Dr. Rank » l'épouse, "
       + "« Abraham a Santa Clara » le prédicateur baroque.",
     ne_pas_conclure:
-      "Ce que la carte ne montre pas ne veut PAS dire que rien n'a eu lieu. Elle touche moins "
-      + "d'un demi pour cent du corpus, plus de la moitié des œuvres n'y apparaissent jamais, et "
-      + "un tiers des phrases sont trop courtes pour être comparables. Entre deux auteurs de "
+      "Ce que la carte ne montre pas ne veut PAS dire que rien n'a eu lieu. Dans le D1 gelé, elle "
+      + "touche 0,805 % du corpus et 25 volumes sur 57 n'y apparaissent jamais ; un tiers des "
+      + "phrases sont trop courtes pour être comparables. Entre deux auteurs de "
       + "langues différentes elle est aveugle par construction — les corpus français et allemand "
       + "du projet partagent UN seul groupe de six mots, alors même que Freud consacre à Le Bon "
       + "un chapitre entier. Chaque couple sans acte porte donc la raison de son silence.",

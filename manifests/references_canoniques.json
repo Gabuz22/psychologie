@@ -1,0 +1,711 @@
+{
+  "faits": {
+    "d1": {
+      "acte_96": {
+        "etat_interprete_sans_modifier_d1": "discordant",
+        "present": true,
+        "reclasse_vers": "Sigmund Freud, Die Traumdeutung (1900) — traumdeutung:a2470",
+        "sens_lu": "b_vers_a",
+        "verdict_historique": null
+      },
+      "actes_discordants": 1,
+      "actes_non_lus": 0,
+      "audit_relations_ok": true,
+      "colonnes_actes_v2_absentes": true,
+      "comptes": {
+        "atomes": 116545,
+        "auteurs": 7,
+        "carte_actes": 354,
+        "concept_liens": 7646,
+        "grappes": 8,
+        "lectures_declarees": 9,
+        "liens_reprise": 507,
+        "mentions": 2899,
+        "oeuvres": 57,
+        "qualifies": 83431,
+        "signaux": 609,
+        "signaux_confirmes": 290,
+        "signaux_juges": 607,
+        "traductions_appliquees": 11198
+      },
+      "genere_le": "2026-08-03",
+      "schema": "d1-v1-historique",
+      "versions_regles_dans_export": "inconnues"
+    },
+    "site_public_observe": {
+      "api": {
+        "atomes": 116545,
+        "auteurs": 7,
+        "carte_actes": 354,
+        "carte_atomes_touches": 938,
+        "carte_oeuvres_muettes": 25,
+        "carte_part_touchee": 0.00805,
+        "chat": false,
+        "genere_le": "2026-08-02",
+        "grappes": 8,
+        "oeuvres": 57,
+        "qualifies": 83431,
+        "signaux_juges": 607,
+        "texte_fr_observe_sur_traumdeutung_a0": false,
+        "version_corpus_observee": "comptes-116545-57-7-export-2026-08-02"
+      },
+      "deploiement": {
+        "commit_git": "inconnu",
+        "url": "https://psychologie.guzan99.workers.dev/"
+      },
+      "methode": [
+        "lecture du DOM rendu dans le navigateur",
+        "GET /api/sante",
+        "GET /api/referentiel",
+        "GET /api/carte?limite=1",
+        "GET /api/atome?id=traumdeutung:a0"
+      ],
+      "schema_observation": "1.0.0",
+      "verifie_le": "2026-08-04",
+      "visible_obsolete": [
+        "191 confirmés",
+        "107 actes réels",
+        "quarante œuvres",
+        "Aucune traduction",
+        "moins d'un demi pour cent du corpus"
+      ]
+    },
+    "sources": {
+      "fichiers_et_temoins": 62,
+      "temoins_non_citables": 5,
+      "textes_citables": 57
+    },
+    "tests": {
+      "execution": "présence vérifiée ; exécution à consigner séparément",
+      "fichiers_python": [
+        {
+          "chemin": "core/tests/test_abraham.py",
+          "tests": 12
+        },
+        {
+          "chemin": "core/tests/test_accueil.py",
+          "tests": 20
+        },
+        {
+          "chemin": "core/tests/test_agents.py",
+          "tests": 29
+        },
+        {
+          "chemin": "core/tests/test_appariement.py",
+          "tests": 11
+        },
+        {
+          "chemin": "core/tests/test_audit_relations.py",
+          "tests": 4
+        },
+        {
+          "chemin": "core/tests/test_banc_lexique.py",
+          "tests": 17
+        },
+        {
+          "chemin": "core/tests/test_base.py",
+          "tests": 65
+        },
+        {
+          "chemin": "core/tests/test_branches.py",
+          "tests": 18
+        },
+        {
+          "chemin": "core/tests/test_carte.py",
+          "tests": 22
+        },
+        {
+          "chemin": "core/tests/test_collation.py",
+          "tests": 13
+        },
+        {
+          "chemin": "core/tests/test_comparaison.py",
+          "tests": 27
+        },
+        {
+          "chemin": "core/tests/test_divergences.py",
+          "tests": 11
+        },
+        {
+          "chemin": "core/tests/test_experience_relations.py",
+          "tests": 4
+        },
+        {
+          "chemin": "core/tests/test_ferenczi.py",
+          "tests": 28
+        },
+        {
+          "chemin": "core/tests/test_manifeste_corpus.py",
+          "tests": 5
+        },
+        {
+          "chemin": "core/tests/test_migration_relations_v2.py",
+          "tests": 5
+        },
+        {
+          "chemin": "core/tests/test_multilingue.py",
+          "tests": 22
+        },
+        {
+          "chemin": "core/tests/test_rank.py",
+          "tests": 17
+        },
+        {
+          "chemin": "core/tests/test_reference_canonique.py",
+          "tests": 10
+        },
+        {
+          "chemin": "core/tests/test_registres_v2.py",
+          "tests": 4
+        },
+        {
+          "chemin": "core/tests/test_relations_v2.py",
+          "tests": 11
+        },
+        {
+          "chemin": "core/tests/test_schemas_v2.py",
+          "tests": 3
+        },
+        {
+          "chemin": "core/tests/test_socle.py",
+          "tests": 16
+        },
+        {
+          "chemin": "core/tests/test_socle_par_couple.py",
+          "tests": 17
+        },
+        {
+          "chemin": "core/tests/test_traduction.py",
+          "tests": 14
+        },
+        {
+          "chemin": "core/tests/test_traductions.py",
+          "tests": 14
+        },
+        {
+          "chemin": "core/tests/test_verification.py",
+          "tests": 21
+        }
+      ],
+      "fichiers_worker": [
+        {
+          "chemin": "web/worker/donnees.test.js",
+          "tests": 38
+        },
+        {
+          "chemin": "web/worker/verification.test.js",
+          "tests": 18
+        }
+      ],
+      "python": 440,
+      "worker": 56
+    },
+    "v2": {
+      "annotations_de_type_humain_dans_relations": 0,
+      "annotations_humaines_experience": 0,
+      "annotations_humaines_prototype": 0,
+      "homonymes_translexicaux": 96,
+      "items_aveugles": 80,
+      "migration_mode": "dry_run",
+      "precision_rappel": "non_calculables_sans_annotations_humaines",
+      "propositions_equivalence": 0,
+      "relations_prototype": 29,
+      "statut": "expérimental"
+    }
+  },
+  "id": "psychologie-references-canoniques",
+  "methode": [
+    "lecture du manifeste et des schémas versionnés",
+    "ouverture SQLite en mode lecture seule",
+    "vérification SHA-256 des artefacts",
+    "comptage statique des tests présents",
+    "comparaison à un instantané public daté et versionné"
+  ],
+  "references": [
+    {
+      "artefacts": [
+        {
+          "chemin": "derive/d1/corpus.sqlite",
+          "sha256": "52f0d2372bf2858169fdec56733520be1d906c1384f6a1fa3924ca2ea4a9045d"
+        }
+      ],
+      "commit_git": "a35fe072d32798964731bab5128ff71dc9c9480a",
+      "compatibilites": [
+        "API v1",
+        "manifeste corpus_actuel",
+        "prototype v2 par migration additive"
+      ],
+      "empreinte_artefacts": "d56a404a07a05172ffbaa852c81ec35b117954337b6fef2c2fa9dcc45e384226",
+      "id": "d1-historique-2026-08-03",
+      "incompatibilites": [
+        "ne contient aucune table v2",
+        "versions de règles absentes de meta"
+      ],
+      "limites": [
+        "ne pas réécrire",
+        "acte 96 stocké avec verdict NULL",
+        "traductions pilotes"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "export relationnel et textuel v1 gelé",
+      "statut": "canonique historique",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "empreinte_sources": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_atomisation": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_carte": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_collation": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_comparaison": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_lexique": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_schema_export": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_socle_par_couple": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        }
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "manifests/corpus_actuel.json",
+          "sha256": "aec3aecf9c1e2df4177c7cb9e739a68447f58fecc3d6962a3992df7fe4ce5f42"
+        }
+      ],
+      "commit_git": "17ba606af1c9e18613f9cf399ee430f421d4aa97",
+      "compatibilites": [
+        "D1 historique au SHA-256 52f0d2372bf2858169fdec56733520be1d906c1384f6a1fa3924ca2ea4a9045d"
+      ],
+      "empreinte_artefacts": "9c6ba32e3720ac54e90012b4468e4f7e4f336451105c8c24561a6dcacf114e0e",
+      "id": "manifeste-corpus-actuel",
+      "incompatibilites": [
+        "les versions lues dans le code ne deviennent pas les versions historiques de D1"
+      ],
+      "limites": [
+        "14 alertes documentaires sont des candidats heuristiques",
+        "scope traduction vide"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "gel vérifiable de D1, des sources et des registres",
+      "statut": "canonique courant",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "atomisation": "1.0.0",
+        "carte": "1.0.0",
+        "collation": "1.0.0",
+        "comparaison": "1.0.0",
+        "lexique": "1.1.0",
+        "socle_par_couple": "1.0.0"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "derive/d1/corpus.sqlite",
+          "sha256": "52f0d2372bf2858169fdec56733520be1d906c1384f6a1fa3924ca2ea4a9045d"
+        }
+      ],
+      "commit_git": "a35fe072d32798964731bab5128ff71dc9c9480a",
+      "compatibilites": [
+        "les résultats historiques restent lisibles et intègres"
+      ],
+      "empreinte_artefacts": "d56a404a07a05172ffbaa852c81ec35b117954337b6fef2c2fa9dcc45e384226",
+      "id": "regles-d1-historiques",
+      "incompatibilites": [
+        "ne pas substituer automatiquement les versions du code courant"
+      ],
+      "limites": [
+        "empreinte des sources et versions absentes de meta"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "versions réellement embarquées dans l'export historique",
+      "statut": "inconnu",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "empreinte_sources": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_atomisation": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_carte": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_collation": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_comparaison": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_lexique": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_schema_export": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        },
+        "version_socle_par_couple": {
+          "raison": "champ absent de cet export historique",
+          "statut": "inconnu",
+          "valeur": null
+        }
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "core/relations_v2.py",
+          "sha256": "289daa188493167a268805a8138eae3f1c6fac1ec1db3eec548704ce5596cea8"
+        },
+        {
+          "chemin": "documentation/MODELE_RELATIONS_MULTIPLES_V2.md",
+          "sha256": "8ed0cdae284387e72f81c678f2cba54a8a109685221f2c913674c434a72c655f"
+        },
+        {
+          "chemin": "documentation/SCHEMA_CANONIQUE_OBJETS_V2.md",
+          "sha256": "d56e95dd73e8b7f27f90551f0754ee089802a687a80d74c097b53f3a1beff0c1"
+        },
+        {
+          "chemin": "schemas/objets_analytiques_v2.json",
+          "sha256": "7d39f1016d66917acd79660aa45cc256af64bb0f8d43ae7da89f6111afed7f79"
+        },
+        {
+          "chemin": "schemas/relations_v2.schema.json",
+          "sha256": "cb9f3f0721592e3552e33278b6b0d35f7513cffd634ef575d9fc944f6a5c7dea"
+        },
+        {
+          "chemin": "schemas/relations_v2.sql",
+          "sha256": "e7785ebc212c69d5b8a1fcf8364e17c980f5fbe2a4a7f3eb921e60f02f93b48a"
+        },
+        {
+          "chemin": "schemas/relations_v2_rollback.sql",
+          "sha256": "11a5b35a34de94ea5e0bd1666c680a2c1589f519ad04800eb01082dbc5201738"
+        }
+      ],
+      "commit_git": "17ba606af1c9e18613f9cf399ee430f421d4aa97",
+      "compatibilites": [
+        "migration additive sur nouvelle base",
+        "D1 conservé comme source historique"
+      ],
+      "empreinte_artefacts": "06a6c7dd37a2cbe0741904656a0864b8d211984862d80785b9c33f53ff97a4ae",
+      "id": "fondations-relations-v2",
+      "incompatibilites": [
+        "non déployé",
+        "aucune validation humaine produite"
+      ],
+      "limites": [
+        "proposition exécutable, pas doctrine adoptée"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "contrats canoniques proposés pour objets et relations",
+      "statut": "expérimental",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "relations_v2": "0.1.0"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "prototypes/relations_v2/experience_freud_stekel.json",
+          "sha256": "20606779fbaf293e5bccf0f5e9ec04e3ebf25358111090a91d6b672fa5539587"
+        },
+        {
+          "chemin": "prototypes/relations_v2/registre_probatoire_freud_stekel.json",
+          "sha256": "3edc4ae0b9bcb75345c173583f2b0f5abda72d2499cbb2197385cca24aef9ac9"
+        }
+      ],
+      "commit_git": "8c55e531ac3c1275b7273dcef4a1ca55e17087a8",
+      "compatibilites": [
+        "20 candidats gelés",
+        "60 contrôles",
+        "29 relations proposées/rejetées"
+      ],
+      "empreinte_artefacts": "17da0db82c3e7fadda285bdf23483852f6bbe404dd71e230cc40d99e588806cb",
+      "id": "prototype-freud-stekel-v1",
+      "incompatibilites": [
+        "ne constitue pas une vérité terrain",
+        "ne remplace pas les 135 actes D1"
+      ],
+      "limites": [
+        "zéro annotation humaine",
+        "précision et rappel non calculables"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "registre probatoire et expérience aveugle préparée",
+      "statut": "expérimental",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "atomisation": "1.0.0",
+        "carte": "1.0.0",
+        "collation": "1.0.0",
+        "comparaison": "1.0.0",
+        "lexique": "1.1.0",
+        "socle_par_couple": "1.0.0"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "prototypes/relations_v2/candidats_translexicaux.json",
+          "sha256": "f1b537b124712946b5a6766acb6a868d80afe346fe021eee606791cbea03b6a4"
+        }
+      ],
+      "commit_git": "8c55e531ac3c1275b7273dcef4a1ca55e17087a8",
+      "compatibilites": [
+        "mesures lexicales D1",
+        "schéma d'alignement v2"
+      ],
+      "empreinte_artefacts": "7e9a13f618130a8be638dcbd90e5f24de8a6d780639b5620376cd27761035829",
+      "id": "homonymes-translexicaux-v1",
+      "incompatibilites": [
+        "aucune équivalence conceptuelle automatique"
+      ],
+      "limites": [
+        "96 homonymes non examinés humainement"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "registre de libellés partagés entre lexiques",
+      "statut": "expérimental",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "registre": "0.1.0-prototype"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "bin/migrer_relations_v2.py",
+          "sha256": "c665aa17958a3e656633343932055ab4dabeeb9bc7f5083277126e5c66e04291"
+        },
+        {
+          "chemin": "core/migration_relations_v2.py",
+          "sha256": "5249b64550fcd1734700f7a5f19ba7b510fa1f7309dd054f40fb48c29e04eb80"
+        },
+        {
+          "chemin": "prototypes/relations_v2/migration_dry_run.json",
+          "sha256": "af3c53d10e598ee8b6ede0d0b4b3a57af391eeb8469203dce98dd0b35f9ef628"
+        },
+        {
+          "chemin": "schemas/relations_v2.sql",
+          "sha256": "e7785ebc212c69d5b8a1fcf8364e17c980f5fbe2a4a7f3eb921e60f02f93b48a"
+        },
+        {
+          "chemin": "schemas/relations_v2_rollback.sql",
+          "sha256": "11a5b35a34de94ea5e0bd1666c680a2c1589f519ad04800eb01082dbc5201738"
+        }
+      ],
+      "commit_git": "8c55e531ac3c1275b7273dcef4a1ca55e17087a8",
+      "compatibilites": [
+        "source D1 vérifiée par SHA",
+        "rollback limité aux tables v2"
+      ],
+      "empreinte_artefacts": "e7b43e65ee93b8d52f0f34f5a2a9481757a598a0bb42aee61c07219f6115d57b",
+      "id": "migration-v2-additive",
+      "incompatibilites": [
+        "jamais appliquée à D1",
+        "acte 96 non convertible automatiquement"
+      ],
+      "limites": [
+        "dry-run uniquement dans le dépôt"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "simulation d'import v2 sur une base séparée",
+      "statut": "expérimental",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "migration": "0.1.0-prototype"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "web/site/app.js",
+          "sha256": "ca49dde626234f4f0f4039d3b1935a8082f380d65d8ee051a836c06223bf4c91"
+        },
+        {
+          "chemin": "web/site/index.html",
+          "sha256": "c7ac62b858dd0c2b23196a4e3ca2dc293bdc1d792273ebf5d8f4e17ab28e9b17"
+        },
+        {
+          "chemin": "web/site/style.css",
+          "sha256": "589e3af373c80f8425fc8091c1b3b7666c06237176f85f817a882592185a461c"
+        },
+        {
+          "chemin": "web/worker/donnees.js",
+          "sha256": "220c25f1ddd9e7c5639a69b6becf374483a19367dd219b37f3d55e22984ef053"
+        }
+      ],
+      "commit_git": "SELF",
+      "compatibilites": [
+        "D1 v1",
+        "état canonique statique généré"
+      ],
+      "empreinte_artefacts": "ef54679917dd872fe16bc1ad20b7b813f38c1e751e2c3b761a38b1a84c4cce8f",
+      "id": "site-source-courant",
+      "incompatibilites": [
+        "ne rend pas les tables v2 utilisables",
+        "n'établit aucune équivalence"
+      ],
+      "limites": [
+        "source locale non déployée par cette consolidation"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "interface et API préparées dans le dépôt",
+      "statut": "canonique courant",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "api": "v1",
+        "site": "sans build"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "manifests/site_public_observe_2026-08-04.json",
+          "sha256": "115d640a7e6f3e46cb27ca3e58bfaaf37168b72bf1801de2659d732f8655971c"
+        }
+      ],
+      "commit_git": "inconnu",
+      "compatibilites": [
+        "comptes 116545/57/7 compatibles avec D1"
+      ],
+      "empreinte_artefacts": "3ca7237c906ab5ce6b2a7c2cb3a68b350bb7d1750ac4102df12e6ab3975d6b06",
+      "id": "site-public-observe-2026-08-04",
+      "incompatibilites": [
+        "base publique datée du 2026-08-02",
+        "traductions et v2 absentes"
+      ],
+      "limites": [
+        "commit de déploiement inconnu",
+        "observation non dynamique"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "instantané daté de l'état effectivement publié",
+      "statut": "dérivé",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "comptes-116545-57-7-export-2026-08-02",
+      "versions_regles": {
+        "api": "v1"
+      }
+    },
+    {
+      "artefacts": [
+        {
+          "chemin": "README.md",
+          "sha256": "79aadae6078af4f372fe5fc69f698cf43cf79852e053af032f9f953281e6b382"
+        },
+        {
+          "chemin": "documentation/ACTE_96_VERDICT_DISCORDANT.md",
+          "sha256": "e00a09ceef8e82f50f93ccf4d575bbe62c940fa9533d951f7b73b45b751ef97a"
+        },
+        {
+          "chemin": "documentation/PROTOCOLE_VALIDATION_RELATIONS.md",
+          "sha256": "2f6b8e2a082b7056e36c1b653741c75df42337d42856a3bb72075b9dffde7d52"
+        },
+        {
+          "chemin": "documentation/REFERENCE_CANONIQUE.md",
+          "sha256": "aee5795040841a54ee00fdf11efd41b71e67861ba80f0525fd08d85137f0f586"
+        }
+      ],
+      "commit_git": "SELF",
+      "compatibilites": [
+        "registre canonique",
+        "rapport de synchronisation"
+      ],
+      "empreinte_artefacts": "d806ba721cef11630d46727e2198ed237c0d0b432ea93a711abd02ee7f475a61",
+      "id": "documentation-courante",
+      "incompatibilites": [
+        "les rapports datés antérieurs restent des photographies historiques"
+      ],
+      "limites": [
+        "les verdicts legacy ne sont pas une validation humaine indépendante"
+      ],
+      "methode_verification": "empreintes SHA-256, lecture structurée et contrôles locaux",
+      "role": "explication technique et méthodologique synchronisée",
+      "statut": "canonique courant",
+      "verifie_le": "2026-08-04",
+      "version_corpus": "5bbbea4ad9f5638abf3c4524449bb12cbaa775308f3f7641ea0cfa581f031a79",
+      "versions_regles": {
+        "atomisation": "1.0.0",
+        "carte": "1.0.0",
+        "collation": "1.0.0",
+        "comparaison": "1.0.0",
+        "lexique": "1.1.0",
+        "socle_par_couple": "1.0.0"
+      }
+    }
+  ],
+  "schema_registre": "1.0.0",
+  "semantique_statuts": {
+    "canonique courant": "fait foi dans le dépôt pour sa couche propre",
+    "canonique historique": "fait foi pour un résultat gelé, sans être le modèle courant",
+    "dérivé": "produit à partir d'une autre couche ou observé extérieurement",
+    "expérimental": "préparé et testable, sans adoption ni validation humaine implicite",
+    "inconnu": "information non enregistrée ou non déterminable",
+    "obsolète": "conservé pour histoire, à ne pas citer comme état courant",
+    "à décider": "décision humaine ou scientifique requise"
+  },
+  "validation": {
+    "avertissements": [
+      {
+        "code": "versions_d1_historiques_inconnues"
+      },
+      {
+        "code": "commit_site_public_inconnu"
+      }
+    ],
+    "erreurs": [],
+    "ok": true
+  },
+  "verifie_le": "2026-08-04"
+}

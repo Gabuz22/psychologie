@@ -1,5 +1,9 @@
 # La carte des actes de citation
 
+> **État documentaire : photographie historique.** Les nombres de 40 œuvres, 107 actes ou 0,45 %
+> décrivent une campagne antérieure. L'état courant est donné par `manifests/references_canoniques.json`
+> et `documentation/REFERENCE_CANONIQUE.md` ; la méthode et les échecs décrits ici restent valides.
+
 Elle montre une seule chose : **les endroits où un texte passe d'une œuvre à une autre**. Pas des
 concepts reliés, pas des affinités d'idées — des passages recopiés, avec les deux versions telles
 qu'elles sont imprimées.

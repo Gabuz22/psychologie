@@ -24,6 +24,34 @@ Ces quatre formes ne sont pas un ornement biographique : c'est la condition pour
 
 ---
 
+## Référence canonique
+
+Le projet conserve plusieurs couches sans en faire artificiellement une version unique :
+
+- `derive/d1/corpus.sqlite` est le **D1 historique gelé** du 3 août 2026 ; il ne doit pas être
+  réécrit pour adopter v2 ;
+- `manifests/corpus_actuel.json` gèle ses comptes, ses sources et son SHA-256 ;
+- `manifests/references_canoniques.json` est la **référence canonique** qui donne le statut,
+  l'empreinte, les compatibilités et les limites de chaque couche ;
+- `schemas/relations_v2.*` et `prototypes/relations_v2/` sont **expérimentaux** : ils ne remplacent
+  pas D1 et ne contiennent aucune validation humaine indépendante ;
+- `manifests/site_public_observe_2026-08-04.json` est une observation datée du déploiement public,
+  dont le commit reste inconnu.
+
+État vérifié : **116 545 atomes**, 57 volumes, 7 auteurs, 62 textes/témoins, 507 liens textuels,
+**354 actes**, 2 899 mentions et 7 646 arêtes de cooccurrence intra-auteur. L'acte 96 est un
+agrégat `discordant`, pas un acte non lu. Les **96 homonymes translexicaux** n'emportent aucune
+équivalence conceptuelle.
+
+Vérification sans régénération de D1 :
+
+```bash
+python bin/generer_reference_canonique.py --check
+python bin/verifier_synchronisation.py
+```
+
+---
+
 ## Un lexique par auteur
 
 **Chaque auteur a ses catégories propres et se travaille séparément.** Les rapprochements entre
@@ -61,9 +89,10 @@ segmentation et repérage prennent la langue de l'œuvre en paramètre. Les CONC
 appartiennent à chaque auteur (voir ci-dessus) : ceux de Le Bon portent des noms français
 (`foule`, `meneur`, `contagion`), ceux de Freud, de Rank et d'Abraham des noms allemands.
 
-**Depuis août 2026, chaque citation peut aussi se lire en français** — une traduction produite
-directement depuis le texte source, jamais copiée d'une édition existante, avec le glossaire déjà
-tranché par ce projet pour les termes sensibles (voir
+**Depuis août 2026, un pilote de traduction française couvre 11 146 empreintes** — traduction
+produite directement depuis le texte source, jamais copiée d'une édition existante. Sa portée
+n'est pas déclarée dans `meta.scope` et il ne couvre donc pas « chaque citation ». Le glossaire
+des termes sensibles est documenté dans
 [`documentation/TRADUCTION.md`](documentation/TRADUCTION.md) : *Trieb* → pulsion, jamais instinct).
 Ça ne renverse aucune des deux raisons ci-dessus : le français est un **confort de lecture**,
 jamais l'autorité — la phrase originale, toujours accessible en un clic, reste la seule citation
@@ -73,8 +102,9 @@ qui fait foi. Voir [`core/traductions.py`](core/traductions.py) pour le registre
 
 ## Corpus
 
-**Cinquante-sept volumes, 1895-1939**, six auteurs traités pour eux-mêmes, plus Josef Breuer comme
-coauteur distinct des *Studien*, dans deux langues. Une **★** signale une datation
+**Cinquante-sept volumes** — œuvres de 1893 à 1933, éditions lues de 1895 à 1939 —, six auteurs
+traités pour eux-mêmes, plus Josef Breuer comme coauteur distinct des *Studien*, dans deux langues.
+Une **★** signale une datation
 certaine : édition d'origine, ou réimpression déclarée inchangée.
 
 **Sigmund Freud** (texte allemand, `sources/freud/de/`) :
@@ -310,12 +340,14 @@ retirés — bibliographies, catalogues de vente, colophons — dont les 56 000 
 *Literaturverzeichnis* de la *Traumdeutung*, qui produisaient des atomes du genre
 « *#Alix.# Les rêves. Rev. Scient.* ».
 
-**Finesse de la catégorisation** — 19 groupes conceptuels, 171 concepts, 19 sous-concepts,
-11 fonctions argumentatives, 4 statuts épistémiques. En pratique le corpus présente
-**4 901 combinaisons distinctes** : un profil différent toutes les 3,2 phrases en moyenne.
+**Finesse de la catégorisation** — 69 groupes et 588 entrées lexicales propres aux auteurs,
+986 associations de sous-concepts, 11 fonctions argumentatives et 4 statuts épistémiques. Une
+entrée lexicale n'est ni une notion interprétée ni un concept transversal validé.
 
-110 tests couvrent les invariants (recomposition, localisation, non-durcissement des propos,
-séparation acquis / à confirmer, pièges du lexique allemand, déterminisme des agents).
+440 tests Python et 56 tests Worker sont présents. Ils couvrent notamment recomposition,
+localisation, non-durcissement des propos, séparation acquis/candidat, déterminisme, schémas v2 et
+synchronisation canonique. Leur présence ne vaut pas preuve d'exécution : les commandes et
+résultats terminaux sont consignés séparément dans les journaux datés.
 
 ---
 
@@ -352,17 +384,19 @@ repartirait de zéro.
 Trois états, jamais mélangés : **confirmé** (opposable), **rejeté** (écarté, motif à l'appui),
 **non lu** (ni promu ni écarté).
 
-**Instruction complète** : les 214 signaux du corpus ont été lus en contexte et jugés un par un
-— dont 22 devenus visibles quand la normalisation des blancs a réparé les marqueurs coupés par
-un retour à la ligne (ils dormaient là depuis le début, deux révisions doctrinales parmi eux).
+Le D1 courant contient **609 signaux** : 607 portent un verdict et un motif legacy, deux objections
+restent sans verdict. Les registres documentent une lecture en contexte humaine ou assistée par
+modèle, mais pas une campagne humaine indépendante à deux annotateurs ; ils ne constituent donc
+pas une vérité terrain.
 
-| Signal | Repérés | Lus | Confirmés | Précision mesurée |
-|---|---:|---:|---:|---:|
-| `revision` | 24 | 24 | 7 | **0,29** |
-| `objection` | 111 | 111 | 64 | **0,58** |
-| `auto_citation` | 79 | 79 | 38 | **0,48** |
+| Signal | Repérés | Avec verdict | Confirmés | Reclassés | Rejetés | Sans verdict |
+|---|---:|---:|---:|---:|---:|---:|
+| `revision` | 90 | 90 | 15 | 10 | 65 | 0 |
+| `objection` | 333 | 331 | 192 | 21 | 118 | 2 |
+| `auto_citation` | 181 | 181 | 83 | 2 | 96 | 0 |
+| `ecart_freud` | 5 | 5 | 0 | 5 | 0 | 0 |
 
-**109 signaux opposables** — dont les objections que Freud dresse contre ses propres thèses
+**290 verdicts legacy confirmés** — dont les objections que Freud dresse contre ses propres thèses
 (« *Es gibt nun einen Einwand, welcher die letzten Schlußfolgerungen umzustoßen droht* »), ses
 renvois datés à ses propres travaux (« *Der Schatten des Objekts ist auf das Ich gefallen, sagte
 ich an anderer Stelle* » — sa formule de *Trauer und Melancholie*), et la correction de sa thèse
@@ -561,7 +595,11 @@ par tout nouveau terme ajouté (voir le point 3 ci-dessus).
 
 ---
 
-## Suite
+## Journal historique antérieur — ne décrit pas l'état courant
+
+La section ci-dessous est conservée comme trace de décisions et de campagnes précédentes. Ses
+comptes de 20 œuvres, 214 signaux, sept grappes ou 107/175 actes ne doivent pas être cités comme
+état actuel ; le registre canonique et le manifeste placés plus haut font foi.
 
 La base est complète et outillée sur **vingt** œuvres majeures — un peu plus de la moitié du
 corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait :
@@ -575,7 +613,7 @@ corpus des grands ouvrages de Freud identifiés comme dignes d'atomisation. Fait
   reste incertaine que *Jenseits des Lustprinzips* — aucun meilleur fac-similé de sa 1ʳᵉ édition
   n'existe sur archive.org (recherche faite, documentée dans `SYNTHESE_FREUD.md`) : la méthode
   refuse de conclure plutôt que dater faux.
-- **Vérification faite** pour les 214 signaux du corpus actuel (dont les 9 apportés par les huit
+- **Photographie de la campagne d'alors** : 214 signaux avaient été traités (dont les 9 apportés par les huit
   œuvres ajoutées et les 22 que cachaient des marqueurs coupés par des retours à la ligne) ; à
   reconduire sur chaque œuvre future (le registre est cumulatif, rien ne se rejoue).
 - **Premier regroupement en grappes** (agent `courants`) sur les atomes de Freud seul — sept
