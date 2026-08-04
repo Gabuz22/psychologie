@@ -1,8 +1,8 @@
 # Protocole exécutable de validation des relations
 
-**Proposition, non encore lancée.** Ce document définit ce qu'il faudra faire avant d'affirmer
-qu'une couche relationnelle ajoute une information historiquement utile. Il ne fabrique aucun
-jugement humain absent.
+**Préparation automatique exécutée ; annotation humaine non commencée.** Ce document définit ce
+qu'il faudra faire avant d'affirmer qu'une couche relationnelle ajoute une information
+historiquement utile. Il ne fabrique aucun jugement humain absent.
 
 ## Question historique bornée
 
@@ -11,29 +11,49 @@ correctement : (a) une reprise directe plausible, (b) une source tierce partagé
 formulaire sans relation démontrable ? La question porte sur la **qualification de passages**, pas
 sur « l'influence de Freud sur Stekel » en général.
 
+## Choix de la paire
+
+Le choix a été fait avant lecture du tirage, sur des critères mesurables :
+
+| Paire | Actes | confirmés / reclassés / rejetés / discordants | paires d'œuvres | Limite principale |
+|---|---:|---:|---:|---|
+| Freud–Stekel | 135 | 115 / 18 / 2 / 0 | 12 | Stekel majoritairement OCR |
+| Freud–Rank | 89 | 82 / 3 / 3 / 1 | 20 | Rank OCR, négatifs moins nombreux |
+| Rank–Stekel | 42 | 7 / 35 / 0 / 0 | 9 | très riche en tiers, pauvre en directs |
+| Freud–Abraham | 31 | 31 / 0 / 0 / 0 | 8 | presque aucun négatif interne |
+
+Freud–Stekel offre le meilleur équilibre entre couverture, directs plausibles, sources tierces et
+rejets, dans une même langue. Le choix ne repose donc pas seulement sur le nombre de résultats
+favorables au moteur. Freud–Rank reste un futur test de transfert, notamment pour l'agrégat 96.
+
 ## Gel du matériau
 
 Avant annotation, enregistrer : commit Git, SHA-256 de `corpus.sqlite`, versions
 `comparaison/carte/socle`, liste exacte des œuvres et années, requête SQL de tirage, graine et date.
 Le corpus, les seuils et la typologie restent immuables pendant la campagne.
 
+Ce gel est maintenant matérialisé par `manifests/corpus_actuel.json`. L'expérience référence son
+empreinte source, le SHA-256 de D1 et le commit `a35fe07`.
+
 ## Ensembles
 
-1. **Positifs candidats** : 60 actes Freud–Stekel stratifiés par contenance
-   `[0,30–0,49]`, `[0,50–0,69]`, `[0,70–1]`, et par œuvre.
-2. **Sources tierces** : tous les reclassés disponibles, complétés jusqu'à 30 si possible.
-3. **Négatifs difficiles** : 60 paires sans lien, appariées par longueur, langue, période et
-   vocabulaire ; inclure des fragments historiquement plausibles et des formules génériques.
+1. **Candidats stratifiés** : 20 actes Freud–Stekel, au plus trois par cellule
+   `verdict legacy × [0,30–0,49] / [0,50–0,69] / [0,70–1]`, triés par SHA-256 avec graine publiée.
+2. **Sources tierces** : présentes dans les cellules `reclasse`, sans suréchantillonnage manuel.
+3. **Négatifs difficiles** : 60 paires absentes des candidats v1, appariées par longueur et milieu
+   de fenêtre temporelle, puis départagées par SHA-256 ; absence de candidature ≠ vérité négative.
 4. **Contrôle explicite** : mentions nominales et chapitres déclarant l'autre auteur, échantillonnés
    séparément ; ils ne deviennent pas automatiquement des reprises.
 
-Un script de tirage devra produire un manifeste JSONL immuable, sans verdict du pipeline visible
-des annotateurs.
+`bin/preparer_experience_relations.py` produit des identifiants opaques et les items aveugles.
+Verdict legacy, appartenance candidat/contrôle et sorties des baselines vivent exclusivement dans
+`automatic_reference_not_gold`, séparé de `blind_items`; rien de cela n'est une vérité terrain.
 
 ## Unité et fiche d'annotation
 
-Chaque item montre les deux passages, 2 phrases de contexte de chaque côté, œuvre, date sous forme
-d'intervalle, page/offset/source et, dans une seconde phase seulement, les notes bibliographiques.
+Chaque item montre les deux passages, jusqu'à 2 atomes de contexte avant et après, œuvre, date sous
+forme d'intervalle, offsets et qualité de source. Les notes bibliographiques viennent dans une
+seconde phase seulement.
 
 Champs obligatoires :
 
@@ -52,12 +72,15 @@ fichier porte identifiant pseudonyme, rôle, date, version du guide et déclarat
 
 ## Baselines
 
-- B0 : recherche plein texte des noms (mention explicite).
-- B1 : seuil brut de contenance des 6-grammes, sans lecture.
-- B2 : TF-IDF caractères ou mots, réglé uniquement sur un jeu de développement séparé.
+- B0 : présence plein texte de `Freud|Stekel` dans les extraits.
+- B1 : contenance brute des 6-grammes, seuil 0,30, sans lecture.
+- B2 : Jaccard lexical des formes repliées, baseline simple sans apprentissage.
 - Système : candidats actuels + verdict/typologie, évalués sans changer le seuil sur le test.
 
 Les chapitres déclarés sont une strate de contrôle, pas une vérité terrain pour la reprise.
+
+Une baseline TF-IDF reste possible dans une seconde phase, uniquement avec développement/test
+séparés ; elle n'est pas nécessaire pour commencer et aucune dépendance n'a été ajoutée.
 
 ## Métriques prédéfinies
 
@@ -87,12 +110,36 @@ La couche sera dite utile seulement si, sur le test gelé :
 Si ces critères échouent, le résultat est conservé comme négatif : le système reste un outil de
 repérage, sans revendication de qualification historique.
 
+## Résultats automatiques préliminaires
+
+Sur 80 items préparés :
+
+- B0 noms explicites : 2 items ;
+- B1 contenance ≥ 0,30 : 20 items, exactement les candidats stratifiés ;
+- médiane B2 Jaccard lexical : 0,0784 ;
+- précision, rappel, F1 et matrice de confusion : **non calculables** avant annotation humaine.
+
+Ces chiffres décrivent les sorties automatiques, pas leur justesse historique. Ils sont conservés
+dans `prototypes/relations_v2/experience_freud_stekel.json`, y compris les 60 non-candidats.
+
+## Commandes reproductibles
+
+```powershell
+python bin/generer_manifeste_corpus.py --check
+python bin/generer_registres_v2.py --check
+python bin/preparer_experience_relations.py --check
+python bin/migrer_relations_v2.py
+```
+
+La dernière commande est un dry-run. Une application exige `--apply <nouvelle-base.sqlite>` et
+refuse une cible existante.
+
 ## Format de conservation proposé
 
 ```json
 {
   "campaign_id": "freud-stekel-v1",
-  "item_id": "acte:12",
+  "item_id": "item:4c1b7262fdf4cf0ac9ec",
   "annotator_id": "A02",
   "guide_version": "1.0.0",
   "independent": true,

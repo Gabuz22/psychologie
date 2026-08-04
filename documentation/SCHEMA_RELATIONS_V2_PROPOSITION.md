@@ -1,6 +1,9 @@
 # Schéma relationnel v2 — proposition compatible
 
-**Statut : proposition à arbitrer, pas migration appliquée.** Le but est d'ajouter de la
+**Statut : proposition initiale, désormais complétée par** `SCHEMA_CANONIQUE_OBJETS_V2.md`,
+`MODELE_RELATIONS_MULTIPLES_V2.md` et les schémas exécutables de `schemas/`. Le SQL ci-dessous est
+conservé comme historique de conception ; le prototype canonique est `schemas/relations_v2.sql`.
+Pas de migration générale appliquée. Le but est d'ajouter de la
 provenance et des dimensions, sans casser les tables ni l'API v1.
 
 ## Modèle
